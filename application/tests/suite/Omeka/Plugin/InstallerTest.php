@@ -11,6 +11,12 @@
  */
 class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
 {
+    private $broker;
+    private $loader;
+    private $iniReader;
+    private $installer;
+    private $plugin;
+
     public function setUpLegacy()
     {
         $this->broker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);

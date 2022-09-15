@@ -16,6 +16,9 @@
  */
 class Helpers_GetRecordsTest extends Omeka_Test_TestCase
 {
+    private $db;
+    private $collectionTable;
+
     public function setUpLegacy()
     {
         // Link a mock collections table to a mock database.

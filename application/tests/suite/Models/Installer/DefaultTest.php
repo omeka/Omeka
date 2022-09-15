@@ -17,6 +17,11 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
     const ENTITY_ID = 2;
     const USERS_PLANS_ID = 3;
 
+    private $dbAdapter;
+    private $db;
+    private $form;
+    private $profilerHelper;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;

@@ -11,6 +11,8 @@
  */
 class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
 {
+    private $builder;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

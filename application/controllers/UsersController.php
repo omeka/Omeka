@@ -20,6 +20,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 
+    protected $_auth;
+
     public function init()
     {
         $this->_helper->db->setDefaultModelName('User');

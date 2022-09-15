@@ -1,6 +1,14 @@
 <?php
 class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 {
+    private $pheanstalk;
+    private $jobFactory;
+    private $dbAdapter;
+    private $db;
+    private $pheanJob;
+    private $omekaJob;
+    private $worker;
+
     public function setUpLegacy()
     {
         $this->pheanstalk = $this->getMock('Pheanstalk_Pheanstalk', array(), array('0.0.0.0'));

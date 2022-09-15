@@ -13,6 +13,9 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 {
     const FORM_URL = '/users/change-password/1';
 
+    private $user;
+    private $salt;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

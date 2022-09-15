@@ -1360,7 +1360,15 @@ function latest_omeka_version()
     $omekaApiVersion = '0.1';
 
     // Determine if we have already checked for the version lately.
-    $check = unserialize(get_option('omeka_update')) or $check = array();
+    $updateOption = get_option('omeka_update');
+    if (!$updateOption) {
+        $updateOption = '';
+    }
+    $check = unserialize($updateOption);
+    if (!$check) {
+        $check = array();
+    }
+
     // This a timestamp corresponding to the last time we checked for
     // a new version.  86400 is the number of seconds in a day, so check
     // once a day for a new version.

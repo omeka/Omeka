@@ -11,6 +11,8 @@
  */
 class Omeka_CaptchaTest extends Omeka_Test_TestCase
 {
+    private $bootstrap;
+
     public function setUpLegacy()
     {
         $this->bootstrap = new Omeka_Test_Bootstrap;

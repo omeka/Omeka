@@ -14,6 +14,11 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
 
+    private $acl;
+    private $db;
+    private $user;
+    private $collection;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

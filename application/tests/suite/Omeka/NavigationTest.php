@@ -13,6 +13,7 @@
 class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 {
     protected $_nav;
+    protected $_beforePages;
 
     public function setUpLegacy()
     {

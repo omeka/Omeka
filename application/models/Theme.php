@@ -14,6 +14,7 @@
  * 
  * @package Omeka\Record
  */
+#[AllowDynamicProperties]
 class Theme
 {
     /**

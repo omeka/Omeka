@@ -12,6 +12,7 @@
  * 
  * @package Omeka\Record
  */
+#[AllowDynamicProperties]
 abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 {
     /**
