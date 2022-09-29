@@ -21,8 +21,15 @@ $formAttributes['method'] = 'GET';
         ?>
         </div>
     </div>
+    <div id="search-narrow-by-field-alerts" class="sr-only alerts" aria-atomic="true" aria-live="polite">
+        <p><?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count">1</span></p>
+    </div>
     <div id="search-narrow-by-fields" class="field">
-        <div class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
+        <div id="search-narrow-by-fields-label" class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
+        <div id="search-narrow-by-fields-property" class="label sr-only"><?php echo __('Search Property'); ?></div>
+        <div id="search-narrow-by-fields-type" class="label sr-only"><?php echo __('Search Type'); ?></div>
+        <div id="search-narrow-by-fields-terms" class="label sr-only"><?php echo __('Search terms'); ?></div>
+        <div id="search-narrow-by-fields-joiner" class="label sr-only"><?php echo __('Search Joiner'); ?></div>
         <div class="inputs">
         <?php
         // If the form has been submitted, retain the number of search
@@ -34,70 +41,84 @@ $formAttributes['method'] = 'GET';
         }
 
         //Here is where we actually build the search form
+        //The POST looks like =>
+        // advanced[0] =>
+        //[field] = 'description'
+        //[type] = 'contains'
+        //[terms] = 'foobar'
+        //etc
         foreach ($search as $i => $rows): ?>
             <div class="search-entry">
-                <?php
-                //The POST looks like =>
-                // advanced[0] =>
-                //[field] = 'description'
-                //[type] = 'contains'
-                //[terms] = 'foobar'
-                //etc
-                echo $this->formSelect(
-                    "advanced[$i][joiner]",
-                    @$rows['joiner'],
-                    array(
-                        'title' => __("Search Joiner"),
-                        'id' => null,
-                        'class' => 'advanced-search-joiner'
-                    ),
-                    array(
-                        'and' => __('AND'),
-                        'or' => __('OR'),
-                    )
-                );
-                echo $this->formSelect(
-                    "advanced[$i][element_id]",
-                    @$rows['element_id'],
-                    array(
-                        'title' => __("Search Field"),
-                        'id' => null,
-                        'class' => 'advanced-search-element'
-                    ),
-                    get_table_options('Element', null, array(
-                        'record_types' => array('Item', 'All'),
-                        'sort' => 'orderBySet')
-                    )
-                );
-                echo $this->formSelect(
-                    "advanced[$i][type]",
-                    @$rows['type'],
-                    array(
-                        'title' => __("Search Type"),
-                        'id' => null,
-                        'class' => 'advanced-search-type'
-                    ),
-                    label_table_options(array(
-                        'contains' => __('contains'),
-                        'does not contain' => __('does not contain'),
-                        'is exactly' => __('is exactly'),
-                        'is empty' => __('is empty'),
-                        'is not empty' => __('is not empty'),
-                        'starts with' => __('starts with'),
-                        'ends with' => __('ends with'))
-                    )
-                );
-                echo $this->formText(
-                    "advanced[$i][terms]",
-                    @$rows['terms'],
-                    array(
-                        'size' => '20',
-                        'title' => __("Search Terms"),
-                        'id' => null,
-                        'class' => 'advanced-search-terms'
-                    )
-                );
-                ?>
+                <div class="input advanced-search-joiner"> 
+                    <span aria-hidden="true" class="visible-label"><?php echo __('Joiner'); ?></span>
+                    <?php 
+                    echo $this->formSelect(
+                        "advanced[$i][joiner]",
+                        @$rows['joiner'],
+                        array(
+                            'id' => null,
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-joiner',
+                        ),
+                        array(
+                            'and' => __('AND'),
+                            'or' => __('OR'),
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="input advanced-search-element"> 
+                    <span aria-hidden="true" class="visible-label"><?php echo __('Property'); ?></span>
+                    <?php 
+                    echo $this->formSelect(
+                        "advanced[$i][element_id]",
+                        @$rows['element_id'],
+                        array(
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-property',
+                            'id' => null,
+                        ),
+                        get_table_options('Element', null, array(
+                            'record_types' => array('Item', 'All'),
+                            'sort' => 'orderBySet')
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="input advanced-search-type"> 
+                    <span aria-hidden="true" class="visible-label"><?php echo __('Type'); ?></span>
+                    <?php 
+                    echo $this->formSelect(
+                        "advanced[$i][type]",
+                        @$rows['type'],
+                        array(
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-type',
+                            'id' => null,
+                        ),
+                        label_table_options(array(
+                            'contains' => __('contains'),
+                            'does not contain' => __('does not contain'),
+                            'is exactly' => __('is exactly'),
+                            'is empty' => __('is empty'),
+                            'is not empty' => __('is not empty'),
+                            'starts with' => __('starts with'),
+                            'ends with' => __('ends with'))
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="input advanced-search-terms">
+                    <span aria-hidden="true" class="visible-label"><?php echo __('Terms'); ?></span>
+                    <?php 
+                    echo $this->formText(
+                        "advanced[$i][terms]",
+                        @$rows['terms'],
+                        array(
+                            'size' => '20',
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-terms',
+                            'id' => null,
+                        )
+                    );
+                    ?>
+                </div>
                 <button type="button" class="remove_search" disabled="disabled" style="display: none;"><?php echo __('Remove field'); ?></button>
             </div>
         <?php endforeach; ?>
