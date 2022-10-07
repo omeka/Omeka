@@ -7,21 +7,21 @@ $total_items = total_records('Item');
 $total_collections = total_records('Collection');
 $total_tags = total_records('Tag');
 $stats = array(
-    array(link_to('items', null, $total_items), __(plural('item', 'items', $total_items))),
-    array(link_to('collections', null, $total_collections), __(plural('collection', 'collections', $total_collections))),
-    array(link_to('tags', null, $total_tags), __(plural('tag', 'tags', $total_tags)))
+    'items' => array($total_items, __(plural('item', 'items', $total_items))),
+    'collections' => array($total_collections, __(plural('collection', 'collections', $total_collections))),
+    'tags' => array($total_tags, __(plural('tag', 'tags', $total_tags)))
 ); ?>
 <?php if (is_allowed('Plugins', 'edit')):
     $total_plugins = total_records('Plugin');
-    $stats[] = array(link_to('plugins', null, $total_plugins), __(plural('plugin', 'plugins', $total_plugins)));
+    $stats['plugins'] = array($total_plugins, __(plural('plugin', 'plugins', $total_plugins)));
 endif; ?>
 <?php if (is_allowed('Users', 'edit')):
     $total_users = total_records('User');
-    $stats[] = array(link_to('users', null, $total_users), __(plural('user', 'users', $total_users)));
+    $stats['users'] = array($total_users, __(plural('user', 'users', $total_users)));
 endif; ?>
 <?php if (is_allowed('Themes', 'edit')):
     $themeName = Theme::getTheme(Theme::getCurrentThemeName('public'))->title;
-    $stats[] = array(link_to('themes', null, $themeName), __('theme'));
+    $stats['themes'] = array($themeName, __('theme'));
 endif; ?>
 <?php $stats = apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
 
@@ -41,8 +41,8 @@ endif; ?>
 <?php endif; ?>
 
 <section id="stats">
-    <?php foreach ($stats as $statInfo): ?>
-    <p><span class="number"><?php echo $statInfo[0]; ?></span><br><?php echo $statInfo[1]; ?></p>
+    <?php foreach ($stats as $statKey => $statInfo): ?>
+    <p><?php echo link_to($statKey, null, '<span class="number">' . $statInfo[0] . '</span><br>' . $statInfo[1], array('class' => 'stat')); ?></p>
     <?php endforeach; ?>
 </section>
 

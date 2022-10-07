@@ -1848,11 +1848,11 @@ ul.details {
 #stats {
   text-align: center;
   margin: auto; }
-  #stats .number {
-    font-style: normal; }
-    #stats .number a {
-      text-decoration: none;
-      font-size: 30px; }
+  #stats a.stat {
+    text-decoration: none; }
+  #stats a.stat .number {
+    font-style: normal;
+    font-size: 30px; }
   #stats p {
     min-width: 3em;
     display: inline-block;
