@@ -1,0 +1,255 @@
+form, 
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+legend {
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 16px;
+    padding: 0;
+
+    h2 {
+        margin: 0;
+    }
+}
+
+input, 
+select, 
+textarea, 
+button, 
+a.button {
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input.color {
+    font-family: monospace;
+}
+
+label input[type=radio] {
+    margin-right: $spacing-s !important;
+}
+
+input[type=text], 
+input[type=password] {
+    height: 36px;
+    border: 1px solid $darkgrayborder;
+    -webkit-border-radius: 0;
+    -moz-box-radius: 0;
+    border-radius: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666666;
+    line-height: $spacing-l;
+    margin: 0 0 $spacing-m 0;
+    padding: $spacing-s $spacing-m;
+}
+
+input[type=text].big {
+    padding: .375em;
+}
+
+input[type=text].small {
+	padding: 0;
+}
+
+.field {
+    clear: both;
+
+    label {
+        clear: left;
+        font-weight: bold;
+        float: left;
+        line-height: 1.5em;
+        margin: 0 0 $spacing-m 0;
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+        margin-bottom: $spacing-m;
+        border: 1px solid $darkgrayborder;
+    }
+}
+
+label {
+    input[type=checkbox],
+    input[type=radio],
+    input[type=text] {
+        margin: 0 $spacing-s;
+    }
+}
+
+.field-meta {
+    @include screen-sm {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        label {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        button {
+            margin-bottom: 0;
+            padding: $spacing-s $spacing-m;
+        }
+    }
+}
+
+.explanation {
+    clear: both;
+    margin: 0 0 10px 0;
+    color: #666;
+    font-style: italic;
+    font-size: 16px;
+
+    * {
+        font-size: 16px;
+    }
+}
+
+.inputs {
+    margin: 0 0 $spacing-l 0;
+    
+    .input-block {
+        margin: 0 0 $spacing-l 0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        @include screen-sm {
+            float: none;
+        }
+        
+        .remove-element {
+	        display: inline-block;
+			margin: $spacing-m $spacing-s $spacing-l 0;
+			padding: $spacing-s $spacing-m;
+
+            @include screen-sm {
+                margin: $spacing-m $spacing-s $spacing-m 0;
+            }
+        }
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    select {
+        margin-top: 0;
+    }
+
+
+    input[type=text],
+    input[type=password],
+    textarea {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    a.button, 
+    input[type="submit"], 
+    button {
+        margin-bottom: $spacing-m;
+    }
+
+    label {
+        @include screen-sm {
+            margin-bottom: 0; 
+        }
+    }
+}
+
+.required:after {
+    content: "*";
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid $darkgrayborder;
+    overflow: auto;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666666;
+    padding: $spacing-s $spacing-m;
+}
+
+input[type="checkbox"] {
+    margin: 0;
+}
+    
+.mce-tinymce button {
+    margin-bottom: 0;
+    box-shadow: none;
+    min-height: 0;
+}
+
+.quick-filter,
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding: $spacing-m 36px $spacing-m 9px;
+    border: 1px solid $darkgrayborder;
+    border-radius: 3px;
+    line-height: 16px;
+    text-align: left;
+    background: url('../images/dropdown-arrow.png') no-repeat center right;
+    background-color: #fff;
+}
+
+select[multiple="multiple"] {
+    background: none;
+    padding-right: 9px;
+}
+
+.quick-filter {
+    margin-bottom: 20px;
+}
+
+@include screen-xs {
+    .quick-filter {
+        margin-bottom: $spacing-m;
+    }
+}
+
+.mce-title:focus,
+.mce-textbox:focus {
+    border-color: darken($darkgrayborder, 25%) !important;
+}
+
+.field label.checkbox-label {
+    font-weight: normal;
+}
+
+.field legend {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.field .inputs legend {
+    font-weight: normal;
+}
+
+.inputs label {
+    display: block;
+    font-weight: normal;
+}
+
+.inputs input[type="checkbox"] {
+    margin: 0 5px;
+}

@@ -119,7 +119,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
 
         // Either don't save the search text or delete an existing search text
         // row if the record has no assigned text.
-        if (!trim($text)) {
+        if (!trim((string) $text)) {
             if ($searchText) {
                 $searchText->delete();
             }

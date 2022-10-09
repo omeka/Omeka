@@ -346,9 +346,11 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         if (isset($args['link_file'])) {
             switch ($args['link_file']) {
                 case 'true':
+                case '1':
                     $props['linkToFile'] = true;
                     break;
                 case 'false':
+                case '0':
                     $props['linkToFile'] = false;
                     break;
                 default:

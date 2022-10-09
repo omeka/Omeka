@@ -314,21 +314,11 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
         if ($type === self::ACT_AS_FALLBACK) {
             // create filename
             $filename = $this->transformClassNameToFilename($class, '');
-            if (version_compare(PHP_VERSION, '5.3.2', '>=')) {
-                $resolvedName = stream_resolve_include_path($filename);
-                if ($resolvedName !== false) {
-                    return include $resolvedName;
-                }
-                return false;
+            $resolvedName = stream_resolve_include_path($filename);
+            if ($resolvedName !== false) {
+                return include $resolvedName;
             }
-            $this->error = false;
-            set_error_handler(array($this, 'handleError'), E_WARNING);
-            include $filename;
-            restore_error_handler();
-            if ($this->error) {
-                return false;
-            }
-            return class_exists($class, false);
+            return false;
         }
 
         // Namespace and/or prefix autoloading

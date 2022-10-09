@@ -11,6 +11,8 @@
  */
 class Omeka_Helper_JsTest extends Omeka_Test_TestCase
 {
+    private $view;
+
     public function setUpLegacy()
     {
         $this->view = new Omeka_View;

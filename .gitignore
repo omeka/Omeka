@@ -48,3 +48,7 @@
 .buildpath
 .project
 .settings/
+
+# For Sass
+
+.sass-cache

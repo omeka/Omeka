@@ -10,11 +10,11 @@
 # Yuri Manyahin <yuri.manyahin@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Yuri Manyahin <yuri.manyahin@gmail.com>, 2018\n"
 "Language-Team: Russian (http://www.transifex.com/omeka/omeka/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,8 +30,8 @@ msgid ""
 msgstr "Набор элементов метаданных Dubline Core является общим для всех записей Omeka, включающих документы, файлы и коллекции. Чтобы узнать больше информации, перейдите по ссылке http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:45
+#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -44,7 +44,7 @@ msgid "A name given to the resource"
 msgstr "Название, данное ресурсу"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Создатель (Автор)"
@@ -62,8 +62,8 @@ msgid "The topic of the resource"
 msgstr "Тема ресурса"
 
 #. Dublin Core: Description element name
-#: admin/themes/default/element-sets/browse.php:17
-#: admin/themes/default/item-types/browse.php:30
+#: admin/themes/default/element-sets/browse.php:18
+#: admin/themes/default/item-types/browse.php:29
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
@@ -102,7 +102,7 @@ msgid ""
 msgstr "Точка или период времени, связанный с событием в жизненном цикле ресурса"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Тип"
 
@@ -326,7 +326,7 @@ msgstr "Администратор"
 msgid "Researcher"
 msgstr "Исследователь"
 
-#: admin/themes/default/appearance/edit-navigation.php:3
+#: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
 #: admin/themes/default/themes/browse.php:5
@@ -334,46 +334,46 @@ msgstr "Исследователь"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: admin/themes/default/appearance/edit-navigation.php:14
+#: admin/themes/default/appearance/edit-navigation.php:15
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
 msgstr "Проверьте ссылки для их отображения в главной навигации. Нажмите и перетащите ссылки для предпочтительного порядка расположения."
 
-#: admin/themes/default/appearance/edit-navigation.php:19
+#: admin/themes/default/appearance/edit-navigation.php:20
 msgid "Add a Link to the Navigation"
 msgstr "Добавить ссылку для навигации"
 
-#: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:41
-#: admin/themes/default/users/api-keys.php:40
+#: admin/themes/default/appearance/edit-navigation.php:22
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/users/api-keys.php:42
 #: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Метка"
 
-#: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/appearance/edit-navigation.php:24
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: application/forms/Navigation.php:135
 msgid "URL"
 msgstr "URL"
 
-#: admin/themes/default/appearance/edit-navigation.php:25
+#: admin/themes/default/appearance/edit-navigation.php:26
 msgid "Add Link"
 msgstr "Добавить ссылку"
 
-#: admin/themes/default/appearance/edit-navigation.php:31
+#: admin/themes/default/appearance/edit-navigation.php:32
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit-all.php:41
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:59
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-api.php:84
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:50
+#: admin/themes/default/settings/edit-search.php:52
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -382,12 +382,12 @@ msgstr "Добавить ссылку"
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
 msgstr ""
 
-#: admin/themes/default/appearance/edit-navigation.php:43
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -397,22 +397,22 @@ msgstr ""
 msgid "View Public Page"
 msgstr "Просмотреть открытую страницу"
 
-#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/appearance/edit-navigation.php:45
 #: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
-#: admin/themes/default/element-sets/browse.php:29
+#: admin/themes/default/element-sets/browse.php:30
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:134
+#: admin/themes/default/items/browse.php:92
+#: admin/themes/default/items/browse.php:136
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
-#: admin/themes/default/users/browse.php:66
+#: admin/themes/default/users/browse.php:70
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
@@ -432,8 +432,8 @@ msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:76
 #: admin/themes/default/collections/browse.php:86
+#: admin/themes/default/collections/browse.php:96
 msgid "Add a Collection"
 msgstr "Добавить коллекцию"
 
@@ -447,7 +447,7 @@ msgstr "Добавить коллекцию"
 #: admin/themes/default/items/add.php:19
 #: admin/themes/default/items/batch-edit-common.php:10
 #: admin/themes/default/items/edit.php:30
-#: admin/themes/default/items/quick-filters.php:6
+#: admin/themes/default/items/quick-filters.php:4
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Общественный"
@@ -457,8 +457,9 @@ msgstr "Общественный"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/browse.php:80
 #: admin/themes/default/items/edit.php:36
-#: admin/themes/default/items/quick-filters.php:8
+#: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
 msgstr "Отмеченный"
@@ -500,65 +501,65 @@ msgstr[3] ""
 msgid "All items are in a collection."
 msgstr ""
 
-#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Соавторы"
 
-#: admin/themes/default/collections/browse.php:32
+#: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Добавлено"
 
-#: admin/themes/default/collections/browse.php:33
+#: admin/themes/default/collections/browse.php:34
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Общее количество документов"
 
-#: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:85
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/items/browse.php:83
 msgid "(Private)"
 msgstr "(Личный)"
 
-#: admin/themes/default/collections/browse.php:51
+#: admin/themes/default/collections/browse.php:60
 #: admin/themes/default/collections/show.php:32
-#: admin/themes/default/element-sets/browse.php:27
+#: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
 #: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
 #: admin/themes/default/index.php:79
-#: admin/themes/default/item-types/browse.php:41
+#: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
-#: admin/themes/default/users/browse.php:63
+#: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Редактировать"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:69
 msgid "No contributors"
 msgstr "Нет соисполнителей"
 
-#: admin/themes/default/collections/browse.php:80
+#: admin/themes/default/collections/browse.php:90
 msgid "There are no collections on this page."
 msgstr "На этой странице нет коллекций."
 
-#: admin/themes/default/collections/browse.php:80
+#: admin/themes/default/collections/browse.php:90
 msgid "View All Collections"
 msgstr "Просмотр всех коллекций"
 
-#: admin/themes/default/collections/browse.php:83
+#: admin/themes/default/collections/browse.php:93
 msgid "You have no collections."
 msgstr "У вас нет коллекций."
 
-#: admin/themes/default/collections/browse.php:85
+#: admin/themes/default/collections/browse.php:95
 msgid "Get started by adding your first collection."
 msgstr "Начните создавать свою первую коллекцию."
 
@@ -608,7 +609,7 @@ msgstr "Нет соисполнителей."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:151
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -638,27 +639,27 @@ msgstr "Настройки"
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: admin/themes/default/common/content-nav.php:5
+#: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
 msgstr "Приборная панель"
 
-#: admin/themes/default/common/content-nav.php:9
+#: admin/themes/default/common/content-nav.php:10
 #: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Документы"
 
-#: admin/themes/default/common/content-nav.php:13
+#: admin/themes/default/common/content-nav.php:14
 msgid "Collections"
 msgstr "Коллекции"
 
-#: admin/themes/default/common/content-nav.php:17
+#: admin/themes/default/common/content-nav.php:18
 msgid "Item Types"
 msgstr "Типы документов"
 
-#: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:107
+#: admin/themes/default/common/content-nav.php:22
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -671,31 +672,31 @@ msgstr "Метки"
 msgid "Delete %s"
 msgstr "Удалить %s"
 
-#: admin/themes/default/common/footer.php:6
-#: admin/themes/default/common/login-footer.php:7
+#: admin/themes/default/common/footer.php:9
+#: admin/themes/default/common/login-footer.php:6
 msgid "Powered by Omeka"
 msgstr "создано Omeka"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:10
 msgid "Documentation"
 msgstr "Документация"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:11
 msgid "Support Forums"
 msgstr "Форумы поддержки"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:12
 msgid "Back to top"
 msgstr ""
 
-#: admin/themes/default/common/footer.php:8
+#: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "Версия %s"
 
-#: admin/themes/default/common/footer.php:10
+#: admin/themes/default/common/footer.php:18
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
 msgstr "Системная информация"
@@ -719,18 +720,18 @@ msgstr "Пользователи"
 msgid "Omeka Admin"
 msgstr "Администратор Omeka"
 
-#: admin/themes/default/common/header.php:41
+#: admin/themes/default/common/header.php:36
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr ""
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:58
 #: application/views/scripts/common/admin-bar.php:6
 #, php-format
 msgid "Welcome, %s"
 msgstr "Добро пожаловать %s"
 
-#: admin/themes/default/common/header.php:62
+#: admin/themes/default/common/header.php:59
 #: application/views/scripts/common/admin-bar.php:14
 msgid "Log Out"
 msgstr "Выход"
@@ -770,14 +771,14 @@ msgid "Change Password"
 msgstr "Изменить пароль"
 
 #: admin/themes/default/common/users-nav.php:17
-#: admin/themes/default/users/api-keys.php:14
+#: admin/themes/default/users/api-keys.php:16
 msgid "API Keys"
 msgstr "Ключи API"
 
-#: admin/themes/default/element-sets/browse.php:16
-#: admin/themes/default/tags/browse.php:27
-#: admin/themes/default/tags/browse.php:57
-#: admin/themes/default/users/browse.php:17
+#: admin/themes/default/element-sets/browse.php:17
+#: admin/themes/default/tags/browse.php:50
+#: admin/themes/default/tags/browse.php:68
+#: admin/themes/default/users/browse.php:13
 #: application/forms/ItemTypes.php:141
 msgid "Name"
 msgstr "Имя"
@@ -1008,7 +1009,7 @@ msgstr "Обновите до %s"
 #: admin/themes/default/item-types/add-new-element.php:15
 #: admin/themes/default/item-types/form.php:43
 #: admin/themes/default/items/tag-form.php:23
-#: application/views/helpers/ElementInput.php:112
+#: application/views/helpers/ElementInput.php:124
 msgid "Remove"
 msgstr "Удалить"
 
@@ -1029,12 +1030,12 @@ msgstr "Добавить документ"
 msgid "Browse Item Types"
 msgstr "Просмотреть типы документов"
 
-#: admin/themes/default/item-types/browse.php:10
-#: admin/themes/default/item-types/browse.php:55
+#: admin/themes/default/item-types/browse.php:9
+#: admin/themes/default/item-types/browse.php:54
 msgid "Add an Item Type"
 msgstr "Добавить тип документа"
 
-#: admin/themes/default/item-types/browse.php:18
+#: admin/themes/default/item-types/browse.php:16
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
@@ -1043,15 +1044,15 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: admin/themes/default/item-types/browse.php:21
+#: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
 msgstr ""
 
-#: admin/themes/default/item-types/browse.php:29
+#: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
 msgstr "Наименование типа"
 
-#: admin/themes/default/item-types/browse.php:31
+#: admin/themes/default/item-types/browse.php:30
 msgid "Total Items"
 msgstr "Всего документов"
 
@@ -1111,8 +1112,8 @@ msgstr "Нет недавно добавленных документов."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:142
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:144
+#: admin/themes/default/items/browse.php:171
 msgid "Add an Item"
 msgstr "Добавить документ"
 
@@ -1122,7 +1123,7 @@ msgstr "Добавить документ"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:104
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1150,7 +1151,7 @@ msgstr ""
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
-#: admin/themes/default/items/batch-edit.php:47
+#: admin/themes/default/items/batch-edit.php:45
 msgid "Delete Items"
 msgstr "Удалить документы"
 
@@ -1238,11 +1239,11 @@ msgstr "Список меток, которые следует добавить 
 msgid "Batch Edit Items"
 msgstr "Пакетные изменения документов"
 
-#: admin/themes/default/items/batch-edit.php:37
+#: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
 msgstr "Изменения будут применены к выделенным элементам."
 
-#: admin/themes/default/items/batch-edit.php:48
+#: admin/themes/default/items/batch-edit.php:46
 msgid "Check if you wish to delete selected items."
 msgstr "Проверьте, хотите ли вы удалить выделенные элементы."
 
@@ -1288,59 +1289,59 @@ msgid "Browse Items"
 msgstr "Просмотр документов"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:144
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2414
-#: application/libraries/globals.php:2805
+#: application/libraries/globals.php:2419
+#: application/libraries/globals.php:2810
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Поиск документов"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:128
+#: admin/themes/default/items/browse.php:130
 #, php-format
 msgid "Select all %s results"
 msgstr ""
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:131
 msgid "items selected"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:63
+#: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
 msgstr ""
 
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Нет меток"
 
-#: admin/themes/default/items/browse.php:155
+#: admin/themes/default/items/browse.php:157
 msgid "Details"
 msgstr "Детали"
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 msgid "Show Details"
 msgstr "Показать детали"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:159
 msgid "Hide Details"
 msgstr "Скрыть детали"
 
-#: admin/themes/default/items/browse.php:165
+#: admin/themes/default/items/browse.php:168
 msgid "You have no items."
 msgstr "У вас нет документов."
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:170
 msgid "Get started by adding your first item."
 msgstr "Начните добавлять ваш первый документ."
 
-#: admin/themes/default/items/browse.php:172
+#: admin/themes/default/items/browse.php:175
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1349,11 +1350,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: admin/themes/default/items/browse.php:173
+#: admin/themes/default/items/browse.php:176
 msgid "refine your search"
 msgstr "Уточните поиск"
 
-#: admin/themes/default/items/browse.php:173
+#: admin/themes/default/items/browse.php:176
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Хотели бы вы %s?"
@@ -1392,16 +1393,16 @@ msgstr "Добавить другой файл"
 msgid "Pick this type"
 msgstr "Выбрать этот тип"
 
+#: admin/themes/default/items/quick-filters.php:1
 #: admin/themes/default/items/quick-filters.php:2
-#: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
 msgstr "Быстрый фильтр"
 
-#: admin/themes/default/items/quick-filters.php:5
+#: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
 msgstr "Просмотреть все"
 
-#: admin/themes/default/items/quick-filters.php:7
+#: admin/themes/default/items/quick-filters.php:5
 msgid "Private"
 msgstr "Личный"
 
@@ -1410,157 +1411,157 @@ msgstr "Личный"
 msgid "Search for Keywords"
 msgstr "Поиск по ключевым словам"
 
-#: admin/themes/default/items/search-form.php:27
+#: admin/themes/default/items/search-form.php:30
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
 msgstr "Сузить по определённым полям"
 
-#: admin/themes/default/items/search-form.php:28
+#: admin/themes/default/items/search-form.php:31
 #: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Добавить поле"
 
-#: admin/themes/default/items/search-form.php:54
+#: admin/themes/default/items/search-form.php:57
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:59
+#: admin/themes/default/items/search-form.php:62
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:60
+#: admin/themes/default/items/search-form.php:63
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:67
+#: admin/themes/default/items/search-form.php:70
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Field"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:83
 #: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:85
-#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "сожержит"
 
-#: admin/themes/default/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "не содержит"
 
-#: admin/themes/default/items/search-form.php:87
+#: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "точно"
 
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:91
 msgid "is not exactly"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "пуст"
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:93
 #: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "не пуст"
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:94
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:95
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:96
 msgid "matches"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:97
 msgid "does not match"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:102
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:108
+#: admin/themes/default/items/search-form.php:111
 #: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Удалить поле"
 
-#: admin/themes/default/items/search-form.php:116
+#: admin/themes/default/items/search-form.php:119
 #: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Поиск в диапазоне ID#s (пример: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:130
+#: admin/themes/default/items/search-form.php:133
 #: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Поиск по коллекциям"
 
-#: admin/themes/default/items/search-form.php:146
+#: admin/themes/default/items/search-form.php:149
 #: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Поиск по типам"
 
-#: admin/themes/default/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:166
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Поиск по пользователям"
 
-#: admin/themes/default/items/search-form.php:180
+#: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Поиск по меткам"
 
-#: admin/themes/default/items/search-form.php:195
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Открытый/Закрытый"
 
-#: admin/themes/default/items/search-form.php:204
+#: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Только доступные документы"
 
-#: admin/themes/default/items/search-form.php:205
+#: admin/themes/default/items/search-form.php:208
 #: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "Только закрытые документы"
 
-#: admin/themes/default/items/search-form.php:215
+#: admin/themes/default/items/search-form.php:218
 #: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Отмеченные/Неотмеченные"
 
-#: admin/themes/default/items/search-form.php:224
+#: admin/themes/default/items/search-form.php:227
 #: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Только отмеченные документы"
 
-#: admin/themes/default/items/search-form.php:225
+#: admin/themes/default/items/search-form.php:228
 #: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Только не отмеченные документы"
 
-#: admin/themes/default/items/search-form.php:233
+#: admin/themes/default/items/search-form.php:236
 #: application/views/scripts/items/search-form.php:215
 msgid "Search for items"
 msgstr "Поиск документов"
@@ -1612,7 +1613,7 @@ msgid "Browse Items by Tag"
 msgstr "Просмотр документов по меткам"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:108
+#: admin/themes/default/tags/browse.php:107
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Нет меток для отображения. Вначале вы должны отметить несколько документов."
 
@@ -1638,8 +1639,8 @@ msgid "by %s"
 msgstr "по %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:26
-#: admin/themes/default/themes/browse.php:69
+#: admin/themes/default/themes/browse.php:25
+#: admin/themes/default/themes/browse.php:68
 msgid "Get support"
 msgstr "Получить поддержку"
 
@@ -1672,7 +1673,7 @@ msgid "Uninstall"
 msgstr "Удалить"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:179
+#: application/forms/Install.php:264
 msgid "Install"
 msgstr "Установить"
 
@@ -1717,7 +1718,7 @@ msgid "Cancel"
 msgstr "Отменить"
 
 #: admin/themes/default/search/index.php:12
-#: admin/themes/default/tags/browse.php:26
+#: admin/themes/default/tags/browse.php:49
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
 msgstr "Тип записи"
@@ -1801,20 +1802,20 @@ msgstr ""
 msgid "Search Record Types"
 msgstr "Поиск записи по её типу"
 
-#: admin/themes/default/settings/edit-search.php:22
+#: admin/themes/default/settings/edit-search.php:23
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Настроить, какие типы записей будут доступны для поиска в Omeka."
 
-#: admin/themes/default/settings/edit-search.php:32
-#: admin/themes/default/settings/edit-search.php:51
+#: admin/themes/default/settings/edit-search.php:34
+#: admin/themes/default/settings/edit-search.php:53
 msgid "Index Records"
 msgstr "Индексировать записи"
 
-#: admin/themes/default/settings/edit-search.php:35
+#: admin/themes/default/settings/edit-search.php:37
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Нажмите на кнопку \"Индексировать записи\", чтобы повторно индексировать ваши записи."
 
-#: admin/themes/default/settings/edit-search.php:37
+#: admin/themes/default/settings/edit-search.php:39
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -1847,53 +1848,55 @@ msgstr "Тест"
 msgid "Browse Tags"
 msgstr "Просмотр меток"
 
-#: admin/themes/default/tags/browse.php:18
-msgid "Search tags"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:29
-msgid "Reset results"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:42
+#: admin/themes/default/tags/browse.php:19
 msgid "Editing Tags"
 msgstr "Редактирование меток"
 
-#: admin/themes/default/tags/browse.php:45
-msgid "To view all items with a tag, click the number."
-msgstr "Для того, чтобы просмотреть все документы с метками, нажмите на порядковый номер."
+#: admin/themes/default/tags/browse.php:22
+msgid ""
+"This number counts all records associated with a tag. Filtering \"Record "
+"types\" to \"Items\" will provide links to all items containing the tag."
+msgstr ""
 
-#: admin/themes/default/tags/browse.php:46
+#: admin/themes/default/tags/browse.php:23
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr "Для того, чтобы редактировать имя метки, нажмите на имя и начните редактирование, затем нажмите \"enter\", чтобы сохранить. Чтобы закрыть редактор, нажмите на ESC или выйдите из метки."
 
-#: admin/themes/default/tags/browse.php:47
+#: admin/themes/default/tags/browse.php:24
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
-"items."
-msgstr "Для того чтобы удалить метку, нажмите на X. Удаление метки не удалит документы с метками."
-
-#: admin/themes/default/tags/browse.php:58
-msgid "Count"
+"records."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:59
-msgid "Date created"
+#: admin/themes/default/tags/browse.php:33
+msgid "Search tags"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:74
-#: admin/themes/default/tags/browse.php:76
+#: admin/themes/default/tags/browse.php:38
+#: admin/themes/default/tags/browse.php:39
 msgid "Record Types"
 msgstr "Типы записи"
 
-#: admin/themes/default/tags/browse.php:77
+#: admin/themes/default/tags/browse.php:40
 msgid "All"
 msgstr ""
 
+#: admin/themes/default/tags/browse.php:52
+msgid "Reset results"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:69
+msgid "Count"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:70
+msgid "Date created"
+msgstr ""
+
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/themes/browse.php:62
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Скриншот %s темы"
@@ -1906,13 +1909,13 @@ msgstr "Конфигурировать тему"
 msgid "Current Theme"
 msgstr "Текущая тема"
 
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:67
 #, php-format
 msgid "By %s"
 msgstr "По %s"
 
-#: admin/themes/default/themes/browse.php:46
+#: admin/themes/default/themes/browse.php:45
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1920,7 +1923,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Добавьте новые темы, скачивая их с  <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\"> Каталог тем Omeka</a>, или <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> для создания собственной темы</a>!"
 
-#: admin/themes/default/themes/browse.php:65
+#: admin/themes/default/themes/browse.php:64
 msgid "Use this theme"
 msgstr "Использовать эту тему"
 
@@ -1991,7 +1994,7 @@ msgstr ""
 msgid "Create a Password"
 msgstr "Создать пароль"
 
-#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:81
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -2012,43 +2015,43 @@ msgstr "Добавить пользователя"
 msgid "Edit User #%s"
 msgstr "Редактировать пользователя #%s"
 
-#: admin/themes/default/users/api-keys.php:17
+#: admin/themes/default/users/api-keys.php:19
 msgid "New key label"
 msgstr "Ярлык нового ключа"
 
-#: admin/themes/default/users/api-keys.php:21
+#: admin/themes/default/users/api-keys.php:23
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
 msgstr "Чтобы создать новый ключ API, войдите в ярлык для ключа ниже. Например, опишите для каких целей это будет использовано. Этот ключ дает вам все разрешения; используйте его как если бы вы использовали пароль."
 
-#: admin/themes/default/users/api-keys.php:31
+#: admin/themes/default/users/api-keys.php:33
 msgid "You have no API keys. Use the form above to create one."
 msgstr "У вас нет ключей API. Используйте форму, которая находится выше, чтобы создать их."
 
-#: admin/themes/default/users/api-keys.php:33
+#: admin/themes/default/users/api-keys.php:35
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
 msgstr "%s не имеет ключей API. Используйте форму, находящуюся выше, чтобы создать их."
 
-#: admin/themes/default/users/api-keys.php:41
+#: admin/themes/default/users/api-keys.php:43
 msgid "Key"
 msgstr "Ключ"
 
-#: admin/themes/default/users/api-keys.php:42
+#: admin/themes/default/users/api-keys.php:44
 msgid "Last IP"
 msgstr "Последний IP"
 
-#: admin/themes/default/users/api-keys.php:43
+#: admin/themes/default/users/api-keys.php:45
 msgid "Last accessed"
 msgstr "Последний доступный"
 
-#: admin/themes/default/users/api-keys.php:44
+#: admin/themes/default/users/api-keys.php:46
 msgid "Rescind"
 msgstr "Отменить"
 
-#: admin/themes/default/users/api-keys.php:61
+#: admin/themes/default/users/api-keys.php:67
 msgid "Update API Keys"
 msgstr ""
 
@@ -2056,42 +2059,46 @@ msgstr ""
 msgid "Browse Users"
 msgstr "Просмотр пользователей"
 
-#: admin/themes/default/users/browse.php:8
-msgid "Add a User"
-msgstr "Добавить пользователя"
-
-#: admin/themes/default/users/browse.php:20
-#: admin/themes/default/users/browse.php:36
-#: admin/themes/default/users/browse.php:47
+#: admin/themes/default/users/browse.php:16
+#: admin/themes/default/users/browse.php:38
+#: admin/themes/default/users/browse.php:51
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: admin/themes/default/users/browse.php:23
-#: admin/themes/default/users/browse.php:38
-#: admin/themes/default/users/browse.php:49
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:84
+#: admin/themes/default/users/browse.php:19
+#: admin/themes/default/users/browse.php:40
+#: admin/themes/default/users/browse.php:53
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr "Электронная почта"
 
-#: admin/themes/default/users/browse.php:35
-msgid "Search users"
-msgstr "Поиск пользователей"
+#: admin/themes/default/users/browse.php:31
+msgid "Add a User"
+msgstr "Добавить пользователя"
 
 #: admin/themes/default/users/browse.php:37
-#: admin/themes/default/users/browse.php:48
+msgid "Options"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:39
+#: admin/themes/default/users/browse.php:52
 #: admin/themes/default/users/show.php:20 application/forms/User.php:81
 msgid "Display Name"
 msgstr "Показать название"
 
-#: admin/themes/default/users/browse.php:50 application/forms/User.php:129
+#: admin/themes/default/users/browse.php:42
+msgid "Search users"
+msgstr "Поиск пользователей"
+
+#: admin/themes/default/users/browse.php:54 application/forms/User.php:129
 msgid "Role"
 msgstr "Роль"
 
-#: admin/themes/default/users/browse.php:60
+#: admin/themes/default/users/browse.php:64
 msgid "inactive"
 msgstr "неактивный"
 
@@ -2686,7 +2693,7 @@ msgid ""
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:128
+#: application/forms/Install.php:178
 msgid "Fullsize Image Size"
 msgstr "Размер изображения в полную величину"
 
@@ -2695,7 +2702,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максимальный размер  изображения (в пикселях)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:136
+#: application/forms/Install.php:191
 msgid "Thumbnail Size"
 msgstr "Размер уменьшенного растрового изображения"
 
@@ -2704,7 +2711,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максимальный размер уменьшенного растрового изображения (в пикселях)."
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:144
+#: application/forms/Install.php:204
 msgid "Square Thumbnail Size"
 msgstr "Прямоугольник уменьшенного растрового изображения"
 
@@ -2732,7 +2739,7 @@ msgid ""
 msgstr "Ограничьте число результатов, отображаемых на странице в общедоступном интерфейсе."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:168
+#: application/forms/Install.php:243
 msgid "Show Empty Elements"
 msgstr "Показать пустые элементы"
 
@@ -2799,27 +2806,27 @@ msgstr "Новый пароль должен состоять из %миниму
 msgid "Repeat New Password"
 msgstr "Повторите новый пароль"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
 msgid "Site Title"
 msgstr "Название сайта"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
 msgid "Site Description"
 msgstr "Описание сайта"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
 msgid "Administrator Email"
 msgstr "Электронная почта администратора"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
 msgid "Site Copyright Information"
 msgstr "Информация об авторском праве для этого сайта"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
 msgid "Site Author Information"
 msgstr "Информация об авторе сайта"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
 msgid "Tag Delimiter"
 msgstr "Разделитель меток"
 
@@ -2829,9 +2836,13 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Разделяйте метки, используя этот символ или строку. Будьте осторожны при изменении этого параметра. Вы рискуете разъединить метки, которые содержат старый разделитель."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
 msgid "ImageMagick Directory Path"
 msgstr "Путь к каталогу ImageMagic"
+
+#: application/forms/GeneralSettings.php:69
+msgid "General Settings"
+msgstr ""
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
@@ -2844,61 +2855,61 @@ msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr ""
 
-#: application/forms/Install.php:48 application/forms/Login.php:34
+#: application/forms/Install.php:53 application/forms/Login.php:34
 msgid "Password"
 msgstr "Пароль"
 
-#: application/forms/Install.php:49
+#: application/forms/Install.php:54
 msgid "must be at least 6 characters"
 msgstr "должно быть по крайней мере 6 символов"
 
-#: application/forms/Install.php:72
+#: application/forms/Install.php:82
 msgid "Confirm your password."
 msgstr "Подтвердите пароль."
 
-#: application/forms/Install.php:114
+#: application/forms/Install.php:159
 msgid "Separate tags using this character or string."
 msgstr "Разделите метки, используя этот символ или строку."
 
-#: application/forms/Install.php:129
+#: application/forms/Install.php:179
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Максимальный размер  изображения, (в пикселях)"
 
-#: application/forms/Install.php:137
+#: application/forms/Install.php:192
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Максимальный размер уменьшенного растрового изображения (в пикселях)"
 
-#: application/forms/Install.php:145
+#: application/forms/Install.php:205
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Максимальный прямоугольник уменьшенного растрового изображения (в пикселях)"
 
-#: application/forms/Install.php:152
+#: application/forms/Install.php:217
 msgid "Items Per Page (admin)"
 msgstr "Количество документов на странице (администраторские)"
 
-#: application/forms/Install.php:153
+#: application/forms/Install.php:218
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Ограничьте количество документов, отображаемых на странице в административном интерфейсе."
 
-#: application/forms/Install.php:160
+#: application/forms/Install.php:230
 msgid "Items Per Page (public)"
 msgstr "Количество документов на странице (доступных)"
 
-#: application/forms/Install.php:161
+#: application/forms/Install.php:231
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Ограничьте количество документов, отображаемых на странице в общедоступном интерфейсе."
 
-#: application/forms/Install.php:170
+#: application/forms/Install.php:245
 msgid "Check box to show metadata elements with no text."
 msgstr "Поставьте галочку, чтобы показывать метаданные без текста."
 
-#: application/forms/Install.php:186
+#: application/forms/Install.php:271
 msgid "Default Superuser Account"
 msgstr "Аккаунт суперпользователя по умолчанию"
 
-#: application/forms/Install.php:196
+#: application/forms/Install.php:281
 msgid "Site Settings"
 msgstr "Настройки сайта"
 
@@ -3201,67 +3212,79 @@ msgstr " Логическое выражение"
 msgid "Exact match"
 msgstr "Точное совпадение"
 
-#: application/libraries/globals.php:1267
-#: application/libraries/globals.php:1288
+#: application/libraries/globals.php:1268
+#: application/libraries/globals.php:1289
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Файл не найден %s!"
 
-#: application/libraries/globals.php:1304
+#: application/libraries/globals.php:1305
 msgid "No featured collections are available."
 msgstr "Отмеченные коллекции отсутствуют."
 
-#: application/libraries/globals.php:1602
+#: application/libraries/globals.php:1603
 msgid "Select Below "
 msgstr "Выберите ниже"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka RSS Feed"
 msgstr "Лента RSS Omeka "
 
-#: application/libraries/globals.php:1646
+#: application/libraries/globals.php:1647
 msgid "Omeka Atom Feed"
 msgstr "Лента Atom Omeka "
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:1966
+msgid "Sort ascending"
+msgstr ""
+
+#: application/libraries/globals.php:1976
+msgid "Sorting descending"
+msgstr ""
+
+#: application/libraries/globals.php:1980
+msgid "Sorting ascending"
+msgstr ""
+
+#: application/libraries/globals.php:2314
 msgid "No recent items available."
 msgstr "Нет недавних доступных документов."
 
-#: application/libraries/globals.php:2335
+#: application/libraries/globals.php:2340
 msgid "No featured items are available."
 msgstr "Отмеченные документы отсутствуют."
 
-#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2401
 msgid "View"
 msgstr "Режим просмотра"
 
-#: application/libraries/globals.php:2458
+#: application/libraries/globals.php:2463
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Нет коллекции"
 
-#: application/libraries/globals.php:2577
+#: application/libraries/globals.php:2582
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2594
+#: application/libraries/globals.php:2599
 msgid "Next Item &rarr;"
 msgstr "Следующий документ &rarr;"
 
-#: application/libraries/globals.php:2614
+#: application/libraries/globals.php:2619
 msgid "&larr; Previous Item"
 msgstr "&larr; Предыдущий документ"
 
-#: application/libraries/globals.php:2795
+#: application/libraries/globals.php:2800
 msgid "Browse All"
 msgstr "Просмотреть все"
 
-#: application/libraries/globals.php:2800
+#: application/libraries/globals.php:2805
 msgid "Browse by Tag"
 msgstr "Просмотр по меткам"
 
-#: application/libraries/globals.php:3079
+#: application/libraries/globals.php:3084
 msgid "No tags are available."
 msgstr "Нет доступных меток."
 
@@ -3573,7 +3596,7 @@ msgstr "Редактировать коллекции"
 #: application/tests/suite/Omeka/NavigationTest.php:819
 #: application/tests/suite/Omeka/NavigationTest.php:862
 #: application/tests/suite/Omeka/NavigationTest.php:954
-#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
 
@@ -3654,11 +3677,11 @@ msgstr "Страница 6"
 msgid "[no text]"
 msgstr "[нет текста]"
 
-#: application/views/helpers/ElementForm.php:65
+#: application/views/helpers/ElementForm.php:273
 msgid "Add Input"
 msgstr "Добавить ввод"
 
-#: application/views/helpers/ElementInput.php:130
+#: application/views/helpers/ElementInput.php:148
 msgid "Use HTML"
 msgstr "Использовать HTML"
 
@@ -3733,15 +3756,19 @@ msgid "Previous Page"
 msgstr "Предыдущая страница"
 
 #: application/views/scripts/common/pagination_control.php:36
+msgid "Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:38
 msgid "Current Page"
 msgstr "Текущая страница"
 
-#: application/views/scripts/common/pagination_control.php:39
+#: application/views/scripts/common/pagination_control.php:42
 #, php-format
 msgid "%s of %s"
 msgstr "%s из %s"
 
-#: application/views/scripts/common/pagination_control.php:48
+#: application/views/scripts/common/pagination_control.php:51
 msgid "Next Page"
 msgstr "Следующая страница"
 
@@ -3820,6 +3847,10 @@ msgstr "Тип запроса:"
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
 msgstr "Типы записи:"
+
+#: application/views/scripts/search/search-form.php:2
+msgid "submit_search"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

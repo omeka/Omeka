@@ -1,0 +1,210 @@
+.ui-sortable, 
+.sortable,
+.drawers {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-dialog .ui-dialog-content {
+	background: white;
+}
+
+.ui-sortable {
+	
+	.sortable-item { 
+		cursor: move;
+		
+		&:before {
+		    display: inline-block;
+		    font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+		    font-size: 16px;
+		    height: $spacing-l;
+		    width: $spacing-l;
+		    margin-right: $spacing-s;
+		    text-indent: 0;
+		    text-align: center;
+			content: "\f0b2";
+			opacity: 0.5;
+			position: relative;
+			
+			#exhibit-page-form & {
+				top: 0px;
+			    position: relative;
+			    float: left;
+			}
+	    }
+	    
+	    > a {
+			max-width: 350px;
+		    display: inline-block;
+		    white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+            line-height: 1.5;
+            vertical-align: top;
+
+            @include screen-xs {
+                max-width: 180px;
+            }
+		}		
+	}
+	
+	li {
+    	margin-bottom: 15px;
+		list-style-type: none;
+	}
+}
+
+.drawer,
+.sortable-item, 
+.add-new {
+    background: $lightgray;
+	box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
+    border: 1px solid $darkgrayborder;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 15px;
+    margin: 0;
+
+    input {
+        margin: 0;
+    }
+    input[type=text] { margin-bottom: 0; }
+        
+    .action-links {
+	    display: inline-block;
+	    float: right;
+	}
+}
+
+.ui-sortable-highlight:empty {
+    background: rgba(0,0,0,.04);
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    display: block;
+    margin: 15px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.drawer-toggle,
+.delete-element, 
+.undo-delete {
+    float: right;
+    height: $spacing-l;
+    width: $spacing-l;
+    cursor: pointer;
+    text-indent: -9999px;
+    color: #4C3939;
+}
+
+.deleted.sortable-item,
+.deleted.drawer {
+    color: #FFF;
+    border: 1px solid rgba(#B00D00, 0.65);
+    background: rgba(#B00D00, 0.65);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    text-shadow: none;
+
+    * {
+        color: #fff;
+    }
+}
+.deleted a:link, 
+.deleted a:visited {
+    color: #fff;
+    text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+}
+.deleted .drawer { color: #fff; }
+
+
+.drawer-toggle:after, 
+.delete-element:after, 
+.undo-delete:after {
+    display: inline-block;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 16px;
+    height: $spacing-l;
+    width: $spacing-l;
+    text-indent: 0;
+    float: left;
+    text-align: center;
+}
+.drawer-toggle:after { content: "\f0da"; }
+
+.delete-element:link, .delete-element:active,
+.delete-element:hover, .delete-element:visited,
+.undo-delete:link, .undo-delete:active,
+.undo-delete:hover, .undo-delete:visited {
+    color: #4C3939;
+}
+
+.drawer-toggle.opened:after {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.delete-element { display: inline-block; }
+.delete-element:after { content: "\f00d"; }
+
+.drawer > a.undo-delete,
+.ui-sortable .sortable-item > a.undo-delete { display: none; }
+
+.undo-delete:after {
+    content: "\f0e2";
+    font-size: 12px;
+    line-height: 2em;
+    color: #fff;
+}
+
+.drawer-contents {
+    background: #fff;
+    border: 1px solid $darkgrayborder;
+    box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
+    line-height: 1.5em;
+    margin: -2px 0 2px 0;
+    overflow: auto;
+    padding: $spacing-l;
+    
+    &:empty { display: none; padding: 0;}
+
+    & > *:only-child { margin: 0; }
+
+    input[type=text] { width: 100%; }
+
+    .button { margin-bottom: 0; }
+
+    & > :first-child {
+        margin-top: 0;
+    }
+
+    & > :last-child {
+        margin-bottom: 0;
+    } 
+
+    textarea {
+        margin: 0;
+        vertical-align: bottom;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        padding-bottom: $spacing-m;
+    }
+}
+
+.ui-widget-overlay {
+    background-color: rgba(0,0,0,.5);
+}

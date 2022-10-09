@@ -4,12 +4,17 @@ if (!Omeka) {
 
 (function($) {
     // Skip to content
-    Omeka.skipNav = function() {
-        $("#skipnav").click(function() {
-            $("#content").focus()
-        });
+    Omeka.skipNav = function () {
+      $("#skipnav").click(function(e) {
+          e.preventDefault();
+          $("#content").attr("tabindex", -1).focus();
+      });
+    
+      $("#content").on("blur focusout", function () {
+          $(this).removeAttr("tabindex");
+      });
     };
-
+    
     // Show advanced options for site-wide search.
     Omeka.showAdvancedForm = function () {
         var advanced_form = $('#advanced-form');

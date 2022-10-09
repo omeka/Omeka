@@ -32,9 +32,9 @@ Omeka.ElementSets = {};
             $(this).hide();
         });
         $('div.sortable-item').each(function () {
-            $(this).append('<div class="drawer"></div>');
+            $(this).append('<div class="drawer-toggle"></div>');
         });
-        $('.drawer')
+        $('.drawer-toggle')
             .click(function (event) {
                 event.preventDefault();
                 $(event.target).parent().next().toggle();
@@ -85,10 +85,10 @@ Omeka.ElementSets = {};
      */
     Omeka.ElementSets.confirmDeleteElement = function (okText, cancelText) {
         $("#confirm-delete-dialog").dialog({autoOpen: false, modal: true, buttons: [
-            {text: okText, click: function () {
+            {text: okText, class: 'small green button', click: function () {
                 $('#edit-item-type-elements').off('submit').submit();
             }}, 
-            {text: cancelText, click: function () {
+            {text: cancelText, class: 'small red button', title: '', click: function () {
                 $(this).dialog('close')
             }}
         ]});

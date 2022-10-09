@@ -11,6 +11,8 @@
  */
 class SystemInfoController extends Omeka_Controller_AbstractActionController
 {
+    protected $_db;
+
     public function preDispatch()
     {
         if (!get_option('display_system_info')) {

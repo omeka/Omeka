@@ -1,15 +1,16 @@
 <?php
 queue_js_file(array('vendor/jquery.nestedSortable', 'navigation'));
+
 $pageTitle = __('Appearance');
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
+
+<?php echo common('appearance-nav'); ?>
+<?php echo flash(); ?>
 <form action="<?php echo $this->form->getAction() ?>"
       enctype="<?php echo $this->form->getEnctype() ?>"
       method="<?php echo $this->form->getMethod() ?>"
       id="<?php echo $this->form->getId() ?>"
       class="<?php echo $this->form->getAttrib('class') ?>" >
-
-<?php echo common('appearance-nav'); ?>
-<?php echo flash(); ?>
 <section class="seven columns alpha">
     <p class="explanation"><?php echo __('Check the links to display them ' 
     . 'in the main navigation. Click and drag the links into the preferred ' 
@@ -28,11 +29,11 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 </section>
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
         <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
     </div>
     <div id="reset" class="panel">
-        <a class='delete-confirm big red button' href='<?php echo url('appearance/reset-navigation-confirm'); ?>'><?php echo __('Reset Navigation'); ?></a>
+        <a class='delete-confirm full-width red button' href='<?php echo url('appearance/reset-navigation-confirm'); ?>'><?php echo __('Reset Navigation'); ?></a>
     </div>
 </section>
 <?php echo $this->form->getElement('navigation_csrf'); ?>

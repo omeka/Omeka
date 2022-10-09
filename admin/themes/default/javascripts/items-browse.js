@@ -7,18 +7,19 @@ Omeka.ItemsBrowse = {};
 (function ($) {
     Omeka.ItemsBrowse.setupDetails = function (detailsText, showDetailsText, hideDetailsText) {
         $('.details').hide();
-        $('.action-links').prepend('<li class="details-link">' + detailsText + '</li> ');
+        $('.action-links').prepend('<li><a href="#" class="details-link">' + detailsText + '</a></li>');
 
         $('tr.item').each(function() {
             var itemDetails = $(this).find('.details');
             if ($.trim(itemDetails.html()) != '') {
-                $(this).find('.details-link').css({'color': '#4E7181', 'cursor': 'pointer'}).click(function() {
+                $(this).find('.details-link').click(function(e) {
+                    e.preventDefault();
                     itemDetails.slideToggle('fast');
                 });
             }
         });
 
-        var toggleList = '<a href="#" class="toggle-all-details small blue button">' + showDetailsText + '</a>';
+        var toggleList = '<a href="#" class="toggle-all-details full-width-mobile blue button">' + showDetailsText + '</a>';
 
         $('.advanced-search-link').before(toggleList);
 
@@ -39,8 +40,8 @@ Omeka.ItemsBrowse = {};
 
     Omeka.ItemsBrowse.setupBatchEdit = function () {
         var itemCheckboxes = $("table#items tbody input[type=checkbox]");
-        var globalCheckboxLabel = $('th.batch-edit-heading').text();
-        var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox" aria-label="' + globalCheckboxLabel + '">').find('input');
+        var globalCheckboxLabel = $('th.batch-edit-heading label').text();
+        var globalCheckbox = $('th.batch-edit-heading').append('<input type="checkbox" name="batch-all-checkbox" id="batch-all-checkbox" title="' + globalCheckboxLabel + '">').find('input');
         var batchEditSubmit = $('.batch-edit-option input[type=submit]');
         var batchAllButton = $('.batch-all-toggle');
         var batchAllInput = $('#batch-all');

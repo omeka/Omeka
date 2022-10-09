@@ -1,0 +1,212 @@
+@mixin button {
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-appearance: none;
+    
+    background: $lightgray;
+    border: 1px solid $darkgrayborder;
+    color: $black;
+    
+    margin: 0 $spacing-s $spacing-l 0;
+    min-height: 25px;
+    padding: $spacing-m ($spacing-l - 2px);
+    line-height: 16px;
+    
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    transition: 0.5s all;
+}
+
+@mixin large {
+    display: block;
+    line-height: 1.75em;
+    margin: $spacing-m auto;
+    padding: $spacing-m $spacing-l;
+    font-size: 115%;
+}
+
+@mixin small {
+    display: inline-block;
+    margin: 0 $spacing-s $spacing-l 0;
+    padding: $spacing-s $spacing-m;
+
+    &:hover,
+    &:focus {
+	    border-color: rgba($black, 0.65);
+	    background: darken($lightgray, 5%);
+	    outline: none;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px #C67F6F;
+        z-index: 9999;
+    }
+    
+    &:disabled {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        cursor: default;
+        opacity: .35;
+    }
+}
+
+@mixin blue {
+    color: $blue;
+    background: #EEF3FA;
+    border: 1px solid rgba($blue, 0.25);
+
+    &.ui-button {
+        background: #EEF3FA !important;
+        border: 1px solid rgba($blue, 0.25) !important;
+    }
+    
+    &:hover,
+    &:focus {
+        border-color: rgba($blue, 0.65);
+        background: darken(#EEF3FA, 5%);
+        outline: none;
+    }
+
+    * {
+        color: $blue;
+    }
+}
+
+@mixin red {
+    color: $red;
+    background: #F9E8E7;
+    border: 1px solid rgba($red, 0.25);
+
+    &.ui-button {
+        background: #F9E8E7 !important;
+        border: 1px solid rgba($red, 0.25) !important;
+    }
+    
+    &:hover,
+    &:focus {
+        border-color: rgba($red, 0.65);
+        background: darken(#F9E8E7, 5%);
+        outline: none;
+    }
+
+    * {
+        color: $red;
+    }
+}
+
+@mixin green {
+    color: darken($green, 5%);
+    background: $lightgreen;
+    border: 1px solid rgba($green, 0.25);
+
+    &.ui-button {
+        background: $lightgreen !important;
+        border: 1px solid rgba($green, 0.25) !important;    
+    }
+
+    &:hover,
+    &:focus {
+        border-color: rgba($green, 0.65);
+        background: darken($lightgreen, 5%);
+        outline: none;
+    }
+
+    * {
+        color: darken($green, 5%);
+    }
+}
+
+span.button,
+a.button, 
+input[type=submit], 
+button {
+    @include button;
+    
+    &.full-width {
+	    width: 100%;
+    }
+    
+    &.full-width-mobile {
+	    @include screen-xs {
+		    width: 100%;
+		    margin-bottom: $spacing-m;
+		}
+    }
+    
+    &.large {
+        @include large;
+    }
+    &.small {
+        @include small;
+    }
+    
+    &.blue {
+        @include blue;
+    }
+    &.red {
+        @include red;
+    }
+    &.green {
+        @include green;
+    }
+}
+           
+
+/* jQuery UI overrides
+================================================== */
+
+button.ui-state-default {
+    background: #A4C637;
+    color: #fff !important;
+    border: 1px solid #749308 !important;
+    -webkit-border-radius: 3 !important;
+    -moz-border-radius: 3 !important;
+    border-radius: 3 !important;
+}
+
+button.ui-dialog-titlebar-close {
+    top: 40% !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* tinyMCE overrides
+================================================== */
+
+.mce-btn {
+    border-radius: 3px !important;
+}
+
+.mce-primary {
+    background: $lightgreen !important;
+    
+    button {
+        color: darken($green, 5%) !important;
+        border: 1px solid rgba($green, 0.25) !important;
+
+        &:hover,
+        &:focus {
+            border-color: rgba($green, 0.65);
+            background: darken($lightgreen, 5%);
+            outline: none;
+        }
+    
+        * {
+            color: darken($green, 5%);
+        }
+    }
+}

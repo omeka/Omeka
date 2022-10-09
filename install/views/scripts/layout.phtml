@@ -8,17 +8,15 @@
         $this->headLink()
             ->appendStylesheet($this->baseUrl('/screen.css'), 'screen')
             ->appendStylesheet($this->baseUrl('/skeleton.css'))
-            ->appendStylesheet($this->baseUrl('/media/767max.css'), 'only screen and (max-width: 767px)')
-            ->appendStylesheet($this->baseUrl('/media/479max.css'), 'only screen and (max-width: 479px)')
             ->appendStylesheet('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic');
     ?>
     <?php echo $this->headLink(); ?>
 </head>
 
-<body>
+<body id="install">
 
 <div class="container container-sixteen">
-    <div id="content" class="eight columns offset-by-four">
+    <div id="content" class="ten columns offset-by-three">
         <header>
             <h1><?php echo __('Omeka'); ?></h1>
         </header>

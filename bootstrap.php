@@ -8,7 +8,7 @@
  */
 
 // Define the current version of Omeka.
-define('OMEKA_VERSION', '2.8');
+define('OMEKA_VERSION', '3.0.3');
 
 // Define the application environment.
 if (!defined('APPLICATION_ENV')) {

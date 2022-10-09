@@ -1,6 +1,10 @@
 <?php
 class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
 {
+    private $user;
+    private $adapter;
+    private $dispatcher;
+
     public function setUpLegacy()
     {
         $this->user = $this->getMock('User', array(), array(), '', false);

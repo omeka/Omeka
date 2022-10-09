@@ -33,6 +33,13 @@ require_once 'Zend/Validate/Interface.php';
 abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 {
     /**
+     * Used by Zend_Form_Element
+     *
+     * @var bool
+     */
+    public $zfBreakChainOnFailure;
+
+    /**
      * The value to be validated
      *
      * @var mixed

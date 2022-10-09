@@ -11,6 +11,8 @@
  */
 class InsertFilesForItemTest extends Omeka_Test_AppTestCase
 {
+    private $item;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

@@ -11,6 +11,9 @@
  */
 class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 {
+    private $adminUser;
+    private $superUser;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

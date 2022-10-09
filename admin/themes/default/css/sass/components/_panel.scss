@@ -1,0 +1,78 @@
+#save, #edit {
+    margin-top: 0;
+    float: right;
+}
+
+    #save .big, #edit .big {
+        width: 100%;
+        margin: 0 auto $spacing-m;
+    }
+
+        #save .big:first-child, #edit .big:first-child {
+            margin-top: 0;
+        }
+
+    #save .field, #edit .field {
+        border-top: 1px solid $darkgrayborder;
+        overflow: visible;
+        padding-top: $spacing-l;
+    }
+
+        #save .field:last-child, #edit .field:last-child {
+            margin-bottom: 0;
+        }
+
+
+    #save label, #edit label {
+        float:none;
+    }
+
+    #save .panel, #edit .panel {
+        clear: both;
+    }
+
+    #save .pagination, #edit .pagination {
+        width: 100%;
+    }
+
+    #save .pagination li, #edit .pagination li {
+        margin: 0 0 $spacing-m 0;
+    }
+
+    #save #previous-item, #edit #previous-item {
+        float: left;
+    }
+
+    #save #next-item, #edit #next-item {
+        float: right;
+    }
+
+    #save select, #edit select {
+        width: 100%;
+        margin: $spacing-m 0 0 0;
+    }
+
+#add-tags-explanation {
+    margin: 0 0 $spacing-m 0;
+}
+
+#edit .pagination { margin: 0; }
+
+#navigation-links {
+  margin-bottom: $spacing-l;
+}
+
+#navigation_main_list ul {
+    margin-top: 15px;
+}
+
+#save #fieldset-homepage_select_display {
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+}
+
+    .navigation_main_list_delete { float: right; }
+
+    .navigation_main_list_visit { float: left;}
+
+#navigation_form input[type=checkbox] { margin-right: $spacing-m; }

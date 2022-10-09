@@ -1,0 +1,197 @@
+.browse-tags .content-wrapper {
+    overflow: hidden;
+}
+
+.tags h3 { margin: 0; }
+
+.tags ol { padding: 0 0 0 $spacing-m;  li { margin-left: $spacing-s; padding-left: $spacing-l; }}
+
+.tags ol:before {
+    content: "";
+    display: inline-block;
+    width: 180px;
+    height: 75px;
+    background:url('../images/tag-desc.png') no-repeat;
+    background-size: cover;
+    margin: $spacing-s 0 $spacing-l -$spacing-l;
+}
+
+.editable-inline div {
+    display: inline-block;
+}
+
+.editable-inline input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    padding: 0 6px !important;
+    height: 20px;
+}
+
+form.form-inline.editableform {
+    position: relative;
+}
+
+.editable-error-block.editable-error {
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    text-shadow: none;
+    color: $darkred;
+    left: 0;
+    font-family: "Cabin", sans-serif;
+    padding: 3px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 3px #cccccc;
+}
+
+.tag-list {
+    padding: 0;
+}
+
+.tag-list li {
+    height: 22px;
+    color: $green;
+    background: $lightgreen;
+    border: 1px solid rgba($green, 0.25);
+    
+    &:hover,
+    &:focus {
+        border-color: rgba($green, 0.65);
+        background: darken($lightgreen, 5%);
+        outline: none;
+    }
+    
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    
+    display: inline-block;
+    margin: 0 $spacing-m $spacing-m 0;
+    padding: $spacing-s $spacing-m;
+}
+
+.tag-list .count {
+    margin-right: $spacing-s;
+    padding-right: $spacing-m;
+    position: relative;
+}
+
+.tag-list li .count:after {
+    content: "";
+    width: 1px;
+    position: absolute;
+    background-color: rgba($green, 0.25);
+    bottom: -$spacing-s;
+    top: -$spacing-s;
+    right: 0;
+}
+
+.tag-list li .tag, .tag-list li a, .tag-list li .count {
+    display: inline-block;
+color: darken($green, 15%);
+}
+
+.tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
+    text-indent: -9999px;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    position: relative;
+    top: 3px;
+}
+
+.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
+    content: "\f067";
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($green, 1);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color:$lightgreen;
+    display: block;
+    position: relative;
+    font-size: $spacing-m;
+    top: 0;
+    float: left;
+    text-indent: 4px;
+    line-height: 17px;
+    text-shadow: none;
+}
+
+.undo-remove-tag a:after {
+    content: "\f112";
+    color: #BB8282;
+    font-size: 9px;
+    text-indent: 3px;
+    line-height: 18px;
+}
+
+#tags-nav {
+    margin: 0;
+}
+
+#tags-nav span:last-of-type {
+    margin-right: $spacing-l;
+}
+
+#tags-nav .quick-filter-wrapper {
+    height: 27px;
+    padding: 0 $spacing-l 0 0;
+    border-width: 1px 1px 0 1px;
+    margin-left: 0;
+}
+
+#tags-nav .quick-filter-wrapper .dropdown li {
+    padding: 0 $spacing-l 0 0;
+}
+
+#tags-nav > span {
+	position: relative;
+}
+
+    #tags-nav > span:first-child {
+
+    }
+
+
+    #tags-nav span a:link, #tags-nav span a:visited {
+
+    }
+
+    #tags-nav span.current {
+        a {
+	        padding-right: 36px;
+            text-align: left;
+        }
+        
+    }
+    #tags-nav span.current a:after {
+        content: "";
+        position: absolute;
+        right: $spacing-l;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translateY(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    #tags-nav span.current.asc a:after {
+        border-bottom: $spacing-s solid;
+    }
+
+    #tags-nav span.current.desc a:after {
+        border-top: $spacing-s solid;
+    }
+
+.tags div.two.columns { clear: both; }

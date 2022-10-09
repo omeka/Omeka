@@ -59,6 +59,9 @@ class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
             $connectionParams['profiler'] = true;
         }
 
+        // Restore < PHP 8.1 behavior, necessary for Zend_Db exceptions to work
+        mysqli_report(MYSQLI_REPORT_OFF);
+
         $dbh = Zend_Db::factory('Mysqli', $connectionParams);
 
         $db_obj = new Omeka_Db($dbh, $dbIni->prefix);

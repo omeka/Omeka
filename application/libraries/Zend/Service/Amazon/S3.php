@@ -781,7 +781,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             $sig_str .= '?versions';
         }
 
-        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Zend_Crypt_Hmac::BINARY));
+        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'sha1', $sig_str, Zend_Crypt_Hmac::BINARY));
         $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
 
         return $sig_str;

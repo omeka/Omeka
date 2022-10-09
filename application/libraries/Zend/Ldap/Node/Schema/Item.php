@@ -108,6 +108,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      * @return null
      * @throws BadMethodCallException
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($name, $value)
     {
         throw new BadMethodCallException();
@@ -119,6 +120,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      * @param  string $name
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($name)
     {
         return $this->__get($name);
@@ -134,6 +136,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      * @return null
      * @throws BadMethodCallException
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($name)
     {
         throw new BadMethodCallException();
@@ -145,6 +148,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      * @param  string $name
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($name)
     {
         return $this->__isset($name);
@@ -156,6 +160,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_data);

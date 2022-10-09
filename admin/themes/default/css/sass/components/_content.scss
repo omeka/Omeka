@@ -1,0 +1,116 @@
+#content {
+    margin-top: 4 * $spacing-m;
+    
+    @include screen-xs {
+    	margin-top: 8.5 * $spacing-m;
+    }
+    
+    h1:first-child,
+    h2:first-child {
+        margin-top: 0;
+    }
+    
+    section:first-of-type {
+	    min-height: 1px;
+	}
+	
+	.content-wrapper {
+		background: white;
+		padding: $spacing-l;
+		box-shadow: 0 0 8px rgba(0,0,0,0.1);
+		z-index: 9;
+		position: relative;
+	}
+}
+
+.panel {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid $lightgrayborder;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    margin: $spacing-m 0;
+    padding: $spacing-l $spacing-l 0;
+    overflow: hidden;
+    word-wrap: break-word;
+    
+    &:first-child {
+        margin-top: 0;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+    }
+    ul {
+        padding: 0 0 0 $spacing-l;
+    }
+    
+    a.button, 
+	input[type=submit], 
+	button {
+		margin-bottom: $spacing-m;
+		width: 100%;
+	}
+	
+	.button:last-child {
+		margin-bottom: $spacing-l !important;
+	}
+}
+
+.admin-thumb.panel img {
+    max-width: 100%;
+    padding-bottom: $spacing-m;
+    vertical-align: bottom;
+}
+
+.recent-row {
+    border-bottom: 1px solid #e7e7e7;
+    overflow: auto;
+    margin: 12px 0;
+    
+    p {
+        margin: 0 0 $spacing-m 0;
+    }
+}
+
+.recent {
+    width: 75%;
+    float: left;
+    margin: 0;
+}
+
+.dash-edit { 
+    float: right;
+    margin: 0;
+}
+
+.ui-dialog {
+	border: none !important;
+	border-radius: 0 !important;
+	padding: 0;
+	
+	.ui-dialog-titlebar {
+		background: $darkred;
+		border: none;
+		border-radius: 0;
+		padding: $spacing-m $spacing-l;
+		
+		* {
+			color: white;
+		}
+	}
+}
+
+.ui-autocomplete {
+    background-color: #fff;
+    border: 1px solid $lightgrayborder;
+}
+
+.ui-menu .ui-menu-item-wrapper.ui-state-active {
+    background-color: $lightgreen;
+}

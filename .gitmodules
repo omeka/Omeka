@@ -1,18 +1,18 @@
 [submodule "plugins/ExhibitBuilder"]
 	path = plugins/ExhibitBuilder
-	url = git://github.com/omeka/plugin-ExhibitBuilder
+	url = https://github.com/omeka/plugin-ExhibitBuilder.git
 [submodule "plugins/SimplePages"]
 	path = plugins/SimplePages
-	url = git://github.com/omeka/plugin-SimplePages
+	url = https://github.com/omeka/plugin-SimplePages.git
 [submodule "themes/default"]
 	path = themes/default
-	url = git://github.com/omeka/theme-thanksroy
+	url = https://github.com/omeka/theme-thanksroy.git
 [submodule "themes/seasons"]
 	path = themes/seasons
-	url = git://github.com/omeka/theme-seasons
+	url = https://github.com/omeka/theme-seasons.git
 [submodule "plugins/Coins"]
 	path = plugins/Coins
-	url = git://github.com/omeka/plugin-Coins
+	url = https://github.com/omeka/plugin-Coins.git
 [submodule "themes/berlin"]
 	path = themes/berlin
-	url = git://github.com/omeka/theme-berlin.git
+	url = https://github.com/omeka/theme-berlin.git

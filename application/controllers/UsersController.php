@@ -20,6 +20,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 
+    protected $_auth;
+
     public function init()
     {
         $this->_helper->db->setDefaultModelName('User');
@@ -410,8 +412,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
     public function loginAction()
     {
-        // require_once is necessary because lacking form autoloading.
-        require_once APP_DIR . '/forms/Login.php';
         $loginForm = new Omeka_Form_Login;
         $loginForm = apply_filters('login_form', $loginForm);
 

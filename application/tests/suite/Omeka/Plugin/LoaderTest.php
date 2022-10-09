@@ -11,6 +11,15 @@
  */
 class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
 {
+    private $broker;
+    private $basePath;
+    private $iniReader;
+    private $mvc;
+    private $loader;
+    private $db;
+    private $pluginFoobar;
+    private $notActivatedPlugin;
+
     public function setUpLegacy()
     {
         $this->broker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
@@ -84,31 +93,31 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
 
     public function testLoadPluginsWithCircularDependencies()
     {
-        $this->circularDependencyPlugin = new Plugin($this->db);
-        $this->circularDependencyPlugin->id = 3;
-        $this->circularDependencyPlugin->setDirectoryName('CircularDependencyPlugin');
-        $this->circularDependencyPlugin->setActive(true);
-        $this->circularDependencyPlugin->setRequiredPlugins(array('foobar'));
+        $circularDependencyPlugin = new Plugin($this->db);
+        $circularDependencyPlugin->id = 3;
+        $circularDependencyPlugin->setDirectoryName('CircularDependencyPlugin');
+        $circularDependencyPlugin->setActive(true);
+        $circularDependencyPlugin->setRequiredPlugins(array('foobar'));
 
         $this->pluginFoobar->setRequiredPlugins(array('CircularDependencyPlugin'));
 
-        $this->loader->loadPlugins(array($this->pluginFoobar, $this->circularDependencyPlugin), true);
+        $this->loader->loadPlugins(array($this->pluginFoobar, $circularDependencyPlugin), true);
         $this->assertFalse($this->pluginFoobar->isLoaded(), "'foobar' plugin should not have been loaded.");
-        $this->assertFalse($this->circularDependencyPlugin->isLoaded(), "'CircularDependencyPlugin' should not have been loaded.");
+        $this->assertFalse($circularDependencyPlugin->isLoaded(), "'CircularDependencyPlugin' should not have been loaded.");
     }
 
     public function testLoadPluginThatDependsOnAlreadyLoadedPlugin()
     {
         $this->pluginFoobar->setRequiredPlugins(array('AllPurposePlugin'));
 
-        $this->alreadyLoadedPlugin = new Plugin($this->db);
-        $this->alreadyLoadedPlugin->id = 4;
-        $this->alreadyLoadedPlugin->setDirectoryName('AllPurposePlugin');
-        $this->alreadyLoadedPlugin->setActive(true);
+        $alreadyLoadedPlugin = new Plugin($this->db);
+        $alreadyLoadedPlugin->id = 4;
+        $alreadyLoadedPlugin->setDirectoryName('AllPurposePlugin');
+        $alreadyLoadedPlugin->setActive(true);
 
-        $this->loader->load($this->alreadyLoadedPlugin, true);
+        $this->loader->load($alreadyLoadedPlugin, true);
         $this->loader->load($this->pluginFoobar, true);
-        $this->assertTrue($this->alreadyLoadedPlugin->isLoaded());
+        $this->assertTrue($alreadyLoadedPlugin->isLoaded());
         $this->assertTrue($this->pluginFoobar->isLoaded());
     }
 
@@ -169,17 +178,17 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
 
     public function testRegisterTwoDifferentPluginObjectsWithSamePluginDirectories()
     {
-        $this->pluginWithSameDir = new Plugin($this->db);
-        $this->pluginWithSameDir->id = 5;
-        $this->pluginWithSameDir->setDirectoryName('foobar');
-        $this->pluginWithSameDir->setActive(true);
+        $pluginWithSameDir = new Plugin($this->db);
+        $pluginWithSameDir->id = 5;
+        $pluginWithSameDir->setDirectoryName('foobar');
+        $pluginWithSameDir->setActive(true);
 
         $this->loader->registerPlugin($this->pluginFoobar);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should be registered.");
 
         $hasException = false;
         try {
-            $this->loader->registerPlugin($this->pluginWithSameDir);
+            $this->loader->registerPlugin($pluginWithSameDir);
         } catch (Omeka_Plugin_Loader_Exception $e) {
             $hasException = true;
             $this->assertStringContainsString("Plugin named 'foobar' has already been loaded/registered.", $e->getMessage());

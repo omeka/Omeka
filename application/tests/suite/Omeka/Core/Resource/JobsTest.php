@@ -1,6 +1,12 @@
 <?php
 class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
 {
+    private $application;
+    private $bootstrap;
+    private $config;
+    private $user;
+    private $db;
+
     /**
      * Warning: this code has been adapted from Zend Framework's 
      * Zend_Application_Resource_FrontcontrollerTest.

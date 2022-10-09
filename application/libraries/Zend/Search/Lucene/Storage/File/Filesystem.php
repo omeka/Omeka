@@ -48,26 +48,20 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
      */
     public function __construct($filename, $mode='r+b')
     {
-        global $php_errormsg;
-
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
             // opening for reading non-readable file
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('File \'' . $filename . '\' is not readable.');
         }
 
-        $trackErrors = ini_get('track_errors');
-        ini_set('track_errors', '1');
-
         $this->_fileHandle = @fopen($filename, $mode);
 
         if ($this->_fileHandle === false) {
-            ini_set('track_errors', $trackErrors);
+            $error = error_get_last();
+            $errormsg = $error ? $error['message'] : '';
             require_once 'Zend/Search/Lucene/Exception.php';
-            throw new Zend_Search_Lucene_Exception($php_errormsg);
+            throw new Zend_Search_Lucene_Exception($errormsg);
         }
-
-        ini_set('track_errors', $trackErrors);
     }
 
     /**

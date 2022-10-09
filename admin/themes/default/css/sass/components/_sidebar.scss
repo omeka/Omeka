@@ -1,0 +1,196 @@
+//scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
+
+#content-nav::-webkit-scrollbar {
+	width: auto;
+  }
+
+#content-nav {
+	scrollbar-color: $scrollbar $darkestred;
+}
+
+#content-nav::-webkit-scrollbar-track {
+	background: $darkestred;
+}
+
+#content-nav::-webkit-scrollbar-thumb {
+	background-color: $scrollbar;
+	border-radius: 6px;
+	border: 3px solid $darkestred;
+}
+
+#content-nav {
+	background-color: $darkestred;
+    width: 200px;
+    position: fixed;
+    top: 40px;
+    left: 0;
+	bottom: 0;
+	margin: 0;
+	overflow-y: auto;
+	z-index: 1000;
+
+    @include screen-md {
+	    width: 160px;
+	}
+	@include screen-sm {
+		width: 180px;
+	}
+	@include screen-xs {
+		width: 100%;
+		top: 40px;
+		background-color: transparent;
+		height: 4.5 * $spacing-m;
+		z-index: 1010;
+		
+		&.open {
+			bottom: 0;
+			height: auto;
+			overflow-y: scroll;	
+			background-color: $darkestred;
+		}
+		
+		&.open ~ #content {
+			height: 0;
+			overflow: hidden;
+		}
+	}
+
+	&.unfix {
+	    position: absolute;
+	    top: -$spacing-m;
+	} 
+
+	ul {
+	    width: 100%;
+	    list-style-type: none;
+	    padding: 0;
+	    float: left;
+	    clear: left;
+		margin: 0;
+	    
+	    @include screen-xs {
+		 	margin-top: 0;
+		 	height: 0px;
+		 	overflow: auto;
+		 	transition: 0.5s all;
+		 	
+		 	&.in {
+			 	height: auto;
+		 	}
+		}
+	}
+
+	li {
+	    word-wrap: break-word;
+	    z-index: 1000;
+	    transition: 0.5s all;
+
+	    &:hover {
+	        background: $darkred;
+	        
+	        a {
+		        color: white;
+	        }
+	    }
+	    
+	    a {
+	        height: 100%;
+	        color: white;
+	        display: block;
+	        line-height: 1.5em;
+	        padding: .5em .5em .5em 1em;
+	        font-size: 14px;
+	        text-decoration: none;
+	        transition: 0.5s all;
+	        
+	        @include screen-xs {
+		    	font-size: 16px;   
+		    }
+	    }
+	}
+	
+	.active, 
+	.active:hover {
+	    background: $darkred;
+	    
+	    a {
+	        background-color: transparent;
+	        color: white;
+	        
+	        &:hover, 
+	        &:active {
+				background-color: transparent;
+    		}
+
+			@include screen-xs {
+				background-color: #333;
+			}
+	    }
+	}
+}
+
+#content-nav-toggle {
+	display: none;
+	
+	@include screen-xs {
+		display: block;
+		background: $darkred;
+		word-wrap: break-word;
+		border-bottom: 1px solid rgba(236, 181, 179, 0.25);
+	    color: white;
+	    display: block;
+	    line-height: 1.5em;
+	    padding: .625em 3em .625em 1em;
+	    font-size: 16px;
+	    text-decoration: none;
+	    transition: 0.5s all;
+		position: sticky;
+		top: 0;
+		z-index: 999;
+		overflow: hidden;
+		height: 2.5 * $spacing-m;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	    
+	    &:after {
+		    content: "\f0d7";
+		    font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+		    font-size: 21px;
+		    display: block;
+		    text-indent: 0;
+		    text-align: center;
+		    margin: -0.75em 0 0 0em;
+		    color: white;
+		    position: absolute;
+		    right: $spacing-l;
+		    top: 27px;
+	    }
+	}
+}
+
+#mobile-content-nav {
+    display: none;
+
+	> ul {
+        width: 100%;
+        background: #1C4E65; /* Fallback */
+        background: url('../images/dropdown-arrow.png') no-repeat right center; /* Fallback */
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #1C4E65, #164052);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #1C4E65, #164052);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #1C4E65, #164052);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #1C4E65, #164052);
+        border: 1px solid #11303F;
+        color: #f7f7f7;
+        font-family: "Arvo", serif;
+    }
+
+    li {
+	    a {
+		    color: #fff; 
+		}
+		.dropdown a { color: #666; }
+	}
+
+    .quick-filter-wrapper ul li:hover:first-child { background-color:#ccc; }
+}

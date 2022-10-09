@@ -86,7 +86,7 @@ class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
 
         $xhtml = '<button'
                 . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ($id === '' ? '' : ' id="' . $this->view->escape($id) . '"')
                 . ' type="' . $type . '"';
 
         // add a value if one is given

@@ -11,6 +11,9 @@
  */
 class Omeka_Plugin_BrokerTest extends Omeka_Test_TestCase
 {
+    private $broker;
+    private $testHooksFired;
+
     public function setUpLegacy()
     {
         $this->broker = new Omeka_Plugin_Broker;

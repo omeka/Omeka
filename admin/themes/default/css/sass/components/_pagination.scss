@@ -1,0 +1,117 @@
+.pagination {
+    clear: right;
+    float: right;
+    margin: 0 0 $spacing-l 14px;
+    padding: 0;
+
+    @include screen-xs {
+        float: none;
+        margin: 0 0 $spacing-m;
+        overflow: hidden;
+    }
+}
+
+    .pagination li {
+        height: 38px;
+        min-width: 25px;
+        color: #666666;
+        font-family: "Cabin", sans-serif;
+        float: left;
+        line-height: 22px;
+        list-style-type: none;
+        text-align: center;
+    }
+
+        .pagination li:last-child {
+            margin-right: 0;
+        }
+
+        .pagination li a {
+            -webkit-border-radius: 3;
+		    -moz-border-radius: 3;
+		    border-radius: 3px;
+		    
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+		    cursor: pointer;
+		    display: inline-block;
+		    -webkit-appearance: none;
+		    
+		    background: $lightgray;
+		    border: 1px solid $darkgrayborder;
+		    color: $black;
+		    
+		    margin: 0 0 $spacing-l 0;
+		    min-height: 25px;
+		    height: 38px;
+		    min-width: 38px;
+		    padding: $spacing-m 18px;
+		    line-height: 16px;
+		    
+		    text-align: center;
+		    text-decoration: none;
+		    white-space: normal;
+		    transition: 0.5s all;
+		    
+		    &:hover,
+		    &:focus {
+			    border-color: rgba($black, 0.65);
+			    background: darken($lightgray, 5%);
+			    outline: none;
+		    }
+		    
+		    &:disabled {
+		        -moz-box-shadow: none !important;
+		        -webkit-box-shadow: none !important;
+		        box-shadow: none !important;
+		        cursor: default;
+		        opacity: .35;
+		    }
+        }
+
+        .pagination_next a,
+        .pagination_previous a {
+            text-indent: -9999px;
+            position: relative;
+            height: 38px;
+            width: 38px;
+        }
+
+        .pagination_next a:after,
+        .pagination_previous a:after {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            padding: 9px 0;
+            top: 0;
+            height: 38px;
+            width: 38px;
+            text-align: center;
+        }
+
+        .pagination_next a:after {
+            text-indent: 0;
+            content: "\f105";
+        }
+
+        .pagination_previous a:after {
+            text-indent: -3px;
+            content: "\f104";
+        }
+
+        .pagination_next { margin: 0 0 0 $spacing-m; }
+
+        .pagination_previous { margin: 0 $spacing-m 0 0; }
+
+    .pagination .page-input input[type=text] {
+        width: 40px;
+        height: 38x;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0 $spacing-s;
+        padding: 0;
+        text-align: center;
+    }

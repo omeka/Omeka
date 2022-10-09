@@ -68,22 +68,22 @@ echo flash();
                 <p class="plugin-support-link"><a href="<?php echo $pluginSupportLink; ?>"><?php echo __("Get support"); ?></a></p>
             <?php endif;?>
             <?php if ($needsUpgrade): ?>
-                <ul class="details">
-                    <li class="success"><?php echo __('You have a new version of %s. Please upgrade!', $displayName); ?></li>
+                <ul class="version-notification active">
+                    <li class="flash success"><?php echo __('You have a new version of %s. Please upgrade!', $displayName); ?></li>
                 </ul>
             <?php endif; ?>
             <?php if ($cannotLoad): ?>
-                <ul class="details">
+                <ul class="version-notification active">
                 <?php foreach ($loadErrors as $error): ?>
-                    <li class="error"><?php echo html_escape($error); ?></li>
+                    <li class="flash error"><?php echo html_escape($error); ?></li>
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
             <?php if ($versionNotifications && $plugin->isActive()): ?>
-                <ul class="version-notification details"
+                <ul class="version-notification"
                     data-addon-id="<?php echo html_escape($pluginDirName); ?>"
                     data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
-                    <li class="success">
+                    <li class="flash success">
                     <?php echo sprintf(
                         $this->translate('A new version of this plugin is available. %s'),
                         sprintf(
@@ -106,7 +106,7 @@ echo flash();
                                 <li></li>
                                 <li></li>
                                 <li>
-                                    <button name="upgrade" type="submit" class="upgrade big green button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
+                                    <button name="upgrade" type="submit" class="upgrade green button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
                                     <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                                 </li>
                                 <?php echo $csrf; ?>
@@ -117,13 +117,13 @@ echo flash();
                     <?php if (is_allowed($plugin, 'activate')  && !$cannotLoad): ?>
                         <li>
                         <?php if (is_allowed($plugin, 'config') && $plugin->hasConfig()): ?>
-                        <a href="<?php echo html_escape(url('plugins/config', array('name' => $plugin->getDirectoryName()))); ?>" class="big blue button"><?php echo __('Configure'); ?></a>
+                        <a href="<?php echo html_escape(url('plugins/config', array('name' => $plugin->getDirectoryName()))); ?>" class="blue button"><?php echo __('Configure'); ?></a>
                         <?php endif; ?>
                         </li>
                         <li>
                         <?php if (!$cannotLoad): ?>
                             <form action="<?php echo html_escape(url('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
-                            <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="big <?php echo ($plugin->isActive()) ? 'red' : 'green'; ?> button"><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
+                            <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo ($plugin->isActive()) ? 'red' : 'green'; ?> button"><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
                             <input type="hidden" name="name" value="<?php echo html_escape($plugin->name); ?>" />
                             <?php echo $csrf; ?>
                             </form>
@@ -134,7 +134,7 @@ echo flash();
                     <?php if (is_allowed($plugin, 'uninstall') && !$cannotLoad): ?>
                             <form action="<?php echo html_escape(url(array('controller' => 'plugins', 'action' => 'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
 
-                            <button name="uninstall" type="submit" class="uninstall big red button"><?php echo __('Uninstall'); ?></button>
+                            <button name="uninstall" type="submit" class="uninstall red button"><?php echo __('Uninstall'); ?></button>
                             <input type="hidden" name="name" value="<?php echo html_escape($plugin->name); ?>" />
                             </form>
                     <?php endif; ?> 
@@ -147,7 +147,7 @@ echo flash();
                         <li></li>
                         <li>
                             <form action="<?php echo html_escape(url('plugins/install')); ?>" method="post" accept-charset="utf-8">
-                            <button name="install" type="submit" class="install big green button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Install'); ?></button>
+                            <button name="install" type="submit" class="install green button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Install'); ?></button>
                             <input type="hidden" name="name" value="<?php echo html_escape($plugin->name); ?>" />
                             <?php echo $csrf; ?>
                             </form> 

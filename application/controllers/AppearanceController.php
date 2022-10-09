@@ -30,7 +30,6 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
 
     public function editSettingsAction()
     {
-        require_once APP_DIR . '/forms/AppearanceSettings.php';
         $form = new Omeka_Form_AppearanceSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         $form->removeDecorator('Form');
@@ -56,7 +55,6 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
 
     public function editNavigationAction()
     {
-        require_once APP_DIR . '/forms/Navigation.php';
         $form = new Omeka_Form_Navigation();
         fire_plugin_hook('navigation_form', array('form' => $form));
         $this->view->form = $form;

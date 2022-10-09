@@ -12,6 +12,17 @@
  **/
 class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
 {
+    private $convertDir;
+    private $invalidFile;
+    private $validFilePath;
+    private $validMimeType;
+    private $fullsizeImgType;
+    private $derivativeFilename;
+    private $logWriter;
+    private $testLog;
+    private $creator;
+    private $strategy;
+
     public function setUpLegacy()
     {
         $config = new Omeka_Test_Resource_Config;

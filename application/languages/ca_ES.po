@@ -12,11 +12,11 @@
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018,2021\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/omeka/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,8 +32,8 @@ msgid ""
 msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres de l'Omeka, inclosos els ítems, fitxers i col·leccions. Per a més informació vegeu: http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:45
+#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -46,7 +46,7 @@ msgid "A name given to the resource"
 msgstr " El nom del recurs"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Autor"
@@ -64,8 +64,8 @@ msgid "The topic of the resource"
 msgstr "La matèria del recurs"
 
 #. Dublin Core: Description element name
-#: admin/themes/default/element-sets/browse.php:17
-#: admin/themes/default/item-types/browse.php:30
+#: admin/themes/default/element-sets/browse.php:18
+#: admin/themes/default/item-types/browse.php:29
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
@@ -104,7 +104,7 @@ msgid ""
 msgstr "Moment en el temps que s'associa a un esdeveniment dins el cicle de vida del recurs"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Tipus"
 
@@ -288,7 +288,7 @@ msgstr "Matriu IPTC"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Fitxer de vídeo d'Omeka"
+msgstr "Fitxer de vídeo de l'Omeka"
 
 #. Omeka Video File description
 msgid ""
@@ -328,7 +328,7 @@ msgstr "Administrador"
 msgid "Researcher"
 msgstr "Investigador"
 
-#: admin/themes/default/appearance/edit-navigation.php:3
+#: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
 #: admin/themes/default/themes/browse.php:5
@@ -336,46 +336,46 @@ msgstr "Investigador"
 msgid "Appearance"
 msgstr "Aparença"
 
-#: admin/themes/default/appearance/edit-navigation.php:14
+#: admin/themes/default/appearance/edit-navigation.php:15
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
 msgstr "Comproveu els enllaços per a mostrar-los a la barra de navegació principal. Feu clic i arrossegueu els vincles en l'ordre de visualització desitjat."
 
-#: admin/themes/default/appearance/edit-navigation.php:19
+#: admin/themes/default/appearance/edit-navigation.php:20
 msgid "Add a Link to the Navigation"
 msgstr "Afegeix un enllaç a la navegació"
 
-#: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:41
-#: admin/themes/default/users/api-keys.php:40
+#: admin/themes/default/appearance/edit-navigation.php:22
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/users/api-keys.php:42
 #: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Etiqueta"
 
-#: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/appearance/edit-navigation.php:24
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: application/forms/Navigation.php:135
 msgid "URL"
 msgstr "URL"
 
-#: admin/themes/default/appearance/edit-navigation.php:25
+#: admin/themes/default/appearance/edit-navigation.php:26
 msgid "Add Link"
 msgstr "Afegeix un enllaç"
 
-#: admin/themes/default/appearance/edit-navigation.php:31
+#: admin/themes/default/appearance/edit-navigation.php:32
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit-all.php:41
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:59
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-api.php:84
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:50
+#: admin/themes/default/settings/edit-search.php:52
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -384,12 +384,12 @@ msgstr "Afegeix un enllaç"
 msgid "Save Changes"
 msgstr "Desa els canvis"
 
-#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
 msgstr "Reinicieu la navegació"
 
-#: admin/themes/default/appearance/edit-navigation.php:43
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -399,22 +399,22 @@ msgstr "Reinicieu la navegació"
 msgid "View Public Page"
 msgstr "Visualitza la pàgina pública"
 
-#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/appearance/edit-navigation.php:45
 #: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
-#: admin/themes/default/element-sets/browse.php:29
+#: admin/themes/default/element-sets/browse.php:30
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:134
+#: admin/themes/default/items/browse.php:92
+#: admin/themes/default/items/browse.php:136
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
-#: admin/themes/default/users/browse.php:66
+#: admin/themes/default/users/browse.php:70
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
@@ -434,8 +434,8 @@ msgstr "Es perdran totes les personalitzacions. L’ordre i les etiquetes tornar
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:76
 #: admin/themes/default/collections/browse.php:86
+#: admin/themes/default/collections/browse.php:96
 msgid "Add a Collection"
 msgstr "Afegeix una col·lecció"
 
@@ -449,7 +449,7 @@ msgstr "Afegeix una col·lecció"
 #: admin/themes/default/items/add.php:19
 #: admin/themes/default/items/batch-edit-common.php:10
 #: admin/themes/default/items/edit.php:30
-#: admin/themes/default/items/quick-filters.php:6
+#: admin/themes/default/items/quick-filters.php:4
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Públic"
@@ -459,8 +459,9 @@ msgstr "Públic"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/browse.php:80
 #: admin/themes/default/items/edit.php:36
-#: admin/themes/default/items/quick-filters.php:8
+#: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
 msgstr "Destacat"
@@ -473,7 +474,7 @@ msgstr "Destacat"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Navega per les col·leccions"
+msgstr "Col·leccions"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -494,71 +495,71 @@ msgstr "(%s total)"
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
 msgstr[0] "%s%d ítems %s no es troben en cap col·lecció."
-msgstr[1] "%s%d ítems%s no es troben en cap col·lecció."
+msgstr[1] "%s%d ítems%s no es troben a cap col·lecció."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
 msgstr "Tots els ítems es troben dins d'una col·lecció."
 
-#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Contribuïdors"
 
-#: admin/themes/default/collections/browse.php:32
+#: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Data d'alta"
 
-#: admin/themes/default/collections/browse.php:33
+#: admin/themes/default/collections/browse.php:34
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Nombre total d'ítems"
 
-#: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:85
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/items/browse.php:83
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: admin/themes/default/collections/browse.php:51
+#: admin/themes/default/collections/browse.php:60
 #: admin/themes/default/collections/show.php:32
-#: admin/themes/default/element-sets/browse.php:27
+#: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
 #: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
 #: admin/themes/default/index.php:79
-#: admin/themes/default/item-types/browse.php:41
+#: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
-#: admin/themes/default/users/browse.php:63
+#: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Edita"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:69
 msgid "No contributors"
 msgstr "No hi ha contribuïdors"
 
-#: admin/themes/default/collections/browse.php:80
+#: admin/themes/default/collections/browse.php:90
 msgid "There are no collections on this page."
 msgstr "No hi ha col·leccions en aquesta pàgina"
 
-#: admin/themes/default/collections/browse.php:80
+#: admin/themes/default/collections/browse.php:90
 msgid "View All Collections"
 msgstr "Mostra totes les col·leccions"
 
-#: admin/themes/default/collections/browse.php:83
+#: admin/themes/default/collections/browse.php:93
 msgid "You have no collections."
 msgstr "No teniu cap col·lecció."
 
-#: admin/themes/default/collections/browse.php:85
+#: admin/themes/default/collections/browse.php:95
 msgid "Get started by adding your first collection."
 msgstr "Comenceu afegint la vostra primera col·lecció."
 
@@ -608,7 +609,7 @@ msgstr "No hi ha contribuïdors."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:151
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -638,27 +639,27 @@ msgstr "Paràmetres"
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: admin/themes/default/common/content-nav.php:5
+#: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
 msgstr "Tauler de control"
 
-#: admin/themes/default/common/content-nav.php:9
+#: admin/themes/default/common/content-nav.php:10
 #: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Ítems"
 
-#: admin/themes/default/common/content-nav.php:13
+#: admin/themes/default/common/content-nav.php:14
 msgid "Collections"
 msgstr "Col·leccions"
 
-#: admin/themes/default/common/content-nav.php:17
+#: admin/themes/default/common/content-nav.php:18
 msgid "Item Types"
 msgstr "Tipus d'ítems"
 
-#: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:107
+#: admin/themes/default/common/content-nav.php:22
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -671,31 +672,31 @@ msgstr "Etiquetes"
 msgid "Delete %s"
 msgstr "Suprimeix %s"
 
-#: admin/themes/default/common/footer.php:6
-#: admin/themes/default/common/login-footer.php:7
+#: admin/themes/default/common/footer.php:9
+#: admin/themes/default/common/login-footer.php:6
 msgid "Powered by Omeka"
-msgstr "Funcionant amb Omeka"
+msgstr "Funcionant amb l'Omeka"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:10
 msgid "Documentation"
 msgstr "Documentació"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:11
 msgid "Support Forums"
 msgstr "Fòrums de suport"
 
-#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/footer.php:12
 msgid "Back to top"
 msgstr "Torna a l'inici"
 
-#: admin/themes/default/common/footer.php:8
+#: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "Versió %s"
 
-#: admin/themes/default/common/footer.php:10
+#: admin/themes/default/common/footer.php:18
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
 msgstr "Informació del sistema"
@@ -717,20 +718,20 @@ msgstr "Usuaris"
 #: admin/themes/default/upgrade/index.php:6
 #: application/views/scripts/common/admin-bar.php:10
 msgid "Omeka Admin"
-msgstr "Administració d'Omeka"
+msgstr "Administració de l'Omeka"
 
-#: admin/themes/default/common/header.php:41
+#: admin/themes/default/common/header.php:36
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Salta al contingut principal"
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:58
 #: application/views/scripts/common/admin-bar.php:6
 #, php-format
 msgid "Welcome, %s"
 msgstr "Benvingut, %s"
 
-#: admin/themes/default/common/header.php:62
+#: admin/themes/default/common/header.php:59
 #: application/views/scripts/common/admin-bar.php:14
 msgid "Log Out"
 msgstr "Surt"
@@ -770,14 +771,14 @@ msgid "Change Password"
 msgstr "Canvia la contrasenya"
 
 #: admin/themes/default/common/users-nav.php:17
-#: admin/themes/default/users/api-keys.php:14
+#: admin/themes/default/users/api-keys.php:16
 msgid "API Keys"
 msgstr "Claus de l'API"
 
-#: admin/themes/default/element-sets/browse.php:16
-#: admin/themes/default/tags/browse.php:27
-#: admin/themes/default/tags/browse.php:57
-#: admin/themes/default/users/browse.php:17
+#: admin/themes/default/element-sets/browse.php:17
+#: admin/themes/default/tags/browse.php:50
+#: admin/themes/default/tags/browse.php:68
+#: admin/themes/default/users/browse.php:13
 #: application/forms/ItemTypes.php:141
 msgid "Name"
 msgstr "Nom"
@@ -987,7 +988,7 @@ msgstr "plantilla"
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
-msgstr "Ja podeu descarregar la nova versió d'Omeka."
+msgstr "Ja podeu descarregar la nova versió de l'Omeka."
 
 #: admin/themes/default/index.php:36
 #, php-format
@@ -998,7 +999,7 @@ msgstr "Actualitza a %s"
 #: admin/themes/default/item-types/add-new-element.php:15
 #: admin/themes/default/item-types/form.php:43
 #: admin/themes/default/items/tag-form.php:23
-#: application/views/helpers/ElementInput.php:112
+#: application/views/helpers/ElementInput.php:124
 msgid "Remove"
 msgstr "Elimina"
 
@@ -1017,29 +1018,29 @@ msgstr "Afegeix un tipus d'ítem"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Navega pels tipus d'ítem"
+msgstr "Tipus d'ítem"
 
-#: admin/themes/default/item-types/browse.php:10
-#: admin/themes/default/item-types/browse.php:55
+#: admin/themes/default/item-types/browse.php:9
+#: admin/themes/default/item-types/browse.php:54
 msgid "Add an Item Type"
 msgstr "Afegeix un tipus d'ítem"
 
-#: admin/themes/default/item-types/browse.php:18
+#: admin/themes/default/item-types/browse.php:16
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
 msgstr[0] "%s%d ítems %s no tenen tipus."
 msgstr[1] "%s%d ítems%s no tenen tipus."
 
-#: admin/themes/default/item-types/browse.php:21
+#: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
 msgstr "Tots els ítems tenen un tipus."
 
-#: admin/themes/default/item-types/browse.php:29
+#: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
 msgstr "Nom del tipus"
 
-#: admin/themes/default/item-types/browse.php:31
+#: admin/themes/default/item-types/browse.php:30
 msgid "Total Items"
 msgstr "Total d'ítems"
 
@@ -1099,8 +1100,8 @@ msgstr "No hi ha ítems afegits recentment"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:142
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:144
+#: admin/themes/default/items/browse.php:171
 msgid "Add an Item"
 msgstr "Afegeix un ítem"
 
@@ -1110,7 +1111,7 @@ msgstr "Afegeix un ítem"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:104
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1138,7 +1139,7 @@ msgstr "Les supressions es processaran en segon pla ítem per ítem."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
-#: admin/themes/default/items/batch-edit.php:47
+#: admin/themes/default/items/batch-edit.php:45
 msgid "Delete Items"
 msgstr "Suprimeix els ítems"
 
@@ -1226,11 +1227,11 @@ msgstr "Llista d'etiquetes per afegir a tots els ítems seleccionats, separats p
 msgid "Batch Edit Items"
 msgstr "Edita els ítems per lots"
 
-#: admin/themes/default/items/batch-edit.php:37
+#: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
 msgstr "Els canvis s'aplicaran als ítems seleccionats"
 
-#: admin/themes/default/items/batch-edit.php:48
+#: admin/themes/default/items/batch-edit.php:46
 msgid "Check if you wish to delete selected items."
 msgstr "Marqueu-lo si voleu suprimir els ítems seleccionats."
 
@@ -1273,73 +1274,73 @@ msgstr "Marqueu-lo si voleu suprimir els ítems seleccionats."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Navega pels ítems"
+msgstr "Ítems"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:144
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2414
-#: application/libraries/globals.php:2805
+#: application/libraries/globals.php:2419
+#: application/libraries/globals.php:2810
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Cerca ítems."
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:128
+#: admin/themes/default/items/browse.php:130
 #, php-format
 msgid "Select all %s results"
 msgstr "Selecciona els %s resultats"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:131
 msgid "items selected"
 msgstr "Ítems seleccionats"
 
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
 msgstr "Selecciona totes les files"
 
-#: admin/themes/default/items/browse.php:63
+#: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
 msgstr "Selecciona l'ítem \"%s\""
 
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Sense etiquetes"
 
-#: admin/themes/default/items/browse.php:155
+#: admin/themes/default/items/browse.php:157
 msgid "Details"
 msgstr "Detalls"
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 msgid "Show Details"
 msgstr "Mostra els detalls"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:159
 msgid "Hide Details"
 msgstr "Amaga els detalls"
 
-#: admin/themes/default/items/browse.php:165
+#: admin/themes/default/items/browse.php:168
 msgid "You have no items."
 msgstr "No teniu cap ítem."
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:170
 msgid "Get started by adding your first item."
 msgstr "Comenceu afegint el vostre primer ítem."
 
-#: admin/themes/default/items/browse.php:172
+#: admin/themes/default/items/browse.php:175
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "S'ha fet un consulta sobre 1 ítem i no s'ha obtingut cap resultat."
 msgstr[1] "S'ha fet un consulta sobre %s ítems i no s'ha obtingut cap resultat."
 
-#: admin/themes/default/items/browse.php:173
+#: admin/themes/default/items/browse.php:176
 msgid "refine your search"
 msgstr "Reformula la cerca"
 
-#: admin/themes/default/items/browse.php:173
+#: admin/themes/default/items/browse.php:176
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Voldrieu %s?"
@@ -1378,16 +1379,16 @@ msgstr "Afegeix un altre fitxer"
 msgid "Pick this type"
 msgstr "Tria aquest tipus"
 
+#: admin/themes/default/items/quick-filters.php:1
 #: admin/themes/default/items/quick-filters.php:2
-#: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
 msgstr "Filtre ràpid"
 
-#: admin/themes/default/items/quick-filters.php:5
+#: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
 msgstr "Veure tot"
 
-#: admin/themes/default/items/quick-filters.php:7
+#: admin/themes/default/items/quick-filters.php:5
 msgid "Private"
 msgstr "Privat"
 
@@ -1396,157 +1397,157 @@ msgstr "Privat"
 msgid "Search for Keywords"
 msgstr "Cerca per paraules clau"
 
-#: admin/themes/default/items/search-form.php:27
+#: admin/themes/default/items/search-form.php:30
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
 msgstr "Cerca per camps específics."
 
-#: admin/themes/default/items/search-form.php:28
+#: admin/themes/default/items/search-form.php:31
 #: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Afegeix un camp"
 
-#: admin/themes/default/items/search-form.php:54
+#: admin/themes/default/items/search-form.php:57
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
 msgstr "Search Joiner"
 
-#: admin/themes/default/items/search-form.php:59
+#: admin/themes/default/items/search-form.php:62
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
 msgstr "I"
 
-#: admin/themes/default/items/search-form.php:60
+#: admin/themes/default/items/search-form.php:63
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
 msgstr "O"
 
-#: admin/themes/default/items/search-form.php:67
+#: admin/themes/default/items/search-form.php:70
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Field"
 msgstr "Camp de cerca"
 
-#: admin/themes/default/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:83
 #: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr "Tipus de cerca"
 
-#: admin/themes/default/items/search-form.php:85
-#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "conté"
 
-#: admin/themes/default/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "no conté"
 
-#: admin/themes/default/items/search-form.php:87
+#: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "es exactament"
 
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:91
 msgid "is not exactly"
 msgstr "No és exactament"
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "Està buit"
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:93
 #: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "No està buit"
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:94
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
 msgstr "comença amb"
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:95
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
 msgstr "finalitza amb"
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:96
 msgid "matches"
 msgstr "coincideix"
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:97
 msgid "does not match"
 msgstr "no coincideix"
 
-#: admin/themes/default/items/search-form.php:102
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr "Termes de cerca"
 
-#: admin/themes/default/items/search-form.php:108
+#: admin/themes/default/items/search-form.php:111
 #: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Elimina el camp"
 
-#: admin/themes/default/items/search-form.php:116
+#: admin/themes/default/items/search-form.php:119
 #: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Cerca per rang de ID#s (p. e.: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:130
+#: admin/themes/default/items/search-form.php:133
 #: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Cerca per col·lecció"
 
-#: admin/themes/default/items/search-form.php:146
+#: admin/themes/default/items/search-form.php:149
 #: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Cerca per tipus"
 
-#: admin/themes/default/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:166
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Cerca per usuari"
 
-#: admin/themes/default/items/search-form.php:180
+#: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Cerca per etiquetes"
 
-#: admin/themes/default/items/search-form.php:195
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Publicat/No publicat"
 
-#: admin/themes/default/items/search-form.php:204
+#: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Només ítems publicats"
 
-#: admin/themes/default/items/search-form.php:205
+#: admin/themes/default/items/search-form.php:208
 #: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "Només ítems no publicats"
 
-#: admin/themes/default/items/search-form.php:215
+#: admin/themes/default/items/search-form.php:218
 #: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Destacats/No destacats"
 
-#: admin/themes/default/items/search-form.php:224
+#: admin/themes/default/items/search-form.php:227
 #: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Només ítems destacats"
 
-#: admin/themes/default/items/search-form.php:225
+#: admin/themes/default/items/search-form.php:228
 #: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Només ítems no destacats"
 
-#: admin/themes/default/items/search-form.php:233
+#: admin/themes/default/items/search-form.php:236
 #: application/views/scripts/items/search-form.php:215
 msgid "Search for items"
 msgstr "Cerca ítems"
@@ -1595,17 +1596,17 @@ msgstr "Totes les etiquetes"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Navega els ítems per etiqueta"
+msgstr "Consulta els ítems per etiqueta"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:108
+#: admin/themes/default/tags/browse.php:107
 msgid "There are no tags to display. You must first tag some items."
 msgstr "No hi ha etiquetes per mostrar. Primer heu d'etiquetar els ítems."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Aquesta versió de %1$s requereix com a mínim Omeka %2$s."
+msgstr "Aquesta versió de %1$s requereix com a mínim l'Omeka %2$s."
 
 #: admin/themes/default/plugins/browse.php:32
 #, php-format
@@ -1624,8 +1625,8 @@ msgid "by %s"
 msgstr "per %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:26
-#: admin/themes/default/themes/browse.php:69
+#: admin/themes/default/themes/browse.php:25
+#: admin/themes/default/themes/browse.php:68
 msgid "Get support"
 msgstr "Suport"
 
@@ -1658,7 +1659,7 @@ msgid "Uninstall"
 msgstr "Desinstal·la"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:179
+#: application/forms/Install.php:264
 msgid "Install"
 msgstr "Instal·la"
 
@@ -1703,7 +1704,7 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #: admin/themes/default/search/index.php:12
-#: admin/themes/default/tags/browse.php:26
+#: admin/themes/default/tags/browse.php:49
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
 msgstr "Tipus de registre"
@@ -1748,7 +1749,7 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i suprimir els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon a un usuari existent d'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
+msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i suprimir els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon a un usuari existent de l'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1777,37 +1778,37 @@ msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Tipus de cerca"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Seleccioneu el tipus de cerca per defecte per a la cerca simple."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Tipus de registres cercats"
 
-#: admin/themes/default/settings/edit-search.php:22
+#: admin/themes/default/settings/edit-search.php:23
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "Personalitza quins tipus de registres podran ser cercats a Omeka."
+msgstr "Personalitza quins tipus de registres podran ser cercats a l'Omeka."
 
-#: admin/themes/default/settings/edit-search.php:32
-#: admin/themes/default/settings/edit-search.php:51
+#: admin/themes/default/settings/edit-search.php:34
+#: admin/themes/default/settings/edit-search.php:53
 msgid "Index Records"
 msgstr "Indexa els registres"
 
-#: admin/themes/default/settings/edit-search.php:35
+#: admin/themes/default/settings/edit-search.php:37
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Feu clic al botó \"Indexa els registres\" per a reindexar els vostres registres"
 
-#: admin/themes/default/settings/edit-search.php:37
+#: admin/themes/default/settings/edit-search.php:39
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "La indexació implica la recopilació, estructuració i emmagatzematge de dades per tal de facilitar cerques ràpides i acurades. Omeka indexa els registres automàticament a mesura que es guarden, però hi ha circumstàncies en les que els teus registres no s'indexen, per exemple, quan s'actualitza a partir d'una versió anterior d'Omeka o bé després d'haver personalitzat quins registres podran ser cercats. "
+msgstr "La indexació implica la recopilació, estructuració i emmagatzematge de dades per tal de facilitar cerques ràpides i acurades. Omeka indexa els registres automàticament a mesura que es guarden, però hi ha circumstàncies en les que els teus registres no s'indexen, per exemple, quan s'actualitza a partir d'una versió anterior de l'Omeka o bé després d'haver personalitzat quins registres podran ser cercats. "
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
@@ -1831,55 +1832,57 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
-msgstr "Cerca etiquetes"
+msgstr "Etiquetes"
 
-#: admin/themes/default/tags/browse.php:18
-msgid "Search tags"
-msgstr "Cerca etiquetes"
-
-#: admin/themes/default/tags/browse.php:29
-msgid "Reset results"
-msgstr "Restableix els resultats"
-
-#: admin/themes/default/tags/browse.php:42
+#: admin/themes/default/tags/browse.php:19
 msgid "Editing Tags"
 msgstr "S'estan editant les etiquetes"
 
-#: admin/themes/default/tags/browse.php:45
-msgid "To view all items with a tag, click the number."
-msgstr "Per veure tots els elements amb una etiqueta determinada, feu clic al número."
+#: admin/themes/default/tags/browse.php:22
+msgid ""
+"This number counts all records associated with a tag. Filtering \"Record "
+"types\" to \"Items\" will provide links to all items containing the tag."
+msgstr "Aquest número indica la quantitat de registres amb aquesta etiqueta."
 
-#: admin/themes/default/tags/browse.php:46
+#: admin/themes/default/tags/browse.php:23
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr "Per editar el nom de l'etiqueta feu clic al nom i comenceu a editar-lo. Polseu \"intro\" per guardar. Per cancel·lar l'edició feu clic a la tecla ESC o feu clic fora de l'etiqueta."
 
-#: admin/themes/default/tags/browse.php:47
+#: admin/themes/default/tags/browse.php:24
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
-"items."
-msgstr "Per suprimir una etiqueta feu clic a la X. Si se suprimeix una etiqueta, no se suprimeixen els ítems etiquetats amb aquesta."
+"records."
+msgstr "Per suprimir una etiqueta, feu clic a la X. Suprimir una etiqueta no esborra els registres associats."
 
-#: admin/themes/default/tags/browse.php:58
-msgid "Count"
-msgstr "Total"
+#: admin/themes/default/tags/browse.php:33
+msgid "Search tags"
+msgstr "Cerca etiquetes"
 
-#: admin/themes/default/tags/browse.php:59
-msgid "Date created"
-msgstr "Data de creació"
-
-#: admin/themes/default/tags/browse.php:74
-#: admin/themes/default/tags/browse.php:76
+#: admin/themes/default/tags/browse.php:38
+#: admin/themes/default/tags/browse.php:39
 msgid "Record Types"
 msgstr "Tipus de registres"
 
-#: admin/themes/default/tags/browse.php:77
+#: admin/themes/default/tags/browse.php:40
 msgid "All"
 msgstr "Tot"
 
+#: admin/themes/default/tags/browse.php:52
+msgid "Reset results"
+msgstr "Restableix els resultats"
+
+#: admin/themes/default/tags/browse.php:69
+msgid "Count"
+msgstr "Total"
+
+#: admin/themes/default/tags/browse.php:70
+msgid "Date created"
+msgstr "Data de creació"
+
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/themes/browse.php:62
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Captura de pantalla de la %s Plantilla"
@@ -1892,13 +1895,13 @@ msgstr "Configura la plantilla"
 msgid "Current Theme"
 msgstr "Plantilla actual"
 
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:67
 #, php-format
 msgid "By %s"
 msgstr "Per %s"
 
-#: admin/themes/default/themes/browse.php:46
+#: admin/themes/default/themes/browse.php:45
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1906,7 +1909,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Podeu afegir noves plantilles descarregant-les del <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Directori de plantilles d'Omeka</a>, o <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">dissenyar-ne una de pròpia</a>!"
 
-#: admin/themes/default/themes/browse.php:65
+#: admin/themes/default/themes/browse.php:64
 msgid "Use this theme"
 msgstr "Utilitza aquesta plantilla"
 
@@ -1921,12 +1924,12 @@ msgstr "Les configuracions s'apliquen únicament a aquesta plantilla."
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Actualitzeu la base de dades d'Omeka"
+msgstr "Actualitzeu la base de dades de l'Omeka"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "La base de dades no es compatible amb versió actual d'Omeka"
+msgstr "La base de dades no es compatible amb la versió actual de l'Omeka"
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
@@ -1939,11 +1942,11 @@ msgstr "Actualitza la base de dades"
 
 #: admin/themes/default/upgrade/migrate.php:3
 msgid "Omeka has upgraded successfully."
-msgstr "Omeka s'ha actualitzat correctament."
+msgstr "L'Omeka s'ha actualitzat correctament."
 
 #: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka ha trobat un error en actualitzar el sistema."
+msgstr "L'Omeka ha trobat un error en actualitzar el sistema."
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
@@ -1977,7 +1980,7 @@ msgstr "Hola %s. El teu nom d'usuari és %s"
 msgid "Create a Password"
 msgstr "Trieu una contrasenya"
 
-#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:81
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -1998,43 +2001,43 @@ msgstr "Afegeix un usuari"
 msgid "Edit User #%s"
 msgstr "Edita l'usuari #%s"
 
-#: admin/themes/default/users/api-keys.php:17
+#: admin/themes/default/users/api-keys.php:19
 msgid "New key label"
 msgstr "Nova etiqueta per la clau"
 
-#: admin/themes/default/users/api-keys.php:21
+#: admin/themes/default/users/api-keys.php:23
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
 msgstr "Per crear una clau d'API, introduïu una etiqueta per aquesta clau a continuació. Per exemple, un terme que descrigui amb quin propòsit es vol utilitzar. Aquesta clau tindrà tots els vostres permisos, tracteu-la com si fos la vostra contrasenya."
 
-#: admin/themes/default/users/api-keys.php:31
+#: admin/themes/default/users/api-keys.php:33
 msgid "You have no API keys. Use the form above to create one."
 msgstr "No teniu cap clau API. Creeu una amb el formulari següent."
 
-#: admin/themes/default/users/api-keys.php:33
+#: admin/themes/default/users/api-keys.php:35
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
 msgstr "%s no té claus API. Utilitzeu el formulari per crear-ne una."
 
-#: admin/themes/default/users/api-keys.php:41
+#: admin/themes/default/users/api-keys.php:43
 msgid "Key"
 msgstr "Clau"
 
-#: admin/themes/default/users/api-keys.php:42
+#: admin/themes/default/users/api-keys.php:44
 msgid "Last IP"
 msgstr "Darrera IP"
 
-#: admin/themes/default/users/api-keys.php:43
+#: admin/themes/default/users/api-keys.php:45
 msgid "Last accessed"
 msgstr "Darrer accés"
 
-#: admin/themes/default/users/api-keys.php:44
+#: admin/themes/default/users/api-keys.php:46
 msgid "Rescind"
 msgstr "Rescindir"
 
-#: admin/themes/default/users/api-keys.php:61
+#: admin/themes/default/users/api-keys.php:67
 msgid "Update API Keys"
 msgstr "Actualitza les claus de l'API"
 
@@ -2042,42 +2045,46 @@ msgstr "Actualitza les claus de l'API"
 msgid "Browse Users"
 msgstr "Usuaris"
 
-#: admin/themes/default/users/browse.php:8
-msgid "Add a User"
-msgstr "Afegeix un usuari"
-
-#: admin/themes/default/users/browse.php:20
-#: admin/themes/default/users/browse.php:36
-#: admin/themes/default/users/browse.php:47
+#: admin/themes/default/users/browse.php:16
+#: admin/themes/default/users/browse.php:38
+#: admin/themes/default/users/browse.php:51
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
 msgstr "Nom d'usuari"
 
-#: admin/themes/default/users/browse.php:23
-#: admin/themes/default/users/browse.php:38
-#: admin/themes/default/users/browse.php:49
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:84
+#: admin/themes/default/users/browse.php:19
+#: admin/themes/default/users/browse.php:40
+#: admin/themes/default/users/browse.php:53
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr "Correu electrònic"
 
-#: admin/themes/default/users/browse.php:35
-msgid "Search users"
-msgstr "Cerca usuaris"
+#: admin/themes/default/users/browse.php:31
+msgid "Add a User"
+msgstr "Afegeix un usuari"
 
 #: admin/themes/default/users/browse.php:37
-#: admin/themes/default/users/browse.php:48
+msgid "Options"
+msgstr "Opcions"
+
+#: admin/themes/default/users/browse.php:39
+#: admin/themes/default/users/browse.php:52
 #: admin/themes/default/users/show.php:20 application/forms/User.php:81
 msgid "Display Name"
 msgstr "Nom que es visualitzarà"
 
-#: admin/themes/default/users/browse.php:50 application/forms/User.php:129
+#: admin/themes/default/users/browse.php:42
+msgid "Search users"
+msgstr "Cerca usuaris"
+
+#: admin/themes/default/users/browse.php:54 application/forms/User.php:129
 msgid "Role"
 msgstr "Rol"
 
-#: admin/themes/default/users/browse.php:60
+#: admin/themes/default/users/browse.php:64
 msgid "inactive"
 msgstr "inactiu"
 
@@ -2278,7 +2285,7 @@ msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr "La ruta del directori de l'ImageMagick no s'ha establert. No es crearan imatges derivades. Per a que Omeka pugui crear imatges derivades heu de definir la ruta a l'apartat de Paràmetres."
+msgstr "La ruta del directori de l'ImageMagick no s'ha establert. No es crearan imatges derivades. Perquè l'Omeka pugui crear imatges derivades heu de definir la ruta a l'apartat de Paràmetres."
 
 #: application/controllers/ItemsController.php:95
 #, php-format
@@ -2485,7 +2492,7 @@ msgstr "El paràmetres de seguretat s'han actualitzat."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Heu modificat quins son els registres que poden ser cercats a Omeka. Reindexeu els registres utilitzant el formulari següent."
+msgstr "Heu modificat quins son els registres que poden ser cercats a l'Omeka. Reindexeu els registres utilitzant el formulari següent."
 
 #: application/controllers/SettingsController.php:130
 msgid ""
@@ -2528,7 +2535,7 @@ msgstr "Heu triat una plantilla inadequada. Si us plau seleccioneu una altra pla
 #: application/controllers/ThemesController.php:47
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr "Aquesta plantilla requereix una versió més recent d'Omeka (%s)."
+msgstr "Aquesta plantilla requereix una versió més recent de l'Omeka (%s)."
 
 #: application/controllers/ThemesController.php:61
 msgid "The theme has been successfully changed."
@@ -2547,7 +2554,7 @@ msgstr "Error SQL en la migració:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr "Omeka requereix una versió del PHP igual a %1$s o superior, i en aquest servidor funciona la versió %2$s. Actualitzeu la versió del PHP i torneu a provar."
+msgstr "L'Omeka requereix una versió del PHP igual a %1$s o superior, i en aquest servidor funciona la versió %2$s. Actualitzeu la versió del PHP i torneu a provar."
 
 #: application/controllers/UsersController.php:72
 msgid ""
@@ -2581,7 +2588,7 @@ msgstr "Codi d'activació invàlid"
 
 #: application/controllers/UsersController.php:137
 msgid "Password: The passwords do not match."
-msgstr "Contrasenya: Les contrasenyes no coincideixen."
+msgstr "Les contrasenyes no coincideixen."
 
 #: application/controllers/UsersController.php:145
 msgid "You may now log in to Omeka."
@@ -2643,7 +2650,7 @@ msgstr "%s serà suprimit del sistema. Tots el ítems, col·leccions i etiquetes
 
 #: application/controllers/UsersController.php:386
 msgid "Welcome!"
-msgstr "Benvingut!"
+msgstr "Benvinguts!"
 
 #: application/controllers/UsersController.php:388
 #, php-format
@@ -2672,7 +2679,7 @@ msgid ""
 msgstr "Utilitzeu  miniatures quadrades per defecte sempre que a la interfície pública es visualitzin miniatures."
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:128
+#: application/forms/Install.php:178
 msgid "Fullsize Image Size"
 msgstr "Mida de la imatge a mida natural"
 
@@ -2681,7 +2688,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Mida màxima de la imatge completa (en píxels)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:136
+#: application/forms/Install.php:191
 msgid "Thumbnail Size"
 msgstr "Mida de la imatge en miniatura"
 
@@ -2690,7 +2697,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Mida màxima de la miniatura (en píxels)."
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:144
+#: application/forms/Install.php:204
 msgid "Square Thumbnail Size"
 msgstr "Mida de les miniatures quadrades"
 
@@ -2718,7 +2725,7 @@ msgid ""
 msgstr "Nombre màxim de resultats que es mostraran per pàgina a la interfície pública."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:168
+#: application/forms/Install.php:243
 msgid "Show Empty Elements"
 msgstr "Mostra els elements buits"
 
@@ -2785,27 +2792,27 @@ msgstr "La nova contrasenya ha de tenir un mínim de %min% caràcters."
 msgid "Repeat New Password"
 msgstr "Torneu a introduïr la nova contrasenya"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
 msgid "Site Title"
 msgstr "Títol del lloc web"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
 msgid "Site Description"
 msgstr "Descripció del lloc web"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
 msgid "Administrator Email"
 msgstr "Correu electrònic de l'administrador del lloc"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
 msgid "Site Copyright Information"
 msgstr "Avís legal"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
 msgid "Site Author Information"
 msgstr "Informació sobre l'autor del lloc web"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
 msgid "Tag Delimiter"
 msgstr "Delimitador per a les etiquetes"
 
@@ -2815,9 +2822,13 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Separeu les etiquetes utilitzant aquest caràcter o cadena. Compte al canviar-lo, hi ha el risc de dividir etiquetes que tenen l'antic delimitador."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
 msgid "ImageMagick Directory Path"
 msgstr "Ruta al directori de l'ImageMagick"
+
+#: application/forms/GeneralSettings.php:69
+msgid "General Settings"
+msgstr "Paràmetres generals"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
@@ -2830,61 +2841,61 @@ msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Els espais en blanc no són permesos. Només es poden utilitzar els següents caràcters especials: %s"
 
-#: application/forms/Install.php:48 application/forms/Login.php:34
+#: application/forms/Install.php:53 application/forms/Login.php:34
 msgid "Password"
 msgstr "Contrasenya"
 
-#: application/forms/Install.php:49
+#: application/forms/Install.php:54
 msgid "must be at least 6 characters"
 msgstr "ha de tenir un mínim de 6 caràcters"
 
-#: application/forms/Install.php:72
+#: application/forms/Install.php:82
 msgid "Confirm your password."
 msgstr "Confirma la contrasenya"
 
-#: application/forms/Install.php:114
+#: application/forms/Install.php:159
 msgid "Separate tags using this character or string."
 msgstr "Separeu les etiquetes utilitzant aquest caràcter o cadena."
 
-#: application/forms/Install.php:129
+#: application/forms/Install.php:179
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Mida màxima per a les imatges a mida completa (en píxels)"
 
-#: application/forms/Install.php:137
+#: application/forms/Install.php:192
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Mida màxima per a les miniatures (en píxels)"
 
-#: application/forms/Install.php:145
+#: application/forms/Install.php:205
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Mida màxima per al quadrat de les miniatures (en píxels)."
 
-#: application/forms/Install.php:152
+#: application/forms/Install.php:217
 msgid "Items Per Page (admin)"
 msgstr "Ítems per pàgina (administrador)"
 
-#: application/forms/Install.php:153
+#: application/forms/Install.php:218
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Limiteu el nombre d'ítems que es visualitzen per pàgina dins la interfície d'administració."
 
-#: application/forms/Install.php:160
+#: application/forms/Install.php:230
 msgid "Items Per Page (public)"
 msgstr "Ítems per pàgina (públic)"
 
-#: application/forms/Install.php:161
+#: application/forms/Install.php:231
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Limiteu el nombre d'ítems per pàgina que es mostraran a l'interfície pública"
 
-#: application/forms/Install.php:170
+#: application/forms/Install.php:245
 msgid "Check box to show metadata elements with no text."
 msgstr "Marca la casella si vols mostrar els camps de metadades sense text."
 
-#: application/forms/Install.php:186
+#: application/forms/Install.php:271
 msgid "Default Superuser Account"
 msgstr "Compte per defecte del Superuser"
 
-#: application/forms/Install.php:196
+#: application/forms/Install.php:281
 msgid "Site Settings"
 msgstr "Paràmetres del lloc"
 
@@ -3187,67 +3198,79 @@ msgstr "Booleà"
 msgid "Exact match"
 msgstr "Coincidència exacta"
 
-#: application/libraries/globals.php:1267
-#: application/libraries/globals.php:1288
+#: application/libraries/globals.php:1268
+#: application/libraries/globals.php:1289
 #, php-format
 msgid "Could not find file %s!"
 msgstr "No s'ha pogut trobar el fitxer %s!"
 
-#: application/libraries/globals.php:1304
+#: application/libraries/globals.php:1305
 msgid "No featured collections are available."
 msgstr "No hi ha cap col·lecció destacada disponible."
 
-#: application/libraries/globals.php:1602
+#: application/libraries/globals.php:1603
 msgid "Select Below "
 msgstr "Tria a sota"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka RSS Feed"
 msgstr "Feed RSS de l'Omeka"
 
-#: application/libraries/globals.php:1646
+#: application/libraries/globals.php:1647
 msgid "Omeka Atom Feed"
 msgstr "Feed Atom de l'Omeka"
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:1966
+msgid "Sort ascending"
+msgstr "Ordenació ascendent"
+
+#: application/libraries/globals.php:1976
+msgid "Sorting descending"
+msgstr "S'està ordenant descendentment"
+
+#: application/libraries/globals.php:1980
+msgid "Sorting ascending"
+msgstr "S'està ordenant ascendentment"
+
+#: application/libraries/globals.php:2314
 msgid "No recent items available."
 msgstr "No hi ha ítems recents disponibles."
 
-#: application/libraries/globals.php:2335
+#: application/libraries/globals.php:2340
 msgid "No featured items are available."
 msgstr "No hi ha cap ítem destacat disponible."
 
-#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2401
 msgid "View"
 msgstr "Visualitza"
 
-#: application/libraries/globals.php:2458
+#: application/libraries/globals.php:2463
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Sense col·lecció"
 
-#: application/libraries/globals.php:2577
+#: application/libraries/globals.php:2582
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2594
+#: application/libraries/globals.php:2599
 msgid "Next Item &rarr;"
 msgstr "Ítem següent &rarr;"
 
-#: application/libraries/globals.php:2614
+#: application/libraries/globals.php:2619
 msgid "&larr; Previous Item"
 msgstr "&larr; ítem anterior"
 
-#: application/libraries/globals.php:2795
-msgid "Browse All"
-msgstr "Navegar per tot el contingut"
-
 #: application/libraries/globals.php:2800
-msgid "Browse by Tag"
-msgstr "Navegar per les etiquetes"
+msgid "Browse All"
+msgstr "Tot el contingut"
 
-#: application/libraries/globals.php:3079
+#: application/libraries/globals.php:2805
+msgid "Browse by Tag"
+msgstr "Etiquetes"
+
+#: application/libraries/globals.php:3084
 msgid "No tags are available."
 msgstr "No hi ha cap etiqueta disponible."
 
@@ -3463,7 +3486,7 @@ msgstr "No hi ha cap element \"%1$s\", \"%2$s\"!"
 #: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "No es pot trobar cap element amb ID '%s'!"
+msgstr "No es pot trobar cap element amb l'ID '%s'!"
 
 #: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
@@ -3555,7 +3578,7 @@ msgstr "Edita les col·leccions"
 #: application/tests/suite/Omeka/NavigationTest.php:819
 #: application/tests/suite/Omeka/NavigationTest.php:862
 #: application/tests/suite/Omeka/NavigationTest.php:954
-#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
 
@@ -3636,11 +3659,11 @@ msgstr "Pàgina 6"
 msgid "[no text]"
 msgstr "[sense contingut]"
 
-#: application/views/helpers/ElementForm.php:65
+#: application/views/helpers/ElementForm.php:273
 msgid "Add Input"
 msgstr "Afegeix una entrada"
 
-#: application/views/helpers/ElementInput.php:130
+#: application/views/helpers/ElementInput.php:148
 msgid "Use HTML"
 msgstr "Utilitza HTML"
 
@@ -3713,15 +3736,19 @@ msgid "Previous Page"
 msgstr "Pàgina anterior"
 
 #: application/views/scripts/common/pagination_control.php:36
+msgid "Page"
+msgstr "Pàgina"
+
+#: application/views/scripts/common/pagination_control.php:38
 msgid "Current Page"
 msgstr "Pàgina actual"
 
-#: application/views/scripts/common/pagination_control.php:39
+#: application/views/scripts/common/pagination_control.php:42
 #, php-format
 msgid "%s of %s"
 msgstr "%s de %s"
 
-#: application/views/scripts/common/pagination_control.php:48
+#: application/views/scripts/common/pagination_control.php:51
 msgid "Next Page"
 msgstr "Pàgina següent"
 
@@ -3800,6 +3827,10 @@ msgstr "Tipus de consulta:"
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
 msgstr "Tipus de registre:"
+
+#: application/views/scripts/search/search-form.php:2
+msgid "submit_search"
+msgstr "submit_search"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

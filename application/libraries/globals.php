@@ -1155,10 +1155,11 @@ function head_js($includeDefaults = true)
     if ($includeDefaults) {
         $dir = 'javascripts';
         $headScript->prependScript('jQuery.noConflict();')
+                   ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'))
                    ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
                    ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js');
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
     }
     return $headScript;
 }
@@ -1359,7 +1360,15 @@ function latest_omeka_version()
     $omekaApiVersion = '0.1';
 
     // Determine if we have already checked for the version lately.
-    $check = unserialize(get_option('omeka_update')) or $check = array();
+    $updateOption = get_option('omeka_update');
+    if (!$updateOption) {
+        $updateOption = '';
+    }
+    $check = unserialize($updateOption);
+    if (!$check) {
+        $check = array();
+    }
+
     // This a timestamp corresponding to the last time we checked for
     // a new version.  86400 is the number of seconds in a day, so check
     // once a day for a new version.
@@ -1932,8 +1941,8 @@ function browse_sort_links($links, $wrapperTags = array())
     $sortParam = Omeka_Db_Table::SORT_PARAM;
     $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
     $req = Zend_Controller_Front::getInstance()->getRequest();
-    $currentSort = trim($req->getParam($sortParam));
-    $currentDir = trim($req->getParam($sortDirParam));
+    $currentSort = $req->getParam($sortParam);
+    $currentDir = $req->getParam($sortDirParam);
 
     $defaults = array(
         'link_tag' => 'li',
@@ -1962,27 +1971,31 @@ function browse_sort_links($links, $wrapperTags = array())
     }
 
     foreach ($links as $label => $column) {
+        $sortingLabel = __('Sort ascending');
         if ($column) {
             $urlParams = $_GET;
             $urlParams[$sortParam] = $column;
             $class = '';
+
             if ($currentSort && $currentSort == $column) {
                 if ($currentDir && $currentDir == 'd') {
                     $class = 'class="sorting desc"';
                     $urlParams[$sortDirParam] = 'a';
+                    $sortingLabel = __('Sorting descending');
                 } else {
                     $class = 'class="sorting asc"';
                     $urlParams[$sortDirParam] = 'd';
+                    $sortingLabel = __('Sorting ascending');
                 }
             }
             $url = html_escape(url(array(), null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
-                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label</a></{$sortlistWrappers['link_tag']}>";
+                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" $class $linkAttr>$label</a>";
+                $sortlist .= "<a href=\"$url\" $class $linkAttr>$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></a>";
             }
         } else {
-            $sortlist .= "<{$sortlistWrappers['link_tag']}>$label</{$sortlistWrappers['link_tag']}>";
+            $sortlist .= "<{$sortlistWrappers['link_tag']}>$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></{$sortlistWrappers['link_tag']}>";
         }
     }
     if (!empty($sortlistWrappers['list_tag'])) {
@@ -2987,6 +3000,7 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
  */
 function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
 {
+    $str = (string) $str;
     // Strip the tags.
     $str = strip_tags($str, $allowableTags);
     // Remove non-breaking space html entities.
@@ -3034,7 +3048,7 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
 function url_to_link($str)
 {
     $pattern = "#(\bhttps?://\S+\b)#";
-    return preg_replace_callback($pattern, 'url_to_link_callback', $str);
+    return preg_replace_callback($pattern, 'url_to_link_callback', (string) $str);
 }
 
 /**
@@ -3265,7 +3279,7 @@ function current_url(array $params = array())
 function is_current_url($url)
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    $currentUrl = $request->getRequestUri();
+    $currentUrl = (string) $request->getRequestUri();
     $baseUrl = $request->getBaseUrl();
 
     // Strip out the protocol, host, base URL, and rightmost slash before

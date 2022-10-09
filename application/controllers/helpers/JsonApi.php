@@ -32,12 +32,17 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
             $data = array('headers' => $headers, 'data' => $data);
         }
 
-        $json = Zend_Json::encode($data);
-
+        $flags = 0;
+        // Don't choke completely on invalid UTF-8 content (requires PHP 7.2+)
+        if (PHP_VERSION_ID >= 70200) {
+            $flags |= JSON_INVALID_UTF8_SUBSTITUTE;
+        }
         // Pretty print the JSON if requested.
         if (isset($_GET['pretty_print'])) {
-            $json = Zend_Json::prettyPrint($json);
+            $flags |= JSON_PRETTY_PRINT;
         }
+
+        $json = $this->_encode($data, $flags);
 
         // Wrap the JSON with a callback function if requested.
         if (isset($_GET['callback'])) {
@@ -47,5 +52,25 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
         $response->setBody($json);
         $response->sendResponse();
         exit;
+    }
+
+    /**
+     * Thin wrapper around json_encode to preserve Zend_Json::encode's
+     * default behavior, but allow passing PHP flags to json_encode.
+     *
+     * Specifically this means supporting toJson and toArray methods on passed
+     * objects.
+     */
+    private function _encode($data, $flags)
+    {
+        if (is_object($data)) {
+            if (method_exists($data, 'toJson')) {
+                return $data->toJson();
+            } else if (method_exists($data, 'toArray')) {
+                return $this->_encode($data->toArray(), $flags);
+            }
+        }
+
+        return json_encode($data, $flags);
     }
 }

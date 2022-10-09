@@ -17,7 +17,7 @@ echo flash();
 </section>
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('submit', __('Save Password'), array('class' => 'submit big green button')); ?>
+        <?php echo $this->formSubmit('submit', __('Save Password'), array('class' => 'submit full-width green button')); ?>
     </div>
 </section>
 </form>

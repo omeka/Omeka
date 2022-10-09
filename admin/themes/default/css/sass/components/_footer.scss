@@ -1,0 +1,38 @@
+footer {
+    clear: both;
+    font-size: 12px;
+    padding: $spacing-l 0 !important;
+    
+	* {
+		font-size: 12px !important;
+	}
+	
+    a {
+	    margin-right:  $spacing-l;
+	    
+	    @include screen-ltmd {
+			margin-right:  $spacing-s;   
+		}
+	    
+	    &:last-of-type {
+		    margin-right: 0;
+	    }
+    }
+    
+    p.left {
+	    @include screen-ltmd {
+		    float: none;
+			margin:  $spacing-l 0  $spacing-s;
+		}
+    }
+    p.right {
+	    @include screen-ltmd {
+			float: none;
+			margin: 0 0  $spacing-l;
+		}
+	    
+	    a {
+		    margin-left:  $spacing-l;
+	    }
+    }
+}
