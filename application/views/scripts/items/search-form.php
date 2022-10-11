@@ -26,10 +26,11 @@ $formAttributes['method'] = 'GET';
     </div>
     <div id="search-narrow-by-fields" class="field">
         <div id="search-narrow-by-fields-label" class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
-        <div id="search-narrow-by-fields-property" class="label sr-only"><?php echo __('Search Property'); ?></div>
-        <div id="search-narrow-by-fields-type" class="label sr-only"><?php echo __('Search Type'); ?></div>
-        <div id="search-narrow-by-fields-terms" class="label sr-only"><?php echo __('Search terms'); ?></div>
-        <div id="search-narrow-by-fields-joiner" class="label sr-only"><?php echo __('Search Joiner'); ?></div>
+        <div id="search-narrow-by-fields-property" class="label sr-only" aria-hidden="true"><?php echo __('Search Property'); ?></div>
+        <div id="search-narrow-by-fields-type" class="label sr-only" aria-hidden="true"><?php echo __('Search Type'); ?></div>
+        <div id="search-narrow-by-fields-terms" class="label sr-only" aria-hidden="true"><?php echo __('Search Terms'); ?></div>
+        <div id="search-narrow-by-fields-joiner" class="label sr-only" aria-hidden="true"><?php echo __('Search Joiner'); ?></div>
+        <div id="search-narrow-by-fields-remove-field" class="label aria-hidden="true"><?php echo __('Remove field'); ?></div>
         <div class="inputs">
         <?php
         // If the form has been submitted, retain the number of search
@@ -48,7 +49,8 @@ $formAttributes['method'] = 'GET';
         //[terms] = 'foobar'
         //etc
         foreach ($search as $i => $rows): ?>
-            <div class="search-entry">
+            <?php $index = $i + 1; // The index must start at 1 for accessible labels. ;?>
+            <div class="search-entry" id="search-row-<?php echo $index; ?>" aria-label="<?php echo __('Row %s', $index); ?>">
                 <div class="input advanced-search-joiner"> 
                     <span aria-hidden="true" class="visible-label"><?php echo __('Joiner'); ?></span>
                     <?php 
@@ -57,7 +59,7 @@ $formAttributes['method'] = 'GET';
                         @$rows['joiner'],
                         array(
                             'id' => null,
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-joiner',
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $index . ' search-narrow-by-fields-joiner',
                         ),
                         array(
                             'and' => __('AND'),
@@ -73,7 +75,7 @@ $formAttributes['method'] = 'GET';
                         "advanced[$i][element_id]",
                         @$rows['element_id'],
                         array(
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-property',
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $index . ' search-narrow-by-fields-property',
                             'id' => null,
                         ),
                         get_table_options('Element', null, array(
@@ -90,7 +92,7 @@ $formAttributes['method'] = 'GET';
                         "advanced[$i][type]",
                         @$rows['type'],
                         array(
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-type',
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $index . ' search-narrow-by-fields-type',
                             'id' => null,
                         ),
                         label_table_options(array(
@@ -113,13 +115,13 @@ $formAttributes['method'] = 'GET';
                         @$rows['terms'],
                         array(
                             'size' => '20',
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-narrow-by-fields-terms',
+                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $index . ' search-narrow-by-fields-terms',
                             'id' => null,
                         )
                     );
                     ?>
                 </div>
-                <button type="button" class="remove_search" disabled="disabled" style="display: none;"><?php echo __('Remove field'); ?></button>
+                <button type="button" class="remove_search" disabled="disabled" style="display: none;" aria-labelledby="search-narrow-by-fields-label search-row-<?php echo $index; ?> search-narrow-by-fields-remove-field" title="<?php echo __('Remove field'); ?>"><?php echo __('Remove field'); ?></button>
             </div>
         <?php endforeach; ?>
         </div>
