@@ -38,9 +38,6 @@ hr {
 		@include screen-xl {
 			width: 1040px;
 		}
-		@include screen-md {
-			width: 840px;
-		}
 		@include screen-sm {
 			width: 600px;
 		}

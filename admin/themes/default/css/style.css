@@ -144,9 +144,6 @@ hr {
 @media (min-width: 1440px) {
   .container .ten.columns {
     width: 1040px; } }
-@media (min-width: 992px) and (max-width: 1199px) {
-  .container .ten.columns {
-    width: 840px; } }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .ten.columns {
     width: 600px; } }
@@ -1868,6 +1865,18 @@ ul.details {
 
 .index .omega {
   clear: right; }
+
+.index .panels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.index .container-twelve .panels .panel {
+  margin-top: 0;
+  width: calc(50% - 10px); }
+  @media (max-width: 991px) {
+    .index .container-twelve .panels .panel {
+      width: 100%; } }
 
 .files dt, .files dd {
   line-height: 1.5em;

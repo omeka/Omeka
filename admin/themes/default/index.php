@@ -86,14 +86,12 @@ endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
 <?php $panels = apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>
-<?php for ($i = 0; $i < count($panels); $i++): ?>
-<section class="five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
-    <div class="panel">
+<div role="group" class="panels">
+    <?php for ($i = 0; $i < count($panels); $i++): ?>
+    <section class="panel five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
         <?php echo $panels[$i]; ?>
-    </div>
-</section>
-<?php endfor; ?>
-
-<?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
-
+    </section>
+    <?php endfor; ?>
+    <?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
+</div>
 <?php echo foot(); ?>

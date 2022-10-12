@@ -35,3 +35,19 @@
 .index .omega {
     clear: right;
 }
+
+.index .panels {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.index .container-twelve .panels .panel {
+	margin-top: 0;
+	width: calc(50% - #{$spacing-m});
+
+	@include screen-ltmd {
+		width: 100%;
+	}
+}
+
