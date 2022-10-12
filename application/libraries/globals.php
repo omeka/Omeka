@@ -3537,11 +3537,11 @@ function queue_lightgallery_assets()
     );
     queue_js_file(array(
             'vendor/lightgallery/lightgallery.min', 
-            'vendor/lightgallery/plugins/thumbnail/lg-thumbnail', 
-            'vendor/lightgallery/plugins/video/lg-video', 
-            'vendor/lightgallery/plugins/rotate/lg-rotate', 
-            'vendor/lightgallery/plugins/hash/lg-hash', 
-            'vendor/lightgallery/plugins/zoom/lg-zoom',
+            'vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min', 
+            'vendor/lightgallery/plugins/video/lg-video.min', 
+            'vendor/lightgallery/plugins/rotate/lg-rotate.min', 
+            'vendor/lightgallery/plugins/hash/lg-hash.min', 
+            'vendor/lightgallery/plugins/zoom/lg-zoom.min',
             'lightgallery-init', 
         )
     );
