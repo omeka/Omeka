@@ -3519,3 +3519,30 @@ function add_shortcode($shortcodeName, $function)
 {
     return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
 }
+
+/**
+ * Queue assets for lightgallery media viewer.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @uses queue_css_file()
+ * @uses queue_js_file()
+ */
+function queue_lightgallery_assets()
+{
+    queue_css_file(array(
+            'vendor/lightgallery/lightgallery-bundle.min',
+            'lightgallery'
+        )
+    );
+    queue_js_file(array(
+            'vendor/lightgallery/lightgallery.min', 
+            'vendor/lightgallery/plugins/thumbnail/lg-thumbnail', 
+            'vendor/lightgallery/plugins/video/lg-video', 
+            'vendor/lightgallery/plugins/rotate/lg-rotate', 
+            'vendor/lightgallery/plugins/hash/lg-hash', 
+            'vendor/lightgallery/plugins/zoom/lg-zoom',
+            'lightgallery-init', 
+        )
+    );
+}
