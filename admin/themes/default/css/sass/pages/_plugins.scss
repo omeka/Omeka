@@ -36,6 +36,12 @@
 	th:first-child {
 	    width: 30%;
 	}
+
+	@include screen-ltmd {
+		.action-links {
+			margin-top: $spacing-l;
+		}
+	}
 	
 	.action-links:after {
 	    content: "";
@@ -73,17 +79,8 @@
 	}
 
 	.action-links li {
-	    display: inline-block;
-	    width: 32.3%;
-	    vertical-align: top;
-	    
-	    @include screen-xs {
-		    width: 100%;
-		    
-		    &:first-child {
-			    margin-top: $spacing-m;
-		    }
-		}
+		display: block;
+		width: 100%;
 	}
 
 	button,
@@ -118,10 +115,6 @@
 	.container-twelve .plugin .columns {
 		width: 100%;
 		margin: 0;
-	}
-
-	.plugin .four.columns .action-links li {
-		width: 100%;
 	}
 }
 
