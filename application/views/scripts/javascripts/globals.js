@@ -19,12 +19,6 @@ if (!Omeka) {
     Omeka.showAdvancedForm = function () {
         var advanced_form = $('#advanced-form');
 
-        // Set up classes and DOM elements jQuery will use.
-        if (advanced_form.length > 0) {
-            $('#search-container').addClass('with-advanced');
-            advanced_form.addClass('closed');
-        }
-
         $('.show-advanced').click(function(e) {
             e.preventDefault();
             advanced_form.toggleClass('open').toggleClass('closed');

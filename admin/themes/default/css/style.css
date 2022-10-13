@@ -1396,11 +1396,11 @@ header {
     background: #68302C;
     color: white; }
 
-#advanced-search {
+#advanced-search.button {
   position: absolute;
   top: 0;
   right: 37px; }
-  #advanced-search:after {
+  #advanced-search.button:after {
     content: "\f141"; }
 
 #advanced-form {

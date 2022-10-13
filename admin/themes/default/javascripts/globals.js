@@ -84,9 +84,6 @@ if (!Omeka) {
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
-        $('#search-form').addClass("with-advanced");
-        $('#search-form button').addClass("blue button");
-        advancedForm.before('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
         advancedForm.click(function (event) {
             event.stopPropagation();
         });
