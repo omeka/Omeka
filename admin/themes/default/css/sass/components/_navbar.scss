@@ -11,6 +11,10 @@ header {
     
     background-color: #333333;
     color: #FFFFFF;
+
+	@include screen-xxs {
+		position: absolute;
+	}
     
     a:link,
     a:visited {

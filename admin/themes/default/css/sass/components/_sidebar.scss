@@ -55,6 +55,10 @@
 		}
 	}
 
+	@include screen-xxs {
+		position: absolute;
+	}
+
 	&.unfix {
 	    position: absolute;
 	    top: -$spacing-m;
