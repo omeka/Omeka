@@ -66,6 +66,13 @@
 		@include screen-xs {
 			display: block;
 		}
+
+		button,
+		a.button,
+		input[type=submit] {
+			width: 100%;
+			margin-bottom: $spacing-m;
+		}
 	}
 	
 	.details {
@@ -83,12 +90,6 @@
 		width: 100%;
 	}
 
-	button,
-	a.button,
-	input[type=submit] {
-	    width: 100%;
-	    margin-bottom: $spacing-m;
-	}
 	
 	.action-links li:after { content: none; }
 	.cannotload { background-color: lighten(#FFE7E7, 2%); }

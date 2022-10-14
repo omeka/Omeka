@@ -2659,6 +2659,11 @@ ul.details {
   @media (max-width: 767px) {
     .plugins.browse .plugin {
       display: block; } }
+  .plugins.browse .plugin button,
+  .plugins.browse .plugin a.button,
+  .plugins.browse .plugin input[type=submit] {
+    width: 100%;
+    margin-bottom: 10px; }
 .plugins.browse .details {
   list-style-type: none;
   padding-left: 10px; }
@@ -2668,11 +2673,6 @@ ul.details {
 .plugins.browse .action-links li {
   display: block;
   width: 100%; }
-.plugins.browse button,
-.plugins.browse a.button,
-.plugins.browse input[type=submit] {
-  width: 100%;
-  margin-bottom: 10px; }
 .plugins.browse .action-links li:after {
   content: none; }
 .plugins.browse .cannotload {
