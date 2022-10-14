@@ -41,8 +41,9 @@
         <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
     </div>
 
-	<div id="mobile-navbar-toggle" class="mobile-menu" data-target="#navbar">...</div>
-    <nav id="navbar">
+	<button id="mobile-navbar-toggle" class="mobile-menu" data-target="#global-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>"><span class="admin-icon" aria-role="hidden"></span></button>
+
+    <nav id="global-nav">
         <?php echo common('global-nav'); ?>
         
         <ul id="user-nav">

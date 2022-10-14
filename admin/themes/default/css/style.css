@@ -560,7 +560,7 @@ button.ui-dialog-titlebar-close {
   margin-top: 40px; }
   @media (max-width: 767px) {
     #content {
-      margin-top: 85px; } }
+      margin-top: 0; } }
   #content h1:first-child,
   #content h2:first-child {
     margin-top: 0; }
@@ -1059,9 +1059,19 @@ header {
   z-index: 9999;
   background-color: #333333;
   color: #FFFFFF; }
-  @media (max-width: 480px) {
+  @media (max-width: 767px) {
     header {
-      position: absolute; } }
+      z-index: auto;
+      position: relative;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 5px 0; } }
+  header .site-title a:focus,
+  header button:focus {
+    position: relative;
+    z-index: 9999; }
   header a:link,
   header a:visited {
     color: #CCCCCC;
@@ -1088,17 +1098,20 @@ header {
     @media (max-width: 767px) {
       header nav {
         float: none;
-        position: absolute;
-        top: 40px;
+        position: relative;
+        top: 0;
         width: 100%;
         height: 0px;
+        display: none;
         left: 0;
         overflow: auto;
         background: #333333;
         transition: 0.5s all; }
         header nav.in {
           height: 260px;
-          overflow-x: hidden; }
+          overflow-x: hidden;
+          display: block;
+          z-index: 10000; }
         header nav li {
           float: none;
           margin-right: 0;
@@ -1108,7 +1121,7 @@ header {
           header nav li a:visited {
             width: 100%;
             display: block;
-            padding: 8px 15px;
+            padding: 8px 20px;
             border: none;
             font-size: 16px; }
           header nav li a:hover,
@@ -1119,38 +1132,57 @@ header {
   float: left;
   line-height: 1.5em;
   margin: 0; }
+  @media (max-width: 767px) {
+    #site-title {
+      float: none;
+      padding: 5px 20px; } }
+
+@media (max-width: 767px) {
+  #site-title a {
+    font-size: 16px; } }
+#global-nav > .navigation {
+  float: left; }
+  @media (max-width: 767px) {
+    #global-nav > .navigation {
+      float: none; } }
 
 #user-nav {
-  float: left; }
+  float: left;
+  margin-left: 20px; }
   @media (max-width: 767px) {
     #user-nav {
       float: none;
-      border-top: 1px solid #666; }
+      border-top: 1px solid #666;
+      margin-left: 0; }
       #user-nav li:first-of-type {
-        padding: 12px 15px 8px; }
+        padding: 12px 20px 8px; }
         #user-nav li:first-of-type a {
           display: inline;
           border-bottom: none;
           padding: 0; } }
 
 #global-nav {
-  float: left;
+  float: right;
   margin-right: 1.5em; }
   @media (max-width: 767px) {
     #global-nav {
       float: none;
       border-top: 1px solid #666;
-      margin: 0; }
+      margin: 0;
+      overflow: visible; }
       #global-nav li:first-of-type a {
-        padding: 12px 15px 8px; }
+        padding: 10px 20px; }
       #global-nav li:last-of-type a {
-        padding: 8px 15px 12px; } }
+        padding: 10px 20px; } }
 
 #mobile-navbar-toggle {
-  float: right;
   color: white;
+  appearance: initial;
   cursor: pointer;
-  text-indent: -9999px; }
+  text-indent: -9999px;
+  background: transparent;
+  border: 0;
+  margin: -5px 0 0 auto; }
   #mobile-navbar-toggle:after {
     content: "\f141";
     font-family: "Font Awesome 5 Free";
@@ -1158,8 +1190,7 @@ header {
     font-size: 21px;
     display: block;
     text-indent: 0;
-    text-align: center;
-    margin: -0.75em 0 0 0em; }
+    text-align: center; }
   @media (min-width: 768px) {
     #mobile-navbar-toggle {
       display: none; } }
@@ -1519,41 +1550,26 @@ button.remove_search {
 
 #content-nav {
   background-color: #68302C;
-  width: 200px;
   position: fixed;
   top: 40px;
   left: 0;
   bottom: 0;
   margin: 0;
-  overflow-y: auto;
-  z-index: 1000; }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    #content-nav {
-      width: 160px; } }
-  @media (min-width: 768px) and (max-width: 991px) {
-    #content-nav {
-      width: 180px; } }
+  z-index: 1002; }
   @media (max-width: 767px) {
     #content-nav {
-      width: 100%;
-      top: 40px;
-      background-color: transparent;
-      height: 45px;
-      z-index: 1010; }
+      position: relative;
+      width: calc(100% + 40px);
+      left: -20px;
+      right: -20px;
+      bottom: auto;
+      top: 0;
+      z-index: auto; }
       #content-nav.open {
-        bottom: 0;
-        height: auto;
-        overflow-y: scroll;
-        background-color: #68302C; }
-      #content-nav.open ~ #content {
-        height: 0;
-        overflow: hidden; } }
-  @media (max-width: 480px) {
-    #content-nav {
-      position: absolute; } }
-  #content-nav.unfix {
-    position: absolute;
-    top: -10px; }
+        z-index: 9999; } }
+  #content-nav button:focus {
+    position: relative;
+    z-index: 9999; }
   #content-nav ul {
     width: 100%;
     list-style-type: none;
@@ -1565,10 +1581,13 @@ button.remove_search {
       #content-nav ul {
         margin-top: 0;
         height: 0px;
+        display: none;
         overflow: auto;
         transition: 0.5s all; }
         #content-nav ul.in {
-          height: auto; } }
+          height: auto;
+          display: block;
+          overflow: visible; } }
   #content-nav li {
     word-wrap: break-word;
     z-index: 1000;
@@ -1587,7 +1606,8 @@ button.remove_search {
       transition: 0.5s all; }
       @media (max-width: 767px) {
         #content-nav li a {
-          font-size: 16px; } }
+          font-size: 16px;
+          padding: 10px 20px; } }
   #content-nav .active,
   #content-nav .active:hover {
     background: #82423B; }
@@ -1608,6 +1628,9 @@ button.remove_search {
   display: none; }
   @media (max-width: 767px) {
     #content-nav-toggle {
+      width: 100%;
+      border: 0;
+      text-align: left;
       display: block;
       background: #82423B;
       word-wrap: break-word;
@@ -1615,17 +1638,15 @@ button.remove_search {
       color: white;
       display: block;
       line-height: 1.5em;
-      padding: .625em 3em .625em 1em;
+      padding: 0.625em 3em 0.625em 20px;
       font-size: 16px;
       text-decoration: none;
       transition: 0.5s all;
-      position: sticky;
-      top: 0;
-      z-index: 999;
       overflow: hidden;
-      height: 25px;
+      border-radius: 0;
       text-overflow: ellipsis;
-      white-space: nowrap; }
+      white-space: nowrap;
+      margin-bottom: 0; }
       #content-nav-toggle:after {
         content: "\f0d7";
         font-family: "Font Awesome 5 Free";

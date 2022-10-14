@@ -1,5 +1,5 @@
 <nav id="content-nav" class="two columns" role="navigation" aria-label="<?php echo __('Main Menu'); ?>">
-	<a id="content-nav-toggle" class="mobile-menu" data-target=".navigation"><?php echo $title; ?></a>
+	<button type="button" id="content-nav-toggle" class="mobile-menu" data-target=".navigation"><?php echo $title; ?></button>
     <?php
         $mainNav = array(
             array(

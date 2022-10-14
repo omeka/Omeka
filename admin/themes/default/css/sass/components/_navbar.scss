@@ -2,8 +2,7 @@ header {
     left: 0;
     right: 0;
     top: 0;
-    height: 40px;
-    
+    height: 40px;    
     box-sizing: border-box;
     position: fixed;
     padding:  8px 1em;
@@ -11,11 +10,23 @@ header {
     
     background-color: #333333;
     color: #FFFFFF;
-
-	@include screen-xxs {
-		position: absolute;
+	
+	@include screen-xs {
+		z-index: auto;
+		position: relative;
+		height: auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		padding: $spacing-s 0;
 	}
-    
+
+	.site-title a:focus,
+	button:focus {
+		position: relative;
+		z-index: 9999;
+	}
+
     a:link,
     a:visited {
     	color: #CCCCCC;
@@ -48,10 +59,11 @@ header {
 	    
 	    @include screen-xs {
 			float: none;
-			position: absolute;
-			top: 40px;
+			position: relative;
+			top: 0;
 			width: 100%;
 			height: 0px;
+			display: none;
 			left: 0;
 			overflow: auto;
 			background: #333333;
@@ -60,6 +72,8 @@ header {
 			&.in {
 				height: 260px;
 				overflow-x: hidden;
+				display: block;
+				z-index: 10000;
 			}
 			
 			li {
@@ -72,7 +86,7 @@ header {
 				a:visited {
 					width: 100%;
 					display: block;
-					padding: 8px 15px;
+					padding: 8px $spacing-l;
 					border: none;
 					font-size: 16px;
 				}
@@ -89,17 +103,38 @@ header {
     float: left;
     line-height: 1.5em;
     margin: 0;
+	
+	@include screen-xs {
+		float: none;
+		padding: $spacing-s $spacing-l;
+	}
+}
+
+@include screen-xs {
+	#site-title a {
+		font-size: 16px;
+	}
+}
+
+#global-nav > .navigation {
+	float: left;
+
+	@include screen-xs {
+		float: none;
+	}
 }
 
 #user-nav {
     float: left;
+	margin-left: $spacing-l;
     
     @include screen-xs {
 	 	float: none;
 	 	border-top: 1px solid #666;
+		margin-left: 0;
 	 	
 	 	li:first-of-type {
-		 	padding: 12px 15px 8px;
+		 	padding: 12px $spacing-l 8px;
     
 		 	a {
 			 	display: inline;
@@ -111,32 +146,36 @@ header {
 }
 
 #global-nav {
-    float: left;
+    float: right;
     margin-right: 1.5em;
     
     @include screen-xs {
 	 	float: none;   
 	 	border-top: 1px solid #666;
 	 	margin: 0;
+		overflow: visible;
 	 	
 	 	li:first-of-type {
 		 	a {
-		 		padding: 12px 15px 8px;
+		 		padding: $spacing-m $spacing-l;
 		 	}
 		}
 		li:last-of-type {
 		 	a {
-		 		padding: 8px 15px 12px;
+		 		padding: $spacing-m $spacing-l;
 		 	}
 		}
 	}
 }
 
 #mobile-navbar-toggle {
-	float: right;
     color: white;
+	appearance: initial;
     cursor: pointer;
     text-indent: -9999px;
+	background: transparent;
+	border: 0;
+	margin: (-1 * $spacing-s) 0 0 auto;
     
     &:after {
         content: "\f141";
@@ -146,7 +185,6 @@ header {
 	    display: block;
 	    text-indent: 0;
 	    text-align: center;
-	    margin: -0.75em 0 0 0em;;
 	}
 
     @include screen-gtxs {

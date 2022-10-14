@@ -20,49 +20,31 @@
 
 #content-nav {
 	background-color: $darkestred;
-    width: 200px;
     position: fixed;
     top: 40px;
     left: 0;
 	bottom: 0;
 	margin: 0;
-	overflow-y: auto;
-	z-index: 1000;
+	z-index: 1002;
 
-    @include screen-md {
-	    width: 160px;
-	}
-	@include screen-sm {
-		width: 180px;
-	}
 	@include screen-xs {
-		width: 100%;
-		top: 40px;
-		background-color: transparent;
-		height: 4.5 * $spacing-m;
-		z-index: 1010;
-		
+		position: relative;
+    	width: calc(100% + #{2 * $spacing-l});
+		left: -2 * $spacing-m;
+		right: -2 * $spacing-m;
+		bottom: auto;
+		top: 0;
+		z-index: auto;
+
 		&.open {
-			bottom: 0;
-			height: auto;
-			overflow-y: scroll;	
-			background-color: $darkestred;
-		}
-		
-		&.open ~ #content {
-			height: 0;
-			overflow: hidden;
+			z-index: 9999;
 		}
 	}
 
-	@include screen-xxs {
-		position: absolute;
+	button:focus {
+		position: relative;
+		z-index: 9999;
 	}
-
-	&.unfix {
-	    position: absolute;
-	    top: -$spacing-m;
-	} 
 
 	ul {
 	    width: 100%;
@@ -75,11 +57,14 @@
 	    @include screen-xs {
 		 	margin-top: 0;
 		 	height: 0px;
+			display: none;
 		 	overflow: auto;
 		 	transition: 0.5s all;
 		 	
 		 	&.in {
 			 	height: auto;
+				display: block;
+				overflow: visible;
 		 	}
 		}
 	}
@@ -108,6 +93,7 @@
 	        
 	        @include screen-xs {
 		    	font-size: 16px;   
+				padding: $spacing-m $spacing-l;
 		    }
 	    }
 	}
@@ -136,6 +122,9 @@
 	display: none;
 	
 	@include screen-xs {
+		width: 100%;
+		border: 0;
+		text-align: left;
 		display: block;
 		background: $darkred;
 		word-wrap: break-word;
@@ -143,17 +132,15 @@
 	    color: white;
 	    display: block;
 	    line-height: 1.5em;
-	    padding: .625em 3em .625em 1em;
+	    padding: .625em 3em .625em $spacing-l;
 	    font-size: 16px;
 	    text-decoration: none;
 	    transition: 0.5s all;
-		position: sticky;
-		top: 0;
-		z-index: 999;
 		overflow: hidden;
-		height: 2.5 * $spacing-m;
+		border-radius: 0;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		margin-bottom: 0;
 	    
 	    &:after {
 		    content: "\f0d7";
