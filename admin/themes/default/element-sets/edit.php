@@ -19,15 +19,18 @@ echo flash();
         <p><?php echo __($element_set->description); ?></p>
         <ul class="sortable">
         <?php foreach ($element_set->getElements() as $element): ?>
+            <?php $elementId = $element->id; ?>
             <li class="element">
             <div class="sortable-item">
-                <?php echo __($element->name); ?>
+                <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
+                <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>
+                <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?>" class="drawer-toggle" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Comment'); ?>"><span class="icon" aria-hidden="true"></span></button>
             </div>
             <div class="drawer-contents">
                 <?php echo __($element->description); ?>
-                <label for="<?php echo "elements[{$element->id}][comment]"; ?>"><?php echo __('Comment'); ?></label>
-                <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment, array('rows' => '3')); ?>
+                <label id="element-<?php echo $elementId; ?>-comment"; ?><?php echo __('Comment'); ?></label>
+                <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment, array('rows' => '3', 'aria-labelledby' => 'element-' . $elementId . '-name element-' . $elementId . '-comment')); ?>
                 <?php fire_plugin_hook('admin_element_sets_form_each', array('element_set' => $element_set, 'element' => $element, 'view' => $this)); ?>
             </div>
             </li>
@@ -44,8 +47,8 @@ echo flash();
 </form>
 <script type="text/javascript">
 //<![CDATA[
+Omeka.addReadyCallback(Omeka.manageDrawers);
 Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
-Omeka.addReadyCallback(Omeka.ElementSets.addHideButtons);
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
 //]]>
 </script>

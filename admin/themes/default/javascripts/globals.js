@@ -68,6 +68,30 @@ if (!Omeka) {
             });
         }
     };
+
+    /**
+     * Add link that collapses and expands content.
+     */
+    Omeka.manageDrawers = function () {
+       $('.drawer-toggle')
+            .click(function (event) {
+                event.preventDefault();
+                $(event.target).parents('.element').find('.drawer-contents').toggleClass('opened');
+                $(this).toggleClass('opened');
+                Omeka.toggleAriaExpanded($(this));
+            })
+            .mousedown(function (event) {
+                event.stopPropagation();
+            });
+    };
+
+    Omeka.toggleAriaExpanded = function(element) {
+        if (element.attr('aria-expanded') == 'true') {
+            element.attr('aria-expanded', 'false');
+        } else {
+            element.attr('aria-expanded', 'true');
+        }
+    };
     
     Omeka.toggleMobileMenu = function() {
 	    $('.mobile-menu').click(function (event) {
@@ -75,11 +99,7 @@ if (!Omeka) {
 			var target = button.data('target');
 			$(target).toggleClass('in');
             button.parent('nav').toggleClass('open');
-            if (button.attr('aria-expanded') == 'true') {
-                button.attr('aria-expanded', 'false');
-            } else {
-                button.attr('aria-expanded', 'true');
-            }
+            Omeka.toggleAriaExpanded(button);
 	    });
     };
     

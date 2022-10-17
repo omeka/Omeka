@@ -671,17 +671,6 @@ button.ui-dialog-titlebar-close {
       top: 0px;
       position: relative;
       float: left; }
-  .ui-sortable .sortable-item > a {
-    max-width: 350px;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5;
-    vertical-align: top; }
-    @media (max-width: 767px) {
-      .ui-sortable .sortable-item > a {
-        max-width: 180px; } }
 .ui-sortable li {
   margin-bottom: 15px;
   list-style-type: none; }
@@ -692,11 +681,11 @@ button.ui-dialog-titlebar-close {
   background: #f1f2f2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #D6D5C2;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   padding: 15px;
-  margin: 0; }
+  margin: 0;
+  display: flex;
+  align-items: center; }
   .drawer input,
   .sortable-item input,
   .add-new input {
@@ -723,15 +712,33 @@ button.ui-dialog-titlebar-close {
   -moz-border-radius: 2px;
   border-radius: 2px; }
 
-.drawer-toggle,
-.delete-element,
-.undo-delete {
-  float: right;
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-  text-indent: -9999px;
+.drawer-name {
+  margin-right: auto !important; }
+
+.drawer > button {
+  max-width: 350px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  vertical-align: top;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  margin-bottom: 0;
   color: #4C3939; }
+  @media (max-width: 767px) {
+    .drawer > button {
+      max-width: 180px; } }
+
+.drawer.deleted .delete-element,
+.drawer.deleted .drawer-toggle,
+.drawer .undo-delete {
+  display: none; }
+
+.drawer.deleted .undo-delete {
+  display: inline-block; }
 
 .deleted.sortable-item,
 .deleted.drawer {
@@ -751,12 +758,15 @@ button.ui-dialog-titlebar-close {
   color: #fff;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5); }
 
-.deleted .drawer {
-  color: #fff; }
+.drawer-contents {
+  display: none; }
 
-.drawer-toggle:after,
-.delete-element:after,
-.undo-delete:after {
+.drawer-contents.opened:not(.deleted) {
+  display: block; }
+
+.drawer-toggle .icon:after,
+.delete-element .icon:after,
+.undo-delete .icon:after {
   display: inline-block;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -764,10 +774,9 @@ button.ui-dialog-titlebar-close {
   height: 20px;
   width: 20px;
   text-indent: 0;
-  float: left;
   text-align: center; }
 
-.drawer-toggle:after {
+.drawer-toggle .icon:after {
   content: "\f0da"; }
 
 .delete-element:link, .delete-element:active,
@@ -776,7 +785,7 @@ button.ui-dialog-titlebar-close {
 .undo-delete:hover, .undo-delete:visited {
   color: #4C3939; }
 
-.drawer-toggle.opened:after {
+.drawer-toggle.opened .icon:after {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -785,17 +794,13 @@ button.ui-dialog-titlebar-close {
 .delete-element {
   display: inline-block; }
 
-.delete-element:after {
+.delete-element .icon:after {
   content: "\f00d"; }
 
-.drawer > a.undo-delete,
-.ui-sortable .sortable-item > a.undo-delete {
-  display: none; }
-
-.undo-delete:after {
+.undo-delete .icon:after {
   content: "\f0e2";
   font-size: 12px;
-  line-height: 2em;
+  line-height: 1;
   color: #fff; }
 
 .drawer-contents {
@@ -2481,14 +2486,6 @@ ul.details {
   border-top: 1px solid #ccc;
   margin-top: 10px;
   padding: 9px 0 10px; }
-
-/* Edit Item Type Metadata
-================================================== */
-.item-type-metadata .drawer-toggle {
-  display: none; }
-
-.item-type-metadata .sortable-item {
-  cursor: default; }
 
 #install #content,
 #login #content,

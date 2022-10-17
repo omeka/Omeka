@@ -16,16 +16,24 @@ echo flash();
         <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
                 <ul class="item-type-metadata drawers">
         <?php foreach ($element_set->getElements() as $element): ?>
+            <?php $elementId = $element->id; ?>
             <li class="element">
                 <div class="drawer">
-                    <?php echo __($element->name); ?>
-                    <a href="#" class="undo-delete"><?php echo __('Undo'); ?></a>
-                    <a href="#" class="delete-element"><?php echo __('Delete'); ?></a>
-                    <?php echo $this->formHidden("elements[{$element->id}][delete]"); ?>
+                    <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
+                    <?php $buttonToggleLabel = ' element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
+                    <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?> <?php echo __('Description'); ?>" class="drawer-toggle" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Description'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="remove-element-link-<?php echo html_escape($elementId); ?>" class="delete-element" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>" aria-labelledby="remove-element-link-<?php echo html_escape($elementId); ?> element-<?php echo $elementId; ?>-name"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="return-element-link-<?php echo html_escape($elementId); ?>" class="undo-delete" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="return-element-link-<?php echo html_escape($elementId); ?> element-<?php echo $elementId; ?>-name"><span class="icon" aria-hidden="true"></span></button>
+                    <?php echo $this->formHidden("elements[{$elementId}][delete]", 1, array('class' => 'element-delete-hidden')); ?>
                 </div>
                 <div class="drawer-contents">
-                    <label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
-                    <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description, array('rows' => '3', 'id' => "elements[{$element->id}][description]")); ?>
+                    <label for="<?php echo "elements[{$elementId}][description]"; ?>"><?php echo __('Description'); ?></label>
+                    <?php echo $this->formTextarea("elements[{$elementId}][description]", $element->description, array(
+                            'rows' => '3', 
+                            'id' => "elements[{$element->id}][description]",
+                            'aria-labelledby' => "elements[{$elementId}][description]")
+                        ); 
+                    ?>
                     <?php fire_plugin_hook('admin_settings_item_type_form_each', array('element_set' => $element_set, 'element' => $element, 'view' => $this)); ?>
                 </div>
             </li>
@@ -46,6 +54,7 @@ echo flash();
 . 'be undone.'); ?>
 </div>
 <script type="text/javascript">
+Omeka.addReadyCallback(Omeka.manageDrawers);
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
 Omeka.addReadyCallback(Omeka.ElementSets.confirmDeleteElement,
     [<?php echo js_escape(__('Ok')); ?>, <?php echo js_escape(__('Cancel')); ?>]);

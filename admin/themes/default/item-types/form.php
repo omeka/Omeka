@@ -35,12 +35,15 @@ jQuery(document).ready(function () {
                 if ($element && $elementTempId === null):
             ?>
                 <li class="element">
-                    <div class="sortable-item">
-                    <strong><?php echo html_escape($element->name); ?></strong>
-                    <?php echo $this->formHidden("elements[$element->id][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
+                    <div class="sortable-item drawer">
+                    <?php $elementId = $element->id; ?>
+                    <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
+                    <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
+                    <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?> <?php echo __('Description'); ?>" class="drawer-toggle" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Description'); ?>"><span class="icon" aria-hidden="true"></span></button>
                     <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
-                    <a id="return-element-link-<?php echo html_escape($element->id); ?>" href="" class="undo-delete"><?php echo __('Undo'); ?></a>
-                    <a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a>
+                    <button type="button" id="return-element-link-<?php echo html_escape($elementId); ?>" class="undo-delete" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="remove-element-link-<?php echo html_escape($elementId); ?>" class="delete-element" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <?php echo $this->formHidden("elements[$elementId][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
                     <?php endif; ?>
                     </div>
                     
@@ -67,7 +70,7 @@ jQuery(document).ready(function () {
                         array(
                             'from_post' => true,
                             'elementTempId' => $elementTempId,
-                            'elementId' => $element->id,
+                            'elementId' => $elementId,
                             'elementOrder' => $elementOrder
                         )
                     );
@@ -79,7 +82,7 @@ jQuery(document).ready(function () {
                     <div class="add-new">
                         <?php echo __('Add Element'); ?>
                     </div>
-                    <div class="drawer-contents">
+                    <div class="drawer-contents opened">
                         <p>
                             <label><input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?></label>
                             <label><input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?></label>

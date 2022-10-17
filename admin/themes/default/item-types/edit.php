@@ -26,6 +26,7 @@ echo flash();
 </form>
 
 <script type="text/javascript">
+Omeka.addReadyCallback(Omeka.manageDrawers);
 Omeka.addReadyCallback(Omeka.ItemTypes.enableSorting);
 Omeka.addReadyCallback(Omeka.ItemTypes.addHideButtons);
 </script>

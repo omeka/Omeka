@@ -31,14 +31,12 @@ Omeka.ElementSets = {};
         $('.sortable .drawer-contents').each(function () {
             $(this).hide();
         });
-        $('div.sortable-item').each(function () {
-            $(this).append('<div class="drawer-toggle"></div>');
-        });
         $('.drawer-toggle')
             .click(function (event) {
                 event.preventDefault();
-                $(event.target).parent().next().toggle();
+                $(event.target).parents('.element').find('.drawer-contents').toggle();
                 $(this).toggleClass('opened');
+                Omeka.toggleAriaExpanded($(this));
             })
             .mousedown(function (event) {
                 event.stopPropagation();
@@ -68,15 +66,13 @@ Omeka.ElementSets = {};
      * @param {Element} button Clicked button.
      */
     Omeka.ElementSets.toggleElement = function (button) {
-        $(button).parent().toggleClass('deleted');
-        $(button).parent().next().toggleClass('deleted');
-        $(button).toggle();
-        if($(button).nextAll('input[type=hidden]').val() != 1) {
-            $(button).next().val(1);
-            $(button).prev().toggle();
+        var buttonElement = $(button).parents('.element');
+        var elementDeleteHidden = buttonElement.find('.element-delete-hidden');
+        buttonElement.find('.drawer, .drawer-contents').toggleClass('deleted');
+        if(elementDeleteHidden.val() != 1) {
+            elementDeleteHidden.val(1);
         } else {
-            $(button).nextAll('input[type=hidden]').val(0);
-            $(button).next().toggle();
+            elementDeleteHidden.val(0);
         }
     };
     

@@ -1,9 +1,9 @@
 <li class="element">
-    <div class="sortable-item">
+    <div class="sortable-item drawer">
         <?php
         echo $this->formSelect(
             $element_id_name, $element_id_value,
-            array('class' => 'existing-element-drop-down'),
+            array('class' => 'existing-element-drop-down drawer-name'),
             get_table_options(
                 'Element', null,
                 array(
@@ -19,7 +19,7 @@
             array('class' => 'element-order')
         );
         ?>
-        <a href="" class="delete-element"><?php echo __('Remove'); ?></a>
+        <button type="button" class="delete-element" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
     </div>
-    <div class="drawer-contents"></div>
+    <div class="drawer-contents opened"></div>
 </li>
