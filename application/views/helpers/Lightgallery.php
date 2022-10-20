@@ -89,7 +89,7 @@ class Omeka_View_Helper_Lightgallery extends Zend_View_Helper_Abstract
             if (in_array($mediaType, $whitelist)) {
                 $sortedMedia['lightMedia'][$mediaCount]['media'] = $media;
                 if (strpos($mediaType,'video') !== false) {
-                    $html5videos[$mediaCount] = pathinfo($media->filename, PATHINFO_FILENAME);
+                    $html5videos[$mediaCount] = $media->getProperty('original_filename');
                     $sortedMedia['lightMedia'][$mediaCount]['tracks'] = [];
                 }
                 $mediaCount++;
@@ -99,8 +99,10 @@ class Omeka_View_Helper_Lightgallery extends Zend_View_Helper_Abstract
         }
         if ((count($html5videos) > 0) && isset($sortedMedia['otherMedia'])) {
             foreach ($html5videos as $fileId => $filename) {
+                $originalFileExtension = $sortedMedia['lightMedia'][$fileId]['media']->getExtension();
+                $originalFilename = str_replace('.' . $originalFileExtension, '', $filename);
                 foreach ($sortedMedia['otherMedia'] as $key => $otherMedia) {
-                    if ($otherMedia->filename == "$filename.vtt") {
+                    if ($otherMedia->getProperty('original_filename') == "$originalFilename.vtt") {
                         $sortedMedia['lightMedia'][$fileId]['tracks'][] = $otherMedia;
                         unset($sortedMedia['otherMedia'][$key]);
                     }
