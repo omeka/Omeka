@@ -43,8 +43,8 @@ class Omeka_View_Helper_Lightgallery extends Zend_View_Helper_Abstract
                     if (isset($index['tracks'])) {
                         foreach ($index['tracks'] as $key => $track) {
                             $label = metadata($track, 'display_title');
-                            $srclang = (metadata($track, 'dcterms:language')) ? metadata($track, 'dcterms:language') : '';
-                            $type = (metadata($track, 'dcterms:type')) ? metadata($track, 'dcterms:type') : 'captions';
+                                $srclang = (metadata($track, array('Dublin Core', 'Language'))) ? metadata($track, array('Dublin Core', 'Language'), array('no_escape' => true)) : '';
+                                $type = (metadata($track, array('Dublin Core', 'Type'))) ? metadata($track, array('Dublin Core', 'Type'), array('no_escape' => true)) : 'captions';
                             $videoSrcObject['tracks'][$key]['src'] = $track->getWebPath();
                             $videoSrcObject['tracks'][$key]['label'] = $label;
                             $videoSrcObject['tracks'][$key]['srclang'] = $srclang;
