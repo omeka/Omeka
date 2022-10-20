@@ -68,7 +68,7 @@ class Omeka_View_Helper_Lightgallery extends Zend_View_Helper_Abstract
         } elseif (isset($sortedMedia['otherMedia'])) {
             $otherMedia = $sortedMedia['otherMedia'];
             $html .= '<div id="other-media" class="element">';
-            $html .= '<h3>' . get_view()->translate('Other Media') . '</h3>';
+            $html .= '<h3>' . $this->view->translate('Other Media') . '</h3>';
             foreach($otherMedia as $media) {
                 $html .= '<div class="element-text">' . link_to($media, null, metadata($media, 'display_title')) . '</div>';
             }
