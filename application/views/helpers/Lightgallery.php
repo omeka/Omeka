@@ -80,8 +80,7 @@ class Omeka_View_Helper_Lightgallery extends Zend_View_Helper_Abstract
 
     protected function _prepareLightgalleryFiles($files = null) {
         $sortedMedia = [];
-        $whitelist = ['image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'video/flv', 'video/x-flv', 'video/mp4', 'video/m4v',
-                    'video/webm', 'video/wmv', 'video/quicktime', 'application/pdf'];
+        $whitelist = ['image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'video/mp4', 'video/x-m4v', 'video/ogg', 'video/webm', 'video/quicktime', 'application/pdf'];
         $html5videos = [];
         $mediaCount = 0;
 
