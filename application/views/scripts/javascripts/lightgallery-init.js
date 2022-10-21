@@ -3,7 +3,6 @@
         const lgContainer = document.getElementById('itemfiles');
 
         const inlineGallery = lightGallery(lgContainer, {
-            selector: '.media.resource',
             plugins: [lgThumbnail, lgVideo, lgZoom],
             thumbnail: true,
             container: lgContainer,
