@@ -33,7 +33,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                 ];
                 $mediaCaptionAttribute = ($mediaCaption) ? $mediaCaptionOptions[$mediaCaption] : '';
 
-                $mediaType = ($media->mime_type == 'video/quicktime') ? 'video/mp4' : $media->mime_type;
+                $mediaType = ($file->mime_type == 'video/quicktime') ? 'video/mp4' : $file->mime_type;
                 if (strpos($mediaType, 'video') !== false) {
                     $videoSrcObject = [
                         'source' => [
