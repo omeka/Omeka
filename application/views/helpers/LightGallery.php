@@ -16,14 +16,14 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
      */
     public function lightGallery($files, $supported = true)
     {
-        $sortedMedia = $this->_prepareFiles($files);
+        $sortedFiles = $this->_prepareFiles($files);
         $html = '';
 
         if ($supported) {
             $html .= '<div id="itemfiles">';
             $mediaCaption = get_theme_option('media_caption');
 
-            foreach ($sortedMedia['gallery'] as $galleryEntry) {
+            foreach ($sortedFiles['gallery'] as $galleryEntry) {
                 $file = $galleryEntry['file'];
                 $source = $file->getWebPath();
                 $mediaCaptionOptions = [
@@ -96,14 +96,14 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
         foreach ($files as $file) {
             $mediaType = $file->mime_type;
             if (in_array($mediaType, $whitelist)) {
-                $sortedMedia['gallery'][$index]['file'] = $file;
+                $sortedFiles['gallery'][$index]['file'] = $file;
                 if (strpos($mediaType,'video') !== false) {
                     $html5videos[$index] = pathinfo($file->original_filename, PATHINFO_FILENAME);
-                    $sortedMedia['gallery'][$index]['tracks'] = [];
+                    $sortedFiles['gallery'][$index]['tracks'] = [];
                 }
                 $index++;
             } else {
-                $sortedMedia['other'][] = $file;
+                $sortedFiles['other'][] = $file;
             }
         }
         if ($html5videos && $sortedFiles['other']) {
