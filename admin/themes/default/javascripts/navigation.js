@@ -45,24 +45,6 @@ Omeka.Navigation = {};
         select.val(selectedValue);
     };
 
-    Omeka.Navigation.updateHideButtons = function () {
-        $('div.sortable-item').each(function () {
-            var headerDiv = $(this); 
-            if (!headerDiv.find('.drawer-toggle').length) {
-                headerDiv.append('<div class="drawer-toggle"></div>');
-                headerDiv.find('.drawer-toggle')
-                    .click(function (event) {
-                        event.preventDefault();
-                        $(this).parent().next().toggle();
-                        $(this).toggleClass('opened');
-                    })
-                    .mousedown(function (event) {
-                        event.stopPropagation();
-                    });
-                headerDiv.next().hide();
-            }
-        });
-    };
 
     Omeka.Navigation.updateVisitButtons = function () {
         $('div.sortable-item > input[type="checkbox"]').each(function () {
@@ -82,8 +64,7 @@ Omeka.Navigation = {};
     Omeka.Navigation.updateDeleteButtons = function () {
         $('input.can_delete_nav_link').each(function () {
             var header = $(this).parent(); 
-            if (!header.children('a.delete-toggle').length) {
-                header.append('<a class="delete-toggle delete-element" href="">' + Omeka.Navigation.deleteText + '</a>');
+            if (!header.children('.delete-toggle').length) {
                 var checkbox = this;
                 header.children('.delete-toggle').css('display', 'inline-block').click(function (event) {
                     event.preventDefault();
@@ -195,6 +176,6 @@ Omeka.Navigation = {};
         Omeka.Navigation.updateDeleteButtons();
         Omeka.Navigation.updateSelectHomepageOptions();
         Omeka.Navigation.updateVisitButtons();
-        Omeka.Navigation.updateHideButtons();
+        Omeka.manageDrawers('.main_link');
     };
 })(jQuery);

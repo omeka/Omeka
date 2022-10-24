@@ -72,17 +72,19 @@ if (!Omeka) {
     /**
      * Add link that collapses and expands content.
      */
-    Omeka.manageDrawers = function () {
-       $('.drawer-toggle')
-            .click(function (event) {
-                event.preventDefault();
-                $(event.target).parents('.element').find('.drawer-contents').toggleClass('opened');
-                $(this).toggleClass('opened');
-                Omeka.toggleAriaExpanded($(this));
-            })
-            .mousedown(function (event) {
-                event.stopPropagation();
-            });
+    Omeka.manageDrawers = function (containerName) {
+        if (!containerName) {
+            containerName = '.element';
+        }
+       $('.drawer-toggle').click(function (event) {
+            event.preventDefault();
+            $(event.target).parents(containerName).find('.drawer-contents').toggleClass('opened');
+            $(this).toggleClass('opened');
+            Omeka.toggleAriaExpanded($(this));
+        })
+        .mousedown(function (event) {
+            event.stopPropagation();
+        });
     };
 
     Omeka.toggleAriaExpanded = function(element) {
