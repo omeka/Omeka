@@ -18,7 +18,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
         <div class="add-new"><?php echo __('Add a Link to the Navigation'); ?></div>
-        <div class="drawer-contents">
+        <div class="drawer-contents opened">
             <label for="new_nav_link_label"><?php echo __('Label'); ?></label>
             <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
             <label for="new_nav_link_uri"><?php echo __('URL'); ?></label>

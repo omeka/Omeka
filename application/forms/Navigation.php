@@ -44,7 +44,10 @@ class Omeka_Form_Navigation extends Omeka_Form
         $html = '<ul id="navigation_main_list">';
         $pageCount = 0;
         foreach ($this->_nav as $page) {
-            $html .= $this->_displayNavigationPageLink($page, $pageCount);
+            $html .= get_view()->partial('settings/edit-navigation-link.php', [
+                'page' => $page,
+                'pageCount' => $pageCount,
+            ]);
         }
         $html .= '</ul>';
         return $html;
@@ -95,56 +98,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                     array('Label'),
                     'Errors', )
         ));
-    }
-
-    /**
-     * Returns the html for a navigation page link and its sublinks. 
-     *
-     * @param Zend_Navigation_Page $page The navigation page
-     * @param int $pageCount The number of pages added so far to the form
-     * @return String The html for a navigation page link and its sublinks
-     */
-    protected function _displayNavigationPageLink(Zend_Navigation_Page $page, &$pageCount)
-    {
-        $pageCount++;
-        $checkboxId = 'main_nav_checkboxes_' . $pageCount;
-        $checkboxValue = $this->_getPageHiddenInfo($page);
-        $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
-        $checkboxClasses = array();
-        if ($page->can_delete) {
-            $checkboxClasses[] = 'can_delete_nav_link';
-        }
-        $checkboxClass = implode(' ', $checkboxClasses);
-        $html = '<li>';
-        $html .= '<div class="main_link">';
-        $html .= '<div class="sortable-item">';
-        $html .= '<input type="checkbox" name="'
-                 . $checkboxId
-                 . '" id="'
-                 . $checkboxId
-                 . '" value="' . html_escape($checkboxValue)
-                 . '" '
-                 . $checkboxChecked
-                 . ' class="'
-                 . $checkboxClass
-                 . '">';
-        $html .= html_escape($page->getLabel());
-        $html .= '</div>';
-        $html .= '<div class="drawer-contents">';
-        $html .= '<label>' . __('Label') . '</label><input type="text" class="navigation-label" />';
-        $html .= '<label>' . __('URL') . '</label><input type="text" class="navigation-uri" />';
-        $html .= '<div class="main_link_buttons"></div>';
-        $html .= '</div>';
-        $html .= '</div>';
-        if ($page->hasChildren()) {
-            $html .= '<ul>';
-            foreach ($page as $childPage) {
-                $html .= $this->_displayNavigationPageLink($childPage, $pageCount);
-            }
-            $html .= '</ul>';
-        }
-        $html .= '</li>';
-        return $html;
     }
 
     /**
@@ -277,23 +230,6 @@ class Omeka_Form_Navigation extends Omeka_Form
             $homepageUri = '/';
         }
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri);
-    }
-
-    /**
-     * Returns JSON with the hidden info for a navigation page link. 
-     *
-     * @param Zend_Navigation_Page $page The navigation page
-     * @return String JSON with the hidden info for a navigation page link. 
-     */
-    protected function _getPageHiddenInfo(Zend_Navigation_Page $page)
-    {
-        $hiddenInfo = array(
-          'can_delete' => (bool) $page->can_delete,
-          'uri' => $page->getHref(),
-          'label' => $page->getLabel(),
-          'visible' => $page->isVisible(),
-        );
-        return json_encode($hiddenInfo);
     }
 
     /**
