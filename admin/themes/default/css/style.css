@@ -2213,11 +2213,7 @@ ul.details {
 
 .table-actions .selected {
   display: inline-block;
-  margin-right: 4px;
-  font-style: italic;
-  color: gray; }
-  .table-actions .selected > span {
-    color: gray; }
+  margin-right: 4px; }
 
 .table-actions > input[type="submit"].small {
   display: inline-block;

@@ -191,12 +191,6 @@
 .table-actions .selected {
     display: inline-block;
     margin-right: 4px;
-    font-style: italic;
-    color: gray;
-    
-    > span {
-	    color: gray;
-    }
 }
 
 .table-actions > input[type="submit"].small {
