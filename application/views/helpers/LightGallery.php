@@ -21,7 +21,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 
         if ($supported) {
             $html .= '<div id="itemfiles">';
-            $mediaCaption = get_theme_option('media_caption');
+            $mediaCaption = get_theme_option('lightgallery_caption');
 
             foreach ($sortedFiles['gallery'] as $galleryEntry) {
                 $file = $galleryEntry['file'];
