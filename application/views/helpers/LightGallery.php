@@ -76,10 +76,25 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
         } elseif ($sortedFiles['other']) {
             $html .= '<div id="other-files" class="element">';
             $html .= '<h3>' . $this->view->translate('Other Files') . '</h3>';
-            $html .= file_markup($sortedFiles['other'], array(), array('class' => 'element-text'));
+            $html .= $this->_displayFileList($sortedFiles['other']);
             $html .= '</div>';
         }
 
+        return $html;
+    }
+
+    protected function _displayFileList($files) {
+        $html = '';
+        foreach ($files as $file) {
+            $linkToFileMetadata = option('link_to_file_metadata');
+            $fileLink = ($linkToFileMetadata) ? record_url($file, 'show') : $file->getWebPath($derivative);
+            $html .= '<div class="element-text"><a href="' . $fileLink . '" class="other-files-link">';
+            if ($file->hasThumbnail()) {
+                $html .= record_image($file, 'square_thumbnail', array('alt' => ''));
+            }
+            $html .= $file->getProperty('display_title');
+            $html .= '</a></div>';
+        }
         return $html;
     }
 
