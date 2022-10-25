@@ -2132,7 +2132,8 @@ function get_previous_item($item = null)
  * @throws InvalidArgumentException If an invalid record is passed.
  * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param Omeka_Record_AbstractRecord|string $record
- * @param string $imageType Image size: thumbnail, square thumbnail, fullsize
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
  * @param array $props HTML attributes for the img tag
  * @return string
  */
@@ -2147,6 +2148,30 @@ function record_image($record, $imageType = null, $props = array())
     }
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($record, $props, $imageType);
+}
+
+/**
+ * Get an image URL for a record.
+ *
+ * @package Omeka\Function\View
+ * @throws InvalidArgumentException If an invalid record is passed.
+ * @uses Omeka_View-Helper_FileMarkup::image_url()
+ * @param Omeka_Record_AbstractRecord|string $record
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
+ * @return string
+ */
+function record_image_url($record, $imageType = null)
+{
+    if (is_string($record)) {
+        $record = get_current_record($record);
+    }
+
+    if (!($record instanceof Omeka_Record_AbstractRecord)) {
+        throw new InvalidArgumentException('An Omeka record must be passed to record_image_url.');
+    }
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_url($record, $imageType);
 }
 
 /**
