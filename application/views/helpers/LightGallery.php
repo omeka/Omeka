@@ -76,9 +76,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
         } elseif ($sortedFiles['other']) {
             $html .= '<div id="other-files" class="element">';
             $html .= '<h3>' . $this->view->translate('Other Files') . '</h3>';
-            foreach ($sortedFiles['other'] as $file) {
-                $html .= '<div class="element-text">' . link_to($file, null, metadata($file, 'display_title')) . '</div>';
-            }
+            $html .= file_markup($sortedFiles['other'], array(), array('class' => 'element-text'));
             $html .= '</div>';
         }
 
