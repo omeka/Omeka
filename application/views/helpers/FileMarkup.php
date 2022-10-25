@@ -587,12 +587,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function image_url($record, $format = null)
     {
-        if (!($record && $record instanceof Omeka_Record_AbstractRecord)) {
-            return false;
-        }
-
-        // Use the default representative file.
-        $file = $record->getFile();
+        $file = $this->_getFileForRecord($record);
         if (!$file) {
             return false;
         }
@@ -618,6 +613,11 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function image_tag($record, $attrs, $format)
     {
+        $file = $this->_getFileForRecord($record);
+        if (!$file) {
+            return false;
+        }
+
         $uri = $this->image_url($record, $format);
 
         if ($uri === false) {
@@ -680,6 +680,22 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         }
 
         return self::$_fallbackImages['*'];
+    }
+
+    /**
+     * Get the representative File for a record
+     *
+     * @param Omeka_Record_AbstractRecord $record
+     * @return File|null
+     */
+    protected function _getFileForRecord($record)
+    {
+        if (!($record && $record instanceof Omeka_Record_AbstractRecord)) {
+            return null;
+        }
+
+        // Use the default representative file.
+        return $record->getFile();
     }
 
     /**
