@@ -4,6 +4,7 @@
 
         const inlineGallery = lightGallery(lgContainer, {
             plugins: [lgThumbnail, lgVideo, lgZoom],
+            exThumbImage: 'data-thumb',
             thumbnail: true,
             container: lgContainer,
             hash: false,

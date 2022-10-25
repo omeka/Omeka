@@ -63,7 +63,6 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                     $videoThumbnail = ($file->hasThumbnail()) ? metadata($file, 'thumbnail_uri') : img('fallback-video.png');
 
                     $html .= '<div data-video="' . html_escape($videoSrcJson) . '" ' . $mediaCaptionAttribute . 'data-thumb="' . html_escape($videoThumbnail) . '" data-download-url="' . $source . '">';
-                    $html .= '<img src="' . $videoThumbnail . '" alt="" role="presentation">';
                 } else if ($mediaType == 'application/pdf') {
                     $html .= '<div data-iframe="' . html_escape($source) . '" '. $mediaCaptionAttribute . 'data-src="' . $source . '" data-thumb="' . html_escape(metadata($file, 'thumbnail_uri')) . '" data-download-url="' . $source . '">';
                     $html .= file_markup($file);
