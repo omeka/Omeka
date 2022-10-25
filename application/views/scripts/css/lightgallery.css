@@ -1,0 +1,10 @@
+#itemfiles {
+    overflow: hidden;
+}
+
+.other-files-link img {
+    height: 2rem;
+    width: auto;
+    margin-right: .5rem;
+    box-shadow: 0 0 0 1px #dfdfdf;
+}
