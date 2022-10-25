@@ -3530,11 +3530,7 @@ function add_shortcode($shortcodeName, $function)
  */
 function queue_lightgallery_assets()
 {
-    queue_css_file(array(
-            'vendor/lightgallery/lightgallery-bundle.min',
-            'lightgallery'
-        )
-    );
+    queue_css_file('lightgallery-bundle.min', 'all', false, 'javascripts/vendor/lightgallery/css');
     queue_js_file(array(
             'vendor/lightgallery/lightgallery.min', 
             'vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min', 
