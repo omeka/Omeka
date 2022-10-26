@@ -21,11 +21,11 @@ echo flash();
         <?php foreach ($element_set->getElements() as $element): ?>
             <?php $elementId = $element->id; ?>
             <li class="element">
-            <div class="sortable-item">
+            <div class="sortable-item drawer">
                 <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
                 <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>
-                <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?>" class="drawer-toggle" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Comment'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?>" class="drawer-toggle" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Comment'); ?>"><span class="icon" aria-hidden="true"></span></button>
             </div>
             <div class="drawer-contents">
                 <?php echo __($element->description); ?>

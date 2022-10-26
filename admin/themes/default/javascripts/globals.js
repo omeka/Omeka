@@ -76,14 +76,14 @@ if (!Omeka) {
         if (!containerName) {
             containerName = '.element';
         }
-       $('.drawer-toggle').click(function (event) {
-            event.preventDefault();
-            $(event.target).parents(containerName).find('.drawer-contents').toggleClass('opened');
-            $(this).toggleClass('opened');
-            Omeka.toggleAriaExpanded($(this));
-        })
-        .mousedown(function (event) {
-            event.stopPropagation();
+        $(containerName).on('click', '.drawer button', function() { 
+            var drawerButton = $(this);
+            var container = drawerButton.parents(containerName);
+            var drawerActionSelector = drawerButton.data('action-selector');
+            container.find('.drawer, .drawer-contents').toggleClass(drawerActionSelector);
+            if (drawerButton.attr('aria-expanded')) {
+                Omeka.toggleAriaExpanded(drawerButton);
+            }
         });
     };
 

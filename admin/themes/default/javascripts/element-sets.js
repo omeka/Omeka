@@ -25,57 +25,21 @@ Omeka.ElementSets = {};
     };
 
     /**
-     * Add link that collapses and expands content.
-     */
-    Omeka.ElementSets.addHideButtons = function () {
-        $('.sortable .drawer-contents').each(function () {
-            $(this).hide();
-        });
-        $('.drawer-toggle')
-            .click(function (event) {
-                event.preventDefault();
-                $(event.target).parents('.element').find('.drawer-contents').toggle();
-                $(this).toggleClass('opened');
-                Omeka.toggleAriaExpanded($(this));
-            })
-            .mousedown(function (event) {
-                event.stopPropagation();
-            });
-    };
-
-    /**
      * Set up tag remove/undo buttons for each element.
      *
      */
     Omeka.ElementSets.enableElementRemoval = function () {
-        $(document).on('click', '.delete-element', function (event) {
-            event.preventDefault();
-            Omeka.ElementSets.toggleElement(this);
-        });
-
-        $(document).on('click', '.undo-delete', function (event) {
-            event.preventDefault();
-            Omeka.ElementSets.toggleElement(this);
-        });
+        $(document).on('click', '.delete-drawer, .undo-delete', function () {
+            var buttonElement = $(this).parents('.element');
+            var elementDeleteHidden = buttonElement.find('.element-delete-hidden');
+            if(elementDeleteHidden.val() != 1) {
+                elementDeleteHidden.val(1);
+            } else {
+                elementDeleteHidden.val(0);
+            }
+            });
     };
 
-
-    /**
-     * Callback for element delete and undoing delete actions.
-     *
-     * @param {Element} button Clicked button.
-     */
-    Omeka.ElementSets.toggleElement = function (button) {
-        var buttonElement = $(button).parents('.element');
-        var elementDeleteHidden = buttonElement.find('.element-delete-hidden');
-        buttonElement.find('.drawer, .drawer-contents').toggleClass('deleted');
-        if(elementDeleteHidden.val() != 1) {
-            elementDeleteHidden.val(1);
-        } else {
-            elementDeleteHidden.val(0);
-        }
-    };
-    
     /**
      * Callback for confirming a delete element.
      */

@@ -39,10 +39,10 @@ jQuery(document).ready(function () {
                     <?php $elementId = $element->id; ?>
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
                     <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
-                    <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?> <?php echo __('Description'); ?>" class="drawer-toggle" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Description'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?> <?php echo __('Description'); ?>" class="drawer-toggle" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Description'); ?>"><span class="icon" aria-hidden="true"></span></button>
                     <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
-                    <button type="button" id="return-element-link-<?php echo html_escape($elementId); ?>" class="undo-delete" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?>"><span class="icon" aria-hidden="true"></span></button>
-                    <button type="button" id="remove-element-link-<?php echo html_escape($elementId); ?>" class="delete-element" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="return-element-link-<?php echo html_escape($elementId); ?>" class="undo-delete" data-action-selector="deleted" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                    <button type="button" id="remove-element-link-<?php echo html_escape($elementId); ?>" class="delete-drawer" data-action-selector="deleted" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
                     <?php echo $this->formHidden("elements[$elementId][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
                     <?php endif; ?>
                     </div>
