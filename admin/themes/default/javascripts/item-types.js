@@ -69,7 +69,7 @@ Omeka.ItemTypes = {};
          */
         function activateRemoveElementLinks() {
 
-            $(document).on('click', '.delete-element, .undo-delete', function (event) {
+            $(document).on('click', '.delete-drawer, .undo-delete', function (event) {
                 event.preventDefault();
                 toggleElements(this);
             });
@@ -79,15 +79,13 @@ Omeka.ItemTypes = {};
             var elementsToRemove = $('#itemtypes_remove');
             var removeElementLinkPrefix = 'remove-element-link-';
             var removeElementLinkId = button.getAttribute('id');
-            if ($(button).hasClass('delete-element')) {
+            if ($(button).hasClass('delete-drawer')) {
                 if (removeElementLinkId !== null) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     if (elementId) {
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
                     $(button).prevAll('.element-order').attr('name', '');
-                    $(button).parent().addClass('deleted');
-                    $(button).parent().next().addClass('deleted');
                 } else {
                     var row = $(button).parent().parent();
                     row.remove();
@@ -97,8 +95,6 @@ Omeka.ItemTypes = {};
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     $(button).prevAll('.element-order').attr('name', 'elements[' + elementId + '][order]');
                 }
-                $(button).parent().removeClass('deleted');
-                $(button).parent().next().removeClass('deleted');
             }
         }
 

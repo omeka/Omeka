@@ -19,7 +19,7 @@
             array('class' => 'element-order')
         );
         ?>
-        <button type="button" class="delete-element" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
+        <button type="button" class="delete-drawer" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
     </div>
     <div class="drawer-contents opened"></div>
 </li>

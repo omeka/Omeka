@@ -68,12 +68,12 @@ Omeka.Navigation = {};
                 var checkbox = this;
                 header.children('.delete-toggle').css('display', 'inline-block').click(function (event) {
                     event.preventDefault();
-                    if ($(this).hasClass('delete-element')) {
-                        $(this).removeClass('delete-element').addClass('undo-delete');
+                    if ($(this).hasClass('delete-drawer')) {
+                        $(this).removeClass('delete-drawer').addClass('undo-delete');
                         header.addClass('deleted');
                         checkbox.disabled = true;
                     } else {
-                        $(this).removeClass('undo-delete').addClass('delete-element');
+                        $(this).removeClass('undo-delete').addClass('delete-drawer');
                         header.removeClass('deleted');
                         checkbox.disabled = false;
                     }

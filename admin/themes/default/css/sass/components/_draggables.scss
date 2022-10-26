@@ -103,7 +103,7 @@
     }
 }		
 
-.drawer.deleted .delete-element,
+.drawer.deleted .delete-drawer,
 .drawer.deleted .drawer-toggle,
 .drawer .undo-delete {
     display: none;
@@ -138,7 +138,7 @@
 .drawer-contents.opened:not(.deleted) { display: block; }
 
 .drawer-toggle .icon:after, 
-.delete-element .icon:after, 
+.delete-drawer .icon:after, 
 .undo-delete .icon:after {
     display: inline-block;
     font-family: "Font Awesome 5 Free";
@@ -151,22 +151,22 @@
 }
 .drawer-toggle .icon:after { content: "\f0da"; }
 
-.delete-element:link, .delete-element:active,
-.delete-element:hover, .delete-element:visited,
+.delete-drawer:link, .delete-drawer:active,
+.delete-drawer:hover, .delete-drawer:visited,
 .undo-delete:link, .undo-delete:active,
 .undo-delete:hover, .undo-delete:visited {
     color: #4C3939;
 }
 
-.drawer-toggle.opened .icon:after {
+.drawer.opened .drawer-toggle .icon:after {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 
-.delete-element { display: inline-block; }
-.delete-element .icon:after { content: "\f00d"; }
+.delete-drawer { display: inline-block; }
+.delete-drawer .icon:after { content: "\f00d"; }
 
 .undo-delete .icon:after {
     content: "\f0e2";
