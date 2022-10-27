@@ -62,27 +62,16 @@ Omeka.Navigation = {};
     };
 
     Omeka.Navigation.updateDeleteButtons = function () {
-        $('input.can_delete_nav_link').each(function () {
-            var header = $(this).parent(); 
-            if (!header.children('.delete-toggle').length) {
-                var checkbox = this;
-                header.children('.delete-toggle').css('display', 'inline-block').click(function (event) {
-                    event.preventDefault();
-                    if ($(this).hasClass('delete-drawer')) {
-                        $(this).removeClass('delete-drawer').addClass('undo-delete');
-                        header.addClass('deleted');
-                        checkbox.disabled = true;
-                    } else {
-                        $(this).removeClass('undo-delete').addClass('delete-drawer');
-                        header.removeClass('deleted');
-                        checkbox.disabled = false;
-                    }
-                    var disabledAttr = $(this).attr('disabled');
-
-                    Omeka.Navigation.updateNavList();
-                    Omeka.Navigation.updateSelectHomepageOptions();
-                });
-            } 
+        $('#navigation_main_list').on('click', '.delete-drawer,.undo-delete', function () {
+            var drawer = $(this).parents('.drawer');
+            var drawerInput = drawer.find('.can_delete_nav_link');
+            if (drawer.hasClass('deleted')) {
+                drawerInput.attr('disabled', true);
+            } else {
+                drawerInput.removeAttr('disabled');
+            }
+            Omeka.Navigation.updateNavList();
+            Omeka.Navigation.updateSelectHomepageOptions();
         });
     };
 

@@ -22,8 +22,10 @@
             <?php echo html_escape($page->getLabel()); ?>
             </span>
             <button type="button" id="drawer-toggle-<?php echo $checkboxId; ?>" class="drawer-toggle" data-action-selector="opened" aria-expanded="false" aria-label="' . __('Show Options') . '" aria-labelledby="drawer-<?php echo $checkboxId; ?> drawer-toggle-<?php echo $checkboxId; ?>"><span class="icon"></span></button>
+            <?php if ($checkboxValue['can_delete']): ?>
             <button type="button" id="drawer-undo-<?php echo $checkboxId; ?>" class="undo-delete" data-action-selector="deleted" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="drawer-undo-<?php echo $checkboxId; ?> drawer-<?php echo $checkboxId; ?>"  title="<?php echo __('Undo'); ?>"><span class="icon"></span></button>
             <button type="button" id="drawer-remove-<?php echo $checkboxId; ?>" class="delete-drawer" data-action-selector="deleted" aria-label="<?php echo __('Remove'); ?>" aria-labelledby="drawer-remove-<?php echo $checkboxId; ?> drawer-<?php echo $checkboxId; ?>"  title="<?php echo __('Remove'); ?>"><span class="icon"></span></button>
+            <?php endif; ?>
         </div>
         <div class="drawer-contents">
             <label><?php echo __('Label') ; ?></label><input type="text" class="navigation-label" />
