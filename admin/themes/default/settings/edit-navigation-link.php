@@ -17,6 +17,7 @@
 <li>
     <div class="main_link">
         <div class="sortable-item drawer">
+            <span class="move icon" aria-role="tooltip" aria-hidden="true" title="<?php echo __('Move'); ?>"></span>
             <input type="checkbox" name="<?php echo $checkboxId; ?>" id="<?php echo $checkboxId; ?>" value="<?php echo html_escape(json_encode($checkboxValue)); ?>" <?php echo $checkboxChecked; ?> class="<?php echo $checkboxClass; ?>">
             <span class="drawer-name" id="drawer-<?php echo $checkboxId; ?>">
             <?php echo html_escape($page->getLabel()); ?>

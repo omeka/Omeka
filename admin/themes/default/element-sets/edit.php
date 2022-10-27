@@ -22,6 +22,7 @@ echo flash();
             <?php $elementId = $element->id; ?>
             <li class="element">
             <div class="sortable-item drawer">
+                <span class="move icon" aria-role="tooltip" aria-hidden="true" title="<?php echo __('Move'); ?>"></span>
                 <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
                 <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>

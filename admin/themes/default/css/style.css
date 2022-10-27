@@ -654,7 +654,7 @@ button.ui-dialog-titlebar-close {
 
 .ui-sortable .sortable-item {
   cursor: move; }
-  .ui-sortable .sortable-item:before {
+  .ui-sortable .sortable-item .move.icon:before {
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -667,10 +667,6 @@ button.ui-dialog-titlebar-close {
     content: "\f0b2";
     opacity: 0.5;
     position: relative; }
-    #exhibit-page-form .ui-sortable .sortable-item:before {
-      top: 0px;
-      position: relative;
-      float: left; }
 .ui-sortable li {
   margin-bottom: 15px;
   list-style-type: none; }
@@ -697,8 +693,11 @@ button.ui-dialog-titlebar-close {
   .drawer .action-links,
   .sortable-item .action-links,
   .add-new .action-links {
-    display: inline-block;
-    float: right; }
+    display: inline-block; }
+  .drawer .action-links li,
+  .sortable-item .action-links li,
+  .add-new .action-links li {
+    margin-bottom: 0; }
 
 .ui-sortable-highlight:empty {
   background: rgba(0, 0, 0, 0.04);
