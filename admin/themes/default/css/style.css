@@ -744,6 +744,9 @@ button.ui-dialog-titlebar-close {
   .deleted.drawer * {
     color: #fff; }
 
+.deleted.drawer input.link-status {
+  display: none; }
+
 .deleted a:link,
 .deleted a:visited {
   color: #fff;

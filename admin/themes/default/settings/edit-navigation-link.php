@@ -8,7 +8,7 @@
         'visible' => $page->isVisible(),
     );
     $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
-    $checkboxClasses = array();
+    $checkboxClasses = array('link-status');
     if ($page->can_delete) {
         $checkboxClasses[] = 'can_delete_nav_link';
     }
