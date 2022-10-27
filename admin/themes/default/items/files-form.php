@@ -21,7 +21,7 @@
 <?php endif; ?>
 
 <div class="add-new"><?php echo __('Add New Files'); ?></div>
-<div class="drawer-contents">
+<div class="drawer-contents opened">
     <p><?php echo __('The maximum file size is %s.', max_file_size()); ?></p>
     
     <div class="field two columns alpha" id="file-inputs">
