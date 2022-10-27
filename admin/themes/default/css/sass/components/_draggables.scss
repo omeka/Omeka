@@ -15,7 +15,7 @@
 	.sortable-item { 
 		cursor: move;
 		
-		&:before {
+		.move.icon:before {
 		    display: inline-block;
 		    font-family: "Font Awesome 5 Free";
             font-weight: 900;
@@ -28,12 +28,6 @@
 			content: "\f0b2";
 			opacity: 0.5;
 			position: relative;
-			
-			#exhibit-page-form & {
-				top: 0px;
-			    position: relative;
-			    float: left;
-			}
 	    }
 	    
 	}
@@ -63,8 +57,11 @@
         
     .action-links {
 	    display: inline-block;
-	    float: right;
 	}
+
+    .action-links li {
+        margin-bottom: 0;
+    }
 }
 
 .ui-sortable-highlight:empty {
