@@ -21,17 +21,30 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 
         if ($supported) {
             $html .= '<div id="itemfiles" class="lightgallery">';
-            $mediaCaption = get_theme_option('lightgallery_caption');
+            $captionOption = get_theme_option('lightgallery_caption');
 
             foreach ($sortedFiles['gallery'] as $galleryEntry) {
                 $file = $galleryEntry['file'];
                 $source = $file->getWebPath();
-                $mediaCaptionOptions = [
-                    'none' => '',
-                    'title' => 'data-sub-html="' . metadata($file, 'display_title') . '"',
-                    'description' => 'data-sub-html="'. metadata($file, array('Dublin Core', 'Description')) . '"'
+                switch ($captionOption) {
+                    case 'title':
+                        $caption = metadata($file, 'rich_title', ['no_escape' => true]);
+                        break;
+                    case 'description':
+                        $caption = metadata($file, ['Dublin Core', 'Description'], ['no_escape' => true]);
+                        break;
+                    case 'none':
+                    default:
+                        $caption = '';
+                }
+
+                $attributes = [
+                    'data-thumb' => record_image_url($file, 'thumbnail'),
+                    'data-download-url' => $source,
                 ];
-                $mediaCaptionAttribute = ($mediaCaption) ? $mediaCaptionOptions[$mediaCaption] : '';
+                if (strlen((string) $caption)) {
+                    $attributes['data-sub-html'] = $caption;
+                };
 
                 $mediaType = ($file->mime_type == 'video/quicktime') ? 'video/mp4' : $file->mime_type;
                 if (strpos($mediaType, 'video') !== false) {
@@ -50,8 +63,8 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                     ];
                     foreach ($galleryEntry['tracks'] as $track) {
                         $label = metadata($track, 'display_title');
-                        $srclang = metadata($track, array('Dublin Core', 'Language'), array('no_escape' => true));
-                        $type = metadata($track, array('Dublin Core', 'Type'), array('no_escape' => true));
+                        $srclang = metadata($track, ['Dublin Core', 'Language'], ['no_escape' => true]);
+                        $type = metadata($track, ['Dublin Core', 'Type'], ['no_escape' => true]);
                         $videoSrcObject['tracks'][] = [
                             'src' => $track->getWebPath(),
                             'label' => $label,
@@ -59,15 +72,19 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                             'kind' => $type !== null ? $type : 'captions',
                         ];
                     }
-                    $videoSrcJson = json_encode($videoSrcObject);
-                    $videoThumbnail = ($file->hasThumbnail()) ? metadata($file, 'thumbnail_uri') : img('fallback-video.png');
 
-                    $html .= '<div data-video="' . html_escape($videoSrcJson) . '" ' . $mediaCaptionAttribute . 'data-thumb="' . html_escape($videoThumbnail) . '" data-download-url="' . $source . '">';
+                    $attributes['data-video'] = json_encode($videoSrcObject);
+                    $includeMarkup = false;
                 } else if ($mediaType == 'application/pdf') {
-                    $html .= '<div data-iframe="' . html_escape($source) . '" '. $mediaCaptionAttribute . 'data-src="' . $source . '" data-thumb="' . html_escape(metadata($file, 'thumbnail_uri')) . '" data-download-url="' . $source . '">';
-                    $html .= file_markup($file);
+                    $attributes['data-iframe'] = 'true';
+                    $attributes['data-src'] = $source;
+                    $includeMarkup = false;
                 } else {
-                    $html .= '<div data-src="' . $source . '" ' . $mediaCaptionAttribute . 'data-thumb="' . html_escape(metadata($file, 'thumbnail_uri')) . '" data-download-url="' . $source . '">';
+                    $attributes['data-src'] = $source;
+                    $includeMarkup = true;
+                }
+                $html .= '<div ' . tag_attributes($attributes) . '>';
+                if ($includeMarkup) {
                     $html .= file_markup($file);
                 }
                 $html .= '</div>';
@@ -83,15 +100,14 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
         return $html;
     }
 
-    protected function _displayFileList($files) {
+    protected function _displayFileList($files)
+    {
         $html = '';
         foreach ($files as $file) {
             $linkToFileMetadata = option('link_to_file_metadata');
-            $fileLink = ($linkToFileMetadata) ? record_url($file, 'show') : $file->getWebPath($derivative);
+            $fileLink = ($linkToFileMetadata) ? record_url($file, 'show') : $file->getWebPath();
             $html .= '<div class="element-text"><a href="' . $fileLink . '" class="other-files-link">';
-            if ($file->hasThumbnail()) {
-                $html .= record_image($file, 'square_thumbnail', array('alt' => ''));
-            }
+            $html .= record_image($file, 'square_thumbnail', ['alt' => '']);
             $html .= $file->getProperty('display_title');
             $html .= '</a></div>';
         }
