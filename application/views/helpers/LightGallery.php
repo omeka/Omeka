@@ -74,19 +74,13 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                     }
 
                     $attributes['data-video'] = json_encode($videoSrcObject);
-                    $includeMarkup = false;
                 } else if ($mediaType == 'application/pdf') {
                     $attributes['data-iframe'] = 'true';
                     $attributes['data-src'] = $source;
-                    $includeMarkup = false;
                 } else {
                     $attributes['data-src'] = $source;
-                    $includeMarkup = true;
                 }
                 $html .= '<div ' . tag_attributes($attributes) . '>';
-                if ($includeMarkup) {
-                    $html .= file_markup($file);
-                }
                 $html .= '</div>';
             }
             $html .= '</div>';
