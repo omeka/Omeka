@@ -3,6 +3,7 @@
         const lgContainer = document.getElementById('itemfiles');
 
         const inlineGallery = lightGallery(lgContainer, {
+            licenseKey: '76E9AA35-CDB54382-B1A52890-683C953F',
             plugins: [lgThumbnail, lgVideo, lgZoom],
             exThumbImage: 'data-thumb',
             thumbnail: true,
@@ -10,10 +11,8 @@
             hash: false,
             closable: false,
             showMaximizeIcon: true,
-            appendSubHtmlTo: '.lg-item',
             captions: true,
-            slideDelay: 400,
-            allowMediaOverlap: false
+            allowMediaOverlap: false,
         });  
 
         inlineGallery.openGallery();
