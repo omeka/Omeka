@@ -5,7 +5,7 @@
         <?php foreach( $item->Files as $key => $file ): ?>
             <li class="file">
                 <div class="sortable-item">
-                    <span class="move icon" aria-role="tooltip" aria-hidden="true" title="<?php echo __('Move navigation item'); ?>"></span>
+                    <span class="move icon" aria-role="tooltip" title="<?php echo __('Move navigation item'); ?>"></span>
                     <?php echo file_image('square_thumbnail', array(), $file); ?>
                     <?php echo link_to($file, 'show', html_escape($file->original_filename), array('class' => 'drawer-name')); ?>
                     <?php echo $this->formHidden("order[{$file->id}]", $file->order, array('class' => 'file-order')); ?>
