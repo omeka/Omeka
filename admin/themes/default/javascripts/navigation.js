@@ -101,11 +101,11 @@ Omeka.Navigation = {};
                 };
                 var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();
                 var n_value = JSON.stringify(n_hidden_info);
-                var edit_nav_header_html = '<div class="sortable-item"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link">' + n_label + '</div>';
+                var edit_nav_header_html = '<div class="sortable-item drawer"><span class="move icon" aria-role="tooltip" title="Move"></span><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link">' + n_label + '</div>';
                 var link_label_html = '<div><label class="main_link_label_label">' + Omeka.Navigation.labelText + '</label><input type="text" value="' + n_label + '" class="navigation-label" /></div>';
                 var link_uri_html = '<div><label class="main_link_uri_label">' + Omeka.Navigation.urlText + '</label><input type="text" value="' + n_uri + '" class="navigation-uri" /></div>';
                 var buttons_html = '<div class="main_link_buttons"></div>';
-                var edit_nav_body_html = '<div class="drawer-contents">' + link_label_html + link_uri_html + buttons_html + '</div>';
+                var edit_nav_body_html = '<div class="drawer-contents opened">' + link_label_html + link_uri_html + buttons_html + '</div>';
 
                 $( '#navigation_main_list' ).append('<li><div class="main_link">' + edit_nav_header_html + edit_nav_body_html + '</div></li>');
                 $( '#' + n_id).val(n_value); // does escaping for json data
