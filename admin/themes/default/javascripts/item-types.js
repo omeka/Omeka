@@ -76,24 +76,25 @@ Omeka.ItemTypes = {};
         }
         
         function toggleElements(button) {
+            var deleteButton = $(button);
             var elementsToRemove = $('#itemtypes_remove');
             var removeElementLinkPrefix = 'remove-element-link-';
-            var removeElementLinkId = button.getAttribute('id');
-            if ($(button).hasClass('delete-drawer')) {
-                if (removeElementLinkId !== null) {
+            var removeElementLinkId = deleteButton.attr('id');
+            var element = deleteButton.parents('.element');
+            if (deleteButton.hasClass('delete-drawer')) {
+                if (removeElementLinkId !== undefined) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     if (elementId) {
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
-                    $(button).prevAll('.element-order').attr('name', '');
+                    element.find('.element-order').attr('name', '');
                 } else {
-                    var row = $(button).parent().parent();
-                    row.remove();
+                    element.remove();
                 }
             } else {
                 if (removeElementLinkId) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
-                    $(button).prevAll('.element-order').attr('name', 'elements[' + elementId + '][order]');
+                    element.find('.element-order').attr('name', 'elements[' + elementId + '][order]');
                 }
             }
         }
