@@ -36,7 +36,7 @@ jQuery(document).ready(function () {
             ?>
                 <li class="element">
                     <div class="sortable-item drawer">
-                    <span class="move icon" aria-role="tooltip" aria-hidden="true" title="<?php echo __('Move'); ?>"></span>
+                    <span class="move icon" aria-role="tooltip" title="<?php echo __('Move'); ?>"></span>
                     <?php $elementId = $element->id; ?>
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
                     <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
