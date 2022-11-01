@@ -44,6 +44,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         $html = '<ul id="navigation_main_list">';
         $pageCount = 0;
         foreach ($this->_nav as $page) {
+            $pageCount++;
             $html .= get_view()->partial('settings/edit-navigation-link.php', [
                 'page' => $page,
                 'pageCount' => $pageCount,
