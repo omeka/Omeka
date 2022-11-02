@@ -69,8 +69,7 @@ Omeka.ItemTypes = {};
          */
         function activateRemoveElementLinks() {
 
-            $(document).on('click', '.delete-drawer, .undo-delete', function (event) {
-                event.preventDefault();
+            $(document).on('click', '.delete-drawer, .undo-delete', function () {
                 toggleElements(this);
             });
         }
@@ -99,8 +98,7 @@ Omeka.ItemTypes = {};
             }
         }
 
-        $('#add-element').click( function (event) {
-            event.preventDefault();
+        $('#add-element').click( function () {
             var elementCount = $('#item-type-elements li').length;
             var typeValue = $('input[name=add-element-type]:checked').val();
             var requestUrl;
