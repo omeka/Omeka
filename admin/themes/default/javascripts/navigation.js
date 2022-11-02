@@ -165,6 +165,5 @@ Omeka.Navigation = {};
         Omeka.Navigation.updateDeleteButtons();
         Omeka.Navigation.updateSelectHomepageOptions();
         Omeka.Navigation.updateVisitButtons();
-        Omeka.manageDrawers('.main_link');
     };
 })(jQuery);
