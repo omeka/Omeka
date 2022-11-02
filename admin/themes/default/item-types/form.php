@@ -88,7 +88,7 @@ jQuery(document).ready(function () {
                             <label><input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?></label>
                             <label><input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?></label>
                         </p>
-                        <button id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
+                        <button type="button" id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
                     </div>
                 </li>
             </ul>
