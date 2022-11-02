@@ -87,8 +87,6 @@ Omeka.ItemTypes = {};
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
                     element.find('.element-order').attr('name', '');
-                } else {
-                    element.remove();
                 }
             } else {
                 if (removeElementLinkId) {
