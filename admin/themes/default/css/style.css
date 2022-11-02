@@ -2974,4 +2974,8 @@ form.form-inline.editableform {
 #search-users button {
   margin: 0; }
 
+#navigation_form .template,
+#navigation_form .inactive.alert {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */
