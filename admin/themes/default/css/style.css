@@ -751,6 +751,11 @@ button.ui-dialog-titlebar-close {
   .deleted.sortable-item *,
   .deleted.drawer * {
     color: #fff; }
+  .deleted.sortable-item input.drawer-name,
+  .deleted.sortable-item select.drawer-name,
+  .deleted.drawer input.drawer-name,
+  .deleted.drawer select.drawer-name {
+    color: #232323; }
 
 .deleted.drawer input.link-status {
   display: none; }
@@ -2998,8 +3003,7 @@ form.form-inline.editableform {
 #search-users button {
   margin: 0; }
 
-#navigation_form .template,
-#navigation_form .inactive.alert {
+#navigation_form .template {
   display: none; }
 
 /*# sourceMappingURL=style.css.map */
