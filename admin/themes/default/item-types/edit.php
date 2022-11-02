@@ -26,7 +26,7 @@ echo flash();
 </form>
 
 <script type="text/javascript">
-Omeka.addReadyCallback(Omeka.manageDrawers);
+Omeka.addReadyCallback(Omeka.manageDrawers('#type-elements'));
 Omeka.addReadyCallback(Omeka.ItemTypes.enableSorting);
 </script>
 <?php echo foot(); ?>

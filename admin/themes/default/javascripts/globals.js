@@ -72,11 +72,11 @@ if (!Omeka) {
     /**
      * Add link that collapses and expands content.
      */
-    Omeka.manageDrawers = function (containerName) {
+    Omeka.manageDrawers = function (drawerList, containerName) {
         if (!containerName) {
             containerName = '.element';
         }
-        $(containerName).on('click', '.drawer button', function() { 
+        $(drawerList).on('click', '.drawer button', function() { 
             var drawerButton = $(this);
             var container = drawerButton.parents(containerName);
             var drawerActionSelector = drawerButton.data('action-selector');
