@@ -20,7 +20,7 @@ Omeka.Navigation = {};
             }
         });
         
-        $('div.sortable-item input[type="checkbox"]').click(function(e) {
+        $('#navigation_main_list').on('click', '.link-status', function(e) {
             e.stopPropagation();
         });
     };
@@ -76,7 +76,7 @@ Omeka.Navigation = {};
     };
 
     Omeka.Navigation.updateNavLinkEditForms = function () {
-        $( 'div.sortable-item input[type="checkbox"]' ).each(function () {
+        $( '#navigation_main_list .link-status' ).each(function () {
             var hiddenInfo = $.parseJSON($(this).val());
             var bodyDiv = $(this).parent().next(); 
             bodyDiv.find('.navigation-label').val(hiddenInfo.label);
@@ -126,7 +126,7 @@ Omeka.Navigation = {};
             
             // get link data
             var linkData = [];
-            $('div.sortable-item > input[type="checkbox"]').each(function (index) {
+            $('#navigation_main_list .link-status').each(function (index) {
                 if (this.disabled) {
                     return;
                 }
