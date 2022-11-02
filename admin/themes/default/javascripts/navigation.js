@@ -33,10 +33,10 @@ Omeka.Navigation = {};
         $('#navigation_homepage_select option').slice(1).remove();
         
         // add links
-        $('.main_link').each(function() {
-            var navLink = $(this).next(),
-                value = $(this).find('.navigation-uri').val(),
-                label = $(this).find('.navigation-label').val();
+        $('#navigation_main_list .main_link').each(function() {
+            var navLink = $(this),
+                value = navLink.find('.navigation-uri').val(),
+                label = navLink.find('.navigation-label').val();
             select.append(
                 $('<option>').attr('value', value).text(label)
             );
@@ -47,14 +47,15 @@ Omeka.Navigation = {};
 
 
     Omeka.Navigation.updateVisitButtons = function () {
-        $('div.sortable-item > input[type="checkbox"]').each(function () {
-            var hiddenInfo = $.parseJSON($(this).val());
-            var buttonsDiv = $(this).parent().next().find('div.main_link_buttons'); 
+        $('#navigation_main_list .link-status').each(function () {
+            var enableCheckbox = $(this);
+            var link = enableCheckbox.parents('.main_link');
+            var hiddenInfo = $.parseJSON(enableCheckbox.val());
+            var buttonsDiv = link.find('div.main_link_buttons'); 
             if (!buttonsDiv.find('.navigation_main_list_visit').length) {
-                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">' + Omeka.Navigation.visitText + '</a>');
-                buttonsDiv.find('.navigation_main_list_visit').click(function (event) {
-                    event.preventDefault();
-                    var url = $(this).parent().parent().find('.navigation-uri').val();
+                buttonsDiv.append('<button type="button" class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">' + Omeka.Navigation.visitText + '</button>');
+                buttonsDiv.find('.navigation_main_list_visit').click(function () {
+                    var url = link.find('.navigation-uri').val();
                     window.open(url);
                 });
             }
@@ -89,31 +90,58 @@ Omeka.Navigation = {};
 
     Omeka.Navigation.addNewNavLinkForm = function () {
         // add the new nav link add button
-        $( '#new_nav_link_button_link' ).click(function (event) {
-            event.preventDefault();
-            var n_label = $( '#new_nav_link_label' ).val();
-            var n_uri = $( '#new_nav_link_uri' ).val();
+        $( '#new_nav_link_button_link' ).click(function () {
+            var n_label = $('#new_nav_link_label').val();
+            var n_uri = $('#new_nav_link_uri').val();
+            $('#add-new-options .flash').each(function() {
+                $(this).hide();
+            });
             if (n_label && n_uri) {
+                var newLink = $('#navigation_form .template').clone();
                 var n_hidden_info = {
                     'can_delete': true,
                     'uri': n_uri,
                     'label': n_label
-                };
-                var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();
+                }
+                var timeId = (new Date()).getTime();
                 var n_value = JSON.stringify(n_hidden_info);
-                var edit_nav_header_html = '<div class="sortable-item drawer"><span class="move icon" aria-role="tooltip" title="Move"></span><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link">' + n_label + '</div>';
-                var link_label_html = '<div><label class="main_link_label_label">' + Omeka.Navigation.labelText + '</label><input type="text" value="' + n_label + '" class="navigation-label" /></div>';
-                var link_uri_html = '<div><label class="main_link_uri_label">' + Omeka.Navigation.urlText + '</label><input type="text" value="' + n_uri + '" class="navigation-uri" /></div>';
-                var buttons_html = '<div class="main_link_buttons"></div>';
-                var edit_nav_body_html = '<div class="drawer-contents opened">' + link_label_html + link_uri_html + buttons_html + '</div>';
 
-                $( '#navigation_main_list' ).append('<li><div class="main_link">' + edit_nav_header_html + edit_nav_body_html + '</div></li>');
-                $( '#' + n_id).val(n_value); // does escaping for json data
-                $( '#new_nav_link_label' ).val('');
-                $( '#new_nav_link_uri' ).val('');
+                var needIdUpdates = ['.link-status', '.drawer-name', '.drawer-toggle', '.undo-delete', '.delete-drawer', '.drawer-contents', '.navigation-label', '.navigation-uri'];
+                var needForUpdates = ['.label-label', '.uri-label'];
+                var needNameUpdates = ['.link-status', '.navigation-label', '.navigation-uri'];
+                var needLabelledByUpdates = ['.link-status', '.drawer-toggle', '.undo-delete', '.delete-drawer'];
+                Omeka.Navigation.populateNewNavLinkAttributes(needIdUpdates, timeId, 'id', newLink);
+                Omeka.Navigation.populateNewNavLinkAttributes(needForUpdates, timeId, 'for', newLink);
+                Omeka.Navigation.populateNewNavLinkAttributes(needNameUpdates, timeId, 'name', newLink);
+                Omeka.Navigation.populateNewNavLinkAttributes(needLabelledByUpdates, timeId, 'aria-labelledby', newLink);
+
+                newLink.find('.drawer-name').text(n_label);
+                newLink.find('.navigation-label').val(n_label);
+                newLink.find('.navigation-uri').val(n_uri).removeAttr('disabled');
+                newLink.removeClass('template');
+
+                $('#navigation_main_list').append(newLink);
+                newLink.find('.link-status').val(n_value); // does escaping for json data
+                $('#new_nav_link_label').val('');
+                $('#new_nav_link_uri').val('');
+
+                var totalLinks = $('#navigation_main_list .main_link').length;
+                $('.link-count').text(totalLinks);
+                $('#new-link-success').show();
                 Omeka.Navigation.updateForNewLinks();
+            } else {
+                if (!n_label) { $('#label-required').show(); }
+                if (!n_uri) { $('#uri-required').show(); }
             }
         });
+    };
+
+    Omeka.Navigation.populateNewNavLinkAttributes = function (map, timeId, attribute, newLink) {
+        for (var selector in map) {
+            var element = newLink.find(map[selector]);
+            var newAttribute = element.attr(attribute).replaceAll('[pageId]',timeId);
+            element.attr(attribute, newAttribute);
+        }
     };
 
     Omeka.Navigation.setUpFormSubmission = function () {
