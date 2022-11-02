@@ -123,6 +123,11 @@
     * {
         color: #fff;
     }
+
+    input.drawer-name,
+    select.drawer-name {
+        color: $black;
+    }
 }
 
 .deleted.drawer input.link-status {
