@@ -1,3 +1,7 @@
 #fieldset-site_settings legend {
     @extend .sr-only;
 }
+
+#navigation_form .template {
+    display: none;
+}
