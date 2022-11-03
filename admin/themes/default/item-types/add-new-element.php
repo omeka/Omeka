@@ -1,17 +1,16 @@
-<li class="element">
+<li class="element new">
     <div class="sortable-item drawer">
         <?php
         echo $this->formText(
             $element_name_name, $element_name_value,
             array(
                 'placeholder' => __('Element Name'),
-                'class' => 'drawer-name',
-                'id' => 'new-element-[elementId]'
+                'class' => 'drawer-name'
             )
         );
         ?>
-        <button type="button" id="return-element-link-[elementId]" class="undo-delete" data-action-selector="deleted" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?>"><span class="icon" aria-hidden="true"></span></button>
-        <button type="button" id="remove-element-link-[elementId]" class="delete-drawer" data-action-selector="deleted" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"><span class="icon" aria-hidden="true"></span></button>
+        <button type="button" id="return-element-link-<?php echo $element_id_temp; ?>" class="undo-delete" data-action-selector="deleted" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="return-element-link-<?php echo $element_id_temp; ?> new-elements-<?php echo $element_id_temp; ?>-name"><span class="icon" aria-hidden="true"></span></button>
+        <button type="button" id="remove-element-link-<?php echo $element_id_temp; ?>" class="delete-drawer" data-action-selector="deleted" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>"  aria-labelledby="remove-element-link-<?php echo $element_id_temp; ?> new-elements-<?php echo $element_id_temp; ?>-name"><span class="icon" aria-hidden="true"></span></button>
         <?php
         echo $this->formHidden(
             $element_order_name, $element_order_value,
