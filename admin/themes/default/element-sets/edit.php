@@ -48,9 +48,9 @@ echo flash();
 </form>
 <script type="text/javascript">
 //<![CDATA[
-Omeka.addReadyCallback(Omeka.manageDrawers('.sortable'));
 Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
+Omeka.manageDrawers('.sortable');
 //]]>
 </script>
 <?php echo foot(); ?>

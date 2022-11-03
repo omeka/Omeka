@@ -51,6 +51,6 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
     Omeka.addReadyCallback(Omeka.Navigation.addNewNavLinkForm);
     Omeka.addReadyCallback(Omeka.Navigation.updateForNewLinks);
     Omeka.addReadyCallback(Omeka.Navigation.setUpFormSubmission);
-    Omeka.addReadyCallback(Omeka.manageDrawers('#navigation_main_list', '.main_link'));
+    Omeka.manageDrawers('#navigation_main_list', '.main_link');
 </script>
 <?php echo foot(); ?>
