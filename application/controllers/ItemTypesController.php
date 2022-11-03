@@ -88,6 +88,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 
         $this->view->assign(array('element_name_name' => $elementNameName,
                                   'element_name_value' => $elementName,
+                                  'element_id_temp' => $elementTempId,
                                   'element_description_name' => $elementDescriptionName,
                                   'element_description_value' => $elementDescription,
                                   'element_order_name' => $elementOrderName,
@@ -117,6 +118,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         $elementOrderName = $stem .'[order]';
 
         $this->view->assign(array('element_id_name' => $elementIdName,
+                                  'element_id_temp' => $elementTempId,
                                   'element_id_value' => $elementId,
                                   'element_description' => $elementDescription,
                                   'element_order_name' => $elementOrderName,
