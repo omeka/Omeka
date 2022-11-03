@@ -97,6 +97,7 @@ Omeka.ItemTypes = {};
         }
 
         $('#add-element').click( function () {
+            $('#add-element-success').hide();
             var elementCount = $('#item-type-elements li').length;
             var typeValue = $('input[name=add-element-type]:checked').val();
             var requestUrl;
@@ -112,6 +113,9 @@ Omeka.ItemTypes = {};
                 success: function (responseText) {
                     var response = responseText || 'no response text';
                     $('.add-new').parent().before(response);
+                    var totalElements = $('#item-type-elements .element').length;
+                    $('#add-element-success .element-count').text(totalElements);
+                    $('#add-element-success').show();
                 },
                 error: function () {
                     alert('Unable to get a new element.');
