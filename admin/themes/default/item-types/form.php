@@ -84,6 +84,7 @@ jQuery(document).ready(function () {
                         <?php echo __('Add Element'); ?>
                     </div>
                     <div class="drawer-contents opened">
+                        <div class="sr-only flash success" id="add-element-success" aria-live="polite" style="display: none"><?php echo __('New element added. Total Elements: '); ?><span class="element-count"></span></div>
                         <p>
                             <label><input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?></label>
                             <label><input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?></label>
