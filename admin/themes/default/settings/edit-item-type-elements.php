@@ -53,7 +53,7 @@ echo flash();
 . 'be undone.'); ?>
 </div>
 <script type="text/javascript">
-Omeka.addReadyCallback(Omeka.manageDrawers);
+Omeka.addReadyCallback(Omeka.manageDrawers('#edit-item-type-elements'));
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
 Omeka.addReadyCallback(Omeka.ElementSets.confirmDeleteElement,
     [<?php echo js_escape(__('Ok')); ?>, <?php echo js_escape(__('Cancel')); ?>]);
