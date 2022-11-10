@@ -88,12 +88,14 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
     public function otherFiles($files)
     {
         $sortedFiles = $this->_prepareFiles($files);
-        $html = '';
-        $html .= '<div id="other-files" class="element">';
-        $html .= '<h3>' . $this->view->translate('Other Files') . '</h3>';
-        $html .= $this->_displayFileList($sortedFiles['other']);
-        $html .= '</div>';
-        return $html;
+        if ($sortedFiles['other']) {
+            $html = '';
+            $html .= '<div id="other-files" class="element">';
+            $html .= '<h3>' . $this->view->translate('Other Files') . '</h3>';
+            $html .= $this->_displayFileList($sortedFiles['other']);
+            $html .= '</div>';
+            return $html;
+        }
     }
 
     protected function _displayFileList($files)
