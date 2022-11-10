@@ -3568,3 +3568,13 @@ function queue_lightgallery_assets()
         )
     );
 }
+
+function light_gallery($files)
+{
+    return get_view()->getHelper('lightGallery')->lightGallery($files);
+}
+
+function light_gallery_other_files()
+{
+    return get_view()->getHelper('lightGallery')->otherFiles($files);
+}
