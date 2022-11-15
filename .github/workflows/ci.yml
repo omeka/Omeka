@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        php-versions: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
+        php-versions: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
       fail-fast: false
     steps:
     - name: Checkout
@@ -39,21 +39,24 @@ jobs:
 
     - name: Get composer cache directory
       id: composer-cache
-      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      run: echo "CI_COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
 
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
-        path: ${{ steps.composer-cache.outputs.dir }}
+        path: ${{ env.CI_COMPOSER_CACHE_DIR }}
         key: ${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.json') }}
         restore-keys: ${{ matrix.php-versions }}-composer-
         
     - name: Start MySQL
-      run: sudo systemctl start mysql.service
+      run: |
+        echo "default_authentication_plugin=mysql_native_password" | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf
+        sudo systemctl start mysql.service
       
     - name: Set up database
       run: |
         mysql -e "create database IF NOT EXISTS omeka_test;" -uroot -proot
+        mysql -e "alter user root@localhost identified with mysql_native_password by 'root';" -uroot -proot
         mv application/config/config.ini.changeme application/config/config.ini
         mv application/tests/config.ini.changeme application/tests/config.ini
         sed -i 's/db.host = ""/db.host = "localhost"/' application/tests/config.ini
