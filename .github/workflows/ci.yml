@@ -17,14 +17,14 @@ on:
 jobs:
   run:
     name: PHP ${{ matrix.php-versions }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         php-versions: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
       fail-fast: false
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         submodules: true
 
@@ -42,7 +42,7 @@ jobs:
       run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
     - name: Cache dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
         key: ${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.json') }}
