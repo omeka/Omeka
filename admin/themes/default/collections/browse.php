@@ -1,8 +1,10 @@
 <?php
+queue_js_file('collections-browse');
 $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_results);
 $totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections browse'));
 echo flash();
+echo collection_search_filters();
 ?>
 
 <?php if (total_records('Collection') > 0): ?>
@@ -12,6 +14,7 @@ echo flash();
             <?php echo __('Add a Collection'); ?>
         </a>
     <?php endif; ?>
+	<?php echo common('quick-filters', array(), 'collections'); ?>
     <p class="not-in-collections">
     <?php if ($totalItemsWithoutCollection):
         $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
@@ -85,7 +88,17 @@ echo flash();
         <?php if (is_allowed('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
+		<?php echo common('quick-filters', array(), 'collections'); ?>
         <p class="not-in-collections"><?php echo $withoutCollectionMessage; ?></p>
+
+    <script type="text/javascript">
+    Omeka.addReadyCallback(Omeka.CollectionsBrowse.setupDetails, [
+        <?php echo js_escape(__('Details')); ?>,
+        <?php echo js_escape(__('Show Details')); ?>,
+        <?php echo js_escape(__('Hide Details')); ?>
+    ]);
+    </script>
+
     <?php else: ?>
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?>

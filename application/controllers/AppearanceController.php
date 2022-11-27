@@ -14,6 +14,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
+    const DEFAULT_RECENT_ADMIN = 5;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
 

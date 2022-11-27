@@ -44,6 +44,13 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'required' => true,
         ));
 
+        $this->addElement('text', 'recent_admin', array(
+            'label' => __('Recents Items/Collections (admin)'),
+            'description' => __('Limit the number of recent Items and Collections displayed in the administrative inteface.'),
+            'validators' => array('Digits'),
+            'required' => true,
+        ));
+
         $this->addElement('text', 'per_page_admin', array(
             'label' => __('Results Per Page (admin)'),
             'description' => __('Limit the number of results displayed per page in the administrative interface.'),
@@ -101,7 +108,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addDisplayGroup(
             array(
-                'use_square_thumbnail', 'link_to_file_metadata', 'per_page_admin', 'per_page_public',
+                'use_square_thumbnail', 'link_to_file_metadata', 'recent_admin', 'per_page_admin', 'per_page_public',
                 'show_empty_elements', 'show_element_set_headings',
             ),
             'display-settings', array('legend' => __('Display Settings'))

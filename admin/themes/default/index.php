@@ -51,7 +51,7 @@ endif; ?>
 <?php ob_start(); ?>
 <h2><?php echo __('Recent Items'); ?></h2>
 <?php
-    set_loop_records('items', get_recent_items(5));
+    set_loop_records('items', get_recent_items(get_option('recent_admin')));
     foreach (loop('items') as $item):
 ?>
     <div class="recent-row">
@@ -69,7 +69,7 @@ endif; ?>
 <?php ob_start(); ?>
 <h2><?php echo __('Recent Collections'); ?></h2>
 <?php
-    $collections = get_recent_collections(5);
+    $collections = get_recent_collections(get_option('recent_admin'));
     set_loop_records('collections', $collections);
     foreach (loop('collections') as $collection):
 ?>

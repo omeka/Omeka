@@ -272,7 +272,7 @@ img {
   overflow: visible;
   float: left;
   margin-right: 14px; }
-  .image img {
+.image img {
     width: 50px;
     height: auto;
     float: left; }
@@ -282,6 +282,66 @@ dt {
 
 dd {
   margin-top: 10px; }
+
+legend {
+       font-size: 21px;
+        font-weight: normal;
+        margin-bottom: 16px;
+        padding: 0;
+    }
+
+    input, select, textarea, button, a.button {
+        font-family: inherit;
+        font-size: 100%;
+    }
+
+    input.color {
+        font-family: monospace;
+    }
+
+    input[type=text], input[type=password], input[type=email] {
+        height: 30px;
+        border: 1px solid #d8d8d8;
+        -webkit-border-radius: 0;
+        -moz-box-radius: 0;
+        border-radius: 0;
+        -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+        box-shadow: 0 0 .375em #d6d6d6 inset;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #666666;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+        padding: 5px 10px;
+    }
+
+        input[type=text].big {
+            padding: .375em;
+        }
+
+        input[type=text].small {
+            padding: 0;
+        }
+
+    .field {
+        clear: both;
+    }
+
+        .field label {
+            clear: left;
+            font-weight: bold;
+            float: left;
+            line-height: 1.5em;
+            margin: 0 0 10px 0;
+            min-width: 120px;
+        }
+
+        .field select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
 .exhibit .image,
 .collection .image {
@@ -572,6 +632,13 @@ button.ui-dialog-titlebar-close {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     z-index: 9;
     position: relative; }
+
+ .inputs input[type=text], .inputs input[type=password], .inputs input[type=email], .inputs textarea {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
 .panel {
   width: 100%;
@@ -1930,6 +1997,26 @@ ul.details {
 ================================================== */
 .add.button {
   float: left; }
+
+.items.browse #advanced-search-link {
+    float: left;
+    margin-bottom: 20px;
+}
+
+ #item-filters ul, #collection-filters ul {
+    clear: both;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+    #item-filters li, #collection-filters li {
+        display: inline-block;
+        background: url('../images/search.png') no-repeat;
+        padding: 0 0 0 21px;
+        margin: 0 30px 20px 0;
+        background-position-y: 2px;
+    }
 
 #type-metadata-form .offset-by-two {
   margin-left: 28%; }

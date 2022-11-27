@@ -88,6 +88,23 @@ class TagsController extends Omeka_Controller_AbstractActionController
         return array('name', 'a');
     }
 
+    protected function _getDeleteConfirmMessage($tag)
+    {
+        return __('This will delete the tag "%s" from all records associated to it.', $tag->name);
+    }
+    
+    /**
+     * Redirect to another page after a record is successfully deleted.
+     *
+     * The default is to redirect to this controller's browse page.
+     *
+     * @param Omeka_Record_AbstractRecord $record
+     */
+    protected function _redirectAfterDelete($record)
+    {
+        $this->_helper->redirector('browse');
+    }
+    
     public function autocompleteAction()
     {
         $tagText = $this->_getParam('term');
@@ -109,8 +126,15 @@ class TagsController extends Omeka_Controller_AbstractActionController
 
         $oldTag->name = $newName;
         $this->_helper->viewRenderer->setNoRender();
-        if ($csrf->isValid($_POST) && $oldTag->save(false)) {
-            $this->getResponse()->setBody($newName);
+        if ($csrf->isValid($_POST)) {
+            if ($oldTag->save(false)) {
+                $this->getResponse()->setBody($newName);
+            } else {
+                $newTag = $this->_helper->db->findOrNew($newName);
+                $newTagId = $newTag->id;
+                $count = $this->_helper->db->mergeTags($oldTagId, $newTagId);
+                $this->getResponse()->setBody($newName);
+            }
         } else {
             $this->getResponse()->setHttpResponseCode(500);
             $this->getResponse()->setBody($error);

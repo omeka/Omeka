@@ -1,4 +1,6 @@
 <?php
+queue_js_file('items');
+$tagDelimiter = get_option('tag_delimiter');
 $title = __('Batch Edit Items');
 if (!$isPartial):
     echo head(
@@ -12,6 +14,14 @@ endif;
 <div title="<?php echo $title; ?>">
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
+    <script type="text/javascript">
+    //<![CDATA[
+    jQuery(document).ready(function () {
+        Omeka.Items.tagDelimiter = <?php echo js_escape($tagDelimiter); ?>;
+        Omeka.Items.tagChoices('#metadata-tags', <?php echo js_escape(url(array('controller' => 'tags', 'action' => 'autocomplete'), 'default', array(), true)); ?>);
+    });
+    //]]>
+    </script>
     <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
             <h2><?php echo __('Items'); ?></h2>
