@@ -72,7 +72,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                 }
 
                 $attributes['data-video'] = json_encode($videoSrcObject);
-            } else if ($mediaType == 'application/pdf') {
+            } else if ($mediaType == 'application/pdf' || (strpos($mediaType, 'audio') !== false)) {
                 $attributes['data-iframe'] = 'true';
                 $attributes['data-src'] = $source;
             } else {
@@ -115,7 +115,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
     protected function _prepareFiles($files)
     {
         $sortedFiles = ['gallery' => [], 'other' => []];
-        $whitelist = ['image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'video/mp4', 'video/x-m4v', 'video/ogg', 'video/webm', 'video/quicktime', 'application/pdf'];
+        $whitelist = ['image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'audio/mp3', 'audio/mpeg', 'audio/mpeg3', 'audio/aac', 'audio/mp4', 'audio/ogg', 'video/mp4', 'video/x-m4v', 'video/ogg', 'video/webm', 'video/quicktime', 'application/pdf'];
         $html5videos = [];
 
         $index = 0;
