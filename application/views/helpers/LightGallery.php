@@ -59,16 +59,18 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                         'controls' => true,
                     ],
                 ];
-                foreach ($galleryEntry['tracks'] as $track) {
-                    $label = metadata($track, 'display_title');
-                    $srclang = metadata($track, ['Dublin Core', 'Language'], ['no_escape' => true]);
-                    $type = metadata($track, ['Dublin Core', 'Type'], ['no_escape' => true]);
-                    $videoSrcObject['tracks'][] = [
-                        'src' => $track->getWebPath(),
-                        'label' => $label,
-                        'srclang' => $srclang !== null ? $srclang : '',
-                        'kind' => $type !== null ? $type : 'captions',
-                    ];
+                if (isset($galleryEntry['tracks'])) {
+                    foreach ($galleryEntry['tracks'] as $track) {
+                        $label = metadata($track, 'display_title');
+                        $srclang = metadata($track, ['Dublin Core', 'Language'], ['no_escape' => true]);
+                        $type = metadata($track, ['Dublin Core', 'Type'], ['no_escape' => true]);
+                        $videoSrcObject['tracks'][] = [
+                            'src' => $track->getWebPath(),
+                            'label' => $label,
+                            'srclang' => $srclang !== null ? $srclang : '',
+                            'kind' => $type !== null ? $type : 'captions',
+                        ];
+                    }
                 }
 
                 $attributes['data-video'] = json_encode($videoSrcObject);
