@@ -127,35 +127,26 @@ hr {
 @media (min-width: 992px) and (max-width: 1199px) {
   .container {
     width: 1000px; } }
-@media (min-width: 768px) and (max-width: 991px) {
-  .container {
-    width: 768px; } }
 @media (max-width: 767px) {
   .container {
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box; } }
-@media (min-width: 992px) and (max-width: 1020px) {
-  .container {
-    width: 940px; } }
 @media (min-width: 768px) and (max-width: 790px) {
   .container {
     width: 740px; } }
 @media (min-width: 1440px) {
   .container .ten.columns {
     width: 1040px; } }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 767px) {
   .container .ten.columns {
     width: 600px; } }
-@media (min-width: 768px) and (max-width: 991px) {
-  .container > .offset-by-two {
-    margin-left: 170px; } }
 @media (min-width: 1200px) and (max-width: 1250px) {
   .container > .offset-by-two {
-    margin-left: 210px; } }
-@media (min-width: 992px) and (max-width: 1020px) {
+    margin-left: 200px; } }
+@media (min-width: 992px) and (max-width: 1199px) {
   .container > .offset-by-two {
-    margin-left: 160px; } }
+    margin-left: 180px; } }
 @media (max-width: 767px) {
   .container .ten.columns, .container .nine.columns, .container .eight.columns, .container .seven.columns, .container .six.columns, .container .five.columns, .container .four.columns, .container .three.columns, .container .two.columns {
     width: 100%; }
@@ -2916,10 +2907,12 @@ form.form-inline.editableform {
 
 .themes .group .theme {
   min-height: 300px; }
-  @media (min-width: 768px) and (max-width: 991px) {
+  @media (max-width: 991px) {
     .themes .group .theme {
       min-height: 0;
       margin-bottom: 40px; } }
+  .themes .group .theme:nth-child(3n) {
+    margin-right: 0; }
 
 .themes .theme .author {
   font-style: italic;
