@@ -45,7 +45,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
             };
 
             $mediaType = ($file->mime_type == 'video/quicktime') ? 'video/mp4' : $file->mime_type;
-            if (strpos($mediaType, 'video') !== false) {
+            if (strpos($mediaType, 'video') !== false || (strpos($mediaType, 'audio') !== false)) {
                 $videoSrcObject = [
                     'source' => [
                         [
@@ -72,7 +72,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
                 }
 
                 $attributes['data-video'] = json_encode($videoSrcObject);
-            } else if ($mediaType == 'application/pdf' || (strpos($mediaType, 'audio') !== false)) {
+            } else if ($mediaType == 'application/pdf') {
                 $attributes['data-iframe'] = 'true';
                 $attributes['data-src'] = $source;
             } else {
