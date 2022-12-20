@@ -1172,11 +1172,18 @@ function head_js($includeDefaults = true)
  *
  * @package Omeka\Function\View\Asset
  * @see queue_css_file()
+ * @param bool $includeDefaults Whether the default stylesheets should be
+ * included. Defaults to true.
  * @return string
  */
-function head_css()
+function head_css($includeDefaults = true)
 {
-    return get_view()->headLink() . get_view()->headStyle();
+    $headLink = get_view()->headLink();
+
+    if ($includeDefaults) {
+        $headLink->prependStylesheet(css_src('public'));
+    }
+    return $headLink . get_view()->headStyle();
 }
 
 /**
