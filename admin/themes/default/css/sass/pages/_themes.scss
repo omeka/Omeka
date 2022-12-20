@@ -56,9 +56,13 @@
 .themes .group .theme { 
     min-height: 300px; 
 
-    @include screen-sm {
+    @include screen-ltmd {
         min-height: 0;
         margin-bottom: 40px;
+    }
+
+    &:nth-child(3n) {
+        margin-right: 0;
     }
 }
 

@@ -2132,7 +2132,8 @@ function get_previous_item($item = null)
  * @throws InvalidArgumentException If an invalid record is passed.
  * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param Omeka_Record_AbstractRecord|string $record
- * @param string $imageType Image size: thumbnail, square thumbnail, fullsize
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
  * @param array $props HTML attributes for the img tag
  * @return string
  */
@@ -2147,6 +2148,30 @@ function record_image($record, $imageType = null, $props = array())
     }
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($record, $props, $imageType);
+}
+
+/**
+ * Get an image URL for a record.
+ *
+ * @package Omeka\Function\View
+ * @throws InvalidArgumentException If an invalid record is passed.
+ * @uses Omeka_View-Helper_FileMarkup::image_url()
+ * @param Omeka_Record_AbstractRecord|string $record
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
+ * @return string
+ */
+function record_image_url($record, $imageType = null)
+{
+    if (is_string($record)) {
+        $record = get_current_record($record);
+    }
+
+    if (!($record instanceof Omeka_Record_AbstractRecord)) {
+        throw new InvalidArgumentException('An Omeka record must be passed to record_image_url.');
+    }
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_url($record, $imageType);
 }
 
 /**
@@ -3518,4 +3543,63 @@ function is_allowed($resource, $privilege)
 function add_shortcode($shortcodeName, $function)
 {
     return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
+}
+
+/**
+ * Queue assets for lightgallery media viewer.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @uses queue_css_file()
+ * @uses queue_js_file()
+ */
+function queue_lightgallery_assets()
+{
+    queue_css_file('lightgallery');
+    queue_css_file('lightgallery-bundle.min', 'all', false, 'javascripts/vendor/lightgallery/css');
+    queue_js_file(array(
+            'vendor/lightgallery/lightgallery.min',
+            'vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min',
+            'vendor/lightgallery/plugins/video/lg-video.min',
+            'vendor/lightgallery/plugins/rotate/lg-rotate.min',
+            'vendor/lightgallery/plugins/hash/lg-hash.min',
+            'vendor/lightgallery/plugins/zoom/lg-zoom.min',
+            'lightgallery-init',
+        )
+    );
+}
+
+/**
+ * Display lightGallery media viewer.
+ *
+ * Only filetypes supported by the lightGallery will be included; use
+ * light_gallery_other_files to list links to other files not supported
+ * in the gallery.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @param array $files Array of files to display
+ * @return string HTML
+ */
+function light_gallery($files)
+{
+    return get_view()->getHelper('lightGallery')->lightGallery($files);
+}
+
+/**
+ * Display "other files" from lightGallery,
+ *
+ * This displays a simple list of links to the files; only files that are not
+ * supported by lightGallery are included in the results. Using this function
+ * only really makes sense if you're also using light_gallery, and the same
+ * array of files should be passed to both functions.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @param array $files Array of files to display
+ * @return string HTML
+ */
+function light_gallery_other_files($files)
+{
+    return get_view()->getHelper('lightGallery')->otherFiles($files);
 }

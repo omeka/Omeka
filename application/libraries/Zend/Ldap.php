@@ -54,7 +54,7 @@ class Zend_Ldap
     /**
      * The raw LDAP extension resource.
      *
-     * @var resource
+     * @var resource|LDAP\Connection
      */
     protected $_resource = null;
 
@@ -147,7 +147,7 @@ class Zend_Ldap
      */
     public function getResource()
     {
-        if (!is_resource($this->_resource) || $this->_boundUser === false) {
+        if (!$this->_resource || $this->_boundUser === false) {
             $this->bind();
         }
         return $this->_resource;
@@ -659,7 +659,7 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception(null, 'Invalid account filter');
         }
 
-        if (!is_resource($this->getResource())) {
+        if (!$this->getResource()) {
             $this->bind();
         }
 
@@ -697,7 +697,7 @@ class Zend_Ldap
      */
     public function disconnect()
     {
-        if (is_resource($this->_resource)) {
+        if ($this->_resource) {
             @ldap_unbind($this->_resource);
         }
         $this->_resource = null;
@@ -777,7 +777,7 @@ class Zend_Ldap
          */
         $resource = ($useUri) ? @ldap_connect($this->_connectString) : @ldap_connect($host, $port);
 
-        if (is_resource($resource) === true) {
+        if ($resource) {
             $this->_resource = $resource;
             $this->_boundUser = false;
 
@@ -870,7 +870,7 @@ class Zend_Ldap
             }
         }
 
-        if (!is_resource($this->_resource)) {
+        if (!$this->_resource) {
             $this->connect();
         }
 

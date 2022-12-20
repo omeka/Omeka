@@ -45,20 +45,12 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      */
     public $subject = null;
 
-
     /**
      * Config options for sendmail parameters
      *
      * @var string
      */
     public $parameters;
-
-    /**
-     * EOL character string
-     * @var string
-     * @access public
-     */
-    public $EOL = PHP_EOL;
 
     /**
      * error information
@@ -74,6 +66,12 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      */
     public function __construct($parameters = null)
     {
+        // (Omeka edit) PHP 8.0 modified mail() to use CRLF line-endings
+        // Only use native line-endings in pre-8, otherwise CRLF (as is default)
+        if (PHP_VERSION_ID < 80000) {
+            $this->EOL = PHP_EOL;
+        }
+
         if ($parameters instanceof Zend_Config) {
             $parameters = $parameters->toArray();
         }
