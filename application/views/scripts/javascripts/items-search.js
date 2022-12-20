@@ -16,6 +16,12 @@ Omeka.Search = {};
 
         handleRemoveButtons();
 
+        function incrementScreenReaderLabels(attribute, element, index) {
+            var oldAttribute = element.attr(attribute);
+            var newAttribute = oldAttribute.replace(/\d+/, parseInt(index) + 1);
+            element.attr(attribute, newAttribute);
+        }
+
         /**
          * Callback for adding a new row of advanced search options.
          */
@@ -31,6 +37,7 @@ Omeka.Search = {};
 
             var inputs = div.find('input');
             var selects = div.find('select');
+            var rowName = div.attr('id');
 
             //Find the index of the last advanced search formlet and inc it
             //I.e. if there are two entries on the form, they should be named advanced[0], advanced[1], etc
@@ -40,10 +47,15 @@ Omeka.Search = {};
             var index = inputName.match(/advanced\[(\d+)\]/)[1];
             var newIndex = (parseInt(index, 10) + 1).toString();
 
-            //Reset the selects and inputs
+            //Reset the selects, inputs, and aria labels.
             inputs.val('');
             inputs.attr('name', function () {
                 return this.name.replace(/\d+/, newIndex);
+            });
+            incrementScreenReaderLabels('id', div, newIndex);
+            incrementScreenReaderLabels('aria-label', div, newIndex);
+            div.find('input, select, button').each(function() {
+                incrementScreenReaderLabels('aria-labelledby', $(this), newIndex);
             });
 
             selects.each(function () {
@@ -59,7 +71,15 @@ Omeka.Search = {};
                 removeAdvancedSearch(this);
             });
 
+            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
             handleRemoveButtons();
+        }
+
+        function updateAdvancedSearchCount(fieldId, alertId, rowClass) {
+            var field =  $(fieldId);
+            var countSpan = $(alertId).find('.count');
+            var countValue = field.find(rowClass).length;
+            countSpan.text(countValue);
         }
 
         /**
@@ -70,6 +90,7 @@ Omeka.Search = {};
         function removeAdvancedSearch(button) {
             $(button).parent().remove();
             handleRemoveButtons();
+            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
         }
 
         /**
