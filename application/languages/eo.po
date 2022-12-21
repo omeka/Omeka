@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Daniele Binaghi, 2018-2019,2021
-# John Flatness <john@zerocrates.org>, 2020
+# John Flatness <john@omeka.org>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
@@ -100,6 +100,7 @@ msgstr "Tempa punkto aŭ periodo asociita kun evento en la vivciklo de la risurc
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Speco"
 
@@ -316,6 +317,7 @@ msgid "Super"
 msgstr "Ĉefa"
 
 #. User role: Admin
+#: admin/themes/default/common/header.php:43
 msgid "Admin"
 msgstr "Admin"
 
@@ -325,7 +327,7 @@ msgstr "Esploristo"
 
 #: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
-#: admin/themes/default/common/global-nav.php:11
+#: admin/themes/default/common/global-nav.php:10
 #: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
@@ -463,10 +465,10 @@ msgstr "Elstarigita"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
-#: application/tests/suite/Omeka/NavigationTest.php:747
-#: application/tests/suite/Omeka/NavigationTest.php:816
-#: application/tests/suite/Omeka/NavigationTest.php:831
-#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/tests/suite/Omeka/NavigationTest.php:748
+#: application/tests/suite/Omeka/NavigationTest.php:817
+#: application/tests/suite/Omeka/NavigationTest.php:832
+#: application/tests/suite/Omeka/NavigationTest.php:951
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
 msgstr "Esplori kolektojn"
@@ -620,7 +622,7 @@ msgid "Navigation"
 msgstr "Navigo"
 
 #: admin/themes/default/common/appearance-nav.php:15
-#: admin/themes/default/common/global-nav.php:23
+#: admin/themes/default/common/global-nav.php:22
 #: admin/themes/default/element-sets/browse.php:6
 #: admin/themes/default/settings/edit-api.php:2
 #: admin/themes/default/settings/edit-item-type-elements.php:3
@@ -631,8 +633,14 @@ msgid "Settings"
 msgstr "Agordoj"
 
 #: admin/themes/default/common/content-nav.php:1
+#: admin/themes/default/common/content-nav.php:2
 msgid "Main Menu"
 msgstr "Ĉefa menuo"
+
+#: admin/themes/default/common/content-nav.php:2
+#: application/views/scripts/common/pagination_control.php:38
+msgid "Current Page"
+msgstr "Sekva paĝo"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
@@ -696,16 +704,12 @@ msgstr "Versio %s"
 msgid "System Information"
 msgstr "Sistemaj informoj"
 
-#: admin/themes/default/common/global-nav.php:1
-msgid "Manage Site"
-msgstr "Administri retejon"
-
-#: admin/themes/default/common/global-nav.php:5
+#: admin/themes/default/common/global-nav.php:4
 #: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Kromprogramoj"
 
-#: admin/themes/default/common/global-nav.php:17
+#: admin/themes/default/common/global-nav.php:16
 msgid "Users"
 msgstr "Uzantoj"
 
@@ -742,9 +746,8 @@ msgstr "Sekureco"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:57
+#: application/views/helpers/SearchForm.php:72
 #: application/views/scripts/search/index.php:2
-#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "Serĉi"
 
@@ -1232,40 +1235,40 @@ msgstr "Ŝaltu se vi volas forigi la elektitajn erojn."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
-#: application/tests/suite/Omeka/NavigationTest.php:37
-#: application/tests/suite/Omeka/NavigationTest.php:56
-#: application/tests/suite/Omeka/NavigationTest.php:79
-#: application/tests/suite/Omeka/NavigationTest.php:97
-#: application/tests/suite/Omeka/NavigationTest.php:120
-#: application/tests/suite/Omeka/NavigationTest.php:139
-#: application/tests/suite/Omeka/NavigationTest.php:162
-#: application/tests/suite/Omeka/NavigationTest.php:185
-#: application/tests/suite/Omeka/NavigationTest.php:214
-#: application/tests/suite/Omeka/NavigationTest.php:236
-#: application/tests/suite/Omeka/NavigationTest.php:265
-#: application/tests/suite/Omeka/NavigationTest.php:288
-#: application/tests/suite/Omeka/NavigationTest.php:317
-#: application/tests/suite/Omeka/NavigationTest.php:339
-#: application/tests/suite/Omeka/NavigationTest.php:367
-#: application/tests/suite/Omeka/NavigationTest.php:388
-#: application/tests/suite/Omeka/NavigationTest.php:416
-#: application/tests/suite/Omeka/NavigationTest.php:438
-#: application/tests/suite/Omeka/NavigationTest.php:466
-#: application/tests/suite/Omeka/NavigationTest.php:483
-#: application/tests/suite/Omeka/NavigationTest.php:511
-#: application/tests/suite/Omeka/NavigationTest.php:527
-#: application/tests/suite/Omeka/NavigationTest.php:555
-#: application/tests/suite/Omeka/NavigationTest.php:572
-#: application/tests/suite/Omeka/NavigationTest.php:600
-#: application/tests/suite/Omeka/NavigationTest.php:621
-#: application/tests/suite/Omeka/NavigationTest.php:647
-#: application/tests/suite/Omeka/NavigationTest.php:667
-#: application/tests/suite/Omeka/NavigationTest.php:693
-#: application/tests/suite/Omeka/NavigationTest.php:714
-#: application/tests/suite/Omeka/NavigationTest.php:740
-#: application/tests/suite/Omeka/NavigationTest.php:815
-#: application/tests/suite/Omeka/NavigationTest.php:845
-#: application/tests/suite/Omeka/NavigationTest.php:949
+#: application/tests/suite/Omeka/NavigationTest.php:38
+#: application/tests/suite/Omeka/NavigationTest.php:57
+#: application/tests/suite/Omeka/NavigationTest.php:80
+#: application/tests/suite/Omeka/NavigationTest.php:98
+#: application/tests/suite/Omeka/NavigationTest.php:121
+#: application/tests/suite/Omeka/NavigationTest.php:140
+#: application/tests/suite/Omeka/NavigationTest.php:163
+#: application/tests/suite/Omeka/NavigationTest.php:186
+#: application/tests/suite/Omeka/NavigationTest.php:215
+#: application/tests/suite/Omeka/NavigationTest.php:237
+#: application/tests/suite/Omeka/NavigationTest.php:266
+#: application/tests/suite/Omeka/NavigationTest.php:289
+#: application/tests/suite/Omeka/NavigationTest.php:318
+#: application/tests/suite/Omeka/NavigationTest.php:340
+#: application/tests/suite/Omeka/NavigationTest.php:368
+#: application/tests/suite/Omeka/NavigationTest.php:389
+#: application/tests/suite/Omeka/NavigationTest.php:417
+#: application/tests/suite/Omeka/NavigationTest.php:439
+#: application/tests/suite/Omeka/NavigationTest.php:467
+#: application/tests/suite/Omeka/NavigationTest.php:484
+#: application/tests/suite/Omeka/NavigationTest.php:512
+#: application/tests/suite/Omeka/NavigationTest.php:528
+#: application/tests/suite/Omeka/NavigationTest.php:556
+#: application/tests/suite/Omeka/NavigationTest.php:573
+#: application/tests/suite/Omeka/NavigationTest.php:601
+#: application/tests/suite/Omeka/NavigationTest.php:622
+#: application/tests/suite/Omeka/NavigationTest.php:648
+#: application/tests/suite/Omeka/NavigationTest.php:668
+#: application/tests/suite/Omeka/NavigationTest.php:694
+#: application/tests/suite/Omeka/NavigationTest.php:715
+#: application/tests/suite/Omeka/NavigationTest.php:741
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:846
+#: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
@@ -1274,8 +1277,8 @@ msgstr "Esplori erojn"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2419
-#: application/libraries/globals.php:2810
+#: application/libraries/globals.php:2459
+#: application/libraries/globals.php:2850
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Serĉi erojn"
@@ -1394,54 +1397,54 @@ msgstr "Serĉi lau ŝlosilvortoj"
 
 #: admin/themes/default/items/search-form.php:30
 #: application/views/scripts/items/search-form.php:25
+#: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Limigi per specifaj kampoj"
 
 #: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:105
+#: application/views/scripts/items/search-form.php:127
 msgid "Add a Field"
 msgstr "Aldoni kampon"
 
 #: admin/themes/default/items/search-form.php:57
-#: application/views/scripts/items/search-form.php:50
+#: application/views/scripts/items/search-form.php:32
 msgid "Search Joiner"
 msgstr "Serĉkunigilo"
 
 #: admin/themes/default/items/search-form.php:62
 #: application/views/helpers/ItemSearchFilters.php:108
-#: application/views/scripts/items/search-form.php:55
+#: application/views/scripts/items/search-form.php:64
 msgid "AND"
 msgstr "AND"
 
 #: admin/themes/default/items/search-form.php:63
 #: application/views/helpers/ItemSearchFilters.php:106
-#: application/views/scripts/items/search-form.php:56
+#: application/views/scripts/items/search-form.php:65
 msgid "OR"
 msgstr "OR"
 
 #: admin/themes/default/items/search-form.php:70
-#: application/views/scripts/items/search-form.php:63
 msgid "Search Field"
 msgstr "Serĉkampo"
 
 #: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:76
+#: application/views/scripts/items/search-form.php:30
 msgid "Search Type"
 msgstr "Serĉtipo"
 
 #: admin/themes/default/items/search-form.php:88
 #: admin/themes/default/tags/browse.php:50
-#: application/views/scripts/items/search-form.php:81
+#: application/views/scripts/items/search-form.php:98
 msgid "contains"
 msgstr "enhavas"
 
 #: admin/themes/default/items/search-form.php:89
-#: application/views/scripts/items/search-form.php:82
+#: application/views/scripts/items/search-form.php:99
 msgid "does not contain"
 msgstr "ne enhavas"
 
 #: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:83
+#: application/views/scripts/items/search-form.php:100
 msgid "is exactly"
 msgstr "estas ekzakte"
 
@@ -1450,22 +1453,22 @@ msgid "is not exactly"
 msgstr "estas ne ekzakte"
 
 #: admin/themes/default/items/search-form.php:92
-#: application/views/scripts/items/search-form.php:84
+#: application/views/scripts/items/search-form.php:101
 msgid "is empty"
 msgstr "estas malplena"
 
 #: admin/themes/default/items/search-form.php:93
-#: application/views/scripts/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:102
 msgid "is not empty"
 msgstr "ne estas malplena"
 
 #: admin/themes/default/items/search-form.php:94
-#: application/views/scripts/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:103
 msgid "starts with"
 msgstr "ekas per"
 
 #: admin/themes/default/items/search-form.php:95
-#: application/views/scripts/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:104
 msgid "ends with"
 msgstr "finiĝas per"
 
@@ -1478,72 +1481,73 @@ msgid "does not match"
 msgstr "ne kongruas"
 
 #: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:95
+#: application/views/scripts/items/search-form.php:31
 msgid "Search Terms"
 msgstr "Serĉvortoj"
 
 #: admin/themes/default/items/search-form.php:111
-#: application/views/scripts/items/search-form.php:101
+#: application/views/scripts/items/search-form.php:33
+#: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Forigi kampon"
 
 #: admin/themes/default/items/search-form.php:119
-#: application/views/scripts/items/search-form.php:109
+#: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Serĉi laŭ intervalo de ID#s (ekzemple: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:133
-#: application/views/scripts/items/search-form.php:120
+#: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Serĉi laŭ kolekto"
 
 #: admin/themes/default/items/search-form.php:149
-#: application/views/scripts/items/search-form.php:134
+#: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Serĉi laŭ tipo"
 
 #: admin/themes/default/items/search-form.php:166
-#: application/views/scripts/items/search-form.php:150
+#: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Serĉi laŭ uzanto"
 
 #: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:165
+#: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Serĉi laŭ etikedoj"
 
 #: admin/themes/default/items/search-form.php:198
-#: application/views/scripts/items/search-form.php:178
+#: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Publika/Ne publika"
 
 #: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Nur publikaj eroj"
 
 #: admin/themes/default/items/search-form.php:208
-#: application/views/scripts/items/search-form.php:187
+#: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Nur nepublikaj eroj"
 
 #: admin/themes/default/items/search-form.php:218
-#: application/views/scripts/items/search-form.php:196
+#: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Elstarigita/ne-elstarigita"
 
 #: admin/themes/default/items/search-form.php:227
-#: application/views/scripts/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Nur elstarigitaj eroj"
 
 #: admin/themes/default/items/search-form.php:228
-#: application/views/scripts/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Nur ne-elstarigitaj eroj"
 
 #: admin/themes/default/items/search-form.php:236
-#: application/views/scripts/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Serĉi erojn"
 
@@ -2062,6 +2066,7 @@ msgid "Add a User"
 msgstr "Aldoni uzanton"
 
 #: admin/themes/default/users/browse.php:37
+#: application/views/scripts/search/search-form.php:10
 msgid "Options"
 msgstr ""
 
@@ -2102,6 +2107,9 @@ msgid "Enter your email address to retrieve your password."
 msgstr "Enigu vian retadreson por ricevi vian pasvorton."
 
 #: admin/themes/default/users/forgot-password.php:21
+#: application/views/helpers/SearchForm.php:57
+#: application/views/scripts/search/search-form.php:39
+#: application/views/scripts/search/search-form.php:43
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
 msgstr "Sendi"
@@ -2133,11 +2141,11 @@ msgstr "Uzanto #%s"
 msgid "Edit this User"
 msgstr "Redakti tiun ĉi uzanton"
 
-#: application/controllers/AppearanceController.php:48
+#: application/controllers/AppearanceController.php:47
 msgid "The appearance settings have been updated."
 msgstr "La aspektaj agordoj estis ĝisdatigitaj."
 
-#: application/controllers/AppearanceController.php:51
+#: application/controllers/AppearanceController.php:50
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
 #: application/controllers/SettingsController.php:55
@@ -2146,17 +2154,17 @@ msgstr "La aspektaj agordoj estis ĝisdatigitaj."
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "Oni trovis erarojn en via formularo. Bonvolu redakti kaj resendi."
 
-#: application/controllers/AppearanceController.php:66
+#: application/controllers/AppearanceController.php:64
 msgid "The navigation settings have been updated."
 msgstr "La navigaj agordoj estis ĝisdatigitaj."
 
-#: application/controllers/AppearanceController.php:69
+#: application/controllers/AppearanceController.php:67
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
 msgstr "La navigaj agordoj ne estis savitaj ĉar iu valoroj ne estis validaj au malĉeestis. Ĉiuj ŝanĝitaj valoroj estis restaŭritaj."
 
-#: application/controllers/AppearanceController.php:97
+#: application/controllers/AppearanceController.php:95
 msgid "The navigation settings have been reset."
 msgstr "La navigaj agordoj estis restarigitaj."
 
@@ -2213,19 +2221,19 @@ msgid ""
 msgstr "Tio forigos la elementaron kaj ĉiujn elementojn asociitaj al la elementaro. Eroj perdos ĉiujn metadatumojn, kiuj estas specifaj de tiu ĉi elementaro."
 
 #: application/controllers/ElementSetsController.php:51
-#: application/controllers/PluginsController.php:49
-#: application/controllers/PluginsController.php:77
-#: application/controllers/PluginsController.php:135
-#: application/controllers/PluginsController.php:184
-#: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:325
+#: application/controllers/PluginsController.php:54
+#: application/controllers/PluginsController.php:82
+#: application/controllers/PluginsController.php:140
+#: application/controllers/PluginsController.php:189
+#: application/controllers/PluginsController.php:222
+#: application/controllers/PluginsController.php:330
 #: application/controllers/SettingsController.php:106
 #: application/controllers/SettingsController.php:149
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
-#: application/controllers/UsersController.php:312
-#: application/libraries/Omeka/Controller/AbstractActionController.php:183
-#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+#: application/controllers/UsersController.php:314
+#: application/libraries/Omeka/Controller/AbstractActionController.php:190
+#: application/libraries/Omeka/Controller/AbstractActionController.php:231
 msgid "There was an error on the form. Please try again."
 msgstr "Estis eraro en la formularo. Bonvolu provi denove."
 
@@ -2382,95 +2390,95 @@ msgstr "La elementoj estas kontrolitaj kaj ŝanĝitaj unu post la alian fone."
 msgid "Check logs for success and errors."
 msgstr "Kontrolu protokolojn pri sukcesoj kaj eraroj."
 
-#: application/controllers/PluginsController.php:43
+#: application/controllers/PluginsController.php:48
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr "Eraro dum agordiĝo de kromprogamo nomita \"%s\". Malĉeestas config kaj/aŭ config-form hoko(j)."
 
-#: application/controllers/PluginsController.php:57
+#: application/controllers/PluginsController.php:62
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "La kromprogramo %s estis sukcese agordita!"
 
-#: application/controllers/PluginsController.php:87
+#: application/controllers/PluginsController.php:92
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "La kromprogramo %s estis jam instalita."
 
-#: application/controllers/PluginsController.php:97
+#: application/controllers/PluginsController.php:102
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "La kromprogramo %s estis sukcese instalita!"
 
-#: application/controllers/PluginsController.php:109
 #: application/controllers/PluginsController.php:114
+#: application/controllers/PluginsController.php:119
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "La sekvanta eraro okazis dum instalado de la kromprogramo %s:"
 
-#: application/controllers/PluginsController.php:150
+#: application/controllers/PluginsController.php:155
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "La sekvanta eraro okazis dum aktivado de la kromprogramo %s:"
 
-#: application/controllers/PluginsController.php:160
+#: application/controllers/PluginsController.php:165
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "La kromprogramo %s estis sukcese aktivigita!"
 
-#: application/controllers/PluginsController.php:165
+#: application/controllers/PluginsController.php:170
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "La kromprogramo %s estis aktivigita, sed ne povis esti ŝarĝita:"
 
-#: application/controllers/PluginsController.php:198
+#: application/controllers/PluginsController.php:203
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "La kromprogramo %s estis sukcese malaktivigita!"
 
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:208
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "La sekvanta eraro okazis dum malaktivigado de la kromprogramo %s:"
 
-#: application/controllers/PluginsController.php:233
+#: application/controllers/PluginsController.php:238
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "La %s kromprogramo estis sukcese ĝisdatigita!"
 
-#: application/controllers/PluginsController.php:242
-#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:247
+#: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Okazis tiu ĉi eraro dum ĝisdatigo de la %s kromprogramo:"
 
-#: application/controllers/PluginsController.php:299
+#: application/controllers/PluginsController.php:304
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "La kromprogramo ne estis trovita en la '%s' dosierujo!"
 
-#: application/controllers/PluginsController.php:312
+#: application/controllers/PluginsController.php:317
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Vi devas konfirmi la malinstalon antaŭ daŭrigi."
 
-#: application/controllers/PluginsController.php:331
+#: application/controllers/PluginsController.php:336
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "La %s kromprogramo estis sukcese malinstalita."
 
-#: application/controllers/PluginsController.php:336
 #: application/controllers/PluginsController.php:341
+#: application/controllers/PluginsController.php:346
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Eraro okazis dum malinstalado de la %s kromprogramo:"
 
-#: application/controllers/PluginsController.php:370
+#: application/controllers/PluginsController.php:375
 msgid "No plugin name given."
 msgstr "Neniu kromprograma nomo donita."
 
-#: application/controllers/PluginsController.php:383
+#: application/controllers/PluginsController.php:388
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "La kromprogramo %s devas esti instalita."
@@ -2551,91 +2559,91 @@ msgid ""
 "version %2$s. Please update the installed version of PHP and try again."
 msgstr "Omeka necesas version de PHP %1$s aŭ pli alta, sed tiu ĉi servilo funkciigas version %2$s de PHP. Bonvolu ĝisdatigi la instalitan version de PHP kaj provi denove."
 
-#: application/controllers/UsersController.php:72
+#: application/controllers/UsersController.php:74
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr "Ne eblis restarigi pasvorton. Bonvolu kontroli ĉu la informoj estas korektaj kaj kontakti administranton se necese."
 
-#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:112
 msgid "Please follow this link to reset your password:"
 msgstr "Bonvolu sekvi tiun ĉi ligilon por restarigi vian pasvorton:"
 
-#: application/controllers/UsersController.php:112
-#: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:390
+#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:392
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administranto"
 
-#: application/controllers/UsersController.php:116
+#: application/controllers/UsersController.php:118
 #, php-format
 msgid "[%s] Reset Your Password"
 msgstr "[%s] Restarigi vian pasvorton"
 
-#: application/controllers/UsersController.php:119
+#: application/controllers/UsersController.php:121
 msgid "Please check your email for a link to reset your password."
 msgstr "Bonvolu kontroli vian retpoŝton por ligilo al restarigo de via pasvorto."
 
-#: application/controllers/UsersController.php:128
+#: application/controllers/UsersController.php:130
 msgid "Invalid activation code given."
 msgstr "Ne valida aktvigkodo donita."
 
-#: application/controllers/UsersController.php:137
+#: application/controllers/UsersController.php:139
 msgid "Password: The passwords do not match."
 msgstr "Pasvorto: La pasvortoj ne kongruas."
 
-#: application/controllers/UsersController.php:145
+#: application/controllers/UsersController.php:147
 msgid "You may now log in to Omeka."
 msgstr "Vi povas nun ensaluti en Omeka."
 
-#: application/controllers/UsersController.php:169
-#: application/controllers/UsersController.php:235
-#: application/controllers/UsersController.php:286
+#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:237
+#: application/controllers/UsersController.php:288
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Estis ne valida enigo en la formularo. Bonvolu provi denove."
 
-#: application/controllers/UsersController.php:177
+#: application/controllers/UsersController.php:179
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "La uzanto \"%s\" estis sukcese aldonita!"
 
-#: application/controllers/UsersController.php:181
+#: application/controllers/UsersController.php:183
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "La uzanto \"%s\" estis aldonita, sed ne eblis sendi la aktivigan retmesaĝon."
 
-#: application/controllers/UsersController.php:217
+#: application/controllers/UsersController.php:219
 msgid "User activation email has been sent."
 msgstr "Uzantaktiviga retmesaĝo sendita."
 
-#: application/controllers/UsersController.php:219
+#: application/controllers/UsersController.php:221
 msgid "User activation email could not be sent."
 msgstr "Ne eblis sendi la uzantaktivigan retmesaĝon. "
 
-#: application/controllers/UsersController.php:257
+#: application/controllers/UsersController.php:259
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "La uzanto %s estis sukcese ŝanĝita!"
 
-#: application/controllers/UsersController.php:293
+#: application/controllers/UsersController.php:295
 msgid "Password changed!"
 msgstr "Pasvorto ŝanĝita!"
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:324
 msgid "A new API key was successfully created."
 msgstr "Nova API ŝlosilo estis sukcese kreita."
 
-#: application/controllers/UsersController.php:329
+#: application/controllers/UsersController.php:331
 msgid "An existing API key was successfully rescinded."
 msgstr "Ekzistanta API ŝlosilo estis sukcese nuligita."
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:358
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "La uzanto \"%s\" estis sukcese forigita!"
 
-#: application/controllers/UsersController.php:362
+#: application/controllers/UsersController.php:364
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2643,18 +2651,18 @@ msgid ""
 "this user."
 msgstr "%s estos forigita el la sistemo. Eroj, kolektoj kaj etikedoj kreitaj de tiu ĉi uzanto restos en la sistemo, sed ne plu estos asociitaj al tiu ĉi uzanto."
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:388
 msgid "Welcome!"
 msgstr "Bonvenon!"
 
-#: application/controllers/UsersController.php:388
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Via uzantkonto por la arĥivo %s estis kreita. Bonvolu alklaki la sekvantan ligilon por aktivigi vian uzantkonton:"
 
-#: application/controllers/UsersController.php:391
+#: application/controllers/UsersController.php:393
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Aktivigi vian uzantkonton ĉe la arĥivo %s"
@@ -2724,32 +2732,40 @@ msgstr "Limigi la nombron de rezultoj montritaj en ĉiu paĝo de la publika inte
 msgid "Show Empty Elements"
 msgstr "Montri malplenajn elementojn"
 
-#: application/forms/AppearanceSettings.php:67
+#: application/forms/AppearanceSettings.php:63
+msgid "Include empty elements in show pages."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr "Montri elementarajn titolojn"
 
-#: application/forms/AppearanceSettings.php:72
+#: application/forms/AppearanceSettings.php:69
+msgid "Include element set headings in show pages and in drop-down lists."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
 msgstr "Ligilo al dosieraj metadatumoj"
 
-#: application/forms/AppearanceSettings.php:73
+#: application/forms/AppearanceSettings.php:75
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
 msgstr "Ligi erajn dosierojn al dosieraj metadatumoj anstataŭ ol rekte al la dosiero."
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:85
 msgid "Admin Theme"
 msgstr "Admin etoso"
 
-#: application/forms/AppearanceSettings.php:97
+#: application/forms/AppearanceSettings.php:99
 msgid "Derivative Size Constraints"
 msgstr "Derivaj dimensiaj limigoj"
 
-#: application/forms/AppearanceSettings.php:105
+#: application/forms/AppearanceSettings.php:107
 msgid "Display Settings"
 msgstr "Montraj agordoj"
 
-#: application/forms/AppearanceSettings.php:113
+#: application/forms/AppearanceSettings.php:115
 msgid "Admin Themes"
 msgstr "Admin etosoj"
 
@@ -3168,12 +3184,12 @@ msgstr "La kromprogramo \"%s\" devas esti instalita kaj havi pli novajn dosieroj
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Kromprogramo devas havi validan dosierujan nomon antaŭ povi esti instalita."
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:351
+#: application/libraries/Omeka/Record/AbstractRecord.php:352
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr "'%s' estas nevalida speciala valoro."
 
-#: application/libraries/Omeka/Record/Iterator.php:49
+#: application/libraries/Omeka/Record/Iterator.php:51
 msgid "An invalid value was detected during record iteration."
 msgstr "Nevalida valoro estis detektita dum rikorda iteracio."
 
@@ -3193,79 +3209,79 @@ msgstr "Bulea"
 msgid "Exact match"
 msgstr "Trafo"
 
-#: application/libraries/globals.php:1268
-#: application/libraries/globals.php:1289
+#: application/libraries/globals.php:1275
+#: application/libraries/globals.php:1296
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Ne povis trovi dosieron %s!"
 
-#: application/libraries/globals.php:1305
+#: application/libraries/globals.php:1312
 msgid "No featured collections are available."
 msgstr "Neniu elstarigita kolekto disponeblas."
 
-#: application/libraries/globals.php:1603
+#: application/libraries/globals.php:1618
 msgid "Select Below "
 msgstr "Elektu malsupre"
 
-#: application/libraries/globals.php:1646
+#: application/libraries/globals.php:1661
 msgid "Omeka RSS Feed"
 msgstr "RSS-fluo Omeka"
 
-#: application/libraries/globals.php:1647
+#: application/libraries/globals.php:1662
 msgid "Omeka Atom Feed"
 msgstr "Atom-fluo Omeka"
 
-#: application/libraries/globals.php:1966
+#: application/libraries/globals.php:1981
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:1976
+#: application/libraries/globals.php:1991
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:1980
+#: application/libraries/globals.php:1995
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2314
+#: application/libraries/globals.php:2354
 msgid "No recent items available."
 msgstr "Ne disponeblas freŝaj eroj."
 
-#: application/libraries/globals.php:2340
+#: application/libraries/globals.php:2380
 msgid "No featured items are available."
 msgstr "Neniu elstarigita ero disponeblas."
 
-#: application/libraries/globals.php:2401
+#: application/libraries/globals.php:2441
 msgid "View"
 msgstr "Vidi"
 
-#: application/libraries/globals.php:2463
+#: application/libraries/globals.php:2503
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Neniu kolekt"
 
-#: application/libraries/globals.php:2582
+#: application/libraries/globals.php:2622
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2599
+#: application/libraries/globals.php:2639
 msgid "Next Item &rarr;"
 msgstr "Sekva ero &rarr;"
 
-#: application/libraries/globals.php:2619
+#: application/libraries/globals.php:2659
 msgid "&larr; Previous Item"
 msgstr "&larr; Antaŭa ero"
 
-#: application/libraries/globals.php:2800
+#: application/libraries/globals.php:2840
 msgid "Browse All"
 msgstr "Esplori ĉiujn"
 
-#: application/libraries/globals.php:2805
+#: application/libraries/globals.php:2845
 msgid "Browse by Tag"
 msgstr "Esplori laŭ etikedoj"
 
-#: application/libraries/globals.php:3084
+#: application/libraries/globals.php:3125
 msgid "No tags are available."
 msgstr "Ne disponeblas etikedoj."
 
@@ -3555,98 +3571,98 @@ msgstr "Tiu ĉi datuma transmetado devintus okazi antaŭe (kaj ne devus okazi de
 msgid "This migration should not be run."
 msgstr "Tiu ĉi datuma transmetado ne devus okazi."
 
-#: application/tests/suite/Omeka/NavigationTest.php:752
-#: application/tests/suite/Omeka/NavigationTest.php:817
-#: application/tests/suite/Omeka/NavigationTest.php:839
-#: application/tests/suite/Omeka/NavigationTest.php:952
+#: application/tests/suite/Omeka/NavigationTest.php:753
+#: application/tests/suite/Omeka/NavigationTest.php:818
+#: application/tests/suite/Omeka/NavigationTest.php:840
+#: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Items"
 msgstr "Redakti erojn"
 
-#: application/tests/suite/Omeka/NavigationTest.php:758
-#: application/tests/suite/Omeka/NavigationTest.php:818
-#: application/tests/suite/Omeka/NavigationTest.php:856
-#: application/tests/suite/Omeka/NavigationTest.php:953
+#: application/tests/suite/Omeka/NavigationTest.php:759
+#: application/tests/suite/Omeka/NavigationTest.php:819
+#: application/tests/suite/Omeka/NavigationTest.php:857
+#: application/tests/suite/Omeka/NavigationTest.php:954
 msgid "Edit Collections"
 msgstr "Redakti kolektojn"
 
-#: application/tests/suite/Omeka/NavigationTest.php:764
-#: application/tests/suite/Omeka/NavigationTest.php:819
-#: application/tests/suite/Omeka/NavigationTest.php:862
-#: application/tests/suite/Omeka/NavigationTest.php:954
+#: application/tests/suite/Omeka/NavigationTest.php:765
+#: application/tests/suite/Omeka/NavigationTest.php:820
+#: application/tests/suite/Omeka/NavigationTest.php:863
+#: application/tests/suite/Omeka/NavigationTest.php:955
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
 
-#: application/tests/suite/Omeka/NavigationTest.php:825
-#: application/tests/suite/Omeka/NavigationTest.php:951
+#: application/tests/suite/Omeka/NavigationTest.php:826
+#: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "CHNM"
 msgstr "CHNM"
 
-#: application/tests/suite/Omeka/NavigationTest.php:982
-#: application/tests/suite/Omeka/NavigationTest.php:990
-#: application/tests/suite/Omeka/NavigationTest.php:1127
-#: application/tests/suite/Omeka/NavigationTest.php:1135
+#: application/tests/suite/Omeka/NavigationTest.php:983
+#: application/tests/suite/Omeka/NavigationTest.php:991
+#: application/tests/suite/Omeka/NavigationTest.php:1128
+#: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
 msgstr "Paĝo"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1008
-#: application/tests/suite/Omeka/NavigationTest.php:1012
-#: application/tests/suite/Omeka/NavigationTest.php:1070
-#: application/tests/suite/Omeka/NavigationTest.php:1075
-#: application/tests/suite/Omeka/NavigationTest.php:1155
-#: application/tests/suite/Omeka/NavigationTest.php:1255
+#: application/tests/suite/Omeka/NavigationTest.php:1009
+#: application/tests/suite/Omeka/NavigationTest.php:1013
+#: application/tests/suite/Omeka/NavigationTest.php:1071
+#: application/tests/suite/Omeka/NavigationTest.php:1076
+#: application/tests/suite/Omeka/NavigationTest.php:1156
+#: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
 msgstr "Paĝo 1"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1015
-#: application/tests/suite/Omeka/NavigationTest.php:1021
-#: application/tests/suite/Omeka/NavigationTest.php:1078
-#: application/tests/suite/Omeka/NavigationTest.php:1081
-#: application/tests/suite/Omeka/NavigationTest.php:1162
-#: application/tests/suite/Omeka/NavigationTest.php:1181
-#: application/tests/suite/Omeka/NavigationTest.php:1199
-#: application/tests/suite/Omeka/NavigationTest.php:1231
+#: application/tests/suite/Omeka/NavigationTest.php:1016
+#: application/tests/suite/Omeka/NavigationTest.php:1022
+#: application/tests/suite/Omeka/NavigationTest.php:1079
+#: application/tests/suite/Omeka/NavigationTest.php:1082
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
 msgstr "Paĝo 2"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1024
-#: application/tests/suite/Omeka/NavigationTest.php:1028
-#: application/tests/suite/Omeka/NavigationTest.php:1084
-#: application/tests/suite/Omeka/NavigationTest.php:1088
-#: application/tests/suite/Omeka/NavigationTest.php:1163
-#: application/tests/suite/Omeka/NavigationTest.php:1182
-#: application/tests/suite/Omeka/NavigationTest.php:1192
-#: application/tests/suite/Omeka/NavigationTest.php:1254
+#: application/tests/suite/Omeka/NavigationTest.php:1025
+#: application/tests/suite/Omeka/NavigationTest.php:1029
+#: application/tests/suite/Omeka/NavigationTest.php:1085
+#: application/tests/suite/Omeka/NavigationTest.php:1089
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1193
+#: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
 msgstr "Paĝo 3"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1031
-#: application/tests/suite/Omeka/NavigationTest.php:1040
-#: application/tests/suite/Omeka/NavigationTest.php:1091
-#: application/tests/suite/Omeka/NavigationTest.php:1095
-#: application/tests/suite/Omeka/NavigationTest.php:1164
-#: application/tests/suite/Omeka/NavigationTest.php:1183
-#: application/tests/suite/Omeka/NavigationTest.php:1200
-#: application/tests/suite/Omeka/NavigationTest.php:1221
-#: application/tests/suite/Omeka/NavigationTest.php:1239
-#: application/tests/suite/Omeka/NavigationTest.php:1249
+#: application/tests/suite/Omeka/NavigationTest.php:1032
+#: application/tests/suite/Omeka/NavigationTest.php:1041
+#: application/tests/suite/Omeka/NavigationTest.php:1092
+#: application/tests/suite/Omeka/NavigationTest.php:1096
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1184
+#: application/tests/suite/Omeka/NavigationTest.php:1201
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
 msgstr "Paĝo 4"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1043
-#: application/tests/suite/Omeka/NavigationTest.php:1047
-#: application/tests/suite/Omeka/NavigationTest.php:1098
-#: application/tests/suite/Omeka/NavigationTest.php:1102
-#: application/tests/suite/Omeka/NavigationTest.php:1165
-#: application/tests/suite/Omeka/NavigationTest.php:1174
-#: application/tests/suite/Omeka/NavigationTest.php:1222
-#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1044
+#: application/tests/suite/Omeka/NavigationTest.php:1048
+#: application/tests/suite/Omeka/NavigationTest.php:1099
+#: application/tests/suite/Omeka/NavigationTest.php:1103
+#: application/tests/suite/Omeka/NavigationTest.php:1166
+#: application/tests/suite/Omeka/NavigationTest.php:1175
+#: application/tests/suite/Omeka/NavigationTest.php:1223
+#: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
 msgstr " Paĝo 5"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1050
-#: application/tests/suite/Omeka/NavigationTest.php:1054
-#: application/tests/suite/Omeka/NavigationTest.php:1214
+#: application/tests/suite/Omeka/NavigationTest.php:1051
+#: application/tests/suite/Omeka/NavigationTest.php:1055
+#: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
 msgstr "Paĝo 6"
 
@@ -3734,10 +3750,6 @@ msgstr "Antaŭa paĝo"
 msgid "Page"
 msgstr ""
 
-#: application/views/scripts/common/pagination_control.php:38
-msgid "Current Page"
-msgstr "Sekva paĝo"
-
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
 msgid "%s of %s"
@@ -3803,6 +3815,32 @@ msgstr "Elstarigita kolekto"
 msgid "View All Items"
 msgstr "Montri ĉiujn erojn"
 
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Property"
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:71
+msgid "Property"
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
+
 #: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Dosieroj"
@@ -3823,23 +3861,24 @@ msgstr "Informpeta tipo:"
 msgid "Record types:"
 msgstr "Rikorda tipo:"
 
-#: application/views/scripts/search/search-form.php:2
-msgid "submit_search"
+#: application/views/scripts/search/search-form.php:4
+#: application/views/scripts/search/search-form.php:5
+msgid "Query"
 msgstr ""
 
-#: application/views/scripts/search/search-form.php:6
+#: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
 msgstr "Serĉi uzante tiun ĉi informpetan tipon:"
 
-#: application/views/scripts/search/search-form.php:11
+#: application/views/scripts/search/search-form.php:20
 msgid "Search only these record types:"
 msgstr "Serĉi nur tiujn ĉi rikordajn tipojn:"
 
-#: application/views/scripts/search/search-form.php:17
+#: application/views/scripts/search/search-form.php:26
 msgid "Go to search settings to select record types to use."
 msgstr "Iri al serĉaj agordoj por elekti rikordajn tipojn por uzi."
 
-#: application/views/scripts/search/search-form.php:19
+#: application/views/scripts/search/search-form.php:28
 msgid "Advanced Search (Items only)"
 msgstr "Altnivela serĉado (nur eroj)"
 
