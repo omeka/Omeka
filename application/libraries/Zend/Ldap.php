@@ -1557,7 +1557,7 @@ class Zend_Ldap
      */
     public function getBaseNode()
     {
-        return $this->getNode($this->getBaseDn(), $this);
+        return $this->getNode($this->getBaseDn());
     }
 
     /**
