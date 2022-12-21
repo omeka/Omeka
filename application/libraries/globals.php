@@ -3580,7 +3580,7 @@ function queue_lightgallery_assets()
  * Display lightGallery media viewer.
  *
  * Only filetypes supported by the lightGallery will be included; use
- * light_gallery_other_files to list links to other files not supported
+ * lightgallery_other_files to list links to other files not supported
  * in the gallery.
  *
  * @since 3.1
@@ -3588,7 +3588,7 @@ function queue_lightgallery_assets()
  * @param array $files Array of files to display
  * @return string HTML
  */
-function light_gallery($files)
+function lightgallery($files)
 {
     return get_view()->getHelper('lightGallery')->lightGallery($files);
 }
@@ -3598,7 +3598,7 @@ function light_gallery($files)
  *
  * This displays a simple list of links to the files; only files that are not
  * supported by lightGallery are included in the results. Using this function
- * only really makes sense if you're also using light_gallery, and the same
+ * only really makes sense if you're also using lightgallery(), and the same
  * array of files should be passed to both functions.
  *
  * @since 3.1
@@ -3606,7 +3606,7 @@ function light_gallery($files)
  * @param array $files Array of files to display
  * @return string HTML
  */
-function light_gallery_other_files($files)
+function lightgallery_other_files($files)
 {
     return get_view()->getHelper('lightGallery')->otherFiles($files);
 }
