@@ -2896,7 +2896,7 @@ function js_escape($value)
 function xml_escape($value)
 {
     return htmlspecialchars(preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]+#', '',
-        $value), ENT_QUOTES);
+        (string) $value), ENT_QUOTES);
 }
 
 /**
