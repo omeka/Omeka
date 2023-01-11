@@ -68,6 +68,32 @@ if (!Omeka) {
             });
         }
     };
+
+    /**
+     * Add link that collapses and expands content.
+     */
+    Omeka.manageDrawers = function (drawerList, containerName) {
+        if (!containerName) {
+            containerName = '.element';
+        }
+        $(drawerList).on('click', '.drawer button', function() { 
+            var drawerButton = $(this);
+            var container = drawerButton.parents(containerName);
+            var drawerActionSelector = drawerButton.data('action-selector');
+            container.find('.drawer, .drawer-contents').toggleClass(drawerActionSelector);
+            if (drawerButton.attr('aria-expanded')) {
+                Omeka.toggleAriaExpanded(drawerButton);
+            }
+        });
+    };
+
+    Omeka.toggleAriaExpanded = function(element) {
+        if (element.attr('aria-expanded') == 'true') {
+            element.attr('aria-expanded', 'false');
+        } else {
+            element.attr('aria-expanded', 'true');
+        }
+    };
     
     Omeka.toggleMobileMenu = function() {
 	    $('.mobile-menu').click(function (event) {
@@ -75,11 +101,7 @@ if (!Omeka) {
 			var target = button.data('target');
 			$(target).toggleClass('in');
             button.parent('nav').toggleClass('open');
-            if (button.attr('aria-expanded') == 'true') {
-                button.attr('aria-expanded', 'false');
-            } else {
-                button.attr('aria-expanded', 'true');
-            }
+            Omeka.toggleAriaExpanded(button);
 	    });
     };
     
