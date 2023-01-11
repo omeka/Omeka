@@ -25,7 +25,7 @@
 <li <?php echo ($template) ? 'class="template"' : ''; ?>> 
     <div class="main_link">
         <div class="sortable-item drawer <?php echo ($template) ? 'opened' : ''; ?>">
-            <span class="move icon" aria-role="tooltip" title="<?php echo __('Move'); ?>"></span>
+            <span class="move icon" aria-role="tooltip" aria-label="<?php echo __('Move'); ?>" id="move-<?php echo $pageCount; ?>" aria-labelledby="move-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Move'); ?>"></span>
             <?php if ($template): ?>
             <input type="hidden" class="new-link-hidden" value="0">
             <?php endif; ?>
