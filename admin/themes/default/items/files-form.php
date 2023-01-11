@@ -4,10 +4,11 @@
         <ul class="sortable">
         <?php foreach( $item->Files as $key => $file ): ?>
             <li class="file">
+                <?php $fileId = $file->id; ?>
                 <div class="sortable-item">
-                    <span class="move icon" aria-role="tooltip" title="<?php echo __('Move navigation item'); ?>"></span>
+                    <span id="move-<?php echo $fileId; ?>" class="move icon" aria-role="tooltip" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>"></span>
                     <?php echo file_image('square_thumbnail', array(), $file); ?>
-                    <?php echo link_to($file, 'show', html_escape($file->original_filename), array('class' => 'drawer-name')); ?>
+                    <?php echo link_to($file, 'show', html_escape($file->original_filename), array('class' => 'drawer-name', 'id' => 'file-' . $fileId)); ?>
                     <?php echo $this->formHidden("order[{$file->id}]", $file->order, array('class' => 'file-order')); ?>
                     <ul class="action-links">
                         <li><?php echo link_to($file, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
