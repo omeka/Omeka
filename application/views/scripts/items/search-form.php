@@ -30,7 +30,7 @@ $formAttributes['method'] = 'GET';
         <div id="search-narrow-by-fields-type" class="label sr-only" aria-hidden="true"><?php echo __('Search Type'); ?></div>
         <div id="search-narrow-by-fields-terms" class="label sr-only" aria-hidden="true"><?php echo __('Search Terms'); ?></div>
         <div id="search-narrow-by-fields-joiner" class="label sr-only" aria-hidden="true"><?php echo __('Search Joiner'); ?></div>
-        <div id="search-narrow-by-fields-remove-field" class="label aria-hidden="true"><?php echo __('Remove field'); ?></div>
+        <div id="search-narrow-by-fields-remove-field" class="label" aria-hidden="true"><?php echo __('Remove field'); ?></div>
         <div class="inputs">
         <?php
         // If the form has been submitted, retain the number of search
