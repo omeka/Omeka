@@ -8,4 +8,39 @@
   position: absolute;
   width: 1px; }
 
+#search-narrow-by-fields-remove-field {
+  display: none; }
+
+.search-entry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1rem; }
+  .search-entry .visible-label {
+    width: 100%;
+    display: block;
+    margin-bottom: .25rem; }
+  .search-entry .input,
+  .search-entry input[type=text] {
+    margin-bottom: .5rem; }
+  .search-entry select {
+    width: 100%; }
+
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+  display: none; }
+
+#search-narrow-by-fields .advanced-search-joiner select {
+  width: auto; }
+
+#search-narrow-by-fields .advanced-search-joiner .visible-label {
+  width: 100%; }
+
+#search-narrow-by-fields .advanced-search-element,
+#search-narrow-by-fields .advanced-search-type {
+  width: 49%; }
+
+#search-narrow-by-fields .advanced-search-joiner,
+#search-narrow-by-fields .advanced-search-terms {
+  width: 100%; }
+
 /*# sourceMappingURL=public.css.map */
