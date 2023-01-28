@@ -24,6 +24,7 @@ if (!Omeka) {
         }
 
         advanced_form.addClass('closed');
+        $('#search-container').addClass('with-advanced');
 
         $('.show-advanced').click(function(e) {
             e.preventDefault();
