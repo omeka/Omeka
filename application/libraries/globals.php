@@ -1180,7 +1180,7 @@ function head_css($includeDefaults = true)
 {
     $headLink = get_view()->headLink();
 
-    if ($includeDefaults) {
+    if ($includeDefaults && !is_admin_theme()) {
         $headLink->prependStylesheet(css_src('public'));
     }
     return $headLink . get_view()->headStyle();
