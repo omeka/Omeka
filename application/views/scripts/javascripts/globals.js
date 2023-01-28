@@ -19,6 +19,12 @@ if (!Omeka) {
     Omeka.showAdvancedForm = function () {
         var advanced_form = $('#advanced-form');
 
+        if (!advanced_form.length) {
+            return;
+        }
+
+        advanced_form.addClass('closed');
+
         $('.show-advanced').click(function(e) {
             e.preventDefault();
             advanced_form.toggleClass('open').toggleClass('closed');
