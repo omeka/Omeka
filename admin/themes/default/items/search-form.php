@@ -97,8 +97,10 @@ $formAttributes['method'] = 'GET';
                             'is empty' => __('is empty'),
                             'is not empty' => __('is not empty'),
                             'starts with' => __('starts with'),
-                            'ends with' => __('ends with'))
-                        )
+                            'ends with' => __('ends with'),
+                            'matches' => __('matches'),
+                            'does not match' => __('does not match'),
+                        ))
                     );
                     ?>
                 </div>
