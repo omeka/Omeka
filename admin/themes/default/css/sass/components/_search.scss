@@ -184,15 +184,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    
-	select {
-	    min-width: 0;
-	    width: 40%;
-	}
 
-	&:first-of-type select {
-	    width: 49.5%;
-	}
+    .visible-label {
+        width: 100%;
+        display: block;
+        margin-bottom: $spacing-s;
+    }
 
 	input[type=text] {
 	    margin-bottom: $spacing-m;
@@ -203,8 +200,17 @@
     display: none;
 }
 
-#search-narrow-by-fields .advanced-search-joiner {
-    width: 20%;
+#search-narrow-by-fields .advanced-search-joiner select {
+    width: auto;
+}
+
+#search-narrow-by-fields .advanced-search-joiner .visible-label {
+    width: 100%;
+}
+
+#search-narrow-by-fields .advanced-search-element,
+#search-narrow-by-fields .advanced-search-type {
+    width: 49%;
 }
 
 button.remove_search {
