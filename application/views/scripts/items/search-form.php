@@ -26,7 +26,7 @@ $formAttributes['method'] = 'GET';
     </div>
     <div id="search-narrow-by-fields" class="field">
         <div id="search-narrow-by-fields-label" class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
-        <div id="search-narrow-by-fields-property" class="label sr-only" aria-hidden="true"><?php echo __('Search Property'); ?></div>
+        <div id="search-narrow-by-fields-property" class="label sr-only" aria-hidden="true"><?php echo __('Search Field'); ?></div>
         <div id="search-narrow-by-fields-type" class="label sr-only" aria-hidden="true"><?php echo __('Search Type'); ?></div>
         <div id="search-narrow-by-fields-terms" class="label sr-only" aria-hidden="true"><?php echo __('Search Terms'); ?></div>
         <div id="search-narrow-by-fields-joiner" class="label sr-only" aria-hidden="true"><?php echo __('Search Joiner'); ?></div>
@@ -68,7 +68,7 @@ $formAttributes['method'] = 'GET';
                     ?>
                 </div>
                 <div class="input advanced-search-element"> 
-                    <span aria-hidden="true" class="visible-label"><?php echo __('Property'); ?></span>
+                    <span aria-hidden="true" class="visible-label"><?php echo __('Field'); ?></span>
                     <?php 
                     echo $this->formSelect(
                         "advanced[$i][element_id]",
