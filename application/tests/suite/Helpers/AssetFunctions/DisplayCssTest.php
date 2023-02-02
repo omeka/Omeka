@@ -62,7 +62,11 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
             self::ASSET_PATH_ROOT . '/css/public.css?v='.OMEKA_VERSION
         );
 
+        $this->_assertStylesheets($this->_getCssOutput(), array());
+
+        $frontController = Zend_Controller_Front::getInstance()->setParam('admin', false);
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
+        $frontController->resetInstance();
     }
 
     public function testQueueCssSingleWithDefaultVersion()
