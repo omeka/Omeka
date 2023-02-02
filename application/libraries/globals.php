@@ -2160,6 +2160,7 @@ function record_image($record, $imageType = null, $props = array())
 /**
  * Get an image URL for a record.
  *
+ * @since 3.1
  * @package Omeka\Function\View
  * @throws InvalidArgumentException If an invalid record is passed.
  * @uses Omeka_View-Helper_FileMarkup::image_url()
