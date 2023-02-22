@@ -1767,12 +1767,14 @@ td {
     color: #003576; }
   .action-links li {
     display: inline-block; }
-    .action-links li:after {
+    .action-links li .spacer {
+      display: inline-block; }
+    .action-links li .spacer:after {
       content: ' \00b7';
       margin-left: 3px;
       margin-right: 3px; }
       @media (max-width: 767px) {
-        .action-links li:after {
+        .action-links li .spacer:after {
           content: '';
           margin: 0; } }
     @media (max-width: 767px) {

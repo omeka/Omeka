@@ -89,11 +89,17 @@ echo item_search_filters();
 							</span>
 	                    <ul class="action-links group">
 	                        <?php if (is_allowed($item, 'edit')): ?>
-	                        <li><?php echo link_to_item(__('Edit'), array('class' => 'edit'), 'edit'); ?></li>
+	                        <li>
+								<span class="spacer" aria-hidden="true"></span>
+								<?php echo link_to_item(__('Edit'), array('class' => 'edit'), 'edit'); ?>
+							</li>
 	                        <?php endif; ?>
 	
 	                        <?php if (is_allowed($item, 'delete')): ?>
-	                        <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+	                        <li>
+								<span class="spacer" aria-hidden="true"></span>
+								<?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?>
+							</li>
 	                        <?php endif; ?>
 	                    </ul>
 	

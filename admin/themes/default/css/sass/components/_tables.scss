@@ -103,7 +103,11 @@ td {
     li { 
 	    display: inline-block; 
 	    
-        &:after { 
+        .spacer {
+            display: inline-block;
+        }
+
+        .spacer:after { 
             content: ' \00b7'; 
             margin-left: 3px; 
             margin-right: 3px;
