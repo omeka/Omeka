@@ -143,6 +143,11 @@ span.title {
 	}
 }
 
+.featured-icon,
+.private {
+    display: inline-block;
+}
+
 span.featured:after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -150,6 +155,10 @@ span.featured:after {
     width: 24px;
     height: 24px;
     color: $darkred;
+}
+
+span.private {
+    font-weight: normal;
 }
 
 .details {

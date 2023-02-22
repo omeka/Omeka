@@ -77,10 +77,14 @@ echo item_search_filters();
 	
 	                    <span class="title">
 	                    	<?php echo link_to_item(); ?>
-							<?php if ($item->featured): ?><span class="featured" aria-label="<?php echo __('Featured'); ?>" title="<?php echo __('Featured'); ?>"></span><?php endif; ?>
-	
+							<?php if ($item->featured): ?>
+							<div class="featured-icon">
+								<span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>
+								<span class="sr-only icon-label"><?php echo __('Featured'); ?></span>
+							</div> 
+							<?php endif; ?>	
 		                    <?php if(!$item->public): ?>
-		                    	<small><?php echo __('(Private)'); ?></small>
+		                    	<span class="private"><?php echo __('(Private)'); ?></span>
 		                    <?php endif; ?>
 							</span>
 	                    <ul class="action-links group">

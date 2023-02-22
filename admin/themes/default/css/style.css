@@ -1792,6 +1792,10 @@ span.title {
     font-weight: 400;
     color: gray; }
 
+.featured-icon,
+.private {
+  display: inline-block; }
+
 span.featured:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -1799,6 +1803,9 @@ span.featured:after {
   width: 24px;
   height: 24px;
   color: #82423B; }
+
+span.private {
+  font-weight: normal; }
 
 .details {
   background-color: #fff;
