@@ -47,12 +47,17 @@ echo flash();
 	                        <?php endif; ?>
 	                        
 	                        
-	                        <span class="title <?php if ($collection->featured): ?>featured<?php endif; ?>">
-		                    	<?php echo link_to_collection(); ?>
-		
-			                    <?php if(!$collection->public): ?>
-			                    	<small><?php echo __('(Private)'); ?></small>
-			                    <?php endif; ?>
+	                        <span class="title">
+		                    	<?php echo link_to_collection(); ?>		
+								<?php if ($collection->featured): ?>
+								<div class="featured-icon">
+									<span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>
+									<span class="sr-only icon-label"><?php echo __('Featured'); ?></span>
+								</div> 
+								<?php endif; ?>	
+								<?php if(!$collection->public): ?>
+									<span class="private"><?php echo __('(Private)'); ?></span>
+								<?php endif; ?>
 							</span>
 
 	                        <?php if (is_allowed($collection, 'edit')): ?>
