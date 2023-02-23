@@ -30,12 +30,13 @@ $formAttributes['method'] = 'GET';
         <p><?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count">1</span></p>
     </div>
     <div id="search-narrow-by-fields" class="field">
-        <div class="two columns alpha label"><label><?php echo __('Narrow by Specific Fields'); ?></label>
+        <div class="two columns alpha label"><label id="search-narrow-by-fields-label"><?php echo __('Narrow by Specific Fields'); ?></label>
         <div id="search-narrow-by-fields-property" class="label sr-only" aria-hidden="true"><?php echo __('Search Field'); ?></div>
         <div id="search-narrow-by-fields-type" class="label sr-only" aria-hidden="true"><?php echo __('Search Type'); ?></div>
         <div id="search-narrow-by-fields-terms" class="label sr-only" aria-hidden="true"><?php echo __('Search Terms'); ?></div>
         <div id="search-narrow-by-fields-joiner" class="label sr-only" aria-hidden="true"><?php echo __('Search Joiner'); ?></div>
-        <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
+        <div id="search-narrow-by-fields-remove-field" class="label sr-only" aria-hidden="true"><?php echo __('Remove field'); ?></div>
+        <button id="search-narrow-by-fields-add-field" type="button" class="add_search" aria-labelledby="search-narrow-by-fields-label search-narrow-by-fields-add-field"><?php echo __('Add a Field'); ?></button>
         </div>
         <div class="five columns omega inputs">
         <?php
@@ -122,7 +123,7 @@ $formAttributes['method'] = 'GET';
                     );
                     ?>
                 </div>
-                <button type="button" class="remove_search" disabled="disabled" style="display: none;" aria-labelledby="search-narrow-by-fields-label search-row-<?php echo $i; ?> search-narrow-by-fields-remove-field" title="<?php echo __('Remove field'); ?>"><?php echo __('Remove field'); ?></button>
+                <button type="button" class="remove_search" disabled="disabled" style="display: none;" aria-labelledby="search-narrow-by-fields-label search-row-<?php echo $i; ?> search-narrow-by-fields-remove-field"><?php echo __('Remove field'); ?></button>
             </div>
         <?php endforeach; ?>
         </div>
