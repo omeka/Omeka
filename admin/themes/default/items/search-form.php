@@ -26,8 +26,13 @@ $formAttributes['method'] = 'GET';
         ?>
         </div>
     </div>
-    <div id="search-narrow-by-field-alerts" class="sr-only alerts" aria-atomic="true" aria-live="polite">
-        <p><?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count">1</span></p>
+    <div id="search-narrow-by-field-alerts" class="sr-only alerts">
+        <div class="add-alert" role="status" aria-atomic="true" aria-live="polite">
+            <?php echo __('Field added.'); ?> <?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count"></span>
+        </div>
+        <div class="remove-alert" role="status" aria-atomic="true" aria-live="polite">
+            <?php echo __('Field removed.'); ?> <?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count"></span>
+        </div>
     </div>
     <div id="search-narrow-by-fields" class="field">
         <div class="two columns alpha label"><label id="search-narrow-by-fields-label"><?php echo __('Narrow by Specific Fields'); ?></label>

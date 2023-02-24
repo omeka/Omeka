@@ -71,7 +71,7 @@ Omeka.Search = {};
                 removeAdvancedSearch(this);
             });
 
-            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
+            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts .add-alert', '.search-entry');
             handleRemoveButtons();
         }
 
@@ -90,7 +90,7 @@ Omeka.Search = {};
         function removeAdvancedSearch(button) {
             $(button).parent().remove();
             handleRemoveButtons();
-            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
+            updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts .remove-alert', '.search-entry');
         }
 
         /**
