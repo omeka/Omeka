@@ -521,7 +521,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                 );
 
                 // Ignore fields that are empty (no text)
-                if (!strlen($elementText)) {
+                if ($elementText === null || !strlen($elementText)) {
                     continue;
                 }
 
