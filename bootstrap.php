@@ -60,7 +60,7 @@ if ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS']
 if (!isset($_SERVER['HTTP_HOST'])) {
     $_SERVER['HTTP_HOST'] = null;
 }
-$absoluteBase = $scheme . '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+$absoluteBase = $scheme . '://' . preg_replace('/[^a-z0-9-:._]/i', '', (string) $_SERVER['HTTP_HOST']);
 
 // Set the path.
 $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');
