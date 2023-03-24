@@ -6,7 +6,7 @@
 # Adam Véle <vele@centrum.cz>, 2012
 # Dana Léw <lew.dana@gmail.com>, 2011,2013
 # Jan Černý <cernyhonza@gmail.com>, 2011-2014
-# Jiří Vírava <appukonrad@gmail.com>, 2014-2015,2017
+# Appukonrad <appukonrad@gmail.com>, 2014-2015,2017
 # Martin Slavík <martin.d.slavik@gmail.com>, 2018,2021-2022
 # MICHAL D. <black23@gmail.com>, 2013-2014
 # Adam Véle <vele@centrum.cz>, 2012
@@ -3849,12 +3849,12 @@ msgstr ""
 
 #: application/views/scripts/items/search-form.php:29
 msgid "Search Property"
-msgstr ""
+msgstr "Hledaná vlastnost"
 
 #: application/views/scripts/items/search-form.php:52
 #, php-format
 msgid "Row %s"
-msgstr ""
+msgstr "Řádek %s"
 
 #: application/views/scripts/items/search-form.php:54
 msgid "Joiner"
@@ -3862,11 +3862,11 @@ msgstr ""
 
 #: application/views/scripts/items/search-form.php:71
 msgid "Property"
-msgstr ""
+msgstr "Vlastnost"
 
 #: application/views/scripts/items/search-form.php:110
 msgid "Terms"
-msgstr ""
+msgstr "Podmínky"
 
 #: application/views/scripts/items/show.php:13
 msgid "Files"
@@ -3891,7 +3891,7 @@ msgstr "Typy záznamů:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
-msgstr ""
+msgstr "Dotaz"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"

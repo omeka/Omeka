@@ -6,7 +6,7 @@
 # Anderson Santana <desantana.anderson@gmail.com>, 2021
 # Antoanne Pontes <antoanne@gmail.com>, 2018
 # Carlos Eduardo Maciel <carlosmaciel1@gmail.com>, 2011-2017,2019
-# Deidson Rafael <drafael@usp.br>, 2019
+# Deidson Rafael Trindade <drafael@usp.br>, 2019
 # Diego Ecker <eckerdiego@gmail.com>, 2014
 # Henrique B <henriquebeira@gmail.com>, 2013
 # Henrique B <henriquebeira@gmail.com>, 2013

@@ -7,7 +7,7 @@
 # John Flatness <john@omeka.org>, 2020
 # Miquel Àngel <ma.serra@gmail.com>, 2013
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018,2021
+# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018,2021,2023
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018,2021\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018,2021,2023\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/omeka/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -443,7 +443,7 @@ msgstr "Afegeix una col·lecció"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Afegeix una col·lecció"
+msgstr "Desa la col·lecció"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:32
@@ -1110,7 +1110,7 @@ msgstr "Afegeix un ítem"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Afegeix un ítem"
+msgstr "Desa l'ítem"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
@@ -2739,7 +2739,7 @@ msgstr "Mostra els elements buits"
 
 #: application/forms/AppearanceSettings.php:63
 msgid "Include empty elements in show pages."
-msgstr ""
+msgstr "Inclou els elements buits a les pàgines dels registres bibliogràfics."
 
 #: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
@@ -2747,7 +2747,7 @@ msgstr "Mostra la capçalera del conjunt d'elements"
 
 #: application/forms/AppearanceSettings.php:69
 msgid "Include element set headings in show pages and in drop-down lists."
-msgstr ""
+msgstr "Inclou el nom del conjunt de metadades en les pàgines dels registres i en les llistes."
 
 #: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
@@ -3823,28 +3823,28 @@ msgstr "Mostra tots els ítems"
 #: application/views/scripts/items/search-form.php:25
 #, php-format
 msgid "Number of rows in \"%s\":"
-msgstr ""
+msgstr "Nombre de files a \"%s\":"
 
 #: application/views/scripts/items/search-form.php:29
 msgid "Search Property"
-msgstr ""
+msgstr "Cerca la propietat"
 
 #: application/views/scripts/items/search-form.php:52
 #, php-format
 msgid "Row %s"
-msgstr ""
+msgstr "Fila %s"
 
 #: application/views/scripts/items/search-form.php:54
 msgid "Joiner"
-msgstr ""
+msgstr "Joiner"
 
 #: application/views/scripts/items/search-form.php:71
 msgid "Property"
-msgstr ""
+msgstr "Propietat"
 
 #: application/views/scripts/items/search-form.php:110
 msgid "Terms"
-msgstr ""
+msgstr "Termes"
 
 #: application/views/scripts/items/show.php:13
 msgid "Files"
@@ -3869,7 +3869,7 @@ msgstr "Tipus de registre:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
-msgstr ""
+msgstr "Consulta"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
