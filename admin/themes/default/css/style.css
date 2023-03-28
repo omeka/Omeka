@@ -875,6 +875,9 @@ label input[type=radio] {
   margin-right: 5px !important; }
 
 input[type=text],
+input[type=number],
+input[type=email],
+input[type=search],
 input[type=password] {
   height: 36px;
   border: 1px solid #D6D5C2;

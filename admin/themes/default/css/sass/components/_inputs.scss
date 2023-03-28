@@ -35,7 +35,10 @@ label input[type=radio] {
 }
 
 input[type=text], 
-input[type=password] {
+input[type=number], 
+input[type=email], 
+input[type=search], 
+input[type=password] { 
     height: 36px;
     border: 1px solid $darkgrayborder;
     -webkit-border-radius: 0;
