@@ -57,6 +57,13 @@ class Theme
     public $directory;
 
     /**
+     * Theme's current version.
+     *
+     * @var string
+     */
+    public $version;
+
+    /**
      * Web path to the theme screenshot.
      *
      * @var string

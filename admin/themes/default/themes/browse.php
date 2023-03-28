@@ -20,6 +20,7 @@ if ($current->image) {
     </div>
     <div id="current-info" class="six columns omega">
         <h2><?php echo html_escape($current->title); ?> <small class="current-theme-label"><?php echo __('Current Theme'); ?></small></h2>
+        <p class="version"><?php echo __('Version %s', html_escape($current->version)); ?></p>
         <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
         <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
@@ -64,6 +65,7 @@ foreach ($themes as $theme):
             <button type="submit" name="public_theme" class="use-theme green button" value="<?php echo html_escape($theme->directory); ?>"><?php echo __('Use this theme'); ?></button>
             <div class="meta">
                 <h3><?php echo html_escape($theme->title); ?></h3>
+                <p class="version"><?php echo __('Version %s', html_escape($theme->version)); ?></p>
                 <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?></a></p>
                 <p class="theme-support-link"><a href="<?php echo $theme->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
             </div>
