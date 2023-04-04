@@ -2247,6 +2247,9 @@ ul.details {
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); }
 
+.element-set {
+  overflow: hidden; }
+
 .element {
   clear: both;
   margin: 0 0 16px 0; }
