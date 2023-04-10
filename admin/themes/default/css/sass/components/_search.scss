@@ -118,14 +118,6 @@
 	.advanced-search-terms {
 		margin-bottom: $spacing-m;
 	}
-	@include screen-md {
-		.columns.two {
-			width: 100%;
-		}
-		.columns.five {
-			width: 100%;
-		}
-	}
 }
 
     

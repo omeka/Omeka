@@ -90,7 +90,7 @@ hr {
 
 .field .field-meta,
 .field .two.columns.alpha {
-	width: calc(2/7 * 100%);
+	width: #{2/7 * 100%};
 	margin-right: 0;
 	padding-right: $spacing-l;
 	box-sizing: border-box;
@@ -104,7 +104,7 @@ hr {
 
 .field .inputs,
 .field .five.columns.omega {
-	width: calc(5/7 * 100%);
+	width: #{5/7 * 100%};
 	margin-left: 0;
 	float: left;
 

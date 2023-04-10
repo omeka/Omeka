@@ -184,7 +184,7 @@ hr {
 
 .field .field-meta,
 .field .two.columns.alpha {
-  width: calc(2/7 * 100%);
+  width: 28.5714285714%;
   margin-right: 0;
   padding-right: 20px;
   box-sizing: border-box;
@@ -197,7 +197,7 @@ hr {
 
 .field .inputs,
 .field .five.columns.omega {
-  width: calc(5/7 * 100%);
+  width: 71.4285714286%;
   margin-left: 0;
   float: left; }
   @media (max-width: 767px) {
@@ -924,7 +924,6 @@ label input[type=text] {
     align-items: center;
     justify-content: space-between; }
     .field-meta label {
-      font-size: 16px;
       margin-bottom: 0; }
     .field-meta button {
       margin-bottom: 0;
@@ -1456,11 +1455,6 @@ header {
 
 #advanced-search-form .advanced-search-terms {
   margin-bottom: 10px; }
-@media (min-width: 992px) and (max-width: 1199px) {
-  #advanced-search-form .columns.two {
-    width: 100%; }
-  #advanced-search-form .columns.five {
-    width: 100%; } }
 
 #search-results td:first-of-type {
   width: 15%; }
