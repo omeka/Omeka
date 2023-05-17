@@ -12,9 +12,14 @@
             closable: false,
             showMaximizeIcon: true,
             captions: true,
-            allowMediaOverlap: false,
+            allowMediaOverlap: false
         });
 
         inlineGallery.openGallery();
+
+        var downloadButton = lgContainer.getElementsByClassName('lg-download');
+        downloadButton[0].addEventListener('click', function(e) {
+            e.stopPropagation();
+        }); 
     });
   })(jQuery)
