@@ -59,7 +59,7 @@
   animation-duration: 4s;
   animation-iteration-count: 1; }
 
-* {
+html {
   font-family: "Lato", sans-serif;
   font-size: 14px;
   color: #232323; }
@@ -933,10 +933,7 @@ label input[type=text] {
   clear: both;
   margin: 0 0 10px 0;
   color: #666;
-  font-style: italic;
-  font-size: 16px; }
-  .explanation * {
-    font-size: 16px; }
+  font-style: italic; }
 
 .inputs {
   margin: 0 0 20px 0; }
