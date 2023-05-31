@@ -1200,7 +1200,6 @@ header {
   height: 38px;
   min-width: 25px;
   color: #666666;
-  font-family: "Cabin", sans-serif;
   float: left;
   line-height: 22px;
   list-style-type: none;
@@ -2755,7 +2754,6 @@ form.form-inline.editableform {
   text-shadow: none;
   color: #82423B;
   left: 0;
-  font-family: "Cabin", sans-serif;
   padding: 3px 6px;
   width: 100%;
   box-sizing: border-box;
