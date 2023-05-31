@@ -837,8 +837,6 @@ footer {
   clear: both;
   font-size: 12px;
   padding: 20px 0 !important; }
-  footer * {
-    font-size: 12px !important; }
   footer a {
     margin-right: 20px; }
     @media (max-width: 991px) {
@@ -1037,7 +1035,8 @@ select[multiple="multiple"] {
   font-weight: normal; }
 
 .field legend {
-  font-size: 14px;
+  font-size: inherit;
+  line-height: 1.5em;
   font-weight: bold; }
 
 .field .inputs legend {
@@ -1124,8 +1123,7 @@ header {
             width: 100%;
             display: block;
             padding: 8px 20px;
-            border: none;
-            font-size: 16px; }
+            border: none; }
           header nav li a:hover,
           header nav li a:active {
             border-bottom-color: #666; } }
@@ -1455,8 +1453,6 @@ header {
     margin: 0 9px 0 0; }
   #advanced-form input[type=checkbox] {
     margin-right: 5px; }
-  #advanced-form fieldset {
-    margin: 20px 0; }
   #advanced-form legend {
     font-size: 16px;
     margin: 20px 0 10px; }
@@ -1595,9 +1591,7 @@ button.remove_search {
     #content-nav li a {
       color: white;
       display: block;
-      line-height: 1.5em;
       padding: .5em .5em .5em 1em;
-      font-size: 14px;
       text-decoration: none;
       transition: 0.5s all; }
       @media (max-width: 767px) {
@@ -2363,8 +2357,7 @@ ul.details {
 #public-featured {
   margin: 0 0 10px 0;
   padding: 0;
-  text-align: center;
-  font-size: 12px; }
+  text-align: center; }
 
 #public-featured div {
   display: inline-block; }
