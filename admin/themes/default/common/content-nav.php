@@ -27,13 +27,3 @@
         echo $nav;
     ?>
 </nav>
-
-<!--
-<nav id="mobile-content-nav">
-    <ul class="quick-filter-wrapper">
-        <li><a href="#" tabindex="0"><?php echo $title; ?></a>
-        <?php echo $nav->setUlClass('dropdown'); ?>
-        </li>
-    </ul>    
-</nav>
--->
