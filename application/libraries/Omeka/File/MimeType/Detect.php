@@ -74,7 +74,6 @@ class Omeka_File_MimeType_Detect
                 new Omeka_File_MimeType_Detect_Strategy_FileCommand,
                 new Omeka_File_MimeType_Detect_Strategy_MimeContentType,
                 new Omeka_File_MimeType_Detect_Strategy_GetId3,
-                new Omeka_File_MimeType_Detect_Strategy_Browser,
             );
         } else {
             // Validate the passed strategies.
