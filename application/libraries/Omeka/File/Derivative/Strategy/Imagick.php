@@ -74,7 +74,7 @@ class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_Abstr
                 $offsetX = $this->_getCropOffsetX($newX, $sizeConstraint);
             }
 
-            $imagick->thumbnailImage($newX, $newY);
+            $imagick->thumbnailImage(round($newX), round($newY));
             $imagick->cropImage($sizeConstraint, $sizeConstraint, $offsetX, $offsetY);
             $imagick->setImagePage($sizeConstraint, $sizeConstraint, 0, 0);
         }
