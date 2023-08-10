@@ -228,13 +228,15 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
                 $existingTags[$key] = trim($tag);
             }
         }
+
+        $arr = array();
         if (!empty($existingTags)) {
-            $removed = array_values(array_diff($existingTags, $inputTags));
+            $arr['removed'] = array_values(array_diff($existingTags, $inputTags));
         }
         if (!empty($inputTags)) {
-            $added = array_values(array_diff($inputTags, $existingTags));
+            $arr['added'] = array_values(array_diff($inputTags, $existingTags));
         }
-        return compact('removed', 'added');
+        return $arr;
     }
 
     /**
