@@ -404,7 +404,7 @@ class Omeka_Db_Table
      */
     public function applyPagination($select, $limit, $page = null)
     {
-        if ($page) {
+        if ($page && is_numeric($page)) {
             $select->limitPage($page, $limit);
         } else {
             $select->limit($limit);
