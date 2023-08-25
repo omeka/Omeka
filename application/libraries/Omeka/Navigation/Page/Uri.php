@@ -106,7 +106,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 );
             }
         } catch (Zend_Uri_Exception $e) {
-            if (filter_var($href, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+            if (filter_var($href, FILTER_VALIDATE_URL)) {
                 $fragmentPos = strrpos($href, '#');
                 if ($fragmentPos !== false) {
                     if ($fragmentPos < strlen($href) - 1) {
