@@ -106,4 +106,11 @@ class Omeka_Navigation_UriTest extends Omeka_Test_AppTestCase
         $this->_page->setHref($beforeHref);
         $this->assertEquals($afterHref, $this->_page->getHref());
     }
+
+    public function testInterestingScheme()
+    {
+        $href = 'mailto:example@example.com';
+        $this->_page->setHref($href);
+        $this->assertEquals($href, $this->_page->getHref());
+    }
 }
