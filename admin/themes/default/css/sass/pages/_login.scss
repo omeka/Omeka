@@ -14,7 +14,7 @@
 	    }
 	}
 
-	.errors {
+	.error {
 	    list-style-type: none;
 	    margin: 0;
 	    padding: 0;
@@ -110,9 +110,20 @@
 	
 	#required-note {
 		display: block;
+        font-size: 14px;
 	}
 
 	.columns {
 		max-width: 100%;
 	}
+}
+
+#debug {
+    #content {
+        padding: 25px;
+    }
+
+    #error-message {
+        text-align: left;
+    }
 }

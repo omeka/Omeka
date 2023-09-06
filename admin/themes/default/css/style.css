@@ -2472,16 +2472,16 @@ ul.details {
     #login #content,
     #debug #content {
       padding: 25px; } }
-#install .errors,
-#login .errors,
-#debug .errors {
+#install .error,
+#login .error,
+#debug .error {
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: left; }
-  #install .errors li,
-  #login .errors li,
-  #debug .errors li {
+  #install .error li,
+  #login .error li,
+  #debug .error li {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid #E7E7E7;
     -webkit-border-radius: 3px;
@@ -2575,11 +2575,17 @@ ul.details {
 #install #required-note,
 #login #required-note,
 #debug #required-note {
-  display: block; }
+  display: block;
+  font-size: 14px; }
 #install .columns,
 #login .columns,
 #debug .columns {
   max-width: 100%; }
+
+#debug #content {
+  padding: 25px; }
+#debug #error-message {
+  text-align: left; }
 
 .plugins.browse table form {
   display: inline-block; }
