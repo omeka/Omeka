@@ -15,7 +15,7 @@ msgstr ""
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
 "Last-Translator: Anna Svensson <anna.svensson@ub.gu.se>, 2020\n"
-"Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
+"Language-Team: Swedish (Sweden) (http://app.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,6 +103,7 @@ msgstr "Ett datum knutet till en händelse i resursens levnadstid"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
 #: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Resurstyp"
@@ -409,8 +410,8 @@ msgstr "Visa publik sida"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -434,8 +435,8 @@ msgstr "Alla anpassningar förloras. Ordning och etiketter återställs till Ome
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Lägg till en samling"
 
@@ -455,11 +456,14 @@ msgid "Public"
 msgstr "Offentlig"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -521,12 +525,12 @@ msgstr "Tilläggsdatum"
 msgid "Total Number of Items"
 msgstr "Totalt antal objekt"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -535,31 +539,31 @@ msgstr "(Privat)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Redigera"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Inga medarbetare"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Det finns inga samlingar på denna sida."
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Se alla samlingar"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "Du har inga samlingar."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "Börja genom att skapa din första samling"
 
@@ -609,7 +613,7 @@ msgstr "Inga medarbetare."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -665,7 +669,7 @@ msgid "Item Types"
 msgstr "Objekttyper"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -698,6 +702,8 @@ msgstr ""
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Version %s"
@@ -1101,8 +1107,8 @@ msgstr "Det finns inga nyligen tillagda objekt"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "Lägg till ett objekt"
 
@@ -1112,7 +1118,7 @@ msgstr "Lägg till objekt"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1278,22 +1284,22 @@ msgid "Browse Items"
 msgstr "Bläddra bland objekt"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2459
-#: application/libraries/globals.php:2850
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Sök objekt"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr "Välj alla %s resultat"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr "Valda objekt"
 
@@ -1306,42 +1312,42 @@ msgstr "Markera alla rader"
 msgid "Select item \"%s\""
 msgstr "Välj objekt \"%s\""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Inga etiketter/taggar"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Detaljer"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Visa detaljer"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Dölj detaljer"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "Du har inga objekt."
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "Börja genom att skapa ditt första objekt."
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "Din sökning gav inget resultat."
 msgstr[1] "Din sökfråga kördes på %s objekt men gav inga resultat."
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "förfina din sökning"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Vill du %s?"
@@ -1399,157 +1405,186 @@ msgid "Search for Keywords"
 msgstr "Sök efter nyckelord"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
 #: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Avgränsa med specifika fält"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:127
-msgid "Add a Field"
-msgstr "Lägg till ett fält"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:57
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Field"
+msgstr "Sök fält"
+
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
+msgid "Search Type"
+msgstr "Sök typ"
+
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
+msgid "Search Terms"
+msgstr "Söktermer"
+
+#: admin/themes/default/items/search-form.php:37
 #: application/views/scripts/items/search-form.php:32
 msgid "Search Joiner"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Lägg till ett fält"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:64
 msgid "AND"
 msgstr "AND"
 
-#: admin/themes/default/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:65
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:65
 msgid "OR"
 msgstr "OR"
 
-#: admin/themes/default/items/search-form.php:70
-msgid "Search Field"
-msgstr "Sök fält"
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:30
-msgid "Search Type"
-msgstr "Sök typ"
-
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:98
 msgid "contains"
 msgstr "innehåller"
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:99
 #: application/views/scripts/items/search-form.php:99
 msgid "does not contain"
 msgstr "innehåller ej"
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:100
 #: application/views/scripts/items/search-form.php:100
 msgid "is exactly"
 msgstr "är exakt"
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:101
 msgid "is not exactly"
 msgstr "är inte exakt"
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
 msgid "is empty"
 msgstr "är tomt"
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:103
 #: application/views/scripts/items/search-form.php:102
 msgid "is not empty"
 msgstr "är ej tomt"
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:104
 #: application/views/scripts/items/search-form.php:103
 msgid "starts with"
 msgstr "börjar med"
 
-#: admin/themes/default/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:104
 msgid "ends with"
 msgstr "slutar med"
 
-#: admin/themes/default/items/search-form.php:96
+#: admin/themes/default/items/search-form.php:106
 msgid "matches"
 msgstr "matchar"
 
-#: admin/themes/default/items/search-form.php:97
+#: admin/themes/default/items/search-form.php:107
 msgid "does not match"
 msgstr "matchar inte"
 
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:31
-msgid "Search Terms"
-msgstr "Söktermer"
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Ta bort fält"
 
-#: admin/themes/default/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:134
 #: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Sök efter spann av ID#s (t.ex: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:133
+#: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Sök samling"
 
-#: admin/themes/default/items/search-form.php:149
+#: admin/themes/default/items/search-form.php:164
 #: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Sök typ"
 
-#: admin/themes/default/items/search-form.php:166
+#: admin/themes/default/items/search-form.php:181
 #: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Sök användare"
 
-#: admin/themes/default/items/search-form.php:183
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Sök taggar"
 
-#: admin/themes/default/items/search-form.php:198
+#: admin/themes/default/items/search-form.php:213
 #: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Publik/Inte publik"
 
-#: admin/themes/default/items/search-form.php:207
+#: admin/themes/default/items/search-form.php:222
 #: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Enbast publika objekt"
 
-#: admin/themes/default/items/search-form.php:208
+#: admin/themes/default/items/search-form.php:223
 #: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Endast icke-publika objekt"
 
-#: admin/themes/default/items/search-form.php:218
+#: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Utvalt/Ej utvalt"
 
-#: admin/themes/default/items/search-form.php:227
+#: admin/themes/default/items/search-form.php:242
 #: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Endast utvalda objekt"
 
-#: admin/themes/default/items/search-form.php:228
+#: admin/themes/default/items/search-form.php:243
 #: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Endast ej utvalda objekt"
 
-#: admin/themes/default/items/search-form.php:236
+#: admin/themes/default/items/search-form.php:251
 #: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Sök objekt"
@@ -1627,8 +1662,8 @@ msgid "by %s"
 msgstr "efter %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Få support"
 
@@ -1661,7 +1696,7 @@ msgid "Uninstall"
 msgstr "Avinstallera"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Installera"
 
@@ -1884,7 +1919,7 @@ msgid "Date created"
 msgstr "Tillkomstdatum"
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Skärmdump for %s tema"
@@ -1897,13 +1932,13 @@ msgstr "Anpassa tema"
 msgid "Current Theme"
 msgstr "Nuvarande tema"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "Efter %s"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1911,7 +1946,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Lägg till nya teman genom att hämta dem från <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omekas temakatalog</a>, eller <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">designa ditt eget tema</a>!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Använd detta tema"
 
@@ -2050,15 +2085,15 @@ msgstr "Bläddra användare"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Användarnamn"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2122,7 +2157,7 @@ msgstr "Skicka"
 msgid "Back to Log In"
 msgstr "Tillbaka till inloggning"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Logga in"
@@ -2235,8 +2270,8 @@ msgstr "Detta kommer att radera elementsamlingen och dess relaterade element. Ob
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:314
-#: application/libraries/Omeka/Controller/AbstractActionController.php:190
-#: application/libraries/Omeka/Controller/AbstractActionController.php:231
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "Något blev fel i formuläret. Försök igen."
 
@@ -2685,7 +2720,7 @@ msgid ""
 msgstr "Använd kvadratiskt beskurna bilder som standard för tumnaglar i det publika gränssnittet."
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Fullstorlek"
 
@@ -2694,7 +2729,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Max storlek på fullstorlek (i pixlar)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Tumnagelstorlek"
 
@@ -2703,7 +2738,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Max storlek på tumnagel (i pixlar)"
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Kvadratisk tumnagelstorlek"
 
@@ -2731,7 +2766,7 @@ msgid ""
 msgstr "Begränsa antalet resultat som visas per sida i det publika gränssnittet."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Visa tomma element"
 
@@ -2806,27 +2841,27 @@ msgstr "Det nya lösenordet måste bestå av minst %min% tecken."
 msgid "Repeat New Password"
 msgstr "Repetera nytt lösenord"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Webbplatsens titel"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Webbplatsens beskrivning"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Administratörens epostadress"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Webbplatsens copyrightinformation"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Webbplatsens upphovsman"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Avgränsare för taggar"
 
@@ -2836,7 +2871,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Separera taggar med detta tecken eller ord. Var försiktig när du ändrar denna inställning. Du riskerar att dela taggar som innehåller den tidigare avgränsaren."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "Katalogsökväg för ImageMagick"
 
@@ -2844,22 +2879,22 @@ msgstr "Katalogsökväg för ImageMagick"
 msgid "General Settings"
 msgstr ""
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "får vara max 30 tecken utan mellanrum"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Mellanrum är inte tillåtna. Endast följande specialtecken får användas: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Lösenord"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "måste vara minst 6 tecken"
 
@@ -2867,49 +2902,49 @@ msgstr "måste vara minst 6 tecken"
 msgid "Confirm your password."
 msgstr "Bekräfta lösenord"
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Separera taggar med detta tecken eller ord."
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Max storlek på fullstorlek (i pixlar)."
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Max storlek på tumnagel (i pixlar)"
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Max storlek på kvadratisk tumnagel (i pixlar)."
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Objekt per sida (admin)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Begränsa antalet objekt som visas per sida i det administrativa gränssnittet."
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Objekt per sida (publikt)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Begränsa antalet objekt som visas per sida i det publika gränssnittet."
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Markera för att visa metadataelement utan text."
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "Standardkonto huvudadministratör"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Webbplatsinställningar"
 
@@ -2926,15 +2961,15 @@ msgstr "Objekttypens beskrivning."
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Objekttypen kan inte ha mer än ett \"%s\" element."
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Användarnamn kan inte vara tomt."
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "senord kan inte vara tomt."
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Kom ihåg mig?"
 
@@ -3168,7 +3203,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Det överordnade elementet måste antingen vara navigeringsobjektet eller en undersida till navigeringsobjektet."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Ogiltig URI för Omeka_Navigation_Page_Uri-objektet: %s "
@@ -3246,45 +3281,45 @@ msgstr ""
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2354
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Inga senaste objekt finns tillgängliga"
 
-#: application/libraries/globals.php:2380
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Inga utvalda objekt finns tillgängliga."
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Listvy"
 
-#: application/libraries/globals.php:2503
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Inga samlingar"
 
-#: application/libraries/globals.php:2622
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "Nästa post &rarr;"
 
-#: application/libraries/globals.php:2659
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Föregående post"
 
-#: application/libraries/globals.php:2840
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Visa alla"
 
-#: application/libraries/globals.php:2845
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Bläddra via taggar"
 
-#: application/libraries/globals.php:3125
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Inga taggar tillgängliga."
 
@@ -3338,7 +3373,7 @@ msgstr "Ogiltigt element-id"
 msgid "Cannot get the local path for a stored file."
 msgstr "Den lokala sökvägen för en sparad fil kunde inte hämtas."
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" är inte ett giltigt filderivat"
@@ -3818,32 +3853,6 @@ msgstr "Utvald samling"
 msgid "View All Items"
 msgstr "Se alla samlingar"
 
-#: application/views/scripts/items/search-form.php:25
-#, php-format
-msgid "Number of rows in \"%s\":"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:29
-msgid "Search Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:52
-#, php-format
-msgid "Row %s"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:54
-msgid "Joiner"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:71
-msgid "Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:110
-msgid "Terms"
-msgstr ""
-
 #: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Filer"
@@ -3893,7 +3902,7 @@ msgstr "Till startsidan"
 msgid "Lost your password?"
 msgstr "Glömt ditt lösenord?"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Databasresursen kunde inte laddas!"
 

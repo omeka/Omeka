@@ -17,7 +17,7 @@ msgstr ""
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
 "Last-Translator: Yuliya Ilchuk, 2022\n"
-"Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
+"Language-Team: Ukrainian (http://app.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -105,6 +105,7 @@ msgstr "Точка або період часу, що пов'язана з по�
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
 #: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Техніка"
@@ -411,8 +412,8 @@ msgstr "Переглянути загальнодоступну сторінку
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -436,8 +437,8 @@ msgstr "Всі налаштування будуть втрачені. Поря�
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Додати колекцію"
 
@@ -457,11 +458,14 @@ msgid "Public"
 msgstr "Загальнодоступні"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -525,12 +529,12 @@ msgstr "Дата створення"
 msgid "Total Number of Items"
 msgstr "Загальна кількість елементів"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Приватне)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -539,31 +543,31 @@ msgstr "(Приватне)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Редагувати"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Партнери відсутні"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Колекції відсутні на цій сторінці."
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Перегляд усіх колекцій"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "У вас відсутні колекції."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "Розпочніть з додавання вашої першої колекції."
 
@@ -613,7 +617,7 @@ msgstr "Партнери відсутні."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -669,7 +673,7 @@ msgid "Item Types"
 msgstr "Типи елементів"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -702,6 +706,8 @@ msgstr "Вверх"
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Версія %s"
@@ -1117,8 +1123,8 @@ msgstr "Останні додані елементи відсутні."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "Додати елемент"
 
@@ -1128,7 +1134,7 @@ msgstr "Додати елемент"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1294,22 +1300,22 @@ msgid "Browse Items"
 msgstr "Перегляд елементів"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2459
-#: application/libraries/globals.php:2850
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Пошук"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr "Вибрати всі %sрезультати"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr "Вибрані елементи"
 
@@ -1322,31 +1328,31 @@ msgstr "Вибрати всі рядки"
 msgid "Select item \"%s\""
 msgstr "Вибрати елемент \"%s\""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Теги відсутні"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Деталі"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Переглянути деталі"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Приховати деталі"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "У вас відсутні елементи."
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "Розпочніть з додавання вашого першого елемента."
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1355,11 +1361,11 @@ msgstr[1] "Пошуковий запит  %s елемента не дав рез
 msgstr[2] "Пошуковий запит %s елементів не дав результатів."
 msgstr[3] "Пошуковий запит %s елементів не дав результатів."
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "змініть свій пошук"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Хочете %s?"
@@ -1417,157 +1423,186 @@ msgid "Search for Keywords"
 msgstr "Пошук за ключовими словами"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
 #: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Обмежено за спеціальними полями"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:127
-msgid "Add a Field"
-msgstr "Додати поле"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:57
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Field"
+msgstr "Знайти поле"
+
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
+msgid "Search Type"
+msgstr "Знайти тип"
+
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
+msgid "Search Terms"
+msgstr "Пошукові терміни"
+
+#: admin/themes/default/items/search-form.php:37
 #: application/views/scripts/items/search-form.php:32
 msgid "Search Joiner"
 msgstr "Поєднання в пошуку"
 
-#: admin/themes/default/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Додати поле"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:64
 msgid "AND"
 msgstr "ТА"
 
-#: admin/themes/default/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:65
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:65
 msgid "OR"
 msgstr "ЧИ"
 
-#: admin/themes/default/items/search-form.php:70
-msgid "Search Field"
-msgstr "Знайти поле"
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:30
-msgid "Search Type"
-msgstr "Знайти тип"
-
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:98
 msgid "contains"
 msgstr "містить"
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:99
 #: application/views/scripts/items/search-form.php:99
 msgid "does not contain"
 msgstr "не містить"
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:100
 #: application/views/scripts/items/search-form.php:100
 msgid "is exactly"
 msgstr "відповідний"
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:101
 msgid "is not exactly"
 msgstr "неточний"
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
 msgid "is empty"
 msgstr "порожнє"
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:103
 #: application/views/scripts/items/search-form.php:102
 msgid "is not empty"
 msgstr "не порожнє"
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:104
 #: application/views/scripts/items/search-form.php:103
 msgid "starts with"
 msgstr "почати з"
 
-#: admin/themes/default/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:104
 msgid "ends with"
 msgstr "закінчити з"
 
-#: admin/themes/default/items/search-form.php:96
+#: admin/themes/default/items/search-form.php:106
 msgid "matches"
 msgstr "відповідники"
 
-#: admin/themes/default/items/search-form.php:97
+#: admin/themes/default/items/search-form.php:107
 msgid "does not match"
 msgstr "не відповідає"
 
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:31
-msgid "Search Terms"
-msgstr "Пошукові терміни"
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Видалити поле"
 
-#: admin/themes/default/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:134
 #: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Пошук за діапазоном ID (приклад: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:133
+#: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Пошук за колекцією"
 
-#: admin/themes/default/items/search-form.php:149
+#: admin/themes/default/items/search-form.php:164
 #: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Пошук за типом"
 
-#: admin/themes/default/items/search-form.php:166
+#: admin/themes/default/items/search-form.php:181
 #: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Пошук за користувачем"
 
-#: admin/themes/default/items/search-form.php:183
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Пошук за міткою"
 
-#: admin/themes/default/items/search-form.php:198
+#: admin/themes/default/items/search-form.php:213
 #: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Загальнодоступний/Не загальнодоступний"
 
-#: admin/themes/default/items/search-form.php:207
+#: admin/themes/default/items/search-form.php:222
 #: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Тільки загальнодоступні елементи"
 
-#: admin/themes/default/items/search-form.php:208
+#: admin/themes/default/items/search-form.php:223
 #: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Тільки не загальнодоступні елементи"
 
-#: admin/themes/default/items/search-form.php:218
+#: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Популярні/Непопулярні"
 
-#: admin/themes/default/items/search-form.php:227
+#: admin/themes/default/items/search-form.php:242
 #: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "ТІльки популярні елементи"
 
-#: admin/themes/default/items/search-form.php:228
+#: admin/themes/default/items/search-form.php:243
 #: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Тільки непопулярні елементи"
 
-#: admin/themes/default/items/search-form.php:236
+#: admin/themes/default/items/search-form.php:251
 #: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Пошук"
@@ -1645,8 +1680,8 @@ msgid "by %s"
 msgstr "за %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Отримати допомогу"
 
@@ -1679,7 +1714,7 @@ msgid "Uninstall"
 msgstr "Видалити"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Встановити"
 
@@ -1902,7 +1937,7 @@ msgid "Date created"
 msgstr "Дата створення"
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Копія екрану для %s теми оформлення"
@@ -1915,13 +1950,13 @@ msgstr "Налаштувати тему оформлення"
 msgid "Current Theme"
 msgstr "Поточна тема оформлення"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "За %s"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1929,7 +1964,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Додайте нові теми, завантаживши їх з <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\"> тематичного каталогу Omeka </a> або <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> створіть свій власний </a>!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Використовувати цю тему оформлення"
 
@@ -2068,15 +2103,15 @@ msgstr "Переглянути користувачів"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Ім'я користувача"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2140,7 +2175,7 @@ msgstr "Виконати"
 msgid "Back to Log In"
 msgstr "Повернутись до входу"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Увійти"
@@ -2253,8 +2288,8 @@ msgstr "Це призведе до видалення набору елемен�
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:314
-#: application/libraries/Omeka/Controller/AbstractActionController.php:190
-#: application/libraries/Omeka/Controller/AbstractActionController.php:231
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "У формі з'явилася помилка. Будь ласка, спробуйте ще раз."
 
@@ -2703,7 +2738,7 @@ msgid ""
 msgstr "За замовчування використовуйте квадратні зображення, якщо мініатюри не відображаються у загальнодоступному інтерфейсі."
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Повний розмір малюнку"
 
@@ -2712,7 +2747,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максимальний розмір повнорозмірного зображення (в пікселях)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Розмір мініатюри"
 
@@ -2721,7 +2756,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максимальне обмеження розміру мініатюр (у пікселях)."
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Площа розміру мініатюр"
 
@@ -2749,7 +2784,7 @@ msgid ""
 msgstr "Обмеження кількості результатів, що відображаються на сторінці в загальнодоступному інтерфейсі."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Показати порожні елементи"
 
@@ -2824,27 +2859,27 @@ msgstr "Новий пароль повинен містити мінімум %mi
 msgid "Repeat New Password"
 msgstr "Повторити новий пароль"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Змінити назву"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Опис веб-сайту"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Електронна пошта адміністратора"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Інформація про права на веб-сайт"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Інформація про автора веб-сайту"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Розділювач для міток"
 
@@ -2854,7 +2889,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Окремі теги використовують цей символ або рядок. Будьте обережні, коли змінюєте цей параметр. Ви ризикуєте розділити теги, які містять старий розділювач."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "Шлях до ImageMagick"
 
@@ -2862,22 +2897,22 @@ msgstr "Шлях до ImageMagick"
 msgid "General Settings"
 msgstr "Загальні налаштування"
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "повинно бути 30 або менше значень без використання пробілу"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Пробіл не допускається. Можна використовувати лише спеціальні символи: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Пароль"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "повинен містити мінімум 6 знаків"
 
@@ -2885,49 +2920,49 @@ msgstr "повинен містити мінімум 6 знаків"
 msgid "Confirm your password."
 msgstr "Підтвердити ваш пароль."
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Розділяти мітки використовуючи цю літеру або стрічку."
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Максимальне обмеження розміру зображення у повному розмірі (у пікселях)"
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Максимальне обмеження розміру ескізів (у пікселях)"
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Максимальне обмеження розміру квадратних зображень (у пікселях)"
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Елементів на сторінці (для адміністратора)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Число елементів, що відображаються на сторінці в адміністративному інтерфейсі."
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Елементів на сторінці (для загального доступу)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Число елементів, що відображаються на сторінці в загальнодоступному інтерфейсі."
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Проставте позначку для того, щоб показати елементи метаданих без тексту."
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "Пароль за замовчуванням для суперкористувача"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Налаштування веб-сайту"
 
@@ -2944,15 +2979,15 @@ msgstr "Опис типу елемента."
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Тип елемента не може містити більше одного \"%s\" елемента."
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Необхідно ввести ім'я користувача"
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "Необхідно ввести пароль"
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Запам'ятати на цьому комп'ютері?"
 
@@ -3186,7 +3221,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Батьківський контейнер повинен бути або об'єктом навігації, або підпунктом нащадків об'єкта навігації."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Недійсний URI для Omeka_Navigation_Page_Uri об'єкта: %s"
@@ -3264,45 +3299,45 @@ msgstr "Сортування за спаданням"
 msgid "Sorting ascending"
 msgstr "Сортування за зростанням"
 
-#: application/libraries/globals.php:2354
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Останні елементи відсутні."
 
-#: application/libraries/globals.php:2380
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Популярні елементи відсутні."
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Перегляд"
 
-#: application/libraries/globals.php:2503
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Колекції відсутні"
 
-#: application/libraries/globals.php:2622
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "Наступний елемент &rarr;"
 
-#: application/libraries/globals.php:2659
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Попередній елемент"
 
-#: application/libraries/globals.php:2840
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Перегляд"
 
-#: application/libraries/globals.php:2845
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Перегляд за тегами"
 
-#: application/libraries/globals.php:3125
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Теги відсутні"
 
@@ -3356,7 +3391,7 @@ msgstr "Невірний номер елементу."
 msgid "Cannot get the local path for a stored file."
 msgstr "Неможливо отримати шлях для збереженого файлу."
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" невірний файл."
@@ -3842,32 +3877,6 @@ msgstr "Популярні колекції"
 msgid "View All Items"
 msgstr "Переглянути все"
 
-#: application/views/scripts/items/search-form.php:25
-#, php-format
-msgid "Number of rows in \"%s\":"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:29
-msgid "Search Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:52
-#, php-format
-msgid "Row %s"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:54
-msgid "Joiner"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:71
-msgid "Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:110
-msgid "Terms"
-msgstr ""
-
 #: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Документи"
@@ -3917,7 +3926,7 @@ msgstr "Перейти на домашню сторінку"
 msgid "Lost your password?"
 msgstr "Забули пароль?"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Не можливо завантажити ресурси бази даних!"
 

@@ -15,7 +15,7 @@ msgstr ""
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
 "Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2015-2018,2020-2021\n"
-"Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
+"Language-Team: Estonian (http://app.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,6 +103,7 @@ msgstr "Inforessursi eluloo sündmusega seotud daatum(id)"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
 #: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Liik"
@@ -409,8 +410,8 @@ msgstr "Vaata tavakasutaja lehte"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -434,8 +435,8 @@ msgstr "Kõik kohandamised lähevad kaduma. Järjekord ja sildid muudetakse Omek
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Lisa kogu"
 
@@ -455,11 +456,14 @@ msgid "Public"
 msgstr "Avalik"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -521,12 +525,12 @@ msgstr "Lisamise aeg"
 msgid "Total Number of Items"
 msgstr "Ühikute koguarv"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Privaatne)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -535,31 +539,31 @@ msgstr "(Privaatne)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Redigeeri"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Kaastöölisi pole"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Sellel lehel pole kogusid."
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Vaata kõiki kogusid"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "Sul pole kogusid"
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "Tee algust ja lisa esimene kogu."
 
@@ -609,7 +613,7 @@ msgstr "Kaastöölisi pole."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -665,7 +669,7 @@ msgid "Item Types"
 msgstr "Ühikuliigid"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -698,6 +702,8 @@ msgstr "Tagasi üles"
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Versioon %s"
@@ -1101,8 +1107,8 @@ msgstr "Hiljuti lisatud ühikuid ei ole."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "Lisa ühik"
 
@@ -1112,7 +1118,7 @@ msgstr "Lisa ühik"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1278,22 +1284,22 @@ msgid "Browse Items"
 msgstr "Sirvi ühikuid"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2459
-#: application/libraries/globals.php:2850
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Otsi ühikuid"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr "Vali kõik %s tulemust"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr "ühikut valitud"
 
@@ -1306,42 +1312,42 @@ msgstr "Vali kõik read"
 msgid "Select item \"%s\""
 msgstr "Vali ühik \"%s\""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Silte pole"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Üksikasjad"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Näita üksikasju"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Peida üksikasjad"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "Sul pole ühikuid."
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "Lisa alustuseks oma esimene ühik."
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "Päring otsis läbi 1 ühikut ja ei leidnud ühtegi vastet."
 msgstr[1] "Päring otsis läbi %s ühikut ja ei leidnud ühtegi vastet."
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "täpsusta otsingut"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Kas sa sooviksid %s?"
@@ -1399,157 +1405,186 @@ msgid "Search for Keywords"
 msgstr "Otsi võtmesõnu"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
 #: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Kitsenda kindlate väljade alusel"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:127
-msgid "Add a Field"
-msgstr "Lisa väli"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:57
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Field"
+msgstr "Otsinguväli"
+
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
+msgid "Search Type"
+msgstr "Otsingu liik"
+
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
+msgid "Search Terms"
+msgstr "Otsisõnad"
+
+#: admin/themes/default/items/search-form.php:37
 #: application/views/scripts/items/search-form.php:32
 msgid "Search Joiner"
 msgstr "Otsingu liitja"
 
-#: admin/themes/default/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Lisa väli"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:64
 msgid "AND"
 msgstr "JA"
 
-#: admin/themes/default/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:65
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:65
 msgid "OR"
 msgstr "VÕI"
 
-#: admin/themes/default/items/search-form.php:70
-msgid "Search Field"
-msgstr "Otsinguväli"
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:30
-msgid "Search Type"
-msgstr "Otsingu liik"
-
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:98
 msgid "contains"
 msgstr "sisaldab"
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:99
 #: application/views/scripts/items/search-form.php:99
 msgid "does not contain"
 msgstr "ei sisalda"
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:100
 #: application/views/scripts/items/search-form.php:100
 msgid "is exactly"
 msgstr "on täpselt"
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:101
 msgid "is not exactly"
 msgstr "pole täpselt"
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
 msgid "is empty"
 msgstr "on tühi"
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:103
 #: application/views/scripts/items/search-form.php:102
 msgid "is not empty"
 msgstr "ei ole tühi"
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:104
 #: application/views/scripts/items/search-form.php:103
 msgid "starts with"
 msgstr "algab"
 
-#: admin/themes/default/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:104
 msgid "ends with"
 msgstr "lõpeb"
 
-#: admin/themes/default/items/search-form.php:96
+#: admin/themes/default/items/search-form.php:106
 msgid "matches"
 msgstr "kattub"
 
-#: admin/themes/default/items/search-form.php:97
+#: admin/themes/default/items/search-form.php:107
 msgid "does not match"
 msgstr "ei kattu"
 
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:31
-msgid "Search Terms"
-msgstr "Otsisõnad"
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Eemalda väli"
 
-#: admin/themes/default/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:134
 #: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Otsi ID-de vahemiku järgi (näiteks 1–4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:133
+#: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Otsi kogude järgi"
 
-#: admin/themes/default/items/search-form.php:149
+#: admin/themes/default/items/search-form.php:164
 #: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Otsi liikide järgi"
 
-#: admin/themes/default/items/search-form.php:166
+#: admin/themes/default/items/search-form.php:181
 #: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Otsi kasutajate järgi"
 
-#: admin/themes/default/items/search-form.php:183
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Otsi siltide järgi"
 
-#: admin/themes/default/items/search-form.php:198
+#: admin/themes/default/items/search-form.php:213
 #: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Avalik/mitteavalik"
 
-#: admin/themes/default/items/search-form.php:207
+#: admin/themes/default/items/search-form.php:222
 #: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Ainult avalikud ühikud."
 
-#: admin/themes/default/items/search-form.php:208
+#: admin/themes/default/items/search-form.php:223
 #: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Ainult mitteavalikud ühikud"
 
-#: admin/themes/default/items/search-form.php:218
+#: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Esiletõstetud/esiletõsteta"
 
-#: admin/themes/default/items/search-form.php:227
+#: admin/themes/default/items/search-form.php:242
 #: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Ainult esiletõstetud ühikud"
 
-#: admin/themes/default/items/search-form.php:228
+#: admin/themes/default/items/search-form.php:243
 #: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Ainult esiletõsteta ühikud"
 
-#: admin/themes/default/items/search-form.php:236
+#: admin/themes/default/items/search-form.php:251
 #: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Otsi ühikuid"
@@ -1627,8 +1662,8 @@ msgid "by %s"
 msgstr "%s-ide kaupa"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Abi"
 
@@ -1661,7 +1696,7 @@ msgid "Uninstall"
 msgstr "Eemalda"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Paigalda"
 
@@ -1884,7 +1919,7 @@ msgid "Date created"
 msgstr "Loomise kuupäev"
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Teema %s ekraanipilt."
@@ -1897,13 +1932,13 @@ msgstr "Seadista teema."
 msgid "Current Theme"
 msgstr "Praegune teema"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "%s poolest"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1911,7 +1946,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Lisa uusi teemasid, laadides need alla <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka teemakataloogist</a>, või <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">kujunda enda teema</a>!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Kasuta seda teemat"
 
@@ -2050,15 +2085,15 @@ msgstr "Sirvi kasutajaid"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Kasutajanimi"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2122,7 +2157,7 @@ msgstr "Esita"
 msgid "Back to Log In"
 msgstr "Tagasi sisselogimise lehele"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Logi sisse"
@@ -2235,8 +2270,8 @@ msgstr "See kustutab tunnuste loetelu ja kõik sellesse loetelusse kuuluvad tunn
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:314
-#: application/libraries/Omeka/Controller/AbstractActionController.php:190
-#: application/libraries/Omeka/Controller/AbstractActionController.php:231
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "Vormil oli viga, Palun proovi uuesti."
 
@@ -2685,7 +2720,7 @@ msgid ""
 msgstr "Kasuta vaikimisi ruuduks lõigatud pilte saidil kõikjal, kus on vaja näidata pisipilte."
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Täismahulise pildi suurus"
 
@@ -2694,7 +2729,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Täismahulise pildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Pisipildi suurus"
 
@@ -2703,7 +2738,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Pisipildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Ruudukujulise pisipildi suurus."
 
@@ -2731,7 +2766,7 @@ msgid ""
 msgstr "Piira lehel kuvatavate tulemuste arvu tavakasutaja vaates."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Näita tühje tunnuseid"
 
@@ -2806,27 +2841,27 @@ msgstr "Uus salasõna peab olema vähemalt  %min% characters tähemärgi pikkune
 msgid "Repeat New Password"
 msgstr "Uus salasõna veelkord"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Lehekülje pealkiri"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Veebisaidi kirjeldus."
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Haldaja e-post"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Teave veebisaidi autoriõiguste kohta"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Teave veebisaidi autori kohta"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Siltide eraldaja"
 
@@ -2836,7 +2871,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Eralda sildid selle tähe või stringiga. Ole selle sätte muutmisel ettevaatlik: on oht, et tükeldad sildid, mis sisaldavad vana eraldajat."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "ImageMagick kataloogirada"
 
@@ -2844,22 +2879,22 @@ msgstr "ImageMagick kataloogirada"
 msgid "General Settings"
 msgstr "Üldised seaded"
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "kuni 30 tähemärki ilma tühikuteta"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Tühikud pole lubatud. Kasutada võib üksnes järgmisi erimärke: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Salasõna"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "peab olema vähemalt 6 tähemärki pikk"
 
@@ -2867,49 +2902,49 @@ msgstr "peab olema vähemalt 6 tähemärki pikk"
 msgid "Confirm your password."
 msgstr "Kinnita salasõna"
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Eralda sildid selle tähe või stringiga."
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Täismahulise pildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Pisipildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Ruudukujulise pisipildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Ühikuid lehel (haldaja)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Piira ühikute arvu lehel haldaja vaates."
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Ühikuid lehel (tavakasutaja)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Piira ühikute arvu lehel tavakasutaja vaates."
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Ilma tekstita metaandmete kuvamiseks tee kasti linnuke."
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "Ülemhaldaja vaikekonto"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Veebisaidi sätted"
 
@@ -2926,15 +2961,15 @@ msgstr "Ühikuliigi kirjeldus."
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Ühikuliigil ei saa olla rohkem kui üks \"%s\" tunnus."
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Kasutajanime lahter ei või tühjaks jääda."
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "Salasõna lahter ei või tühjaks jääda."
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Jäta salasõna meelde?"
 
@@ -3168,7 +3203,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Kõrgema taseme ümbris peab olema kas lingiriba objekt või sellest põlvnev alaleht."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Omeka_Navigation_Page_Uri objekti jaoks sobimatu URI: %s"
@@ -3246,45 +3281,45 @@ msgstr "Kahanevalt sorteerimine"
 msgid "Sorting ascending"
 msgstr "Kasvavalt sorteerimine"
 
-#: application/libraries/globals.php:2354
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Pole hiljuti lisatud ühikuid."
 
-#: application/libraries/globals.php:2380
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Esiletõstetud ühikuid ei ole."
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Vaata"
 
-#: application/libraries/globals.php:2503
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Kogu pole"
 
-#: application/libraries/globals.php:2622
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "Järgmine ühik &rarr;"
 
-#: application/libraries/globals.php:2659
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Eelmine ühik"
 
-#: application/libraries/globals.php:2840
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Sirvi kõiki"
 
-#: application/libraries/globals.php:2845
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Sirvi sildi alusel"
 
-#: application/libraries/globals.php:3125
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Silte ei ole."
 
@@ -3338,7 +3373,7 @@ msgstr "Vale tunnuse ID."
 msgid "Cannot get the local path for a stored file."
 msgstr "Ei leia talletatud faili kohalikku asukohaviidet."
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" ei ole sobiv failituletis"
@@ -3818,32 +3853,6 @@ msgstr "Esiletõstetud kogu"
 msgid "View All Items"
 msgstr "Vaata kõiki ühikuid"
 
-#: application/views/scripts/items/search-form.php:25
-#, php-format
-msgid "Number of rows in \"%s\":"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:29
-msgid "Search Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:52
-#, php-format
-msgid "Row %s"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:54
-msgid "Joiner"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:71
-msgid "Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:110
-msgid "Terms"
-msgstr ""
-
 #: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Failid"
@@ -3893,7 +3902,7 @@ msgstr "Mine kodulehele"
 msgid "Lost your password?"
 msgstr "Unustasid salasõna?"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Ei saanud laadida andmebaasi ressurssi!"
 

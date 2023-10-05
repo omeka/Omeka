@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Furkan Kalkan <furkan.kalkan3@gmail.com>, 2018
-# Kamil Comlekci, 2021
+# Kamil Comlekci, 2021,2023
 # mustafaulu@msn.com <Mustafaulu@msn.com>, 2014-2017
 msgid ""
 msgstr ""
@@ -12,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Kamil Comlekci, 2021\n"
-"Language-Team: Turkish (Turkey) (http://www.transifex.com/omeka/omeka/language/tr_TR/)\n"
+"Last-Translator: Kamil Comlekci, 2021,2023\n"
+"Language-Team: Turkish (Turkey) (http://app.transifex.com/omeka/omeka/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,6 +101,7 @@ msgstr "Kaynağın oluşturulduğu dönem içindeki bir olayla ilgili bir zaman 
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
 #: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Tür"
@@ -407,8 +408,8 @@ msgstr "Kamu Sayfasına Bak"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -432,8 +433,8 @@ msgstr "Bütün kişiselleştirilmiş ayarlar kaybedilecektir. Düzen ve etiketl
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Koleksiyon Ekle"
 
@@ -453,11 +454,14 @@ msgid "Public"
 msgstr "Kamuya Açık"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -519,12 +523,12 @@ msgstr "Ekleme Tarihi"
 msgid "Total Number of Items"
 msgstr "Toplam Materyal Sayısı"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Özel)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -533,31 +537,31 @@ msgstr "(Özel)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Düzenle"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Katkıda bulunanlar yok"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Bu sayfada koleksiyon bulunmamaktadır."
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Bütün Koleksiyonlara Bak"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "Koleksiyonsa sahip değilsiniz."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "İlk koleksiyonunuzu ekleyerek başlayın."
 
@@ -607,7 +611,7 @@ msgstr "Katkıda bulunanlar yok"
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -663,7 +667,7 @@ msgid "Item Types"
 msgstr "İtem Türleri"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -691,11 +695,13 @@ msgstr "Destek Forumları"
 
 #: admin/themes/default/common/footer.php:12
 msgid "Back to top"
-msgstr ""
+msgstr "Başa dön"
 
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Versiyon %s"
@@ -1033,7 +1039,7 @@ msgstr[1] ""
 
 #: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
-msgstr ""
+msgstr "Tüm öğelerin bir türü vardır."
 
 #: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
@@ -1099,8 +1105,8 @@ msgstr "Son dönemde eklenen materyal bulunmamaktadır."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "İtem Ekle"
 
@@ -1110,7 +1116,7 @@ msgstr "İtem Ekle"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1276,22 +1282,22 @@ msgid "Browse Items"
 msgstr "Materyalleri Göster"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2459
-#: application/libraries/globals.php:2850
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Materyalleri Ara"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr "Bütün %s sonuçlarını seç"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr "Seçilmiş Materyaller"
 
@@ -1304,42 +1310,42 @@ msgstr "Bütün satırları seç"
 msgid "Select item \"%s\""
 msgstr "\"%s\" itemini seç"
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Etiket Yok"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Detaylar"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Detayları Göster"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Detayları Gizle"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "Materyallere sahip değilsiniz."
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "İlk iteminizi ekleyerek başlayın."
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "%s itemleri sorgusu arandı ve sonuç bulunamadı."
 msgstr[1] "%s itemleri sorgusu arandı ve sonuç bulunamadı."
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "Aramanızı daraltın"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr " %s ister misiniz?"
@@ -1397,157 +1403,186 @@ msgid "Search for Keywords"
 msgstr "Klavye ile Ara"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
 #: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Belirli bölümer tarafından daratılmıştır"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:127
-msgid "Add a Field"
-msgstr "Alan Ekle"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr "\"%s\" içindeki satır sayısı:"
 
-#: admin/themes/default/items/search-form.php:57
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Field"
+msgstr "Alan Ara"
+
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
+msgid "Search Type"
+msgstr "Tür Ara"
+
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
+msgid "Search Terms"
+msgstr "Terimler Ara"
+
+#: admin/themes/default/items/search-form.php:37
 #: application/views/scripts/items/search-form.php:32
 msgid "Search Joiner"
 msgstr "Katılımcıyı ara"
 
-#: admin/themes/default/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Alan Ekle"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr "Satır %s"
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr "Katılımcı"
+
+#: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:64
 msgid "AND"
 msgstr "VE"
 
-#: admin/themes/default/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:65
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:65
 msgid "OR"
 msgstr "VEYA"
 
-#: admin/themes/default/items/search-form.php:70
-msgid "Search Field"
-msgstr "Alan Ara"
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:30
-msgid "Search Type"
-msgstr "Tür Ara"
-
-#: admin/themes/default/items/search-form.php:88
+#: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
 #: application/views/scripts/items/search-form.php:98
 msgid "contains"
 msgstr "içerikler"
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:99
 #: application/views/scripts/items/search-form.php:99
 msgid "does not contain"
 msgstr "içermemektedir."
 
-#: admin/themes/default/items/search-form.php:90
+#: admin/themes/default/items/search-form.php:100
 #: application/views/scripts/items/search-form.php:100
 msgid "is exactly"
 msgstr "kesindir."
 
-#: admin/themes/default/items/search-form.php:91
+#: admin/themes/default/items/search-form.php:101
 msgid "is not exactly"
 msgstr "tam olarak değil"
 
-#: admin/themes/default/items/search-form.php:92
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
 msgid "is empty"
 msgstr "boştur."
 
-#: admin/themes/default/items/search-form.php:93
+#: admin/themes/default/items/search-form.php:103
 #: application/views/scripts/items/search-form.php:102
 msgid "is not empty"
 msgstr "boş değildir."
 
-#: admin/themes/default/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:104
 #: application/views/scripts/items/search-form.php:103
 msgid "starts with"
 msgstr "ile başla"
 
-#: admin/themes/default/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:105
 #: application/views/scripts/items/search-form.php:104
 msgid "ends with"
 msgstr "ile bitir"
 
-#: admin/themes/default/items/search-form.php:96
+#: admin/themes/default/items/search-form.php:106
 msgid "matches"
 msgstr "eşleşme"
 
-#: admin/themes/default/items/search-form.php:97
+#: admin/themes/default/items/search-form.php:107
 msgid "does not match"
 msgstr "eşleşmedi"
 
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:31
-msgid "Search Terms"
-msgstr "Terimler Ara"
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr "Terimler"
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Alanı kaldır"
 
-#: admin/themes/default/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:134
 #: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "ID#s aralığına göre ara (örneğin: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:133
+#: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Koleksiyona Göre Ara"
 
-#: admin/themes/default/items/search-form.php:149
+#: admin/themes/default/items/search-form.php:164
 #: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Türe Göre Ara"
 
-#: admin/themes/default/items/search-form.php:166
+#: admin/themes/default/items/search-form.php:181
 #: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Kullanıcıya Göre Ara"
 
-#: admin/themes/default/items/search-form.php:183
+#: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Etikete Göre Ara"
 
-#: admin/themes/default/items/search-form.php:198
+#: admin/themes/default/items/search-form.php:213
 #: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Kamu/Özel"
 
-#: admin/themes/default/items/search-form.php:207
+#: admin/themes/default/items/search-form.php:222
 #: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Sadece Kamu Materyalleri"
 
-#: admin/themes/default/items/search-form.php:208
+#: admin/themes/default/items/search-form.php:223
 #: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Sadece Özel Materyaller"
 
-#: admin/themes/default/items/search-form.php:218
+#: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Ayrıcalıklı/Ayrıcalıklı Değil"
 
-#: admin/themes/default/items/search-form.php:227
+#: admin/themes/default/items/search-form.php:242
 #: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Sadece Ayrıcalıklı Materyaller"
 
-#: admin/themes/default/items/search-form.php:228
+#: admin/themes/default/items/search-form.php:243
 #: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Sadece Ayrıcalıklı Olmayan Materyaller"
 
-#: admin/themes/default/items/search-form.php:236
+#: admin/themes/default/items/search-form.php:251
 #: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Materyal Ara"
@@ -1625,8 +1660,8 @@ msgid "by %s"
 msgstr "%s tarafından"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Yardım alın"
 
@@ -1659,7 +1694,7 @@ msgid "Uninstall"
 msgstr "Kaldır"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Yükle"
 
@@ -1688,7 +1723,7 @@ msgstr "%s isimli ekltentiyi silmek istediğinize emin misiniz?"
 msgid ""
 "Warning: data associated with this plugin may be permanently deleted from "
 "the database."
-msgstr ""
+msgstr "Uyarı: Bu eklentiyle ilişkili veriler veritabanından kalıcı olarak silinebilir."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
@@ -1778,11 +1813,11 @@ msgstr "Tamam"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Arama Sorgusu Türü"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Omeka'da basit arama için kullanılan varsayılan sorgu türünü seçin."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
@@ -1842,7 +1877,7 @@ msgstr "Etiketler Düzenleniyor"
 msgid ""
 "This number counts all records associated with a tag. Filtering \"Record "
 "types\" to \"Items\" will provide links to all items containing the tag."
-msgstr ""
+msgstr "Bu sayı, bir etiketle ilişkili tüm kayıtları sayar. \"Kayıt türleri\"ni \"Öğeler\" olarak filtrelemek, etiketi içeren tüm öğelere bağlantılar sağlayacaktır."
 
 #: admin/themes/default/tags/browse.php:23
 msgid ""
@@ -1854,7 +1889,7 @@ msgstr "Etiket ismini düzenlemek için isme tıklayınız ce düzenlemeye başl
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "records."
-msgstr ""
+msgstr "Bir etiketi silmek için X'e tıklayın. Bir etiketi silmek, etiketlenen kayıtları silmez."
 
 #: admin/themes/default/tags/browse.php:33
 msgid "Search tags"
@@ -1867,7 +1902,7 @@ msgstr "Kayıt Türleri"
 
 #: admin/themes/default/tags/browse.php:40
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 #: admin/themes/default/tags/browse.php:52
 msgid "Reset results"
@@ -1875,14 +1910,14 @@ msgstr "Souçları sıfırla"
 
 #: admin/themes/default/tags/browse.php:69
 msgid "Count"
-msgstr ""
+msgstr "Hesapla"
 
 #: admin/themes/default/tags/browse.php:70
 msgid "Date created"
-msgstr ""
+msgstr "Tarih oluşturuldu"
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "%s Tema İçin Ekran Görüntüsü"
@@ -1895,13 +1930,13 @@ msgstr "Temayı Düzenle"
 msgid "Current Theme"
 msgstr "Geçerli Tema"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "%s e Göre"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1909,7 +1944,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Yeni temaları <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\"> Omeka Tema Dizini</a> ya da <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">kendi temanı tasarla</a> adresinden indirerek yükle!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Bu temayı kullan"
 
@@ -2048,15 +2083,15 @@ msgstr "Kullanıcıları Tara"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2069,7 +2104,7 @@ msgstr "Kullanıcı Ekle"
 #: admin/themes/default/users/browse.php:37
 #: application/views/scripts/search/search-form.php:10
 msgid "Options"
-msgstr ""
+msgstr "Seçenekler"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/browse.php:52
@@ -2120,7 +2155,7 @@ msgstr "Onayla"
 msgid "Back to Log In"
 msgstr "Girişe Geri Dön"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Giriş"
@@ -2233,8 +2268,8 @@ msgstr "Bu işlem, öğe setini ve onunla ilişkili olan bütün öğeleri silec
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:314
-#: application/libraries/Omeka/Controller/AbstractActionController.php:190
-#: application/libraries/Omeka/Controller/AbstractActionController.php:231
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "Formda bir hata oluştu. lütfen yeniden deneyiniz."
 
@@ -2526,7 +2561,7 @@ msgstr "Geçersiz Etiket Türü"
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "Hata oluştu."
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2683,7 +2718,7 @@ msgid ""
 msgstr "Küçük resimler kamu arayüzünde gösterildiğinde varsayılan olarak kare şeklinde küçültülmüş resimleri kullan."
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Tamölçü Resim Boyutu"
 
@@ -2692,7 +2727,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Maksimum tamölçü resim ölçüsü kısıtlaması (piksel)"
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Küçük Resim Ölçüsü"
 
@@ -2701,7 +2736,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Maksimum küçük resim ölçüsü kısıtlaması (piksel)"
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Kare Küçük Resim Ölçüsü"
 
@@ -2729,13 +2764,13 @@ msgid ""
 msgstr "Yerel arayüzü kullanarak sayfada görüntülenen sonuç sayısını sınırlandırın."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Boş Öğeleri Göster"
 
 #: application/forms/AppearanceSettings.php:63
 msgid "Include empty elements in show pages."
-msgstr ""
+msgstr "Gösterim sayfalarına boş öğeler ekleyin."
 
 #: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
@@ -2743,16 +2778,16 @@ msgstr "Öğe Seti Başlığını Göster"
 
 #: application/forms/AppearanceSettings.php:69
 msgid "Include element set headings in show pages and in drop-down lists."
-msgstr ""
+msgstr "Öğe kümesi başlıklarını gösteri sayfalarına ve açılır listelere ekleyin."
 
 #: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
-msgstr ""
+msgstr "Dosya Meta Verilerine Bağlantı"
 
 #: application/forms/AppearanceSettings.php:75
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
-msgstr ""
+msgstr "Öğe dosyalarının doğrudan dosya yerine dosya meta verilerine bağlanmasını sağlayın."
 
 #: application/forms/AppearanceSettings.php:85
 msgid "Admin Theme"
@@ -2804,27 +2839,27 @@ msgstr "Yeni şifre en az %min% karakter uzunluğunda olmalıdır."
 msgid "Repeat New Password"
 msgstr "Yeni Şifre Tekrar"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Site Başlığı"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Site Tanımı"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Yönetici E-Postası"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Site Telif Bilgisi"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Site Yönetici Bilgisi"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Etiket Ayıracı"
 
@@ -2834,30 +2869,30 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Bu karakter ya da diziyi kullanan etiketleri ayırın. Bu ayarı değiştirirken dikkati olun. Eski ayırıcıları içeren etiketleri ayırma riskini almaktasınız."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "ImageMagick dizin yolu"
 
 #: application/forms/GeneralSettings.php:69
 msgid "General Settings"
-msgstr ""
+msgstr "Genel Ayarlar"
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "boşluksuz olarak 30 ya da daha az karakter olmalı"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Boşluğa izin verilmiyor. Sadece bu özel karakterle kullanılabilir: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Şifre"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "en az 6 karakter uzunluğunda olmalıdır"
 
@@ -2865,49 +2900,49 @@ msgstr "en az 6 karakter uzunluğunda olmalıdır"
 msgid "Confirm your password."
 msgstr "Şifrenizi Onaylayınız."
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Bu karakteri ya da diziyi kullanarak etiketleri ayırınız"
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Maksimum tamölçü resim ölçüsü kısıtlaması (piksel)"
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Maksimum küçük resim ölçüsü kısıtlaması (piksel)"
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Maksimum kare küçük resim ölçüsü kısıtlaması (piksel)"
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Sayfa Başına Materyaller (yönetici)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Yönetici arayüzünde sayfa başına görüntülenecek materyal sayısı sınırı"
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Sayfa Başına Materyal (kamu)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Kamu arayüzünde sayfa başına görüntülenecek materyal sayısı sınırı"
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Üstveri öğelerini yazısız olarak göstermek için kutucuğu işaretleyiniz."
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "Varsayılan Süper Kullanıcı Hesabı"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Site Ayarları"
 
@@ -2924,15 +2959,15 @@ msgstr "İtem türünün tanımı"
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "İtem türü \"%s\" öğresinin birden fazlasına sahip değildir."
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Kullanıcı adı boş olamaz."
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "Şifre boş olamaz."
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Beni Hatırla?"
 
@@ -3021,25 +3056,25 @@ msgstr "Yükleme için izin verilen MIME türlerini listele"
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "Recaptcha site anahtarı"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "%s'den site anahtarını girin. Genel formların güvenliğini sağlamak için hem bu hem de özel anahtar doldurulmalıdır. Anahtarlar reCAPTCHA v2 için olmalıdır."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHA Gizli Anahtarı"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "%s'den gizli anahtarı girin. Genel formların güvenliğini sağlamak için hem bu hem de genel anahtar doldurulmalıdır. Anahtarlar reCAPTCHA v2 için olmalıdır."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3166,7 +3201,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Üst kapsayıcı ya navigasyon nesne ya da navigasyon nesne soyundan altsayfa olmalıdır."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Omeka_Navigasyon_Sayfa_Url linki için geçersiz URI: %s"
@@ -3234,55 +3269,55 @@ msgstr "Omeka Atom Besleme"
 
 #: application/libraries/globals.php:1981
 msgid "Sort ascending"
-msgstr ""
+msgstr "Artan sıralama"
 
 #: application/libraries/globals.php:1991
 msgid "Sorting descending"
-msgstr ""
+msgstr "Azalan sıralama"
 
 #: application/libraries/globals.php:1995
 msgid "Sorting ascending"
-msgstr ""
+msgstr "Artan sıralama"
 
-#: application/libraries/globals.php:2354
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Geçerli bir en son materyal yoktur."
 
-#: application/libraries/globals.php:2380
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Ayrıcalıklı materyal mevcut değil."
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Görünüm"
 
-#: application/libraries/globals.php:2503
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Koleksiyon Yok"
 
-#: application/libraries/globals.php:2622
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "&rarr; Sonraki İtem"
 
-#: application/libraries/globals.php:2659
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Önceki İtem"
 
-#: application/libraries/globals.php:2840
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Tümünü Tara"
 
-#: application/libraries/globals.php:2845
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Etikete Göre Tara"
 
-#: application/libraries/globals.php:3125
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Etiket mevcut değil."
 
@@ -3336,7 +3371,7 @@ msgstr "Geçersiz öğe ID'si."
 msgid "Cannot get the local path for a stored file."
 msgstr "Depolanmış bir dosya için lokal yol oluşturulamaz."
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" geçerli bir dosya türetilmesi değildir."
@@ -3722,7 +3757,7 @@ msgstr "%s teki materyalleri aç"
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Koleksiyon Öğeleri"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
@@ -3749,7 +3784,7 @@ msgstr "Önceki Sayfa"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Page"
-msgstr ""
+msgstr "Sayfa"
 
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
@@ -3802,7 +3837,7 @@ msgid ""
 "Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr ""
+msgstr "Bu hata hakkında daha detaylı bilgiyi nasıl göreceğinizi öğrenmek için Omeka Codex sayfasındaki <a href=\"http://omeka.org/codex/Retrieving_error_messages\">hata iletilerinin alınması</a> bölümüne bakınız."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
@@ -3815,32 +3850,6 @@ msgstr "Ayrıcalıklı Koleksiyon"
 #: application/views/scripts/index.php:42
 msgid "View All Items"
 msgstr "Tüm Materyalleri Göster"
-
-#: application/views/scripts/items/search-form.php:25
-#, php-format
-msgid "Number of rows in \"%s\":"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:29
-msgid "Search Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:52
-#, php-format
-msgid "Row %s"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:54
-msgid "Joiner"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:71
-msgid "Property"
-msgstr ""
-
-#: application/views/scripts/items/search-form.php:110
-msgid "Terms"
-msgstr ""
 
 #: application/views/scripts/items/show.php:13
 msgid "Files"
@@ -3865,7 +3874,7 @@ msgstr "Kayıt türleri:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
-msgstr ""
+msgstr "Sorgu"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
@@ -3891,7 +3900,7 @@ msgstr "Anasayfaya Git"
 msgid "Lost your password?"
 msgstr "Şifrenizi Kayıp Mı?"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Veritabanı kaynağı yüklenemedi!"
 
