@@ -18,6 +18,9 @@ Omeka.Search = {};
 
         function incrementScreenReaderLabels(attribute, element, index) {
             var oldAttribute = element.attr(attribute);
+            if (!oldAttribute) {
+                return;
+            }
             var newAttribute = oldAttribute.replace(/\d+/, parseInt(index) + 1);
             element.attr(attribute, newAttribute);
         }
