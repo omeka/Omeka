@@ -1154,12 +1154,23 @@ function head_js($includeDefaults = true)
 
     if ($includeDefaults) {
         $dir = 'javascripts';
+        $config = Zend_Registry::get('bootstrap')->getResource('Config');
+        $useInternalAssets = isset($config->theme->useInternalAssets)
+            ? (bool) $config->theme->useInternalAssets
+            : false;
+
         $headScript->prependScript('jQuery.noConflict();')
-                   ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'))
-                   ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
-                   ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+            ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'));
+
+        if ($useInternalAssets) {
+            $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
+                ->prependFile(src('vendor/jquery', $dir, 'js'));
+        } else {
+            $headScript->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
+                ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+                ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
+                ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+        }
     }
     return $headScript;
 }
