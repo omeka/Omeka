@@ -257,13 +257,24 @@ Omeka.Items = {};
      */
     Omeka.Items.enableAddFiles = function (label) {
         var filesDiv = $('#files-metadata .files');
+        var fileInput = filesDiv.find('input');
+        var supportsMultiple = ('multiple' in fileInput.get(0));
+        // add mutliple file upload support only for browsers that support it
+        if (supportsMultiple) {
+            fileInput.attr({'multiple': '', 'name': 'file[]'});
+        }
 
         var link = $('<button type="button" id="add-file" class="add-file button">' + label + '</button>');
         link.click(function (event) {
             event.preventDefault();
             var inputs = filesDiv.find('input');
-            var inputCount = inputs.length;
-            var fileHtml = '<input name="file[' + inputCount + ']" type="file"></div>';
+            var fileHtml = '';
+            if (supportsMultiple) {
+                fileHtml = '<input name="file[]" type="file" multiple>';
+            } else {
+                var inputCount = inputs.length;
+                fileHtml = '<input name="file[' + inputCount + ']" type="file">';
+            }
             $(fileHtml).insertAfter(inputs.last()).hide().slideDown(200, function () {
                 // Extra show fixes IE bug.
                 $(this).show();
