@@ -1,12 +1,6 @@
 <?php 
 class TagAttributesTest extends Omeka_Test_TestCase
 {
-    public function setUpLegacy()
-    {
-        $this->reporting = error_reporting();
-        error_reporting(E_ALL);
-    }
-
     /**
      * Test when a string is passed as the first argument to tag_attributes. This
      * should return the id and name attributes, and use the argument for each of
@@ -64,10 +58,5 @@ class TagAttributesTest extends Omeka_Test_TestCase
         $attrs = array('int1' => 0, 'int2' => 100, 'float' => 1.5);
         $html = 'int1="0" int2="100" float="1.5"';
         $this->assertEquals($html, tag_attributes($attrs));
-    }
-
-    public function tearDownLegacy()
-    {
-        error_reporting($this->reporting);
     }
 }

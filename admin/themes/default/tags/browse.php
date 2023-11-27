@@ -17,24 +17,24 @@ echo flash();
 <?php if ($canEdit): ?>
 <section class="three columns alpha">
     <h2><?php echo __('Editing Tags'); ?></h2>
-    
+
     <ol>
         <li><?php echo __('This number counts all records associated with a tag. Filtering "Record types" to "Items" will provide links to all items containing the tag.'); ?></li>
         <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
         <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged records.'); ?></li>
     </ol>
-</section>    
+</section>
 <?php endif; ?>
 
-<?php $tagsSectionClass = ($canEdit) ? 'seven' : 'ten alpha'; ?> 
+<?php $tagsSectionClass = ($canEdit) ? 'seven' : 'ten alpha'; ?>
 
 <form id="search-tags" method="GET" class="<?php echo $tagsSectionClass; ?> columns omega">
-    <input type="text" name="like" aria-labelledby="search-tags-button"/> 
+    <input type="text" name="like" aria-labelledby="search-tags-button"/>
     <button class="green button" type="submit" id="search-tags-button"><?php echo __('Search tags'); ?></button>
     <?php if(isset($params['type'])): ?>
     <input type="hidden" name="type" value="<?php echo $params['type']; ?>"/>
     <?php endif; ?>
-    
+
     <select class="quick-filter" aria-label="<?php echo __('Record Types'); ?>">
         <option><?php echo __('Record Types'); ?></option>
         <option value="<?php echo $this->url(); ?>"><?php echo __('All'); ?></option>
@@ -60,8 +60,8 @@ echo flash();
         $paginationLinks = pagination_links();
         echo $paginationLinks;
     ?>
-    
-	<section>
+
+    <section>
         <div id="tags-nav">
             <?php
             $sortOptions = array(

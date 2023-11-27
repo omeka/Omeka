@@ -65,7 +65,7 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
         // build the element
         $xhtml = '<input type="file"'
                 . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ($id === '' ? '' : ' id="' . $this->view->escape($id) . '"')
                 . $disabled
                 . $this->_htmlAttribs($attribs)
                 . $this->getClosingBracket();

@@ -18,6 +18,8 @@
  */
 class Omeka_Helper_LinkFunctions_LinkToItemTest extends Omeka_Test_AppTestCase
 {
+    private $item;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

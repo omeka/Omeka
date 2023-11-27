@@ -44,14 +44,14 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     /**
      * Result identifier resource
      *
-     * @var resource
+     * @var resource|LDAP\Result
      */
     protected $_resultId = null;
 
     /**
      * Current result entry identifier
      *
-     * @var resource
+     * @var resource|LDAP\ResultEntry
      */
     protected $_current = null;
 
@@ -103,7 +103,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     public function close()
     {
         $isClosed = false;
-        if (is_resource($this->_resultId)) {
+        if ($this->_resultId) {
              $isClosed = @ldap_free_result($this->_resultId);
              $this->_resultId = null;
              $this->_current = null;
@@ -177,6 +177,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->_itemCount;
@@ -189,19 +190,18 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      * @return array|null
      * @throws Zend_Ldap_Exception
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
-        if (!is_resource($this->_current)) {
+        if (!$this->_current) {
             $this->rewind();
         }
-        if (!is_resource($this->_current)) {
+        if (!$this->_current) {
             return null;
         }
 
         $entry = array('dn' => $this->key());
-        $ber_identifier = null;
-        $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,
-            $ber_identifier);
+        $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current);
         while ($name) {
             $data = @ldap_get_values_len($this->_ldap->getResource(), $this->_current, $name);
             unset($data['count']);
@@ -221,8 +221,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
                     break;
             }
             $entry[$attrName] = $data;
-            $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current,
-                $ber_identifier);
+            $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current);
         }
         ksort($entry, SORT_LOCALE_STRING);
         return $entry;
@@ -234,12 +233,13 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      *
      * @return string|null
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
-        if (!is_resource($this->_current)) {
+        if (!$this->_current) {
             $this->rewind();
         }
-        if (is_resource($this->_current)) {
+        if ($this->_current) {
             $currentDn = @ldap_get_dn($this->_ldap->getResource(), $this->_current);
             if ($currentDn === false) {
                 /** @see Zend_Ldap_Exception */
@@ -258,9 +258,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      *
      * @throws Zend_Ldap_Exception
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
-        if (is_resource($this->_current) && $this->_itemCount > 0) {
+        if ($this->_current && $this->_itemCount > 0) {
             $this->_current = @ldap_next_entry($this->_ldap->getResource(), $this->_current);
             /** @see Zend_Ldap_Exception */
             require_once 'Zend/Ldap/Exception.php';
@@ -284,9 +285,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      *
      * @throws Zend_Ldap_Exception
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
-        if (is_resource($this->_resultId)) {
+        if ($this->_resultId) {
             $this->_current = @ldap_first_entry($this->_ldap->getResource(), $this->_resultId);
             /** @see Zend_Ldap_Exception */
             require_once 'Zend/Ldap/Exception.php';
@@ -304,9 +306,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
-        return (is_resource($this->_current));
+        return ($this->_current);
     }
 
 }

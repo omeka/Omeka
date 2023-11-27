@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-09-21 20:28+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/omeka/omeka/language/bg_BG/)\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Gabriel Radev <gabosss@gmail.com>, 2014-2015,2017,2020\n"
+"Language-Team: Bulgarian (Bulgaria) (http://app.transifex.com/omeka/omeka/language/bg_BG/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -99,6 +99,8 @@ msgstr "Дата или период от време асоциирани с п�
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
+#: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Тип"
 
@@ -315,6 +317,7 @@ msgid "Super"
 msgstr "Супер"
 
 #. User role: Admin
+#: admin/themes/default/common/header.php:43
 msgid "Admin"
 msgstr "Администратор"
 
@@ -324,7 +327,7 @@ msgstr "Изследовател"
 
 #: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
-#: admin/themes/default/common/global-nav.php:11
+#: admin/themes/default/common/global-nav.php:10
 #: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
@@ -403,8 +406,8 @@ msgstr "Преглед на публична страница"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -428,8 +431,8 @@ msgstr "Всички персонализации ще бъдат загубен
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Добавяне на колекция"
 
@@ -449,11 +452,14 @@ msgid "Public"
 msgstr "Публичен"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -462,10 +468,10 @@ msgstr "Избран"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
-#: application/tests/suite/Omeka/NavigationTest.php:747
-#: application/tests/suite/Omeka/NavigationTest.php:816
-#: application/tests/suite/Omeka/NavigationTest.php:831
-#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/tests/suite/Omeka/NavigationTest.php:748
+#: application/tests/suite/Omeka/NavigationTest.php:817
+#: application/tests/suite/Omeka/NavigationTest.php:832
+#: application/tests/suite/Omeka/NavigationTest.php:951
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
 msgstr "Преглед на Колекциите"
@@ -515,12 +521,12 @@ msgstr "Дата на добавяне"
 msgid "Total Number of Items"
 msgstr "Общ брой на документите"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Частен)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -529,31 +535,31 @@ msgstr "(Частен)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Редактиране"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Няма съавтори"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Няма колекции на тази страница"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Преглед на всички Колекции"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "Нямате колекции"
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "Започнете с добавяне на първата си колекция"
 
@@ -603,7 +609,7 @@ msgstr "Няма съавтори"
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -619,7 +625,7 @@ msgid "Navigation"
 msgstr "Навигация"
 
 #: admin/themes/default/common/appearance-nav.php:15
-#: admin/themes/default/common/global-nav.php:23
+#: admin/themes/default/common/global-nav.php:22
 #: admin/themes/default/element-sets/browse.php:6
 #: admin/themes/default/settings/edit-api.php:2
 #: admin/themes/default/settings/edit-item-type-elements.php:3
@@ -630,8 +636,14 @@ msgid "Settings"
 msgstr "Настройки"
 
 #: admin/themes/default/common/content-nav.php:1
+#: admin/themes/default/common/content-nav.php:2
 msgid "Main Menu"
 msgstr "Главно меню"
+
+#: admin/themes/default/common/content-nav.php:2
+#: application/views/scripts/common/pagination_control.php:38
+msgid "Current Page"
+msgstr "Текуща страница"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
@@ -653,7 +665,7 @@ msgid "Item Types"
 msgstr "Типове документи"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -686,6 +698,8 @@ msgstr "Връщане в началото"
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Версия %s"
@@ -695,16 +709,12 @@ msgstr "Версия %s"
 msgid "System Information"
 msgstr "Информация за системата"
 
-#: admin/themes/default/common/global-nav.php:1
-msgid "Manage Site"
-msgstr "Управление на сайта"
-
-#: admin/themes/default/common/global-nav.php:5
+#: admin/themes/default/common/global-nav.php:4
 #: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Разширения"
 
-#: admin/themes/default/common/global-nav.php:17
+#: admin/themes/default/common/global-nav.php:16
 msgid "Users"
 msgstr "Потребители "
 
@@ -741,9 +751,8 @@ msgstr "Сигурност"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:57
+#: application/views/helpers/SearchForm.php:72
 #: application/views/scripts/search/index.php:2
-#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "Търсене"
 
@@ -1094,8 +1103,8 @@ msgstr "Няма последно добавени документи"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "Добавяне на Документ"
 
@@ -1105,7 +1114,7 @@ msgstr "Добавяне на Документ"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1231,62 +1240,62 @@ msgstr "Отметнете ако искате да изтриете избра�
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
-#: application/tests/suite/Omeka/NavigationTest.php:37
-#: application/tests/suite/Omeka/NavigationTest.php:56
-#: application/tests/suite/Omeka/NavigationTest.php:79
-#: application/tests/suite/Omeka/NavigationTest.php:97
-#: application/tests/suite/Omeka/NavigationTest.php:120
-#: application/tests/suite/Omeka/NavigationTest.php:139
-#: application/tests/suite/Omeka/NavigationTest.php:162
-#: application/tests/suite/Omeka/NavigationTest.php:185
-#: application/tests/suite/Omeka/NavigationTest.php:214
-#: application/tests/suite/Omeka/NavigationTest.php:236
-#: application/tests/suite/Omeka/NavigationTest.php:265
-#: application/tests/suite/Omeka/NavigationTest.php:288
-#: application/tests/suite/Omeka/NavigationTest.php:317
-#: application/tests/suite/Omeka/NavigationTest.php:339
-#: application/tests/suite/Omeka/NavigationTest.php:367
-#: application/tests/suite/Omeka/NavigationTest.php:388
-#: application/tests/suite/Omeka/NavigationTest.php:416
-#: application/tests/suite/Omeka/NavigationTest.php:438
-#: application/tests/suite/Omeka/NavigationTest.php:466
-#: application/tests/suite/Omeka/NavigationTest.php:483
-#: application/tests/suite/Omeka/NavigationTest.php:511
-#: application/tests/suite/Omeka/NavigationTest.php:527
-#: application/tests/suite/Omeka/NavigationTest.php:555
-#: application/tests/suite/Omeka/NavigationTest.php:572
-#: application/tests/suite/Omeka/NavigationTest.php:600
-#: application/tests/suite/Omeka/NavigationTest.php:621
-#: application/tests/suite/Omeka/NavigationTest.php:647
-#: application/tests/suite/Omeka/NavigationTest.php:667
-#: application/tests/suite/Omeka/NavigationTest.php:693
-#: application/tests/suite/Omeka/NavigationTest.php:714
-#: application/tests/suite/Omeka/NavigationTest.php:740
-#: application/tests/suite/Omeka/NavigationTest.php:815
-#: application/tests/suite/Omeka/NavigationTest.php:845
-#: application/tests/suite/Omeka/NavigationTest.php:949
+#: application/tests/suite/Omeka/NavigationTest.php:38
+#: application/tests/suite/Omeka/NavigationTest.php:57
+#: application/tests/suite/Omeka/NavigationTest.php:80
+#: application/tests/suite/Omeka/NavigationTest.php:98
+#: application/tests/suite/Omeka/NavigationTest.php:121
+#: application/tests/suite/Omeka/NavigationTest.php:140
+#: application/tests/suite/Omeka/NavigationTest.php:163
+#: application/tests/suite/Omeka/NavigationTest.php:186
+#: application/tests/suite/Omeka/NavigationTest.php:215
+#: application/tests/suite/Omeka/NavigationTest.php:237
+#: application/tests/suite/Omeka/NavigationTest.php:266
+#: application/tests/suite/Omeka/NavigationTest.php:289
+#: application/tests/suite/Omeka/NavigationTest.php:318
+#: application/tests/suite/Omeka/NavigationTest.php:340
+#: application/tests/suite/Omeka/NavigationTest.php:368
+#: application/tests/suite/Omeka/NavigationTest.php:389
+#: application/tests/suite/Omeka/NavigationTest.php:417
+#: application/tests/suite/Omeka/NavigationTest.php:439
+#: application/tests/suite/Omeka/NavigationTest.php:467
+#: application/tests/suite/Omeka/NavigationTest.php:484
+#: application/tests/suite/Omeka/NavigationTest.php:512
+#: application/tests/suite/Omeka/NavigationTest.php:528
+#: application/tests/suite/Omeka/NavigationTest.php:556
+#: application/tests/suite/Omeka/NavigationTest.php:573
+#: application/tests/suite/Omeka/NavigationTest.php:601
+#: application/tests/suite/Omeka/NavigationTest.php:622
+#: application/tests/suite/Omeka/NavigationTest.php:648
+#: application/tests/suite/Omeka/NavigationTest.php:668
+#: application/tests/suite/Omeka/NavigationTest.php:694
+#: application/tests/suite/Omeka/NavigationTest.php:715
+#: application/tests/suite/Omeka/NavigationTest.php:741
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:846
+#: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
 msgstr "Преглед на документите"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2419
-#: application/libraries/globals.php:2810
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Търсене на документи"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr "Изберете всички %s резултата"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr "Избрани документи"
 
@@ -1299,42 +1308,42 @@ msgstr "Избор на всички редове"
 msgid "Select item \"%s\""
 msgstr "Избор на документ \"%s\""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Без маркери"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Детайли"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Показване на детайлите"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Скриване на детайлите"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "Нямате документи"
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "Започнете с добавяне на вашият първи документ"
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "Заявката провери 1 документ и върна празен резултат"
 msgstr[1] "Заявката провери %s документа и върна празен резултат"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "прецизирайте търсенето"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Искате ли да %s"
@@ -1392,157 +1401,187 @@ msgid "Search for Keywords"
 msgstr "Търсене по ключова дума"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
+#: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Ограничаване по специфични полета"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:105
-msgid "Add a Field"
-msgstr "Добавяне на поле"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
 
-#: admin/themes/default/items/search-form.php:57
-#: application/views/scripts/items/search-form.php:50
-msgid "Search Joiner"
-msgstr "Обединено търсене"
-
-#: admin/themes/default/items/search-form.php:62
-#: application/views/helpers/ItemSearchFilters.php:108
-#: application/views/scripts/items/search-form.php:55
-msgid "AND"
-msgstr "И"
-
-#: admin/themes/default/items/search-form.php:63
-#: application/views/helpers/ItemSearchFilters.php:106
-#: application/views/scripts/items/search-form.php:56
-msgid "OR"
-msgstr "ИЛИ"
-
-#: admin/themes/default/items/search-form.php:70
-#: application/views/scripts/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
 msgid "Search Field"
 msgstr "Поле за търсене"
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:76
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
 msgid "Search Type"
 msgstr "Тип за търсене"
 
-#: admin/themes/default/items/search-form.php:88
-#: admin/themes/default/tags/browse.php:50
-#: application/views/scripts/items/search-form.php:81
-msgid "contains"
-msgstr "съдържат"
-
-#: admin/themes/default/items/search-form.php:89
-#: application/views/scripts/items/search-form.php:82
-msgid "does not contain"
-msgstr "не съдържа"
-
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:83
-msgid "is exactly"
-msgstr "е точно"
-
-#: admin/themes/default/items/search-form.php:91
-msgid "is not exactly"
-msgstr "не е точно"
-
-#: admin/themes/default/items/search-form.php:92
-#: application/views/scripts/items/search-form.php:84
-msgid "is empty"
-msgstr "е празно"
-
-#: admin/themes/default/items/search-form.php:93
-#: application/views/scripts/items/search-form.php:85
-msgid "is not empty"
-msgstr "не е празно"
-
-#: admin/themes/default/items/search-form.php:94
-#: application/views/scripts/items/search-form.php:86
-msgid "starts with"
-msgstr "започва с"
-
-#: admin/themes/default/items/search-form.php:95
-#: application/views/scripts/items/search-form.php:87
-msgid "ends with"
-msgstr "завършва на "
-
-#: admin/themes/default/items/search-form.php:96
-msgid "matches"
-msgstr "съвпадения"
-
-#: admin/themes/default/items/search-form.php:97
-msgid "does not match"
-msgstr "няма съвпадения"
-
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
 msgid "Search Terms"
 msgstr "Условия за търсене"
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:37
+#: application/views/scripts/items/search-form.php:32
+msgid "Search Joiner"
+msgstr "Обединено търсене"
+
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Добавяне на поле"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:64
+msgid "AND"
+msgstr "И"
+
+#: admin/themes/default/items/search-form.php:65
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:65
+msgid "OR"
+msgstr "ИЛИ"
+
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:98
+#: admin/themes/default/tags/browse.php:50
+#: application/views/scripts/items/search-form.php:98
+msgid "contains"
+msgstr "съдържат"
+
+#: admin/themes/default/items/search-form.php:99
+#: application/views/scripts/items/search-form.php:99
+msgid "does not contain"
+msgstr "не съдържа"
+
+#: admin/themes/default/items/search-form.php:100
+#: application/views/scripts/items/search-form.php:100
+msgid "is exactly"
+msgstr "е точно"
+
+#: admin/themes/default/items/search-form.php:101
+msgid "is not exactly"
+msgstr "не е точно"
+
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
+msgid "is empty"
+msgstr "е празно"
+
+#: admin/themes/default/items/search-form.php:103
+#: application/views/scripts/items/search-form.php:102
+msgid "is not empty"
+msgstr "не е празно"
+
+#: admin/themes/default/items/search-form.php:104
+#: application/views/scripts/items/search-form.php:103
+msgid "starts with"
+msgstr "започва с"
+
+#: admin/themes/default/items/search-form.php:105
+#: application/views/scripts/items/search-form.php:104
+msgid "ends with"
+msgstr "завършва на "
+
+#: admin/themes/default/items/search-form.php:106
+msgid "matches"
+msgstr "съвпадения"
+
+#: admin/themes/default/items/search-form.php:107
+msgid "does not match"
+msgstr "няма съвпадения"
+
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:126
+#: application/views/scripts/items/search-form.php:33
+#: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Премахване на поле"
 
-#: admin/themes/default/items/search-form.php:119
-#: application/views/scripts/items/search-form.php:109
+#: admin/themes/default/items/search-form.php:134
+#: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Търсене в диапазон от ID# (например: 1-4, 156,79)"
 
-#: admin/themes/default/items/search-form.php:133
-#: application/views/scripts/items/search-form.php:120
+#: admin/themes/default/items/search-form.php:148
+#: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Търсене по Колекция"
 
-#: admin/themes/default/items/search-form.php:149
-#: application/views/scripts/items/search-form.php:134
+#: admin/themes/default/items/search-form.php:164
+#: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Търсене по тип"
 
-#: admin/themes/default/items/search-form.php:166
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:181
+#: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Търсене по потребите"
 
-#: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:165
+#: admin/themes/default/items/search-form.php:198
+#: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Търсене по маркери"
 
-#: admin/themes/default/items/search-form.php:198
-#: application/views/scripts/items/search-form.php:178
+#: admin/themes/default/items/search-form.php:213
+#: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Публичен/Закрит"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:186
+#: admin/themes/default/items/search-form.php:222
+#: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Само публични документи"
 
-#: admin/themes/default/items/search-form.php:208
-#: application/views/scripts/items/search-form.php:187
+#: admin/themes/default/items/search-form.php:223
+#: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Само закрити документи"
 
-#: admin/themes/default/items/search-form.php:218
-#: application/views/scripts/items/search-form.php:196
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Избрани/Неизбрани"
 
-#: admin/themes/default/items/search-form.php:227
-#: application/views/scripts/items/search-form.php:204
+#: admin/themes/default/items/search-form.php:242
+#: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Само избрани документи"
 
-#: admin/themes/default/items/search-form.php:228
-#: application/views/scripts/items/search-form.php:205
+#: admin/themes/default/items/search-form.php:243
+#: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Само неизбрани документи"
 
-#: admin/themes/default/items/search-form.php:236
-#: application/views/scripts/items/search-form.php:215
+#: admin/themes/default/items/search-form.php:251
+#: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Търсене за документи"
 
@@ -1619,8 +1658,8 @@ msgid "by %s"
 msgstr "от %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Получаване на поддръжка"
 
@@ -1653,7 +1692,7 @@ msgid "Uninstall"
 msgstr "Деинсталиране"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Инсталиране"
 
@@ -1876,7 +1915,7 @@ msgid "Date created"
 msgstr "Дата на създаване"
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Скриншот на %s тема"
@@ -1889,13 +1928,13 @@ msgstr "Редактор на теми"
 msgid "Current Theme"
 msgstr "Текуща тема"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "От %s"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1903,7 +1942,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Добавете нова тема, като я свалите от  <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\\\">Omeka Theme Directory</a>, или <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">направена \"от вас</a>!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Използвай тази тема"
 
@@ -2042,15 +2081,15 @@ msgstr "Преглед на Потребители"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Потребителско име "
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2061,6 +2100,7 @@ msgid "Add a User"
 msgstr "Добавяне на потребител"
 
 #: admin/themes/default/users/browse.php:37
+#: application/views/scripts/search/search-form.php:10
 msgid "Options"
 msgstr ""
 
@@ -2101,6 +2141,9 @@ msgid "Enter your email address to retrieve your password."
 msgstr "Въведете вашият имейл за получаване на нова парола"
 
 #: admin/themes/default/users/forgot-password.php:21
+#: application/views/helpers/SearchForm.php:57
+#: application/views/scripts/search/search-form.php:39
+#: application/views/scripts/search/search-form.php:43
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
 msgstr "Изпращане"
@@ -2110,7 +2153,7 @@ msgstr "Изпращане"
 msgid "Back to Log In"
 msgstr "Обратно към Вход"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Вход"
@@ -2132,11 +2175,11 @@ msgstr "Потребител #%s"
 msgid "Edit this User"
 msgstr "Редактиране на потребител"
 
-#: application/controllers/AppearanceController.php:48
+#: application/controllers/AppearanceController.php:47
 msgid "The appearance settings have been updated."
 msgstr "Настройките са обновени"
 
-#: application/controllers/AppearanceController.php:51
+#: application/controllers/AppearanceController.php:50
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
 #: application/controllers/SettingsController.php:55
@@ -2145,17 +2188,17 @@ msgstr "Настройките са обновени"
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "Намерена е грешка във вашата форма. Моля редактирайте я и я пратете отново "
 
-#: application/controllers/AppearanceController.php:66
+#: application/controllers/AppearanceController.php:64
 msgid "The navigation settings have been updated."
 msgstr "Настройките за навигация за обновени успешно"
 
-#: application/controllers/AppearanceController.php:69
+#: application/controllers/AppearanceController.php:67
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
 msgstr "Настройките за навигация не са записани, защото са невалидни или грешни. Всички променени стойности са възстановени"
 
-#: application/controllers/AppearanceController.php:97
+#: application/controllers/AppearanceController.php:95
 msgid "The navigation settings have been reset."
 msgstr "Навигационните настройки ще бътат нулирани"
 
@@ -2212,19 +2255,19 @@ msgid ""
 msgstr "Това ще изтрие набора от елементи и всички елементи съпричастни към него. Документите ще загубят всички метаданни които са зададени за този набор елементи"
 
 #: application/controllers/ElementSetsController.php:51
-#: application/controllers/PluginsController.php:49
-#: application/controllers/PluginsController.php:77
-#: application/controllers/PluginsController.php:135
-#: application/controllers/PluginsController.php:184
-#: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:325
+#: application/controllers/PluginsController.php:54
+#: application/controllers/PluginsController.php:82
+#: application/controllers/PluginsController.php:140
+#: application/controllers/PluginsController.php:189
+#: application/controllers/PluginsController.php:222
+#: application/controllers/PluginsController.php:330
 #: application/controllers/SettingsController.php:106
 #: application/controllers/SettingsController.php:149
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
-#: application/controllers/UsersController.php:312
-#: application/libraries/Omeka/Controller/AbstractActionController.php:183
-#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+#: application/controllers/UsersController.php:314
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "Има грешка във формата. Моля, опитайте отново"
 
@@ -2381,95 +2424,95 @@ msgstr "Документите са отбелязани и променени �
 msgid "Check logs for success and errors."
 msgstr "Проверете записите за грешки или успехи"
 
-#: application/controllers/PluginsController.php:43
+#: application/controllers/PluginsController.php:48
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr "Грешка при конфигурирането на разширение \"%s\".  Липсващи настройки или/и обработчик на config_forms"
 
-#: application/controllers/PluginsController.php:57
+#: application/controllers/PluginsController.php:62
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "Разширението %s е конфигурирано успешно!"
 
-#: application/controllers/PluginsController.php:87
+#: application/controllers/PluginsController.php:92
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "Разширението  %s  вече е инсталирано"
 
-#: application/controllers/PluginsController.php:97
+#: application/controllers/PluginsController.php:102
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "Разширението %s  е инсталирано успешно!"
 
-#: application/controllers/PluginsController.php:109
 #: application/controllers/PluginsController.php:114
+#: application/controllers/PluginsController.php:119
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "Възникна следната грешка  докато се инсталираше разширение %s:"
 
-#: application/controllers/PluginsController.php:150
+#: application/controllers/PluginsController.php:155
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "Възникна следната грешка  докато се активираше разширение %s:"
 
-#: application/controllers/PluginsController.php:160
+#: application/controllers/PluginsController.php:165
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "Разширението %s е включено!"
 
-#: application/controllers/PluginsController.php:165
+#: application/controllers/PluginsController.php:170
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "Разширението %s е включено, но не може да бъде заредено:"
 
-#: application/controllers/PluginsController.php:198
+#: application/controllers/PluginsController.php:203
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "Разширението %s е изключено!"
 
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:208
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "Възникна следната грешка, при опит за спиране на разширение %s :"
 
-#: application/controllers/PluginsController.php:233
+#: application/controllers/PluginsController.php:238
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Разширението %s  е обновено!"
 
-#: application/controllers/PluginsController.php:242
-#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:247
+#: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Възникна следната грешка при обновяване на разширение %s :"
 
-#: application/controllers/PluginsController.php:299
+#: application/controllers/PluginsController.php:304
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Разширението не може да бъде намерено в '%s'  папка!"
 
-#: application/controllers/PluginsController.php:312
+#: application/controllers/PluginsController.php:317
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Трябва да потвърдите деинсталирането преди да продължите"
 
-#: application/controllers/PluginsController.php:331
+#: application/controllers/PluginsController.php:336
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "Разширението %s е премахнато!"
 
-#: application/controllers/PluginsController.php:336
 #: application/controllers/PluginsController.php:341
+#: application/controllers/PluginsController.php:346
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Възникна следната грешка при опит за премахване на разширение %s:"
 
-#: application/controllers/PluginsController.php:370
+#: application/controllers/PluginsController.php:375
 msgid "No plugin name given."
 msgstr "Не е дадено име на разширението"
 
-#: application/controllers/PluginsController.php:383
+#: application/controllers/PluginsController.php:388
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Разширението %s трябва да бъде инсталирано"
@@ -2550,91 +2593,91 @@ msgid ""
 "version %2$s. Please update the installed version of PHP and try again."
 msgstr "Омека изисква PHP версия  %1$s  или по-висока, но този сървър има стартирана PHP версия %2$s. Моля, инсталирайте по-нова версия и опитайте отново."
 
-#: application/controllers/UsersController.php:72
+#: application/controllers/UsersController.php:74
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr "Паролата не може да бъде нулирана. Моля, проверете дали информацията е коректна и се свържете с администратора ако е нужно"
 
-#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:112
 msgid "Please follow this link to reset your password:"
 msgstr "Моля, следвайте тази връзка за да нулирате паролата си"
 
-#: application/controllers/UsersController.php:112
-#: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:390
+#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:392
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Администратор"
 
-#: application/controllers/UsersController.php:116
+#: application/controllers/UsersController.php:118
 #, php-format
 msgid "[%s] Reset Your Password"
 msgstr "[%s] Нулиране на парола"
 
-#: application/controllers/UsersController.php:119
+#: application/controllers/UsersController.php:121
 msgid "Please check your email for a link to reset your password."
 msgstr "Моля, проверете пощата си за връзка, чрез която да нулирате паролата си. Проверете и SPAM папката, ако не получите нищо"
 
-#: application/controllers/UsersController.php:128
+#: application/controllers/UsersController.php:130
 msgid "Invalid activation code given."
 msgstr "Въведен е грешен код за активация"
 
-#: application/controllers/UsersController.php:137
+#: application/controllers/UsersController.php:139
 msgid "Password: The passwords do not match."
 msgstr "Паролите не съвпадат"
 
-#: application/controllers/UsersController.php:145
+#: application/controllers/UsersController.php:147
 msgid "You may now log in to Omeka."
 msgstr "Сега вече можете да влезете в профила си"
 
-#: application/controllers/UsersController.php:169
-#: application/controllers/UsersController.php:235
-#: application/controllers/UsersController.php:286
+#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:237
+#: application/controllers/UsersController.php:288
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Има невалидни данни във формата. Моля, опитайте отново"
 
-#: application/controllers/UsersController.php:177
+#: application/controllers/UsersController.php:179
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Потребител \"%s\" е добавен успешно!"
 
-#: application/controllers/UsersController.php:181
+#: application/controllers/UsersController.php:183
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Потребителят \"%s\" е добавен, но не е изпратен имейл за активация"
 
-#: application/controllers/UsersController.php:217
+#: application/controllers/UsersController.php:219
 msgid "User activation email has been sent."
 msgstr "Кода за активация е изпратен успешно"
 
-#: application/controllers/UsersController.php:219
+#: application/controllers/UsersController.php:221
 msgid "User activation email could not be sent."
 msgstr "Кода за активация не е изпратен успешно"
 
-#: application/controllers/UsersController.php:257
+#: application/controllers/UsersController.php:259
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Потребителят %s е променен успешно!"
 
-#: application/controllers/UsersController.php:293
+#: application/controllers/UsersController.php:295
 msgid "Password changed!"
 msgstr "Паролата е променена!"
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:324
 msgid "A new API key was successfully created."
 msgstr "Новият API ключ е създаден успешно"
 
-#: application/controllers/UsersController.php:329
+#: application/controllers/UsersController.php:331
 msgid "An existing API key was successfully rescinded."
 msgstr "Съществуващият API ключ е отменен успешно"
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:358
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Потребителят  \"%s\"  е изтрит!"
 
-#: application/controllers/UsersController.php:362
+#: application/controllers/UsersController.php:364
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2642,18 +2685,18 @@ msgid ""
 "this user."
 msgstr "%s е премахнат от системата. Документите, колекциите и маркерите създадени от този потребител се пазят в системата, но вече не са свързани с него"
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:388
 msgid "Welcome!"
 msgstr "Добре Дошъл!"
 
-#: application/controllers/UsersController.php:388
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Вашата регистрация за %s е създадена. Моля, щракнете на връзката за да активирате потребителя: "
 
-#: application/controllers/UsersController.php:391
+#: application/controllers/UsersController.php:393
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Активирайте своята регистрация в %s "
@@ -2673,7 +2716,7 @@ msgid ""
 msgstr "Използвайте квадратно изрязани изображения по подразбиране, където се използват в публичният интерфейс"
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Размер на изображението"
 
@@ -2682,7 +2725,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максимален размер на изображението (в пиксели)"
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Размер на миниатюрата"
 
@@ -2691,7 +2734,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максимален размер на миниатюрата (в пиксели)"
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Размер на квадрата на миниатюрата"
 
@@ -2719,36 +2762,44 @@ msgid ""
 msgstr "Ограничаване на броя резултати, показвани на страница в публичните страници"
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Показване на празните елементи"
 
-#: application/forms/AppearanceSettings.php:67
+#: application/forms/AppearanceSettings.php:63
+msgid "Include empty elements in show pages."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr "Показване на елементите обозначени като заглавни"
 
-#: application/forms/AppearanceSettings.php:72
+#: application/forms/AppearanceSettings.php:69
+msgid "Include element set headings in show pages and in drop-down lists."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
 msgstr "Връзка към метаданните на файла"
 
-#: application/forms/AppearanceSettings.php:73
+#: application/forms/AppearanceSettings.php:75
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
 msgstr "Файловете на елементите да имат връзка към метаданните на файла вместо към файла директно."
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:85
 msgid "Admin Theme"
 msgstr "Администраторска Тема"
 
-#: application/forms/AppearanceSettings.php:97
+#: application/forms/AppearanceSettings.php:99
 msgid "Derivative Size Constraints"
 msgstr "Вторични ограничения на размера"
 
-#: application/forms/AppearanceSettings.php:105
+#: application/forms/AppearanceSettings.php:107
 msgid "Display Settings"
 msgstr "Настройки на показването"
 
-#: application/forms/AppearanceSettings.php:113
+#: application/forms/AppearanceSettings.php:115
 msgid "Admin Themes"
 msgstr "Администраторски теми"
 
@@ -2786,27 +2837,27 @@ msgstr "Новата парола трябва да е поне %min% знака
 msgid "Repeat New Password"
 msgstr "Повторете новата парола"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Заглавие на сайта"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Описание на сайта"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Поща на Администратора"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Авторски права на сайта"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Информация за администратора на сайта"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Разделител на маркерите"
 
@@ -2816,7 +2867,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "За разделяне на маркери, използвайки този символ или стринг. Бъдете внимателни при промяната на настройките, рискувате да премахнете маркерите които са правени при старите настройки."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "Път до програмата ImageMagick "
 
@@ -2824,22 +2875,22 @@ msgstr "Път до програмата ImageMagick "
 msgid "General Settings"
 msgstr ""
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "трябва да е до 30 знака без интервали"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Интервалите не са разрешени. Може да се използват само специални знаци: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Парола"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "трябва да е поне 6 знака"
 
@@ -2847,49 +2898,49 @@ msgstr "трябва да е поне 6 знака"
 msgid "Confirm your password."
 msgstr "Потвърдете паролата"
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Разделяне на маркери използвайки тези знаци или стрингове "
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Максималния размер на изображението (в пиксели)"
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Максимален размер на миниатюрата (в пиксели)"
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Максимален размер на правоъгълника с миниатюрата (в пиксели)"
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Документи на страница (администратор)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Ограничаване на броя документи показвани на една страница в административният панел"
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Документи на страница (обществени)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Ограничаване броя на документите показвани на страница за публични страници"
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Сложете отметка за показване на метаданните на елементите без текст"
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "СуперПотребителски акаунт по подразбиране"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Настройка на сайта"
 
@@ -2906,15 +2957,15 @@ msgstr "Описание: на типа документ"
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Този тип документ не може има повече от един  \"%s\" елемент"
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Потребителско име не може да е празно"
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "Паролата не може да е празна"
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Запомни ме"
 
@@ -3148,7 +3199,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Основният контейнер трябва да е или обект от навигация или наследник на подстраница от обекта за навигация"
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Невалиден URI за  Omeka_Navigation_Page_Uri обект: %s\""
@@ -3167,12 +3218,12 @@ msgstr "Разширението \"%s\"трябва да е инсталиран
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Разширението трябва да има валидно име на папка, преди да бъде инсталирано"
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:351
+#: application/libraries/Omeka/Record/AbstractRecord.php:352
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr "'%s' е с грешно специална стойност"
 
-#: application/libraries/Omeka/Record/Iterator.php:49
+#: application/libraries/Omeka/Record/Iterator.php:51
 msgid "An invalid value was detected during record iteration."
 msgstr "Невалидна стойност е открита при опит за повторен запис"
 
@@ -3192,79 +3243,79 @@ msgstr "Логически израз"
 msgid "Exact match"
 msgstr "Точно съвпадение"
 
-#: application/libraries/globals.php:1268
-#: application/libraries/globals.php:1289
+#: application/libraries/globals.php:1275
+#: application/libraries/globals.php:1296
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Не може да бъде намерен файл %s!"
 
-#: application/libraries/globals.php:1305
+#: application/libraries/globals.php:1312
 msgid "No featured collections are available."
 msgstr "Няма избрани колекции"
 
-#: application/libraries/globals.php:1603
+#: application/libraries/globals.php:1618
 msgid "Select Below "
 msgstr "Изберете по-долу "
 
-#: application/libraries/globals.php:1646
+#: application/libraries/globals.php:1661
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS хранилка"
 
-#: application/libraries/globals.php:1647
+#: application/libraries/globals.php:1662
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom хранилка"
 
-#: application/libraries/globals.php:1966
+#: application/libraries/globals.php:1981
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:1976
+#: application/libraries/globals.php:1991
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:1980
+#: application/libraries/globals.php:1995
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2314
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Няма последни документи"
 
-#: application/libraries/globals.php:2340
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Няма избрани документи"
 
-#: application/libraries/globals.php:2401
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Преглед"
 
-#: application/libraries/globals.php:2463
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Няма колекция"
 
-#: application/libraries/globals.php:2582
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "Адрес на RSS"
 
-#: application/libraries/globals.php:2599
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "Следващ документ &rarr;"
 
-#: application/libraries/globals.php:2619
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Предишен документ"
 
-#: application/libraries/globals.php:2800
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Преглед на всички"
 
-#: application/libraries/globals.php:2805
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Преглед по маркери"
 
-#: application/libraries/globals.php:3084
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Няма достъпни маркери"
 
@@ -3318,7 +3369,7 @@ msgstr "Невалиден ID на елемента"
 msgid "Cannot get the local path for a stored file."
 msgstr "Не може да се определи локалният път за съхранение на файла"
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" недопустима модификация на файла"
@@ -3554,98 +3605,98 @@ msgstr "Тази миграция трябва да е била стартира
 msgid "This migration should not be run."
 msgstr "Тази миграция не трябва да се изпълнява."
 
-#: application/tests/suite/Omeka/NavigationTest.php:752
-#: application/tests/suite/Omeka/NavigationTest.php:817
-#: application/tests/suite/Omeka/NavigationTest.php:839
-#: application/tests/suite/Omeka/NavigationTest.php:952
+#: application/tests/suite/Omeka/NavigationTest.php:753
+#: application/tests/suite/Omeka/NavigationTest.php:818
+#: application/tests/suite/Omeka/NavigationTest.php:840
+#: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Items"
 msgstr "Редактиране на документ"
 
-#: application/tests/suite/Omeka/NavigationTest.php:758
-#: application/tests/suite/Omeka/NavigationTest.php:818
-#: application/tests/suite/Omeka/NavigationTest.php:856
-#: application/tests/suite/Omeka/NavigationTest.php:953
+#: application/tests/suite/Omeka/NavigationTest.php:759
+#: application/tests/suite/Omeka/NavigationTest.php:819
+#: application/tests/suite/Omeka/NavigationTest.php:857
+#: application/tests/suite/Omeka/NavigationTest.php:954
 msgid "Edit Collections"
 msgstr "Редактиране на колекция"
 
-#: application/tests/suite/Omeka/NavigationTest.php:764
-#: application/tests/suite/Omeka/NavigationTest.php:819
-#: application/tests/suite/Omeka/NavigationTest.php:862
-#: application/tests/suite/Omeka/NavigationTest.php:954
+#: application/tests/suite/Omeka/NavigationTest.php:765
+#: application/tests/suite/Omeka/NavigationTest.php:820
+#: application/tests/suite/Omeka/NavigationTest.php:863
+#: application/tests/suite/Omeka/NavigationTest.php:955
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
 
-#: application/tests/suite/Omeka/NavigationTest.php:825
-#: application/tests/suite/Omeka/NavigationTest.php:951
+#: application/tests/suite/Omeka/NavigationTest.php:826
+#: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "CHNM"
 msgstr "CHNM"
 
-#: application/tests/suite/Omeka/NavigationTest.php:982
-#: application/tests/suite/Omeka/NavigationTest.php:990
-#: application/tests/suite/Omeka/NavigationTest.php:1127
-#: application/tests/suite/Omeka/NavigationTest.php:1135
+#: application/tests/suite/Omeka/NavigationTest.php:983
+#: application/tests/suite/Omeka/NavigationTest.php:991
+#: application/tests/suite/Omeka/NavigationTest.php:1128
+#: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
 msgstr "Страница"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1008
-#: application/tests/suite/Omeka/NavigationTest.php:1012
-#: application/tests/suite/Omeka/NavigationTest.php:1070
-#: application/tests/suite/Omeka/NavigationTest.php:1075
-#: application/tests/suite/Omeka/NavigationTest.php:1155
-#: application/tests/suite/Omeka/NavigationTest.php:1255
+#: application/tests/suite/Omeka/NavigationTest.php:1009
+#: application/tests/suite/Omeka/NavigationTest.php:1013
+#: application/tests/suite/Omeka/NavigationTest.php:1071
+#: application/tests/suite/Omeka/NavigationTest.php:1076
+#: application/tests/suite/Omeka/NavigationTest.php:1156
+#: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
 msgstr "Страница 1"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1015
-#: application/tests/suite/Omeka/NavigationTest.php:1021
-#: application/tests/suite/Omeka/NavigationTest.php:1078
-#: application/tests/suite/Omeka/NavigationTest.php:1081
-#: application/tests/suite/Omeka/NavigationTest.php:1162
-#: application/tests/suite/Omeka/NavigationTest.php:1181
-#: application/tests/suite/Omeka/NavigationTest.php:1199
-#: application/tests/suite/Omeka/NavigationTest.php:1231
+#: application/tests/suite/Omeka/NavigationTest.php:1016
+#: application/tests/suite/Omeka/NavigationTest.php:1022
+#: application/tests/suite/Omeka/NavigationTest.php:1079
+#: application/tests/suite/Omeka/NavigationTest.php:1082
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
 msgstr "Страница 2"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1024
-#: application/tests/suite/Omeka/NavigationTest.php:1028
-#: application/tests/suite/Omeka/NavigationTest.php:1084
-#: application/tests/suite/Omeka/NavigationTest.php:1088
-#: application/tests/suite/Omeka/NavigationTest.php:1163
-#: application/tests/suite/Omeka/NavigationTest.php:1182
-#: application/tests/suite/Omeka/NavigationTest.php:1192
-#: application/tests/suite/Omeka/NavigationTest.php:1254
+#: application/tests/suite/Omeka/NavigationTest.php:1025
+#: application/tests/suite/Omeka/NavigationTest.php:1029
+#: application/tests/suite/Omeka/NavigationTest.php:1085
+#: application/tests/suite/Omeka/NavigationTest.php:1089
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1193
+#: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
 msgstr "Страница 3"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1031
-#: application/tests/suite/Omeka/NavigationTest.php:1040
-#: application/tests/suite/Omeka/NavigationTest.php:1091
-#: application/tests/suite/Omeka/NavigationTest.php:1095
-#: application/tests/suite/Omeka/NavigationTest.php:1164
-#: application/tests/suite/Omeka/NavigationTest.php:1183
-#: application/tests/suite/Omeka/NavigationTest.php:1200
-#: application/tests/suite/Omeka/NavigationTest.php:1221
-#: application/tests/suite/Omeka/NavigationTest.php:1239
-#: application/tests/suite/Omeka/NavigationTest.php:1249
+#: application/tests/suite/Omeka/NavigationTest.php:1032
+#: application/tests/suite/Omeka/NavigationTest.php:1041
+#: application/tests/suite/Omeka/NavigationTest.php:1092
+#: application/tests/suite/Omeka/NavigationTest.php:1096
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1184
+#: application/tests/suite/Omeka/NavigationTest.php:1201
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
 msgstr "Страница 4"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1043
-#: application/tests/suite/Omeka/NavigationTest.php:1047
-#: application/tests/suite/Omeka/NavigationTest.php:1098
-#: application/tests/suite/Omeka/NavigationTest.php:1102
-#: application/tests/suite/Omeka/NavigationTest.php:1165
-#: application/tests/suite/Omeka/NavigationTest.php:1174
-#: application/tests/suite/Omeka/NavigationTest.php:1222
-#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1044
+#: application/tests/suite/Omeka/NavigationTest.php:1048
+#: application/tests/suite/Omeka/NavigationTest.php:1099
+#: application/tests/suite/Omeka/NavigationTest.php:1103
+#: application/tests/suite/Omeka/NavigationTest.php:1166
+#: application/tests/suite/Omeka/NavigationTest.php:1175
+#: application/tests/suite/Omeka/NavigationTest.php:1223
+#: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
 msgstr "Страница 5"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1050
-#: application/tests/suite/Omeka/NavigationTest.php:1054
-#: application/tests/suite/Omeka/NavigationTest.php:1214
+#: application/tests/suite/Omeka/NavigationTest.php:1051
+#: application/tests/suite/Omeka/NavigationTest.php:1055
+#: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
 msgstr "Страница  6"
 
@@ -3733,10 +3784,6 @@ msgstr "Предишна страница"
 msgid "Page"
 msgstr ""
 
-#: application/views/scripts/common/pagination_control.php:38
-msgid "Current Page"
-msgstr "Текуща страница"
-
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
 msgid "%s of %s"
@@ -3822,23 +3869,24 @@ msgstr "Тип въпрос:"
 msgid "Record types:"
 msgstr "Типове записи"
 
-#: application/views/scripts/search/search-form.php:2
-msgid "submit_search"
+#: application/views/scripts/search/search-form.php:4
+#: application/views/scripts/search/search-form.php:5
+msgid "Query"
 msgstr ""
 
-#: application/views/scripts/search/search-form.php:6
+#: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
 msgstr "Търсене използвайки:"
 
-#: application/views/scripts/search/search-form.php:11
+#: application/views/scripts/search/search-form.php:20
 msgid "Search only these record types:"
 msgstr "Търсене само на този тип запис"
 
-#: application/views/scripts/search/search-form.php:17
+#: application/views/scripts/search/search-form.php:26
 msgid "Go to search settings to select record types to use."
 msgstr "Отидете на настройки на търсенето за да изберете типовете записи за използване "
 
-#: application/views/scripts/search/search-form.php:19
+#: application/views/scripts/search/search-form.php:28
 msgid "Advanced Search (Items only)"
 msgstr "Разширено търсене (само за Документи)"
 
@@ -3850,7 +3898,7 @@ msgstr "Начало"
 msgid "Lost your password?"
 msgstr "Изгубена парола?"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Базата данни не може да бъде заредена"
 

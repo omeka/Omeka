@@ -13,6 +13,8 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
 {
     const PLUGIN_NAME = 'Foobar';
 
+    private $plugin;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

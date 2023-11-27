@@ -210,6 +210,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_methods);
@@ -220,6 +221,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->_methods);
@@ -230,6 +232,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return int|string
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_methods);
@@ -240,6 +243,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->_methods);
@@ -250,6 +254,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->_methods);
@@ -260,6 +265,7 @@ class Zend_Server_Definition implements Countable, Iterator
      *
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return (bool) $this->current();

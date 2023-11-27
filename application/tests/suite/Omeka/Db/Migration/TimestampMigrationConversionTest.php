@@ -11,6 +11,8 @@
  */
 class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
 {
+    private $db;
+
     public function setUpLegacy()
     {
         $this->application = new Omeka_Application('testing', array(

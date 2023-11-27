@@ -4,6 +4,7 @@ db.host = ""
 db.username = ""
 db.password = ""
 db.dbname = ""
+db.charset = "utf8"
 
 paths.imagemagick = ""
 

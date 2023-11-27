@@ -14,6 +14,8 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
     //const COLLECTION_ID = 1;
     const USER_ID = 5;
 
+    private $collection;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();
@@ -29,27 +31,27 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
     {
         $collectionId = 1;
 
-        $this->dbAdapter = new Zend_Test_DbAdapter;
-        $this->dbAdapter->appendLastInsertIdToStack($collectionId);
-        $this->db = new Omeka_Db($this->dbAdapter);
-        $this->collection = new Collection($this->db);
-        $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->db->getAdapter()->getProfiler(), $this);
+        $dbAdapter = new Zend_Test_DbAdapter;
+        $dbAdapter->appendLastInsertIdToStack($collectionId);
+        $db = new Omeka_Db($dbAdapter);
+        $this->collection = new Collection($db);
+        $profilerHelper = new Omeka_Test_Helper_DbProfiler($db->getAdapter()->getProfiler(), $this);
         $this->collection->totalItems();
 
-        $this->profilerHelper->assertDbQuery("SELECT COUNT(DISTINCT(items.id)) FROM items");
+        $profilerHelper->assertDbQuery("SELECT COUNT(DISTINCT(items.id)) FROM items");
     }
 
     public function testTotalItems()
     {
         $collectionId = 1;
 
-        $this->dbAdapter = new Zend_Test_DbAdapter;
-        $this->dbAdapter->appendLastInsertIdToStack($collectionId);
-        $this->db = new Omeka_Db($this->dbAdapter);
-        $this->collection = new Collection($this->db);
-        $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->db->getAdapter()->getProfiler(), $this);
+        $dbAdapter = new Zend_Test_DbAdapter;
+        $dbAdapter->appendLastInsertIdToStack($collectionId);
+        $db = new Omeka_Db($dbAdapter);
+        $this->collection = new Collection($db);
+        $profilerHelper = new Omeka_Test_Helper_DbProfiler($db->getAdapter()->getProfiler(), $this);
 
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(array(3))));
+        $dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(array(3))));
 
         $this->assertEquals(3, $this->collection->totalItems());
     }

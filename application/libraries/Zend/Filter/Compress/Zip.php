@@ -233,24 +233,6 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
             throw new Zend_Filter_Exception($this->_errorString($res));
         }
 
-        if (version_compare(PHP_VERSION, '5.2.8', '<')) {
-            for ($i = 0; $i < $zip->numFiles; $i++) {
-                $statIndex = $zip->statIndex($i);
-                $currName = $statIndex['name'];
-                if (($currName[0] == '/') ||
-                    (substr($currName, 0, 2) == '..') ||
-                    (substr($currName, 0, 4) == './..')
-                    )
-                {
-                    require_once 'Zend/Filter/Exception.php';
-                    throw new Zend_Filter_Exception('Upward directory traversal was detected inside ' . $archive
-                        . ' please use PHP 5.2.8 or greater to take advantage of path resolution features of '
-                        . 'the zip extension in this decompress() method.'
-                        );
-                }
-            }
-        }
-
         $res = @$zip->extractTo($target);
         if ($res !== true) {
             require_once 'Zend/Filter/Exception.php';

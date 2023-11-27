@@ -104,7 +104,7 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
                     $sig_str .= '?torrent';
                 }
 
-        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Zend_Crypt_Hmac::BINARY));
+        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_secretKey, 'sha1', $sig_str, Zend_Crypt_Hmac::BINARY));
         $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . $signature;
 
         return $sig_str;

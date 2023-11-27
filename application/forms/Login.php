@@ -15,6 +15,14 @@ class Omeka_Form_Login extends Omeka_Form
     {
         parent::init();
 
+        $decorators = array(
+            'ViewHelper',
+            array('Errors', array('class' => 'error')),
+            array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
+            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta')),
+            array('HtmlTag', array('tag' => 'div', 'class' => 'field'))
+        );
+
         $this->setMethod('post');
         $this->setAttrib('id', 'login-form');
         $this->addElement('text', 'username', array(
@@ -25,11 +33,8 @@ class Omeka_Form_Login extends Omeka_Form
                           'options' => array(
                               'messages' => array(
                                   'isEmpty' => __('Username cannot be empty.'))))),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))));
+            'decorators' => $decorators,
+        ));
         $this->addElement('password', 'password', array(
             'label' => __('Password'),
             'required' => true,
@@ -38,19 +43,13 @@ class Omeka_Form_Login extends Omeka_Form
                           'options' => array(
                               'messages' => array(
                                   'isEmpty' => __('Password cannot be empty.'))))),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))));
+            'decorators' => $decorators,
+        ));
         $this->addElement('checkbox', 'remember', array(
             'class' => 'checkbox',
             'label' => __('Remember Me?'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))));
+            'decorators' => $decorators,
+        ));
         $this->addDisplayGroup(array('username', 'password', 'remember'), 'login');
         $this->addElement('submit', 'submit', array('label' => __('Log In')));
     }

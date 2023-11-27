@@ -22,6 +22,9 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
         'show_description' => false
     );
 
+    private $dbAdapter;
+    private $db;
+
     public function setUpLegacy()
     {
         $bootstrap = new Omeka_Test_Bootstrap;

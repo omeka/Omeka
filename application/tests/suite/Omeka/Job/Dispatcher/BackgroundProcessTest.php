@@ -8,6 +8,9 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends Omeka_Test_Test
         'options' => array('baz' => true),
     );
 
+    private $processDispatcher;
+    private $adapter;
+
     public function setUpLegacy()
     {
         // Omeka_Job_Process_Dispatcher is quite untestable so this test just

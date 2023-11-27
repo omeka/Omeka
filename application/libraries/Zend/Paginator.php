@@ -514,6 +514,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         if (!$this->_pageCount) {
@@ -818,6 +819,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @return Traversable
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return $this->getCurrentItems();

@@ -1,12 +1,6 @@
 <?php 
 class SnippetTest extends Omeka_Test_TestCase
 {
-    public function setUpLegacy()
-    {
-        $this->reporting = error_reporting();
-        error_reporting(E_ALL);
-    }
-
     public function testSnippetEmptyText()
     {
         $this->assertEquals('', snippet('', 0, 15));
@@ -60,10 +54,5 @@ class SnippetTest extends Omeka_Test_TestCase
         } else {
             $this->assertEquals('dummy…', $snippet);
         }
-    }
-
-    public function tearDownLegacy()
-    {
-        error_reporting($this->reporting);
     }
 }

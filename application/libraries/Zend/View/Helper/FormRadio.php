@@ -161,7 +161,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
                     . (('prepend' == $labelPlacement) ? $opt_label : '')
                     . '<input type="' . $this->_inputType . '"'
                     . ' name="' . $name . '"'
-                    . ' id="' . $optId . '"'
+                    . ($id === '' ? '' : ' id="' . $optId . '"')
                     . ' value="' . $this->view->escape($opt_value) . '"'
                     . $checked
                     . $disabled

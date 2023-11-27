@@ -13,6 +13,8 @@
  */
 class Models_Table_ElementTest extends Omeka_Test_AppTestCase
 {
+    private $table;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

@@ -2,6 +2,8 @@
 
 class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends Omeka_Test_TestCase
 {
+    private $adapter;
+
     public function testPheanstalkRequiresHostOption()
     {
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk;

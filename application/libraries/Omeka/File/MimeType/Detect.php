@@ -74,7 +74,6 @@ class Omeka_File_MimeType_Detect
                 new Omeka_File_MimeType_Detect_Strategy_FileCommand,
                 new Omeka_File_MimeType_Detect_Strategy_MimeContentType,
                 new Omeka_File_MimeType_Detect_Strategy_GetId3,
-                new Omeka_File_MimeType_Detect_Strategy_Browser,
             );
         } else {
             // Validate the passed strategies.
@@ -112,10 +111,11 @@ class Omeka_File_MimeType_Detect
             // Cache the MIME type, keyed to the strategy class name.
             $this->_mimeTypes[get_class($strategy)] = $mimeType;
 
-            // Set the definitive MIME type if it's not ambiguous and if it
-            // hasn't already been detected by a previous strategy.
-            if (!in_array($mimeType, $this->_ambiguousMimeTypes) && !$this->_mimeType) {
+            // Set the definitive MIME type if it's not ambiguous, and
+            // don't run any further strategies
+            if (!in_array($mimeType, $this->_ambiguousMimeTypes)) {
                 $this->_mimeType = $mimeType;
+                break;
             }
         }
 

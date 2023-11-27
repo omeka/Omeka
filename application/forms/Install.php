@@ -26,6 +26,14 @@ class Omeka_Form_Install extends Omeka_Form
 
         $this->setMethod('post');
 
+        $decorators = array(
+            'ViewHelper',
+            array('Errors', array('class' => 'error')),
+            array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
+            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta')),
+            array('HtmlTag', array('tag' => 'div', 'class' => 'field'))
+        );
+
         $this->addElement('text', 'username', array(
             'label' => __('Username'),
             'description' => __('must be 30 characters or fewer with no whitespace'),
@@ -41,11 +49,7 @@ class Omeka_Form_Install extends Omeka_Form
                     )
                 )
             ),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -69,11 +73,7 @@ class Omeka_Form_Install extends Omeka_Form
                         'stringLengthTooShort' => "Password must be at least %min% characters in length.")
                 ))
             ),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -88,81 +88,49 @@ class Omeka_Form_Install extends Omeka_Form
                     )
                 ))
             ),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('text', 'super_email', array(
             'label' => __('Email'),
             'validators' => array('EmailAddress'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true,
         ));
 
         $this->addElement('text', 'site_title', array(
             'label' => __('Site Title'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
         $this->addElement('textarea', 'description', array(
             'label' => __('Site Description'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('text', 'administrator_email', array(
             'label' => __('Administrator Email'),
             'validators' => array('EmailAddress'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
         $this->addElement('text', 'copyright', array(
             'label' => __('Site Copyright Information'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('text', 'author', array(
             'label' => __('Site Author Information'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('text', 'tag_delimiter', array(
             'label' => __('Tag Delimiter'),
             'description' => __('Separate tags using this character or string.'),
             'value' => self::DEFAULT_TAG_DELIMITER,
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         // Allow the tag delimiter to be a whitespace character(s) (except for
@@ -179,11 +147,7 @@ class Omeka_Form_Install extends Omeka_Form
             'description' => __('Maximum fullsize image size constraint (in pixels)'),
             'value' => self::DEFAULT_FULLSIZE_CONSTRAINT,
             'validators' => array('Digits'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -192,11 +156,7 @@ class Omeka_Form_Install extends Omeka_Form
             'description' => __('Maximum thumbnail size constraint (in pixels)'),
             'value' => self::DEFAULT_THUMBNAIL_CONSTRAINT,
             'validators' => array('Digits'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -205,11 +165,7 @@ class Omeka_Form_Install extends Omeka_Form
             'description' => __('Maximum square thumbnail size constraint (in pixels)'),
             'value' => self::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT,
             'validators' => array('Digits'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -218,11 +174,7 @@ class Omeka_Form_Install extends Omeka_Form
             'description' => __('Limit the number of items displayed per page in the administrative interface.'),
             'value' => self::DEFAULT_PER_PAGE_ADMIN,
             'validators' => array('Digits'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -231,11 +183,7 @@ class Omeka_Form_Install extends Omeka_Form
             'description' => __('Limit the number of items displayed per page in the public interface.'),
             'value' => self::DEFAULT_PER_PAGE_PUBLIC,
             'validators' => array('Digits'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))),
+            'decorators' => $decorators,
             'required' => true
         ));
 
@@ -244,20 +192,12 @@ class Omeka_Form_Install extends Omeka_Form
             'class' => 'checkbox',
             'description' => __('Check box to show metadata elements with no text.'),
             'value' => self::DEFAULT_SHOW_EMPTY_ELEMENTS,
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('text', 'path_to_convert', array(
             'label' => __('ImageMagick Directory Path'),
-            'decorators' => array(
-                'ViewHelper',
-                array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs six columns omega')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array('HtmlTag', array('tag' => 'div', 'class' => 'field')))
+            'decorators' => $decorators,
         ));
 
         $this->addElement('submit', 'install_submit', array(

@@ -13,6 +13,11 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
 {
     const DUMMY_RECORD_ID = 1;
 
+    public $ranBeforeBuild;
+    public $ranAfterBuild;
+    private $dbAdapter;
+    private $db;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;

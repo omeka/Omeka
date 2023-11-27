@@ -1,0 +1,3939 @@
+# Translation template for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# 
+# Translators:
+# Vibiblio Library <vietbiblio@gmail.com>, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: Omeka Classic\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
+"POT-Creation-Date: 2012-11-26 14:33-0500\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Vibiblio Library <vietbiblio@gmail.com>, 2022\n"
+"Language-Team: Vietnamese (http://app.transifex.com/omeka/omeka/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Dublin Core description
+msgid ""
+"The Dublin Core metadata element set is common to all Omeka records, "
+"including items, files, and collections. For more information see, "
+"http://dublincore.org/documents/dces/."
+msgstr "Tập hợp phần tử Metadata Dublin Core chung cho tất cả records, bao gồm cả tài liệu, files, bộ sưu tập. Xem thêm thông tin, http://dublincore.org/documents/dces/."
+
+#. Dublin Core: Title element name
+#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/search/index.php:13
+#: application/views/scripts/collections/browse.php:10
+#: application/views/scripts/items/browse.php:19
+#: application/views/scripts/search/index.php:14
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. Dublin Core: Title element description
+msgid "A name given to the resource"
+msgstr "Tên của nguồn thông tin"
+
+#. Dublin Core: Creator element name
+#: admin/themes/default/items/browse.php:47
+#: application/views/scripts/items/browse.php:20
+msgid "Creator"
+msgstr "Người tạo lập"
+
+#. Dublin Core: Creator element description
+msgid "An entity primarily responsible for making the resource"
+msgstr "Thực thể chịu trách nhiệm chính tạo ra nguồn thông tin"
+
+#. Dublin Core: Subject element name
+msgid "Subject"
+msgstr "Chủ đề"
+
+#. Dublin Core: Subject element description
+msgid "The topic of the resource"
+msgstr "Đề tài về nội dung của nguồn thông tin"
+
+#. Dublin Core: Description element name
+#: admin/themes/default/element-sets/browse.php:18
+#: admin/themes/default/item-types/browse.php:29
+#: admin/themes/default/item-types/show.php:14
+#: admin/themes/default/settings/edit-item-type-elements.php:27
+#: application/forms/ItemTypes.php:150
+msgid "Description"
+msgstr "Bản mô tả"
+
+#. Dublin Core: Description element description
+msgid "An account of the resource"
+msgstr "Mô tả về nguồn thông tin"
+
+#. Dublin Core: Publisher element name
+msgid "Publisher"
+msgstr "Nhà xuất bản"
+
+#. Dublin Core: Publisher element description
+msgid "An entity responsible for making the resource available"
+msgstr "Thực thể chịu trách nhiệm tạo ra nguồn thông tin sẵn có để sử dụng"
+
+#. Dublin Core: Contributor element name
+#. User role: contributor
+msgid "Contributor"
+msgstr "Người cộng tác/ Người đóng góp"
+
+#. Dublin Core: Contributor element description
+msgid "An entity responsible for making contributions to the resource"
+msgstr "Thực thể chịu trách nhiệm đóng góp vào nội dung nguồn thông tin."
+
+#. Dublin Core: Date element name
+msgid "Date"
+msgstr "Ngày tháng"
+
+#. Dublin Core: Date element description
+msgid ""
+"A point or period of time associated with an event in the lifecycle of the "
+"resource"
+msgstr "Thời điểm hoặc thời kỳ có liên quan đến mặt sự kiện trong vòng đời của nguồn thông tin"
+
+#. Dublin Core: Type element name
+#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
+#: application/views/scripts/items/search-form.php:88
+msgid "Type"
+msgstr "Loại hình"
+
+#. Dublin Core: Type element description
+msgid "The nature or genre of the resource"
+msgstr "Bản chất hoặc loại nguồn thông tin"
+
+#. Dublin Core: Format element name
+msgid "Format"
+msgstr "Định dạng"
+
+#. Dublin Core: Format element description
+msgid "The file format, physical medium, or dimensions of the resource"
+msgstr "Định dạng tệp, phương tiện vật lý hoặc kích thước của nguồn thông tin"
+
+#. Dublin Core: Identifier element name
+msgid "Identifier"
+msgstr "Yếu tố nhận dạng"
+
+#. Dublin Core: Identifier element description
+msgid "An unambiguous reference to the resource within a given context"
+msgstr "Tham chiếu rõ ràng đến một nguồn thông tin trong một ngữ cảnh cụ thể"
+
+#. Dublin Core: Source element name
+msgid "Source"
+msgstr "Nguồn"
+
+#. Dublin Core: Source element description
+msgid "A related resource from which the described resource is derived"
+msgstr "Nguồn thông tin liên quan mà từ đó tham chiếu tới nguồn thông tin được mô tả"
+
+#. Dublin Core: Language element name
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#. Dublin Core: Language element description
+msgid "A language of the resource"
+msgstr "Ngôn ngữ của nguồn thông tin"
+
+#. Dublin Core: Relation element name
+msgid "Relation"
+msgstr "Quan hệ"
+
+#. Dublin Core: Relation element description
+msgid "A related resource"
+msgstr "Nguồn thông tin liên quan"
+
+#. Dublin Core: Coverage element name
+msgid "Coverage"
+msgstr "Diện bao quát"
+
+#. Dublin Core: Coverage element description
+msgid ""
+"The spatial or temporal topic of the resource, the spatial applicability of "
+"the resource, or the jurisdiction under which the resource is relevant"
+msgstr "Đề tài của nguồn tin liên quan đến thời gian hoặc không gian, không gian có thể áp dụng nguồn thông tin hoặc khu vực pháp quyền mà nguồn thông tin liên quan"
+
+#. Dublin Core: Rights element name
+msgid "Rights"
+msgstr "Các quyền"
+
+#. Dublin Core: Rights element description
+msgid "Information about rights held in and over the resource"
+msgstr "Thông tin về các quyền đối với nguồn tin"
+
+#. Item Type Metadata
+msgid "Item Type Metadata"
+msgstr "Metadata loại hình tài liệu"
+
+#. Item Type Metadata description
+msgid ""
+"The item type metadata element set, consisting of all item type elements "
+"bundled with Omeka and all item type elements created by an administrator."
+msgstr "Tập hợp Metadata loại hình tài liệu, bao gồm tất cả các loại hình tài liệu đi kèm với Omeka và tất cả các loại hình tài liệu do quản trị viên tạo ra."
+
+#. Omeka Legacy File
+msgid "Omeka Legacy File"
+msgstr "File kế thừa Omeka"
+
+#. Omeka Legacy File description
+msgid ""
+"The metadata element set that, in addition to the Dublin Core element set, "
+"was included in the `files` table in previous versions of Omeka. These "
+"elements are common to all Omeka files. This set may be deprecated in future"
+" versions."
+msgstr "Bộ phần tử siêu dữ liệu, ngoài bộ phần tử Dublin Core, đã được bao gồm trong bảng `files` trong các phiên bản trước của Omeka. Những yếu tố này là chung cho tất cả các tệp Omeka. Thiết lập này có thể không được dùng nữa trong các phiên bản trong tương lai."
+
+#. Omeka Legacy File: Additional Creator element
+msgid "Additional Creator"
+msgstr "Thêm người tạo lập"
+
+#. Omeka Legacy File: Transcriber element
+msgid "Transcriber"
+msgstr "Người sao chép"
+
+#. Omeka Legacy File: Producer element
+msgid "Producer"
+msgstr "Người sản xuất"
+
+#. Omeka Legacy File: Render Device element
+msgid "Render Device"
+msgstr "Thiết bị kết xuất"
+
+#. Omeka Legacy File: Render Details element
+msgid "Render Details"
+msgstr "Chi tiết kết xuất"
+
+#. Omeka Legacy File: Capture Date element
+msgid "Capture Date"
+msgstr "Ngày ghi lại"
+
+#. Omeka Legacy File: Capture Device element
+msgid "Capture Device"
+msgstr "Thiết bị ghi lại"
+
+#. Omeka Legacy File: Capture Details element
+msgid "Capture Details"
+msgstr "Cho tiết ghi lại"
+
+#. Omeka Legacy File: Change History element
+msgid "Change History"
+msgstr "Nhật ký thay đổi"
+
+#. Omeka Legacy File: Watermark element
+msgid "Watermark"
+msgstr "Đánh dấu"
+
+#. Omeka Legacy File: Encryption element
+msgid "Encryption"
+msgstr "Mã hóa"
+
+#. Omeka Legacy File: Compression element
+msgid "Compression"
+msgstr "Nén"
+
+#. Omeka Legacy File: Post Processing element
+msgid "Post Processing"
+msgstr ""
+
+#. Omeka Image File
+msgid "Omeka Image File"
+msgstr "File ảnh Omeka"
+
+#. Omeka Image File description
+msgid ""
+"The metadata element set that was included in the `files_images` table in "
+"previous versions of Omeka. These elements are common to all image files."
+msgstr "Bộ phần tử siêu dữ liệu dược chứa trong bảng `files_images` trong các phiên bản trước của Omeka. Các yếu tố này là chung cho tất cả các tệp hình ảnh."
+
+#. Omeka Image File: Width element
+msgid "Width"
+msgstr "Chiều rộng"
+
+#. Omeka Image File: Height element
+msgid "Height"
+msgstr "Chiều cao"
+
+#. Omeka Image File: Bit Depth element
+msgid "Bit Depth"
+msgstr "Độ sâu bit ảnh"
+
+#. Omeka Image File: Channels element
+msgid "Channels"
+msgstr "Kênh"
+
+#. Omeka Image File: Exif String element
+msgid "Exif String"
+msgstr "Chuỗi Exif"
+
+#. Omeka Image File: Exif Array element
+msgid "Exif Array"
+msgstr "Mảng Exif"
+
+#. Omeka Image File: IPTC String element
+msgid "IPTC String"
+msgstr "Chuỗi IPTC"
+
+#. Omeka Image File: IPTC Array element
+msgid "IPTC Array"
+msgstr "Mảng ITPC"
+
+#. Omeka Video File
+msgid "Omeka Video File"
+msgstr "Tập tin Video Omeka"
+
+#. Omeka Video File description
+msgid ""
+"The metadata element set that was included in the `files_videos` table in "
+"previous versions of Omeka. These elements are common to all video files."
+msgstr "Bộ phần tử siêu dữ liệu dược chứa trong bảng `files_videos` trong các phiên bản trước của Omeka. Các yếu tố này là chung cho tất cả các tệp video."
+
+#. Omeka Video File: Bitrate element
+msgid "Bitrate"
+msgstr ""
+
+# Omeka Video File: Duration element
+msgid "Duration"
+msgstr "Thời lượng"
+
+#. Omeka Video File: Sample Rate element
+msgid "Sample Rate"
+msgstr "Tần số lấy mẫu"
+
+#. Omeka Video File: Codec element
+msgid "Codec"
+msgstr "Bộ giải mã"
+
+#. Format (Legacy) Metadata element set
+msgid "Format (Legacy) Metadata"
+msgstr "Định dạng (kế thừa) Metadata"
+
+#. User role: Super
+msgid "Super"
+msgstr ""
+
+#. User role: Admin
+#: admin/themes/default/common/header.php:43
+msgid "Admin"
+msgstr ""
+
+#. User role: Researcher
+msgid "Researcher"
+msgstr "Nhà nghiên cứu"
+
+#: admin/themes/default/appearance/edit-navigation.php:4
+#: admin/themes/default/appearance/edit-settings.php:2
+#: admin/themes/default/common/global-nav.php:10
+#: admin/themes/default/themes/browse.php:5
+#: admin/themes/default/themes/config.php:3
+msgid "Appearance"
+msgstr "Hình dạng bên ngoài"
+
+#: admin/themes/default/appearance/edit-navigation.php:15
+msgid ""
+"Check the links to display them in the main navigation. Click and drag the "
+"links into the preferred display order."
+msgstr "Kiểm tra các liên kết để hiển thị chúng trong điều hướng chính. Nhấp và kéo các liên kết vào thứ tự hiển thị ưa thích."
+
+#: admin/themes/default/appearance/edit-navigation.php:20
+msgid "Add a Link to the Navigation"
+msgstr "Thêm liên kết để điều hướng"
+
+#: admin/themes/default/appearance/edit-navigation.php:22
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/users/api-keys.php:42
+#: application/forms/Navigation.php:134
+msgid "Label"
+msgstr "Nhãn"
+
+#: admin/themes/default/appearance/edit-navigation.php:24
+#: admin/themes/default/appearance/edit-navigation.php:43
+#: application/forms/Navigation.php:135
+msgid "URL"
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:26
+msgid "Add Link"
+msgstr "Thêm liên kết"
+
+#: admin/themes/default/appearance/edit-navigation.php:32
+#: admin/themes/default/appearance/edit-settings.php:21
+#: admin/themes/default/collections/edit.php:22
+#: admin/themes/default/element-sets/edit.php:41
+#: admin/themes/default/files/edit.php:35
+#: admin/themes/default/item-types/edit.php:18
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:59
+#: admin/themes/default/items/edit.php:19
+#: admin/themes/default/plugins/config.php:14
+#: admin/themes/default/settings/edit-api.php:84
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:52
+#: admin/themes/default/settings/edit-security.php:15
+#: admin/themes/default/settings/edit-settings.php:15
+#: admin/themes/default/themes/config.php:16
+#: admin/themes/default/users/edit.php:21
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
+msgid "Save Changes"
+msgstr "Lưu thay đổi"
+
+#: admin/themes/default/appearance/edit-navigation.php:36
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr "Thiết lập lại điều hướng"
+
+#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/collections/edit.php:23
+#: admin/themes/default/collections/show.php:34
+#: admin/themes/default/files/show.php:28
+#: admin/themes/default/items/edit.php:20
+#: admin/themes/default/items/show.php:45
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:72
+msgid "View Public Page"
+msgstr "Xem trang công khai"
+
+#: admin/themes/default/appearance/edit-navigation.php:45
+#: admin/themes/default/collections/edit.php:25
+#: admin/themes/default/collections/show.php:36
+#: admin/themes/default/element-sets/browse.php:30
+#: admin/themes/default/files/edit.php:37
+#: admin/themes/default/files/show.php:30
+#: admin/themes/default/item-types/edit.php:20
+#: admin/themes/default/item-types/show.php:54
+#: admin/themes/default/items/batch-edit.php:48
+#: admin/themes/default/items/browse.php:33
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/edit.php:22
+#: admin/themes/default/items/show.php:47
+#: admin/themes/default/settings/edit-item-type-elements.php:23
+#: admin/themes/default/users/browse.php:70
+#: admin/themes/default/users/edit.php:26
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
+msgid "Delete"
+msgstr "Xóa"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "Bạn có chắc chắn?"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr "Tất cả các tùy chỉnh sẽ bị mất. Thứ tự và nhãn sẽ hoàn nguyên về mặc định của Omeka. Các liên kết tùy chỉnh sẽ bị mất."
+
+#: admin/themes/default/collections/add.php:2
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
+msgid "Add a Collection"
+msgstr "Thêm một bộ sưu tập"
+
+#: admin/themes/default/collections/add.php:11
+msgid "Add Collection"
+msgstr "Thêm bộ sưu tập"
+
+#: admin/themes/default/collections/add.php:16
+#: admin/themes/default/collections/edit.php:32
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/items/add.php:19
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
+#: admin/themes/default/items/quick-filters.php:4
+#: admin/themes/default/items/show.php:52
+msgid "Public"
+msgstr "Công khai"
+
+#: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
+#: admin/themes/default/collections/edit.php:37
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/add.php:25
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/items/edit.php:36
+#: admin/themes/default/items/quick-filters.php:6
+#: admin/themes/default/items/show.php:53
+msgid "Featured"
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:2
+#: application/libraries/Omeka/Navigation.php:149
+#: application/tests/suite/Omeka/NavigationTest.php:748
+#: application/tests/suite/Omeka/NavigationTest.php:817
+#: application/tests/suite/Omeka/NavigationTest.php:832
+#: application/tests/suite/Omeka/NavigationTest.php:951
+#: application/views/scripts/collections/browse.php:2
+msgid "Browse Collections"
+msgstr "Duyệt các bộ sưu tập"
+
+#: admin/themes/default/collections/browse.php:2
+#: admin/themes/default/item-types/browse.php:2
+#: admin/themes/default/items/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
+#: admin/themes/default/search/index.php:2
+#: admin/themes/default/tags/browse.php:6
+#: admin/themes/default/users/browse.php:2
+#: application/views/scripts/collections/browse.php:6
+#: application/views/scripts/items/browse.php:6
+#: application/views/scripts/search/index.php:2
+#, php-format
+msgid "(%s total)"
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%s%d item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+
+#: admin/themes/default/collections/browse.php:20
+msgid "All items are in a collection."
+msgstr "Tất cả tài liệu có trong bộ sưu tập."
+
+#: admin/themes/default/collections/browse.php:32
+#: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:35
+msgid "Contributors"
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:33
+#: admin/themes/default/files/show.php:66
+#: admin/themes/default/items/browse.php:49
+#: application/views/scripts/collections/browse.php:11
+#: application/views/scripts/items/browse.php:21
+msgid "Date Added"
+msgstr "Ngày tạo lập"
+
+#: admin/themes/default/collections/browse.php:34
+#: admin/themes/default/collections/show.php:46
+#: admin/themes/default/item-types/show.php:42
+msgid "Total Number of Items"
+msgstr "Tổng số tài liệu"
+
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
+msgid "(Private)"
+msgstr "(Riêng tư)"
+
+#: admin/themes/default/collections/browse.php:65
+#: admin/themes/default/collections/show.php:32
+#: admin/themes/default/element-sets/browse.php:28
+#: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
+#: admin/themes/default/index.php:79
+#: admin/themes/default/item-types/browse.php:40
+#: admin/themes/default/item-types/show.php:51
+#: admin/themes/default/items/browse.php:30
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/show.php:43
+#: admin/themes/default/users/browse.php:67
+msgid "Edit"
+msgstr "Sửa"
+
+#: admin/themes/default/collections/browse.php:74
+msgid "No contributors"
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:95
+msgid "There are no collections on this page."
+msgstr "Không có bộ sưu tập nào trên trang này."
+
+#: admin/themes/default/collections/browse.php:95
+msgid "View All Collections"
+msgstr "Xem tất cả các bộ sưu tập"
+
+#: admin/themes/default/collections/browse.php:98
+msgid "You have no collections."
+msgstr "Không có bộ sưu tập nào"
+
+#: admin/themes/default/collections/browse.php:100
+msgid "Get started by adding your first collection."
+msgstr "Bắt đầu bằng cách thêm bộ sưu tập đầu tiên của bạn."
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/models/Mixin/ElementText.php:791
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[Không có tiêu đề]"
+
+#: admin/themes/default/collections/edit.php:8
+#, php-format
+msgid "Edit Collection #%s"
+msgstr "Sửa bộ sưu tập #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr "Bộ sưu tập #%s"
+
+#: admin/themes/default/collections/show.php:18
+#: admin/themes/default/item-types/show.php:30
+#: application/views/scripts/index.php:40
+msgid "Recently Added Items"
+msgstr "Tài liệu mới được thêm"
+
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/show.php:52
+#: admin/themes/default/items/show.php:53
+#: application/views/helpers/ItemSearchFilters.php:68
+msgid "Yes"
+msgstr ""
+
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/show.php:52
+#: admin/themes/default/items/show.php:53
+#: application/views/helpers/ItemSearchFilters.php:68
+msgid "No"
+msgstr ""
+
+#: admin/themes/default/collections/show.php:56
+msgid "No contributors."
+msgstr ""
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr "Định dạng đầu ra"
+
+#: admin/themes/default/common/appearance-nav.php:5
+msgid "Themes"
+msgstr "Themes"
+
+#: admin/themes/default/common/appearance-nav.php:11
+msgid "Navigation"
+msgstr "Điều hướng"
+
+#: admin/themes/default/common/appearance-nav.php:15
+#: admin/themes/default/common/global-nav.php:22
+#: admin/themes/default/element-sets/browse.php:6
+#: admin/themes/default/settings/edit-api.php:2
+#: admin/themes/default/settings/edit-item-type-elements.php:3
+#: admin/themes/default/settings/edit-search.php:2
+#: admin/themes/default/settings/edit-security.php:3
+#: admin/themes/default/settings/edit-settings.php:3
+msgid "Settings"
+msgstr "Thiết lập cấu hình"
+
+#: admin/themes/default/common/content-nav.php:1
+#: admin/themes/default/common/content-nav.php:2
+msgid "Main Menu"
+msgstr "Menu chính"
+
+#: admin/themes/default/common/content-nav.php:2
+#: application/views/scripts/common/pagination_control.php:38
+msgid "Current Page"
+msgstr ""
+
+#: admin/themes/default/common/content-nav.php:6
+#: admin/themes/default/index.php:2
+msgid "Dashboard"
+msgstr "Bảng điều khiển"
+
+#: admin/themes/default/common/content-nav.php:10
+#: admin/themes/default/items/batch-delete.php:15
+#: admin/themes/default/items/batch-edit.php:17
+msgid "Items"
+msgstr "Tài liệu"
+
+#: admin/themes/default/common/content-nav.php:14
+msgid "Collections"
+msgstr "Bộ sưu tập"
+
+#: admin/themes/default/common/content-nav.php:18
+msgid "Item Types"
+msgstr "Loại hình tài liệu"
+
+#: admin/themes/default/common/content-nav.php:22
+#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/show.php:65
+#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/show.php:29
+msgid "Tags"
+msgstr "Thẻ"
+
+#: admin/themes/default/common/delete-confirm.php:3
+#: application/views/scripts/common/delete-confirm.php:3
+#, php-format
+msgid "Delete %s"
+msgstr "Xóa %s"
+
+#: admin/themes/default/common/footer.php:9
+#: admin/themes/default/common/login-footer.php:6
+msgid "Powered by Omeka"
+msgstr "Được cung cấp bởi Omeka"
+
+#: admin/themes/default/common/footer.php:10
+msgid "Documentation"
+msgstr ""
+
+#: admin/themes/default/common/footer.php:11
+msgid "Support Forums"
+msgstr ""
+
+#: admin/themes/default/common/footer.php:12
+msgid "Back to top"
+msgstr ""
+
+#: admin/themes/default/common/footer.php:16
+#: admin/themes/default/common/login-footer.php:8
+#: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: admin/themes/default/common/footer.php:18
+#: admin/themes/default/system-info/index.php:2
+msgid "System Information"
+msgstr ""
+
+#: admin/themes/default/common/global-nav.php:4
+#: admin/themes/default/plugins/browse.php:5
+msgid "Plugins"
+msgstr ""
+
+#: admin/themes/default/common/global-nav.php:16
+msgid "Users"
+msgstr ""
+
+#: admin/themes/default/common/header.php:11
+#: admin/themes/default/upgrade/index.php:6
+#: application/views/scripts/common/admin-bar.php:10
+msgid "Omeka Admin"
+msgstr ""
+
+#: admin/themes/default/common/header.php:36
+#: application/views/scripts/common/header.php:38
+msgid "Skip to main content"
+msgstr ""
+
+#: admin/themes/default/common/header.php:58
+#: application/views/scripts/common/admin-bar.php:6
+#, php-format
+msgid "Welcome, %s"
+msgstr ""
+
+#: admin/themes/default/common/header.php:59
+#: application/views/scripts/common/admin-bar.php:14
+msgid "Log Out"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:6
+#: admin/themes/default/common/users-nav.php:5
+msgid "General"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:10
+msgid "Security"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
+#: application/views/helpers/SearchForm.php:72
+#: application/views/scripts/search/index.php:2
+msgid "Search"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:20
+msgid "Element Sets"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:26
+msgid "Item Type Elements"
+msgstr ""
+
+#: admin/themes/default/common/settings-nav.php:32
+msgid "API"
+msgstr ""
+
+#: admin/themes/default/common/users-nav.php:11
+#: application/forms/ChangePassword.php:80
+msgid "Change Password"
+msgstr ""
+
+#: admin/themes/default/common/users-nav.php:17
+#: admin/themes/default/users/api-keys.php:16
+msgid "API Keys"
+msgstr ""
+
+#: admin/themes/default/element-sets/browse.php:17
+#: admin/themes/default/tags/browse.php:50
+#: admin/themes/default/tags/browse.php:68
+#: admin/themes/default/users/browse.php:13
+#: application/forms/ItemTypes.php:141
+msgid "Name"
+msgstr ""
+
+#: admin/themes/default/element-sets/edit.php:5
+msgid "Edit Element Set"
+msgstr ""
+
+#: admin/themes/default/element-sets/edit.php:17
+msgid ""
+"Click and drag the elements into the preferred display order. Click the "
+"right arrows to add customized comments to element descriptions."
+msgstr ""
+
+#: admin/themes/default/element-sets/edit.php:29
+msgid "Comment"
+msgstr ""
+
+#: admin/themes/default/error/403.php:2
+msgid "403: Forbidden"
+msgstr ""
+
+#: admin/themes/default/error/403.php:6
+msgid "Sorry, you do not have permission to access this page."
+msgstr ""
+
+#: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
+#: admin/themes/default/error/405.php:8
+msgid "site administrator"
+msgstr ""
+
+#: admin/themes/default/error/403.php:11
+#, php-format
+msgid "If you think you should have permission, try contacting the %s."
+msgstr ""
+
+#: admin/themes/default/error/404.php:2
+msgid "404: Page Not Found"
+msgstr ""
+
+#: admin/themes/default/error/404.php:6
+msgid ""
+"You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
+"this happens. Below is a quick break-down of the items, collections, and "
+"exhibits on this site."
+msgstr ""
+
+#: admin/themes/default/error/404.php:10
+#, php-format
+msgid "If this does not help, try contacting the %s."
+msgstr ""
+
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
+msgid "Recent Items"
+msgstr ""
+
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
+msgid "Add a new item"
+msgstr ""
+
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
+msgid "Recent Collections"
+msgstr ""
+
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
+msgid "Add a new collection"
+msgstr ""
+
+#: admin/themes/default/error/405.php:2
+msgid "405: Method Not Allowed"
+msgstr ""
+
+#: admin/themes/default/error/405.php:9
+#, php-format
+msgid ""
+"You must use a different method to access this URL. If you reached this page"
+" by following a link or clicking a button in Omeka, please contact the %s."
+msgstr ""
+
+#: admin/themes/default/files/edit.php:8
+#, php-format
+msgid "Edit File #%s"
+msgstr ""
+
+#: admin/themes/default/files/show.php:9
+#: application/views/scripts/files/show.php:9
+#, php-format
+msgid "File #%s"
+msgstr ""
+
+#: admin/themes/default/files/show.php:35
+#: application/libraries/globals.php:409
+#: application/views/scripts/files/show.php:22
+msgid "Item"
+msgstr ""
+
+#: admin/themes/default/files/show.php:40
+msgid "Direct Links"
+msgstr ""
+
+#: admin/themes/default/files/show.php:42
+msgid "Original"
+msgstr ""
+
+#: admin/themes/default/files/show.php:44
+msgid "Fullsize"
+msgstr ""
+
+#: admin/themes/default/files/show.php:45
+msgid "Thumbnail"
+msgstr ""
+
+#: admin/themes/default/files/show.php:46
+msgid "Square Thumbnail"
+msgstr ""
+
+#: admin/themes/default/files/show.php:52
+#: application/views/scripts/files/show.php:27
+msgid "Format Metadata"
+msgstr ""
+
+#: admin/themes/default/files/show.php:54
+msgid "Filename"
+msgstr ""
+
+#: admin/themes/default/files/show.php:56
+#: application/views/scripts/files/show.php:29
+msgid "Original Filename"
+msgstr ""
+
+#: admin/themes/default/files/show.php:58
+#: application/views/scripts/files/show.php:34
+msgid "File Size"
+msgstr ""
+
+#: admin/themes/default/files/show.php:59
+#: application/views/scripts/files/show.php:35
+#, php-format
+msgid "%s bytes"
+msgstr ""
+
+#: admin/themes/default/files/show.php:64
+msgid "File History"
+msgstr ""
+
+#: admin/themes/default/files/show.php:68
+msgid "Date Modified"
+msgstr ""
+
+#: admin/themes/default/files/show.php:70
+#: application/views/scripts/files/show.php:39
+msgid "Authentication"
+msgstr ""
+
+#: admin/themes/default/files/show.php:76
+#: application/views/scripts/files/show.php:45
+msgid "Type Metadata"
+msgstr ""
+
+#: admin/themes/default/files/show.php:78
+#: application/views/scripts/files/show.php:47
+msgid "Mime Type"
+msgstr ""
+
+#: admin/themes/default/files/show.php:80
+#: application/views/scripts/files/show.php:51
+msgid "File Type / OS"
+msgstr ""
+
+#: admin/themes/default/files/show.php:87
+msgid "Embedded Metadata"
+msgstr ""
+
+#: admin/themes/default/index.php:10
+msgid "item"
+msgid_plural "items"
+msgstr[0] ""
+
+#: admin/themes/default/index.php:11
+msgid "collection"
+msgid_plural "collections"
+msgstr[0] ""
+
+#: admin/themes/default/index.php:12
+msgid "tag"
+msgid_plural "tags"
+msgstr[0] ""
+
+#: admin/themes/default/index.php:16
+msgid "plugin"
+msgid_plural "plugins"
+msgstr[0] ""
+
+#: admin/themes/default/index.php:20
+msgid "user"
+msgid_plural "users"
+msgstr[0] ""
+
+#: admin/themes/default/index.php:24
+msgid "theme"
+msgstr ""
+
+#: admin/themes/default/index.php:35
+msgid "A new version of Omeka is available for download."
+msgstr ""
+
+#: admin/themes/default/index.php:36
+#, php-format
+msgid "Upgrade to %s"
+msgstr ""
+
+#: admin/themes/default/item-types/add-existing-element.php:22
+#: admin/themes/default/item-types/add-new-element.php:15
+#: admin/themes/default/item-types/form.php:43
+#: admin/themes/default/items/tag-form.php:23
+#: application/views/helpers/ElementInput.php:124
+msgid "Remove"
+msgstr ""
+
+#: admin/themes/default/item-types/add-new-element.php:6
+msgid "Element Name"
+msgstr ""
+
+#: admin/themes/default/item-types/add-new-element.php:22
+msgid "Element Description"
+msgstr ""
+
+#: admin/themes/default/item-types/add.php:2
+#: admin/themes/default/item-types/add.php:11
+msgid "Add Item Type"
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:2
+msgid "Browse Item Types"
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:9
+#: admin/themes/default/item-types/browse.php:54
+msgid "Add an Item Type"
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:16
+#, php-format
+msgid "%s%d item%s has no type."
+msgid_plural "%s%d items%s have no type."
+msgstr[0] ""
+
+#: admin/themes/default/item-types/browse.php:19
+msgid "All items have a type."
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:28
+msgid "Type Name"
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:30
+msgid "Total Items"
+msgstr ""
+
+#: admin/themes/default/item-types/edit.php:8
+#, php-format
+msgid "Edit Item Type #%s"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:14
+msgid "Item Type Information"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:15
+#: admin/themes/default/users/add.php:7
+#: admin/themes/default/users/change-password.php:15
+#: admin/themes/default/users/edit.php:15
+#: install/views/scripts/index/index.phtml:14
+msgid "required field"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:25
+#: admin/themes/default/item-types/show.php:16
+msgid "Elements"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:42
+#: admin/themes/default/items/tag-form.php:22
+#: admin/themes/default/settings/edit-item-type-elements.php:22
+msgid "Undo"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:80
+#: admin/themes/default/item-types/form.php:87
+msgid "Add Element"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:84
+msgid "Existing"
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:85
+msgid "New"
+msgstr ""
+
+#: admin/themes/default/item-types/show.php:8
+#, php-format
+msgid "Item Type #%s"
+msgstr ""
+
+#: admin/themes/default/item-types/show.php:25
+msgid "There are no elements."
+msgstr ""
+
+#: admin/themes/default/item-types/show.php:39
+msgid "There are no recently added items."
+msgstr ""
+
+#: admin/themes/default/items/add.php:2
+#: admin/themes/default/items/browse.php:17
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
+msgid "Add an Item"
+msgstr ""
+
+#: admin/themes/default/items/add.php:12
+msgid "Add Item"
+msgstr ""
+
+#: admin/themes/default/items/add.php:32
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:114
+#: admin/themes/default/items/edit.php:43
+#: admin/themes/default/items/show.php:57
+#: application/libraries/globals.php:411
+#: application/views/scripts/items/show.php:21
+msgid "Collection"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:45
+msgid "Delete Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete.php:2
+msgid "Batch Delete Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete.php:36
+msgid ""
+"Some items were excluded because you do not have permission to delete them."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete.php:39
+msgid "Checked items will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:2
+msgid "Item Metadata"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:6
+msgid "Public?"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
+msgid "Select Below"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:11
+msgid "Not Public"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:20
+msgid "Featured?"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:25
+msgid "Not Featured"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:33
+#: admin/themes/default/items/item-type-form.php:3
+msgid "Item Type"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
+msgid "Remove?"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:63
+#: admin/themes/default/items/tag-form.php:8
+#: admin/themes/default/items/tag-form.php:11
+msgid "Add Tags"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:66
+#, php-format
+msgid "List of tags to add to all checked items, separated by %s."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit.php:2
+msgid "Batch Edit Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit.php:36
+msgid "Changes will be applied to checked items."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit.php:46
+msgid "Check if you wish to delete selected items."
+msgstr ""
+
+#: admin/themes/default/items/browse.php:3
+#: application/libraries/Omeka/Navigation.php:142
+#: application/tests/suite/Omeka/NavigationTest.php:38
+#: application/tests/suite/Omeka/NavigationTest.php:57
+#: application/tests/suite/Omeka/NavigationTest.php:80
+#: application/tests/suite/Omeka/NavigationTest.php:98
+#: application/tests/suite/Omeka/NavigationTest.php:121
+#: application/tests/suite/Omeka/NavigationTest.php:140
+#: application/tests/suite/Omeka/NavigationTest.php:163
+#: application/tests/suite/Omeka/NavigationTest.php:186
+#: application/tests/suite/Omeka/NavigationTest.php:215
+#: application/tests/suite/Omeka/NavigationTest.php:237
+#: application/tests/suite/Omeka/NavigationTest.php:266
+#: application/tests/suite/Omeka/NavigationTest.php:289
+#: application/tests/suite/Omeka/NavigationTest.php:318
+#: application/tests/suite/Omeka/NavigationTest.php:340
+#: application/tests/suite/Omeka/NavigationTest.php:368
+#: application/tests/suite/Omeka/NavigationTest.php:389
+#: application/tests/suite/Omeka/NavigationTest.php:417
+#: application/tests/suite/Omeka/NavigationTest.php:439
+#: application/tests/suite/Omeka/NavigationTest.php:467
+#: application/tests/suite/Omeka/NavigationTest.php:484
+#: application/tests/suite/Omeka/NavigationTest.php:512
+#: application/tests/suite/Omeka/NavigationTest.php:528
+#: application/tests/suite/Omeka/NavigationTest.php:556
+#: application/tests/suite/Omeka/NavigationTest.php:573
+#: application/tests/suite/Omeka/NavigationTest.php:601
+#: application/tests/suite/Omeka/NavigationTest.php:622
+#: application/tests/suite/Omeka/NavigationTest.php:648
+#: application/tests/suite/Omeka/NavigationTest.php:668
+#: application/tests/suite/Omeka/NavigationTest.php:694
+#: application/tests/suite/Omeka/NavigationTest.php:715
+#: application/tests/suite/Omeka/NavigationTest.php:741
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:846
+#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/views/scripts/items/browse.php:2
+#: application/views/scripts/items/tags.php:2
+msgid "Browse Items"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/search.php:2
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
+#: application/views/scripts/items/search.php:2
+msgid "Search Items"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:25
+#: admin/themes/default/items/browse.php:140
+#, php-format
+msgid "Select all %s results"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:141
+msgid "items selected"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr ""
+
+#: admin/themes/default/items/browse.php:119
+msgid "No Tags"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:167
+msgid "Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:168
+msgid "Show Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:169
+msgid "Hide Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:178
+msgid "You have no items."
+msgstr ""
+
+#: admin/themes/default/items/browse.php:180
+msgid "Get started by adding your first item."
+msgstr ""
+
+#: admin/themes/default/items/browse.php:185
+#, php-format
+msgid "The query searched 1 item and returned no results."
+msgid_plural "The query searched %s items and returned no results."
+msgstr[0] ""
+
+#: admin/themes/default/items/browse.php:186
+msgid "refine your search"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:186
+#, php-format
+msgid "Would you like to %s?"
+msgstr ""
+
+#: admin/themes/default/items/edit.php:8
+#, php-format
+msgid "Edit Item #%s"
+msgstr ""
+
+#: admin/themes/default/items/files-form.php:2
+msgid "Click and drag the files into the preferred display order."
+msgstr ""
+
+#: admin/themes/default/items/files-form.php:13
+msgid "Delete "
+msgstr ""
+
+#: admin/themes/default/items/files-form.php:22
+msgid "Add New Files"
+msgstr ""
+
+#: admin/themes/default/items/files-form.php:24
+#, php-format
+msgid "The maximum file size is %s."
+msgstr ""
+
+#: admin/themes/default/items/files-form.php:27
+msgid "Find a File"
+msgstr ""
+
+#: admin/themes/default/items/form.php:23
+msgid "Add Another File"
+msgstr ""
+
+#: admin/themes/default/items/item-type-form.php:15
+msgid "Pick this type"
+msgstr ""
+
+#: admin/themes/default/items/quick-filters.php:1
+#: admin/themes/default/items/quick-filters.php:2
+msgid "Quick Filter"
+msgstr ""
+
+#: admin/themes/default/items/quick-filters.php:3
+msgid "View All"
+msgstr ""
+
+#: admin/themes/default/items/quick-filters.php:5
+msgid "Private"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:14
+#: application/views/scripts/items/search-form.php:13
+msgid "Search for Keywords"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
+#: application/views/scripts/items/search-form.php:25
+#: application/views/scripts/items/search-form.php:28
+msgid "Narrow by Specific Fields"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
+msgid "Search Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
+msgid "Search Type"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
+msgid "Search Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:37
+#: application/views/scripts/items/search-form.php:32
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:64
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:65
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:65
+msgid "OR"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:98
+#: admin/themes/default/tags/browse.php:50
+#: application/views/scripts/items/search-form.php:98
+msgid "contains"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:99
+#: application/views/scripts/items/search-form.php:99
+msgid "does not contain"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:100
+#: application/views/scripts/items/search-form.php:100
+msgid "is exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:101
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:101
+msgid "is empty"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:103
+#: application/views/scripts/items/search-form.php:102
+msgid "is not empty"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:104
+#: application/views/scripts/items/search-form.php:103
+msgid "starts with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:105
+#: application/views/scripts/items/search-form.php:104
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:106
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:107
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:126
+#: application/views/scripts/items/search-form.php:33
+#: application/views/scripts/items/search-form.php:123
+msgid "Remove field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:134
+#: application/views/scripts/items/search-form.php:131
+msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:148
+#: application/views/scripts/items/search-form.php:142
+msgid "Search By Collection"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:164
+#: application/views/scripts/items/search-form.php:156
+msgid "Search By Type"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:181
+#: application/views/scripts/items/search-form.php:172
+msgid "Search By User"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:198
+#: application/views/scripts/items/search-form.php:187
+msgid "Search By Tags"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:213
+#: application/views/scripts/items/search-form.php:200
+msgid "Public/Non-Public"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:222
+#: application/views/scripts/items/search-form.php:208
+msgid "Only Public Items"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:223
+#: application/views/scripts/items/search-form.php:209
+msgid "Only Non-Public Items"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:218
+msgid "Featured/Non-Featured"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:242
+#: application/views/scripts/items/search-form.php:226
+msgid "Only Featured Items"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:243
+#: application/views/scripts/items/search-form.php:227
+msgid "Only Non-Featured Items"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:251
+#: application/views/scripts/items/search-form.php:237
+msgid "Search for items"
+msgstr ""
+
+#: admin/themes/default/items/show.php:8
+#, php-format
+msgid "Item #%s"
+msgstr ""
+
+#: admin/themes/default/items/show.php:28
+msgid "Prev Item"
+msgstr ""
+
+#: admin/themes/default/items/show.php:33
+msgid "Next Item"
+msgstr ""
+
+#: admin/themes/default/items/show.php:73
+msgid "File Metadata"
+msgstr ""
+
+#: admin/themes/default/items/show.php:76
+msgid "There are no files for this item yet."
+msgstr ""
+
+#: admin/themes/default/items/show.php:76
+msgid "Add a File"
+msgstr ""
+
+#: admin/themes/default/items/show.php:80
+msgid "View File Metadata"
+msgstr ""
+
+#: admin/themes/default/items/show.php:93
+msgid "Bibliographic Citation"
+msgstr ""
+
+#: admin/themes/default/items/tag-form.php:10
+#, php-format
+msgid "Separate tags with %s"
+msgstr ""
+
+#: admin/themes/default/items/tag-form.php:15
+msgid "All Tags"
+msgstr ""
+
+#: admin/themes/default/items/tags.php:2
+msgid "Browse Items by Tag"
+msgstr ""
+
+#: admin/themes/default/items/tags.php:9
+#: admin/themes/default/tags/browse.php:107
+msgid "There are no tags to display. You must first tag some items."
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:29
+#, php-format
+msgid "This version of %1$s requires at least Omeka %2$s."
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:32
+#, php-format
+msgid ""
+"%1$s requires the following plugins to be installed, activated, and loaded: "
+"%2$s"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:35
+msgid "This is not a valid plugin."
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:60
+#, php-format
+msgid "by %s"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
+msgid "Get support"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:72
+#, php-format
+msgid "You have a new version of %s. Please upgrade!"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:109
+msgid "Upgrade"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:120
+msgid "Configure"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:126
+msgid "Deactivate"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:126
+#: admin/themes/default/users/activate.php:30
+#: application/views/scripts/users/activate.php:27
+msgid "Activate"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:137
+#: admin/themes/default/plugins/confirm-uninstall.php:18
+msgid "Uninstall"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:150
+#: application/forms/Install.php:204
+msgid "Install"
+msgstr ""
+
+#: admin/themes/default/plugins/browse.php:162
+msgid ""
+"You do not have any plugins installed. Add them to the plugins directory to "
+"see them listed here."
+msgstr ""
+
+#: admin/themes/default/plugins/config.php:2
+#, php-format
+msgid "Configure Plugin: %s"
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:2
+#, php-format
+msgid "Uninstall Plugin: %s"
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:7
+#, php-format
+msgid "Are you sure you want to uninstall %s?"
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:11
+msgid ""
+"Warning: data associated with this plugin may be permanently deleted from "
+"the database."
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:14
+msgid "Yes, I want to uninstall this plugin."
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:19
+msgid "or"
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:19
+#: admin/themes/default/settings/edit-item-type-elements.php:51
+msgid "Cancel"
+msgstr ""
+
+#: admin/themes/default/search/index.php:12
+#: admin/themes/default/tags/browse.php:49
+#: application/views/scripts/search/index.php:13
+msgid "Record Type"
+msgstr ""
+
+#: admin/themes/default/search/index.php:39
+#: application/views/scripts/search/index.php:40
+msgid "Your query returned no results."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:11
+msgid "Enable API"
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:15
+msgid "Enable or disable the API by checking or unchecking the box below."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:22
+msgid "Filter Element Texts"
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:26
+msgid ""
+"Filter element texts by checking the box below. When checked, the API will "
+"respect the display element and element text filters when outputting element"
+" text representations."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:35
+msgid "Results per Page"
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:39
+msgid "Maximum number of API results displayed per page."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:45
+#, php-format
+msgid ""
+"After enabling the API, applications may be able to show, browse, add, edit,"
+" and delete your site resources. Viewing protected content, as well as "
+"adding, editing, and deleting content, is protected and requires key "
+"authentication. Each key corresponds to, and has all permissions of, an "
+"existing Omeka user. You can create keys on each user's %sedit page%s."
+msgstr ""
+
+#: admin/themes/default/settings/edit-item-type-elements.php:12
+msgid "edit a specific item type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-item-type-elements.php:11
+#, php-format
+msgid ""
+"Customize the element descriptions below. To re-order the elements, %s."
+msgstr ""
+
+#: admin/themes/default/settings/edit-item-type-elements.php:43
+msgid "Confirm Delete"
+msgstr ""
+
+#: admin/themes/default/settings/edit-item-type-elements.php:44
+msgid ""
+"Are you sure you want to delete the selected item type elements from the "
+"database? You will lose all text related to the selected elements. This "
+"cannot be undone."
+msgstr ""
+
+#: admin/themes/default/settings/edit-item-type-elements.php:51
+msgid "Ok"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
+msgid "Search Record Types"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:23
+msgid "Customize which types of records will be searchable in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:34
+#: admin/themes/default/settings/edit-search.php:53
+msgid "Index Records"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:37
+msgid "Click on the \"Index Records\" button to re-index your records."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:39
+msgid ""
+"Indexing means to collect, parse, and store data to facilitate fast and "
+"accurate searches. Omeka will automatically index individual records as they"
+" are saved, but there are circumstances when your records are not indexed; "
+"for instance, when updating from an earlier version of Omeka or after you "
+"customize which records will be searchable."
+msgstr ""
+
+#: admin/themes/default/settings/edit-security.php:23
+msgid "Restore Default Extensions"
+msgstr ""
+
+#: admin/themes/default/settings/edit-security.php:28
+msgid "Restore Default Types"
+msgstr ""
+
+#: admin/themes/default/settings/edit-security.php:33
+msgid "Restore Default Elements"
+msgstr ""
+
+#: admin/themes/default/settings/edit-security.php:38
+msgid "Restore Default Attributes"
+msgstr ""
+
+#: admin/themes/default/settings/edit-settings.php:23
+msgid "Test"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:5
+msgid "Browse Tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:19
+msgid "Editing Tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:22
+msgid ""
+"This number counts all records associated with a tag. Filtering \"Record "
+"types\" to \"Items\" will provide links to all items containing the tag."
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:23
+msgid ""
+"To edit the tag name, click the name and begin editing, and hit \"enter\" to"
+" save. To cancel an edit, click the ESC key or click away from the tag."
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:24
+msgid ""
+"To delete a tag, click the X. Deleting a tag will not delete the tagged "
+"records."
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:33
+msgid "Search tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:38
+#: admin/themes/default/tags/browse.php:39
+msgid "Record Types"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:40
+msgid "All"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:52
+msgid "Reset results"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:69
+msgid "Count"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:70
+msgid "Date created"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:18
+#: admin/themes/default/themes/browse.php:63
+#, php-format
+msgid "Screenshot for %s Theme"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:19
+msgid "Configure Theme"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:22
+msgid "Current Theme"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:46
+msgid ""
+"Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
+"ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
+"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
+"target=\"_blank\">design your own</a>!"
+msgstr ""
+
+#: admin/themes/default/themes/browse.php:65
+msgid "Use this theme"
+msgstr ""
+
+#: admin/themes/default/themes/config.php:10
+#, php-format
+msgid "Configure Theme: %s"
+msgstr ""
+
+#: admin/themes/default/themes/config.php:11
+msgid "Configurations apply to this theme only."
+msgstr ""
+
+#: admin/themes/default/upgrade/index.php:32
+msgid "Upgrade Your Omeka Database"
+msgstr ""
+
+#: admin/themes/default/upgrade/index.php:34
+msgid ""
+"Your Omeka database is not compatible with your current version of Omeka."
+msgstr ""
+
+#: admin/themes/default/upgrade/index.php:35
+msgid ""
+"Please back up your existing database and then click the button to upgrade."
+msgstr ""
+
+#: admin/themes/default/upgrade/index.php:37
+msgid "Upgrade Database"
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:5
+msgid "Omeka encountered an error when upgrading your installation."
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:30
+msgid "Please restore from your database backup and try again."
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:31
+msgid ""
+"If you have any questions please refer to <a "
+"href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
+" the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
+msgstr ""
+
+#: admin/themes/default/users/activate.php:2
+#: application/views/scripts/users/activate.php:2
+msgid "User Activation"
+msgstr ""
+
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr ""
+
+#: admin/themes/default/users/activate.php:17
+#: application/forms/ResetPassword.php:23
+#: application/views/scripts/users/activate.php:14
+msgid "Create a Password"
+msgstr ""
+
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:81
+#: application/forms/ResetPassword.php:44
+#: application/views/scripts/users/activate.php:20
+msgid "Re-type the Password"
+msgstr ""
+
+#: admin/themes/default/users/add.php:2
+msgid "Add New User"
+msgstr ""
+
+#: admin/themes/default/users/add.php:13
+msgid "Add User"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:8
+#: admin/themes/default/users/change-password.php:8
+#: admin/themes/default/users/edit.php:8
+#, php-format
+msgid "Edit User #%s"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:19
+msgid "New key label"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:23
+msgid ""
+"To create a new API key, enter a label for the key below. For example, "
+"describe for what purpose it will be used. This key will have all your "
+"permissions; treat it as you would your password."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:33
+msgid "You have no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:35
+#, php-format
+msgid "%s has no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:43
+msgid "Key"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:44
+msgid "Last IP"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:45
+msgid "Last accessed"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:46
+msgid "Rescind"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:67
+msgid "Update API Keys"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:2
+msgid "Browse Users"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:16
+#: admin/themes/default/users/browse.php:38
+#: admin/themes/default/users/browse.php:51
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
+msgid "Username"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:19
+#: admin/themes/default/users/browse.php:40
+#: admin/themes/default/users/browse.php:53
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
+#: application/forms/RecoverPassword.php:27 application/forms/User.php:96
+#: application/views/scripts/users/forgot-password.php:14
+msgid "Email"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:31
+msgid "Add a User"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:37
+#: application/views/scripts/search/search-form.php:10
+msgid "Options"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:39
+#: admin/themes/default/users/browse.php:52
+#: admin/themes/default/users/show.php:20 application/forms/User.php:81
+msgid "Display Name"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:42
+msgid "Search users"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:54 application/forms/User.php:129
+msgid "Role"
+msgstr ""
+
+#: admin/themes/default/users/browse.php:64
+msgid "inactive"
+msgstr ""
+
+#: admin/themes/default/users/change-password.php:20
+msgid "Save Password"
+msgstr ""
+
+#: admin/themes/default/users/edit.php:23
+msgid "Resend Activation Email"
+msgstr ""
+
+#: admin/themes/default/users/forgot-password.php:2
+#: application/views/scripts/users/forgot-password.php:2
+msgid "Forgot Password"
+msgstr ""
+
+#: admin/themes/default/users/forgot-password.php:11
+#: application/views/scripts/users/forgot-password.php:10
+msgid "Enter your email address to retrieve your password."
+msgstr ""
+
+#: admin/themes/default/users/forgot-password.php:21
+#: application/views/helpers/SearchForm.php:57
+#: application/views/scripts/search/search-form.php:39
+#: application/views/scripts/search/search-form.php:43
+#: application/views/scripts/users/forgot-password.php:18
+msgid "Submit"
+msgstr ""
+
+#: admin/themes/default/users/forgot-password.php:25
+#: application/views/scripts/users/forgot-password.php:7
+msgid "Back to Log In"
+msgstr ""
+
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
+#: application/views/scripts/users/login.php:3
+msgid "Log In"
+msgstr ""
+
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr ""
+
+#: admin/themes/default/users/login.php:17
+msgid "(Lost your password?)"
+msgstr ""
+
+#: admin/themes/default/users/show.php:8
+#, php-format
+msgid "User #%s"
+msgstr ""
+
+#: admin/themes/default/users/show.php:15
+msgid "Edit this User"
+msgstr ""
+
+#: application/controllers/AppearanceController.php:47
+msgid "The appearance settings have been updated."
+msgstr ""
+
+#: application/controllers/AppearanceController.php:50
+#: application/controllers/ItemTypesController.php:35
+#: application/controllers/ItemTypesController.php:61
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
+#: install/views/scripts/index/index.phtml:17
+msgid "There were errors found in your form. Please edit and resubmit."
+msgstr ""
+
+#: application/controllers/AppearanceController.php:64
+msgid "The navigation settings have been updated."
+msgstr ""
+
+#: application/controllers/AppearanceController.php:67
+msgid ""
+"The navigation settings were not saved because of missing or invalid values."
+"  All changed values have been restored."
+msgstr ""
+
+#: application/controllers/AppearanceController.php:95
+msgid "The navigation settings have been reset."
+msgstr ""
+
+#: application/controllers/CollectionsController.php:59
+#, php-format
+msgid "The collection \"%s\" was successfully added!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:61
+#, php-format
+msgid "The collection #%s was successfully added!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:69
+#, php-format
+msgid "The collection \"%s\" was successfully changed!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:71
+#, php-format
+msgid "The collection #%s was successfully changed!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:79
+#, php-format
+msgid "The collection \"%s\" was successfully deleted!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:81
+#, php-format
+msgid "The collection #%s was successfully deleted!"
+msgstr ""
+
+#: application/controllers/CollectionsController.php:89
+#, php-format
+msgid ""
+"This will delete the collection \"%s\" and its associated metadata. This "
+"will not delete any items in this collection, but will delete the reference "
+"to this collection in each item."
+msgstr ""
+
+#: application/controllers/CollectionsController.php:93
+#, php-format
+msgid ""
+"This will delete the collection #%s and its associated metadata. This will "
+"not delete any items in this collection, but will delete the reference to "
+"this collection in each item."
+msgstr ""
+
+#: application/controllers/ElementSetsController.php:21
+msgid ""
+"This will delete the element set and all elements assigned to the element "
+"set. Items will lose all metadata that is specific to this element set."
+msgstr ""
+
+#: application/controllers/ElementSetsController.php:51
+#: application/controllers/PluginsController.php:54
+#: application/controllers/PluginsController.php:82
+#: application/controllers/PluginsController.php:140
+#: application/controllers/PluginsController.php:189
+#: application/controllers/PluginsController.php:222
+#: application/controllers/PluginsController.php:330
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
+#: application/controllers/ThemesController.php:89
+#: application/controllers/UsersController.php:314
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
+msgid "There was an error on the form. Please try again."
+msgstr ""
+
+#: application/controllers/ElementSetsController.php:70
+msgid "The element set was successfully changed!"
+msgstr ""
+
+#: application/controllers/ErrorController.php:63
+msgid "Page not found."
+msgstr ""
+
+#: application/controllers/ErrorController.php:78
+msgid "Access denied."
+msgstr ""
+
+#: application/controllers/FilesController.php:66
+msgid "This will delete the file and its associated metadata."
+msgstr ""
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr ""
+
+#: application/controllers/ItemTypesController.php:28
+#, php-format
+msgid "The item type \"%s\" was successfully added."
+msgstr ""
+
+#: application/controllers/ItemTypesController.php:55
+#, php-format
+msgid "The item type \"%s\" was successfully updated."
+msgstr ""
+
+#: application/controllers/ItemTypesController.php:150
+#, php-format
+msgid ""
+"This will delete the \"%s\" item type but will not delete the elements "
+"assigned to the item type. Items that are assigned to this item type will "
+"lose all metadata that is specific to the item type."
+msgstr ""
+
+#: application/controllers/ItemTypesController.php:158
+#, php-format
+msgid ""
+"The item type \"%s\" was successfully added!  You may now add elements to "
+"your new item type."
+msgstr ""
+
+#: application/controllers/ItemsController.php:86
+#: application/controllers/ItemsController.php:146
+msgid ""
+"The ImageMagick directory path has not been set. No derivative images will "
+"be created. If you would like Omeka to create derivative images, please set "
+"the path in Settings."
+msgstr ""
+
+#: application/controllers/ItemsController.php:95
+#, php-format
+msgid "The item \"%s\" was successfully added!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:97
+#, php-format
+msgid "The item #%s was successfully added!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:105
+#, php-format
+msgid "The item \"%s\" was successfully changed!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:107
+#, php-format
+msgid "The item #%s was successfully changed!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:115
+#, php-format
+msgid "The item \"%s\" was successfully deleted!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:117
+#, php-format
+msgid "The item #%s was successfully deleted!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:125
+#, php-format
+msgid ""
+"This will delete the item \"%s\" and its associated metadata. It will also "
+"delete all files and file metadata associated with this item."
+msgstr ""
+
+#: application/controllers/ItemsController.php:129
+#, php-format
+msgid ""
+"This will delete the item #%s and its associated metadata. It will also "
+"delete all files and file metadata associated with this item."
+msgstr ""
+
+#: application/controllers/ItemsController.php:235
+#: application/controllers/ItemsController.php:368
+#: application/controllers/ItemsController.php:434
+msgid "No item to batch edit."
+msgstr ""
+
+#: application/controllers/ItemsController.php:242
+msgid "The deletion of all items is forbidden."
+msgstr ""
+
+#: application/controllers/ItemsController.php:259
+msgid "You must choose some items to batch edit."
+msgstr ""
+
+#: application/controllers/ItemsController.php:306
+#: application/controllers/ItemsController.php:402
+msgid "User is not allowed to modify visibility of items."
+msgstr ""
+
+#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:407
+msgid "User is not allowed to modify featured status of items."
+msgstr ""
+
+#: application/controllers/ItemsController.php:318
+msgid "User is not allowed to delete selected items."
+msgstr ""
+
+#: application/controllers/ItemsController.php:324
+msgid "User is not allowed to edit selected items."
+msgstr ""
+
+#: application/controllers/ItemsController.php:329
+msgid "User is not allowed to tag selected items."
+msgstr ""
+
+#: application/controllers/ItemsController.php:361
+msgid "The items were successfully deleted!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:363
+msgid "The items were successfully changed!"
+msgstr ""
+
+#: application/controllers/ItemsController.php:426
+msgid "The items are checked and deleted one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:428
+msgid "The items are checked and changed one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:430
+msgid "Check logs for success and errors."
+msgstr ""
+
+#: application/controllers/PluginsController.php:48
+#, php-format
+msgid ""
+"Error in configuring plugin named \"%s\". Missing config and/or config_form "
+"hook(s)."
+msgstr ""
+
+#: application/controllers/PluginsController.php:62
+#, php-format
+msgid "The %s plugin was successfully configured!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:92
+#, php-format
+msgid "The %s plugin has already been installed."
+msgstr ""
+
+#: application/controllers/PluginsController.php:102
+#, php-format
+msgid "The %s plugin was successfully installed!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:114
+#: application/controllers/PluginsController.php:119
+#, php-format
+msgid "The following error occurred while installing the %s plugin: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:155
+#, php-format
+msgid "The following error occurred while activating the %s plugin: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:165
+#, php-format
+msgid "The %s plugin was successfully activated!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:170
+#, php-format
+msgid "The %s plugin was activated, but could not be loaded: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:203
+#, php-format
+msgid "The %s plugin was successfully deactivated!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:208
+#, php-format
+msgid "The following error occurred while deactivating the %s plugin: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:238
+#, php-format
+msgid "The %s plugin was successfully upgraded!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:247
+#: application/controllers/PluginsController.php:253
+#, php-format
+msgid "The following error occurred while upgrading the %s plugin: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:304
+#, php-format
+msgid "The plugin could not be found in the '%s' directory!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:317
+msgid "You must confirm the uninstall before proceeding."
+msgstr ""
+
+#: application/controllers/PluginsController.php:336
+#, php-format
+msgid "The %s plugin was successfully uninstalled!"
+msgstr ""
+
+#: application/controllers/PluginsController.php:341
+#: application/controllers/PluginsController.php:346
+#, php-format
+msgid "The following error occurred while uninstalling the %s plugin: "
+msgstr ""
+
+#: application/controllers/PluginsController.php:375
+msgid "No plugin name given."
+msgstr ""
+
+#: application/controllers/PluginsController.php:388
+#, php-format
+msgid "The plugin %s must be installed."
+msgstr ""
+
+#: application/controllers/SettingsController.php:52
+msgid "The general settings have been updated."
+msgstr ""
+
+#: application/controllers/SettingsController.php:85
+msgid "The security settings have been updated."
+msgstr ""
+
+#: application/controllers/SettingsController.php:123
+msgid ""
+"You have changed which records are searchable in Omeka. Please re-index the "
+"records using the form below."
+msgstr ""
+
+#: application/controllers/SettingsController.php:130
+msgid ""
+"Indexing records. This may take a while. You may continue administering your"
+" site."
+msgstr ""
+
+#: application/controllers/SettingsController.php:165
+msgid "The item type elements were successfully changed!"
+msgstr ""
+
+#: application/controllers/SettingsController.php:192
+msgid "The API configuration was successfully changed!"
+msgstr ""
+
+#: application/controllers/SettingsController.php:215
+msgid "The ImageMagick directory path works."
+msgstr ""
+
+#: application/controllers/SettingsController.php:216
+msgid "The ImageMagick directory path does not work."
+msgstr ""
+
+#: application/controllers/TagsController.php:42
+msgid "Invalid tagType given."
+msgstr ""
+
+#: application/controllers/TagsController.php:108
+msgid "Error occurred."
+msgstr ""
+
+#: application/controllers/ThemesController.php:32
+msgid "Invalid form submission."
+msgstr ""
+
+#: application/controllers/ThemesController.php:40
+msgid "You have chosen an illegal theme name. Please select another theme."
+msgstr ""
+
+#: application/controllers/ThemesController.php:47
+#, php-format
+msgid "This theme requires a newer version of Omeka (%s)."
+msgstr ""
+
+#: application/controllers/ThemesController.php:61
+msgid "The theme has been successfully changed."
+msgstr ""
+
+#: application/controllers/ThemesController.php:86
+msgid "The theme settings were successfully saved!"
+msgstr ""
+
+#: application/controllers/UpgradeController.php:53
+msgid "SQL error in migration: "
+msgstr ""
+
+#: application/controllers/UpgradeController.php:66
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
+msgstr ""
+
+#: application/controllers/UsersController.php:74
+msgid ""
+"Unable to reset password. Please verify that the information is correct and "
+"contact an administrator if necessary."
+msgstr ""
+
+#: application/controllers/UsersController.php:112
+msgid "Please follow this link to reset your password:"
+msgstr ""
+
+#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:392
+#, php-format
+msgid "%s Administrator"
+msgstr ""
+
+#: application/controllers/UsersController.php:118
+#, php-format
+msgid "[%s] Reset Your Password"
+msgstr ""
+
+#: application/controllers/UsersController.php:121
+msgid "Please check your email for a link to reset your password."
+msgstr ""
+
+#: application/controllers/UsersController.php:130
+msgid "Invalid activation code given."
+msgstr ""
+
+#: application/controllers/UsersController.php:139
+msgid "Password: The passwords do not match."
+msgstr ""
+
+#: application/controllers/UsersController.php:147
+msgid "You may now log in to Omeka."
+msgstr ""
+
+#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:237
+#: application/controllers/UsersController.php:288
+msgid "There was an invalid entry on the form. Please try again."
+msgstr ""
+
+#: application/controllers/UsersController.php:179
+#, php-format
+msgid "The user \"%s\" was successfully added!"
+msgstr ""
+
+#: application/controllers/UsersController.php:183
+#, php-format
+msgid "The user \"%s\" was added, but the activation email could not be sent."
+msgstr ""
+
+#: application/controllers/UsersController.php:219
+msgid "User activation email has been sent."
+msgstr ""
+
+#: application/controllers/UsersController.php:221
+msgid "User activation email could not be sent."
+msgstr ""
+
+#: application/controllers/UsersController.php:259
+#, php-format
+msgid "The user %s was successfully changed!"
+msgstr ""
+
+#: application/controllers/UsersController.php:295
+msgid "Password changed!"
+msgstr ""
+
+#: application/controllers/UsersController.php:324
+msgid "A new API key was successfully created."
+msgstr ""
+
+#: application/controllers/UsersController.php:331
+msgid "An existing API key was successfully rescinded."
+msgstr ""
+
+#: application/controllers/UsersController.php:358
+#, php-format
+msgid "The user \"%s\" was successfully deleted!"
+msgstr ""
+
+#: application/controllers/UsersController.php:364
+#, php-format
+msgid ""
+"%s will be deleted from the system. Items, collections, and tags created by "
+"this user will remain in the system, but will no longer be associated with "
+"this user."
+msgstr ""
+
+#: application/controllers/UsersController.php:388
+msgid "Welcome!"
+msgstr ""
+
+#: application/controllers/UsersController.php:390
+#, php-format
+msgid ""
+"Your account for the %s repository has been created. Please click the "
+"following link to activate your account:"
+msgstr ""
+
+#: application/controllers/UsersController.php:393
+#, php-format
+msgid "Activate your account with the %s repository"
+msgstr ""
+
+#: application/controllers/UsersController.php:486
+msgid "Login information incorrect. Please try again."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:21
+msgid "Use Square Thumbnails"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:22
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:27
+#: application/forms/Install.php:146
+msgid "Fullsize Image Size"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:28
+msgid "Maximum fullsize image size constraint (in pixels)."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:34
+#: application/forms/Install.php:155
+msgid "Thumbnail Size"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:35
+msgid "Maximum thumbnail size constraint (in pixels)."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:41
+#: application/forms/Install.php:164
+msgid "Square Thumbnail Size"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:42
+msgid "Maximum square thumbnail size constraint (in pixels)."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:48
+msgid "Results Per Page (admin)"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:49
+msgid ""
+"Limit the number of results displayed per page in the administrative "
+"interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:55
+msgid "Results Per Page (public)"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:56
+msgid ""
+"Limit the number of results displayed per page in the public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:62
+#: application/forms/Install.php:191
+msgid "Show Empty Elements"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:63
+msgid "Include empty elements in show pages."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:68
+msgid "Show Element Set Headings"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:69
+msgid "Include element set headings in show pages and in drop-down lists."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:74
+msgid "Link to File Metadata"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:75
+msgid ""
+"Have item files link to the file metadata instead of the file directly."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:85
+msgid "Admin Theme"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:99
+msgid "Derivative Size Constraints"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:107
+msgid "Display Settings"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:115
+msgid "Admin Themes"
+msgstr ""
+
+#: application/forms/ChangePassword.php:25
+msgid "Current Password"
+msgstr ""
+
+#: application/forms/ChangePassword.php:26
+#: application/forms/ChangePassword.php:36
+msgid "Password must be at least 6 characters long."
+msgstr ""
+
+#: application/forms/ChangePassword.php:28
+msgid "Invalid current password"
+msgstr ""
+
+#: application/forms/ChangePassword.php:34
+msgid "New Password"
+msgstr ""
+
+#: application/forms/ChangePassword.php:41
+msgid "New password must be entered."
+msgstr ""
+
+#: application/forms/ChangePassword.php:50
+#: application/forms/ChangePassword.php:70
+msgid "New password must be typed correctly twice."
+msgstr ""
+
+#: application/forms/ChangePassword.php:59
+msgid "New password must be at least %min% characters long."
+msgstr ""
+
+#: application/forms/ChangePassword.php:68
+msgid "Repeat New Password"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
+msgid "Site Title"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
+msgid "Site Description"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
+msgid "Administrator Email"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
+msgid "Site Copyright Information"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
+msgid "Site Author Information"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
+msgid "Tag Delimiter"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:46
+msgid ""
+"Separate tags using this character or string. Be careful when changing this "
+"setting. You run the risk of splitting tags that contain the old delimiter."
+msgstr ""
+
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
+msgid "ImageMagick Directory Path"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:69
+msgid "General Settings"
+msgstr ""
+
+#: application/forms/Install.php:39
+msgid "must be 30 characters or fewer with no whitespace"
+msgstr ""
+
+#: application/forms/Install.php:47 application/forms/User.php:46
+#: application/models/User.php:188
+#, php-format
+msgid ""
+"Whitespace is not allowed. Only these special characters may be used: %s"
+msgstr ""
+
+#: application/forms/Install.php:57 application/forms/Login.php:39
+msgid "Password"
+msgstr ""
+
+#: application/forms/Install.php:58
+msgid "must be at least 6 characters"
+msgstr ""
+
+#: application/forms/Install.php:82
+msgid "Confirm your password."
+msgstr ""
+
+#: application/forms/Install.php:131
+msgid "Separate tags using this character or string."
+msgstr ""
+
+#: application/forms/Install.php:147
+msgid "Maximum fullsize image size constraint (in pixels)"
+msgstr ""
+
+#: application/forms/Install.php:156
+msgid "Maximum thumbnail size constraint (in pixels)"
+msgstr ""
+
+#: application/forms/Install.php:165
+msgid "Maximum square thumbnail size constraint (in pixels)"
+msgstr ""
+
+#: application/forms/Install.php:173
+msgid "Items Per Page (admin)"
+msgstr ""
+
+#: application/forms/Install.php:174
+msgid ""
+"Limit the number of items displayed per page in the administrative "
+"interface."
+msgstr ""
+
+#: application/forms/Install.php:182
+msgid "Items Per Page (public)"
+msgstr ""
+
+#: application/forms/Install.php:183
+msgid "Limit the number of items displayed per page in the public interface."
+msgstr ""
+
+#: application/forms/Install.php:193
+msgid "Check box to show metadata elements with no text."
+msgstr ""
+
+#: application/forms/Install.php:211
+msgid "Default Superuser Account"
+msgstr ""
+
+#: application/forms/Install.php:221
+msgid "Site Settings"
+msgstr ""
+
+#: application/forms/ItemTypes.php:142
+msgid "The name of the item type."
+msgstr ""
+
+#: application/forms/ItemTypes.php:151
+msgid "The description of the item type."
+msgstr ""
+
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
+#, php-format
+msgid "The item type cannot have more than one \"%s\" element."
+msgstr ""
+
+#: application/forms/Login.php:35
+msgid "Username cannot be empty."
+msgstr ""
+
+#: application/forms/Login.php:45
+msgid "Password cannot be empty."
+msgstr ""
+
+#: application/forms/Login.php:50
+msgid "Remember Me?"
+msgstr ""
+
+#: application/forms/Navigation.php:157
+msgid "[Default]"
+msgstr ""
+
+#: application/forms/Navigation.php:163
+msgid "Select a Homepage"
+msgstr ""
+
+#: application/forms/Navigation.php:244
+msgid "Cannot find parent navigation page."
+msgstr ""
+
+#: application/forms/Navigation.php:324
+msgid "All navigation links must have URIs."
+msgstr ""
+
+#: application/forms/Navigation.php:337
+msgid "All navigation links must have different URIs."
+msgstr ""
+
+#: application/forms/Navigation.php:343
+#, php-format
+msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
+msgstr ""
+
+#: application/forms/Navigation.php:376
+msgid "Navigation links that have undeleteable sublinks cannot be deleted."
+msgstr ""
+
+#: application/forms/RecoverPassword.php:36
+msgid "Email address is required."
+msgstr ""
+
+#: application/forms/RecoverPassword.php:46
+msgid "Invalid email address given."
+msgstr ""
+
+#: application/forms/RecoverPassword.php:48
+msgid "Invalid format given for email address."
+msgstr ""
+
+#: application/forms/RecoverPassword.php:50
+msgid "Invalid hostname given for email address."
+msgstr ""
+
+#: application/forms/RecoverPassword.php:66
+msgid "Invalid email address"
+msgstr ""
+
+#: application/forms/ResetPassword.php:27
+msgid "Password is required."
+msgstr ""
+
+#: application/forms/ResetPassword.php:33
+msgid "Typed passwords do not match."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:23
+msgid "Disable File Upload Validation"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:25
+msgid ""
+"Check this field if you would like to allow any file to be uploaded to "
+"Omeka."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:31
+msgid "Allowed File Extensions"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:32
+msgid "List of allowed extensions for file uploads"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:41
+msgid "Allowed File Types"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:42
+msgid "List of allowed MIME types for file uploads"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:51
+msgid "reCAPTCHA Site Key"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:52
+#, php-format
+msgid ""
+"Enter site key from %s. Both this and the private key must be filled in to "
+"secure public forms. Keys must be for reCAPTCHA v2."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:59
+msgid "reCAPTCHA Secret Key"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:60
+#, php-format
+msgid ""
+"Enter secret key from %s. Both this and the public key must be filled in to "
+"secure public forms. Keys must be for reCAPTCHA v2."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:67
+msgid ""
+"Check this field if you would like to filter HTML elements or attributes "
+"from form input."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:68
+msgid "Enable HTML Filtering"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:73
+msgid "Allowed HTML Elements"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:74
+msgid "List of allowed HTML elements in form input"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:81
+msgid "Allowed HTML Attributes"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:82
+msgid "List of allowed HTML attributes in form input"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:97
+msgid "File Validation"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:105
+msgid "Captcha"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:114
+msgid "HTML Filtering"
+msgstr ""
+
+#: application/forms/User.php:30
+msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
+msgstr ""
+
+#: application/forms/User.php:37
+msgid "Username is required."
+msgstr ""
+
+#: application/forms/User.php:56
+msgid "Username must be at least %min% characters long."
+msgstr ""
+
+#: application/forms/User.php:58
+msgid "Username must be at most %max% characters long."
+msgstr ""
+
+#: application/forms/User.php:72
+msgid "This username is already in use."
+msgstr ""
+
+#: application/forms/User.php:82
+msgid "Name as it should be displayed on the site"
+msgstr ""
+
+#: application/forms/User.php:88 application/models/User.php:168
+msgid "Real Name is required."
+msgstr ""
+
+#: application/forms/User.php:94
+msgid "This email address is invalid."
+msgstr ""
+
+#: application/forms/User.php:102
+msgid "Email is required."
+msgstr ""
+
+#: application/forms/User.php:121
+msgid "This email address is already in use."
+msgstr ""
+
+#: application/forms/User.php:130
+msgid ""
+"Roles describe the permissions a user has. See <a "
+"href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
+"for details."
+msgstr ""
+
+#: application/forms/User.php:137
+msgid "Inactive users cannot log in to the site."
+msgstr ""
+
+#: application/forms/User.php:139
+#, php-format
+msgid "Activation has been pending since %s."
+msgstr ""
+
+#: application/forms/User.php:142
+msgid "Active?"
+msgstr ""
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
+#, php-format
+msgid "The configured PHP path (%s) is invalid."
+msgstr ""
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
+#, php-format
+msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
+msgstr ""
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
+#, php-format
+msgid ""
+"The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
+"version (%s)"
+msgstr ""
+
+#: application/libraries/Omeka/Navigation.php:213
+msgid "The page must be normalized and have a valid uid."
+msgstr ""
+
+#: application/libraries/Omeka/Navigation.php:225
+msgid ""
+"The parent container must either be the navigation object or a descendant "
+"subpage of the navigation object."
+msgstr ""
+
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
+#, php-format
+msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
+msgstr ""
+
+#: application/libraries/Omeka/Plugin/Ini.php:63
+#, php-format
+msgid "Path to plugin.ini for \"%s\" is not correct."
+msgstr ""
+
+#: application/libraries/Omeka/Plugin/Installer.php:76
+#, php-format
+msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
+msgstr ""
+
+#: application/libraries/Omeka/Plugin/Installer.php:112
+msgid "Plugin must have a valid directory name before it can be installed."
+msgstr ""
+
+#: application/libraries/Omeka/Record/AbstractRecord.php:352
+#, php-format
+msgid "'%s' is an invalid special value."
+msgstr ""
+
+#: application/libraries/Omeka/Record/Iterator.php:51
+msgid "An invalid value was detected during record iteration."
+msgstr ""
+
+#: application/libraries/globals.php:410
+msgid "File"
+msgstr ""
+
+#: application/libraries/globals.php:468
+msgid "Keyword"
+msgstr ""
+
+#: application/libraries/globals.php:469
+msgid "Boolean"
+msgstr ""
+
+#: application/libraries/globals.php:470
+msgid "Exact match"
+msgstr ""
+
+#: application/libraries/globals.php:1275
+#: application/libraries/globals.php:1296
+#, php-format
+msgid "Could not find file %s!"
+msgstr ""
+
+#: application/libraries/globals.php:1312
+msgid "No featured collections are available."
+msgstr ""
+
+#: application/libraries/globals.php:1618
+msgid "Select Below "
+msgstr ""
+
+#: application/libraries/globals.php:1661
+msgid "Omeka RSS Feed"
+msgstr ""
+
+#: application/libraries/globals.php:1662
+msgid "Omeka Atom Feed"
+msgstr ""
+
+#: application/libraries/globals.php:1981
+msgid "Sort ascending"
+msgstr ""
+
+#: application/libraries/globals.php:1991
+msgid "Sorting descending"
+msgstr ""
+
+#: application/libraries/globals.php:1995
+msgid "Sorting ascending"
+msgstr ""
+
+#: application/libraries/globals.php:2355
+msgid "No recent items available."
+msgstr ""
+
+#: application/libraries/globals.php:2381
+msgid "No featured items are available."
+msgstr ""
+
+#: application/libraries/globals.php:2442
+msgid "View"
+msgstr ""
+
+#: application/libraries/globals.php:2504
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
+msgid "No Collection"
+msgstr ""
+
+#: application/libraries/globals.php:2623
+msgid "RSS"
+msgstr ""
+
+#: application/libraries/globals.php:2640
+msgid "Next Item &rarr;"
+msgstr ""
+
+#: application/libraries/globals.php:2660
+msgid "&larr; Previous Item"
+msgstr ""
+
+#: application/libraries/globals.php:2841
+msgid "Browse All"
+msgstr ""
+
+#: application/libraries/globals.php:2846
+msgid "Browse by Tag"
+msgstr ""
+
+#: application/libraries/globals.php:3126
+msgid "No tags are available."
+msgstr ""
+
+#: application/models/Builder/Item.php:263
+msgid "Must specify a file transfer type when attaching files to an item!"
+msgstr ""
+
+#: application/models/Collection.php:120
+msgid "Cannot associate the collection with an unsaved user."
+msgstr ""
+
+#: application/models/Element.php:174
+msgid "The element name must not be empty."
+msgstr ""
+
+#: application/models/Element.php:178
+msgid "Invalid element set."
+msgstr ""
+
+#: application/models/Element.php:184
+#, php-format
+msgid "An element named \"%s\" already exists for the \"%s\" element set."
+msgstr ""
+
+#: application/models/Element.php:215
+#, php-format
+msgid "Cannot set element set ID: set named \"%s\" does not exist."
+msgstr ""
+
+#: application/models/ElementSet.php:144
+msgid "Name of element set must be unique."
+msgstr ""
+
+#: application/models/ElementSet.php:148
+msgid "Name of element set must not be empty."
+msgstr ""
+
+#: application/models/ElementText.php:59
+msgid "Invalid record ID."
+msgstr ""
+
+#: application/models/ElementText.php:62
+msgid "All element texts must have a record type."
+msgstr ""
+
+#: application/models/ElementText.php:65
+msgid "Invalid element ID."
+msgstr ""
+
+#: application/models/File.php:237
+msgid "Cannot get the local path for a stored file."
+msgstr ""
+
+#: application/models/File.php:456
+#, php-format
+msgid "\"%s\" is not a valid file derivative."
+msgstr ""
+
+#: application/models/Item.php:333
+msgid ""
+"Files cannot be attached to an item that is not persistent in the database!"
+msgstr ""
+
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:468
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:472
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:476
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:494
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:511
+msgid "Cannot add an existing file to an item!"
+msgstr ""
+
+#: application/models/Item.php:515
+msgid "File must be valid before it can be associated with an item!"
+msgstr ""
+
+#: application/models/Item.php:540
+msgid "Invalid item type."
+msgstr ""
+
+#: application/models/Item.php:543
+msgid "Invalid collection."
+msgstr ""
+
+#: application/models/ItemType.php:102
+#, php-format
+msgid "The item type name must have between %1$s and %2$s characters."
+msgstr ""
+
+#: application/models/ItemType.php:106
+msgid "The item type name must be unique."
+msgstr ""
+
+#: application/models/ItemType.php:183
+msgid "There are too many values in the element ordering array."
+msgstr ""
+
+#: application/models/ItemType.php:185
+msgid "There are too few values in the element ordering array."
+msgstr ""
+
+#: application/models/ItemType.php:222
+msgid ""
+"Invalid element data. To add elements, you must either pass an element "
+"objects or an array of element metadata."
+msgstr ""
+
+#: application/models/ItemType.php:286
+msgid ""
+"Cannot remove elements from an item type that is not persistent in the "
+"database!"
+msgstr ""
+
+#: application/models/ItemType.php:295
+#, php-format
+msgid "Cannot find element with ID %s!"
+msgstr ""
+
+#: application/models/ItemType.php:336
+#, php-format
+msgid "Item type does not contain an element with the ID %s!"
+msgstr ""
+
+#: application/models/ItemType.php:357
+msgid ""
+"Invalid parameter. The hasElement function requires either an element object"
+" or an element id to determine if an item type has an element."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:40
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:47
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+
+#: application/models/Job/ItemBatchEditAll.php:66
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:73
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+
+#: application/models/Job/ItemBatchEditAll.php:90
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:105
+msgid "User is not allowed to delete this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:112
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:118
+msgid "User is not allowed to tag this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:141
+msgid "The item was successfully deleted."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:153
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:158
+msgid "The item was successfully batch-edited."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:176
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:292
+#, php-format
+msgid "There is no element \"%1$s\", \"%2$s\"!"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:311
+#, php-format
+msgid "Cannot find an element with an ID of '%s'!"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:430
+msgid "Element texts are not formatted correctly!"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:578
+#, php-format
+msgid "The \"%s\" field has at least one invalid value!"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:648
+msgid "Cannot save element text for records that are not yet persistent!"
+msgstr ""
+
+#: application/models/Option.php:50 application/models/Option.php:54
+msgid "Each option must have a unique name."
+msgstr ""
+
+#: application/models/Plugin.php:133
+msgid "Names of plugins must not be blank"
+msgstr ""
+
+#: application/models/Table/Collection.php:80
+#, php-format
+msgid "[Untitled] #%s"
+msgstr ""
+
+#: application/models/Table/Item.php:143
+msgid "Invalid search type given!"
+msgstr ""
+
+#: application/models/Tag.php:57
+msgid "Tags must be given a name."
+msgstr ""
+
+#: application/models/Tag.php:61
+msgid "That name is already taken for this tag."
+msgstr ""
+
+#: application/models/User.php:109
+msgid "User may not change permissions to super-user"
+msgstr ""
+
+#: application/models/User.php:112
+msgid "User may not change roles."
+msgstr ""
+
+#: application/models/User.php:181 application/models/User.php:229
+msgid "The user must be assigned a role."
+msgstr ""
+
+#: application/models/User.php:186
+#, php-format
+msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
+msgstr ""
+
+#: application/models/User.php:190
+#, php-format
+msgid "'%s' is already in use. Please choose another username."
+msgstr ""
+
+#: application/models/UsersActivations.php:54
+msgid "Cannot create a user activation for non-existent user."
+msgstr ""
+
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
+msgid "This migration should have been run previously (should not run again)."
+msgstr ""
+
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:18
+msgid "This migration should not be run."
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:753
+#: application/tests/suite/Omeka/NavigationTest.php:818
+#: application/tests/suite/Omeka/NavigationTest.php:840
+#: application/tests/suite/Omeka/NavigationTest.php:953
+msgid "Edit Items"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:759
+#: application/tests/suite/Omeka/NavigationTest.php:819
+#: application/tests/suite/Omeka/NavigationTest.php:857
+#: application/tests/suite/Omeka/NavigationTest.php:954
+msgid "Edit Collections"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:765
+#: application/tests/suite/Omeka/NavigationTest.php:820
+#: application/tests/suite/Omeka/NavigationTest.php:863
+#: application/tests/suite/Omeka/NavigationTest.php:955
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
+msgid "Omeka"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:826
+#: application/tests/suite/Omeka/NavigationTest.php:952
+msgid "CHNM"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:983
+#: application/tests/suite/Omeka/NavigationTest.php:991
+#: application/tests/suite/Omeka/NavigationTest.php:1128
+#: application/tests/suite/Omeka/NavigationTest.php:1136
+msgid "Page "
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1009
+#: application/tests/suite/Omeka/NavigationTest.php:1013
+#: application/tests/suite/Omeka/NavigationTest.php:1071
+#: application/tests/suite/Omeka/NavigationTest.php:1076
+#: application/tests/suite/Omeka/NavigationTest.php:1156
+#: application/tests/suite/Omeka/NavigationTest.php:1256
+msgid "Page 1"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1016
+#: application/tests/suite/Omeka/NavigationTest.php:1022
+#: application/tests/suite/Omeka/NavigationTest.php:1079
+#: application/tests/suite/Omeka/NavigationTest.php:1082
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1232
+msgid "Page 2"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1025
+#: application/tests/suite/Omeka/NavigationTest.php:1029
+#: application/tests/suite/Omeka/NavigationTest.php:1085
+#: application/tests/suite/Omeka/NavigationTest.php:1089
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1193
+#: application/tests/suite/Omeka/NavigationTest.php:1255
+msgid "Page 3"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1032
+#: application/tests/suite/Omeka/NavigationTest.php:1041
+#: application/tests/suite/Omeka/NavigationTest.php:1092
+#: application/tests/suite/Omeka/NavigationTest.php:1096
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1184
+#: application/tests/suite/Omeka/NavigationTest.php:1201
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1250
+msgid "Page 4"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1044
+#: application/tests/suite/Omeka/NavigationTest.php:1048
+#: application/tests/suite/Omeka/NavigationTest.php:1099
+#: application/tests/suite/Omeka/NavigationTest.php:1103
+#: application/tests/suite/Omeka/NavigationTest.php:1166
+#: application/tests/suite/Omeka/NavigationTest.php:1175
+#: application/tests/suite/Omeka/NavigationTest.php:1223
+#: application/tests/suite/Omeka/NavigationTest.php:1241
+msgid "Page 5"
+msgstr ""
+
+#: application/tests/suite/Omeka/NavigationTest.php:1051
+#: application/tests/suite/Omeka/NavigationTest.php:1055
+#: application/tests/suite/Omeka/NavigationTest.php:1215
+msgid "Page 6"
+msgstr ""
+
+#: application/views/helpers/AllElementTexts.php:107
+msgid "[no text]"
+msgstr ""
+
+#: application/views/helpers/ElementForm.php:273
+msgid "Add Input"
+msgstr ""
+
+#: application/views/helpers/ElementInput.php:148
+msgid "Use HTML"
+msgstr ""
+
+#: application/views/helpers/GetCurrentRecord.php:27
+#, php-format
+msgid "A current %s variable has not been set to this view."
+msgstr ""
+
+#: application/views/helpers/GetLoopRecords.php:30
+#, php-format
+msgid "A loop %s variable has not been set to this view."
+msgstr ""
+
+#: application/views/helpers/Loop.php:27
+msgid "An array of records is not available for the loop."
+msgstr ""
+
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
+msgstr ""
+
+#: application/views/helpers/RecordUrl.php:34
+msgid "Invalid record passed while getting record URL."
+msgstr ""
+
+#: application/views/helpers/RecordUrl.php:44
+msgid "Invalid action passed while getting record URL."
+msgstr ""
+
+#: application/views/helpers/RecordUrl.php:75
+msgid "Invalid return value while getting record URL."
+msgstr ""
+
+#: application/views/scripts/collections/browse.php:14
+#: application/views/scripts/items/browse.php:24
+msgid "Sort by: "
+msgstr ""
+
+#: application/views/scripts/collections/browse.php:41
+#, php-format
+msgid "View the items in %s"
+msgstr ""
+
+#: application/views/scripts/collections/show.php:13
+msgid "Collection Items"
+msgstr ""
+
+#: application/views/scripts/collections/show.php:33
+#, php-format
+msgid "View item"
+msgid_plural "View all %s items"
+msgstr[0] ""
+
+#: application/views/scripts/collections/show.php:35
+msgid "There are currently no items within this collection."
+msgstr ""
+
+#: application/views/scripts/common/footer.php:14
+msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:5
+msgid "Pagination"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:11
+msgid "Previous Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:36
+msgid "Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:42
+#, php-format
+msgid "%s of %s"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:51
+msgid "Next Page"
+msgstr ""
+
+#: application/views/scripts/error/403.php:2
+msgid "403 Page Forbidden"
+msgstr ""
+
+#: application/views/scripts/error/403.php:8
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: application/views/scripts/error/404.dc.php:1
+#: application/views/scripts/error/404.php:2
+#: application/views/scripts/error/404.xml.php:1
+msgid "404 Page Not Found"
+msgstr ""
+
+#: application/views/scripts/error/404.php:6
+#, php-format
+msgid "%s is not a valid URL."
+msgstr ""
+
+#: application/views/scripts/error/404.rss2.php:1
+msgid "Rss2.0 Feed Not Found!"
+msgstr ""
+
+#: application/views/scripts/error/405.php:2
+msgid "405 Method Not Allowed"
+msgstr ""
+
+#: application/views/scripts/error/405.php:6
+#, php-format
+msgid "The method used to access this URL (%s) is not valid."
+msgstr ""
+
+#: application/views/scripts/error/index.php:4
+msgid "Omeka has encountered an error"
+msgstr ""
+
+#: application/views/scripts/error/index.php:33
+msgid ""
+"To learn how to see more detailed information about this error, see the "
+"Omeka Classic User Manual page on <a "
+"href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
+" error messages</a>."
+msgstr ""
+
+#: application/views/scripts/index.php:10
+msgid "Featured Item"
+msgstr ""
+
+#: application/views/scripts/index.php:18
+msgid "Featured Collection"
+msgstr ""
+
+#: application/views/scripts/index.php:42
+msgid "View All Items"
+msgstr ""
+
+#: application/views/scripts/items/show.php:13
+msgid "Files"
+msgstr ""
+
+#: application/views/scripts/items/show.php:36
+msgid "Citation"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:4
+#: application/views/scripts/search/search-form.php:5
+msgid "Query"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:15
+msgid "Search using this query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:20
+msgid "Search only these record types:"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:26
+msgid "Go to search settings to select record types to use."
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:28
+msgid "Advanced Search (Items only)"
+msgstr ""
+
+#: application/views/scripts/users/login.php:9
+msgid "Go to Home Page"
+msgstr ""
+
+#: application/views/scripts/users/login.php:9
+msgid "Lost your password?"
+msgstr ""
+
+#: install/controllers/IndexController.php:27
+msgid "Could not load database resource!"
+msgstr ""
+
+#: install/views/scripts/index/errors.phtml:1
+msgid "Installation Error"
+msgstr ""
+
+#: install/views/scripts/index/errors.phtml:2
+msgid ""
+"Before installation can continue, the following errors must be resolved:"
+msgstr ""
+
+#: install/views/scripts/index/fatal-error.phtml:1
+msgid "Fatal Error"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:2
+msgid "Installation Warning"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:4
+msgid ""
+"The following issues will not affect installation, but they may negatively "
+"affect the behavior of Omeka:"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:14
+msgid "Configure Your Site"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:16
+msgid "Form Validation Errors"
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:1
+msgid "Success!"
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:2
+msgid "Omeka is installed."
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Public Site"
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Admin Dashboard"
+msgstr ""

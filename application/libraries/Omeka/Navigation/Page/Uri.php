@@ -106,7 +106,14 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 );
             }
         } catch (Zend_Uri_Exception $e) {
-            if (filter_var($href, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+            if (filter_var($href, FILTER_VALIDATE_URL)) {
+                $scheme = parse_url($href, PHP_URL_SCHEME);
+                if ($scheme === 'javascript') {
+                    return array(
+                        'uri' => '',
+                        'fragment' => null,
+                    );
+                }
                 $fragmentPos = strrpos($href, '#');
                 if ($fragmentPos !== false) {
                     if ($fragmentPos < strlen($href) - 1) {

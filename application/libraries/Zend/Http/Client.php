@@ -261,13 +261,6 @@ class Zend_Http_Client
     protected $_unmaskStatus = false;
 
     /**
-     * Status if the http_build_query function escapes brackets
-     *
-     * @var boolean
-     */
-    protected $_queryBracketsEscaped = true;
-
-    /**
      * Fileinfo magic database resource
      *
      * This variable is populated the first time _detectFileMimeType is called
@@ -292,8 +285,6 @@ class Zend_Http_Client
         if ($config !== null) {
             $this->setConfig($config);
         }
-
-        $this->_queryBracketsEscaped = version_compare(phpversion(), '5.1.3', '>=');
     }
 
     /**
@@ -1041,18 +1032,14 @@ class Zend_Http_Client
                    if (! empty($query)) {
                        $query .= '&';
                    }
-                $query .= http_build_query($this->paramsGet, null, '&');
+                $query .= http_build_query($this->paramsGet, '', '&');
                 if ($this->config['rfc3986_strict']) {
                     $query = str_replace('+', '%20', $query);
                 }
 
                 // @see ZF-11671 to unmask for some services to foo=val1&foo=val2
                 if ($this->getUnmaskStatus()) {
-                    if ($this->_queryBracketsEscaped) {
-                        $query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
-                    } else {
-                        $query = preg_replace('/\\[(?:[0-9]|[1-9][0-9]+)\\]=/', '=', $query);
-                    }
+                    $query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
                 }
 
                 $uri->setQuery($query);

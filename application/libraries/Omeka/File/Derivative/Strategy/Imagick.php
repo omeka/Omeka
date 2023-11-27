@@ -50,7 +50,12 @@ class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_Abstr
         $imagick->setImagePage($origX, $origY, 0, 0);
         $imagick->setBackgroundColor('white');
         $imagick->setImageBackgroundColor('white');
-        $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+
+        if (defined('Imagick::ALPHACHANNEL_REMOVE')) {
+            $imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+        } else {
+            $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+        }
 
         if ($type != 'square_thumbnail') {
             $imagick->thumbnailImage($sizeConstraint, $sizeConstraint, true);
@@ -69,7 +74,7 @@ class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_Abstr
                 $offsetX = $this->_getCropOffsetX($newX, $sizeConstraint);
             }
 
-            $imagick->thumbnailImage($newX, $newY);
+            $imagick->thumbnailImage(round($newX), round($newY));
             $imagick->cropImage($sizeConstraint, $sizeConstraint, $offsetX, $offsetY);
             $imagick->setImagePage($sizeConstraint, $sizeConstraint, 0, 0);
         }

@@ -19,7 +19,7 @@ class Omeka_Form_SessionCsrf extends Omeka_Form
     public function init()
     {
         parent::init();
-        $this->addElement('sessionCsrfToken', 'csrf_token');
+        $this->addElement('sessionCsrfToken', 'csrf_token', array('id' => ''));
     }
 
     public function loadDefaultDecorators()

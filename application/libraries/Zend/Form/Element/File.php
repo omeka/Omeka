@@ -149,7 +149,7 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = strtoupper((string) $type);
         if (!empty($type) && ($type != self::TRANSFER_ADAPTER)) {
             return parent::addPrefixPath($prefix, $path, $type);
         }

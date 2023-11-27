@@ -19,6 +19,8 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
 
+    private $aclHelper;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

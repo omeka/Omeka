@@ -13,6 +13,10 @@
  */
 class Models_Table_CollectionTest extends Omeka_Test_TestCase
 {
+    private $dbAdapter;
+    private $db;
+    private $table;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter();

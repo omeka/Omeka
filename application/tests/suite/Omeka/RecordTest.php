@@ -17,6 +17,10 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
 
     private static $_eventStack = array();
 
+    private $dbAdapter;
+    private $db;
+    private $pluginBroker;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;

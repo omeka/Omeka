@@ -1154,12 +1154,23 @@ function head_js($includeDefaults = true)
 
     if ($includeDefaults) {
         $dir = 'javascripts';
+        $config = Zend_Registry::get('bootstrap')->getResource('Config');
+        $useInternalAssets = isset($config->theme->useInternalAssets)
+            ? (bool) $config->theme->useInternalAssets
+            : false;
+
         $headScript->prependScript('jQuery.noConflict();')
-                   ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'))
-                   ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
-                   ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+            ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'));
+
+        if ($useInternalAssets) {
+            $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
+                ->prependFile(src('vendor/jquery', $dir, 'js'));
+        } else {
+            $headScript->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
+                ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+                ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
+                ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+        }
     }
     return $headScript;
 }
@@ -1172,11 +1183,18 @@ function head_js($includeDefaults = true)
  *
  * @package Omeka\Function\View\Asset
  * @see queue_css_file()
+ * @param bool $includeDefaults Whether the default stylesheets should be
+ * included. Defaults to true.
  * @return string
  */
-function head_css()
+function head_css($includeDefaults = true)
 {
-    return get_view()->headLink() . get_view()->headStyle();
+    $headLink = get_view()->headLink();
+
+    if ($includeDefaults && !is_admin_theme()) {
+        $headLink->prependStylesheet(css_src('public'));
+    }
+    return $headLink . get_view()->headStyle();
 }
 
 /**
@@ -1360,7 +1378,15 @@ function latest_omeka_version()
     $omekaApiVersion = '0.1';
 
     // Determine if we have already checked for the version lately.
-    $check = unserialize(get_option('omeka_update')) or $check = array();
+    $updateOption = get_option('omeka_update');
+    if (!$updateOption) {
+        $updateOption = '';
+    }
+    $check = unserialize($updateOption);
+    if (!$check) {
+        $check = array();
+    }
+
     // This a timestamp corresponding to the last time we checked for
     // a new version.  86400 is the number of seconds in a day, so check
     // once a day for a new version.
@@ -1933,8 +1959,8 @@ function browse_sort_links($links, $wrapperTags = array())
     $sortParam = Omeka_Db_Table::SORT_PARAM;
     $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
     $req = Zend_Controller_Front::getInstance()->getRequest();
-    $currentSort = trim($req->getParam($sortParam));
-    $currentDir = trim($req->getParam($sortDirParam));
+    $currentSort = $req->getParam($sortParam);
+    $currentDir = $req->getParam($sortDirParam);
 
     $defaults = array(
         'link_tag' => 'li',
@@ -1982,12 +2008,12 @@ function browse_sort_links($links, $wrapperTags = array())
             }
             $url = html_escape(url(array(), null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
-                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></a></{$sortlistWrappers['link_tag']}>";
+                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" $class $linkAttr>$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></a>";
+                $sortlist .= "<a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\" $class $linkAttr>$label <span role=\"presentation\" class=\"sort-icon\"></span></a>";
             }
         } else {
-            $sortlist .= "<{$sortlistWrappers['link_tag']}>$label <span aria-label=\"$sortingLabel\" title=\"$sortingLabel\"></span></{$sortlistWrappers['link_tag']}>";
+            $sortlist .= "<{$sortlistWrappers['link_tag']} aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></{$sortlistWrappers['link_tag']}>";
         }
     }
     if (!empty($sortlistWrappers['list_tag'])) {
@@ -2124,7 +2150,8 @@ function get_previous_item($item = null)
  * @throws InvalidArgumentException If an invalid record is passed.
  * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param Omeka_Record_AbstractRecord|string $record
- * @param string $imageType Image size: thumbnail, square thumbnail, fullsize
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
  * @param array $props HTML attributes for the img tag
  * @return string
  */
@@ -2139,6 +2166,31 @@ function record_image($record, $imageType = null, $props = array())
     }
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($record, $props, $imageType);
+}
+
+/**
+ * Get an image URL for a record.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @throws InvalidArgumentException If an invalid record is passed.
+ * @uses Omeka_View-Helper_FileMarkup::image_url()
+ * @param Omeka_Record_AbstractRecord|string $record
+ * @param string|null $imageType Image size: thumbnail, etc. Pass null to use
+ *  admin-configured default size
+ * @return string
+ */
+function record_image_url($record, $imageType = null)
+{
+    if (is_string($record)) {
+        $record = get_current_record($record);
+    }
+
+    if (!($record instanceof Omeka_Record_AbstractRecord)) {
+        throw new InvalidArgumentException('An Omeka record must be passed to record_image_url.');
+    }
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_url($record, $imageType);
 }
 
 /**
@@ -2856,7 +2908,7 @@ function js_escape($value)
 function xml_escape($value)
 {
     return htmlspecialchars(preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]+#', '',
-        $value), ENT_QUOTES);
+        (string) $value), ENT_QUOTES);
 }
 
 /**
@@ -2979,6 +3031,7 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
  */
 function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
 {
+    $str = (string) $str;
     // Strip the tags.
     $str = strip_tags($str, $allowableTags);
     // Remove non-breaking space html entities.
@@ -3026,7 +3079,7 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
 function url_to_link($str)
 {
     $pattern = "#(\bhttps?://\S+\b)#";
-    return preg_replace_callback($pattern, 'url_to_link_callback', $str);
+    return preg_replace_callback($pattern, 'url_to_link_callback', (string) $str);
 }
 
 /**
@@ -3257,7 +3310,7 @@ function current_url(array $params = array())
 function is_current_url($url)
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    $currentUrl = $request->getRequestUri();
+    $currentUrl = (string) $request->getRequestUri();
     $baseUrl = $request->getBaseUrl();
 
     // Strip out the protocol, host, base URL, and rightmost slash before
@@ -3509,4 +3562,63 @@ function is_allowed($resource, $privilege)
 function add_shortcode($shortcodeName, $function)
 {
     return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
+}
+
+/**
+ * Queue assets for lightgallery media viewer.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @uses queue_css_file()
+ * @uses queue_js_file()
+ */
+function queue_lightgallery_assets()
+{
+    queue_css_file('lightgallery');
+    queue_css_file('lightgallery-bundle.min', 'all', false, 'javascripts/vendor/lightgallery/css');
+    queue_js_file(array(
+            'vendor/lightgallery/lightgallery.min',
+            'vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min',
+            'vendor/lightgallery/plugins/video/lg-video.min',
+            'vendor/lightgallery/plugins/rotate/lg-rotate.min',
+            'vendor/lightgallery/plugins/hash/lg-hash.min',
+            'vendor/lightgallery/plugins/zoom/lg-zoom.min',
+            'lightgallery-init',
+        )
+    );
+}
+
+/**
+ * Display lightGallery media viewer.
+ *
+ * Only filetypes supported by the lightGallery will be included; use
+ * lightgallery_other_files to list links to other files not supported
+ * in the gallery.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @param array $files Array of files to display
+ * @return string HTML
+ */
+function lightgallery($files)
+{
+    return get_view()->getHelper('lightGallery')->lightGallery($files);
+}
+
+/**
+ * Display "other files" from lightGallery,
+ *
+ * This displays a simple list of links to the files; only files that are not
+ * supported by lightGallery are included in the results. Using this function
+ * only really makes sense if you're also using lightgallery(), and the same
+ * array of files should be passed to both functions.
+ *
+ * @since 3.1
+ * @package Omeka\Function\View
+ * @param array $files Array of files to display
+ * @return string HTML
+ */
+function lightgallery_other_files($files)
+{
+    return get_view()->getHelper('lightGallery')->otherFiles($files);
 }

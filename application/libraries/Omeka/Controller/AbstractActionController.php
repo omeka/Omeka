@@ -46,6 +46,22 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     protected $_autoCsrfProtection = false;
 
     /**
+     * Array of contexts, indexed by action
+     *
+     * @var array
+     */
+    public $contexts = array();
+
+    /**
+     * Array of contexts, indexed by action
+     *
+     * (used by AjaxContext)
+     *
+     * @var array
+     */
+    public $ajaxable = array();
+
+    /**
      * Base controller constructor.
      *
      * Does the following things:
