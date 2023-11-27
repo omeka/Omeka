@@ -16,9 +16,9 @@ msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-09-21 20:28+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Greek (Greece) (http://www.transifex.com/omeka/omeka/language/el_GR/)\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: ctsolkas <tsolkiss@gmail.com>, 2014\n"
+"Language-Team: Greek (Greece) (http://app.transifex.com/omeka/omeka/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -106,6 +106,8 @@ msgstr "Ένα σημείο ή μια περίοδος του χρόνου πο�
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/search-form.php:88
+#: application/views/scripts/items/search-form.php:88
 msgid "Type"
 msgstr "Τύπος"
 
@@ -322,6 +324,7 @@ msgid "Super"
 msgstr "Super"
 
 #. User role: Admin
+#: admin/themes/default/common/header.php:43
 msgid "Admin"
 msgstr "Διαχειριστής"
 
@@ -331,7 +334,7 @@ msgstr "Researcher"
 
 #: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
-#: admin/themes/default/common/global-nav.php:11
+#: admin/themes/default/common/global-nav.php:10
 #: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
@@ -410,8 +413,8 @@ msgstr "Δείτε τη Δημόσια Σελίδα"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:92
-#: admin/themes/default/items/browse.php:136
+#: admin/themes/default/items/browse.php:101
+#: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -435,8 +438,8 @@ msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:86
-#: admin/themes/default/collections/browse.php:96
+#: admin/themes/default/collections/browse.php:91
+#: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
 msgstr "Προσθήκη συλλογής"
 
@@ -456,11 +459,14 @@ msgid "Public"
 msgstr "Δημόσιο"
 
 #: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/browse.php:54
+#: admin/themes/default/collections/browse.php:55
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:80
+#: admin/themes/default/items/browse.php:82
+#: admin/themes/default/items/browse.php:83
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -469,10 +475,10 @@ msgstr "Προτεινόμενη"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
-#: application/tests/suite/Omeka/NavigationTest.php:747
-#: application/tests/suite/Omeka/NavigationTest.php:816
-#: application/tests/suite/Omeka/NavigationTest.php:831
-#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/tests/suite/Omeka/NavigationTest.php:748
+#: application/tests/suite/Omeka/NavigationTest.php:817
+#: application/tests/suite/Omeka/NavigationTest.php:832
+#: application/tests/suite/Omeka/NavigationTest.php:951
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
 msgstr "Περιήγηση συλλογών"
@@ -522,12 +528,12 @@ msgstr "Ημερομηνία προσθήκης"
 msgid "Total Number of Items"
 msgstr "Συνολικός αριθμός αντικειμένων"
 
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/items/browse.php:87
 msgid "(Private)"
 msgstr "(Ιδιωτικό)"
 
-#: admin/themes/default/collections/browse.php:60
+#: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -536,31 +542,31 @@ msgstr "(Ιδιωτικό)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:88
-#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: admin/themes/default/collections/browse.php:69
+#: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Χωρίς συνεισφέροντες"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
 msgstr "Δεν υπάρχουν συλλογές σε αυτή τη σελίδα"
 
-#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
 msgstr "Προβολή όλων των συλλογών"
 
-#: admin/themes/default/collections/browse.php:93
+#: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
 msgstr "Δεν έχετε συλλογές"
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
 msgstr "Ξεκινήστε προσθέντοντας την πρώτη σας συλλογή."
 
@@ -610,7 +616,7 @@ msgstr "Χωρίς συνεισφέροντες."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -626,7 +632,7 @@ msgid "Navigation"
 msgstr "Πλοήγηση"
 
 #: admin/themes/default/common/appearance-nav.php:15
-#: admin/themes/default/common/global-nav.php:23
+#: admin/themes/default/common/global-nav.php:22
 #: admin/themes/default/element-sets/browse.php:6
 #: admin/themes/default/settings/edit-api.php:2
 #: admin/themes/default/settings/edit-item-type-elements.php:3
@@ -637,8 +643,14 @@ msgid "Settings"
 msgstr "Ρυθμίσεις"
 
 #: admin/themes/default/common/content-nav.php:1
+#: admin/themes/default/common/content-nav.php:2
 msgid "Main Menu"
 msgstr ""
+
+#: admin/themes/default/common/content-nav.php:2
+#: application/views/scripts/common/pagination_control.php:38
+msgid "Current Page"
+msgstr "Τρέχουσα Σελίδα"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
@@ -660,7 +672,7 @@ msgid "Item Types"
 msgstr "Τύποι αντικειμένων"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -693,6 +705,8 @@ msgstr ""
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:55
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
 msgstr "Έκδοση %s"
@@ -702,16 +716,12 @@ msgstr "Έκδοση %s"
 msgid "System Information"
 msgstr "Πληροφορίες συστήματος"
 
-#: admin/themes/default/common/global-nav.php:1
-msgid "Manage Site"
-msgstr ""
-
-#: admin/themes/default/common/global-nav.php:5
+#: admin/themes/default/common/global-nav.php:4
 #: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Plugins"
 
-#: admin/themes/default/common/global-nav.php:17
+#: admin/themes/default/common/global-nav.php:16
 msgid "Users"
 msgstr "Χρήστες"
 
@@ -748,9 +758,8 @@ msgstr "Ασφάλεια"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:57
+#: application/views/helpers/SearchForm.php:72
 #: application/views/scripts/search/index.php:2
-#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "Αναζήτηση"
 
@@ -1101,8 +1110,8 @@ msgstr "Δεν υπάρχουν αντικείμενα που έχουν προ�
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:144
-#: admin/themes/default/items/browse.php:171
+#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
 msgstr "Προσθήκη ενός αντικειμένου"
 
@@ -1112,7 +1121,7 @@ msgstr "Πρόσθεσε ένα Αντικέιμενο"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:114
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1238,62 +1247,62 @@ msgstr "Ελέγξτε αν επιθυμείτε να διαγράψετε τα 
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
-#: application/tests/suite/Omeka/NavigationTest.php:37
-#: application/tests/suite/Omeka/NavigationTest.php:56
-#: application/tests/suite/Omeka/NavigationTest.php:79
-#: application/tests/suite/Omeka/NavigationTest.php:97
-#: application/tests/suite/Omeka/NavigationTest.php:120
-#: application/tests/suite/Omeka/NavigationTest.php:139
-#: application/tests/suite/Omeka/NavigationTest.php:162
-#: application/tests/suite/Omeka/NavigationTest.php:185
-#: application/tests/suite/Omeka/NavigationTest.php:214
-#: application/tests/suite/Omeka/NavigationTest.php:236
-#: application/tests/suite/Omeka/NavigationTest.php:265
-#: application/tests/suite/Omeka/NavigationTest.php:288
-#: application/tests/suite/Omeka/NavigationTest.php:317
-#: application/tests/suite/Omeka/NavigationTest.php:339
-#: application/tests/suite/Omeka/NavigationTest.php:367
-#: application/tests/suite/Omeka/NavigationTest.php:388
-#: application/tests/suite/Omeka/NavigationTest.php:416
-#: application/tests/suite/Omeka/NavigationTest.php:438
-#: application/tests/suite/Omeka/NavigationTest.php:466
-#: application/tests/suite/Omeka/NavigationTest.php:483
-#: application/tests/suite/Omeka/NavigationTest.php:511
-#: application/tests/suite/Omeka/NavigationTest.php:527
-#: application/tests/suite/Omeka/NavigationTest.php:555
-#: application/tests/suite/Omeka/NavigationTest.php:572
-#: application/tests/suite/Omeka/NavigationTest.php:600
-#: application/tests/suite/Omeka/NavigationTest.php:621
-#: application/tests/suite/Omeka/NavigationTest.php:647
-#: application/tests/suite/Omeka/NavigationTest.php:667
-#: application/tests/suite/Omeka/NavigationTest.php:693
-#: application/tests/suite/Omeka/NavigationTest.php:714
-#: application/tests/suite/Omeka/NavigationTest.php:740
-#: application/tests/suite/Omeka/NavigationTest.php:815
-#: application/tests/suite/Omeka/NavigationTest.php:845
-#: application/tests/suite/Omeka/NavigationTest.php:949
+#: application/tests/suite/Omeka/NavigationTest.php:38
+#: application/tests/suite/Omeka/NavigationTest.php:57
+#: application/tests/suite/Omeka/NavigationTest.php:80
+#: application/tests/suite/Omeka/NavigationTest.php:98
+#: application/tests/suite/Omeka/NavigationTest.php:121
+#: application/tests/suite/Omeka/NavigationTest.php:140
+#: application/tests/suite/Omeka/NavigationTest.php:163
+#: application/tests/suite/Omeka/NavigationTest.php:186
+#: application/tests/suite/Omeka/NavigationTest.php:215
+#: application/tests/suite/Omeka/NavigationTest.php:237
+#: application/tests/suite/Omeka/NavigationTest.php:266
+#: application/tests/suite/Omeka/NavigationTest.php:289
+#: application/tests/suite/Omeka/NavigationTest.php:318
+#: application/tests/suite/Omeka/NavigationTest.php:340
+#: application/tests/suite/Omeka/NavigationTest.php:368
+#: application/tests/suite/Omeka/NavigationTest.php:389
+#: application/tests/suite/Omeka/NavigationTest.php:417
+#: application/tests/suite/Omeka/NavigationTest.php:439
+#: application/tests/suite/Omeka/NavigationTest.php:467
+#: application/tests/suite/Omeka/NavigationTest.php:484
+#: application/tests/suite/Omeka/NavigationTest.php:512
+#: application/tests/suite/Omeka/NavigationTest.php:528
+#: application/tests/suite/Omeka/NavigationTest.php:556
+#: application/tests/suite/Omeka/NavigationTest.php:573
+#: application/tests/suite/Omeka/NavigationTest.php:601
+#: application/tests/suite/Omeka/NavigationTest.php:622
+#: application/tests/suite/Omeka/NavigationTest.php:648
+#: application/tests/suite/Omeka/NavigationTest.php:668
+#: application/tests/suite/Omeka/NavigationTest.php:694
+#: application/tests/suite/Omeka/NavigationTest.php:715
+#: application/tests/suite/Omeka/NavigationTest.php:741
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:846
+#: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
 msgstr "Περιήγηση αντικείμενων"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2419
-#: application/libraries/globals.php:2810
+#: application/libraries/globals.php:2460
+#: application/libraries/globals.php:2851
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Αναζήτηση στοιχείων"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
 msgstr ""
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:131
+#: admin/themes/default/items/browse.php:141
 msgid "items selected"
 msgstr ""
 
@@ -1306,42 +1315,42 @@ msgstr ""
 msgid "Select item \"%s\""
 msgstr ""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:119
 msgid "No Tags"
 msgstr "Χωρίς Tags"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:167
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: admin/themes/default/items/browse.php:158
+#: admin/themes/default/items/browse.php:168
 msgid "Show Details"
 msgstr "Εμφάνιση λεπτομερειών"
 
-#: admin/themes/default/items/browse.php:159
+#: admin/themes/default/items/browse.php:169
 msgid "Hide Details"
 msgstr "Απόκρυψη λεπτομερειών"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:178
 msgid "You have no items."
 msgstr "Δεν έχετε αντικείμενα."
 
-#: admin/themes/default/items/browse.php:170
+#: admin/themes/default/items/browse.php:180
 msgid "Get started by adding your first item."
 msgstr "Ξεκινήστε προσθέτοντας το πρώτο σας αντικείμενο."
 
-#: admin/themes/default/items/browse.php:175
+#: admin/themes/default/items/browse.php:185
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 msgid "refine your search"
 msgstr "βελτιώστε την αναζήτησή σας"
 
-#: admin/themes/default/items/browse.php:176
+#: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Θα θέλατε να %s?"
@@ -1399,157 +1408,187 @@ msgid "Search for Keywords"
 msgstr "Αναζήτηση για Λέξεις-κλειδιά"
 
 #: admin/themes/default/items/search-form.php:30
+#: admin/themes/default/items/search-form.php:33
 #: application/views/scripts/items/search-form.php:25
+#: application/views/scripts/items/search-form.php:28
 msgid "Narrow by Specific Fields"
 msgstr "Περιορισμός με βάση Συγκεκριμένα Πεδία"
 
-#: admin/themes/default/items/search-form.php:31
-#: application/views/scripts/items/search-form.php:105
-msgid "Add a Field"
-msgstr "Προσθήκη πεδίου"
-
-#: admin/themes/default/items/search-form.php:57
-#: application/views/scripts/items/search-form.php:50
-msgid "Search Joiner"
+#: admin/themes/default/items/search-form.php:30
+#: application/views/scripts/items/search-form.php:25
+#, php-format
+msgid "Number of rows in \"%s\":"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:62
-#: application/views/helpers/ItemSearchFilters.php:108
-#: application/views/scripts/items/search-form.php:55
-msgid "AND"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:63
-#: application/views/helpers/ItemSearchFilters.php:106
-#: application/views/scripts/items/search-form.php:56
-msgid "OR"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:70
-#: application/views/scripts/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:34
+#: application/views/scripts/items/search-form.php:29
 msgid "Search Field"
 msgstr "Πεδίο Αναζήτησης"
 
-#: admin/themes/default/items/search-form.php:83
-#: application/views/scripts/items/search-form.php:76
+#: admin/themes/default/items/search-form.php:35
+#: application/views/scripts/items/search-form.php:30
 msgid "Search Type"
 msgstr "Τύπος Αναζήτησης"
 
-#: admin/themes/default/items/search-form.php:88
-#: admin/themes/default/tags/browse.php:50
-#: application/views/scripts/items/search-form.php:81
-msgid "contains"
-msgstr "περιέχει"
-
-#: admin/themes/default/items/search-form.php:89
-#: application/views/scripts/items/search-form.php:82
-msgid "does not contain"
-msgstr "δεν περιέχει"
-
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:83
-msgid "is exactly"
-msgstr "είναι ακριβώς"
-
-#: admin/themes/default/items/search-form.php:91
-msgid "is not exactly"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:92
-#: application/views/scripts/items/search-form.php:84
-msgid "is empty"
-msgstr "είναι άδειο"
-
-#: admin/themes/default/items/search-form.php:93
-#: application/views/scripts/items/search-form.php:85
-msgid "is not empty"
-msgstr "δεν είναι άδειο"
-
-#: admin/themes/default/items/search-form.php:94
-#: application/views/scripts/items/search-form.php:86
-msgid "starts with"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:95
-#: application/views/scripts/items/search-form.php:87
-msgid "ends with"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:96
-msgid "matches"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:97
-msgid "does not match"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:105
-#: application/views/scripts/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:36
+#: application/views/scripts/items/search-form.php:31
 msgid "Search Terms"
 msgstr "Όροι Αναζήτησης"
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:37
+#: application/views/scripts/items/search-form.php:32
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:38
+#: application/views/scripts/items/search-form.php:127
+msgid "Add a Field"
+msgstr "Προσθήκη πεδίου"
+
+#: admin/themes/default/items/search-form.php:52
+#: application/views/scripts/items/search-form.php:52
+#, php-format
+msgid "Row %s"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:54
+msgid "Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:64
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:64
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:65
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:65
+msgid "OR"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:71
+msgid "Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:98
+#: admin/themes/default/tags/browse.php:50
+#: application/views/scripts/items/search-form.php:98
+msgid "contains"
+msgstr "περιέχει"
+
+#: admin/themes/default/items/search-form.php:99
+#: application/views/scripts/items/search-form.php:99
+msgid "does not contain"
+msgstr "δεν περιέχει"
+
+#: admin/themes/default/items/search-form.php:100
+#: application/views/scripts/items/search-form.php:100
+msgid "is exactly"
+msgstr "είναι ακριβώς"
+
+#: admin/themes/default/items/search-form.php:101
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:101
+msgid "is empty"
+msgstr "είναι άδειο"
+
+#: admin/themes/default/items/search-form.php:103
+#: application/views/scripts/items/search-form.php:102
+msgid "is not empty"
+msgstr "δεν είναι άδειο"
+
+#: admin/themes/default/items/search-form.php:104
+#: application/views/scripts/items/search-form.php:103
+msgid "starts with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:105
+#: application/views/scripts/items/search-form.php:104
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:106
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:107
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:113
+#: application/views/scripts/items/search-form.php:110
+msgid "Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:126
+#: application/views/scripts/items/search-form.php:33
+#: application/views/scripts/items/search-form.php:123
 msgid "Remove field"
 msgstr "Αφαίρεση πεδίου"
 
-#: admin/themes/default/items/search-form.php:119
-#: application/views/scripts/items/search-form.php:109
+#: admin/themes/default/items/search-form.php:134
+#: application/views/scripts/items/search-form.php:131
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Αναζήτηση σε ένα εύρος ID#s (παράδειιγμα: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:133
-#: application/views/scripts/items/search-form.php:120
+#: admin/themes/default/items/search-form.php:148
+#: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
 msgstr "Αναζήτηση με βάση την Συλλογή"
 
-#: admin/themes/default/items/search-form.php:149
-#: application/views/scripts/items/search-form.php:134
+#: admin/themes/default/items/search-form.php:164
+#: application/views/scripts/items/search-form.php:156
 msgid "Search By Type"
 msgstr "Αναζήτηση με βάση τον Τύπο"
 
-#: admin/themes/default/items/search-form.php:166
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:181
+#: application/views/scripts/items/search-form.php:172
 msgid "Search By User"
 msgstr "Αναζήτηση με τον χρήστη"
 
-#: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:165
+#: admin/themes/default/items/search-form.php:198
+#: application/views/scripts/items/search-form.php:187
 msgid "Search By Tags"
 msgstr "Αναζήτηση με Tags"
 
-#: admin/themes/default/items/search-form.php:198
-#: application/views/scripts/items/search-form.php:178
+#: admin/themes/default/items/search-form.php:213
+#: application/views/scripts/items/search-form.php:200
 msgid "Public/Non-Public"
 msgstr "Δημόσιευμένο/Μή-Δημοσιευμένο"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:186
+#: admin/themes/default/items/search-form.php:222
+#: application/views/scripts/items/search-form.php:208
 msgid "Only Public Items"
 msgstr "Μόνο δημοσιευμένα Αντικείμενα"
 
-#: admin/themes/default/items/search-form.php:208
-#: application/views/scripts/items/search-form.php:187
+#: admin/themes/default/items/search-form.php:223
+#: application/views/scripts/items/search-form.php:209
 msgid "Only Non-Public Items"
 msgstr "Μόνο Μη-Δημοσιευμένα Αντικείμενα"
 
-#: admin/themes/default/items/search-form.php:218
-#: application/views/scripts/items/search-form.php:196
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:218
 msgid "Featured/Non-Featured"
 msgstr "Προτεινόμενα/Μη Προτεινόμενα "
 
-#: admin/themes/default/items/search-form.php:227
-#: application/views/scripts/items/search-form.php:204
+#: admin/themes/default/items/search-form.php:242
+#: application/views/scripts/items/search-form.php:226
 msgid "Only Featured Items"
 msgstr "Μόνο Προτεινόμενα Αντικείμενα"
 
-#: admin/themes/default/items/search-form.php:228
-#: application/views/scripts/items/search-form.php:205
+#: admin/themes/default/items/search-form.php:243
+#: application/views/scripts/items/search-form.php:227
 msgid "Only Non-Featured Items"
 msgstr "Μόνο Μη-Προτεινόμενα Αντικείμενα"
 
-#: admin/themes/default/items/search-form.php:236
-#: application/views/scripts/items/search-form.php:215
+#: admin/themes/default/items/search-form.php:251
+#: application/views/scripts/items/search-form.php:237
 msgid "Search for items"
 msgstr "Αναζήτηση αντικειμένου"
 
@@ -1626,8 +1665,8 @@ msgid "by %s"
 msgstr "με %s"
 
 #: admin/themes/default/plugins/browse.php:68
-#: admin/themes/default/themes/browse.php:25
-#: admin/themes/default/themes/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:70
 msgid "Get support"
 msgstr "Υποστήριξη"
 
@@ -1660,7 +1699,7 @@ msgid "Uninstall"
 msgstr "Απεγκατάσταση"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:264
+#: application/forms/Install.php:204
 msgid "Install"
 msgstr "Εγκατάσταση"
 
@@ -1883,7 +1922,7 @@ msgid "Date created"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:18
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Εικόνα για το %s θέμα"
@@ -1896,13 +1935,13 @@ msgstr "Διαμόρφωση Θέματος"
 msgid "Current Theme"
 msgstr "Τρέχων θέμα"
 
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:67
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:69
 #, php-format
 msgid "By %s"
 msgstr "Από %s"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1910,7 +1949,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Προσθήκη νέων θεμάτων από τη λήψη τους από τον <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Κατάλογο Θεμάτων του Omeka</a>, ή <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">σχεδιάστε το δικό σας</a>!"
 
-#: admin/themes/default/themes/browse.php:64
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Χρήση τρέχοντος θέματος"
 
@@ -2049,15 +2088,15 @@ msgstr "Περιήγηση στους Χρήστες"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:29
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Όνομα Χρήστη"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:99
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2068,6 +2107,7 @@ msgid "Add a User"
 msgstr "Προσθήκη Χρήστη"
 
 #: admin/themes/default/users/browse.php:37
+#: application/views/scripts/search/search-form.php:10
 msgid "Options"
 msgstr ""
 
@@ -2108,6 +2148,9 @@ msgid "Enter your email address to retrieve your password."
 msgstr "Πληκτρολογήστε το email σας για να ανακτήσετε τον κωδικό πρόσβασής σας."
 
 #: admin/themes/default/users/forgot-password.php:21
+#: application/views/helpers/SearchForm.php:57
+#: application/views/scripts/search/search-form.php:39
+#: application/views/scripts/search/search-form.php:43
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
 msgstr "Υποβολή"
@@ -2117,7 +2160,7 @@ msgstr "Υποβολή"
 msgid "Back to Log In"
 msgstr "Επιστροφή στην Σύνδεση"
 
-#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:54
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
 msgstr "Σύνδεση"
@@ -2139,11 +2182,11 @@ msgstr "Χρήστης #%s"
 msgid "Edit this User"
 msgstr "Επεξεργασία αυτού του Χρήστη"
 
-#: application/controllers/AppearanceController.php:48
+#: application/controllers/AppearanceController.php:47
 msgid "The appearance settings have been updated."
 msgstr "Οι ρυθμίσεις εμφάνισης έχουν ενημερωθεί."
 
-#: application/controllers/AppearanceController.php:51
+#: application/controllers/AppearanceController.php:50
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
 #: application/controllers/SettingsController.php:55
@@ -2152,17 +2195,17 @@ msgstr "Οι ρυθμίσεις εμφάνισης έχουν ενημερωθε
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "Υπήρξαν σφάλματα που διαπιστώθηκαν στη φόρμα σας. Παρακαλούμε να την επεξεργαστείτε και υποβάλετε την εκ νέου."
 
-#: application/controllers/AppearanceController.php:66
+#: application/controllers/AppearanceController.php:64
 msgid "The navigation settings have been updated."
 msgstr "Οι ρυθμίσεις περιήγησης έχουν ενημερωθεί."
 
-#: application/controllers/AppearanceController.php:69
+#: application/controllers/AppearanceController.php:67
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
 msgstr "Οι ρυθμίσεις περιήγησης δεν αποθηκεύτηκαν λόγω ελλιπών ή απόντων τιμών. Όλες οι αλλαγές των τιμών έχουν ακυρωθεί."
 
-#: application/controllers/AppearanceController.php:97
+#: application/controllers/AppearanceController.php:95
 msgid "The navigation settings have been reset."
 msgstr ""
 
@@ -2219,19 +2262,19 @@ msgid ""
 msgstr "Αυτό θα διαγράψει το σύνολο των στοιχείων και όλα τα στοιχεία που περιέχονται σε αυτό. Τα αντικείμενα θα χάσουν όλα τα μεταδεδομένα που αντιστοιχούν σε αυτό το σύνολο δεδομένων."
 
 #: application/controllers/ElementSetsController.php:51
-#: application/controllers/PluginsController.php:49
-#: application/controllers/PluginsController.php:77
-#: application/controllers/PluginsController.php:135
-#: application/controllers/PluginsController.php:184
-#: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:325
+#: application/controllers/PluginsController.php:54
+#: application/controllers/PluginsController.php:82
+#: application/controllers/PluginsController.php:140
+#: application/controllers/PluginsController.php:189
+#: application/controllers/PluginsController.php:222
+#: application/controllers/PluginsController.php:330
 #: application/controllers/SettingsController.php:106
 #: application/controllers/SettingsController.php:149
 #: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
-#: application/controllers/UsersController.php:312
-#: application/libraries/Omeka/Controller/AbstractActionController.php:183
-#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+#: application/controllers/UsersController.php:314
+#: application/libraries/Omeka/Controller/AbstractActionController.php:199
+#: application/libraries/Omeka/Controller/AbstractActionController.php:240
 msgid "There was an error on the form. Please try again."
 msgstr "Διαπιστώθηκαν σφάλματα στα δεδομένα της φόρμας. Παρακαλούμε δοκιμάστε ξανά."
 
@@ -2388,95 +2431,95 @@ msgstr ""
 msgid "Check logs for success and errors."
 msgstr ""
 
-#: application/controllers/PluginsController.php:43
+#: application/controllers/PluginsController.php:48
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr "Σφάλμα κατά τη ρύθμιση του plugin \"%s\".Λείπουν τα config και/ή config_form hook(s)."
 
-#: application/controllers/PluginsController.php:57
+#: application/controllers/PluginsController.php:62
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "Το plugin %s ρυθμίστηκε με επιτυχία!"
 
-#: application/controllers/PluginsController.php:87
+#: application/controllers/PluginsController.php:92
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "Το %s plugin έχει ήδη εγκατασταθεί."
 
-#: application/controllers/PluginsController.php:97
+#: application/controllers/PluginsController.php:102
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "Το %s plugin εγκαταστάθηκε επιτυχώς!"
 
-#: application/controllers/PluginsController.php:109
 #: application/controllers/PluginsController.php:114
+#: application/controllers/PluginsController.php:119
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "Το ακόλουθο σφάλμα παρουσιάστηκε κατά την εγκατάσταση του %s plugin:"
 
-#: application/controllers/PluginsController.php:150
+#: application/controllers/PluginsController.php:155
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "Το ακόλουθο σφάλμα παρουσιάστηκε κατά την ενεργοποίηση του %s plugin:"
 
-#: application/controllers/PluginsController.php:160
+#: application/controllers/PluginsController.php:165
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "Το %s plugin εγκαταστάθηκε επιτυχώς!"
 
-#: application/controllers/PluginsController.php:165
+#: application/controllers/PluginsController.php:170
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "Το %s plugin ενεργοποιήθηκε αλλά δεν μπορούσε να φορτωθεί."
 
-#: application/controllers/PluginsController.php:198
+#: application/controllers/PluginsController.php:203
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "Το plugin %s έχει απενεργοποιηθεί επιτυχώς!"
 
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:208
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "Το ακόλουθο σφάλμα προήλθε κατά την απενεργοποίηση του plugin %s:"
 
-#: application/controllers/PluginsController.php:233
+#: application/controllers/PluginsController.php:238
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Το %s plugin αναβαθμίστικε επιτυχώς!"
 
-#: application/controllers/PluginsController.php:242
-#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:247
+#: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Το ακόλουθο σφάλμα προήλθε κατά την αναβάθμιση του plugin %s:"
 
-#: application/controllers/PluginsController.php:299
+#: application/controllers/PluginsController.php:304
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Το πρόσθετο δεν βρέθηκε στο φάκελο '%s'!"
 
-#: application/controllers/PluginsController.php:312
+#: application/controllers/PluginsController.php:317
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Πρέπει να επιβεβαιώσετε την απεγκατάσταση πριν προχωρήσετε."
 
-#: application/controllers/PluginsController.php:331
+#: application/controllers/PluginsController.php:336
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "To %s plugin απεγκαταστάθηκε με επιτυχία!"
 
-#: application/controllers/PluginsController.php:336
 #: application/controllers/PluginsController.php:341
+#: application/controllers/PluginsController.php:346
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Το ακόλουθο σφάλμα προήλθε κατά την απεγκατάσταση του plugin %s:"
 
-#: application/controllers/PluginsController.php:370
+#: application/controllers/PluginsController.php:375
 msgid "No plugin name given."
 msgstr "Δεν έχεο δοθεί κάποιο όνομα για το plugin."
 
-#: application/controllers/PluginsController.php:383
+#: application/controllers/PluginsController.php:388
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Το plugin %s πρέπει να εγκατασταθεί."
@@ -2557,91 +2600,91 @@ msgid ""
 "version %2$s. Please update the installed version of PHP and try again."
 msgstr ""
 
-#: application/controllers/UsersController.php:72
+#: application/controllers/UsersController.php:74
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr "Η επαναφορά του συνθηματικού σας δεν ήταν δυνατή. Παρακαλούμε επιβεβαιώστε ότι τα στοιχεία είναι σωστά και αν χρειαστεί επικοινωνήστε με τον διαχειριστή."
 
-#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:112
 msgid "Please follow this link to reset your password:"
 msgstr "Παρακαλώ ακολουθήστε αυτό το σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας:"
 
-#: application/controllers/UsersController.php:112
-#: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:390
+#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:392
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Διαχειριστής"
 
-#: application/controllers/UsersController.php:116
+#: application/controllers/UsersController.php:118
 #, php-format
 msgid "[%s] Reset Your Password"
 msgstr "[%s] Επαναφορά κωδικού πρόσβασης"
 
-#: application/controllers/UsersController.php:119
+#: application/controllers/UsersController.php:121
 msgid "Please check your email for a link to reset your password."
 msgstr "Παρακαλούμε βρείτε στο mail σας ένα σύνδεσμο για να επαναφέρετε το συνθηματικό σας."
 
-#: application/controllers/UsersController.php:128
+#: application/controllers/UsersController.php:130
 msgid "Invalid activation code given."
 msgstr "Μη έγκυρος κωδικός ενεργοποίησης."
 
-#: application/controllers/UsersController.php:137
+#: application/controllers/UsersController.php:139
 msgid "Password: The passwords do not match."
 msgstr "Κωδικός πρόσβασης: Οι κωδικοί πρόσβασης δεν ταιριάζουν."
 
-#: application/controllers/UsersController.php:145
+#: application/controllers/UsersController.php:147
 msgid "You may now log in to Omeka."
 msgstr "Μπορείτε πλέον να συνδεθείτε στο Omeka."
 
-#: application/controllers/UsersController.php:169
-#: application/controllers/UsersController.php:235
-#: application/controllers/UsersController.php:286
+#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:237
+#: application/controllers/UsersController.php:288
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Διαπιστώθηκαν σφάλματα στα δεδομένα που έχετε εισάγει στη φόρμα. Παρακαλούμε δοκιμάστε ξανά."
 
-#: application/controllers/UsersController.php:177
+#: application/controllers/UsersController.php:179
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Ο Χρήστης \"%s\" προστέθηκε με επιτυχία!"
 
-#: application/controllers/UsersController.php:181
+#: application/controllers/UsersController.php:183
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Ο χρήστης \"%s\" προστέθηκε αλλά το ηλεκτρονικό μήνυμα ενεργοποίησης δεν στάλθηκε."
 
-#: application/controllers/UsersController.php:217
+#: application/controllers/UsersController.php:219
 msgid "User activation email has been sent."
 msgstr "Το email ενεργοποίησης του χρήστη έχει σταλεί."
 
-#: application/controllers/UsersController.php:219
+#: application/controllers/UsersController.php:221
 msgid "User activation email could not be sent."
 msgstr "Το email ενεργοποίησης του χρήστη δεν μπορεί να σταλεί."
 
-#: application/controllers/UsersController.php:257
+#: application/controllers/UsersController.php:259
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Ο χρήστης \"%s\" άλλαξε με επιτυχία!"
 
-#: application/controllers/UsersController.php:293
+#: application/controllers/UsersController.php:295
 msgid "Password changed!"
 msgstr "Ο κωδικός πρόσβασης άλλαξε!"
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:324
 msgid "A new API key was successfully created."
 msgstr "Ένα νέο κλειδί API δημιουργήθηκε επιτυχώς."
 
-#: application/controllers/UsersController.php:329
+#: application/controllers/UsersController.php:331
 msgid "An existing API key was successfully rescinded."
 msgstr "Το κλειδί API ακυρώθηκε επιτυχώς."
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:358
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Ο χρήστης \"%s\" έχει διαγραφεί επιτυχώς!"
 
-#: application/controllers/UsersController.php:362
+#: application/controllers/UsersController.php:364
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2649,18 +2692,18 @@ msgid ""
 "this user."
 msgstr "Ο χρήστης %s θα διαγραφεί από το σύστημα. Τα αντικείμενα, οι συλλογές και οι ετικέτες που δημιουργήθηκαν από το συγκεκριμένο χρήστη θα παραμείνουν στο σύστημα αλλά δεν θα συσχετίζονται πλεόν με το συγκεκριμένο χρήστη."
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:388
 msgid "Welcome!"
 msgstr "Καλώς ήρθατε!"
 
-#: application/controllers/UsersController.php:388
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Ο λογαριασμός σας για το αποθετήριο %s έχει δημιουργηθεί. Παρακαλούμε κάντε κλικ στον ακόλουθο σύνδεσμο για να ενεργοποιήσετε τον λογαριασμό σας:"
 
-#: application/controllers/UsersController.php:391
+#: application/controllers/UsersController.php:393
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Ενεργοποιήστε το λογαριασμό σας για το αποθετήριο %s"
@@ -2680,7 +2723,7 @@ msgid ""
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:178
+#: application/forms/Install.php:146
 msgid "Fullsize Image Size"
 msgstr "Πραγματικό μέγεθος εικόνας"
 
@@ -2689,7 +2732,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Περιορισμός μέγιστου πραγματικού μεγέθους εικόνας (σε pixels)"
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:191
+#: application/forms/Install.php:155
 msgid "Thumbnail Size"
 msgstr "Μέγεθος εικονιδίου"
 
@@ -2698,7 +2741,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Περιορισμός μέγιστου μεγέθους εικόνιδίου (σε pixels)"
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:204
+#: application/forms/Install.php:164
 msgid "Square Thumbnail Size"
 msgstr "Square μέγεθος μικρογραφιών"
 
@@ -2726,36 +2769,44 @@ msgid ""
 msgstr "Περιορίστε τον αριθμό των αποτελεσμάτων που εμφανίζονται ανά σελίδα στη δημόσια διεπαφή χρήστη."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:243
+#: application/forms/Install.php:191
 msgid "Show Empty Elements"
 msgstr "Εμφάνιση κενών στοιχείων"
 
-#: application/forms/AppearanceSettings.php:67
+#: application/forms/AppearanceSettings.php:63
+msgid "Include empty elements in show pages."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr "Εμφάνιση Επικεφαλίδας Συνόλου Στοιχείων"
 
-#: application/forms/AppearanceSettings.php:72
+#: application/forms/AppearanceSettings.php:69
+msgid "Include element set headings in show pages and in drop-down lists."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:73
+#: application/forms/AppearanceSettings.php:75
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:85
 msgid "Admin Theme"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:97
+#: application/forms/AppearanceSettings.php:99
 msgid "Derivative Size Constraints"
 msgstr "Παραγόμενοι Περιορισμοί Μεγέθους"
 
-#: application/forms/AppearanceSettings.php:105
+#: application/forms/AppearanceSettings.php:107
 msgid "Display Settings"
 msgstr "Εμφάνιση Ρυθμίσεων"
 
-#: application/forms/AppearanceSettings.php:113
+#: application/forms/AppearanceSettings.php:115
 msgid "Admin Themes"
 msgstr ""
 
@@ -2793,27 +2844,27 @@ msgstr "Ο νέος μυστικός κωδικός πρέπει να περιέ
 msgid "Repeat New Password"
 msgstr "Επανάληψη νέου κωδικού πρόσβασης"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:110
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
 msgid "Site Title"
 msgstr "Τίτλος Σελίδας"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
 msgid "Site Description"
 msgstr "Περιγραφή σελίδας"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
 msgid "Administrator Email"
 msgstr "Ηλεκτρονική διεύθυνση διαχειριστή"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:140
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
 msgid "Site Copyright Information"
 msgstr "Πληροφορίες Πνευματικών Δικαιωμάτων Ιστοσελίδας"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:149
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
 msgid "Site Author Information"
 msgstr "Πληροφορίες Συγγραφέα Ιστοσελίδας"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:158
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
 msgid "Tag Delimiter"
 msgstr "Οριοθέτηση Τag"
 
@@ -2823,7 +2874,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Διαχωρίσετε τα tags, χρησιμοποιώντας αυτόν το χαρακτήρα ή string. Να είστε προσεκτικοί κατά την αλλαγή αυτής της ρύθμισης. Μπορείτε να διατρέξετε τον κίνδυνο της διάσπασης των tags που περιέχουν τις παλιές οριοθετίσεις."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:255
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
 msgid "ImageMagick Directory Path"
 msgstr "Διαδρομή Καταλόγου ImageMagick"
 
@@ -2831,22 +2882,22 @@ msgstr "Διαδρομή Καταλόγου ImageMagick"
 msgid "General Settings"
 msgstr ""
 
-#: application/forms/Install.php:31
+#: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr "πρέπει να αποτελείται από 30 ή λιγότερους χαρακτήρες δίχως κενά διαστήματα"
 
-#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/forms/Install.php:47 application/forms/User.php:46
 #: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr "Τα κενά διαστήματα δεν επιτρέπονται. Μόνο οι συγκεκριμένοι ειδικοί χαρακτήρες επιτρέπονται: %s"
 
-#: application/forms/Install.php:53 application/forms/Login.php:34
+#: application/forms/Install.php:57 application/forms/Login.php:39
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
-#: application/forms/Install.php:54
+#: application/forms/Install.php:58
 msgid "must be at least 6 characters"
 msgstr "πρέπει να είναι τουλάχιστον 6 χαρακτήρες"
 
@@ -2854,49 +2905,49 @@ msgstr "πρέπει να είναι τουλάχιστον 6 χαρακτήρε
 msgid "Confirm your password."
 msgstr "Επιβεβαιώστε τον κωδικό πρόσβασής σας."
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:131
 msgid "Separate tags using this character or string."
 msgstr "Διαχωρίστε τα tags χρησιμοπιώντας αυτόν τον χαρακτήτα ή string."
 
-#: application/forms/Install.php:179
+#: application/forms/Install.php:147
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Περιορισμός του μέγιστου πλήρους μεγέθους εικόνας (σε pixels)"
 
-#: application/forms/Install.php:192
+#: application/forms/Install.php:156
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Περιορισμός του μέγιστου μεγέθους εικονιδίου (σε pixels)"
 
-#: application/forms/Install.php:205
+#: application/forms/Install.php:165
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Περιορισμός του μέγιστου μεγέθους του τετραγώνου του εικονιδίου (σε pixels)"
 
-#: application/forms/Install.php:217
+#: application/forms/Install.php:173
 msgid "Items Per Page (admin)"
 msgstr "Αντικείμενα ανα σελίδα (admin)"
 
-#: application/forms/Install.php:218
+#: application/forms/Install.php:174
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Περιορισμός του αριθμού των αντικειμένων που εμφανίζονται ανα σελίδα στη διεπαφή του διαχειριστή"
 
-#: application/forms/Install.php:230
+#: application/forms/Install.php:182
 msgid "Items Per Page (public)"
 msgstr "Αντικείμενα ανά σελίδα (public)"
 
-#: application/forms/Install.php:231
+#: application/forms/Install.php:183
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Περιορίσμός του αριθμού των αντικειμένων που εμφανίζονται ανα σελίδα στη δημόσια διεπαφή"
 
-#: application/forms/Install.php:245
+#: application/forms/Install.php:193
 msgid "Check box to show metadata elements with no text."
 msgstr "Κουτί επιλογής για την εμφάνιση των μεταδεδομένων χωρίς κείμενο."
 
-#: application/forms/Install.php:271
+#: application/forms/Install.php:211
 msgid "Default Superuser Account"
 msgstr "Προεπιλεγμένος λογαριασμός Superuser"
 
-#: application/forms/Install.php:281
+#: application/forms/Install.php:221
 msgid "Site Settings"
 msgstr "Ρυθμίσεις σελίδας"
 
@@ -2913,15 +2964,15 @@ msgstr "Η περιγραφή του τύπου αντικειμένου."
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Ο τύπος αντικειμένου δεν μπορεί να έχει περσισσοτερα από \"%s\" πεδία."
 
-#: application/forms/Login.php:27
+#: application/forms/Login.php:35
 msgid "Username cannot be empty."
 msgstr "Το όνομα χρήστη δεν μπορεί να είναι κενό."
 
-#: application/forms/Login.php:40
+#: application/forms/Login.php:45
 msgid "Password cannot be empty."
 msgstr "Ο κωδικός πρόσβασης δεν μπορεί να είναι κενός."
 
-#: application/forms/Login.php:48
+#: application/forms/Login.php:50
 msgid "Remember Me?"
 msgstr "Να με θυμάσαι;"
 
@@ -3155,7 +3206,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "Ο γονικός υποδοχέας πρέπει να είναι είτε το αντικείμενο περιήγησης είτε κάποια υποσελίδα απόγονος του αντικειμένου περιήγησης."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#: application/libraries/Omeka/Navigation/Page/Uri.php:135
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "Το URI για το αντικείμενο Omeka_Navigation_Page_Uri δεν είναι έγκυρο: %s"
@@ -3174,12 +3225,12 @@ msgstr "Το πρόσθετο \"%s\" πρέπει να έχει εγκαταστ
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Το πρόσθετο πρέπει να διαθέτει έγκυρο όνομα καταλόγου για να μπορεί να εγκατασταθεί. "
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:351
+#: application/libraries/Omeka/Record/AbstractRecord.php:352
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr "'%s' δεν είναι έγκυρη ειδική αξία"
 
-#: application/libraries/Omeka/Record/Iterator.php:49
+#: application/libraries/Omeka/Record/Iterator.php:51
 msgid "An invalid value was detected during record iteration."
 msgstr "Ανιχνεύθηκε μία μη έγκυρη τιμή κατά την επαναλαμβανόμενη επεξεργασία των εγγραφών."
 
@@ -3199,79 +3250,79 @@ msgstr "Λογική Τιμή"
 msgid "Exact match"
 msgstr "Ακριβές ταίριασμα"
 
-#: application/libraries/globals.php:1268
-#: application/libraries/globals.php:1289
+#: application/libraries/globals.php:1275
+#: application/libraries/globals.php:1296
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Δεν βρέθηκε το αρχείο %s!"
 
-#: application/libraries/globals.php:1305
+#: application/libraries/globals.php:1312
 msgid "No featured collections are available."
 msgstr "Δεν υπάρχουν προτεινόμενες συλλογές"
 
-#: application/libraries/globals.php:1603
+#: application/libraries/globals.php:1618
 msgid "Select Below "
 msgstr "Επιλέξτε παρακάτω"
 
-#: application/libraries/globals.php:1646
+#: application/libraries/globals.php:1661
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1647
+#: application/libraries/globals.php:1662
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:1966
+#: application/libraries/globals.php:1981
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:1976
+#: application/libraries/globals.php:1991
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:1980
+#: application/libraries/globals.php:1995
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2314
+#: application/libraries/globals.php:2355
 msgid "No recent items available."
 msgstr "Δεν υπάρχουν πρόσφατα αντικείμενα διαθέσιμα."
 
-#: application/libraries/globals.php:2340
+#: application/libraries/globals.php:2381
 msgid "No featured items are available."
 msgstr "Δεν υπάρχουν προτεινόμενα χαρακτηριστικά διαθέσιμα"
 
-#: application/libraries/globals.php:2401
+#: application/libraries/globals.php:2442
 msgid "View"
 msgstr "Προοβολή"
 
-#: application/libraries/globals.php:2463
+#: application/libraries/globals.php:2504
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Καμμία συλλογή"
 
-#: application/libraries/globals.php:2582
+#: application/libraries/globals.php:2623
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2599
+#: application/libraries/globals.php:2640
 msgid "Next Item &rarr;"
 msgstr "Επόμενο αντικείμενο &rarr;"
 
-#: application/libraries/globals.php:2619
+#: application/libraries/globals.php:2660
 msgid "&larr; Previous Item"
 msgstr "&larr; Προηγούμενο αντικείμενο"
 
-#: application/libraries/globals.php:2800
+#: application/libraries/globals.php:2841
 msgid "Browse All"
 msgstr "Περιήγηση Όλων"
 
-#: application/libraries/globals.php:2805
+#: application/libraries/globals.php:2846
 msgid "Browse by Tag"
 msgstr "Περιήγηση με βάση το Tag"
 
-#: application/libraries/globals.php:3084
+#: application/libraries/globals.php:3126
 msgid "No tags are available."
 msgstr "Δεν υπάρχουν διαθέσιμα tags"
 
@@ -3325,7 +3376,7 @@ msgstr "Μη έγκυρο ID στοιχείου."
 msgid "Cannot get the local path for a stored file."
 msgstr "Δεν μπορεί να βρεθεί το μονοπάτι για ένα αποθηκευμένο αρχείο."
 
-#: application/models/File.php:454
+#: application/models/File.php:456
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "Το \"%s\" δεν αποτελεί έγκυρη παραγωγή αρχείου."
@@ -3561,98 +3612,98 @@ msgstr "Η συγκεκριμένη μετακίνηση έπρεπε να εί�
 msgid "This migration should not be run."
 msgstr "Η συγκεκριμένη μετακίνηση δεν πρέπει να εκτελεστεί."
 
-#: application/tests/suite/Omeka/NavigationTest.php:752
-#: application/tests/suite/Omeka/NavigationTest.php:817
-#: application/tests/suite/Omeka/NavigationTest.php:839
-#: application/tests/suite/Omeka/NavigationTest.php:952
+#: application/tests/suite/Omeka/NavigationTest.php:753
+#: application/tests/suite/Omeka/NavigationTest.php:818
+#: application/tests/suite/Omeka/NavigationTest.php:840
+#: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Items"
 msgstr "Επεξεργασία αντικειμένων"
 
-#: application/tests/suite/Omeka/NavigationTest.php:758
-#: application/tests/suite/Omeka/NavigationTest.php:818
-#: application/tests/suite/Omeka/NavigationTest.php:856
-#: application/tests/suite/Omeka/NavigationTest.php:953
+#: application/tests/suite/Omeka/NavigationTest.php:759
+#: application/tests/suite/Omeka/NavigationTest.php:819
+#: application/tests/suite/Omeka/NavigationTest.php:857
+#: application/tests/suite/Omeka/NavigationTest.php:954
 msgid "Edit Collections"
 msgstr "Επεξεργασία συλλογών"
 
-#: application/tests/suite/Omeka/NavigationTest.php:764
-#: application/tests/suite/Omeka/NavigationTest.php:819
-#: application/tests/suite/Omeka/NavigationTest.php:862
-#: application/tests/suite/Omeka/NavigationTest.php:954
+#: application/tests/suite/Omeka/NavigationTest.php:765
+#: application/tests/suite/Omeka/NavigationTest.php:820
+#: application/tests/suite/Omeka/NavigationTest.php:863
+#: application/tests/suite/Omeka/NavigationTest.php:955
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
 
-#: application/tests/suite/Omeka/NavigationTest.php:825
-#: application/tests/suite/Omeka/NavigationTest.php:951
+#: application/tests/suite/Omeka/NavigationTest.php:826
+#: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "CHNM"
 msgstr "CHNM"
 
-#: application/tests/suite/Omeka/NavigationTest.php:982
-#: application/tests/suite/Omeka/NavigationTest.php:990
-#: application/tests/suite/Omeka/NavigationTest.php:1127
-#: application/tests/suite/Omeka/NavigationTest.php:1135
+#: application/tests/suite/Omeka/NavigationTest.php:983
+#: application/tests/suite/Omeka/NavigationTest.php:991
+#: application/tests/suite/Omeka/NavigationTest.php:1128
+#: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
 msgstr "Σελίδα"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1008
-#: application/tests/suite/Omeka/NavigationTest.php:1012
-#: application/tests/suite/Omeka/NavigationTest.php:1070
-#: application/tests/suite/Omeka/NavigationTest.php:1075
-#: application/tests/suite/Omeka/NavigationTest.php:1155
-#: application/tests/suite/Omeka/NavigationTest.php:1255
+#: application/tests/suite/Omeka/NavigationTest.php:1009
+#: application/tests/suite/Omeka/NavigationTest.php:1013
+#: application/tests/suite/Omeka/NavigationTest.php:1071
+#: application/tests/suite/Omeka/NavigationTest.php:1076
+#: application/tests/suite/Omeka/NavigationTest.php:1156
+#: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
 msgstr "Σελίδα 1"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1015
-#: application/tests/suite/Omeka/NavigationTest.php:1021
-#: application/tests/suite/Omeka/NavigationTest.php:1078
-#: application/tests/suite/Omeka/NavigationTest.php:1081
-#: application/tests/suite/Omeka/NavigationTest.php:1162
-#: application/tests/suite/Omeka/NavigationTest.php:1181
-#: application/tests/suite/Omeka/NavigationTest.php:1199
-#: application/tests/suite/Omeka/NavigationTest.php:1231
+#: application/tests/suite/Omeka/NavigationTest.php:1016
+#: application/tests/suite/Omeka/NavigationTest.php:1022
+#: application/tests/suite/Omeka/NavigationTest.php:1079
+#: application/tests/suite/Omeka/NavigationTest.php:1082
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
 msgstr "Σελίδα 2"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1024
-#: application/tests/suite/Omeka/NavigationTest.php:1028
-#: application/tests/suite/Omeka/NavigationTest.php:1084
-#: application/tests/suite/Omeka/NavigationTest.php:1088
-#: application/tests/suite/Omeka/NavigationTest.php:1163
-#: application/tests/suite/Omeka/NavigationTest.php:1182
-#: application/tests/suite/Omeka/NavigationTest.php:1192
-#: application/tests/suite/Omeka/NavigationTest.php:1254
+#: application/tests/suite/Omeka/NavigationTest.php:1025
+#: application/tests/suite/Omeka/NavigationTest.php:1029
+#: application/tests/suite/Omeka/NavigationTest.php:1085
+#: application/tests/suite/Omeka/NavigationTest.php:1089
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1193
+#: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
 msgstr "Σελίδα 3"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1031
-#: application/tests/suite/Omeka/NavigationTest.php:1040
-#: application/tests/suite/Omeka/NavigationTest.php:1091
-#: application/tests/suite/Omeka/NavigationTest.php:1095
-#: application/tests/suite/Omeka/NavigationTest.php:1164
-#: application/tests/suite/Omeka/NavigationTest.php:1183
-#: application/tests/suite/Omeka/NavigationTest.php:1200
-#: application/tests/suite/Omeka/NavigationTest.php:1221
-#: application/tests/suite/Omeka/NavigationTest.php:1239
-#: application/tests/suite/Omeka/NavigationTest.php:1249
+#: application/tests/suite/Omeka/NavigationTest.php:1032
+#: application/tests/suite/Omeka/NavigationTest.php:1041
+#: application/tests/suite/Omeka/NavigationTest.php:1092
+#: application/tests/suite/Omeka/NavigationTest.php:1096
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1184
+#: application/tests/suite/Omeka/NavigationTest.php:1201
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
 msgstr "Σελίδα 4"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1043
-#: application/tests/suite/Omeka/NavigationTest.php:1047
-#: application/tests/suite/Omeka/NavigationTest.php:1098
-#: application/tests/suite/Omeka/NavigationTest.php:1102
-#: application/tests/suite/Omeka/NavigationTest.php:1165
-#: application/tests/suite/Omeka/NavigationTest.php:1174
-#: application/tests/suite/Omeka/NavigationTest.php:1222
-#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1044
+#: application/tests/suite/Omeka/NavigationTest.php:1048
+#: application/tests/suite/Omeka/NavigationTest.php:1099
+#: application/tests/suite/Omeka/NavigationTest.php:1103
+#: application/tests/suite/Omeka/NavigationTest.php:1166
+#: application/tests/suite/Omeka/NavigationTest.php:1175
+#: application/tests/suite/Omeka/NavigationTest.php:1223
+#: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
 msgstr "Σελίδα 5"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1050
-#: application/tests/suite/Omeka/NavigationTest.php:1054
-#: application/tests/suite/Omeka/NavigationTest.php:1214
+#: application/tests/suite/Omeka/NavigationTest.php:1051
+#: application/tests/suite/Omeka/NavigationTest.php:1055
+#: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
 msgstr "Σελίδα 6"
 
@@ -3740,10 +3791,6 @@ msgstr "Προηγούμενη Σελίδα"
 msgid "Page"
 msgstr ""
 
-#: application/views/scripts/common/pagination_control.php:38
-msgid "Current Page"
-msgstr "Τρέχουσα Σελίδα"
-
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
 msgid "%s of %s"
@@ -3829,23 +3876,24 @@ msgstr "Τύπος αναζήτησης:"
 msgid "Record types:"
 msgstr "Τύποι εγγραφών:"
 
-#: application/views/scripts/search/search-form.php:2
-msgid "submit_search"
+#: application/views/scripts/search/search-form.php:4
+#: application/views/scripts/search/search-form.php:5
+msgid "Query"
 msgstr ""
 
-#: application/views/scripts/search/search-form.php:6
+#: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
 msgstr "Αναζήτηση βάσει αυτού του τύπου:"
 
-#: application/views/scripts/search/search-form.php:11
+#: application/views/scripts/search/search-form.php:20
 msgid "Search only these record types:"
 msgstr "Αναζήτηση μόνο σε αυτούς τους τύπους εγγραφών:"
 
-#: application/views/scripts/search/search-form.php:17
+#: application/views/scripts/search/search-form.php:26
 msgid "Go to search settings to select record types to use."
 msgstr "Μεταβείτε στις ρυθμίσεις της αναζήτησης για να επιλέξετε τους τύπους εγγραφών που θα χρησιμοποιηθούν."
 
-#: application/views/scripts/search/search-form.php:19
+#: application/views/scripts/search/search-form.php:28
 msgid "Advanced Search (Items only)"
 msgstr "Προχωρημένη Αναζήτηση (μόνο για αντικείμενα)"
 
@@ -3857,7 +3905,7 @@ msgstr "Μετάβαση στην Αρχική Σελίδα"
 msgid "Lost your password?"
 msgstr "Ξεχάσατε τον κωδικό σας;"
 
-#: install/controllers/IndexController.php:25
+#: install/controllers/IndexController.php:27
 msgid "Could not load database resource!"
 msgstr "Αδυναμία φόρτωσης πόρου από την βάση δεδομένων!"
 

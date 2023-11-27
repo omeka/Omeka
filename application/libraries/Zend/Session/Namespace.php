@@ -207,6 +207,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      *
      * @return ArrayObject - iteratable container of the namespace contents
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayObject(parent::_namespaceGetAll($this->_namespace));

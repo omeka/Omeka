@@ -36,6 +36,7 @@ require_once 'Zend/View/Interface.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+#[AllowDynamicProperties]
 abstract class Zend_View_Abstract implements Zend_View_Interface
 {
     /**
@@ -902,7 +903,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     public function escape($var)
     {
         if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
-            return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_encoding);
+            return call_user_func($this->_escape, (string) $var, ENT_COMPAT, $this->_encoding);
         }
 
         if (1 == func_num_args()) {

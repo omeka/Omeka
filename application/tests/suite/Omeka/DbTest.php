@@ -10,6 +10,7 @@ class Omeka_DbTest extends Omeka_Test_TestCase
     {
         // false as 5th argument makes the constructor not be called
         $this->adapter = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
+        $this->adapter->method('getServerVersion')->will($this->returnValue('1.0.0'));
 
         $db_with_prefix = new Omeka_Db($this->adapter, 'foobar_');
 

@@ -2,7 +2,7 @@
 
 function utf8_htmlspecialchars($value)
 {
-    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
 function show_untitled_items($title)

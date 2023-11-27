@@ -103,7 +103,11 @@ td {
     li { 
 	    display: inline-block; 
 	    
-        &:after { 
+        .spacer {
+            display: inline-block;
+        }
+
+        .spacer:after { 
             content: ' \00b7'; 
             margin-left: 3px; 
             margin-right: 3px;
@@ -133,7 +137,6 @@ td {
 
 span.title {
 	margin: 0 $spacing-s $spacing-s 0;
-    font-size: 16px;
 	font-weight: 700;
 	line-height: 20px;
     	
@@ -143,6 +146,11 @@ span.title {
 	}
 }
 
+.featured-icon,
+.private {
+    display: inline-block;
+}
+
 span.featured:after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -150,6 +158,10 @@ span.featured:after {
     width: 24px;
     height: 24px;
     color: $darkred;
+}
+
+span.private {
+    font-weight: normal;
 }
 
 .details {

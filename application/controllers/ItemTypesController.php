@@ -160,7 +160,6 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 
     private function _getForm($itemType)
     {
-        require_once APP_DIR . '/forms/ItemTypes.php';
         $form = new Omeka_Form_ItemTypes;
         $form->setItemType($itemType);
         fire_plugin_hook('item_types_form', array('form' => $form));

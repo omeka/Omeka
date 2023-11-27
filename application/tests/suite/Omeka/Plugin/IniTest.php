@@ -11,6 +11,11 @@
  */
 class Omeka_Plugin_IniTest extends Omeka_Test_TestCase
 {
+    private $basePath;
+    private $iniReader;
+    private $db;
+    private $plugin;
+
     public function setUpLegacy()
     {
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';

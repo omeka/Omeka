@@ -11,6 +11,9 @@
  */
 class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 {
+    private $mailHelper;
+    private $email;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

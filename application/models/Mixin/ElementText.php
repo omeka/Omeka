@@ -431,7 +431,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                     }
                     // Only add the element text if it's not empty.  There
                     // should be no empty element texts in the DB.
-                    if (strlen($elementText['text'])) {
+                    if (strlen((string) $elementText['text'])) {
                         $this->addTextForElement($element, $elementText['text'], $elementText['html']);
                     }
                 }
@@ -521,7 +521,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                 );
 
                 // Ignore fields that are empty (no text)
-                if (!strlen($elementText)) {
+                if ($elementText === null || !strlen($elementText)) {
                     continue;
                 }
 

@@ -22,6 +22,11 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      */
     protected $_isAdminTest = true;
 
+    /**
+     * @var Omeka_Application
+     */
+    public $application;
+
     /* Start of code ported from Zend_Test_PHPUnit_ControllerTestCase */
 
     /**

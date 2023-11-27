@@ -314,11 +314,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
             $payload[$k] = $v;
         }
         
-        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            $payload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        } else {
-            $payload = json_encode($payload);
-        }
+        $payload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $expire = $message->getExpire();
         if ($expire > 0) {

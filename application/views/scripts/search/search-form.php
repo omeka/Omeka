@@ -1,6 +1,15 @@
 <?php echo $this->form('search-form', $options['form_attributes']); ?>
-    <?php echo $this->formText('query', $filters['query'], array('title' => __('Search'), 'aria-labelledby' => __('submit_search'))); ?>
+    <?php 
+        echo $this->formText('query', $filters['query'], array(
+            'title' => __('Query'), 
+            'aria-label' => __('Query'), 
+            'aria-labelledby' => 'search-form query'
+        )); 
+    ?>
     <?php if ($options['show_advanced']): ?>
+    <button id="advanced-search" type="button" class="show-advanced button" aria-label="<?php echo __('Options'); ?>" title="<?php echo __('Options'); ?>" aria-labelledby="search-form advanced-search">
+        <span class="icon" aria-hidden="true"></span>
+    </button>
     <div id="advanced-form">
         <fieldset id="query-types">
             <legend><?php echo __('Search using this query type:'); ?></legend>
@@ -21,8 +30,19 @@
     <?php else: ?>
         <?php echo $this->formHidden('query_type', $filters['query_type']); ?>
         <?php foreach ($filters['record_types'] as $type): ?>
-        <?php echo $this->formHidden('record_types[]', $type); ?>
+        <?php echo $this->formHidden('record_types[]', $type, array('id' => '')); ?>
         <?php endforeach; ?>
     <?php endif; ?>
-    <?php echo $this->formButton('submit_search', $options['submit_value'], array('type' => 'submit')); ?>
+    <?php 
+        echo $this->formButton('submit_search', $options['submit_value'], array(
+            'type' => 'submit', 
+            'title' => __('Submit'), 
+            'class' => 'button', 
+            'content' => '<span class="icon" aria-hidden="true"></span>', 
+            'escape' => false,
+            'aria-label' => __('Submit'),
+            'aria-labelledby' => 'search-form submit_search'
+            )
+        ); 
+    ?>
 </form>

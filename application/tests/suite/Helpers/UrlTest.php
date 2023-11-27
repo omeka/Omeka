@@ -11,6 +11,9 @@
  */
 class Omeka_View_Helper_UrlTest extends Omeka_Test_TestCase
 {
+    private $front;
+    private $helper;
+
     public function setUpLegacy()
     {
         $this->front = Zend_Controller_Front::getInstance();

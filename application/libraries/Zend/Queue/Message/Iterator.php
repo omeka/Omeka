@@ -212,6 +212,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->_pointer = 0;
@@ -224,6 +225,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return Zend_Queue_Message current element from the collection
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return (($this->valid() === false)
@@ -238,6 +240,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->_pointer;
@@ -250,6 +253,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         ++$this->_pointer;
@@ -262,6 +266,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return bool False if there's nothing more to iterate over
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->_pointer < count($this);
@@ -278,6 +283,7 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      *
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_data);

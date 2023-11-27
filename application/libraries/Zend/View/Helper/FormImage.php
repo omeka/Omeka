@@ -83,7 +83,7 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
         // build the element
         $xhtml = '<input type="image"'
                 . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ($id === '' ? '' : ' id="' . $this->view->escape($id) . '"')
                 . $src
                 . $value
                 . $disabled

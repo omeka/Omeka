@@ -13,6 +13,8 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
 {
     const USER_ID = 2;
 
+    private $builder;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

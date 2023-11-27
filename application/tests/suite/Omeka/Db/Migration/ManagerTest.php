@@ -17,6 +17,11 @@ class Omeka_Db_Migration_ManagerTest extends Omeka_Test_TestCase
     const ALREADY_RUN_MIGRATION = '20080717013526';
     const TARGET_MIGRATION = '20100401120000';
 
+    private $db;
+    private $dbAdapter;
+    private $manager;
+    private $bootstrap;
+
     public function setUpLegacy()
     {
         $this->db = $this->getMockBuilder('Omeka_Db')

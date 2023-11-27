@@ -12,6 +12,8 @@
  **/
 class Omeka_Controller_Action_Helper_FlashMessengerTest extends Omeka_Test_AppTestCase
 {
+    private $messenger;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

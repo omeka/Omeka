@@ -11,6 +11,11 @@
  */
 class PluginsController extends Omeka_Controller_AbstractActionController
 {
+    protected $_pluginBroker;
+    protected $_pluginLoader;
+    protected $_pluginIniReader;
+    protected $_pluginInstaller;
+
     public function init()
     {
         $this->_helper->redirector->setExit(false);

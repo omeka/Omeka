@@ -13,6 +13,10 @@
  */
 class Models_UserTest extends Omeka_Test_TestCase
 {
+    private $dbAdapter;
+    private $db;
+    private $user;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;

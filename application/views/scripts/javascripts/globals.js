@@ -18,14 +18,13 @@ if (!Omeka) {
     // Show advanced options for site-wide search.
     Omeka.showAdvancedForm = function () {
         var advanced_form = $('#advanced-form');
-        var show_advanced = '<a href="#" class="show-advanced button">Advanced Search</a>';
-        var search_submit = $('#search-form button');
 
-        // Set up classes and DOM elements jQuery will use.
-        if (advanced_form.length > 0) {
-            $('#search-container').addClass('with-advanced');
-            advanced_form.addClass('closed').before(show_advanced);
+        if (!advanced_form.length) {
+            return;
         }
+
+        advanced_form.addClass('closed');
+        $('#search-container').addClass('with-advanced');
 
         $('.show-advanced').click(function(e) {
             e.preventDefault();
