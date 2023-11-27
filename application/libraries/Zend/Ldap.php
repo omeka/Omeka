@@ -811,7 +811,7 @@ class Zend_Ldap
 
         // Security check: remove null bytes in password
         // @see https://net.educause.edu/ir/library/pdf/csd4875.pdf
-        $password = str_replace("\0", '', $password);
+        $password = is_string($password) ? str_replace("\0", '', $password) : '';
 
         if ($username === null) {
             $username = $this->_getUsername();
