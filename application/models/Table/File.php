@@ -192,7 +192,7 @@ class Table_File extends Omeka_Db_Table
         // order the files
         switch ($sort) {
             case 'order':
-                $select->order('ISNULL(files.order)')->order('files.order');
+                $select->order('ISNULL(files.order)')->order('files.order')->order('files.id');
             break;
 
             case 'filename':

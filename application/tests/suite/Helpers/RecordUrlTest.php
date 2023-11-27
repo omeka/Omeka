@@ -10,6 +10,11 @@
  */
 class Omeka_View_Helper_RecordUrlTest extends Omeka_Test_AppTestCase
 {
+    private $helper;
+    private $mockString;
+    private $mockQuery;
+    private $mockRoute;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

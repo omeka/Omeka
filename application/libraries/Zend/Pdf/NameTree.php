@@ -85,47 +85,55 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->_items);
     }
 
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->_items);
     }
 
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_items);
     }
 
 
+    #[\ReturnTypeWillChange]
     public function valid() {
         return current($this->_items)!==false;
     }
 
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_items);
     }
 
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->_items);
     }
 
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->_items[$offset];
     }
 
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if ($offset === null) {
@@ -136,6 +144,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
     }
 
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->_items[$offset]);
@@ -147,6 +156,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
         $this->_items = array();
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_items);

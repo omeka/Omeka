@@ -14,6 +14,7 @@
  * 
  * @package Omeka\Record
  */
+#[AllowDynamicProperties]
 class Theme
 {
     /**
@@ -54,6 +55,13 @@ class Theme
      * @var string
      */
     public $directory;
+
+    /**
+     * Theme's current version.
+     *
+     * @var string
+     */
+    public $version;
 
     /**
      * Web path to the theme screenshot.
@@ -247,10 +255,12 @@ class Theme
          * theme.ini files and images paths if they are present
          */
         $themes = array();
-        $iterator = new VersionedDirectoryIterator(PUBLIC_THEME_DIR);
-        $themeDirs = $iterator->getValid();
-        foreach ($themeDirs as $themeName) {
-            $themes[$themeName] = self::getTheme($themeName);
+        foreach (new DirectoryIterator(PUBLIC_THEME_DIR) as $entry) {
+            $filename = $entry->getFilename();
+            if (!$entry->isDir() || $filename[0] === '.') {
+                continue;
+            }
+            $themes[$filename] = self::getTheme($filename);
         }
         return $themes;
     }
@@ -268,15 +278,17 @@ class Theme
          * theme.ini files and images paths if they are present
          */
         $themes = array();
-        $iterator = new VersionedDirectoryIterator(ADMIN_THEME_DIR);
-        $themeDirs = $iterator->getValid();
-        foreach ($themeDirs as $themeName) {
-            $theme = self::getTheme($themeName);
-            $theme->path = ADMIN_THEME_DIR . '/' . $themeName;
+        foreach (new DirectoryIterator(ADMIN_THEME_DIR) as $entry) {
+            $filename = $entry->getFilename();
+            if (!$entry->isDir() || $filename[0] === '.') {
+                continue;
+            }
+            $theme = self::getTheme($filename);
+            $theme->path = $entry->getPathname();;
             $theme->setImage(self::THEME_IMAGE_FILE_NAME);
             $theme->setIni(self::THEME_INI_FILE_NAME);
             $theme->setConfig(self::THEME_CONFIG_FILE_NAME);
-            $themes[$themeName] = $theme;
+            $themes[$filename] = $theme;
         }
         ksort($themes);
         return $themes;

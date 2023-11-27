@@ -183,8 +183,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
             $stringToSign = "GET\n\n\n$expires\n/$object";
 
             $signature = base64_encode(
-                Zend_Crypt_Hmac::compute($secretKey, 'sha1',
-                    utf8_encode($stringToSign), Zend_Crypt_Hmac::BINARY));
+                Zend_Crypt_Hmac::compute($secretKey, 'sha1', $stringToSign, Zend_Crypt_Hmac::BINARY));
 
             $query['AWSAccessKeyId'] = $accessKeyId;
             $query['Expires'] = $expires;

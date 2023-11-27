@@ -1,0 +1,35 @@
+.sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#search-narrow-by-fields-remove-field {
+    display: none;
+}
+
+.search-entry {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    .visible-label {
+        display: block;
+        margin-bottom: .25rem;
+    }
+
+    .input,
+	input[type=text] {
+	    margin-bottom: .5rem;
+	}
+
+}
+
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+    display: none;
+}

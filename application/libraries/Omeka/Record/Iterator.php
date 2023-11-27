@@ -35,6 +35,7 @@ class Omeka_Record_Iterator implements Iterator
         $this->_view = $view;
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_records);
@@ -43,6 +44,7 @@ class Omeka_Record_Iterator implements Iterator
     /**
      * Return the current record, setting it to the view if applicable.
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if (!(current($this->_records) instanceof Omeka_Record_AbstractRecord)) {
@@ -55,6 +57,7 @@ class Omeka_Record_Iterator implements Iterator
         return current($this->_records);
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_records);
@@ -65,12 +68,14 @@ class Omeka_Record_Iterator implements Iterator
      * 
      * @uses release_object()
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         release_object($this->_records[$this->key()]);
         next($this->_records);
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return false !== current($this->_records);

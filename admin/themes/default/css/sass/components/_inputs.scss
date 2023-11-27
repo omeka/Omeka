@@ -35,7 +35,10 @@ label input[type=radio] {
 }
 
 input[type=text], 
-input[type=password] {
+input[type=number], 
+input[type=email], 
+input[type=search], 
+input[type=password] { 
     height: 36px;
     border: 1px solid $darkgrayborder;
     -webkit-border-radius: 0;
@@ -93,7 +96,6 @@ label {
         justify-content: space-between;
 
         label {
-            font-size: 16px;
             margin-bottom: 0;
         }
 
@@ -109,11 +111,6 @@ label {
     margin: 0 0 10px 0;
     color: #666;
     font-style: italic;
-    font-size: 16px;
-
-    * {
-        font-size: 16px;
-    }
 }
 
 .inputs {
@@ -212,6 +209,11 @@ select {
     background-color: #fff;
 }
 
+select[multiple="multiple"] {
+    background: none;
+    padding-right: 9px;
+}
+
 .quick-filter {
     margin-bottom: 20px;
 }
@@ -232,7 +234,8 @@ select {
 }
 
 .field legend {
-    font-size: 14px;
+    font-size: inherit;
+    line-height: 1.5em;
     font-weight: bold;
 }
 

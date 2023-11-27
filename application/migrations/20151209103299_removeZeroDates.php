@@ -19,11 +19,19 @@ class removeZeroDates extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
+        // MySQL 8 is even stricter on zero dates, so set the mode to nothing
+        // to remove NO_ZERO_DATE, then set back to what we had after
+        $stmt = $this->db->query('SELECT @@sql_mode');
+        $origMode = $stmt->fetchColumn();
+        $this->db->query("SET SESSION sql_mode=''");
+
         $this->db->query("UPDATE IGNORE {$this->db->Collection} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
         $this->db->query("UPDATE IGNORE {$this->db->Collection} SET `modified` = '2000-01-01 00:00:00' WHERE `modified` = '0000-00-00 00:00:00'");
         $this->db->query("UPDATE IGNORE {$this->db->File} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
         $this->db->query("UPDATE IGNORE {$this->db->Item} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
         $this->db->query("UPDATE IGNORE {$this->db->Process} SET `started` = '2000-01-01 00:00:00' WHERE `started` = '0000-00-00 00:00:00'");
         $this->db->query("UPDATE IGNORE {$this->db->Process} SET `stopped` = '2000-01-01 00:00:00' WHERE `stopped` = '0000-00-00 00:00:00'");
+
+        $this->db->query('SET SESSION sql_mode=' . $this->db->quote($origMode));
     }
 }

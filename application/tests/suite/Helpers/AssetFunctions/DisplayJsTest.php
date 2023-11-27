@@ -18,6 +18,8 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
     public $externalDefaults;
     public $internalDefaults;
 
+    private $view;
+
     public function setUpLegacy()
     {
         // Load a view object to allow get_view() to work.

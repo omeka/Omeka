@@ -11,6 +11,10 @@
  */
 class Omeka_Job_Worker_Beanstalk
 {
+    protected $_pheanstalk;
+    protected $_jobFactory;
+    protected $_db;
+
     public function __construct(Pheanstalk_Pheanstalk $pheanstalk,
                                 Omeka_Job_Factory $jobFactory,
                                 Omeka_Db $db

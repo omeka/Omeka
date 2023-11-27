@@ -1,11 +1,20 @@
 <?php
 class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 {
+    private $pheanstalk;
+    private $jobFactory;
+    private $dbAdapter;
+    private $db;
+    private $pheanJob;
+    private $omekaJob;
+    private $worker;
+
     public function setUpLegacy()
     {
         $this->pheanstalk = $this->getMock('Pheanstalk_Pheanstalk', array(), array('0.0.0.0'));
         $this->jobFactory = $this->getMock('Omeka_Job_Factory');
         $this->dbAdapter = $this->getMock('Zend_Test_DbAdapter');
+        $this->dbAdapter->method('getServerVersion')->will($this->returnValue('1.0.0'));
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pheanJob = new Pheanstalk_Job(1, 'foo');
         $this->omekaJob = $this->getMock('Omeka_Job_JobInterface', array(), array(array()));

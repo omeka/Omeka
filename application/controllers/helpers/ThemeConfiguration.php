@@ -121,11 +121,15 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
      */
     private function _deleteOldFile(Zend_Form_Element_File $element)
     {
-        // delete old file if it is not the same as the new file name
-        if (!isset($this->_themeOptions[$element->getName()])) {
+        $elementName = $element->getName();
+
+        if (!isset($this->_themeOptions[$elementName])) {
             return;
         }
-        $oldFileName = $this->_themeOptions[$element->getName()];
+        $oldFileName = $this->_themeOptions[$elementName];
+        $newFileName = $this->_formValues[$elementName];
+
+        // delete old file if it is not the same as the new file name
         if ($oldFileName != $newFileName) {
             $storage = Zend_Registry::get('storage');
             $storagePath = $storage->getPathByType($oldFileName, self::THEME_UPLOAD_TYPE);

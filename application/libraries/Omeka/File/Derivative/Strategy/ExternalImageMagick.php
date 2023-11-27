@@ -94,11 +94,13 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
     {
         $version = $this->getOption('version', '0');
 
+        $alphaRemoveArg = version_compare($version, '6.7.5-1', '>=') ? '-alpha remove' : '-flatten';
+
         if ($type != 'square_thumbnail') {
             $args = array(
                 '-background white',
                 '+repage',
-                '-flatten',
+                $alphaRemoveArg,
                 '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>")
             );
         } else {
@@ -108,7 +110,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
                 $args = array(
                     '-background white',
                     '+repage',
-                    '-flatten',
+                    $alphaRemoveArg,
                     '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}^"),
                     '-gravity ' . escapeshellarg($gravity),
                     '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
@@ -121,7 +123,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
                     '-resize 50%',
                     '-background white',
                     '+repage',
-                    '-flatten',
+                    $alphaRemoveArg,
                     '-gravity ' . escapeshellarg($gravity),
                     '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
                     '+repage'

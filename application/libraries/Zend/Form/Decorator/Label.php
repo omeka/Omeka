@@ -53,6 +53,11 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
     const IMPLICIT_PREPEND = 'IMPLICIT_PREPEND';
     const IMPLICIT_APPEND  = 'IMPLICIT_APPEND';
 
+    public $optionalPrefix;
+    public $optionalSuffix;
+    public $requiredPrefix;
+    public $requiredSuffix;
+
     /**
      * Default placement: prepend
      * @var string
@@ -301,7 +306,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             return '';
         }
 
-        $label = $element->getLabel();
+        $label = (string) $element->getLabel();
         $label = trim($label);
 
         if (empty($label)) {

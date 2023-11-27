@@ -99,7 +99,12 @@ class Omeka_Db_Migration_Manager
     {
         ini_set('max_execution_time', 0);
 
-        $stop = new DateTime($endTimestamp);
+        if ($endTimestamp === null) {
+            $stop = new DateTime;
+        } else {
+            $stop = new DateTime($endTimestamp);
+        }
+
         $direction = 'up';
 
         if ($direction == 'up') {
@@ -197,14 +202,12 @@ class Omeka_Db_Migration_Manager
      */
     private function _getMigrationFileList()
     {
-        // In Ruby, you can do this:
-        // files = Dir["#{@migrations_path}/[0-9]*_*.rb"]
-        $dirIter = new VersionedDirectoryIterator($this->_migrationsDir, false);
-        $regexIter = new RegexIterator($dirIter, '/^(\d*)_.*\.php$/', RegexIterator::ALL_MATCHES);
         $fileList = array();
-        foreach ($regexIter as $key => $match) {
-            if (isset($match[1][0]) && isset($match[0][0])) {
-                $fileList[$match[1][0]] = $match[0][0];
+        foreach (new DirectoryIterator($this->_migrationsDir) as $entry) {
+            if ($entry->isFile()
+                && preg_match('/^(\d*)_.*\.php$/', $entry->getFilename(), $matches) === 1
+            ) {
+                $fileList[$matches[1]] = $matches[0];
             }
         }
         return $fileList;

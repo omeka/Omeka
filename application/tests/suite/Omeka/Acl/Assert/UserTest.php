@@ -2,6 +2,9 @@
 
 class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
 {
+    private $super;
+    private $admin;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

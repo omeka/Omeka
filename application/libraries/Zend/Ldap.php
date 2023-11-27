@@ -54,7 +54,7 @@ class Zend_Ldap
     /**
      * The raw LDAP extension resource.
      *
-     * @var resource
+     * @var resource|LDAP\Connection
      */
     protected $_resource = null;
 
@@ -147,7 +147,7 @@ class Zend_Ldap
      */
     public function getResource()
     {
-        if (!is_resource($this->_resource) || $this->_boundUser === false) {
+        if (!$this->_resource || $this->_boundUser === false) {
             $this->bind();
         }
         return $this->_resource;
@@ -659,7 +659,7 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception(null, 'Invalid account filter');
         }
 
-        if (!is_resource($this->getResource())) {
+        if (!$this->getResource()) {
             $this->bind();
         }
 
@@ -697,7 +697,7 @@ class Zend_Ldap
      */
     public function disconnect()
     {
-        if (is_resource($this->_resource)) {
+        if ($this->_resource) {
             @ldap_unbind($this->_resource);
         }
         $this->_resource = null;
@@ -748,20 +748,17 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception(null, 'A host parameter is required');
         }
 
-        $useUri = false;
         /* Because ldap_connect doesn't really try to connect, any connect error
          * will actually occur during the ldap_bind call. Therefore, we save the
          * connect string here for reporting it in error handling in bind().
          */
         $hosts = array();
-        if (preg_match_all('~ldap(?:i|s)?://~', $host, $hosts, PREG_SET_ORDER) > 0) {
+        if (preg_match_all('~ldap(i|s)?://~', $host, $hosts, PREG_SET_ORDER) > 0) {
             $this->_connectString = $host;
-            $useUri = true;
-            $useSsl = false;
+            $useSsl = isset($hosts[0][1]) && $hosts[0][1] === 's' ? true : false;
         } else {
             if ($useSsl) {
                 $this->_connectString = 'ldaps://' . $host;
-                $useUri = true;
             } else {
                 $this->_connectString = 'ldap://' . $host;
             }
@@ -772,12 +769,10 @@ class Zend_Ldap
 
         $this->disconnect();
 
-        /* Only OpenLDAP 2.2 + supports URLs so if SSL is not requested, just
-         * use the old form.
-         */
-        $resource = ($useUri) ? @ldap_connect($this->_connectString) : @ldap_connect($host, $port);
+        /* PHP 8.3 change: multiarg ldap_connect is deprecated so use the string always */
+        $resource = @ldap_connect($this->_connectString);
 
-        if (is_resource($resource) === true) {
+        if ($resource) {
             $this->_resource = $resource;
             $this->_boundUser = false;
 
@@ -870,7 +865,7 @@ class Zend_Ldap
             }
         }
 
-        if (!is_resource($this->_resource)) {
+        if (!$this->_resource) {
             $this->connect();
         }
 
@@ -1557,7 +1552,7 @@ class Zend_Ldap
      */
     public function getBaseNode()
     {
-        return $this->getNode($this->getBaseDn(), $this);
+        return $this->getNode($this->getBaseDn());
     }
 
     /**

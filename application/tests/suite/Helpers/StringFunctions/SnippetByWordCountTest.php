@@ -5,12 +5,6 @@
  */
 class Helpers_StringFunctions_SnippetByWordCountTest extends Omeka_Test_TestCase
 {
-    public function setUpLegacy()
-    {
-        $this->reporting = error_reporting();
-        error_reporting(E_ALL);
-    }
-
     public function testSnippetByWordCountEmptyText()
     {
         $phrase = '';
@@ -103,10 +97,5 @@ class Helpers_StringFunctions_SnippetByWordCountTest extends Omeka_Test_TestCase
         $ellipsis = '';
         $targetPhrase = 'All goats';
         $this->assertEquals($targetPhrase, snippet_by_word_count($phrase, $wordCount, $ellipsis));
-    }
-
-    public function tearDownLegacy()
-    {
-        error_reporting($this->reporting);
     }
 }

@@ -58,16 +58,8 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
         $this->_adminWhitelist = apply_filters('admin_whitelist', $this->_adminWhitelist);
 
         if ($this->_requireLogin($request)) {
-
-            // Deal with the login stuff
-            require_once 'Zend/Auth.php';
-            require_once 'Zend/Session.php';
-
-            if (!($auth = $this->getAuth())) {
-                throw new RuntimeException('Auth object must be available when routing admin requests!');
-            }
-
-            if (!$auth->hasIdentity()) {
+            $user = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('Currentuser');
+            if (!$user) {
                 // capture the intended controller / action for the redirect
                 $session = new Zend_Session_Namespace;
                 $session->redirect = $request->getPathInfo() .

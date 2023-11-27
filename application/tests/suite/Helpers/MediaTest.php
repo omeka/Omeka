@@ -12,6 +12,9 @@
 class Omeka_View_Helper_MediaTest extends Omeka_Test_TestCase
 {
     private $mimeTypeCallbackFired = false;
+    private $view;
+    private $helper;
+    private $file;
 
     public function setUpLegacy()
     {

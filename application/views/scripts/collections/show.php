@@ -17,7 +17,7 @@ $totalItems = metadata('collection', 'total_items');
         <div class="item hentry">
             <h3><?php echo link_to_item($itemTitle, array('class' => 'permalink')); ?></h3>
 
-            <?php if (metadata('item', 'has thumbnail')): ?>
+            <?php if (metadata('item', 'has files')): ?>
             <div class="item-img">
                 <?php echo link_to_item(item_image(null, array('alt' => $itemTitle))); ?>
             </div>

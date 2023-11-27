@@ -62,13 +62,17 @@ class Omeka_Plugin_Factory
      */
     protected function _getDirectoryList()
     {
-        // Construct the current list of potential, installed & active plugins
-        require_once 'VersionedDirectoryIterator.php';
-
         // Loop through all the plugins in the plugin directory,
         // and add each plugin directory name that has a plugin.php file
         // to the list of all plugin directory names
-        $dir = new VersionedDirectoryIterator($this->_basePath);
-        return $dir->getValid();
+        $dirs = array();
+        foreach (new DirectoryIterator($this->_basePath) as $entry) {
+            $filename = $entry->getFilename();
+            if (!$entry->isDir() || $filename[0] === '.') {
+                continue;
+            }
+            $dirs[] = $entry->getFilename();
+        }
+        return $dirs;
     }
 }

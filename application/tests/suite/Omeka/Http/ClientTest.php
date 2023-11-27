@@ -13,6 +13,11 @@
  */
 class Omeka_Http_ClientTest extends Omeka_Test_TestCase
 {
+    private $uri;
+    private $client;
+    private $exception;
+    private $exceptionAdapter;
+
     public function setUpLegacy()
     {
         $this->uri = 'http://local.test';

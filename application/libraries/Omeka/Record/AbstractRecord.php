@@ -12,6 +12,7 @@
  * 
  * @package Omeka\Record
  */
+#[AllowDynamicProperties]
 abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 {
     /**
@@ -685,6 +686,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @param string $name
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($name)
     {
         return isset($this->$name);
@@ -697,6 +699,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * 
      * @param string $name
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($name)
     {
         unset($this->$name);
@@ -710,6 +713,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @param string $name
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($name)
     {
         return $this->$name;
@@ -723,6 +727,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @param string $name
      * @param mixed $value
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($name, $value)
     {
         $this->$name = $value;

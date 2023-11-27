@@ -11,6 +11,8 @@
  */
 class IndexController extends Zend_Controller_Action
 {
+    public $installer;
+
     // Load the database.  If not possible, redirect to the fail script.
     // Check if Omeka is installed already.  If so, redirect accordingly.
     public function preDispatch()

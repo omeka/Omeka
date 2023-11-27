@@ -17,9 +17,6 @@ hr {
 	@include screen-md {
 		width: 1000px;	
 	}
-	@include screen-sm {
-		width: 768px;
-	}
 	
 	@include screen-xs {
 		width: 100%;
@@ -27,9 +24,6 @@ hr {
 		box-sizing: border-box;
 	}
 	
-	@include screen-btwn-992-1020 {
-		width: 940px;
-	}
 	@include screen-btwn-768-790 {
 		width: 740px;
 	}
@@ -38,23 +32,17 @@ hr {
 		@include screen-xl {
 			width: 1040px;
 		}
-		@include screen-md {
-			width: 840px;
-		}
-		@include screen-sm {
+		@include screen-xs {
 			width: 600px;
 		}
 	}
 	
 	> .offset-by-two {
-		@include screen-sm {
-		    margin-left: 170px;
-		}
 		@include screen-btwn-1200-1250 {
-			margin-left: 210px;
+			margin-left: 200px;
 		}
-		@include screen-btwn-992-1020 {
-			margin-left: 160px;
+		@include screen-md {
+			margin-left: 180px;
 		}
 	}
 	
@@ -102,10 +90,11 @@ hr {
 
 .field .field-meta,
 .field .two.columns.alpha {
-	width: calc(2/7 * 100%);
+	width: #{2/7 * 100%};
 	margin-right: 0;
 	padding-right: $spacing-l;
 	box-sizing: border-box;
+	float: left;
 
 	@include screen-xs {
 		width: 100%;
@@ -115,16 +104,20 @@ hr {
 
 .field .inputs,
 .field .five.columns.omega {
-	width: calc(5/7 * 100%);
+	width: #{5/7 * 100%};
 	margin-left: 0;
+	float: left;
 
 	@include screen-xs {
 		width: 100%;
 	}
 }
 
+
 .panel .field .field-meta,
-.panel .field .two.columns.alpha {
+.panel .field .inputs,
+.panel .field .two.columns.alpha,
+.panel .field .five.columns.omega {
 	width: 100%;
 	padding-right: 0;
 }

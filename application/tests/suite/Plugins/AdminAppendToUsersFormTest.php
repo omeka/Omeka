@@ -14,6 +14,10 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
 
+    private $acl;
+    private $db;
+    private $user;
+
     public function setUpLegacy()
     {
         parent::setUpLegacy();

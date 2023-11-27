@@ -14,6 +14,8 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
 {
     const ASSET_PATH_ROOT = '/omeka-test/asset-path';
 
+    private $view;
+
     public function setUpLegacy()
     {
         // Load a view object to allow get_view() to work.
@@ -56,7 +58,15 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
 
     public function testWithNoStyles()
     {
-        $this->assertEquals('', $this->_getCssOutput());
+        $styles = array(
+            self::ASSET_PATH_ROOT . '/css/public.css?v='.OMEKA_VERSION
+        );
+
+        $this->_assertStylesheets($this->_getCssOutput(), array());
+
+        $frontController = Zend_Controller_Front::getInstance()->setParam('admin', false);
+        $this->_assertStylesheets($this->_getCssOutput(), $styles);
+        $frontController->resetInstance();
     }
 
     public function testQueueCssSingleWithDefaultVersion()

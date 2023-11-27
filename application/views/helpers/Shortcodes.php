@@ -48,7 +48,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     public function shortcodes($content)
     {
-        if (false === strpos($content, '[')) {
+        if (!is_string($content) || false === strpos($content, '[')) {
             return $content;
         }
         $pattern =

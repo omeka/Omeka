@@ -13,6 +13,11 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'test_';
 
+    private $dbAdapter;
+    private $db;
+    private $profilerHelper;
+    private $schemaTask;
+
     public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;

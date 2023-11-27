@@ -133,6 +133,9 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
             }
 
             if ('id' == $key) {
+                if ((string) $val === '') {
+                    continue;
+                }
                 $val = $this->_normalizeId($val);
             }
 

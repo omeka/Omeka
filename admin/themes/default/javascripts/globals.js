@@ -71,9 +71,15 @@ if (!Omeka) {
     
     Omeka.toggleMobileMenu = function() {
 	    $('.mobile-menu').click(function (event) {
-			var target = $(this).data('target');
+            var button = $(this);
+			var target = button.data('target');
 			$(target).toggleClass('in');
-            $(this).parent('nav').toggleClass('open');
+            button.parent('nav').toggleClass('open');
+            if (button.attr('aria-expanded') == 'true') {
+                button.attr('aria-expanded', 'false');
+            } else {
+                button.attr('aria-expanded', 'true');
+            }
 	    });
     };
     
@@ -84,9 +90,6 @@ if (!Omeka) {
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
-        $('#search-form').addClass("with-advanced");
-        $('#search-form button').addClass("blue button");
-        advancedForm.before('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
         advancedForm.click(function (event) {
             event.stopPropagation();
         });
