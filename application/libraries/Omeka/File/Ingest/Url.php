@@ -14,6 +14,15 @@
 class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
 {
     /**
+     * HTTP client.
+     *
+     * Set by the _getHttpClient method.
+     *
+     * @var Zend_Http_Client
+     */
+    protected $_client = null;
+
+    /**
      * Return the original filename.
      *
      * @param array $fileInfo
