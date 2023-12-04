@@ -254,6 +254,15 @@ class Zend_Http_Client
     protected $redirectCounter = 0;
 
     /**
+     * Name of temporary stream
+     *
+     * Set by _openTempStream and used by the request method
+     *
+     * @var string
+     */
+    protected $_stream_name = null;
+
+    /**
      * Status for unmasking GET array params
      *
      * @var boolean
