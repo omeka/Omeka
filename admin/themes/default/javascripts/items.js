@@ -11,7 +11,7 @@ Omeka.Items = {};
     Omeka.Items.enableSorting = function () {
         $('.sortable').sortable({
             items: 'li.file',
-            forcePlaceholderSize: true, 
+            forcePlaceholderSize: true,
             forceHelperSize: true,
             revert: 200,
             placeholder: "ui-sortable-highlight",
@@ -23,7 +23,7 @@ Omeka.Items = {};
             }
         });
         $( ".sortable" ).disableSelection();
-        
+
         $( ".sortable input[type=checkbox]" ).each(function () {
             $(this).css("display", "none");
         });
@@ -44,7 +44,7 @@ Omeka.Items = {};
     };
 
     /**
-     * Set up toggle for marking files for deletion. 
+     * Set up toggle for marking files for deletion.
      */
     Omeka.Items.enableFileDeletion = function (deleteLink) {
         if( !deleteLink.next().is(":checked") ) {
@@ -165,7 +165,7 @@ Omeka.Items = {};
                 tagsToAdd.push(tag);
             }
         });
-        
+
         $('#tags-to-add').val(tagsToAdd.join(Omeka.Items.tagDelimiter));
         $('#tags-to-delete').val(tagsToDelete.join(Omeka.Items.tagDelimiter));
     };
@@ -263,7 +263,7 @@ Omeka.Items = {};
             event.preventDefault();
             var inputs = filesDiv.find('input');
             var inputCount = inputs.length;
-            var fileHtml = '<input name="file[' + inputCount + ']" type="file"></div>';
+            var fileHtml = '<input name="file[' + inputCount + ']" type="file" class="file-input" multiple></div>';
             $(fileHtml).insertAfter(inputs.last()).hide().slideDown(200, function () {
                 // Extra show fixes IE bug.
                 $(this).show();
@@ -271,5 +271,29 @@ Omeka.Items = {};
         });
 
         $('#file-inputs').append(link);
+
+        // Handle multiple file input.
+        $(document).on('change', '.file-input', function(e) {
+            const thisFileInput = $(this);
+            // Iterate every file in the FileList.
+            for (const [fileIndex, file] of Object.entries(this.files)) {
+                let fileInput;
+                // Use the DataTransfer API to create a new FileList containing
+                // one file, then set the FileList to this file input or an
+                // additional file input if the original FileList contains more
+                // than one file.
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                if (0 == fileIndex) {
+                    // Add the first file to this file input.
+                    fileInput = thisFileInput;
+                } else {
+                    // Add each additional file to a new file input.
+                    $('#add-file').trigger('click');
+                    fileInput = $('.file-input').last()
+                }
+                fileInput[0].files = dataTransfer.files;
+            }
+        });
     };
 })(jQuery);
