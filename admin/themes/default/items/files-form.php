@@ -25,11 +25,21 @@
 
     <div class="field two columns alpha" id="file-inputs">
         <label><?php echo __('Find a File'); ?></label>
+        <button type="button" id="add-file" class="add-file button"><?php echo __('Add Another File'); ?></button>
     </div>
 
-    <div class="files four columns omega">
-        <input name="file[0]" type="file" class="file-input" multiple>
+    <?php
+    $fileTemplate = <<<FILE_TEMPLATE
+    <div class="file-container" style="border: 2px solid #D6D5C2; margin: 2px; padding: 4px;">
+        <input name="file[__INDEX__]" type="file" class="file-input" multiple style="width: 100%; background-color: #F1F2F2;">
+        <div class="file-info">
+            <div class="file-thumbnail"></div>
+            <div class="file-size"></div>
+        </div>
     </div>
+    FILE_TEMPLATE;
+    ?>
+    <div class="files four columns omega" data-file-container-template="<?php echo utf8_htmlspecialchars($fileTemplate); ?>"></div>
 </div>
 
 <?php fire_plugin_hook('admin_items_form_files', array('item' => $item, 'view' => $this)); ?>
