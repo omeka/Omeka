@@ -30,8 +30,8 @@
 
     <?php
     $fileTemplate = <<<FILE_TEMPLATE
-    <div class="file-container" style="border: 2px solid #D6D5C2; margin: 2px; padding: 4px;">
-        <input name="file[__INDEX__]" type="file" class="file-input" multiple style="width: 100%; background-color: #F1F2F2;">
+    <div class="file-container">
+        <input name="file[__INDEX__]" type="file" class="file-input" multiple>
         <div class="file-info">
             <div class="file-thumbnail"></div>
             <div class="file-size"></div>
