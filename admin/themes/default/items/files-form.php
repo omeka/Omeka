@@ -37,7 +37,7 @@
             <div class="file-size"></div>
         </div>
     </div>
-    FILE_TEMPLATE;
+FILE_TEMPLATE;
     ?>
     <div class="files four columns omega" data-file-container-template="<?php echo utf8_htmlspecialchars($fileTemplate); ?>"></div>
 </div>
