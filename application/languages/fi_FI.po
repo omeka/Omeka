@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Kai Metsävainio <kai.metsavainio@gmail.com>, 2021
-# Matti Lassila <matti.lassila@gmail.com>, 2012-2016
+# Matti Lassila <matti.lassila@gmail.com>, 2012-2016,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Kai Metsävainio <kai.metsavainio@gmail.com>, 2021\n"
+"Last-Translator: Matti Lassila <matti.lassila@gmail.com>, 2012-2016,2023\n"
 "Language-Team: Finnish (Finland) (http://app.transifex.com/omeka/omeka/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +103,7 @@ msgstr "Aineiston elinkaareen liittyvä ajanhenki"
 #: admin/themes/default/items/search-form.php:88
 #: application/views/scripts/items/search-form.php:88
 msgid "Type"
-msgstr "Laji"
+msgstr "Haun tyyppi"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -1293,12 +1293,12 @@ msgstr "Hae aineistoja"
 #: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
-msgstr "Valitse kaikki %s tulokset"
+msgstr "Valitse kaikki %s tulosta"
 
 #: admin/themes/default/items/browse.php:26
 #: admin/themes/default/items/browse.php:141
 msgid "items selected"
-msgstr "Aineistoa valittuna"
+msgstr "aineistoa valittuna"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
@@ -1412,7 +1412,7 @@ msgstr "Kohdista haku kenttään"
 #: application/views/scripts/items/search-form.php:25
 #, php-format
 msgid "Number of rows in \"%s\":"
-msgstr ""
+msgstr "Rivien määrä \"%s\":"
 
 #: admin/themes/default/items/search-form.php:34
 #: application/views/scripts/items/search-form.php:29
@@ -1443,12 +1443,12 @@ msgstr "Lisää hakuehto"
 #: application/views/scripts/items/search-form.php:52
 #, php-format
 msgid "Row %s"
-msgstr ""
+msgstr "Rivi %s"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:54
 msgid "Joiner"
-msgstr ""
+msgstr "Yhdistävä ehto"
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
@@ -1465,7 +1465,7 @@ msgstr "OR"
 #: admin/themes/default/items/search-form.php:71
 #: application/views/scripts/items/search-form.php:71
 msgid "Field"
-msgstr ""
+msgstr "Kenttä"
 
 #: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
@@ -1518,7 +1518,7 @@ msgstr "ei täsmää"
 #: admin/themes/default/items/search-form.php:113
 #: application/views/scripts/items/search-form.php:110
 msgid "Terms"
-msgstr ""
+msgstr "Hakusanat"
 
 #: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
@@ -1876,7 +1876,7 @@ msgstr "Muokataan  avainsanoja"
 msgid ""
 "This number counts all records associated with a tag. Filtering \"Record "
 "types\" to \"Items\" will provide links to all items containing the tag."
-msgstr ""
+msgstr "Luku sisältää aineistotyypit ja aineistot. Valikon valinnalla \"Aineistot\" luku toimii linkkinä kaikkiin aineistoihin joille on annettu kyseessä oleva avainsana."
 
 #: admin/themes/default/tags/browse.php:23
 msgid ""
@@ -1888,7 +1888,7 @@ msgstr "Muokkaa avainsanaa klikkaamalla, tee muutokset ja tallenna muutokset pai
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "records."
-msgstr ""
+msgstr "Poista avainsana klikkaamalla X. Avainsanan poisto ei poista sisältöjä joissa avainsanaa on käytetty."
 
 #: admin/themes/default/tags/browse.php:33
 msgid "Search tags"
@@ -2103,7 +2103,7 @@ msgstr "Lisää käyttäjä"
 #: admin/themes/default/users/browse.php:37
 #: application/views/scripts/search/search-form.php:10
 msgid "Options"
-msgstr ""
+msgstr "Hakuasetukset"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/browse.php:52
@@ -2769,7 +2769,7 @@ msgstr "Näytä tyhjät metatietokentät"
 
 #: application/forms/AppearanceSettings.php:63
 msgid "Include empty elements in show pages."
-msgstr ""
+msgstr "Näytä tyhjät kentät aineistosivuilla."
 
 #: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
@@ -2777,7 +2777,7 @@ msgstr "Näytä kenttäryhmien otsikot"
 
 #: application/forms/AppearanceSettings.php:69
 msgid "Include element set headings in show pages and in drop-down lists."
-msgstr ""
+msgstr "Näytä kenttäryhmien otsikot aineistosivuilla ja pudotusvalikoissa."
 
 #: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
@@ -2874,7 +2874,7 @@ msgstr "ImageMagick-asennushakemisto"
 
 #: application/forms/GeneralSettings.php:69
 msgid "General Settings"
-msgstr ""
+msgstr "Yleisasetukset"
 
 #: application/forms/Install.php:39
 msgid "must be 30 characters or fewer with no whitespace"
@@ -3268,15 +3268,15 @@ msgstr "Omeka Atom-syöte"
 
 #: application/libraries/globals.php:1981
 msgid "Sort ascending"
-msgstr ""
+msgstr "Nouseva järjestys"
 
 #: application/libraries/globals.php:1991
 msgid "Sorting descending"
-msgstr ""
+msgstr "Laskeva järjestys"
 
 #: application/libraries/globals.php:1995
 msgid "Sorting ascending"
-msgstr ""
+msgstr "Nouseva järjestys"
 
 #: application/libraries/globals.php:2355
 msgid "No recent items available."
@@ -3314,7 +3314,7 @@ msgstr "Selaa"
 
 #: application/libraries/globals.php:2846
 msgid "Browse by Tag"
-msgstr "Selaa avainsanan"
+msgstr "Avainsanat"
 
 #: application/libraries/globals.php:3126
 msgid "No tags are available."
@@ -3783,7 +3783,7 @@ msgstr "Edellinen"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Page"
-msgstr ""
+msgstr "Sivu"
 
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
@@ -3873,7 +3873,7 @@ msgstr "Haun kohteet:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
-msgstr ""
+msgstr "Hakulause"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"

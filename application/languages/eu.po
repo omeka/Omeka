@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Adriana Hernández, 2023
 # Imanol Ortiz <imanol.ortiz@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Imanol Ortiz <imanol.ortiz@gmail.com>, 2016\n"
+"Last-Translator: Adriana Hernández, 2023\n"
 "Language-Team: Basque (http://app.transifex.com/omeka/omeka/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "El conjunto de elementos de metadatos Dublin Core es común a todos los registros Omeka, incluyendo elementos, archivos, y colecciones. Para más información ver: http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:31
@@ -95,7 +96,7 @@ msgstr "Data"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Un punto o período de tiempo asociado con un evento en el ciclo vital del recurso"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
@@ -130,7 +131,7 @@ msgstr "Iturri"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Un recurso relacionado del cual se deriva el recurso descrito."
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -156,7 +157,7 @@ msgstr "Estaldura"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "El tóopico espacial o temporal del recurso, la pertinencia espacial del recurso, o la jurisdicción bajo la cual el recurso es relevante"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -164,7 +165,7 @@ msgstr "Egile-eskubideak"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Información sobre los derechos vigentes en y sobre el recurso"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
@@ -174,7 +175,7 @@ msgstr "Item Type Metadata"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
+msgstr "El conjunto de items de metadatos de tipo de elemento, que consta de todos los tipos de item de elementos incluidos en Omeka, y todos los tipos de item de elementos creados por un administrador."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -186,7 +187,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
+msgstr "El conjunto de elementos de metadatos que, adicionales al conjunto de elementos Dublin Core, fue incluido en la tabla de 'archivos' en versiones previas de Omeka. Estos elementos son comunes a todos los archivos Omeka. Este conjunto puede quedar obsoleto en futuras versiones."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -248,7 +249,7 @@ msgstr "Omekako irudiko artxiboa"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
+msgstr "El conjunto de elementos de metadatos que se incluyó en la tabla de 'files_images' en versiones anteriores de Omeka. Estos elementos son comunes a todos los archivos de imagen."
 
 #. Omeka Image File: Width element
 msgid "Width"
@@ -290,7 +291,7 @@ msgstr "Omekako bideoko artxiboa"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
+msgstr "El conjunto de elementos de metadatos incluido en la tabla de 'files_videos' en versiones anteriores de Omeka. Estos elementos son comunes a todos los archivos de video."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -337,7 +338,7 @@ msgstr "Itxura"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Consulta los enlaces para mostrarlos en la navegación principal. Haga clic y arrastre los enlaces en el orden de visualización preferido."
 
 #: admin/themes/default/appearance/edit-navigation.php:20
 msgid "Add a Link to the Navigation"
@@ -384,7 +385,7 @@ msgstr "Gorde aldaketak"
 #: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Restablecer la navegación"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:23
@@ -427,7 +428,7 @@ msgstr "Zihur zaude?"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Se perderán todas las personalizaciones. El orden y las etiquetas serán restablecidas a la versión por defecto de Omeka. Se perderán los enlaces personalizados."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
@@ -499,7 +500,7 @@ msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Todos los items están en una colección."
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
@@ -569,7 +570,7 @@ msgstr "Hasi zure lehenengo sorta gehitzen"
 #: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Sin-título]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -643,7 +644,7 @@ msgstr "Menu nagusi"
 #: admin/themes/default/common/content-nav.php:2
 #: application/views/scripts/common/pagination_control.php:38
 msgid "Current Page"
-msgstr ""
+msgstr "Página actual"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
@@ -693,7 +694,7 @@ msgstr "Euskarriko foroak"
 
 #: admin/themes/default/common/footer.php:12
 msgid "Back to top"
-msgstr ""
+msgstr "Volver arriba"
 
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
@@ -794,7 +795,7 @@ msgstr "Elementu set editatu"
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Hacer clic y arrastrar los elementos en el orden preferido para que se muestren. Hacer clic en las flechas de la derecha para añadir comentarios personalizados a la descripción de los elementos."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
@@ -816,7 +817,7 @@ msgstr "Administratzailea lekua"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Si piensas que deberías tener permiso, intenta contactar al %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -827,12 +828,12 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Haz &#8217; intentado acceder a una página que parece que ya no existe. Esto ocurre en ocaciones. Debajo hay un rápido desglose de los items, colecciones, y exposiciones en éste Sitio."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr ""
+msgstr "Si esto no ayuda, intenta contactar al %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
@@ -852,14 +853,14 @@ msgstr "Sorta berri bat gehitu"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Método no permitido"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Debes usar otro método de acceso a ésta URL. Si has llegado a ésta página siguiendo un enlace o haciendo clic en un botón en Omeka, por favor contacta al %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -880,7 +881,7 @@ msgstr "Item"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "Enlaces directos"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
@@ -892,16 +893,16 @@ msgstr "Neurri osoa"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniaturas"
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Miniaturas en recuadro"
 
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
-msgstr ""
+msgstr "Dar formato a los metadatos"
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
@@ -934,7 +935,7 @@ msgstr "Aldatuta data"
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:39
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticación"
 
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:45
@@ -953,7 +954,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Metadatos incrustados"
 
 #: admin/themes/default/index.php:10
 msgid "item"
