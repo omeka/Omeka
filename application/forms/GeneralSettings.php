@@ -41,6 +41,10 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
             'label' => __('Site Author Information')
         ));
 
+        $this->addElement('text', 'email_from', array(
+            'label' => __('Email signature from whom')
+        ));
+
         $this->addElement('text', 'tag_delimiter', array(
             'label' => __('Tag Delimiter'),
             'description' => __('Separate tags using this character or string. Be careful when changing this setting. You run the risk of splitting tags that contain the old delimiter.'),
@@ -65,7 +69,7 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
 
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description',
-                  'copyright', 'author', 'tag_delimiter', 'path_to_convert'),
+                  'copyright', 'author', 'email_from', 'tag_delimiter', 'path_to_convert'),
             'site_settings', array('legend' => __('General Settings')));
     }
 }
