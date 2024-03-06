@@ -42,7 +42,8 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
 
         $this->addElement('text', 'email_from', array(
-            'label' => __('Email signature from whom')
+            'label' => __('Email signature from whom'),
+            'description' => __('This field is used for the signature of e-mails from whom, fill in as needed, if not filled in the signature from who uses the site header.')
         ));
 
         $this->addElement('text', 'tag_delimiter', array(
