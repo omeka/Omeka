@@ -98,6 +98,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
     private function _sendResetPasswordEmail($toEmail, $activationCode)
     {
         $siteTitle = get_option('site_title');
+        $emailFrom = get_option('email_from');
+        $from = get_option('administrator_email');
 
         $mail = new Zend_Mail('UTF-8');
         $mail->addTo($toEmail);
@@ -114,7 +116,10 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $body .= __("%s Administrator", $siteTitle);
 
         $mail->setBodyText($body);
-        $mail->setFrom(get_option('administrator_email'), __("%s Administrator", $siteTitle));
+        if(!empty($emailFrom))
+            $mail->setFrom($from, __("%s Administrator", $emailFrom));
+        else
+            $mail->setFrom($from, __("%s Administrator", $siteTitle));
         $mail->setSubject(__("[%s] Reset Your Password", $siteTitle));
 
         $mail->send();
@@ -384,6 +389,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $ua->save();
         // send the user an email telling them about their new user account
         $siteTitle = get_option('site_title');
+        $emailFrom = get_option('email_from');
         $from = get_option('administrator_email');
         $body = __('Welcome!')
                     ."\n\n"
@@ -394,7 +400,10 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
         $mail = new Zend_Mail('UTF-8');
         $mail->setBodyText($body);
-        $mail->setFrom($from, "$siteTitle Administrator");
+        if(!empty($emailFrom))
+            $mail->setFrom($from, __("%s Administrator", $emailFrom));
+        else
+            $mail->setFrom($from, __("%s Administrator", $siteTitle));
         $mail->addTo($user->email, $user->name);
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
