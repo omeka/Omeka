@@ -23,6 +23,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     const BUCKET_OPTION = 'bucket';
     const EXPIRATION_OPTION = 'expiration';
     const FORCE_SSL = 'forceSSL';
+    const ACLS_OPTION = 'acls';
 
     /**
      * @var Zend_Service_Amazon_S3
@@ -37,7 +38,12 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     /**
      * @var string
      */
-    private $_force_ssl_display_endpoint;    
+    private $_force_ssl_display_endpoint;
+
+    /**
+     * @var bool
+     */
+    private $_acls = true;
 
     /**
      * Set options for the storage adapter.
@@ -72,7 +78,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         
         if (isset($this->_options[self::FORCE_SSL]) && (bool) $this->_options[self::FORCE_SSL] && parse_url($this->_s3->getEndpoint(), PHP_URL_SCHEME)=='http'){
             $this->_force_ssl_display_endpoint = 'https:' . substr($this->_s3->getEndpoint(), 5);
-        }        
+        }
+
+        if (isset($this->_options[self::ACLS_OPTION])) {
+            $this->_acls = (bool) $this->_options[self::ACLS_OPTION];
+        }
     }
 
     public function setUp()
@@ -96,12 +106,14 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     {
         $objectName = $this->_getObjectName($dest);
 
-        // If an expiration time is set, we're uploading private files
-        // and using signed URLs. If not, we're uploading public files.
-        if ($this->_getExpiration()) {
-            $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PRIVATE;
-        } else {
-            $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ;
+        if ($this->_acls) {
+            // If an expiration time is set, we're uploading private files
+            // and using signed URLs. If not, we're uploading public files.
+            if ($this->_getExpiration()) {
+                $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PRIVATE;
+            } else {
+                $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ;
+            }
         }
 
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
