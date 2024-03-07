@@ -236,7 +236,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
      *
      * @return int
      */
-    private function _getExpiration()
+    protected function _getExpiration()
     {
         $expiration = (int) @$this->_options[self::EXPIRATION_OPTION];
         return $expiration > 0 ? $expiration : 0;
