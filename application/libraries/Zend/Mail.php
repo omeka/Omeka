@@ -502,10 +502,12 @@ class Zend_Mail extends Zend_Mime_Message
     protected function _encodeHeader($value)
     {
         if (Zend_Mime::isPrintable($value) === false) {
+            // (Omeka edit) change to CRLF on PHP 8+, see change in Zend_Mail_Transport_Sendmail
+            $eol = PHP_VERSION_ID < 80000 ? Zend_Mime::LINEEND : "\r\n";
             if ($this->getHeaderEncoding() === Zend_Mime::ENCODING_QUOTEDPRINTABLE) {
-                $value = Zend_Mime::encodeQuotedPrintableHeader($value, $this->getCharset(), Zend_Mime::LINELENGTH, Zend_Mime::LINEEND);
+                $value = Zend_Mime::encodeQuotedPrintableHeader($value, $this->getCharset(), Zend_Mime::LINELENGTH, $eol);
             } else {
-                $value = Zend_Mime::encodeBase64Header($value, $this->getCharset(), Zend_Mime::LINELENGTH, Zend_Mime::LINEEND);
+                $value = Zend_Mime::encodeBase64Header($value, $this->getCharset(), Zend_Mime::LINELENGTH, $eol);
             }
         }
 
