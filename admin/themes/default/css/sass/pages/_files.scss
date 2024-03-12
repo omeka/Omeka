@@ -24,7 +24,31 @@
 #files-metadata {
 	.files {
 		input {
-			margin-bottom: $spacing-m;
+            background-color: $lightgray;
+            padding: $spacing-m;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid $darkgrayborder;
 		}
 	}
+}
+
+.file-container {
+  border: 1px solid $darkgrayborder;
+  border-bottom: 0;
+  margin-bottom: $spacing-l;
+  border-radius: 2px;
+}
+
+.file-thumbnail:not(:empty) {
+    padding: $spacing-m $spacing-m 0;
+}
+
+.file-thumbnail img {
+    border: 1px solid $lightgrayborder;
+}
+
+.file-size:not(:empty) {
+    border-bottom: 1px solid $darkgrayborder;
+    padding: $spacing-m;
 }

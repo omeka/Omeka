@@ -11,7 +11,7 @@ Omeka.Items = {};
     Omeka.Items.enableSorting = function () {
         $('.sortable').sortable({
             items: 'li.file',
-            forcePlaceholderSize: true, 
+            forcePlaceholderSize: true,
             forceHelperSize: true,
             revert: 200,
             placeholder: "ui-sortable-highlight",
@@ -23,7 +23,7 @@ Omeka.Items = {};
             }
         });
         $( ".sortable" ).disableSelection();
-        
+
         $( ".sortable input[type=checkbox]" ).each(function () {
             $(this).css("display", "none");
         });
@@ -44,7 +44,7 @@ Omeka.Items = {};
     };
 
     /**
-     * Set up toggle for marking files for deletion. 
+     * Set up toggle for marking files for deletion.
      */
     Omeka.Items.enableFileDeletion = function (deleteLink) {
         if( !deleteLink.next().is(":checked") ) {
@@ -165,7 +165,7 @@ Omeka.Items = {};
                 tagsToAdd.push(tag);
             }
         });
-        
+
         $('#tags-to-add').val(tagsToAdd.join(Omeka.Items.tagDelimiter));
         $('#tags-to-delete').val(tagsToDelete.join(Omeka.Items.tagDelimiter));
     };
@@ -257,19 +257,72 @@ Omeka.Items = {};
      */
     Omeka.Items.enableAddFiles = function (label) {
         var filesDiv = $('#files-metadata .files');
+        var fileInputIndex = 0;
 
-        var link = $('<button type="button" id="add-file" class="add-file button">' + label + '</button>');
-        link.click(function (event) {
-            event.preventDefault();
-            var inputs = filesDiv.find('input');
-            var inputCount = inputs.length;
-            var fileHtml = '<input name="file[' + inputCount + ']" type="file"></div>';
-            $(fileHtml).insertAfter(inputs.last()).hide().slideDown(200, function () {
-                // Extra show fixes IE bug.
-                $(this).show();
-            });
+        var getFileContainer = function() {
+            return $(filesDiv.data('file-container-template').replace('__INDEX__', fileInputIndex++));
+        };
+
+        var humanFileSize = function(size) {
+            const i = size == 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
+            return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+        }
+
+        filesDiv.append(getFileContainer());
+
+        // Handle an add file click.
+        $('#add-file').on('click', function(e) {
+            e.preventDefault();
+            filesDiv.append(getFileContainer());
         });
 
-        $('#file-inputs').append(link);
+        // Handle multiple file input.
+        $(document).on('change', '.file-input', function(e) {
+
+            const thisFileInput = $(this);
+            const thisFileContainer = thisFileInput.closest('.file-container');
+
+            // Iterate every file in the FileList.
+            for (const [fileIndex, file] of Object.entries(this.files)) {
+
+                let fileContainer;
+                let fileInput;
+
+                // Use the DataTransfer API to create a new FileList containing
+                // one file, then set the FileList to this file input or an
+                // additional file input if the original FileList contains more
+                // than one file.
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                if (0 == fileIndex) {
+                    // Add the first file to this file input.
+                    fileContainer = thisFileContainer;
+                    fileInput = thisFileInput;
+                } else {
+                    // Add each additional file to a new file input.
+                    fileContainer = getFileContainer();
+                    fileInput = fileContainer.find('.file-input');
+                    filesDiv.append(fileContainer);
+                }
+                fileInput[0].files = dataTransfer.files;
+
+                // Add the formatted file size.
+                fileContainer.find('.file-size').empty().html(humanFileSize(file.size));
+
+                // Add a thumbnail when the file is an image.
+                if ((/^image\/(png|jpe?g|gif)$/).test(file.type)) {
+                    const imageSrc = URL.createObjectURL(file);
+                    const img = new Image();
+                    img.onload = function() {
+                        const maxSize = 100;
+                        const smallestPercent = Math.min(maxSize / this.width, maxSize / this.height);
+                        img.width = this.width * smallestPercent;
+                        img.height = this.height * smallestPercent;
+                        fileContainer.find('.file-thumbnail').empty().html(img);
+                    }
+                    img.src = imageSrc;
+                }
+            }
+        });
     };
 })(jQuery);
