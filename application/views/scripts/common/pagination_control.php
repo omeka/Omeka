@@ -27,7 +27,7 @@ if ($this->pageCount > 1):
 
         foreach ($hiddenParams as $key => $value) {
             if ($key != 'page') {
-                echo $this->formHidden($key, $value);
+                echo $this->formHidden($key, $value, array('id' => ''));
             }
         }
 
