@@ -1,4 +1,4 @@
-<nav id="admin-bar">
+<nav id="admin-bar" aria-label="<?php echo __('Omeka'); ?>">
 
 <?php if ($user = current_user()) {
     $links = array(
