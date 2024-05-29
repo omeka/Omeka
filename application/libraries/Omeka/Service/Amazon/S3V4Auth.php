@@ -1,44 +1,7 @@
 <?php
-/**
- * Zend Framework
- *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- */
 
 /**
- * @see Zend_Service_Amazon_Abstract
- */
-require_once 'Zend/Service/Amazon/Abstract.php';
-
-/**
- * @see Zend_Crypt_Hmac
- */
-require_once 'Zend/Crypt/Hmac.php';
-
-/**
- * Amazon S3 PHP connection class
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
+ * Subclass of Zend's S3 class, making minimal modifications to use SigV4 auth
  */
 class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
 {
@@ -206,26 +169,13 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
         $client->resetParameters(true);
         $client->setUri($endpoint);
         $client->setAuth(false);
-        // Work around buglet in HTTP client - it doesn't clean headers
-        // Remove when ZHC is fixed
-        /*
-        $client->setHeaders(array('Content-MD5'              => null,
-                                  'Content-Encoding'         => null,
-                                  'Expect'                   => null,
-                                  'Range'                    => null,
-                                  'x-amz-acl'                => null,
-                                  'x-amz-copy-source'        => null,
-                                  'x-amz-metadata-directive' => null));
-         */
         $client->setHeaders($headers);
-
 
         if (is_array($params)) {
             foreach ($params as $name=>$value) {
                 $client->setParameterGet($name, $value);
             }
         }
-
 
         if (($method == 'PUT') && ($data !== null)) {
             $client->setRawData($data, $headers['Content-type']);
