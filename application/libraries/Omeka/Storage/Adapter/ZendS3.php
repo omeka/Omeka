@@ -24,6 +24,9 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     const EXPIRATION_OPTION = 'expiration';
     const FORCE_SSL = 'forceSSL';
     const ACLS_OPTION = 'acls';
+    const STORAGE_CLASS_OPTION = 'storageClass';
+
+    const S3_STORAGE_CLASS_HEADER = 'x-amz-storage-class';
 
     /**
      * @var Zend_Service_Amazon_S3
@@ -44,6 +47,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
      * @var bool
      */
     private $_acls = true;
+
+    /**
+     * @var string
+     */
+    private $_storageClass;
 
     /**
      * Set options for the storage adapter.
@@ -83,6 +91,10 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         if (isset($this->_options[self::ACLS_OPTION])) {
             $this->_acls = (bool) $this->_options[self::ACLS_OPTION];
         }
+
+        if (isset($this->_options[self::STORAGE_CLASS_OPTION])) {
+            $this->_storageClass = $this->_options[self::STORAGE_CLASS_OPTION];
+        }
     }
 
     public function setUp()
@@ -114,6 +126,10 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
             } else {
                 $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ;
             }
+        }
+
+        if ($this->_storageClass) {
+            $meta[self::S3_STORAGE_CLASS_HEADER] = $this->_storageClass;
         }
 
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
