@@ -25,6 +25,8 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     const FORCE_SSL = 'forceSSL';
     const ACLS_OPTION = 'acls';
     const STORAGE_CLASS_OPTION = 'storageClass';
+    const SIGV4_OPTION = 'sigV4';
+    const REGION_OPTION = 'region';
 
     const S3_STORAGE_CLASS_HEADER = 'x-amz-storage-class';
 
@@ -54,6 +56,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     private $_storageClass;
 
     /**
+     * @var bool
+     */
+    private $_sigV4 = false;
+
+    /**
      * Set options for the storage adapter.
      *
      * @param array $options
@@ -61,6 +68,10 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     public function __construct(array $options = array())
     {
         $this->_options = $options;
+
+        if (isset($this->_options[self::SIGV4_OPTION])) {
+            $this->_sigV4 = (bool) $this->_options[self::SIGV4_OPTION];
+        }
 
         if (array_key_exists(self::AWS_KEY_OPTION, $options)
         && array_key_exists(self::AWS_SECRET_KEY_OPTION, $options)) {
@@ -79,7 +90,17 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $client->setMaxRetries(3);
         Zend_Service_Amazon_S3::setHttpClient($client);
 
-        $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey);
+        if ($this->_sigV4) {
+            if (isset($this->_options[self::REGION_OPTION])) {
+                $region = $this->_options[self::REGION_OPTION];
+            } else {
+                $region = null;
+            }
+            $this->_s3 = new Omeka_Service_Amazon_S3V4Auth($awsKey, $awsSecretKey, $region);
+        } else {
+            $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey);
+        }
+
         if (!empty($options[self::ENDPOINT_OPTION])) {
             $this->_s3->setEndpoint($options[self::ENDPOINT_OPTION]);
         }
@@ -95,6 +116,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         if (isset($this->_options[self::STORAGE_CLASS_OPTION])) {
             $this->_storageClass = $this->_options[self::STORAGE_CLASS_OPTION];
         }
+
     }
 
     public function setUp()
