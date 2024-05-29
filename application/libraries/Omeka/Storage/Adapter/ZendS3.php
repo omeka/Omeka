@@ -221,30 +221,46 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $uri = "$endpoint/$object";
 
         if ($expiration = $this->_getExpiration()) {
-            $timestamp = time();
-            $expirationSeconds = $expiration * 60;
-            $expires = $timestamp + $expirationSeconds;
-            // "Chunk" expirations to allow browser caching
-            $expires = $expires + $expirationSeconds - ($expires % $expirationSeconds);
-
-            $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
-            $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
-
-            $stringToSign = "GET\n\n\n$expires\n/$object";
-
-            $signature = base64_encode(
-                Zend_Crypt_Hmac::compute($secretKey, 'sha1', $stringToSign, Zend_Crypt_Hmac::BINARY));
-
-            $query['AWSAccessKeyId'] = $accessKeyId;
-            $query['Expires'] = $expires;
-            $query['Signature'] = $signature;
-
-            $queryString = http_build_query($query);
-
-            $uri .= "?$queryString";
+            if ($this->_sigV4) {
+                $uri .= '?' . $this->_getPresignedQueryV4("/$object", $expiration);
+            } else {
+                $uri .= '?' . $this->_getPresignedQueryV2("/$object", $expiration);
+            }
         }
 
         return $uri;
+    }
+
+    protected function _getPresignedQueryV2($path, $expiration)
+    {
+        $timestamp = time();
+        $expirationSeconds = $expiration * 60;
+        $expires = $timestamp + $expirationSeconds;
+        // "Chunk" expirations to allow browser caching
+        $expires = $expires + $expirationSeconds - ($expires % $expirationSeconds);
+
+        $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
+        $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
+
+        $stringToSign = "GET\n\n\n$expires\n$path";
+
+        $signature = base64_encode(
+            Zend_Crypt_Hmac::compute($secretKey, 'sha1', $stringToSign, Zend_Crypt_Hmac::BINARY));
+
+        $query['AWSAccessKeyId'] = $accessKeyId;
+        $query['Expires'] = $expires;
+        $query['Signature'] = $signature;
+
+        return http_build_query($query);
+    }
+
+    protected function _getPresignedQueryV4($path, $expiration)
+    {
+        $expirationSeconds = $expiration * 60;
+        // SigV4 expirations are limited to 7 days
+        $expires = min($expirationSeconds, 604800);
+
+        return $this->_s3->getPresignedURLQuery($path, $expires);
     }
 
     /**
