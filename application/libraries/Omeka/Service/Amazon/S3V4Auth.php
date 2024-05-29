@@ -216,10 +216,10 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
     {
         $sha256 = $headers['x-amz-content-sha256'];
 
-        // use the same time for all dates/timestamps
-        $time = time();
-        $timestamp = gmdate('Ymd\THis\Z', $time);
-        $date = gmdate('Ymd', $time);
+        $timestamp = gmdate('Ymd\THis\Z');
+        $date = substr($timestamp, 0, 8);
+        $region = $this->_region;
+
         // set date here so the request matches the signature
         $headers['x-amz-date'] = $timestamp;
 
@@ -245,9 +245,54 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
         $canonicalHeaders = implode("\n", $canonicalHeadersArr) . "\n";
         $signedHeaders = implode(';', array_keys($canonicalHeadersArr));
 
-        $canonicalRequestHash = hash('sha256', "$method\n$canonicalURI\n$canonicalQueryString\n$canonicalHeaders\n$signedHeaders\n$sha256"); 
+        $signature = $this->_getSignature($method, $canonicalURI, $canonicalQueryString, $canonicalHeaders, $signedHeaders, $sha256, $timestamp, $date, $region);
 
+        $headers['Authorization'] = 'AWS4-HMAC-SHA256 Credential=' . $this->_getAccessKey() . "/$date/$region/s3/aws4_request,SignedHeaders=$signedHeaders,Signature=$signature";
+    }
+
+    /**
+     * Get the query string for a presigned SigV4 URL for the given path
+     *
+     * @param string $path Path portion of the URL (including the leading slash)
+     * @param int $expires Time, in seconds, the URL should be valid for (max is 7 days)
+     * @return string
+     */
+    public function getPresignedURLQuery($path, $expires)
+    {
+        $timestamp = gmdate('Ymd\THis\Z');
+        $date = substr($timestamp, 0, 8);
         $region = $this->_region;
+
+        $accessKey = rawurlencode($this->_getAccessKey());
+        $region = rawurlencode($this->_region);
+        $expires = (int) $expires;
+
+        $query = "X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=$accessKey%2F$date%2F$region%2Fs3%2Faws4_request&X-Amz-Date=$timestamp&X-Amz-Expires=$expires&X-Amz-SignedHeaders=host";
+        $headers = 'host:' . $this->_endpoint->getHost() . "\n";
+        $signature = $this->_getSignature('GET', $path, $query, $headers, 'host', 'UNSIGNED-PAYLOAD', $timestamp, $date, $region);
+        $query .= "&X-Amz-Signature=$signature";
+
+        return $query;
+    }
+
+    /**
+     * Get signature for a given request
+     *
+     * @param string $method
+     * @param string $canonicalURI
+     * @param string $canonicalQueryString
+     * @param string $canonicalHeaders
+     * @param string $signedHeaders
+     * @param string $sha256
+     * @param string $timestamp
+     * @param string $date
+     * @param string $region
+     * @return string
+     */
+    protected function _getSignature($method, $canonicalURI, $canonicalQueryString, $canonicalHeaders, $signedHeaders, $sha256, $timestamp, $date, $region)
+    {
+        $canonicalRequestHash = hash('sha256', "$method\n$canonicalURI\n$canonicalQueryString\n$canonicalHeaders\n$signedHeaders\n$sha256");
+
         $scope = "$date/$region/s3/aws4_request";
         $stringToSign = "AWS4-HMAC-SHA256\n$timestamp\n$scope\n$canonicalRequestHash";
 
@@ -260,8 +305,6 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
             $this->_signingKeyDate = $date;
         }
 
-        $signature = hash_hmac('sha256', $stringToSign, $this->_signingKey);
-
-        $headers['Authorization'] = 'AWS4-HMAC-SHA256 Credential=' . $this->_getAccessKey() . "/$date/$region/s3/aws4_request,SignedHeaders=$signedHeaders,Signature=$signature";
+        return hash_hmac('sha256', $stringToSign, $this->_signingKey);
     }
 }
