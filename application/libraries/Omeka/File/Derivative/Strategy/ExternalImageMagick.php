@@ -201,7 +201,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
             1 => array("pipe", "w"), //STDOUT
             2 => array("pipe", "w"), //STDERR
         );
-        if ($proc = proc_open($cmd, $descriptorSpec, $pipes, getcwd())) {
+        if (function_exists('proc_open') && $proc = proc_open($cmd, $descriptorSpec, $pipes, getcwd())) {
             $output = stream_get_contents($pipes[1]);
             $errors = stream_get_contents($pipes[2]);
             foreach ($pipes as $pipe) {
