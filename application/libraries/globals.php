@@ -2045,13 +2045,16 @@ function body_tag($attributes = array())
  * Get a list of the current search item filters in use.
  *
  * @package Omeka\Function\Search
- * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @uses Omeka_View_Helper_ItemSearchFilters::itemSearchFilters()
  * @params array $params Params to override the ones read from the request.
+ * @param bool $removableFilter Set to true if filters should be removable (via link).  
+ *  By default false. 
+ * @param array $options Additional options for the filters.
  * @return string
  */
-function item_search_filters(array $params = null)
+function item_search_filters(array $params = null, $removableFilter = false, $options = array()) 
 {
-    return get_view()->itemSearchFilters($params);
+    return get_view()->itemSearchFilters($params, $removableFilter, $options);
 }
 
 /**
