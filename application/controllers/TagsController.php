@@ -109,11 +109,17 @@ class TagsController extends Omeka_Controller_AbstractActionController
 
         $oldTag->name = $newName;
         $this->_helper->viewRenderer->setNoRender();
-        if ($csrf->isValid($_POST) && $oldTag->save(false)) {
-            $this->getResponse()->setBody($newName);
-        } else {
-            $this->getResponse()->setHttpResponseCode(500);
-            $this->getResponse()->setBody($error);
+        if ($csrf->isValid($_POST)) {
+			if ($oldTag->save(false)) {
+				$this->getResponse()->setBody($newName);
+			} else {
+				$newTag = $this->_helper->db->findOrNew($newName);
+				$newTagId = $newTag->id;
+				$this->_helper->db->mergeTags($oldTagId, $newTagId);
+			}
+		} else {
+	        $this->getResponse()->setHttpResponseCode(500);
+			$this->getResponse()->setBody($error);
         }
     }
 }
