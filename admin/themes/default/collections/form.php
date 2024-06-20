@@ -1,10 +1,15 @@
 <?php echo js_tag('vendor/tinymce/tinymce.min'); ?>
 <?php echo js_tag('elements'); ?>
 <?php echo js_tag('tabs'); ?>
+<?php echo js_tag('items'); ?>
 <script type="text/javascript">
 jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
     
+    Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
+    Omeka.Items.enableTagRemoval();
+    Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+
     Omeka.wysiwyg({
         selector: false,
         forced_root_block: false

@@ -10,6 +10,11 @@ foreach ($elementSets as $key => $elementSet) {
     $tabs[$tabName] = $tabContent;    
 }
 
+ob_start();
+require 'tag-form.php';
+$tabs['Tags'] = ob_get_contents();
+ob_end_clean();
+
 $tabs = apply_filters('admin_collections_form_tabs', $tabs, array('collection' => $collection));
 ?>
 

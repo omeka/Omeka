@@ -52,6 +52,20 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
         parent::editAction();
     }
 
+    /**
+     * Finds all tags associated with collections (used for tag cloud)
+     */
+    public function tagsAction()
+    {
+        $params = array_merge(
+            array('sort_field' => 'name'),
+            $this->_getAllParams(),
+            array('type' => 'Collection')
+        );
+        $tags = $this->_helper->db->getTable('Tag')->findBy($params);
+        $this->view->assign(compact('tags'));
+    }
+
     protected function _getAddSuccessMessage($collection)
     {
         $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
