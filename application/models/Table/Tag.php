@@ -191,4 +191,21 @@ class Table_Tag extends Omeka_Db_Table
         $tags = $db->fetchCol($sql, array($partialName . '%'));
         return $tags;
     }
+    
+    public function mergeTags($oldTagId, $newTagId, $recordType = '')
+    {
+        if ($recordType != '') $recordType = " AND record_type = '" . $recordType . "'";
+
+	$db = $this->getDb();
+        $sql = "UPDATE $db->RecordsTag SET tag_id = $newTagId, time = CURRENT_TIMESTAMP WHERE tag_id = $oldTagId" . $recordType . " AND record_id NOT IN (SELECT record_id FROM (SELECT DISTINCT record_id FROM $db->RecordsTag WHERE tag_id = $newTagId) AS tmptable)";
+	$db->query($sql);
+	$sql = "DELETE FROM $db->RecordsTag WHERE tag_id = $oldTagId" . $recordType;
+	$db->query($sql);
+	$sql = "DELETE FROM $db->Tag WHERE id = $oldTagId";
+	$db->query($sql);
+
+	$sql = "SELECT COUNT(id) AS tagCount FROM $db->RecordsTag WHERE tag_id = $newTagId" . $recordType;
+	$tagCount = $db->fetchOne($sql);
+	return $tagCount;
+    }
 }
