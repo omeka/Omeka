@@ -84,6 +84,12 @@ if (!Omeka) {
             if (drawerButton.attr('aria-expanded')) {
                 Omeka.toggleAriaExpanded(drawerButton);
             }
+            if (drawerButton.hasClass('delete-drawer')) {
+                container.find('.undo-delete').first().focus();
+            }
+            if (drawerButton.hasClass('undo-delete')) {
+                container.find('.delete-drawer').first().focus();
+            }
         });
     };
 
