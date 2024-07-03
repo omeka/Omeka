@@ -28,7 +28,16 @@ if (!Omeka) {
 
         $('.show-advanced').click(function(e) {
             e.preventDefault();
+            var advanced_toggle = $(this);
+            advanced_toggle.toggleClass('open').toggleClass('closed');
             advanced_form.toggleClass('open').toggleClass('closed');
+            if (advanced_toggle.hasClass('open')) {
+                advanced_toggle.attr('aria-expanded', true);
+                advanced_form.attr('aria-expanded', true);
+            } else {
+                advanced_toggle.attr('aria-expanded', false);
+                advanced_form.attr('aria-expanded', false);
+            }
         });
     };
 

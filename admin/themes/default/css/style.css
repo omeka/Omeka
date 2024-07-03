@@ -1437,6 +1437,8 @@ header {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%; }
+  #advanced-form.open {
+    display: block; }
   #advanced-form input[type=radio] {
     margin: 0 9px 0 0; }
   #advanced-form input[type=checkbox] {
