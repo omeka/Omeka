@@ -33,10 +33,8 @@ if (!Omeka) {
             advanced_form.toggleClass('open').toggleClass('closed');
             if (advanced_toggle.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
-                advanced_form.attr('aria-expanded', true);
             } else {
                 advanced_toggle.attr('aria-expanded', false);
-                advanced_form.attr('aria-expanded', false);
             }
         });
     };
