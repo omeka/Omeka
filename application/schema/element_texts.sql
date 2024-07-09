@@ -9,5 +9,5 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%element_texts` (
   KEY `record_type_record_id` (`record_type`, `record_id`),
   KEY `element_id` (`element_id`),
   KEY `text` (`text`(20)),
-  KEY `record_element_text` (`record_type`, `record_id`, `element_id`, `text`(20));
+  KEY `record_element_text` (`record_type`, `record_id`, `element_id`, `text`(20))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
