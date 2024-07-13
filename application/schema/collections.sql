@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%collections` (
   PRIMARY KEY (`id`),
   KEY `public` (`public`),
   KEY `featured` (`featured`),
-  KEY `owner_id` (`owner_id`)
+  KEY `owner_id` (`owner_id`),
+  KEY `added` (`added`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

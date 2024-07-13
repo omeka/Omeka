@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%items` (
   KEY `collection_id` (`collection_id`),
   KEY `public` (`public`),
   KEY `featured` (`featured`),
-  KEY `owner_id` (`owner_id`)
+  KEY `owner_id` (`owner_id`),
+  KEY `added` (`added`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
