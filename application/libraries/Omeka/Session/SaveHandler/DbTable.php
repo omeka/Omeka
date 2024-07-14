@@ -104,4 +104,20 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
         // Discard parent's return value and return true (PHP 7 actually cares about this)
         return true;
     }
+
+    /**
+     * Garbage Collection
+     *
+     * Overrides Zend's gc to always use the same lifetime rather than the stored column
+     *
+     * @param int $maxlifetime
+     * @return true
+     */
+    public function gc($maxlifetime)
+    {
+        $this->delete($this->getAdapter()->quoteIdentifier($this->_modifiedColumn, true) . ' < '
+                    . $this->getAdapter()->quote(time() - $this->_lifetime));
+
+        return true;
+    }
 }
