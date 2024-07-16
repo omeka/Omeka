@@ -34,7 +34,14 @@ class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_Abstr
     {
         $page = (int) $this->getOption('page', 0);
         try {
-            $imagick = new Imagick($sourcePath . '[' . $page . ']');
+            $imagick = new Imagick;
+            if ($mimeType === 'application/pdf') {
+                $imagick->setResolution(150, 150);
+                if ($this->getOption('pdfUseCropBox', true)) {
+                    $imagick->setOption('pdf:use-cropbox', true);
+                }
+            }
+            $imagick->readImage($sourcePath . '[' . $page . ']');
         } catch (ImagickException $e) {
             _log("Imagick failed to open the file. Details:\n$e", Zend_Log::ERR);
             return false;

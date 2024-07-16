@@ -36,11 +36,11 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
     public function createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType)
     {
         $convertPath = $this->_getConvertPath();
+        $inputArgs = $this->_getInputArgs($sourcePath, $mimeType);
         $convertArgs = $this->_getConvertArgs($type, $sizeConstraint);
-        $page = (int) $this->getOption('page', 0);
         $cmd = join(' ', array(
             escapeshellarg($convertPath),
-            escapeshellarg($sourcePath . '[' . $page . ']'),
+            $inputArgs,
             $convertArgs,
             escapeshellarg($destPath)
         ));
@@ -81,6 +81,28 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
         } else {
             throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
         }
+    }
+
+    /**
+     * Get the ImageMagick command line for resizing to the given constraints.
+     *
+     * @param string $sourcePath Path to the original file
+     * @param string $mimeType Media type of the original file
+     * @return string
+     */
+    protected function _getInputArgs($sourcePath, $mimeType)
+    {
+        $args = array();
+        $page = (int) $this->getOption('page', 0);
+
+        if ($mimeType === 'application/pdf') {
+            $args[] = '-density 150';
+            if ($this->getOption('pdfUseCropBox', true)) {
+                $args[] = '-define pdf:use-cropbox=true';
+            }
+        }
+        $args[] = escapeshellarg($sourcePath . '[' . $page . ']');
+        return join(' ', $args);
     }
 
     /**
