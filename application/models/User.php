@@ -33,6 +33,9 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     /**
      * The salt for the hashed password.
      *
+     * The value "bcrypt" here indicates that $password is a modern PHP
+     * password_hash hash that already includes the salt
+     *
      * @var string
      */
     public $salt;
@@ -201,14 +204,25 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * @param string $username
      * @param string $password
      * @return bool False if incorrect username/password given, otherwise true
-     * when password can be or has been upgraded.
+     * when password has been upgraded.
      */
     public static function upgradeHashedPassword($username, $password)
     {
         $userTable = get_db()->getTable('User');
-        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)",
-                                             array($username, $password), true);
+        $user = $userTable->findBySql("username = ?", array($username), true);
         if (!$user) {
+            return false;
+        }
+        // stored password_hash password: doesn't need upgrade
+        if ($user->salt === 'bcrypt') {
+            return false;
+        }
+        // stored salted SHA1 password, but provided doesn't match
+        if (!empty($user->salt) && $user->password !== sha1($user->salt . $password)) {
+            return false;
+        }
+        // stored unsalted SHA1 password, but provided doesn't match
+        if (empty($user->salt) && $user->password !== sha1($password)) {
             return false;
         }
         $user->setPassword($password);
@@ -244,14 +258,6 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
 
     /**
-     * Generate a simple 16 character salt for the user.
-     */
-    public function generateSalt()
-    {
-        $this->salt = substr(md5(mt_rand()), 0, 16);
-    }
-
-    /**
      * Set a new password for the user.
      *
      * Always use this method to set a password, do not directly set the
@@ -261,20 +267,18 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function setPassword($password)
     {
-        if ($this->salt === null) {
-            $this->generateSalt();
-        }
         $this->password = $this->hashPassword($password);
+        $this->salt = 'bcrypt';
     }
 
     /**
-     * SHA-1 hash the given password with the current salt.
+     * Hash the given password
      *
      * @param string $password Plain-text password.
-     * @return string Salted and hashed password.
+     * @return string Hashed password.
      */
     public function hashPassword($password)
     {
-        return sha1($this->salt . $password);
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 }

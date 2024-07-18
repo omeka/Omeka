@@ -19,15 +19,38 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ no salt).
         $dbAdapter->update('omeka_users',
-                            array('password' => sha1('foobar'),
-                                  'salt' => null),
-                           'id = 1');
+            array('password' => sha1('foobar'), 'salt' => null),
+            'id = 1'
+        );
 
         // Now attempt to login, and verify that the database was upgraded, and
-        // that the user account was upgraded to use a salt.
+        // that the user account was upgraded to use bcrypt.
         $this->_login('foobar123', 'foobar');
         $this->assertRedirectTo('/', $this->getResponse()->getBody());
-        $this->assertNotNull($dbAdapter->fetchOne("SELECT salt FROM omeka_users WHERE id = 1"));
+        $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
+        $this->assertNotNull($newUser);
+        $this->assertEquals($newUser['salt'], 'bcrypt');
+        $this->assertTrue(password_verify('foobar', $newUser['password']));
+    }
+
+    public function testUpgradingSaltedPasswordForUser()
+    {
+        $this->assertTrue($this->db instanceof Omeka_Db);
+        $dbAdapter = $this->db->getAdapter();
+        // Reset the username/pass to the old style (SHA1 w/ salt).
+        $dbAdapter->update('omeka_users',
+            array('password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'),
+            'id = 1'
+        );
+
+        // Now attempt to login, and verify that the database was upgraded, and
+        // that the user account was upgraded to use bcrypt.
+        $this->_login('foobar123', 'barbaz');
+        $this->assertRedirectTo('/', $this->getResponse()->getBody());
+        $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
+        $this->assertNotNull($newUser);
+        $this->assertEquals($newUser['salt'], 'bcrypt');
+        $this->assertTrue(password_verify('barbaz', $newUser['password']));
     }
 
     public function testValidLogin()
@@ -39,6 +62,36 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     public function testInvalidLogin()
     {
         $this->_login('foo', 'bar');
+        $this->assertNotRedirect();
+        $this->assertStringContainsString('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
+    }
+
+    public function testInvalidOldHashedPassword()
+    {
+        $this->assertTrue($this->db instanceof Omeka_Db);
+        $dbAdapter = $this->db->getAdapter();
+        // Reset the username/pass to the old style (SHA1 w/ no salt).
+        $dbAdapter->update('omeka_users',
+            array('password' => sha1('foobar'), 'salt' => null),
+            'id = 1'
+        );
+
+        $this->_login('foobar123', 'foobar_not');
+        $this->assertNotRedirect();
+        $this->assertStringContainsString('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
+    }
+
+    public function testInvalidOldSaltedPassword()
+    {
+        $this->assertTrue($this->db instanceof Omeka_Db);
+        $dbAdapter = $this->db->getAdapter();
+        // Reset the username/pass to the old style (SHA1 w/ salt).
+        $dbAdapter->update('omeka_users',
+            array('password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'),
+            'id = 1'
+        );
+
+        $this->_login('foobar123', 'foobar_not');
         $this->assertNotRedirect();
         $this->assertStringContainsString('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
     }

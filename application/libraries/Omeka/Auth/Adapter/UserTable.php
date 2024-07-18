@@ -22,7 +22,32 @@ class Omeka_Auth_Adapter_UserTable extends Zend_Auth_Adapter_DbTable
                             $db->User,
                             'username',
                             'password',
-                            'SHA1(CONCAT(salt, ?)) AND active = 1');
+                            'active = 1');
+    }
+
+    /**
+     * Accept a Zend_Db_Select object and performs a query against
+     * the database with that object.
+     *
+     * Overrides the Zend implementation to check the password using
+     * password_verify().
+     *
+     * @param Zend_Db_Select $dbSelect
+     * @throws Zend_Auth_Adapter_Exception - when an invalid select
+     *                                       object is encountered
+     * @return array
+     */
+    protected function _authenticateQuerySelect(Zend_Db_Select $dbSelect)
+    {
+        $resultIdentities = parent::_authenticateQuerySelect($dbSelect);
+        $correctResult = array();
+        foreach ($resultIdentities as $identity) {
+            if ($identity['password'] !== null && password_verify($this->_credential, $identity['password'])) {
+                $identity['zend_auth_credential_match'] = 1;
+                $correctResult[] = $identity;
+            }
+        }
+        return $correctResult;
     }
 
     /**

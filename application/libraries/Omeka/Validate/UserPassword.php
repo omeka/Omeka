@@ -53,7 +53,8 @@ class Omeka_Validate_UserPassword extends Zend_Validate_Abstract
     public function isValid($value, $context = null)
     {
         assert($this->_user->password !== null);
-        $valid = $this->_user->hashPassword($value) === $this->_user->password;
+        User::upgradeHashedPassword($this->_user->username, $value);
+        $valid = password_verify($value, $this->_user->password);
         if (!$valid) {
             $this->_error(self::INVALID);
         }
