@@ -89,21 +89,20 @@ if (!Omeka) {
     };
 
     Omeka.showAdvancedForm = function () {
-        var advancedForm = $('#advanced-form');
-        advancedForm.click(function (event) {
-            event.stopPropagation();
-        });
-        $("#advanced-search").click(function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            advancedForm.fadeToggle();
-            $(document).click(function (event) {
-                if (event.target.id == 'query') {
-                    return;
-                }
-                advancedForm.fadeOut();
-                $(this).unbind(event);
-            });
+        var advanced_form = $('#advanced-form');
+        advanced_form.addClass('closed');
+        $('#search-container').addClass('with-advanced');
+
+        $('.show-advanced').click(function(e) {
+            e.preventDefault();
+            var advanced_toggle = $(this);
+            advanced_toggle.toggleClass('open').toggleClass('closed');
+            advanced_form.toggleClass('open').toggleClass('closed');
+            if (advanced_toggle.hasClass('open')) {
+                advanced_toggle.attr('aria-expanded', true);
+            } else {
+                advanced_toggle.attr('aria-expanded', false);
+            }
         });
     };
 
