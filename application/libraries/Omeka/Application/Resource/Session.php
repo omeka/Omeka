@@ -67,6 +67,13 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
             unset($sessionConfig['saveHandler']);
         }
 
+        // Override servers that disable GC, unless allowNoGc is set in config
+        if (empty($sessionConfig['allowNoGc']) && ini_get('session.gc_probability') == 0) {
+            $sessionConfig['gc_probability'] = 1;
+            $sessionConfig['gc_divisor'] = 1000;
+        }
+        unset($sessionConfig['allowNoGc']);
+
         return $sessionConfig;
     }
 
