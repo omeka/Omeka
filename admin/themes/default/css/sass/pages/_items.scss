@@ -241,6 +241,10 @@
         height: 0px;
         margin-bottom: 0;
     }
+    
+    @media (max-width: 1440px) {
+      .element .element-text{
+        margin-left: 10px; } }
 
 .element-text p {
     word-wrap: break-word;
