@@ -2221,19 +2221,20 @@ ul.details {
   width: 100%;
   height: 1px;
   background-color: #DBDBDB;
-  margin: 20px 0; }
+  margin: 10px 0; }
 
 .element .element-text:last-of-type:after {
   height: 0px;
   margin-bottom: 0; }
-  
-@media (max-width: 1440px) {
-  .element .element-text{
-    margin-left: 10px; } }
 
+@media (max-width: 1440px) {
+  .element .element-text {
+    margin-left: 10px; } }
 .element-text p {
   word-wrap: break-word;
   margin: 0 0 1em 0; }
+  .element-text p:last-child {
+    margin-bottom: 0; }
 
 .item-file {
   display: inline-block;

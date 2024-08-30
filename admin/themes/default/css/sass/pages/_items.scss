@@ -234,7 +234,7 @@
         width: 100%;
         height: 1px;
         background-color: #DBDBDB;
-        margin: 20px 0;
+        margin: 10px 0;
     }
 
     .element .element-text:last-of-type:after {
@@ -249,6 +249,10 @@
 .element-text p {
     word-wrap: break-word;
     margin: 0 0 1em 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .item-file {
