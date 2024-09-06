@@ -2,7 +2,7 @@
 if ($this->pageCount > 1):
     $getParams = $_GET;
 ?>
-<nav class="pagination-nav" aria-label="<?php echo $ariaLabel; ?>">
+<nav <?php echo tag_attributes($attrs); ?>>
     <ul class="pagination">
         <?php if (isset($this->previous)): ?>
         <!-- Previous page link -->

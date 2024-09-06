@@ -9,7 +9,7 @@ echo flash();
 <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
 <?php endif ?>
 
-<?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
 
 <p class="without-item-type">
     <?php if ($totalItemsWithoutType):
@@ -54,7 +54,7 @@ echo flash();
 <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
 <?php endif ?>
 
-<?php echo pagination_links(['aria-label' => __('Bottom pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
 
 <p class="without-item-type"><?php echo $withoutTypeMessage; ?></p>
 

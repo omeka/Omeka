@@ -5,7 +5,7 @@ $searchRecordTypes = get_search_record_types();
 ?>
 <?php echo search_filters(); ?>
 <?php if ($total_results): ?>
-<?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
 <table id="search-results">
     <thead>
         <tr>
@@ -33,7 +33,7 @@ $searchRecordTypes = get_search_record_types();
         <?php endforeach; ?>
     </tbody>
 </table>
-<?php echo pagination_links(['aria-label' => __('Bottom pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
 <?php else: ?>
 <div id="no-results">
     <p><?php echo __('Your query returned no results.');?></p>

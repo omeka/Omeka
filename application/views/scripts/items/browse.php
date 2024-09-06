@@ -11,7 +11,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'items browse'));
 
 <?php echo item_search_filters(); ?>
 
-<?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
 
 <?php if ($total_results > 0): ?>
 
@@ -54,7 +54,7 @@ $sortLinks[__('Date Added')] = 'added';
 </div><!-- end class="item hentry" -->
 <?php endforeach; ?>
 
-<?php echo pagination_links(['aria-label' => __('Bottom pagination')]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
 
 <div id="outputs">
     <span class="outputs-label"><?php echo __('Output Formats'); ?></span>

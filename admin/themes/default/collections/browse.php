@@ -6,7 +6,7 @@ echo flash();
 ?>
 
 <?php if (total_records('Collection') > 0): ?>
-    <?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
+    <?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
     <?php if (is_allowed('Collections', 'add')): ?>
         <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button">
             <?php echo __('Add a Collection'); ?>
@@ -86,7 +86,7 @@ echo flash();
             </table>
         </div>
 
-        <?php echo pagination_links(['aria-label' => __('Bottom pagination')]); ?>
+        <?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
         <?php if (is_allowed('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
