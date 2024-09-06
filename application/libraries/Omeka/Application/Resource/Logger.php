@@ -27,13 +27,17 @@ class Omeka_Application_Resource_Logger extends Zend_Application_Resource_Resour
             return;
         }
 
-        $logFile = LOGS_DIR . '/' . 'errors.log';
-
-        if (!is_writable($logFile)) {
-            throw new RuntimeException('Error log file cannot be written to. Please give this file read/write permissions for the web server.');
+        if (empty($config->log->path)) {
+            $logFile = LOGS_DIR . '/' . 'errors.log';
+        } else {
+            $logFile = $config->log->path;
         }
 
-        $writer = new Zend_Log_Writer_Stream($logFile);
+        try {
+            $writer = new Zend_Log_Writer_Stream($logFile);
+        } catch (Zend_Log_Exception $e) {
+            throw new RuntimeException('Error log file cannot be written to. Please give this file read/write permissions for the web server.');
+        }
         $logger = new Zend_Log($writer);
 
         if (isset($config->log->priority)) {
