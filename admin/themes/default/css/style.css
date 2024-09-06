@@ -903,7 +903,7 @@ input[type=text].small {
     font-weight: bold;
     float: left;
     line-height: 1.5em;
-    margin: 0 0 10px 0;
+    margin: 0;
     width: 100%; }
   .field select {
     width: 100%;
@@ -2209,19 +2209,15 @@ ul.details {
 
 .element {
   clear: both;
-  margin: 0 0 16px 0; }
+  margin: 0 0 10px 0;
+  display: flow-root; }
 
 .element h3 {
   margin: 0 0 16px 0;
   line-height: 16px; }
 
-.element .element-text:after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: #DBDBDB;
-  margin: 10px 0; }
+.element .element-text {
+  margin: 5px 0; }
 
 .element .element-text:last-of-type:after {
   height: 0px;

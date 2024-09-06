@@ -220,7 +220,8 @@
 
 .element {
     clear: both;
-    margin: 0 0 16px 0;
+    margin: 0 0 10px 0;
+    display: flow-root;
 }
 
     .element h3 {
@@ -228,13 +229,8 @@
         line-height: 16px;
     }
 
-    .element .element-text:after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: #DBDBDB;
-        margin: 10px 0;
+    .element .element-text {
+        margin: 5px 0;
     }
 
     .element .element-text:last-of-type:after {
