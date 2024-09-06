@@ -42,7 +42,7 @@ echo flash();
     <button id="search-users-button"><?php echo __('Search users'); ?></button>
 </form>
 
-<?php echo pagination_links(); ?>
+<?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
 <div class="table-responsive">
     <table id="users">
         <thead>

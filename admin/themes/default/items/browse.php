@@ -12,7 +12,7 @@ echo item_search_filters();
 ?>
 
 <?php if ($total_results): ?>
-    <?php echo pagination_links(); ?>
+    <?php echo pagination_links(['aria_label' => __('Top pagination')]); ?>
     <?php if (is_allowed('Items', 'add')): ?>
     <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
     <?php endif; ?>
@@ -149,7 +149,7 @@ echo item_search_filters();
         </div>
     </form>
 
-    <?php echo pagination_links(); ?>
+    <?php echo pagination_links(['aria-label' => __('Bottom pagination')]); ?>
     <?php if (is_allowed('Items', 'add')): ?>
     <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
     <?php endif; ?>

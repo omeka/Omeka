@@ -2807,6 +2807,10 @@ function pagination_links($options = array())
     $totalCount = isset($options['total_results']) ? (int) $options['total_results'] : (int) $p['total_results'];
     $pageNumber = isset($options['page']) ? (int) $options['page'] : (int) $p['page'];
     $itemCountPerPage = isset($options['per_page']) ? (int) $options['per_page'] : (int) $p['per_page'];
+    $ariaLabel = isset($options['aria_label']) ? $options['aria_label'] : '';
+    $params = [
+        'ariaLabel' => $ariaLabel
+    ];
 
     // Create an instance of Zend_Paginator.
     $paginator = Zend_Paginator::factory($totalCount);
@@ -2816,7 +2820,7 @@ function pagination_links($options = array())
               ->setItemCountPerPage($itemCountPerPage)
               ->setPageRange($pageRange);
 
-    return get_view()->paginationControl($paginator, $scrollingStyle, $partial);
+    return get_view()->paginationControl($paginator, $scrollingStyle, $partial, $params);
 }
 
 /**

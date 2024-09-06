@@ -56,10 +56,7 @@ echo flash();
 
 <?php if ($total_results): ?>
 
-    <?php
-        $paginationLinks = pagination_links();
-        echo $paginationLinks;
-    ?>
+    <?php echo pagination_links(['aria_label' => __('Pagination')]); ?>
 
     <section>
         <div id="tags-nav">
