@@ -262,7 +262,6 @@ mail.transport.type = "Sendmail"
 
 ; upload.maxFileSize
 ; Set the maximum file upload size.
-; default: 10M
 ;
 ; Uncomment the following line to set the maximum file upload size. This 
 ; configuration will not exceed the maximum beyond what is set in the 
