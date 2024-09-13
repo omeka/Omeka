@@ -100,6 +100,13 @@ log.priority = Zend_Log::WARN
 ; error log.
 log.sql = false
 
+; log.path
+; Path to the log file.
+; default: the installation's application/logs/errors.log file
+;
+; Uncomment the following line and set a path to override the log file's location
+; log.path = ""
+
 ;;;;;;;;;;;;
 ; Sessions ;
 ;;;;;;;;;;;;
