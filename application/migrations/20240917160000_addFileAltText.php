@@ -15,6 +15,6 @@ class addFileAltText extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-        $this->db->query("ALTER TABLE {$this->db->File} ADD `alt_text` mediumtext collate utf8_unicode_ci NOT NULL");
+        $this->db->query("ALTER TABLE {$this->db->File} ADD `alt_text` text collate utf8_unicode_ci");
     }
 }
