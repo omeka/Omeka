@@ -76,6 +76,31 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
+        $db = get_db();
+        $sql = "
+        SELECT es.name AS element_set_name, e.id AS element_id, e.name AS element_name
+        FROM {$db->ElementSet} es 
+        JOIN {$db->Element} e ON es.id = e.element_set_id 
+        WHERE es.record_type IS NULL OR es.record_type = 'File' 
+        ORDER BY es.name, e.name";
+        $legacyElementSetNames = array('Omeka Image File', 'Omeka Video File', 'Omeka Legacy File');
+        $elements = $db->fetchAll($sql);
+        $elementOptions = array('' => __('Select Below'));
+        foreach ($elements as $element) {
+            $optGroup = __($element['element_set_name']);
+            if (array_search($optGroup, $legacyElementSetNames) !== false) {
+                continue;
+            }
+            $value = __($element['element_name']);
+            $elementOptions[$optGroup]["$optGroup,$value"] = $value;
+        }
+
+        $this->addElement('select', 'file_alt_text_element', array(
+            'label' => __('File Alt Text Element'),
+            'description' => __('Element to use in describing visual files to screen reader users.'),
+            'multiOptions' => $elementOptions
+        ));
+
         $adminThemes = Theme::getAllAdminThemes();
         if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
             foreach ($adminThemes as &$theme) {
@@ -102,7 +127,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         $this->addDisplayGroup(
             array(
                 'use_square_thumbnail', 'link_to_file_metadata', 'per_page_admin', 'per_page_public',
-                'show_empty_elements', 'show_element_set_headings',
+                'show_empty_elements', 'show_element_set_headings', 'file_alt_text_element',
             ),
             'display-settings', array('legend' => __('Display Settings'))
         );

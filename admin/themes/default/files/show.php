@@ -31,10 +31,18 @@ echo flash();
         <?php endif; ?>
     </div>
     
-    <div id="item-metadata" class="panel">
+    <div id="file-item" class="panel">
         <h4><?php echo __('Item'); ?></h4>
         <p><?php echo link_to_item(null, array(), 'show', $file->getItem()); ?></p>
     </div>
+
+    <div id="file-alt-text" class="panel">
+        <h4><?php echo __('Alt Text'); ?></h4>
+        <p>
+            <?php echo $file->getAltText(); ?>
+        </p>
+    </div>
+
 
     <div id="file-links" class="panel">
         <h4><?php echo __('Direct Links'); ?></h4>

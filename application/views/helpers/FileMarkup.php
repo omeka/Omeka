@@ -636,18 +636,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $alt = '';
         if (isset($attrs['alt'])) {
             $alt = $attrs['alt'];
-        } elseif ($fileTitle = metadata($file, 'display title', array('no_escape' => true))) {
-            $alt = $fileTitle;
+        } else {
+            $alt = $file->getAltText();
         }
         $attrs['alt'] = $alt;
-
-        $title = '';
-        if (isset($attrs['title'])) {
-            $title = $attrs['title'];
-        } else {
-            $title = $alt;
-        }
-        $attrs['title'] = $title;
 
         $attrs = apply_filters('image_tag_attributes', $attrs, array(
             'record' => $record,
