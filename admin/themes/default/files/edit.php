@@ -38,7 +38,7 @@ echo flash();
             <?php endif; ?>
             <?php fire_plugin_hook("admin_files_panel_buttons", array('view'=>$this, 'record'=>$file)); ?>
             <div id="alt-text-form" class="field">
-                <?php echo $this->formLabel('collection-id', __('Alt Text'));?>
+                <?php echo $this->formLabel('file-alt-text', __('Alt Text'));?>
                 <div class="inputs">
                     <p class="explanation"><?php echo __('Provide a brief description of visual files to screen reader users.'); ?></p>
                     <?php
