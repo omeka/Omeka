@@ -76,29 +76,14 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
-        $db = get_db();
-        $sql = "
-        SELECT es.name AS element_set_name, e.id AS element_id, e.name AS element_name
-        FROM {$db->ElementSet} es 
-        JOIN {$db->Element} e ON es.id = e.element_set_id 
-        WHERE es.record_type IS NULL OR es.record_type = 'File' 
-        ORDER BY es.name, e.name";
-        $legacyElementSetNames = array('Omeka Image File', 'Omeka Video File', 'Omeka Legacy File');
-        $elements = $db->fetchAll($sql);
-        $elementOptions = array('' => __('Select Below'));
-        foreach ($elements as $element) {
-            $optGroup = __($element['element_set_name']);
-            if (array_search($optGroup, $legacyElementSetNames) !== false) {
-                continue;
-            }
-            $value = __($element['element_name']);
-            $elementOptions[$optGroup]["$optGroup,$value"] = $value;
-        }
 
         $this->addElement('select', 'file_alt_text_element', array(
             'label' => __('File Alt Text Element'),
             'description' => __('Default element to use in describing visual files to screen reader users via the image tag\'s alt attribute. This can be overridden using the file form\'s "Alt Text" field.'),
-            'multiOptions' => $elementOptions
+            'multiOptions' => get_table_options('Element', null, array(
+                'record_types' => array('File', 'All'),
+                'sort' => 'orderBySet')
+            )
         ));
 
         $adminThemes = Theme::getAllAdminThemes();

@@ -165,13 +165,20 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
 
     public function getAltText() {
         $fileCustomAltText = $this->alt_text;
-        $fileAltTextElement = get_option('file_alt_text_element');
+        $fileAltTextElementId = get_option('file_alt_text_element');
 
         if ($fileCustomAltText) {
             return $fileCustomAltText;
-        } elseif ($fileAltTextElement) {
-            $fileAltTextElementText = metadata($this, explode(',',$fileAltTextElement));
-            return strip_formatting($fileAltTextElementText);
+        } elseif ($fileAltTextElementId) {
+            $fileAltTextElement = $this->getElementById($fileAltTextElementId);
+            $fileAltTextElementTexts = $this->getElementTextsByRecord($fileAltTextElement);
+            if ($fileAltTextElementTexts) {
+                $fileAltTextElementText = $fileAltTextElementTexts[0]->text;
+                if ($fileAltTextElementTexts[0]->html) {
+                    $fileAltTextElementText = strip_formatting($fileAltTextElementText);
+                }
+                return trim($fileAltTextElementText);
+            }
         } else {
             return '';
         }
