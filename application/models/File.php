@@ -176,6 +176,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 $fileAltTextElementText = $fileAltTextElementTexts[0]->text;
                 if ($fileAltTextElementTexts[0]->html) {
                     $fileAltTextElementText = strip_formatting($fileAltTextElementText);
+                    $fileAltTextElementText = html_entity_decode($fileAltTextElementText, ENT_QUOTES, 'UTF-8');
                 }
                 return trim($fileAltTextElementText);
             }
