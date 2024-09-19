@@ -156,6 +156,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return $this->getDisplayTitle($this->original_filename);
             case 'rich_title':
                 return $this->getRichTitle(html_escape($this->original_filename));
+            case 'alt_text':
+                return $this->getAltText();
             default:
                 return parent::getProperty($property);
         }
