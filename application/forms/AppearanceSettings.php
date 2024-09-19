@@ -97,7 +97,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addElement('select', 'file_alt_text_element', array(
             'label' => __('File Alt Text Element'),
-            'description' => __('Element to use in describing visual files to screen reader users.'),
+            'description' => __('Default element to use in describing visual files to screen reader users via the image tag\'s alt attribute. This can be overridden using the file form\'s "Alt Text" field.'),
             'multiOptions' => $elementOptions
         ));
 
