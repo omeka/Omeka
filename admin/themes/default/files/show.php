@@ -39,7 +39,7 @@ echo flash();
     <div id="file-alt-text" class="panel">
         <h4><?php echo __('Alt Text'); ?></h4>
         <p>
-            <?php echo html_escape(metadata($file, 'alt_text')); ?>
+            <?php echo metadata($file, 'alt_text'); ?>
         </p>
     </div>
 
