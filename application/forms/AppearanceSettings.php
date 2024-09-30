@@ -76,6 +76,16 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
+
+        $this->addElement('select', 'file_alt_text_element', array(
+            'label' => __('File Alt Text Element'),
+            'description' => __('Default element to use in describing visual files to screen reader users via the image tag\'s alt attribute. This can be overridden using the file form\'s "Alt Text" field.'),
+            'multiOptions' => get_table_options('Element', null, array(
+                'record_types' => array('File', 'All'),
+                'sort' => 'orderBySet')
+            )
+        ));
+
         $adminThemes = Theme::getAllAdminThemes();
         if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
             foreach ($adminThemes as &$theme) {
@@ -102,7 +112,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         $this->addDisplayGroup(
             array(
                 'use_square_thumbnail', 'link_to_file_metadata', 'per_page_admin', 'per_page_public',
-                'show_empty_elements', 'show_element_set_headings',
+                'show_empty_elements', 'show_element_set_headings', 'file_alt_text_element',
             ),
             'display-settings', array('legend' => __('Display Settings'))
         );

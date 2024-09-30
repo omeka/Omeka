@@ -42,7 +42,7 @@ echo flash();
                     <?php foreach (loop('Collection') as $collection): ?>
                     <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                         <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
-                            <?php if ($collectionImage = record_image('collection', 'square_thumbnail', array('role' => 'presentation'))): ?>
+                            <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
                                 <?php echo link_to_collection($collectionImage, array('class' => 'image')); ?>
                             <?php endif; ?>
 

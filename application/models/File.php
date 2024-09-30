@@ -115,6 +115,13 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public $metadata;
 
     /**
+     * Alt text to use for file display.
+     *
+     * @var string
+     */
+    public $alt_text;
+
+    /**
      * Folder paths for each type of files/derivatives.
      *
      * @var array
@@ -149,8 +156,32 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return $this->getDisplayTitle($this->original_filename);
             case 'rich_title':
                 return $this->getRichTitle(html_escape($this->original_filename));
+            case 'alt_text':
+                return $this->getAltText();
             default:
                 return parent::getProperty($property);
+        }
+    }
+
+    public function getAltText() {
+        $fileCustomAltText = $this->alt_text;
+        $fileAltTextElementId = get_option('file_alt_text_element');
+
+        if ($fileCustomAltText) {
+            return $fileCustomAltText;
+        } elseif ($fileAltTextElementId) {
+            $fileAltTextElement = $this->getElementById($fileAltTextElementId);
+            $fileAltTextElementTexts = $this->getElementTextsByRecord($fileAltTextElement);
+            if ($fileAltTextElementTexts) {
+                $fileAltTextElementText = $fileAltTextElementTexts[0]->text;
+                if ($fileAltTextElementTexts[0]->html) {
+                    $fileAltTextElementText = strip_formatting($fileAltTextElementText);
+                    $fileAltTextElementText = html_entity_decode($fileAltTextElementText, ENT_QUOTES, 'UTF-8');
+                }
+                return trim($fileAltTextElementText);
+            }
+        } else {
+            return '';
         }
     }
 

@@ -37,6 +37,22 @@ echo flash();
                 <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
             <?php fire_plugin_hook("admin_files_panel_buttons", array('view'=>$this, 'record'=>$file)); ?>
+            <div id="alt-text-form" class="field">
+                <?php echo $this->formLabel('file-alt-text', __('Alt Text'));?>
+                <div class="inputs">
+                    <p class="explanation"><?php echo __('Provide a brief description of visual files to screen reader users.'); ?></p>
+                    <?php
+                        echo $this->formTextarea(
+                            'alt_text',
+                            $file->alt_text,
+                            array(
+                                'id' => 'file-alt-text',
+                                'rows' => '5'
+                            )
+                        );
+                    ?>
+                </div>
+            </div>
             <?php fire_plugin_hook("admin_files_panel_fields", array('view'=>$this, 'record'=>$file)); ?>
         </div>
     </section>
