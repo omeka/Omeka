@@ -1896,7 +1896,27 @@ ul.details {
   font-weight: bold; }
 
 #files-metadata .files input {
-  margin-bottom: 10px; }
+  background-color: #f1f2f2;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #D6D5C2; }
+
+.file-container {
+  border: 1px solid #D6D5C2;
+  border-bottom: 0;
+  margin-bottom: 20px;
+  border-radius: 2px; }
+
+.file-thumbnail:not(:empty) {
+  padding: 10px 10px 0; }
+
+.file-thumbnail img {
+  border: 1px solid #E4E5DE; }
+
+.file-size:not(:empty) {
+  border-bottom: 1px solid #D6D5C2;
+  padding: 10px; }
 
 /* Browse Items
 ================================================== */
