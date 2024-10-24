@@ -94,6 +94,7 @@ Omeka.Search = {};
             $(button).parent().remove();
             handleRemoveButtons();
             updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
+            addButton.focus();
         }
 
         /**
