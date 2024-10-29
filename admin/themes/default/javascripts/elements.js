@@ -53,9 +53,19 @@ Omeka.Elements = {};
                 });
                 fieldDiv.html(response);
                 fieldDiv.trigger('omeka:elementformload');
-            }
+                fieldDiv.find('.add-element').focus();
+                setTimeout(() => {
+                    Omeka.Elements.alertElementChange('element-' + elementId, fieldDiv);
+                }, 2000);
+           }
         });
     };
+
+    Omeka.Elements.alertElementChange = function (elementId, fieldDiv) {
+        var alertsDiv = $('#' + elementId + '-alerts');
+        var rowCount = fieldDiv.find('.input-block').length;
+        alertsDiv.find('span.count').text(rowCount);
+    }
 
     /**
      * Set up add/remove element buttons for ElementText inputs.
@@ -93,7 +103,7 @@ Omeka.Elements = {};
         context.find(addSelector).click(function (event) {
             event.preventDefault();
             var fieldDiv = $(this).parents(fieldSelector);
-
+            
             Omeka.Elements.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, recordType, recordId);
         });
 
@@ -101,6 +111,8 @@ Omeka.Elements = {};
         context.find(removeSelector).click(function (event) {
             event.preventDefault();
             var removeButton = $(this);
+            var fieldDiv = $(this).parents(fieldSelector);
+            var elementId = fieldDiv.attr('id');
 
             // Don't delete the last input block for an element.
             if (removeButton.parents(fieldSelector).find(inputBlockSelector).length === 1) {
@@ -116,6 +128,11 @@ Omeka.Elements = {};
                 tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, this.id);
             });
             inputBlock.remove();
+
+            fieldDiv.find('textarea').last().focus();
+            setTimeout(() => {
+                Omeka.Elements.alertElementChange(elementId, fieldDiv);
+             }, 2000);
 
             // Hide remove buttons for fields with one input.
             $(fieldSelector).each(function () {
