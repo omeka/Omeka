@@ -35,7 +35,7 @@ class Omeka_View extends Zend_View_Abstract
      *
      * @var bool
      */
-    private $_customScriptsLoaded = false;
+    public static $customScriptsLoaded = false;
 
     /**
      * @param array $config View configuration.
@@ -125,7 +125,7 @@ class Omeka_View extends Zend_View_Abstract
      */
     private function _loadCustomThemeScripts()
     {
-        if ($this->_customScriptsLoaded) {
+        if (self::$customScriptsLoaded) {
             return;
         }
 
@@ -144,7 +144,7 @@ class Omeka_View extends Zend_View_Abstract
         if ($pluginBroker) {
             $pluginBroker->setCurrentPluginDirName($tmpPluginDir);
         }
-        $this->_customScriptsLoaded = true;
+        self::$customScriptsLoaded = true;
     }
 
     /**

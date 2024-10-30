@@ -176,6 +176,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
         Zend_Controller_Action_HelperBroker::resetHelpers();
         $this->frontController->resetInstance();
         Zend_Session::$_unitTestEnabled = true;
+        Omeka_View::$customScriptsLoaded = false;
     }
 
     /**
