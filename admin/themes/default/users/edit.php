@@ -12,7 +12,6 @@ echo flash();
 ?>
 <form method="post">
 <section class="seven columns alpha">
-    <p class='explanation'>* <?php echo __('required field'); ?></p>
     <?php echo $this->form; ?>
 </section>
 <section class="three columns omega">
