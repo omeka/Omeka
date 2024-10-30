@@ -85,7 +85,7 @@ class Omeka_Form extends Zend_Form
                         'ViewHelper',
                         array('Errors', array('class' => 'error')),
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')),
-                        array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
+                        array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha', 'escape' => false, 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')))),
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
                     );
     }

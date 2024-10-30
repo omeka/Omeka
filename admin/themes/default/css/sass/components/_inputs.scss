@@ -168,8 +168,15 @@ label {
     }
 }
 
-.required:after {
-    content: "*";
+.required-label {
+    background-color: #eee;
+    border-radius: 2px;
+    display: block;
+    width: fit-content;
+    padding: 0 .25rem;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 3px 0;
 }
 
 textarea {

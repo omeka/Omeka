@@ -30,7 +30,7 @@ class Omeka_Form_Install extends Omeka_Form
             'ViewHelper',
             array('Errors', array('class' => 'error')),
             array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
-            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta')),
+            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta', 'escape' => false, 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')))),
             array('HtmlTag', array('tag' => 'div', 'class' => 'field'))
         );
 
