@@ -228,7 +228,7 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = is_string($type) ? strtoupper($type) : $type;
         switch ($type) {
             case null:
                 $loader = $this->getPluginLoader(self::CAPTCHA);
