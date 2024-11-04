@@ -71,12 +71,12 @@ echo item_search_filters();
 
                     <td class="item-info">
 
-                        <?php if (metadata('item', 'has files')): ?>
-                        <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
-                        <?php endif; ?>
-
                         <span class="title">
-                            <?php echo link_to_item(); ?>
+                            <?php 
+                                $titleLinkContent  = (metadata($item, 'has files')) ? item_image('square_thumbnail', array(), 0, $item) : '';
+                                $titleLinkContent .= metadata($item, 'rich_title', array('no_escape' => true));
+                            ?>
+                            <?php echo link_to_item($titleLinkContent, array('class' => 'item-thumbnail')); ?>
                             <?php if ($item->featured): ?>
                             <div class="featured-icon">
                                 <span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>

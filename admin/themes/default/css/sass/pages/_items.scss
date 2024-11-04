@@ -48,26 +48,13 @@
     margin: 0 0 20px 0;
 }
 
-.items.browse a.item-thumbnail {
-    float: left;
-    margin: 0 10px 0 0;
-    width: 20%;
-}
-
 @media screen and (max-width: 480px) {
     .items.browse a.item-thumbnail {
         width: auto;
     }
 }
 .items.browse .item-thumbnail img {
-    display: block;
-    border: 1px solid $lightgrayborder;
-    width: 100%;
-    margin: 0;
-    float: left;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    @include browse-image;
 }
 
 .table-actions {
