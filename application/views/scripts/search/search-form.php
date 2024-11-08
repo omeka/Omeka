@@ -7,10 +7,10 @@
         )); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" aria-controls="advanced-form" class="show-advanced button closed" aria-label="<?php echo __('Options'); ?>" title="<?php echo __('Options'); ?>" aria-labelledby="search-form advanced-search">
+    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
         <span class="icon" aria-hidden="true"></span>
     </button>
-    <div id="advanced-form" class="closed" aria-labelledby="search-form advanced-search" aria-role="region">
+    <div id="advanced-form">
         <fieldset id="query-types">
             <legend><?php echo __('Search using this query type:'); ?></legend>
             <?php echo $this->formRadio('query_type', $filters['query_type'], null, $query_types); ?>

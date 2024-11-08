@@ -89,15 +89,9 @@ if (!Omeka) {
     };
 
     Omeka.showAdvancedForm = function () {
-        var advanced_form = $('#advanced-form');
-        advanced_form.addClass('closed');
-        $('#search-container').addClass('with-advanced');
-
-        $('.show-advanced').click(function(e) {
-            e.preventDefault();
+        $('#search-form').on('click', '.show-advanced', function() {
             var advanced_toggle = $(this);
-            advanced_toggle.toggleClass('open').toggleClass('closed');
-            advanced_form.toggleClass('open').toggleClass('closed');
+            advanced_toggle.toggleClass('open');
             if (advanced_toggle.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
             } else {
