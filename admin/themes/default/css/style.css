@@ -1377,8 +1377,7 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    margin: 0; }
-  #search-form.with-advanced input[type=text] {
+    margin: 0;
     padding-right: 72px; }
 
 #advanced-search,
