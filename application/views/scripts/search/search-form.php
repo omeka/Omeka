@@ -7,7 +7,7 @@
         )); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
+    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced closed button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
         <span class="icon" aria-hidden="true"></span>
     </button>
     <div id="advanced-form">
