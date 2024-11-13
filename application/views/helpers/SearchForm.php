@@ -61,7 +61,9 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         if (!isset($options['show_advanced'])) {
             $options['show_advanced'] = false;
         } else {
-            $options['form_attributes']['class'] = 'with-advanced';
+            if (!isset($options['form_attributes']['class'])) {
+                $options['form_attributes']['class'] = 'with-advanced';
+            }
         }
 
         if (!isset($options['form_attributes']['action'])) {
