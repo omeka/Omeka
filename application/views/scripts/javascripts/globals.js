@@ -24,15 +24,15 @@ if (!Omeka) {
         }
 
         advanced_form.addClass('closed');
-        $('#search-container').addClass('with-advanced');
 
-        $('.show-advanced').click(function(e) {
+        $(document).on('click', '.show-advanced', function(e) {
             e.preventDefault();
             var advanced_toggle = $(this);
             advanced_toggle.toggleClass('open').toggleClass('closed');
             advanced_form.toggleClass('open').toggleClass('closed');
             if (advanced_toggle.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
+                advanced_form.find(':focusable').first().focus();
             } else {
                 advanced_toggle.attr('aria-expanded', false);
             }

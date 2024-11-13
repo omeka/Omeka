@@ -47,11 +47,6 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
             }
         }
 
-        // Set the default flag indicating whether to show the advanced form.
-        if (!isset($options['show_advanced'])) {
-            $options['show_advanced'] = false;
-        }
-
         // Set the default submit value.
         if (!isset($options['submit_value'])) {
             $options['submit_value'] = __('Submit');
@@ -61,6 +56,14 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         if (!isset($options['form_attributes'])) {
             $options['form_attributes'] = array();
         }
+
+        // Set the default flag indicating whether to show the advanced form.
+        if (!isset($options['show_advanced'])) {
+            $options['show_advanced'] = false;
+        } else {
+            $options['form_attributes']['class'] = 'with-advanced';
+        }
+
         if (!isset($options['form_attributes']['action'])) {
             $url = apply_filters('search_form_default_action', url('search'));
             $options['form_attributes']['action'] = $url;
