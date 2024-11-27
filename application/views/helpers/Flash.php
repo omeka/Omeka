@@ -33,7 +33,7 @@ class Omeka_View_Helper_Flash extends Zend_View_Helper_Abstract
         $flashHtml = '';
         if ($this->_flashMessenger->hasMessages()
          || $this->_flashMessenger->hasCurrentMessages()) {
-            $flashHtml .= '<div id="flash">' . "\n" . '<ul>';
+            $flashHtml .= '<div id="flash"><ul>';
             foreach ($this->_flashMessenger->getMessages() as $status => $messages) {
                 foreach ($messages as $message) {
                     $flashHtml .= $this->_getListHtml($status, $message);
@@ -44,7 +44,8 @@ class Omeka_View_Helper_Flash extends Zend_View_Helper_Abstract
                     $flashHtml .= $this->_getListHtml($status, $message);
                 }
             }
-            $flashHtml .= '</ul></div>';
+            $flashHtml .= '</ul><div id="flash-sr" class="sr-only" aria-live="assertive" aria-atomic="true"></div></div>';
+            $flashHtml .= '<script>Omeka.addReadyCallback(Omeka.moveFlashMessages);</script>';
         }
         $this->_flashMessenger->clearMessages();
         $this->_flashMessenger->clearCurrentMessages();

@@ -110,6 +110,12 @@ if (!Omeka) {
         });
     };
 
+    Omeka.moveFlashMessages = function() {
+        setTimeout(function() {
+            $('#flash-sr').text($('#flash').text());
+        }, 1000);
+    }
+
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
     };
