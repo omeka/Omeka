@@ -33,8 +33,8 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
-<a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 
+<a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 <header role="banner">
     <?php fire_plugin_hook('admin_header_top', array('view'=>$this)); ?>
     <div id="site-title" class="two columns">
