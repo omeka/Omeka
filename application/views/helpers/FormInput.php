@@ -39,7 +39,7 @@ class Omeka_View_Helper_FormInput extends Zend_View_Helper_FormElement
         }
 
         $type = 'text';
-        if ($attribs['type']) {
+        if (isset($attribs['type'])) {
             $type = $attribs['type'];
             unset($attribs['type']);
         }
