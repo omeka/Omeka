@@ -80,12 +80,15 @@ class Omeka_Form extends Zend_Form
         // <input type="submit" />
         // </div>
 
+        $defaultLabelOptions = array('placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')));
+        $defaultLabel = new Omeka_Form_Decorator_DefaultLabel($defaultLabelOptions);
+
         return array(
                         array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),
                         'ViewHelper',
                         array('Errors', array('class' => 'error')),
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')),
-                        array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha', 'escape' => false, 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')))),
+                        $defaultLabel,
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
                     );
     }
