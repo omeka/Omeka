@@ -37,6 +37,13 @@ class Table_Collection extends Omeka_Db_Table
                 case 'range':
                     $this->filterByRange($select, $value);
                     break;
+                case 'tag':
+                case 'tags':
+                    $this->filterByTags($select, $value);
+                    break;
+                case 'excludeTags':
+                    $this->filterByExcludedTags($select, $value);
+                    break;
             }
         }
     }
@@ -133,5 +140,83 @@ class Table_Collection extends Omeka_Db_Table
                                      "et_sort.text $sortDir"));
             }
         }
+    }
+
+    /**
+     * Query must look like the following in order to correctly retrieve collections
+     * that have all the tags provided (in this example, all collections that are
+     * tagged both 'foo' and 'bar'):
+     *
+     *    SELECT i.id
+     *    FROM omeka_collections i
+     *    WHERE
+     *    (
+     *    i.id IN
+     *        (SELECT tg.record_id as id
+     *        FROM omeka_records_tags tg
+     *        INNER JOIN omeka_tags t ON t.id = tg.tag_id
+     *        WHERE t.name = 'foo' AND tg.record_type = 'Collection')
+     *    AND i.id IN
+     *       (SELECT tg.record_id as id
+     *       FROM omeka_records_tags tg
+     *       INNER JOIN omeka_tags t ON t.id = tg.tag_id
+     *       WHERE t.name = 'bar' AND tg.record_type = 'Collection')
+     *    )
+     *      ...
+     *
+     *
+     * @param Omeka_Db_Select
+     * @param string|array A comma-delimited string or an array of tag names.
+     */
+    public function filterByTags($select, $tags)
+    {
+        // Split the tags into an array if they aren't already
+        if (!is_array($tags)) {
+            $tags = explode(get_option('tag_delimiter'), $tags);
+        }
+
+        $db = $this->getDb();
+
+        // For each of the tags, create a SELECT subquery using Omeka_Db_Select.
+        // This subquery should only return collection IDs, so that the subquery can be
+        // appended to the main query by WHERE i.id IN (SUBQUERY).
+        foreach ($tags as $tagName) {
+            $subSelect = new Omeka_Db_Select;
+            $subSelect->from(array('records_tags' => $db->RecordsTags), array('collections.id' => 'records_tags.record_id'))
+                ->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array())
+                ->where('tags.name = ? AND records_tags.`record_type` = "Collection"', trim($tagName));
+
+            $select->where('collections.id IN (' . (string) $subSelect . ')');
+        }
+    }
+
+    /**
+     * Filter SELECT statement based on collections that are not tagged with a specific
+     * set of tags
+     *
+     * @param Zend_Db_Select
+     * @param array|string Set of tag names (either array or comma-delimited string)
+     */
+    public function filterByExcludedTags($select, $tags)
+    {
+        $db = $this->getDb();
+
+        if (!is_array($tags)) {
+            $tags = explode(get_option('tag_delimiter'), $tags);
+        }
+        $subSelect = new Omeka_Db_Select;
+        $subSelect->from(array('collections' => $db->Collection), 'collections.id')
+                         ->joinInner(array('records_tags' => $db->RecordsTags),
+                                     'records_tags.record_id = collections.id AND records_tags.record_type = "Collection"',
+                                     array())
+                         ->joinInner(array('tags' => $db->Tag),
+                                     'records_tags.tag_id = tags.id',
+                                     array());
+
+        foreach ($tags as $key => $tag) {
+            $subSelect->where('tags.name LIKE ?', $tag);
+        }
+
+        $select->where('collections.id NOT IN ('.$subSelect->__toString().')');
     }
 }
