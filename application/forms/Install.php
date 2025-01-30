@@ -35,7 +35,7 @@ class Omeka_Form_Install extends Omeka_Form
                         'ViewHelper',
                         array('Errors', array('class' => 'error')),
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')),
-                        $defaultLabel,
+                        'Label' => $defaultLabel,
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
                     );
 
