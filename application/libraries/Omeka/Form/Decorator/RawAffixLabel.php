@@ -8,7 +8,7 @@
  * 
  * @package Omeka\Form\Decorator
  */
-class Omeka_Form_Decorator_RawAffix extends Zend_Form_Decorator_Label
+class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
 {
     /**
      * Get label to render

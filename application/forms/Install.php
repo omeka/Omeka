@@ -28,7 +28,7 @@ class Omeka_Form_Install extends Omeka_Form
 
 
         $defaultLabelOptions = array('placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')));
-        $defaultLabel = new Omeka_Form_Decorator_RawAffix($defaultLabelOptions);
+        $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
 
         $decorators = array(
                         array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),

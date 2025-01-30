@@ -81,7 +81,7 @@ class Omeka_Form extends Zend_Form
         // </div>
 
         $defaultLabelOptions = array('placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')));
-        $defaultLabel = new Omeka_Form_Decorator_RawAffix($defaultLabelOptions);
+        $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
 
         return array(
                         array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),
