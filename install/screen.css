@@ -452,7 +452,7 @@ input[type=text].small {
     font-weight: bold;
     float: left;
     line-height: 1.5em;
-    margin: 0 0 10px 0;
+    margin: 0;
     width: 100%; }
   .field select {
     width: 100%;
@@ -518,8 +518,15 @@ label input[type=text] {
     .inputs label {
       margin-bottom: 0; } }
 
-.required:after {
-  content: "*"; }
+.required-label {
+  background-color: #eee;
+  border-radius: 2px;
+  display: block;
+  width: fit-content;
+  padding: 0 .25rem;
+  font-weight: normal;
+  font-size: 12px;
+  margin: 3px 0; }
 
 textarea {
   width: 100%;
