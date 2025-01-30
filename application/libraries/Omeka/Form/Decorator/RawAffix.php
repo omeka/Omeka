@@ -1,10 +1,6 @@
 <?php
 /**
- * Omeka
- * 
- * @copyright 2016-present Corporation for Digital Scholarship, 
- * 2008-2016 Roy Rosenzweig Center for History and New Media
- * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ * 2025 Corporation for Digital Scholarship
  */
 
 /**
@@ -12,7 +8,7 @@
  * 
  * @package Omeka\Form\Decorator
  */
-class Omeka_Form_Decorator_DefaultLabel extends Zend_Form_Decorator_Label
+class Omeka_Form_Decorator_RawAffix extends Zend_Form_Decorator_Label
 {
     /**
      * Get label to render
