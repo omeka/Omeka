@@ -26,13 +26,18 @@ class Omeka_Form_Install extends Omeka_Form
 
         $this->setMethod('post');
 
+
+        $defaultLabelOptions = array('placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')));
+        $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
+
         $decorators = array(
-            'ViewHelper',
-            array('Errors', array('class' => 'error')),
-            array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
-            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta')),
-            array('HtmlTag', array('tag' => 'div', 'class' => 'field'))
-        );
+                        array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),
+                        'ViewHelper',
+                        array('Errors', array('class' => 'error')),
+                        array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')),
+                        'Label' => $defaultLabel,
+                        array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
+                    );
 
         $this->addElement('text', 'username', array(
             'label' => __('Username'),

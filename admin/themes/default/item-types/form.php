@@ -12,7 +12,6 @@ jQuery(document).ready(function () {
 <section class="seven columns alpha">
     <fieldset id="type-information">
         <legend><?php echo __('Item Type Information'); ?></legend>
-        <p class='explanation'>* <?php echo __('required field'); ?></p>
             
         <div class="field">
             <?php echo $this->form->getElement(Omeka_Form_ItemTypes::NAME_ELEMENT_ID); ?>
