@@ -218,29 +218,31 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
         $delete = (boolean) $this->_getParam('submit-batch-delete');
 
+        $params = json_decode($this->_getParam('params'), true) ?: array();
+        unset($params['admin']);
+        unset($params['module']);
+        unset($params['controller']);
+        unset($params['action']);
+        unset($params['submit_search']);
+        unset($params['page']);
+        $redirectTo = 'items/browse'. (empty($params) ? '' : '?'. http_build_query($params));
+
         $batchAll = (boolean) $this->_getParam('batch-all');
         // Process all searched items.
         if ($batchAll) {
-            $params = json_decode($this->_getParam('params'), true) ?: array();
-            unset($params['admin']);
-            unset($params['module']);
-            unset($params['controller']);
-            unset($params['action']);
-            unset($params['submit_search']);
-            unset($params['page']);
 
             $totalRecords = $this->_helper->db->count($params);
 
             if (empty($totalRecords)) {
                 $this->_helper->flashMessenger(__('No item to batch edit.'), 'error');
-                $this->_helper->redirector('browse', 'items', null, $params);
+                $this->_helper->redirector->gotoUrl($redirectTo);
                 return;
             }
 
             // Special check to avoid the deletion of all the base.
             if ($delete && total_records('Item') == $totalRecords) {
                 $this->_helper->flashMessenger(__('The deletion of all items is forbidden.'), 'error');
-                $this->_helper->redirector('browse', 'items', null, $params);
+                $this->_helper->redirector->gotoUrl($redirectTo);
                 return;
             }
 
@@ -257,7 +259,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
             $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
-            $this->_helper->redirector('browse', 'items');
+            $this->_helper->redirector->gotoUrl($redirectTo);
             return;
         }
 
@@ -282,6 +284,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             return $this->_batchEditAllSave();
         }
 
+        $redirectToSelection = true;
         $itemIds = $this->_getParam('items');
         if ($itemIds) {
             $metadata = $this->_getParam('metadata');
@@ -358,6 +361,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 $dispatcher->send('Job_ItemBatchEdit', $options);
 
                 if ($delete) {
+                    $redirectToSelection = false;
                     $message = __('The items were successfully deleted!');
                 } else {
                     $message = __('The items were successfully changed!');
@@ -368,7 +372,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger(__('No item to batch edit.'), 'error');
         }
 
-        $this->_helper->redirector('browse', 'items');
+        if ($redirectToSelection && !empty($itemIds)) {
+            $this->_helper->redirector->gotoUrl('items/browse?'. http_build_query(array('range' => implode(',', (array) $itemIds))));
+        } else {
+            $this->_helper->redirector('browse', 'items');
+        }
     }
 
     /**
@@ -376,6 +384,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
      */
     protected function _batchEditAllSave()
     {
+        $redirectToSelection = true;
         // Get the record ids filtered to Omeka_Db_Table::applySearchFilters().
         $params = json_decode($this->_getParam('params'), true) ?: array();
         $totalRecords = $this->_helper->db->count($params);
@@ -423,6 +432,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 $dispatcher->sendLongRunning('Job_ItemBatchEditAll', $options);
 
                 if ($delete) {
+                    $redirectToSelection = false;
                     $message = __('The items are checked and deleted one by one in the background.');
                 } else {
                     $message = __('The items are checked and changed one by one in the background.');
@@ -434,6 +444,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger(__('No item to batch edit.'), 'error');
         }
 
-        $this->_helper->redirector('browse', 'items');
+        if ($redirectToSelection && !empty($params)) {
+            $this->_helper->redirector->gotoUrl('items/browse?'. http_build_query($params));
+        } else {
+            $this->_helper->redirector('browse', 'items');
+        }
     }
 }
