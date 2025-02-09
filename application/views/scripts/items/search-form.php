@@ -41,6 +41,19 @@ $formAttributes['method'] = 'GET';
             $search = array(array('field' => '', 'type' => '', 'value' => ''));
         }
 
+function get_tags_datalist($id)
+{
+  $s = '<datalist id="'.$id.'">';
+  foreach (get_records('Tag', array('sort_field' => 'name'), 500) as $tagi) {
+    if ($tagi->tagCount > 0) {
+      $ename = html_escape($tagi->name);
+      $s .= '<option value="'.$ename.'" label="'.$ename.'">';
+    }
+  }
+  $s .= '</datalist>';
+  return $s;
+}
+
         //Here is where we actually build the search form
         //The POST looks like =>
         // advanced[0] =>
@@ -188,10 +201,10 @@ $formAttributes['method'] = 'GET';
         <div class="inputs">
         <?php
             echo $this->formText('tags', @$_REQUEST['tags'],
-                array('size' => '40', 'id' => 'tag-search')
+                array('size' => '40', 'id' => 'tag-search', 'list' => 'searchable-tags')
             );
         ?>
-        </div>
+        </div><?php echo get_tags_datalist('searchable-tags'); ?>
     </div>
 
 
