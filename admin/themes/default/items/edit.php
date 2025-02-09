@@ -17,7 +17,7 @@ echo flash();
     <section class="three columns omega">
         <div id="save" class="panel">
             <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
-            <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
+            <a href="<?php echo record_url('item'); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
             <?php if (is_allowed($item, 'delete')): ?>
             <?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
             <?php endif; ?>
