@@ -644,7 +644,8 @@ button.ui-dialog-titlebar-close {
   background: white; }
 
 .ui-sortable .sortable-item {
-  cursor: move; }
+  cursor: move;
+  display: flex; }
   .ui-sortable .sortable-item:before {
     display: inline-block;
     font-family: "Font Awesome 5 Free";
@@ -820,6 +821,28 @@ button.ui-dialog-titlebar-close {
 
 .ui-widget-overlay {
   background-color: rgba(0, 0, 0, 0.5); }
+
+.keyboard-reorder {
+  padding: 0;
+  border: 0;
+  display: inline-block;
+  margin: 0 5px 0 auto;
+  background-color: transparent; }
+
+.keyboard-reorder:before {
+  content: "\f11c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: inline-block;
+  height: 20px; }
+
+li.selected {
+  box-shadow: 0 0 0 2px #B00D00; }
+  li.selected .sortable-item {
+    background-color: #c8c8c8; }
+  li.selected ul li .sortable-item .keyboard-reorder,
+  li.selected ul li .sortable-item .drawer-toggle {
+    display: none; }
 
 footer {
   clear: both;

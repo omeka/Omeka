@@ -117,6 +117,22 @@ Omeka.Navigation = {};
         });
     };
 
+    Omeka.Navigation.enableKeyboardNavigation = function() {
+        $(document).on('click', '.keyboard-reorder', function() {
+            var keyboarReorderButton = $(this);
+            var currentSortableElement = keyboarReorderButton.parents('li').first();
+            var childSortableElements = currentSortableElement.find('li input, li button');
+            if (currentSortableElement.hasClass('selected')) {
+                currentSortableElement.removeClass('selected');
+                childSortableElements.removeAttr('disabled');
+            } else {
+                $('li.selected').removeClass('selected');
+                currentSortableElement.addClass('selected');
+                childSortableElements.attr('disabled', 'true');
+            }
+        })
+    };
+
     Omeka.Navigation.addNewNavLinkForm = function () {
         // add the new nav link add button
         $( '#new_nav_link_button_link' ).click(function (event) {

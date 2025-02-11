@@ -14,6 +14,7 @@
 	
 	.sortable-item { 
 		cursor: move;
+        display: flex;
 		
 		&:before {
 		    display: inline-block;
@@ -50,7 +51,7 @@
             }
 		}		
 	}
-	
+
 	li {
     	margin-bottom: 15px;
 		list-style-type: none;
@@ -206,5 +207,34 @@
 }
 
 .ui-widget-overlay {
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.5);	
+}
+
+.keyboard-reorder {
+    padding: 0;
+    border: 0;
+    display: inline-block;
+    margin: 0 $spacing-s 0 auto;
+    background-color: transparent;
+}
+
+.keyboard-reorder:before {
+    content: "\f11c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    display: inline-block;
+    height: 20px;
+}
+
+li.selected {
+    box-shadow: 0 0 0 2px #B00D00;
+
+    .sortable-item {
+        background-color: #c8c8c8;
+    }
+
+    ul li .sortable-item .keyboard-reorder,
+    ul li .sortable-item .drawer-toggle {
+        display: none;
+    }
 }

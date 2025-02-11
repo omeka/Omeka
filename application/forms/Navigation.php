@@ -129,6 +129,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                  . $checkboxClass
                  . '">';
         $html .= html_escape($page->getLabel());
+        $html .= '<button type="button" class="keyboard-reorder" aria-label="' . __('Reorder with keyboard') . ' title="' . __('Reorder with keyboard') . '"></button>';
         $html .= '</div>';
         $html .= '<div class="drawer-contents">';
         $html .= '<label>' . __('Label') . '</label><input type="text" class="navigation-label" />';
