@@ -2368,6 +2368,49 @@ function recent_items($count = 10)
     return $html;
 }
 /**
+ * Get HTML for random featured records.
+ */
+
+function random_featured_records($recordType, $countPerType = 3, $overrides = array(), $hasImage = null, $thumbnailSize = 'fullsize') {
+    $html = '';
+
+    $partials = [
+        'exhibit' => 'exhibit-builder/exhibits/single.php',
+        'collection' => 'collections/single.php',
+        'item' => 'items/single.php',
+    ];
+
+    if (!empty($overrides)) {
+        $partials = array_merge($partials, $overrides);
+    }
+
+    if (!is_array($recordType)) {
+        $recordType = [$recordType];
+    }
+
+    foreach ($recordType as $singleRecordType) {
+        $featuredRecords = get_records(ucfirst($singleRecordType), array('featured' => 1,
+                                     'sort_field' => 'random'), $countPerType);
+        if ($featuredRecords) {
+            foreach ($featuredRecords as $featuredRecord) {
+                $html .= get_view()->partial($partials[$singleRecordType], array(
+                    'featuredRecord' => $featuredRecord,
+                    'recordType' => $singleRecordType,
+                    'thumbnailSize' => $thumbnailSize,
+                    'featured' => 'featured', // A flag for using in single.php, which is also used in non-featured contexts.
+                ));
+            }
+        }
+    }
+
+    if ($recordType == 'exhibit') {
+        $html = apply_filters('exhibit_builder_display_random_featured_exhibit', $html);
+    }
+    
+    return $html;
+}
+
+/**
  * Get HTML for random featured items.
  *
  * @package Omeka\Function\View\Item
