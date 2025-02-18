@@ -18,8 +18,6 @@ $_SERVER['SCRIPT_NAME'] = '';
 require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 require_once 'globals.php';
 
-error_reporting(E_ALL);
-
 ini_set('display_errors', '1');
 
 define('TEST_DIR', dirname(__FILE__));
