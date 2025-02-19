@@ -33,7 +33,7 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
         ini-values: mysqli.default_socket=/var/run/mysqld/mysqld.sock
-        tools: composer:v1
+        tools: composer:2.2
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
