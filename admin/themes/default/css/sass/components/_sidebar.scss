@@ -23,7 +23,8 @@
     position: fixed;
     top: 40px;
     left: 0;
-	bottom: 0;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
 	margin: 0;
 	z-index: 1002;
 
@@ -32,7 +33,8 @@
     	width: calc(100% + #{2 * $spacing-l});
 		left: -2 * $spacing-m;
 		right: -2 * $spacing-m;
-		bottom: auto;
+        height: auto;
+        overflow-y: visible;
 		top: 0;
 		z-index: auto;
 
