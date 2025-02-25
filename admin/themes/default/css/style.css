@@ -1577,7 +1577,7 @@ button.remove_search {
   #content-nav ul {
     width: 100%;
     list-style-type: none;
-    padding: 0;
+    padding: 0 0 20px;
     float: left;
     clear: left;
     margin: 0; }
