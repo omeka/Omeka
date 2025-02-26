@@ -196,10 +196,11 @@ class Table_Item extends Omeka_Db_Table
             if (is_numeric($collection)) {
                 return (int) $collection;
             }
-            return;
+            return '';
         }, $collections);
 
-        $hasEmpty = in_array(null, $collectionIds);
+        // strict check to skip placeholder (empty string)
+        $hasEmpty = in_array(null, $collectionIds, true);
         $collectionIds = array_filter($collectionIds);
         if (!empty($collectionIds)) {
             $select->joinLeft(
@@ -244,10 +245,11 @@ class Table_Item extends Omeka_Db_Table
             if (is_string($type)) {
                 return $type;
             }
-            return;
+            return '';
         }, $types);
 
-        $hasEmpty = in_array(null, $typeIdsOrNames);
+        // strict check to skip placeholder (empty string)
+        $hasEmpty = in_array(null, $typeIdsOrNames, true);
         $typeIdsOrNames = array_filter($typeIdsOrNames);
         if ($typeIdsOrNames) {
             $select->joinLeft(array(
