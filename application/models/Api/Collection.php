@@ -36,6 +36,7 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
                 'url' => self::getResourceUrl("/items?collection={$record->id}"),
                 'resource' => 'items',
             ),
+            'tags' = $this->getTagRepresentations($record),
             'element_texts' => $this->getElementTextRepresentations($record),
         );
 
@@ -56,6 +57,7 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
         if (isset($data->featured)) {
             $record->featured = $data->featured;
         }
+        $this->setTagData($record, $data);
         $this->setElementTextData($record, $data);
     }
 
