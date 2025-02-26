@@ -50,7 +50,18 @@ class Omeka_Form_Login extends Omeka_Form
             'label' => __('Remember Me?'),
             'decorators' => $decorators,
         ));
-        $this->addDisplayGroup(array('username', 'password', 'remember'), 'login');
+        if(Omeka_Captcha::isConfigured()) {
+            $this->addElement('captcha', 'captcha',  array(
+                'class' => 'hidden',
+                'style' => 'display: none;',
+                'label' => __("Please verify you're a human"),
+                'type' => 'hidden',
+                'captcha' => Omeka_Captcha::getCaptcha()
+            ));
+            $this->addDisplayGroup(array('username', 'password','captcha', 'remember'), 'login');
+        }else{
+            $this->addDisplayGroup(array('username', 'password', 'remember'), 'login');
+        }
         $this->addElement('submit', 'submit', array('label' => __('Log In')));
     }
 }
