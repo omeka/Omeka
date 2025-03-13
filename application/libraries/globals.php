@@ -2077,6 +2077,7 @@ function metadata($record, $metadata, $options = array())
  * Get all element text metadata for a record.
  *
  * @package Omeka\Function\View
+
  * @uses Omeka_View_Helper_AllElementTexts::allElementTexts()
  * @param Omeka_Record_AbstractRecord|string $record The record to get the
  * element text metadata for.
@@ -2371,42 +2372,32 @@ function recent_items($count = 10)
  * Get HTML for random featured records.
  */
 
-function random_featured_records($recordType, $countPerType = 3, $overrides = array(), $hasImage = null, $thumbnailSize = 'fullsize') {
+function display_records($recordType, $queryOptions = array(), $partialPath = '', $partialOptions = array(), $count = 3) {
     $html = '';
 
-    $partials = [
-        'exhibit' => 'exhibit-builder/exhibits/single.php',
-        'collection' => 'collections/single.php',
-        'item' => 'items/single.php',
-    ];
-
-    if (!empty($overrides)) {
-        $partials = array_merge($partials, $overrides);
+    if ($partialPath == '') {
+        $partialPath = $recordType . 's/single.php';
     }
 
-    if (!is_array($recordType)) {
-        $recordType = [$recordType];
-    }
+    $defaultQueryOptions = array(
+        'featured' => '1',
+        'sort_field' => 'random'
+    );
+    $queryOptions = array_merge($defaultQueryOptions, $queryOptions);
+    $records = get_records(ucfirst($recordType), $queryOptions, $count);
 
-    foreach ($recordType as $singleRecordType) {
-        $featuredRecords = get_records(ucfirst($singleRecordType), array('featured' => 1,
-                                     'sort_field' => 'random'), $countPerType);
-        if ($featuredRecords) {
-            foreach ($featuredRecords as $featuredRecord) {
-                $html .= get_view()->partial($partials[$singleRecordType], array(
-                    'featuredRecord' => $featuredRecord,
-                    'recordType' => $singleRecordType,
-                    'thumbnailSize' => $thumbnailSize,
-                    'featured' => 'featured', // A flag for using in single.php, which is also used in non-featured contexts.
-                ));
-            }
+    if ($records) {
+        foreach ($records as $record) {
+            $defaultPartialOptions = array(
+                $recordType => $record,
+                'record' => $record,
+                'recordType' => $recordType
+            );
+            $currentPartialOptions = array_merge($defaultPartialOptions, $partialOptions);
+            $html .= get_view()->partial($partialPath, $currentPartialOptions);
         }
     }
 
-    if ($recordType == 'exhibit') {
-        $html = apply_filters('exhibit_builder_display_random_featured_exhibit', $html);
-    }
-    
     return $html;
 }
 
