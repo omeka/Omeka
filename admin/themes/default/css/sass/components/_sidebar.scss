@@ -59,7 +59,7 @@
 		 	height: 0px;
 			display: none;
 		 	overflow: auto;
-		 	transition: 0.5s all;
+		 	transition: 0.5s display;
 		 	
 		 	&.in {
 			 	height: auto;
@@ -72,7 +72,7 @@
 	li {
 	    word-wrap: break-word;
 	    z-index: 1000;
-	    transition: 0.5s all;
+	    transition: 0.5s background;
 
 	    &:hover {
 	        background: $darkred;
@@ -87,7 +87,7 @@
 	        display: block;
 	        padding: .5em .5em .5em 1em;
 	        text-decoration: none;
-	        transition: 0.5s all;
+	        transition: 0.5s color;
 	        
 	        @include screen-xs {
 		    	font-size: 16px;   
@@ -133,7 +133,6 @@
 	    padding: .625em 3em .625em $spacing-l;
 	    font-size: 16px;
 	    text-decoration: none;
-	    transition: 0.5s all;
 		overflow: hidden;
 		border-radius: 0;
 		text-overflow: ellipsis;

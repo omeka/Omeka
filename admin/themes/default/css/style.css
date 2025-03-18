@@ -90,7 +90,7 @@ dt {
 a:link {
   color: #003576;
   text-decoration: underline;
-  transition: 0.5s all; }
+  transition: 0.5s color; }
 
 a:hover,
 a:active,
@@ -374,7 +374,8 @@ button {
   text-align: center;
   text-decoration: none;
   white-space: normal;
-  transition: 0.5s all; }
+  transition-duration: 0.5s;
+  transition-property: border-color, background, outline, box-shadow, z-index; }
   span.button.full-width,
   a.button.full-width,
   input[type=submit].full-width,
@@ -1075,7 +1076,7 @@ header {
     color: #CCCCCC;
     padding-bottom: 11px;
     border-bottom: 2px solid transparent;
-    transition: 0.5s all;
+    transition: 0.5s color;
     text-decoration: none; }
   header a:hover,
   header a:active {
@@ -1104,7 +1105,8 @@ header {
         left: 0;
         overflow: auto;
         background: #333333;
-        transition: 0.5s all; }
+        transition-duration: 0.5s;
+        transition-property: height, overflow-x, display, z-index; }
         header nav.in {
           height: 260px;
           overflow-x: hidden;
@@ -1237,7 +1239,8 @@ header {
   text-align: center;
   text-decoration: none;
   white-space: normal;
-  transition: 0.5s all; }
+  transition-duration: 0.5s;
+  transition-property: border-color, background, outline; }
   .pagination li a:hover, .pagination li a:focus {
     border-color: rgba(35, 35, 35, 0.65);
     background: #e4e6e6;
@@ -1399,7 +1402,7 @@ header {
   top: 0;
   right: 0;
   text-indent: -9999px;
-  transition: 0.5s all;
+  transition: 0.5s background;
   margin: 0;
   color: #fff;
   background: #82423B;
@@ -1581,7 +1584,7 @@ button.remove_search {
         height: 0px;
         display: none;
         overflow: auto;
-        transition: 0.5s all; }
+        transition: 0.5s display; }
         #content-nav ul.in {
           height: auto;
           display: block;
@@ -1589,7 +1592,7 @@ button.remove_search {
   #content-nav li {
     word-wrap: break-word;
     z-index: 1000;
-    transition: 0.5s all; }
+    transition: 0.5s background; }
     #content-nav li:hover {
       background: #82423B; }
       #content-nav li:hover a {
@@ -1599,7 +1602,7 @@ button.remove_search {
       display: block;
       padding: .5em .5em .5em 1em;
       text-decoration: none;
-      transition: 0.5s all; }
+      transition: 0.5s color; }
       @media (max-width: 767px) {
         #content-nav li a {
           font-size: 16px;
@@ -1637,7 +1640,6 @@ button.remove_search {
       padding: 0.625em 3em 0.625em 20px;
       font-size: 16px;
       text-decoration: none;
-      transition: 0.5s all;
       overflow: hidden;
       border-radius: 0;
       text-overflow: ellipsis;
@@ -2025,7 +2027,8 @@ ul.details {
     text-align: center;
     text-decoration: none;
     white-space: normal;
-    transition: 0.5s all;
+    transition-duration: 0.5s;
+    transition-property: border-color, background, outline, box-shadow, z-index;
     display: inline-block;
     margin: 0 5px 20px 0;
     padding: 5px 10px;
@@ -2078,7 +2081,8 @@ ul.details {
     text-align: center;
     text-decoration: none;
     white-space: normal;
-    transition: 0.5s all;
+    transition-duration: 0.5s;
+    transition-property: border-color, background, outline, box-shadow, z-index;
     display: inline-block;
     margin: 0 5px 20px 0;
     padding: 5px 10px;
@@ -2131,7 +2135,8 @@ ul.details {
     text-align: center;
     text-decoration: none;
     white-space: normal;
-    transition: 0.5s all;
+    transition-duration: 0.5s;
+    transition-property: border-color, background, outline, box-shadow, z-index;
     display: inline-block;
     margin: 0 5px 20px 0;
     padding: 5px 10px;
