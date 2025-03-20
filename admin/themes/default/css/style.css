@@ -122,7 +122,8 @@ hr {
   margin: 30px 0; }
 
 .container {
-  max-width: 100%; }
+  max-width: 100%;
+  overflow-x: hidden; }
   @media (min-width: 1440px) {
     .container {
       width: 1240px; } }
