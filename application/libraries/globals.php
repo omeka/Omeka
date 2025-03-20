@@ -2085,7 +2085,7 @@ function metadata($record, $metadata, $options = array())
  */
 function all_element_texts($record, $options = array())
 {
-    return get_view()->allElementTexts($record, $options);
+    return apply_filters('all_element_texts', get_view()->allElementTexts($record, $options), get_view()->allElementTexts($record, array('return_type'=>'array')));
 }
 
 /**
