@@ -5,7 +5,7 @@
     left: 0;
     height: calc(100vh - 40px);
     margin: 0;
-    padding: 0 0 $spacing-l;
+    padding: 0 0 (1.5 * $spacing-l);
     z-index: 1002;
     box-sizing: border-box;
 
@@ -33,7 +33,7 @@
         width: 100%;
         height: 100%;
         list-style-type: none;
-        padding: 0;
+        padding: $spacing-s 0;
         float: left;
         clear: left;
         margin: 0;

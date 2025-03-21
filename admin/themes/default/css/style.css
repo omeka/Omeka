@@ -1543,7 +1543,7 @@ button.remove_search {
   left: 0;
   height: calc(100vh - 40px);
   margin: 0;
-  padding: 0 0 20px;
+  padding: 0 0 30px;
   z-index: 1002;
   box-sizing: border-box; }
   @media (max-width: 767px) {
@@ -1565,7 +1565,7 @@ button.remove_search {
     width: 100%;
     height: 100%;
     list-style-type: none;
-    padding: 0;
+    padding: 5px 0;
     float: left;
     clear: left;
     margin: 0;
