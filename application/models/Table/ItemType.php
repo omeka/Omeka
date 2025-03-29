@@ -22,4 +22,14 @@ class Table_ItemType extends Omeka_Db_Table
         $select->where($this->_name . '.name = ?', $itemTypeName);
         return $this->fetchObject($select);
     }
+
+    public function findPairsForSelectForm(array $options = array())
+    {
+        $pairs = parent::findPairsForSelectForm($options);
+
+        if (isset($options['include_no_item_type']) && $options['include_no_item_type']) {
+            $pairs = array(__('No Item Type')) + $pairs;
+        }
+        return $pairs;
+    }
 }
