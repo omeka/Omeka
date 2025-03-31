@@ -20,8 +20,7 @@ class UpgradeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        if (!$this->_satisfiesPhpRequirement()) {
-            $this->_displayPhpRequirementMessage();
+        if (!$this->_checkRequirements()) {
             return;
         }
     }
@@ -31,8 +30,7 @@ class UpgradeController extends Zend_Controller_Action
      **/
     public function migrateAction()
     {
-        if (!$this->_satisfiesPhpRequirement()) {
-            $this->_displayPhpRequirementMessage();
+        if (!$this->_checkRequirements()) {
             return;
         }
 
@@ -55,17 +53,33 @@ class UpgradeController extends Zend_Controller_Action
         }
     }
 
-    protected function _satisfiesPhpRequirement()
+    /**
+     * Check if the system meets the PHP and MySQL requirements
+     *
+     * @return bool
+     */
+    protected function _checkRequirements()
     {
-        return version_compare(PHP_VERSION, Installer_Requirements::OMEKA_PHP_VERSION, '>=');
-    }
+        $errors = array();
+        if (version_compare(PHP_VERSION, Installer_Requirements::OMEKA_PHP_VERSION, '<')) {
+            $errors[] = __('Omeka requires PHP version %1$s or higher, but this server is ' .
+                'running PHP version %2$s. Please update the installed version of PHP and try again.',
+                Installer_Requirements::OMEKA_PHP_VERSION, PHP_VERSION);
+        }
 
-    public function _displayPhpRequirementMessage()
-    {
-        $this->view->success = false;
-        $this->view->error = __('Omeka requires PHP version %1$s or higher, but this server is ' .
-            'running PHP version %2$s. Please update the installed version of PHP and try again.',
-            Installer_Requirements::OMEKA_PHP_VERSION, PHP_VERSION);
-        $this->_helper->viewRenderer->render('migrate');
+        $dbVersion = get_db()->getAdapter()->getServerVersion();
+        if (version_compare($dbVersion, Installer_Requirements::OMEKA_MYSQL_VERSION, '<')) {
+            $errors[] = __('Omeka requires MySQL version %1$s or higher, but this server is ' .
+                'running MySQL version %2$s. Please update the installed version of MySQL and try again.',
+                Installer_Requirements::OMEKA_MYSQL_VERSION, $dbVersion);
+        }
+
+        if ($errors) {
+            $this->view->success = false;
+            $this->view->error = implode("\n\n", $errors);
+            $this->_helper->viewRenderer->render('migrate');
+            return false;
+        }
+        return true;
     }
 }
