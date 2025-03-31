@@ -69,7 +69,9 @@ jobs:
       run: composer install --no-progress
 
     - name: Install Ubuntu dependencies
-      run: sudo apt install -y imagemagick
+      run: |
+        sudo apt update
+        sudo apt install -y imagemagick
         
     - name: Run tests
       run: ../../vendor/bin/phpunit
