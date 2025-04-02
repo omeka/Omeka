@@ -51,7 +51,8 @@
 		    text-align: center;
 		    text-decoration: none;
 		    white-space: normal;
-		    transition: 0.5s all;
+		    transition-duration: 0.5s;
+            transition-property: border-color, background, outline;
 		    
 		    &:hover,
 		    &:focus {

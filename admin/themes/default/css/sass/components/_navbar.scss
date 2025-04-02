@@ -32,7 +32,7 @@ header {
     	color: #CCCCCC;
     	padding-bottom: 11px;
 		border-bottom: 2px solid transparent;
-		transition: 0.5s all;
+		transition: 0.5s color;
 		text-decoration: none;
 	}
 	a:hover, 
@@ -67,7 +67,8 @@ header {
 			left: 0;
 			overflow: auto;
 			background: #333333;
-			transition: 0.5s all;
+			transition-duration: 0.5s;
+			transition-property: height, overflow-x, display, z-index;
 			
 			&.in {
 				height: 260px;

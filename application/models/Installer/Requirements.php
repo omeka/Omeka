@@ -11,8 +11,8 @@
  */
 class Installer_Requirements
 {
-    const OMEKA_PHP_VERSION = '5.6';
-    const OMEKA_MYSQL_VERSION = '5.0';
+    const OMEKA_PHP_VERSION = '7.1';
+    const OMEKA_MYSQL_VERSION = '5.5.5';
 
     private $_dbAdapter;
     private $_storage;

@@ -12,6 +12,7 @@ hr {
 
 .container {
 	max-width: 100%;
+	overflow-x: hidden;
 
 	@include screen-xl {
 		width: 1240px;

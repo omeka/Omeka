@@ -1,65 +1,67 @@
-//scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
-
-#content-nav::-webkit-scrollbar {
-	width: auto;
-  }
-
 #content-nav {
-	scrollbar-color: $scrollbar $darkestred;
-}
-
-#content-nav::-webkit-scrollbar-track {
-	background: $darkestred;
-}
-
-#content-nav::-webkit-scrollbar-thumb {
-	background-color: $scrollbar;
-	border-radius: 6px;
-	border: 3px solid $darkestred;
-}
-
-#content-nav {
-	background-color: $darkestred;
+    background-color: $darkestred;
     position: fixed;
     top: 40px;
     left: 0;
-	bottom: 0;
-	margin: 0;
-	z-index: 1002;
+    height: calc(100vh - 40px);
+    margin: 0;
+    padding: 0 0 (1.5 * $spacing-l);
+    z-index: 1002;
+    box-sizing: border-box;
 
 	@include screen-xs {
-		position: relative;
-    	width: calc(100% + #{2 * $spacing-l});
-		left: -2 * $spacing-m;
-		right: -2 * $spacing-m;
-		bottom: auto;
-		top: 0;
-		z-index: auto;
+        position: relative;
+        width: calc(100% + #{2 * $spacing-l});
+        left: -2 * $spacing-m;
+        right: -2 * $spacing-m;
+        height: auto;
+        top: 0;
+        padding: 0;
+        z-index: auto;
 
-		&.open {
-			z-index: 9999;
-		}
-	}
+        &.open {
+            z-index: 9999;
+        }
+    }
 
-	button:focus {
-		position: relative;
-		z-index: 9999;
-	}
+    button:focus {
+        position: relative;
+        z-index: 9999;
+    }
 
-	ul {
-	    width: 100%;
-	    list-style-type: none;
-	    padding: 0;
-	    float: left;
-	    clear: left;
-		margin: 0;
-	    
+    ul {
+        width: 100%;
+        height: 100%;
+        list-style-type: none;
+        padding: $spacing-s 0;
+        float: left;
+        clear: left;
+        margin: 0;
+        overflow-y: auto;
+
+        //scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
+        scrollbar-color: $scrollbar $darkestred;
+
+        &::-webkit-scrollbar {
+            width: auto;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: $darkestred;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $scrollbar;
+            border-radius: 6px;
+            border: 3px solid $darkestred;
+        }
+
 	    @include screen-xs {
 		 	margin-top: 0;
 		 	height: 0px;
 			display: none;
 		 	overflow: auto;
-		 	transition: 0.5s all;
+		 	transition: 0.5s display;
 		 	
 		 	&.in {
 			 	height: auto;
@@ -72,7 +74,7 @@
 	li {
 	    word-wrap: break-word;
 	    z-index: 1000;
-	    transition: 0.5s all;
+	    transition: 0.5s background;
 
 	    &:hover {
 	        background: $darkred;
@@ -87,7 +89,7 @@
 	        display: block;
 	        padding: .5em .5em .5em 1em;
 	        text-decoration: none;
-	        transition: 0.5s all;
+	        transition: 0.5s color;
 	        
 	        @include screen-xs {
 		    	font-size: 16px;   
@@ -133,7 +135,6 @@
 	    padding: .625em 3em .625em $spacing-l;
 	    font-size: 16px;
 	    text-decoration: none;
-	    transition: 0.5s all;
 		overflow: hidden;
 		border-radius: 0;
 		text-overflow: ellipsis;
