@@ -88,11 +88,9 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         if (!($record instanceof Omeka_Record_AbstractRecord)) {
             throw new InvalidArgumentException('Invalid record passed to recordMetadata.');
         }
-        
-        $options = apply_filters('all_element_texts_options', $options, array('args'=>$options));
 
         $this->_record = $record;
-        $this->_setOptions($options);
+        $this->_setOptions(apply_filters('all_element_texts_options', $options, array('args'=>$options)));
         return $this->_getOutput();
     }
 
