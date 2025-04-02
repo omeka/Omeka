@@ -90,7 +90,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         }
 
         $this->_record = $record;
-        $this->_setOptions(apply_filters('all_element_texts_options', $options, array('args'=>$options)));
+        $this->_setOptions(apply_filters('all_element_texts_options', $options, array('record' => $record)));
         return $this->_getOutput();
     }
 
