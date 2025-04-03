@@ -87,12 +87,14 @@ Omeka.ItemTypes = {};
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
                     element.find('.element-order').attr('name', '');
+                    element.find('select,input').attr('disabled', 'true');
                 }
             } else {
                 if (removeElementLinkId) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     element.find('.element-order').attr('name', 'elements[' + elementId + '][order]');
                 }
+                element.find('select,input').removeAttr('disabled');
             }
         }
 
