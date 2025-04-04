@@ -644,6 +644,7 @@ button.ui-dialog-titlebar-close {
   margin: 0;
   padding: 0; }
 
+.ui-dialog,
 .ui-dialog .ui-dialog-content {
   background: white; }
 
