@@ -70,13 +70,15 @@ echo item_search_filters();
                     <?php endif; ?>
 
                     <td class="item-info">
-
-                        <?php if (metadata('item', 'has files')): ?>
-                        <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
-                        <?php endif; ?>
-
                         <span class="title">
-                            <?php echo link_to_item(); ?>
+                            <?php 
+                                $linkContent = '';
+                                if (metadata('item', 'has files')) {
+                                    $linkContent .= item_image('square_thumbnail', array('class' => 'item-thumbnail'), 0, $item);
+                                }
+                                $linkContent .= metadata('item', 'rich_title');
+                                echo link_to_item($linkContent);
+                            ?>
                             <?php if ($item->featured): ?>
                             <div class="featured-icon">
                                 <span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>
@@ -86,7 +88,7 @@ echo item_search_filters();
                             <?php if(!$item->public): ?>
                                 <span class="private"><?php echo __('(Private)'); ?></span>
                             <?php endif; ?>
-                            </span>
+                        </span>
                         <ul class="action-links group">
                             <?php if (is_allowed($item, 'edit')): ?>
                             <li>

@@ -28,13 +28,15 @@ $sortLinks[__('Date Added')] = 'added';
 
 <?php foreach (loop('items') as $item): ?>
 <div class="item hentry">
-    <h2><?php echo link_to_item(null, array('class' => 'permalink')); ?></h2>
+    <?php 
+        $linkContent = '';
+        if (metadata('item', 'has files')) {
+            $linkContent .= item_image(null);
+        }
+        $linkContent = metadata('item', 'rich_title');
+    ?>
+    <h2><?php echo link_to_item($linkContent, array('class' => 'permalink')); ?></h2>
     <div class="item-meta">
-    <?php if (metadata('item', 'has files')): ?>
-    <div class="item-img">
-        <?php echo link_to_item(item_image(null)); ?>
-    </div>
-    <?php endif; ?>
 
     <?php if ($description = metadata('item', array('Dublin Core', 'Description'), array('snippet' => 250))): ?>
     <div class="item-description">
