@@ -2253,7 +2253,7 @@ ul.details {
   line-height: 16px; }
 
 .element .element-text {
-  margin: 5px 0; }
+  margin-bottom: 5px; }
 
 .element .element-text:last-of-type:after {
   height: 0px;
