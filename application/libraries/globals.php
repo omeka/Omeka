@@ -2372,29 +2372,41 @@ function recent_items($count = 10)
  * Get HTML for random featured records.
  */
 
-function display_records($recordType, $queryOptions = array(), $partialPath = '', $partialOptions = array(), $count = 3) {
+function display_records($recordType, $count = 3, $query = array(), $partialPath = null, $partialParams = array()) {
     $html = '';
 
-    if ($partialPath == '') {
-        $partialPath = $recordType . 's/single.php';
+    $recordTypes = array(
+        'Item' => array('partial' => 'items/single.php', 'alias' => 'item'),
+        'Collection' => array('partial' => 'collections/single.php', 'alias' => 'collection')
+    );
+
+    $recordTypes = apply_filters('display_records_types', $recordTypes);
+    if (!isset($recordTypes[$recordType])) {
+        return;
     }
 
-    $defaultQueryOptions = array(
+    $defaultQuery = array(
         'featured' => '1',
         'sort_field' => 'random'
     );
-    $queryOptions = array_merge($defaultQueryOptions, $queryOptions);
-    $records = get_records(ucfirst($recordType), $queryOptions, $count);
+    $query = array_merge($defaultQuery, $query);
+    $records = get_records($recordType, $query, $count);
 
     if ($records) {
         foreach ($records as $record) {
-            $defaultPartialOptions = array(
-                $recordType => $record,
+            $recordConfig = $recordTypes[$recordType];
+            $defaultPartialParams = array(
                 'record' => $record,
                 'recordType' => $recordType
             );
-            $currentPartialOptions = array_merge($defaultPartialOptions, $partialOptions);
-            $html .= get_view()->partial($partialPath, $currentPartialOptions);
+            if (isset($recordConfig['alias'])) {
+                $defaultPartialParams[$recordConfig['alias']] = $record;
+            }
+            if (!isset($partialPath)) {
+                $partialPath = $recordConfig['partial'];
+            }
+            $currentPartialParams = array_merge($defaultPartialParams, $partialParams);
+            $html .= get_view()->partial($partialPath, $currentPartialParams);
         }
     }
 
