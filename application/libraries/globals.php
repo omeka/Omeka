@@ -2372,7 +2372,7 @@ function recent_items($count = 10)
  * Get HTML for random featured records.
  */
 
-function display_records($recordType, $count = 3, $query = array(), $partialPath = null, $partialParams = array()) {
+function display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array()) {
     $html = '';
 
     $recordTypes = array(
