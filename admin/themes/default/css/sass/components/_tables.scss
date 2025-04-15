@@ -144,6 +144,11 @@ span.title {
 		font-weight: 400;
 		color: gray;
 	}
+
+    @include screen-xs {
+        margin-bottom: $spacing-m;
+        display: block;
+    }
 }
 
 .featured-icon,
