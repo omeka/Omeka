@@ -461,10 +461,13 @@ button {
     color: #B00D00;
     background: #F9E8E7;
     border: 1px solid rgba(176, 13, 0, 0.25); }
-    span.button.red.ui-button,
+    span.button.red.ui-button, span.button.red.drawer,
     a.button.red.ui-button,
+    a.button.red.drawer,
     input[type=submit].red.ui-button,
-    button.red.ui-button {
+    input[type=submit].red.drawer,
+    button.red.ui-button,
+    button.red.drawer {
       background: #F9E8E7 !important;
       border: 1px solid rgba(176, 13, 0, 0.25) !important; }
     span.button.red:hover, span.button.red:focus,
@@ -672,7 +675,8 @@ button.ui-dialog-titlebar-close {
   padding: 15px;
   margin: 0;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  justify-content: space-between; }
   .drawer input,
   .sortable-item input,
   .add-new input {
@@ -717,31 +721,47 @@ button.ui-dialog-titlebar-close {
   padding: 0;
   border: 0;
   margin-bottom: 0;
-  color: #4C3939; }
+  color: #4C3939;
+  height: 1rem; }
   @media (max-width: 767px) {
     .drawer > button {
       max-width: 180px; } }
 
 .drawer.deleted .delete-drawer,
 .drawer.deleted .drawer-toggle,
-.drawer .undo-delete {
+.drawer:not(.deleted) .undo-delete,
+.drawer.deleted ~ ul .undo-delete {
   display: none; }
+
+.drawer > .drawer-name {
+  margin-right: auto; }
 
 .drawer.deleted .undo-delete {
   display: inline-block; }
 
 .deleted.sortable-item,
 .deleted.drawer {
-  color: #FFF;
-  border: 1px solid rgba(176, 13, 0, 0.65);
-  background: rgba(176, 13, 0, 0.65);
+  color: #B00D00;
+  background: #F9E8E7;
+  border: 1px solid rgba(176, 13, 0, 0.25);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   text-shadow: none; }
+  .deleted.sortable-item.ui-button, .deleted.sortable-item.drawer,
+  .deleted.drawer.ui-button,
+  .deleted.drawer.drawer {
+    background: #F9E8E7 !important;
+    border: 1px solid rgba(176, 13, 0, 0.25) !important; }
+  .deleted.sortable-item:hover, .deleted.sortable-item:focus,
+  .deleted.drawer:hover,
+  .deleted.drawer:focus {
+    border-color: rgba(176, 13, 0, 0.65);
+    background: #f4d4d3;
+    outline: none; }
   .deleted.sortable-item *,
   .deleted.drawer * {
-    color: #fff; }
+    color: #B00D00; }
   .deleted.sortable-item input.drawer-name,
   .deleted.sortable-item select.drawer-name,
   .deleted.drawer input.drawer-name,
@@ -750,11 +770,6 @@ button.ui-dialog-titlebar-close {
 
 .deleted.drawer input.link-status {
   display: none; }
-
-.deleted a:link,
-.deleted a:visited {
-  color: #fff;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5); }
 
 .drawer-contents {
   display: none; }
@@ -798,8 +813,7 @@ button.ui-dialog-titlebar-close {
 .undo-delete .icon:after {
   content: "\f0e2";
   font-size: 12px;
-  line-height: 1;
-  color: #fff; }
+  line-height: 1; }
 
 .drawer-contents {
   background: #fff;
@@ -2079,7 +2093,7 @@ ul.details {
       box-shadow: none !important;
       cursor: default;
       opacity: .35; }
-    .browse .delete-confirm.ui-button {
+    .browse .delete-confirm.ui-button, .browse .delete-confirm.drawer {
       background: #F9E8E7 !important;
       border: 1px solid rgba(176, 13, 0, 0.25) !important; }
     .browse .delete-confirm:hover, .browse .delete-confirm:focus {

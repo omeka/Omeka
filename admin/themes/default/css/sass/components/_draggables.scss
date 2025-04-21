@@ -49,6 +49,7 @@
     margin: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     input {
         margin: 0;
@@ -94,16 +95,22 @@
     border: 0;
     margin-bottom: 0;
     color: #4C3939;
+    height: 1rem;
 
     @include screen-xs {
         max-width: 180px;
     }
-}		
+}
 
 .drawer.deleted .delete-drawer,
 .drawer.deleted .drawer-toggle,
-.drawer .undo-delete {
+.drawer:not(.deleted) .undo-delete, 
+.drawer.deleted ~ ul .undo-delete {
     display: none;
+}
+
+.drawer > .drawer-name {
+    margin-right: auto;
 }
 
 .drawer.deleted .undo-delete {
@@ -112,17 +119,11 @@
 
 .deleted.sortable-item,
 .deleted.drawer {
-    color: #FFF;
-    border: 1px solid rgba(#B00D00, 0.65);
-    background: rgba(#B00D00, 0.65);
+    @include red;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     text-shadow: none;
-
-    * {
-        color: #fff;
-    }
 
     input.drawer-name,
     select.drawer-name {
@@ -132,12 +133,6 @@
 
 .deleted.drawer input.link-status {
     display: none;
-}
-
-.deleted a:link, 
-.deleted a:visited {
-    color: #fff;
-    text-shadow: -1px -1px 1px rgba(0,0,0,.5);
 }
 
 .drawer-contents { display: none; }
@@ -179,7 +174,6 @@
     content: "\f0e2";
     font-size: 12px;
     line-height: 1;
-    color: #fff;
 }
 
 .drawer-contents {
