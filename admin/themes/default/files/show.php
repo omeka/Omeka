@@ -36,13 +36,17 @@ echo flash();
         <p><?php echo link_to_item(null, array(), 'show', $file->getItem()); ?></p>
     </div>
 
+    <?php
+    $altText = metadata($file, 'alt_text');
+    if ($altText):
+    ?>
     <div id="file-alt-text" class="panel">
         <h4><?php echo __('Alt Text'); ?></h4>
         <p>
-            <?php echo metadata($file, 'alt_text'); ?>
+            <?php echo $altText; ?>
         </p>
     </div>
-
+    <?php endif; ?>
 
     <div id="file-links" class="panel">
         <h4><?php echo __('Direct Links'); ?></h4>
