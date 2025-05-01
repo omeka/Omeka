@@ -307,8 +307,10 @@ Omeka.Items = {};
                 fileInput[0].files = dataTransfer.files;
 
                 // Add the formatted file size.
-                fileContainer.find('.file-size').empty().html(humanFileSize(file.size));
+                fileContainer.find('.file-size').text(humanFileSize(file.size));
 
+                let thumbnail = fileContainer.find('.file-thumbnail');
+                thumbnail.empty();
                 // Add a thumbnail when the file is an image.
                 if ((/^image\/(png|jpe?g|gif)$/).test(file.type)) {
                     const imageSrc = URL.createObjectURL(file);
@@ -318,7 +320,7 @@ Omeka.Items = {};
                         const smallestPercent = Math.min(maxSize / this.width, maxSize / this.height);
                         img.width = this.width * smallestPercent;
                         img.height = this.height * smallestPercent;
-                        fileContainer.find('.file-thumbnail').empty().html(img);
+                        thumbnail.html(img);
                     }
                     img.src = imageSrc;
                 }
