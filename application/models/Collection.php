@@ -54,6 +54,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @see Omeka_Record_AbstractRecord::__get
      */
     protected $_related = array(
+        'Tags' => 'getTags',
         'ElementTexts' => 'getAllElementTexts'
     );
 
@@ -62,6 +63,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      */
     protected function _initializeMixins()
     {
+        $this->_mixins[] = new Mixin_Tag($this);
         $this->_mixins[] = new Mixin_PublicFeatured($this);
         $this->_mixins[] = new Mixin_Owner($this);
         $this->_mixins[] = new Mixin_ElementText($this);
@@ -210,6 +212,16 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         if (!$this->public) {
             $this->setSearchTextPrivate();
+        }
+
+        if ($args['post']) {
+            $post = $args['post'];
+
+            // Save/delete the tags.
+            if (isset($post['tags-to-add'])) {
+                $this->addTags($post['tags-to-add']);
+                $this->deleteTags($post['tags-to-delete']);
+            }
         }
     }
 

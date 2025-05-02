@@ -42,6 +42,15 @@ $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collect
         <p><span class="label"><?php echo __('Featured'); ?>:</span> <?php echo ($collection->featured) ? __('Yes') : __('No'); ?></p>
     </div>
 
+    <?php if (metadata('collection', 'has tags')): ?>
+    <div class="tags panel">
+        <h4><?php echo __('Tags'); ?></h4>
+        <div id="tag-cloud">
+            <?php echo common('tag-list', compact('collection'), 'collections'); ?>
+        </div>
+     </div>
+    <?php endif; ?>
+
     <div class="total-items panel">
         <h4><?php echo __('Total Number of Items'); ?></h4>
         <p><?php echo link_to_items_in_collection(); ?></p>
