@@ -150,9 +150,9 @@ $formAttributes['method'] = 'GET';
             <div class="five columns omega inputs">
             <?php
                 echo $this->formSelect(
-                    'collection',
+                    'collection[]',
                     @$_REQUEST['collection'],
-                    array('id' => 'collection-search'),
+                    array('id' => 'collection-search', 'multiple' => true),
                     get_table_options('Collection', null, array('include_no_collection' => true))
                 );
             ?>
@@ -166,10 +166,10 @@ $formAttributes['method'] = 'GET';
             <div class="five columns omega inputs">
             <?php
                 echo $this->formSelect(
-                    'type',
+                    'type[]',
                     @$_REQUEST['type'],
-                    array('id' => 'item-type-search'),
-                    get_table_options('ItemType')
+                    array('id' => 'item-type-search', 'multiple' => true),
+                    get_table_options('ItemType', null, array('include_no_item_type' => true))
                 );
             ?>
             </div>
