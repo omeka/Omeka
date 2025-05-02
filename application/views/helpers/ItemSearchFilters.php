@@ -18,13 +18,31 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *
      * @param array $params Optional array of key-value pairs to use instead of
      *  reading the current params from the request.
+     * @param bool $removableFilter Set to true if filters should be removable (via link).  
+     *  By default false. 
+     *  To support removable filters, you need to pass the key in request params 
+     *  that this filter refers to.
+     *  Example: 
+     *    <code>
+     *        // GET items/browse?search=&public=1&custom_field=xyz
+     *        public function filterItemSearchFilters($displayArray, $args) {
+     *            if (!empty($args['request_array']['custom_field'])) {
+     *                $displayArray['Custom Label'] = array(
+     *                    'key'   => 'custom_field',
+     *                    'value' => $args['request_array']['custom_field']
+     *                );
+     *            }
+     *            return $displayArray;
+     *        }
+     *    </code>
+     * @param array $options Additional options for the filters.
      * @return string HTML output
      */
-    public function itemSearchFilters(array $params = null)
+    public function itemSearchFilters(array $params = null, $removableFilter = false, $options = array())
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest();
-            $requestArray = $request->getParams();
+            $requestArray = $request->getQuery();
         } else {
             $requestArray = $params;
         }
@@ -75,7 +93,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         break;
                 }
                 if ($displayValue) {
-                    $displayArray[$filter] = $displayValue;
+                    // pass the query param key, so we know which part should be removed
+                    $displayArray[$filter] = array(
+                        'key'   => $key,
+                        'value' => $displayValue,
+                    );
                 }
             }
         }
@@ -108,26 +130,17 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         $advancedValue = __('AND') . ' ' . $advancedValue;
                     }
                 }
-                $advancedArray[$index++] = $advancedValue;
+                // pass the query param index, so we know which part should be removed
+                $advancedArray[$index++] = array(
+                    'key'   => $i,
+                    'value' => $advancedValue,
+                );
             }
         }
 
-        $html = '';
-        if (!empty($displayArray) || !empty($advancedArray)) {
-            $html .= '<div id="item-filters">';
-            $html .= '<ul>';
-            foreach ($displayArray as $name => $query) {
-                $class = html_escape(strtolower(str_replace(' ', '-', $name)));
-                $html .= '<li class="' . $class . '">' . html_escape(__($name)) . ': ' . html_escape($query) . '</li>';
-            }
-            if (!empty($advancedArray)) {
-                foreach ($advancedArray as $j => $advanced) {
-                    $html .= '<li class="advanced">' . html_escape($advanced) . '</li>';
-                }
-            }
-            $html .= '</ul>';
-            $html .= '</div>';
-        }
-        return $html;
+        return $this->view->partial(
+            'items/search-filters.php',
+            compact('displayArray', 'advancedArray', 'requestArray', 'removableFilter', 'options')
+        );
     }
 }
