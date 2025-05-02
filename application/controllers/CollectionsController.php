@@ -23,13 +23,31 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     * The show collection action
+     * The show collection action.
+     *
+     * Note -- this also includes aspects of a browseAction in that in showing
+     * a single collection the action is also browsing items within that collection.
      */
     public function showAction()
     {
         parent::showAction();
-        $this->view->items = $this->_helper->db->getTable('Item')->findBy(
-            array('collection' => $this->view->collection->id), $this->_getBrowseRecordsPerPage());
+        $recordsPerPage = $this->_getBrowseRecordsPerPage();
+        $currentPage = $this->getParam('page', 1);
+        $params = array('collection' => $this->view->collection->id);
+        $records = $this->_helper->db->getTable('Item')->findBy(
+            $params, $recordsPerPage, $currentPage);
+        $totalRecords = $this->_helper->db->getTable('Item')->count($params);
+
+        // Add pagination data to the registry. Used by pagination_links().
+        if ($recordsPerPage) {
+            Zend_Registry::set('pagination', array(
+                'page' => $currentPage,
+                'per_page' => $recordsPerPage,
+                'total_results' => $totalRecords,
+            ));
+
+            $this->view->assign(array('items' => $records, 'total_results' => $totalRecords));
+        }
     }
 
     /**
