@@ -2008,12 +2008,12 @@ function browse_sort_links($links, $wrapperTags = array())
             }
             $url = html_escape(url(array(), null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
-                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
+                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\" $class $linkAttr>$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></a>";
+                $sortlist .= "<a href=\"$url\" title=\"$sortingLabel\" $class $linkAttr>$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></a>";
             }
         } else {
-            $sortlist .= "<{$sortlistWrappers['link_tag']} aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></{$sortlistWrappers['link_tag']}>";
+            $sortlist .= "<{$sortlistWrappers['link_tag']} title=\"$sortingLabel\">$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></{$sortlistWrappers['link_tag']}>";
         }
     }
     if (!empty($sortlistWrappers['list_tag'])) {
