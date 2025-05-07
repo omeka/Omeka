@@ -1705,13 +1705,16 @@ th {
     font-weight: 900;
     display: inline-block;
     line-height: 10px;
-    margin: 0 0 0 5px;
     opacity: .75; }
+  th a .sort-icon {
+    position: relative;
+    display: inline-block;
+    text-align: center; }
   th a .sort-icon:after {
     content: none;
     opacity: 1;
     position: absolute;
-    top: 3px;
+    top: 4px;
     right: 0; }
   th a:link,
   th a:visited {
