@@ -24,6 +24,7 @@ if (!Omeka) {
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
             verify_html: false,
             add_unload_trigger: false,
+            cache_suffix: '?v=5.10.9',
         };
 
         tinymce.init($.extend(initParams, params));
