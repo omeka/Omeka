@@ -54,23 +54,25 @@ th {
         content: "\f0dc";
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
-        display: inline-block;
+        display: block;
         line-height: 10px;
         opacity: .75;
+        position: absolute;
+        right: 0;
+        bottom: 0;
     }
 
     a .sort-icon {
         position: relative;
         display: inline-block;
         text-align: center;
+        padding-right: 10px;
+        height: 10px;
     }
 
 	a .sort-icon:after {
         content: none;
         opacity: 1;
-        position: absolute;
-        top: 3.5px;
-        right: 0;
     }
 
     a:link, 

@@ -1703,19 +1703,21 @@ th {
     content: "\f0dc";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    display: inline-block;
+    display: block;
     line-height: 10px;
-    opacity: .75; }
+    opacity: .75;
+    position: absolute;
+    right: 0;
+    bottom: 0; }
   th a .sort-icon {
     position: relative;
     display: inline-block;
-    text-align: center; }
+    text-align: center;
+    padding-right: 10px;
+    height: 10px; }
   th a .sort-icon:after {
     content: none;
-    opacity: 1;
-    position: absolute;
-    top: 3.5px;
-    right: 0; }
+    opacity: 1; }
   th a:link,
   th a:visited {
     opacity: 0.75; }
