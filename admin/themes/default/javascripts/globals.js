@@ -81,7 +81,7 @@ if (!Omeka) {
             var container = drawerButton.parents(containerName);
             var drawerActionSelector = drawerButton.data('action-selector');
             container.find('.drawer, .drawer-contents').toggleClass(drawerActionSelector);
-            if (drawerButton.attr('aria-expanded')) {
+            if (drawerButton.attr('aria-expanded') && drawerButton.hasClass('drawer-toggle')) {
                 Omeka.toggleAriaExpanded(drawerButton);
             }
             if (drawerButton.hasClass('delete-drawer')) {
