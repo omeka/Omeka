@@ -1,6 +1,6 @@
 (function($) {
     $(document).ready(function() {
-        const lgContainer = document.getElementById('itemfiles');
+        const lgContainer = document.getElementById('omeka-lightgallery');
 
         const inlineGallery = lightGallery(lgContainer, {
             licenseKey: '76E9AA35-CDB54382-B1A52890-683C953F',
