@@ -132,12 +132,8 @@ td {
     li { 
 	    display: inline-block; 
 	    
-        .spacer {
-            display: inline-block;
-        }
-
-        .spacer:after { 
-            content: ' \00b7'; 
+        &:not(:last-of-type):after { 
+            content: ' \00b7' / ''; 
             margin-left: 3px; 
             margin-right: 3px;
             
