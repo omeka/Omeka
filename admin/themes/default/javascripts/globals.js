@@ -78,9 +78,10 @@ if (!Omeka) {
         }
         $(drawerList).on('click', '.drawer button', function() { 
             var drawerButton = $(this);
-            var container = drawerButton.parents(containerName);
+            var container = drawerButton.parents(containerName).first();
             var drawerActionSelector = drawerButton.data('action-selector');
-            container.find('.drawer, .drawer-contents').toggleClass(drawerActionSelector);
+            container.find('.drawer').first().toggleClass(drawerActionSelector);
+            container.find('.drawer-contents').first().toggleClass(drawerActionSelector);
             if (drawerButton.attr('aria-expanded') && drawerButton.hasClass('drawer-toggle')) {
                 Omeka.toggleAriaExpanded(drawerButton);
             }
