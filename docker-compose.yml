@@ -1,0 +1,28 @@
+services:
+  omeka:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./omeka_data:/var/www/html
+      - ./db.ini:/var/www/html/db.ini
+    depends_on:
+      - omeka-db
+
+  omeka-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: omeka
+      MYSQL_DATABASE: omeka
+      MYSQL_USER: omeka
+      MYSQL_PASSWORD: omeka
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: omeka-db
+      MYSQL_ROOT_PASSWORD: omeka
