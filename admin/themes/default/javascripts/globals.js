@@ -84,12 +84,16 @@ if (!Omeka) {
             container.find('.drawer-contents').first().toggleClass(drawerActionSelector);
             if (drawerButton.attr('aria-expanded') && drawerButton.hasClass('drawer-toggle')) {
                 Omeka.toggleAriaExpanded(drawerButton);
+                drawerButton.trigger('omeka:toggle-drawer');
             }
             if (drawerButton.hasClass('delete-drawer')) {
                 container.find('.undo-delete').first().focus();
+                drawerButton.trigger('omeka:delete-drawer');
+                
             }
             if (drawerButton.hasClass('undo-delete')) {
                 container.find('.delete-drawer').first().focus();
+                drawerButton.trigger('omeka:undo-drawer-delete');
             }
         });
     };
