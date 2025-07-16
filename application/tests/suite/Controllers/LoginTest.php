@@ -96,6 +96,18 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $this->assertStringContainsString('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
     }
 
+    public function testInactiveLogin()
+    {
+        $dbAdapter = $this->db->getAdapter();
+        $dbAdapter->update('omeka_users',
+            array('active' => '0'),
+            'id = 1'
+        );
+        $this->_login(Omeka_Test_Resource_Db::SUPER_USERNAME, Omeka_Test_Resource_Db::SUPER_PASSWORD);
+        $this->assertNotRedirect();
+        $this->assertStringContainsString('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
+    }
+
     public static function roles()
     {
         return array(

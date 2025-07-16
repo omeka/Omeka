@@ -201,16 +201,20 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * incorrect, or if same has been upgraded already.
      * 
      * @since 1.3
-     * @param string $username
+     * @param string|User $username
      * @param string $password
      * @return bool False if incorrect username/password given, otherwise true
      * when password has been upgraded.
      */
     public static function upgradeHashedPassword($username, $password)
     {
-        $userTable = get_db()->getTable('User');
-        $user = $userTable->findBySql("username = ?", array($username), true);
-        if (!$user) {
+        if (is_string($username)) {
+            $userTable = get_db()->getTable('User');
+            $user = $userTable->findBySql("username = ?", array($username), true);
+        } else {
+            $user = $username;
+        }
+        if (!($user instanceof User)) {
             return false;
         }
         // stored password_hash password: doesn't need upgrade

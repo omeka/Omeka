@@ -2008,12 +2008,12 @@ function browse_sort_links($links, $wrapperTags = array())
             }
             $url = html_escape(url(array(), null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
-                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
+                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\" $class $linkAttr>$label <span role=\"presentation\" class=\"sort-icon\"></span></a>";
+                $sortlist .= "<a href=\"$url\" title=\"$sortingLabel\" $class $linkAttr>$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></a>";
             }
         } else {
-            $sortlist .= "<{$sortlistWrappers['link_tag']} aria-label=\"$sortingLabel $label\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></{$sortlistWrappers['link_tag']}>";
+            $sortlist .= "<{$sortlistWrappers['link_tag']} title=\"$sortingLabel\">$label <span aria-hidden=\"true\" class=\"sort-icon\"></span></{$sortlistWrappers['link_tag']}>";
         }
     }
     if (!empty($sortlistWrappers['list_tag'])) {
@@ -2077,6 +2077,7 @@ function metadata($record, $metadata, $options = array())
  * Get all element text metadata for a record.
  *
  * @package Omeka\Function\View
+
  * @uses Omeka_View_Helper_AllElementTexts::allElementTexts()
  * @param Omeka_Record_AbstractRecord|string $record The record to get the
  * element text metadata for.
@@ -2367,6 +2368,60 @@ function recent_items($count = 10)
     }
     return $html;
 }
+/**
+ * Get HTML for records.
+ *
+ * @since 3.2
+ * @package Omeka\Function\View
+ * @param string $recordType Type of record to display (Item, Collection, etc.)
+ * @param int $count Maximum number of records to display
+ * @param string|null $partialPath Custom partial to use to display each record; pass null for the default
+ * @param array $partialParams Parameters to pass to the partial
+ * @param array $query Query passed to get_records to get the records to display; default is "random featured"
+ * @return string
+ */
+function display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
+{
+    $html = '';
+
+    $recordTypes = array(
+        'Item' => array('partial' => 'items/single.php', 'alias' => 'item'),
+        'Collection' => array('partial' => 'collections/single.php', 'alias' => 'collection')
+    );
+
+    $recordTypes = apply_filters('display_records_types', $recordTypes);
+    if (!isset($recordTypes[$recordType]['partial'])) {
+        return;
+    }
+
+    $defaultQuery = array(
+        'featured' => '1',
+        'sort_field' => 'random'
+    );
+    $query = array_merge($defaultQuery, $query);
+    $records = get_records($recordType, $query, $count);
+
+    if ($records) {
+        foreach ($records as $record) {
+            $recordConfig = $recordTypes[$recordType];
+            $defaultPartialParams = array(
+                'record' => $record,
+                'recordType' => $recordType
+            );
+            if (isset($recordConfig['alias'])) {
+                $defaultPartialParams[$recordConfig['alias']] = $record;
+            }
+            if ($partialPath === null) {
+                $partialPath = $recordConfig['partial'];
+            }
+            $currentPartialParams = array_merge($defaultPartialParams, $partialParams);
+            $html .= get_view()->partial($partialPath, $currentPartialParams);
+        }
+    }
+
+    return $html;
+}
+
 /**
  * Get HTML for random featured items.
  *

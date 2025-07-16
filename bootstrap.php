@@ -10,7 +10,7 @@
 error_reporting(E_ALL & ~E_DEPRECATED);
 
 // Define the current version of Omeka.
-define('OMEKA_VERSION', '3.2-dev4');
+define('OMEKA_VERSION', '3.2');
 
 // Define the application environment.
 if (!defined('APPLICATION_ENV')) {

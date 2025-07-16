@@ -99,7 +99,6 @@ echo flash();
         <?php endforeach; ?>
         </ul>
         <?php fire_plugin_hook('admin_tags_browse', array('tags' => $tags, 'view' => $this)); ?>
-    <?php echo $paginationLinks; ?>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>

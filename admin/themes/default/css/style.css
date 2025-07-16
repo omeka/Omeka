@@ -1694,13 +1694,30 @@ th {
   padding: 5px 10px;
   text-align: left;
   font-weight: normal; }
-  th a span:after {
+  th a {
+    position: relative; }
+  th a .sort-icon:before,
+  th a .sort-icon:after {
     width: 10px;
-    height: 10px;
-    content: url("../images/sort.png");
-    display: inline-block;
+    height: 100%;
+    content: "\f0dc";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    display: block;
     line-height: 10px;
-    margin: 0 0 0 5px; }
+    opacity: .75;
+    position: absolute;
+    right: 0;
+    bottom: 0; }
+  th a .sort-icon {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    padding-right: 10px;
+    height: 10px; }
+  th a .sort-icon:after {
+    content: none;
+    opacity: 1; }
   th a:link,
   th a:visited {
     opacity: 0.75; }
@@ -1712,10 +1729,12 @@ th {
     opacity: 1;
     color: #000;
     font-weight: bold; }
-  th.desc a span:after {
-    content: url("../images/desc.png"); }
-  th.asc a span:after {
-    content: url("../images/asc.png"); }
+  th.desc a .sort-icon:before, th.asc a .sort-icon:before {
+    opacity: .2; }
+  th.desc a .sort-icon:after {
+    content: "\f0dd"; }
+  th.asc a .sort-icon:after {
+    content: "\f0de"; }
 
 tr {
   background-color: rgba(255, 255, 255, 0.5); }

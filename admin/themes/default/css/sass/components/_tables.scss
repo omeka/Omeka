@@ -43,14 +43,38 @@ th {
     text-align: left;
     font-weight: normal;
 
-	a span:after {
-        width: 10px;
-        height: 10px;
-        content: url('../images/sort.png');
-        display: inline-block;
-        line-height: 10px;
-        margin: 0 0 0 $spacing-s;
+    a {
+        position: relative;
     }
+
+	a .sort-icon:before,
+	a .sort-icon:after {
+        width: 10px;
+        height: 100%;
+        content: "\f0dc";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        display: block;
+        line-height: 10px;
+        opacity: .75;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    a .sort-icon {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        padding-right: 10px;
+        height: 10px;
+    }
+
+	a .sort-icon:after {
+        content: none;
+        opacity: 1;
+    }
+
     a:link, 
     a:visited { 
 	    opacity: 0.75;
@@ -69,8 +93,13 @@ th {
 		}
 	}
 
-    &.desc a span:after { content: url('../images/desc.png'); }
-    &.asc a span:after { content: url('../images/asc.png'); }
+    &.desc a .sort-icon:before,
+    &.asc a .sort-icon:before {
+        opacity: .2;
+    }
+
+    &.desc a .sort-icon:after { content: "\f0dd"; }
+    &.asc a .sort-icon:after { content: "\f0de"; }
 }
 
 tr { background-color: rgba(255,255,255,.5); }

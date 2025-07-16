@@ -32,6 +32,29 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
     }
 
     /**
+     * Retrieve element ID (used in 'for' attribute)
+     *
+     * If none set in decorator, looks first for element 'id' attribute, and
+     * defaults to element name.
+     *
+     * (Overriding the parent's implementation to remove a setId call that
+     * improperly causes the decorator to remember the first element's ID.)
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        $id = $this->getOption('id');
+        if (null === $id) {
+            if (null !== ($element = $this->getElement())) {
+                $id = $element->getId();
+            }
+        }
+
+        return $id;
+    }
+
+    /**
      * Return label with required suffix or prefix.
      * Includes custom default suffix.
      *
@@ -83,11 +106,14 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
         }
 
         if (!empty($label)) {
-            $options['class'] = $class;
-            $label            = trim($label);
+            $label = trim($label);
+
+            $formLabelOptions = array();
+            $formLabelOptions['id'] = $id;
+            $formLabelOptions['class'] = $class;
+
             // Give formLabel already escaped label content alongside
             // non-escaped required markup.
-            $formLabelOptions = $options;
             $formLabelOptions['escape'] = false;
 
             // Escape the label, but not the required markup.
