@@ -49,6 +49,11 @@ class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
             $connectionParams['dbname'] = $connectionParams['name'];
         }
 
+        // Use utf8mb4 whenever utf8 is requested for connection charset
+        if (isset($connectionParams['charset']) && $connectionParams['charset'] === 'utf8') {
+            $connectionParams['charset'] = 'utf8mb4';
+        }
+
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $config = $this->getBootstrap()->getResource('Config');
