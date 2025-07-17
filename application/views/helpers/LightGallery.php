@@ -86,6 +86,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
             } else {
                 $attributes['data-src'] = $source;
             }
+            $attributes['title'] = $file->getAltText();
             $html .= '<div ' . tag_attributes($attributes) . '>';
             $html .= '</div>';
         }

@@ -12,7 +12,8 @@
             closable: false,
             showMaximizeIcon: true,
             captions: true,
-            allowMediaOverlap: false
+            allowMediaOverlap: false,
+            getCaptionFromTitleOrAlt: false,
         });
 
         inlineGallery.openGallery();
