@@ -6,6 +6,28 @@
  */
 class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 {
+    protected static $_callbacks = [
+        'image/bmp' => 'self::image',
+        'image/gif' => 'self::image',
+        'image/jpeg' => 'self::image',
+        'image/png' => 'self::image',
+        'image/svg+xml' => 'self::image',
+        'image/jp2' => 'self::derivativeImage',
+        'image/tiff' => 'self::derivativeImage',
+        'audio/mp3' => 'self::video',
+        'audio/mpeg' => 'self::video',
+        'audio/mpeg3' => 'self::video',
+        'audio/aac' => 'self::video',
+        'audio/mp4' => 'self::video',
+        'audio/ogg' => 'self::video',
+        'video/mp4' => 'self::video',
+        'video/x-m4v' => 'self::video',
+        'video/ogg' => 'self::video',
+        'video/webm' => 'self::video',
+        'video/quicktime' => 'self::video',
+        'application/pdf' => 'self::pdf',
+    ];
+
     /**
      * Render a gallery of files using lightGallery
      *
@@ -17,6 +39,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
     public function lightGallery($files)
     {
         $sortedFiles = $this->_prepareFiles($files);
+        $callbacks = self::getCallbacks();
 
         if (!$sortedFiles['gallery']) {
             return '';
@@ -27,7 +50,6 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 
         foreach ($sortedFiles['gallery'] as $galleryEntry) {
             $file = $galleryEntry['file'];
-            $source = $file->getWebPath();
             switch ($captionOption) {
                 case 'title':
                     $caption = metadata($file, 'rich_title', ['no_escape' => true]);
@@ -42,53 +64,15 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 
             $attributes = [
                 'data-thumb' => record_image_url($file, 'thumbnail'),
-                'data-download-url' => $source,
+                'data-download-url' => $file->getWebPath(),
+                'title' => $file->getAltText(),
             ];
             if (strlen((string) $caption)) {
                 $attributes['data-sub-html'] = $caption;
             };
 
-            $mediaType = ($file->mime_type == 'video/quicktime') ? 'video/mp4' : $file->mime_type;
-            if (strpos($mediaType, 'video') !== false || (strpos($mediaType, 'audio') !== false)) {
-                $videoSrcObject = [
-                    'source' => [
-                        [
-                            'src' => $source,
-                            'type' => $mediaType,
-                        ]
-                    ],
-                    'attributes' => [
-                        'preload' => false,
-                        'playsinline' => true,
-                        'controls' => true,
-                    ],
-                ];
-                if (isset($galleryEntry['tracks'])) {
-                    foreach ($galleryEntry['tracks'] as $track) {
-                        $label = metadata($track, 'display_title');
-                        $srclang = metadata($track, ['Dublin Core', 'Language'], ['no_escape' => true]);
-                        $type = metadata($track, ['Dublin Core', 'Type'], ['no_escape' => true]);
-                        $videoSrcObject['tracks'][] = [
-                            'src' => $track->getWebPath(),
-                            'label' => $label,
-                            'srclang' => $srclang !== null ? $srclang : '',
-                            'kind' => $type !== null ? $type : 'captions',
-                        ];
-                    }
-                }
-
-                $attributes['data-video'] = json_encode($videoSrcObject);
-            } else if ($mediaType == 'application/pdf') {
-                $attributes['data-iframe'] = 'true';
-                $attributes['data-src'] = $source;
-            } else if ($mediaType == 'image/tiff' || $mediaType == 'image/jp2') {
-                $attributes['data-src'] = record_image_url($file, 'fullsize');
-            } else {
-                $attributes['data-src'] = $source;
-            }
-            $attributes['title'] = $file->getAltText();
-            $html .= '<div ' . tag_attributes($attributes) . '>';
-            $html .= '</div>';
+            $fileAttrs = call_user_func($callbacks[$file->mime_type], $file);
+            $html .= '<div ' . tag_attributes($fileAttrs + $attributes) . '></div>';
         }
         $html .= '</div>';
         return $html;
@@ -123,14 +107,14 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
 
     protected function _prepareFiles($files)
     {
+        $callbacks = self::getCallbacks();
         $sortedFiles = ['gallery' => [], 'other' => []];
-        $whitelist = ['image/bmp', 'image/gif', 'image/jp2', 'image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'audio/mp3', 'audio/mpeg', 'audio/mpeg3', 'audio/aac', 'audio/mp4', 'audio/ogg', 'video/mp4', 'video/x-m4v', 'video/ogg', 'video/webm', 'video/quicktime', 'application/pdf'];
         $html5videos = [];
 
         $index = 0;
         foreach ($files as $file) {
             $mediaType = $file->mime_type;
-            if (in_array($mediaType, $whitelist)) {
+            if (array_key_exists($mediaType, $callbacks)) {
                 $sortedFiles['gallery'][$index]['file'] = $file;
                 if (strpos($mediaType,'video') !== false) {
                     $html5videos[$index] = pathinfo($file->original_filename, PATHINFO_FILENAME);
@@ -153,5 +137,60 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
         }
 
         return $sortedFiles;
+    }
+
+    protected static function image($file)
+    {
+        return ['data-src' => $file->getWebPath()];
+    }
+
+    protected static function derivativeImage($file)
+    {
+        return ['data-src' => record_image_url($file, 'fullsize')];
+    }
+
+    protected static function video($file)
+    {
+        $mediaType = ($file->mime_type == 'video/quicktime') ? 'video/mp4' : $file->mime_type;
+        $videoSrcObject = [
+            'source' => [
+                [
+                    'src' => $file->getWebPath(),
+                    'type' => $mediaType,
+                ]
+            ],
+            'attributes' => [
+                'preload' => false,
+                'playsinline' => true,
+                'controls' => true,
+            ],
+        ];
+        if (isset($galleryEntry['tracks'])) {
+            foreach ($galleryEntry['tracks'] as $track) {
+                $label = metadata($track, 'display_title');
+                $srclang = metadata($track, ['Dublin Core', 'Language'], ['no_escape' => true]);
+                $type = metadata($track, ['Dublin Core', 'Type'], ['no_escape' => true]);
+                $videoSrcObject['tracks'][] = [
+                    'src' => $track->getWebPath(),
+                    'label' => $label,
+                    'srclang' => $srclang !== null ? $srclang : '',
+                    'kind' => $type !== null ? $type : 'captions',
+                ];
+            }
+        }
+        return ['data-video' => json_encode($videoSrcObject)];
+    }
+
+    protected static function pdf($file)
+    {
+        return [
+            'data-iframe' => 'true',
+            'data-src' => $file->getWebPath(),
+        ];
+    }
+
+    protected static function getCallbacks()
+    {
+        return apply_filters('light_gallery_callbacks', self::$_callbacks);
     }
 }
