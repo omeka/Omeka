@@ -45,7 +45,7 @@
 	box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
     border: 1px solid $darkgrayborder;
     border-radius: 2px;
-    padding: 15px;
+    padding: 8.5px;
     margin: 0;
     display: flex;
     align-items: center;
@@ -139,15 +139,18 @@
 
 .drawer-contents.opened:not(.deleted) { display: block; }
 
+.drawer-toggle .icon {
+    display: inline-block;
+    min-height: 1.25 * $spacing-l;
+    min-width: 1.25 * $spacing-l;
+}
+
 .drawer-toggle .icon:after, 
 .delete-drawer .icon:after, 
 .undo-delete .icon:after {
-    display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 16px;
-    height: $spacing-l;
-    width: $spacing-l;
     text-indent: 0;
     text-align: center;
 }
