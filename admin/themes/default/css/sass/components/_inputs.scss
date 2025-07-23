@@ -161,6 +161,10 @@ label {
         margin-bottom: $spacing-m;
     }
 
+    .drawer button {
+        margin-bottom: 0;
+    }
+
     label {
         @include screen-sm {
             margin-bottom: 0; 

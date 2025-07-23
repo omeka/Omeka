@@ -925,6 +925,7 @@ button.ui-dialog-titlebar-close {
   font-size: 16px;
   text-indent: 0;
   text-align: center;
+  display: inline-block;
 }
 
 .drawer-toggle .icon:after {
@@ -1176,6 +1177,9 @@ label input[type=text] {
 .inputs input[type=submit],
 .inputs button {
   margin-bottom: 10px;
+}
+.inputs .drawer button {
+  margin-bottom: 0;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .inputs label {
