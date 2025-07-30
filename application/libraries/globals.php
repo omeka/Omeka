@@ -2368,21 +2368,9 @@ function recent_items($count = 10)
     }
     return $html;
 }
-/**
- * Get HTML for records.
- *
- * @since 3.2
- * @package Omeka\Function\View
- * @param string $recordType Type of record to display (Item, Collection, etc.)
- * @param int $count Maximum number of records to display
- * @param string|null $partialPath Custom partial to use to display each record; pass null for the default
- * @param array $partialParams Parameters to pass to the partial
- * @param array $query Query passed to get_records to get the records to display; default is "random featured"
- * @return string
- */
-function display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
-{
-    $html = '';
+
+function get_display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array()) {
+    $displayRecords = [];
 
     $recordTypes = array(
         'Item' => array('partial' => 'items/single.php', 'alias' => 'item'),
@@ -2415,7 +2403,34 @@ function display_records($recordType, $count = 3, $partialPath = null, $partialP
                 $partialPath = $recordConfig['partial'];
             }
             $currentPartialParams = array_merge($defaultPartialParams, $partialParams);
-            $html .= get_view()->partial($partialPath, $currentPartialParams);
+            $displayRecords[] = get_view()->partial($partialPath, $currentPartialParams);
+        }
+    }
+
+    return $displayRecords;
+}
+
+/**
+ * Get HTML for records.
+ *
+ * @since 3.2
+ * @package Omeka\Function\View
+ * @param string $recordType Type of record to display (Item, Collection, etc.)
+ * @param int $count Maximum number of records to display
+ * @param string|null $partialPath Custom partial to use to display each record; pass null for the default
+ * @param array $partialParams Parameters to pass to the partial
+ * @param array $query Query passed to get_records to get the records to display; default is "random featured"
+ * @return string
+ */
+function display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
+{
+    $html = '';
+
+    $records = get_display_records($recordType, $count, $partialPath, $partialParams, $query);
+
+    if ($records) {
+        foreach ($records as $recordHtml) {
+            $html .= $recordHtml;
         }
     }
 
