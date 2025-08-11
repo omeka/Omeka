@@ -5,9 +5,9 @@ if (!Omeka) {
 (function($) {
     // Skip to content
     Omeka.skipNav = function () {
-      $("#skipnav").click(function(e) {
-          e.preventDefault();
-          $("#content").attr("tabindex", -1).focus();
+      $(document).on('click', '#skipnav', function(e) {
+          var mainContentId = $(this).attr('href');
+          $(mainContentId).attr("tabindex", -1).focus();
       });
     
       $("#content").on("blur focusout", function () {
