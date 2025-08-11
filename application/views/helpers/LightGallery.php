@@ -185,6 +185,7 @@ class Omeka_View_Helper_LightGallery extends Zend_View_Helper_Abstract
     {
         return [
             'data-iframe' => 'true',
+            'data-iframe-title' => $file->getAltText(),
             'data-src' => $file->getWebPath(),
         ];
     }
