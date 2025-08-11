@@ -2381,8 +2381,8 @@ function recent_items($count = 10)
  * @param array $query Query passed to get_records to get the records to display; default is "random featured"
  * @return array
  */
-
-function get_display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array()) {
+function get_display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
+{
     $displayRecords = [];
 
     $recordTypes = array(
