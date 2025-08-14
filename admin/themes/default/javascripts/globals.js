@@ -76,7 +76,7 @@ if (!Omeka) {
         if (!containerName) {
             containerName = '.element';
         }
-        $(drawerList).on('click', '.drawer button', function() { 
+        $(drawerList).on('click', containerName + ' > .drawer button', function() { 
             var drawerButton = $(this);
             var container = drawerButton.parents(containerName).first();
             var drawerActionSelector = drawerButton.data('action-selector');
