@@ -15,7 +15,7 @@
 	.sortable-item { 
 		cursor: move;
 		
-		&:before {
+		.move.icon:before {
 		    display: inline-block;
 		    font-family: "Font Awesome 5 Free";
             font-weight: 900;
@@ -28,27 +28,8 @@
 			content: "\f0b2";
 			opacity: 0.5;
 			position: relative;
-			
-			#exhibit-page-form & {
-				top: 0px;
-			    position: relative;
-			    float: left;
-			}
 	    }
 	    
-	    > a {
-			max-width: 350px;
-		    display: inline-block;
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-            line-height: 1.5;
-            vertical-align: top;
-
-            @include screen-xs {
-                max-width: 180px;
-            }
-		}		
 	}
 	
 	li {
@@ -63,11 +44,12 @@
     background: $lightgray;
 	box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
     border: 1px solid $darkgrayborder;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
     border-radius: 2px;
-    padding: 15px;
+    padding: 8.5px;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     input {
         margin: 0;
@@ -76,8 +58,11 @@
         
     .action-links {
 	    display: inline-block;
-	    float: right;
 	}
+
+    .action-links li {
+        margin-bottom: 0;
+    }
 }
 
 .ui-sortable-highlight:empty {
@@ -93,79 +78,106 @@
     border-radius: 2px;
 }
 
-.drawer-toggle,
-.delete-element, 
-.undo-delete {
-    float: right;
-    height: $spacing-l;
-    width: $spacing-l;
-    cursor: pointer;
-    text-indent: -9999px;
+.drawer-name {
+    margin-right: auto !important;
+}
+
+.drawer > button {
+    max-width: 350px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    vertical-align: top;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    margin-bottom: 0;
     color: #4C3939;
+    height: 1rem;
+
+    @include screen-xs {
+        max-width: 180px;
+    }
+}
+
+.drawer.deleted .delete-drawer,
+.drawer.deleted .drawer-toggle,
+.drawer:not(.deleted) .undo-delete, 
+.drawer.deleted ~ ul .undo-delete {
+    display: none;
+}
+
+.drawer > .drawer-name {
+    margin-right: auto;
+}
+
+.drawer.deleted .undo-delete {
+    display: inline-block;
 }
 
 .deleted.sortable-item,
 .deleted.drawer {
-    color: #FFF;
-    border: 1px solid rgba(#B00D00, 0.65);
-    background: rgba(#B00D00, 0.65);
+    @include red;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     text-shadow: none;
 
-    * {
-        color: #fff;
+    input.drawer-name,
+    select.drawer-name {
+        color: $black;
     }
 }
-.deleted a:link, 
-.deleted a:visited {
-    color: #fff;
-    text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+
+.deleted.drawer input.link-status {
+    display: none;
 }
-.deleted .drawer { color: #fff; }
 
+.drawer-contents { display: none; }
 
-.drawer-toggle:after, 
-.delete-element:after, 
-.undo-delete:after {
+.drawer-contents.opened:not(.deleted) { display: block; }
+
+.drawer-toggle .icon {
     display: inline-block;
+    min-height: 1.25 * $spacing-l;
+    min-width: 1.25 * $spacing-l;
+}
+
+.drawer-toggle .icon:after, 
+.delete-drawer .icon:after, 
+.undo-delete .icon:after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 16px;
-    height: $spacing-l;
-    width: $spacing-l;
     text-indent: 0;
-    float: left;
     text-align: center;
+    display: inline-block;
 }
-.drawer-toggle:after { content: "\f0da"; }
+.drawer-toggle .icon:after { content: "\f0da"; }
 
-.delete-element:link, .delete-element:active,
-.delete-element:hover, .delete-element:visited,
+.delete-drawer:link, .delete-drawer:active,
+.delete-drawer:hover, .delete-drawer:visited,
 .undo-delete:link, .undo-delete:active,
 .undo-delete:hover, .undo-delete:visited {
     color: #4C3939;
 }
 
-.drawer-toggle.opened:after {
+.drawer.opened .drawer-toggle .icon:after {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 
-.delete-element { display: inline-block; }
-.delete-element:after { content: "\f00d"; }
+.delete-drawer { display: inline-block; }
+.delete-drawer .icon:after { content: "\f00d"; }
 
-.drawer > a.undo-delete,
-.ui-sortable .sortable-item > a.undo-delete { display: none; }
-
-.undo-delete:after {
+.undo-delete .icon:after {
     content: "\f0e2";
     font-size: 12px;
-    line-height: 2em;
-    color: #fff;
+    line-height: 1;
 }
 
 .drawer-contents {

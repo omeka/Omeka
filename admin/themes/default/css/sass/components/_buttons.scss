@@ -88,7 +88,8 @@
     background: #F9E8E7;
     border: 1px solid rgba($red, 0.25);
 
-    &.ui-button {
+    &.ui-button,
+    &.drawer {
         background: #F9E8E7 !important;
         border: 1px solid rgba($red, 0.25) !important;
     }

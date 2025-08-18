@@ -25,61 +25,21 @@ Omeka.ElementSets = {};
     };
 
     /**
-     * Add link that collapses and expands content.
-     */
-    Omeka.ElementSets.addHideButtons = function () {
-        $('.sortable .drawer-contents').each(function () {
-            $(this).hide();
-        });
-        $('div.sortable-item').each(function () {
-            $(this).append('<div class="drawer-toggle"></div>');
-        });
-        $('.drawer-toggle')
-            .click(function (event) {
-                event.preventDefault();
-                $(event.target).parent().next().toggle();
-                $(this).toggleClass('opened');
-            })
-            .mousedown(function (event) {
-                event.stopPropagation();
-            });
-    };
-
-    /**
      * Set up tag remove/undo buttons for each element.
      *
      */
     Omeka.ElementSets.enableElementRemoval = function () {
-        $(document).on('click', '.delete-element', function (event) {
-            event.preventDefault();
-            Omeka.ElementSets.toggleElement(this);
-        });
-
-        $(document).on('click', '.undo-delete', function (event) {
-            event.preventDefault();
-            Omeka.ElementSets.toggleElement(this);
-        });
+        $(document).on('click', '.delete-drawer, .undo-delete', function () {
+            var buttonElement = $(this).parents('.element');
+            var elementDeleteHidden = buttonElement.find('.element-delete-hidden');
+            if(elementDeleteHidden.val() != 1) {
+                elementDeleteHidden.val(1);
+            } else {
+                elementDeleteHidden.val(0);
+            }
+            });
     };
 
-
-    /**
-     * Callback for element delete and undoing delete actions.
-     *
-     * @param {Element} button Clicked button.
-     */
-    Omeka.ElementSets.toggleElement = function (button) {
-        $(button).parent().toggleClass('deleted');
-        $(button).parent().next().toggleClass('deleted');
-        $(button).toggle();
-        if($(button).nextAll('input[type=hidden]').val() != 1) {
-            $(button).next().val(1);
-            $(button).prev().toggle();
-        } else {
-            $(button).nextAll('input[type=hidden]').val(0);
-            $(button).next().toggle();
-        }
-    };
-    
     /**
      * Callback for confirming a delete element.
      */

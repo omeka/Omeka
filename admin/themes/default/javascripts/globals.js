@@ -69,6 +69,43 @@ if (!Omeka) {
             });
         }
     };
+
+    /**
+     * Add link that collapses and expands content.
+     */
+    Omeka.manageDrawers = function (drawerList, containerName) {
+        if (!containerName) {
+            containerName = '.element';
+        }
+        $(drawerList).on('click', containerName + ' > .drawer button', function() { 
+            var drawerButton = $(this);
+            var container = drawerButton.parents(containerName).first();
+            var drawerActionSelector = drawerButton.data('action-selector');
+            container.find('.drawer').first().toggleClass(drawerActionSelector);
+            container.find('.drawer-contents').first().toggleClass(drawerActionSelector);
+            if (drawerButton.attr('aria-expanded') && drawerButton.hasClass('drawer-toggle')) {
+                Omeka.toggleAriaExpanded(drawerButton);
+                drawerButton.trigger('omeka:toggle-drawer');
+            }
+            if (drawerButton.hasClass('delete-drawer')) {
+                container.find('.undo-delete').first().focus();
+                drawerButton.trigger('omeka:delete-drawer');
+                
+            }
+            if (drawerButton.hasClass('undo-delete')) {
+                container.find('.delete-drawer').first().focus();
+                drawerButton.trigger('omeka:undo-drawer-delete');
+            }
+        });
+    };
+
+    Omeka.toggleAriaExpanded = function(element) {
+        if (element.attr('aria-expanded') == 'true') {
+            element.attr('aria-expanded', 'false');
+        } else {
+            element.attr('aria-expanded', 'true');
+        }
+    };
     
     Omeka.toggleMobileMenu = function() {
 	    $('.mobile-menu').click(function (event) {
@@ -76,11 +113,7 @@ if (!Omeka) {
 			var target = button.data('target');
 			$(target).toggleClass('in');
             button.parent('nav').toggleClass('open');
-            if (button.attr('aria-expanded') == 'true') {
-                button.attr('aria-expanded', 'false');
-            } else {
-                button.attr('aria-expanded', 'true');
-            }
+            Omeka.toggleAriaExpanded(button);
 	    });
     };
     

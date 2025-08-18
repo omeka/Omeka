@@ -25,28 +25,6 @@ Omeka.ItemTypes = {};
     };
 
     /**
-     * Add link that collapses and expands content.
-     */
-    Omeka.ItemTypes.addHideButtons = function () {
-        $('.sortable .drawer-contents').each(function () {
-            if( $(this).prev().hasClass("sortable-item") ) {
-                $(this).hide();
-            }
-        });
-        $('div.sortable-item').each(function () {
-            $(this).append('<div class="drawer-toggle"></div>');
-        });
-        $('.drawer-toggle').click( function (event) {
-                event.preventDefault();
-                $(event.target).parent().next().toggle();
-                $(this).toggleClass('opened');
-            })
-            .mousedown(function (event) {
-                event.stopPropagation();
-            });
-    };
-
-    /**
      * Add AJAX-enabled buttons to item type form for adding and removing elements.
      *
      * @param {string} addNewRequestUrl
@@ -91,49 +69,37 @@ Omeka.ItemTypes = {};
          */
         function activateRemoveElementLinks() {
 
-            $(document).on('click', '.delete-element', function (event) {
-                event.preventDefault();
-                toggleElements(this);
-            });
-            $('a.undo-delete').click( function (event) {
-                event.preventDefault();
+            $(document).on('click', '.delete-drawer, .undo-delete', function () {
                 toggleElements(this);
             });
         }
         
         function toggleElements(button) {
+            var deleteButton = $(button);
             var elementsToRemove = $('#itemtypes_remove');
             var removeElementLinkPrefix = 'remove-element-link-';
-            var removeElementLinkId = button.getAttribute('id');
-            if ($(button).hasClass('delete-element')) {
-                if (removeElementLinkId !== null) {
+            var removeElementLinkId = deleteButton.attr('id');
+            var element = deleteButton.parents('.element');
+            if (deleteButton.hasClass('delete-drawer')) {
+                if (removeElementLinkId !== undefined) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     if (elementId) {
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
-                    $(button).prevAll('.element-order').attr('name', '');
-                    $(button).parent().addClass('deleted');
-                    $(button).parent().next().addClass('deleted');
-                    $(button).prev().toggle();
-                    $(button).toggle();
-                } else {
-                    var row = $(button).parent().parent();
-                    row.remove();
+                    element.find('.element-order').attr('name', '');
+                    element.find('select,input').attr('disabled', 'true');
                 }
             } else {
                 if (removeElementLinkId) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
-                    $(button).prevAll('.element-order').attr('name', 'elements[' + elementId + '][order]');
+                    element.find('.element-order').attr('name', 'elements[' + elementId + '][order]');
                 }
-                $(button).parent().removeClass('deleted');
-                $(button).parent().next().removeClass('deleted');
-                $(button).next().toggle();
-                $(button).toggle();
+                element.find('select,input').removeAttr('disabled');
             }
         }
 
-        $('#add-element').click( function (event) {
-            event.preventDefault();
+        $('#add-element').click( function () {
+            $('#add-element-success').hide();
             var elementCount = $('#item-type-elements li').length;
             var typeValue = $('input[name=add-element-type]:checked').val();
             var requestUrl;
@@ -149,6 +115,9 @@ Omeka.ItemTypes = {};
                 success: function (responseText) {
                     var response = responseText || 'no response text';
                     $('.add-new').parent().before(response);
+                    var totalElements = $('#item-type-elements .element').length;
+                    $('#add-element-success .element-count').text(totalElements);
+                    $('#add-element-success').show();
                 },
                 error: function () {
                     alert('Unable to get a new element.');

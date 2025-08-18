@@ -4,9 +4,11 @@
         <ul class="sortable">
         <?php foreach( $item->Files as $key => $file ): ?>
             <li class="file">
+                <?php $fileId = $file->id; ?>
                 <div class="sortable-item">
+                    <span id="move-<?php echo $fileId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>"></span>
                     <?php echo file_image('square_thumbnail', array(), $file); ?>
-                    <?php echo link_to($file, 'show', html_escape($file->original_filename), array()); ?>
+                    <?php echo link_to($file, 'show', html_escape($file->original_filename), array('class' => 'drawer-name', 'id' => 'file-' . $fileId)); ?>
                     <?php echo $this->formHidden("order[{$file->id}]", $file->order, array('class' => 'file-order')); ?>
                     <ul class="action-links">
                         <li><?php echo link_to($file, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
@@ -20,7 +22,7 @@
 <?php endif; ?>
 
 <div class="add-new"><?php echo __('Add New Files'); ?></div>
-<div class="drawer-contents">
+<div class="drawer-contents opened">
     <p><?php echo __('The maximum file size is %s.', max_file_size()); ?></p>
 
     <div class="field two columns alpha" id="file-inputs">
