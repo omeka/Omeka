@@ -2392,7 +2392,7 @@ function get_display_records($recordType, $count = 3, $partialPath = null, $part
 
     $recordTypes = apply_filters('display_records_types', $recordTypes);
     if (!isset($recordTypes[$recordType]['partial'])) {
-        return;
+        return $displayRecords;
     }
 
     $defaultQuery = array(
