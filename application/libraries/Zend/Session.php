@@ -274,14 +274,7 @@ class Zend_Session extends Zend_Session_Abstract
             return;
         }
 
-        $result = session_set_save_handler(
-            array(&$saveHandler, 'open'),
-            array(&$saveHandler, 'close'),
-            array(&$saveHandler, 'read'),
-            array(&$saveHandler, 'write'),
-            array(&$saveHandler, 'destroy'),
-            array(&$saveHandler, 'gc')
-            );
+        $result = session_set_save_handler($saveHandler);
 
         if (!$result) {
             throw new Zend_Session_Exception('Unable to set session handler');
