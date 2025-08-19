@@ -166,7 +166,7 @@ class Omeka_Form extends Zend_Form
      * @param Zend_View_Interface $view
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         if ($this->_autoApplyOmekaStyles) {
             $this->applyOmekaStyles();

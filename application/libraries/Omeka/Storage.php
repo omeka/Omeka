@@ -37,7 +37,7 @@ class Omeka_Storage
      * @param array $options If set, this array will be passed to
      *  setOptions.
      */
-    public function __construct(array $options = null)
+    public function __construct(?array $options = null)
     {
         if (isset($options)) {
             $this->setOptions($options);

@@ -206,7 +206,7 @@ class Omeka_Navigation extends Zend_Navigation
      * @throws Zend_Navigation_Exception    if a subpage is invalid
      * @throws RuntimeException     if the page or parentContainer is invalid  
      */
-    public function mergePage(Zend_Navigation_Page $page, Zend_Navigation_Container $parentContainer = null)
+    public function mergePage(Zend_Navigation_Page $page, ?Zend_Navigation_Container $parentContainer = null)
     {
         if (!$page->uid) {
             // we assume that every page has already been normalized
@@ -395,7 +395,7 @@ class Omeka_Navigation extends Zend_Navigation
      * @param bool $reattach Whether the subpages of the $page should be reattached to $parentContainer
      * @return bool Whether the page was removed
      */
-    public function removePageRecursive(Zend_Navigation_Page $page, Zend_Navigation_Container $parentContainer = null, $reattach = false)
+    public function removePageRecursive(Zend_Navigation_Page $page, ?Zend_Navigation_Container $parentContainer = null, $reattach = false)
     {
         if ($parentContainer === null) {
             $parentContainer = $this;

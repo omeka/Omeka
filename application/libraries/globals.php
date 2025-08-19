@@ -2049,7 +2049,7 @@ function body_tag($attributes = array())
  * @params array $params Params to override the ones read from the request.
  * @return string
  */
-function item_search_filters(array $params = null)
+function item_search_filters(?array $params = null)
 {
     return get_view()->itemSearchFilters($params);
 }
@@ -2924,7 +2924,7 @@ function public_nav_main()
  * @param int|null $maxDepth
  * @return string
  */
-function public_nav_items(array $navArray = null, $maxDepth = 0)
+function public_nav_items(?array $navArray = null, $maxDepth = 0)
 {
     if (!$navArray) {
         $navArray = array(

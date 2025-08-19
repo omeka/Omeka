@@ -20,7 +20,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *  reading the current params from the request.
      * @return string HTML output
      */
-    public function itemSearchFilters(array $params = null)
+    public function itemSearchFilters(?array $params = null)
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest();

@@ -48,8 +48,8 @@ class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
      * All other users are limited to (A).
      */
     public function assert(Zend_Acl $acl,
-                           Zend_Acl_Role_Interface $role = null,
-                           Zend_Acl_Resource_Interface $resource = null,
+                           ?Zend_Acl_Role_Interface $role = null,
+                           ?Zend_Acl_Resource_Interface $resource = null,
                            $privilege = null)
     {
         // Non-authenticated users can never be allowed to do anything.
