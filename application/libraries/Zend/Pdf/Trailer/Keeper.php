@@ -57,7 +57,7 @@ class Zend_Pdf_Trailer_Keeper extends Zend_Pdf_Trailer
      */
     public function __construct(Zend_Pdf_Element_Dictionary $dict,
                                 Zend_Pdf_Element_Reference_Context $context,
-                                Zend_Pdf_Trailer $prev = null)
+                                ?Zend_Pdf_Trailer $prev = null)
     {
         parent::__construct($dict);
 

@@ -87,7 +87,7 @@ class Zend_Mobile_Push_Response_Gcm
      * @return Zend_Mobile_Push_Response_Gcm
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
      */
-    public function __construct($responseString = null, Zend_Mobile_Push_Message_Gcm $message = null)
+    public function __construct($responseString = null, ?Zend_Mobile_Push_Message_Gcm $message = null)
     {
         if ($responseString) {
             if (!$response = json_decode($responseString, true)) {

@@ -75,7 +75,7 @@ class Zend_Captcha_Figlet extends Zend_Captcha_Word
      * @param mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view = null, $element = null)
+    public function render(?Zend_View_Interface $view = null, $element = null)
     {
         return '<pre>'
              . $this->_figlet->render($this->getWord())

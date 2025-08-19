@@ -98,9 +98,9 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * @return Zend_Oauth_Token_Request
      */
     public function getRequestToken(
-        array $customServiceParameters = null,
+        ?array $customServiceParameters = null,
         $httpMethod = null,
-        Zend_Oauth_Http_RequestToken $request = null
+        ?Zend_Oauth_Http_RequestToken $request = null
     ) {
         if ($request === null) {
             $request = new Zend_Oauth_Http_RequestToken($this, $customServiceParameters);
@@ -130,9 +130,9 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * @return string
      */
     public function getRedirectUrl(
-        array $customServiceParameters = null,
-        Zend_Oauth_Token_Request $token = null,
-        Zend_Oauth_Http_UserAuthorization $redirect = null
+        ?array $customServiceParameters = null,
+        ?Zend_Oauth_Token_Request $token = null,
+        ?Zend_Oauth_Http_UserAuthorization $redirect = null
     ) {
         if ($redirect === null) {
             $redirect = new Zend_Oauth_Http_UserAuthorization($this, $customServiceParameters);
@@ -157,9 +157,9 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * @return void
      */
     public function redirect(
-        array $customServiceParameters = null,
-        Zend_Oauth_Token_Request $token = null,
-        Zend_Oauth_Http_UserAuthorization $request = null
+        ?array $customServiceParameters = null,
+        ?Zend_Oauth_Token_Request $token = null,
+        ?Zend_Oauth_Http_UserAuthorization $request = null
     ) {
         if ($token instanceof Zend_Oauth_Http_UserAuthorization) {
             $request = $token;
@@ -185,7 +185,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         $queryData,
         Zend_Oauth_Token_Request $token,
         $httpMethod = null,
-        Zend_Oauth_Http_AccessToken $request = null
+        ?Zend_Oauth_Http_AccessToken $request = null
     ) {
         $authorizedToken = new Zend_Oauth_Token_AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {

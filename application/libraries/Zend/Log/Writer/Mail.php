@@ -123,7 +123,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
      * @param  Zend_Layout $layout Layout instance; optional
      * @return void
      */
-    public function __construct(Zend_Mail $mail, Zend_Layout $layout = null)
+    public function __construct(Zend_Mail $mail, ?Zend_Layout $layout = null)
     {
         $this->_mail = $mail;
         if (null !== $layout) {

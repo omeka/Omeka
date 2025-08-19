@@ -53,7 +53,7 @@ class Zend_Xml_Security
      * @throws  Zend_Xml_Exception
      * @return  SimpleXMLElement|DomDocument|boolean
      */
-    public static function scan($xml, DOMDocument $dom = null)
+    public static function scan($xml, ?DOMDocument $dom = null)
     {
         // Omeka change, php8: libxml entity loading is always disabled by default
         $entitiesAlwaysDisabled = PHP_VERSION_ID >= 80000;
@@ -118,7 +118,7 @@ class Zend_Xml_Security
      * @throws Zend_Xml_Exception
      * @return SimpleXMLElement|DomDocument
      */
-    public static function scanFile($file, DOMDocument $dom = null)
+    public static function scanFile($file, ?DOMDocument $dom = null)
     {
         if (!file_exists($file)) {
             require_once 'Exception.php';

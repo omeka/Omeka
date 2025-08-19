@@ -37,8 +37,8 @@ class Zend_Oauth_Token_Request extends Zend_Oauth_Token
      * @param null|Zend_Oauth_Http_Utility $utility
      */
     public function __construct(
-        Zend_Http_Response $response = null,
-        Zend_Oauth_Http_Utility $utility = null
+        ?Zend_Http_Response $response = null,
+        ?Zend_Oauth_Http_Utility $utility = null
     ) {
         parent::__construct($response, $utility);
 

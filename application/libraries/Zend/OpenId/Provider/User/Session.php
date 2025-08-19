@@ -56,7 +56,7 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
      *
      * @param Zend_Session_Namespace $session
      */
-    public function __construct(Zend_Session_Namespace $session = null)
+    public function __construct(?Zend_Session_Namespace $session = null)
     {
         if ($session === null) {
             $this->_session = new Zend_Session_Namespace("openid");

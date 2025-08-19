@@ -81,8 +81,8 @@ class Zend_Oauth_Http
      */
     public function __construct(
         Zend_Oauth_Consumer $consumer,
-        array $parameters = null,
-        Zend_Oauth_Http_Utility $utility = null
+        ?array $parameters = null,
+        ?Zend_Oauth_Http_Utility $utility = null
     ) {
         $this->_consumer = $consumer;
         $this->_preferredRequestScheme = $this->_consumer->getRequestScheme();
@@ -220,7 +220,7 @@ class Zend_Oauth_Http
      * @return void
      * @throws Zend_Oauth_Exception if unable to retrieve valid token response
      */
-    protected function _assessRequestAttempt(Zend_Http_Response $response = null)
+    protected function _assessRequestAttempt(?Zend_Http_Response $response = null)
     {
         switch ($this->_preferredRequestScheme) {
             case Zend_Oauth::REQUEST_SCHEME_HEADER:

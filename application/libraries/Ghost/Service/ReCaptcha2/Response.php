@@ -28,7 +28,7 @@ class Ghost_Service_ReCaptcha2_Response
      * @param array $errorCodes
      * @param Zend_Http_Response $httpResponse If this is set the content will override $status and $errorCode
      */
-    public function __construct($status = null, array $errorCodes = null, Zend_Http_Response $httpResponse = null)
+    public function __construct($status = null, ?array $errorCodes = null, ?Zend_Http_Response $httpResponse = null)
     {
         if ($status !== null) {
             $this->setStatus($status);

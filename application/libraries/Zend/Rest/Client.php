@@ -158,7 +158,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
-    public function restGet($path, array $query = null)
+    public function restGet($path, ?array $query = null)
     {
         $this->_prepareRest($path);
         $client = self::getHttpClient();

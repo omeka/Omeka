@@ -2673,7 +2673,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * @param  Zend_View_Interface $view
      * @return Zend_Form
      */
-    public function setView(Zend_View_Interface $view = null)
+    public function setView(?Zend_View_Interface $view = null)
     {
         $this->_view = $view;
         return $this;
@@ -2911,7 +2911,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * @param  bool $include Whether $elements is an inclusion or exclusion list
      * @return Zend_Form
      */
-    public function setElementDecorators(array $decorators, array $elements = null, $include = true)
+    public function setElementDecorators(array $decorators, ?array $elements = null, $include = true)
     {
         if (is_array($elements)) {
             if ($include) {
@@ -2981,7 +2981,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * @param  Zend_View_Interface $view
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         if (null !== $view) {
             $this->setView($view);

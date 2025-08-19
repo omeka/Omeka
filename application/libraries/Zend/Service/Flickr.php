@@ -144,7 +144,7 @@ class Zend_Service_Flickr
      * @return Zend_Service_Flickr_ResultSet
      * @throws Zend_Service_Exception
      */
-    public function userSearch($query, array $options = null)
+    public function userSearch($query, ?array $options = null)
     {
         static $method = 'flickr.people.getPublicPhotos';
         static $defaultOptions = array('per_page' => 10,

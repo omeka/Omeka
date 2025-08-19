@@ -133,7 +133,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      * @param  string                   $credentialColumn
      * @param  string                   $credentialTreatment
      */
-    public function __construct(Zend_Db_Adapter_Abstract $zendDb = null, $tableName = null, $identityColumn = null,
+    public function __construct(?Zend_Db_Adapter_Abstract $zendDb = null, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
     {
         $this->_setDbAdapter($zendDb);
@@ -162,7 +162,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      * @throws Zend_Auth_Adapter_Exception
      * @return Zend_Auth_Adapter_DbTable
      */
-    protected function _setDbAdapter(Zend_Db_Adapter_Abstract $zendDb = null)
+    protected function _setDbAdapter(?Zend_Db_Adapter_Abstract $zendDb = null)
     {
         $this->_zendDb = $zendDb;
 

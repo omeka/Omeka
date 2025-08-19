@@ -127,7 +127,7 @@ class Zend_XmlRpc_Client
      * @param  Zend_Http_Client $httpClient HTTP Client to use for requests
      * @return void
      */
-    public function __construct($server, Zend_Http_Client $httpClient = null)
+    public function __construct($server, ?Zend_Http_Client $httpClient = null)
     {
         if ($httpClient === null) {
             $this->_httpClient = new Zend_Http_Client();

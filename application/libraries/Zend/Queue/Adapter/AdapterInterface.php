@@ -38,7 +38,7 @@ interface Zend_Queue_Adapter_AdapterInterface
      * @param  Zend_Queue $queue
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null);
+    public function __construct($options, ?Zend_Queue $queue = null);
 
     /**
      * Retrieve queue instance
@@ -107,7 +107,7 @@ interface Zend_Queue_Adapter_AdapterInterface
      * @param  Zend_Queue|null $queue
      * @return integer
      */
-    public function count(Zend_Queue $queue = null);
+    public function count(?Zend_Queue $queue = null);
 
     /********************************************************************
      * Messsage management functions
@@ -120,7 +120,7 @@ interface Zend_Queue_Adapter_AdapterInterface
      * @param  Zend_Queue|null $queue
      * @return Zend_Queue_Message
      */
-    public function send($message, Zend_Queue $queue = null);
+    public function send($message, ?Zend_Queue $queue = null);
 
     /**
      * Get messages in the queue
@@ -130,7 +130,7 @@ interface Zend_Queue_Adapter_AdapterInterface
      * @param  Zend_Queue|null $queue
      * @return Zend_Queue_Message_Iterator
      */
-    public function receive($maxMessages = null, $timeout = null, Zend_Queue $queue = null);
+    public function receive($maxMessages = null, $timeout = null, ?Zend_Queue $queue = null);
 
     /**
      * Delete a message from the queue

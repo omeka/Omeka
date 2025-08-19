@@ -218,7 +218,7 @@ class Ghost_Captcha_ReCaptcha2 extends Zend_Captcha_Base
      * @param  mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view = null, $element = null)
+    public function render(?Zend_View_Interface $view = null, $element = null)
     {
         $name = null;
         if ($element instanceof Zend_Form_Element) {

@@ -78,7 +78,7 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
      * @param  string $type Feed type
      * @return void
      */
-    public function __construct(DomDocument $dom, $type = null, DOMXPath $xpath = null)
+    public function __construct(DomDocument $dom, $type = null, ?DOMXPath $xpath = null)
     {
         $this->_domDocument = $dom;
 

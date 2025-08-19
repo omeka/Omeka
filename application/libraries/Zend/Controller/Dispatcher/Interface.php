@@ -129,7 +129,7 @@ interface Zend_Controller_Dispatcher_Interface
      * @param Zend_Controller_Response_Abstract|null $response
      * @return void
      */
-    public function setResponse(Zend_Controller_Response_Abstract $response = null);
+    public function setResponse(?Zend_Controller_Response_Abstract $response = null);
 
     /**
      * Retrieve the response object, if any

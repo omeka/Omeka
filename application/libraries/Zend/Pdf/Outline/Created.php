@@ -246,8 +246,8 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
     public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory,
                                                                   $updateNavigation,
                                                  Zend_Pdf_Element $parent,
-                                                 Zend_Pdf_Element $prev = null,
-                                                 SplObjectStorage $processedOutlines = null)
+                                                 ?Zend_Pdf_Element $prev = null,
+                                                 ?SplObjectStorage $processedOutlines = null)
     {
         if ($processedOutlines === null) {
             $processedOutlines = new SplObjectStorage();

@@ -235,7 +235,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      * @param  Zend_View_Interface $view
      * @return string
      */
-    public function render(Zend_View_Interface $view = null)
+    public function render(?Zend_View_Interface $view = null)
     {
         $this->initCsrfToken();
         return parent::render($view);

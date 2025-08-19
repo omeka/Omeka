@@ -71,7 +71,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      * @return void
      * @throws Zend_Feed_Exception If loading the feed failed.
      */
-    public function __construct($uri = null, $string = null, Zend_Feed_Builder_Interface $builder = null)
+    public function __construct($uri = null, $string = null, ?Zend_Feed_Builder_Interface $builder = null)
     {
         if ($uri !== null) {
             // Retrieve the feed via HTTP

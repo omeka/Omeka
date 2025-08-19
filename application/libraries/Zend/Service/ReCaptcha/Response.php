@@ -57,7 +57,7 @@ class Zend_Service_ReCaptcha_Response
      * @param string $errorCode
      * @param Zend_Http_Response $httpResponse If this is set the content will override $status and $errorCode
      */
-    public function __construct($status = null, $errorCode = null, Zend_Http_Response $httpResponse = null)
+    public function __construct($status = null, $errorCode = null, ?Zend_Http_Response $httpResponse = null)
     {
         if ($status !== null) {
             $this->setStatus($status);

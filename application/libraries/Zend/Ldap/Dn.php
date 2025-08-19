@@ -588,7 +588,7 @@ class Zend_Ldap_Dn implements ArrayAccess
      * @return array
      * @throws Zend_Ldap_Exception
      */
-    public static function explodeDn($dn, array &$keys = null, array &$vals = null,
+    public static function explodeDn($dn, ?array &$keys = null, ?array &$vals = null,
         $caseFold = self::ATTR_CASEFOLD_NONE)
     {
         $k = array();
@@ -626,7 +626,7 @@ class Zend_Ldap_Dn implements ArrayAccess
      * @param  string $caseFold
      * @return boolean True if the DN was successfully parsed or false if the string is not a valid DN.
      */
-    public static function checkDn($dn, array &$keys = null, array &$vals = null,
+    public static function checkDn($dn, ?array &$keys = null, ?array &$vals = null,
         $caseFold = self::ATTR_CASEFOLD_NONE)
     {
         /* This is a classic state machine parser. Each iteration of the

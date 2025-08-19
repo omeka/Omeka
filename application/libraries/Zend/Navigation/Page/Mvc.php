@@ -400,7 +400,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *                                      which clears all params.
      * @return Zend_Navigation_Page_Mvc     fluent interface, returns self
      */
-    public function setParams(array $params = null)
+    public function setParams(?array $params = null)
     {
         $this->clearParams();
 

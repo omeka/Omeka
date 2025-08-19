@@ -1006,7 +1006,7 @@ class Zend_Pdf
      * @param Zend_Pdf_Target $openAction
      * @returns Zend_Pdf
      */
-    public function setOpenAction(Zend_Pdf_Target $openAction = null)
+    public function setOpenAction(?Zend_Pdf_Target $openAction = null)
     {
         $root = $this->_trailer->Root;
         $root->touch();

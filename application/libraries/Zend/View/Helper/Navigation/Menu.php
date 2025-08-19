@@ -123,7 +123,7 @@ class Zend_View_Helper_Navigation_Menu
      * @return Zend_View_Helper_Navigation_Menu      fluent interface,
      *                                               returns self
      */
-    public function menu(Zend_Navigation_Container $container = null)
+    public function menu(?Zend_Navigation_Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -899,7 +899,7 @@ class Zend_View_Helper_Navigation_Menu
      *                                               controlling rendering
      * @return string                                rendered menu
      */
-    public function renderMenu(Zend_Navigation_Container $container = null,
+    public function renderMenu(?Zend_Navigation_Container $container = null,
                                array $options = array())
     {
         if (null === $container) {
@@ -982,7 +982,7 @@ class Zend_View_Helper_Navigation_Menu
      *                                                  {@link getInnerIndent()}.
      * @return string                                   rendered content
      */
-    public function renderSubMenu(Zend_Navigation_Container $container = null,
+    public function renderSubMenu(?Zend_Navigation_Container $container = null,
                                   $ulClass = null,
                                   $indent = null,
                                   $ulId   = null,
@@ -1026,7 +1026,7 @@ class Zend_View_Helper_Navigation_Menu
      *
      * @throws Zend_View_Exception   When no partial script is set
      */
-    public function renderPartial(Zend_Navigation_Container $container = null,
+    public function renderPartial(?Zend_Navigation_Container $container = null,
                                   $partial = null)
     {
         if (null === $container) {
@@ -1088,7 +1088,7 @@ class Zend_View_Helper_Navigation_Menu
      *                                               registered in the helper.
      * @return string                                helper output
      */
-    public function render(Zend_Navigation_Container $container = null)
+    public function render(?Zend_Navigation_Container $container = null)
     {
         if ($partial = $this->getPartial()) {
             return $this->renderPartial($container, $partial);

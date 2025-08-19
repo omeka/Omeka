@@ -43,7 +43,7 @@ class Zend_Queue_Adapter_Null extends Zend_Queue_Adapter_AdapterAbstract
      * @param  null|Zend_Queue $queue
      * @return void
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, ?Zend_Queue $queue = null)
     {
         parent::__construct($options, $queue);
     }
@@ -102,7 +102,7 @@ class Zend_Queue_Adapter_Null extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @throws Zend_Queue_Exception - not supported.
      */
-    public function count(Zend_Queue $queue=null)
+    public function count(?Zend_Queue $queue=null)
     {
         require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
@@ -117,7 +117,7 @@ class Zend_Queue_Adapter_Null extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @throws Zend_Queue_Exception - not supported.
      */
-    public function send($message, Zend_Queue $queue=null)
+    public function send($message, ?Zend_Queue $queue=null)
     {
         require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));
@@ -128,7 +128,7 @@ class Zend_Queue_Adapter_Null extends Zend_Queue_Adapter_AdapterAbstract
      *
      * @throws Zend_Queue_Exception - not supported.
      */
-    public function receive($maxMessages=null, $timeout=null, Zend_Queue $queue=null)
+    public function receive($maxMessages=null, $timeout=null, ?Zend_Queue $queue=null)
     {
         require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception(__FUNCTION__ . '() is not supported by ' . get_class($this));

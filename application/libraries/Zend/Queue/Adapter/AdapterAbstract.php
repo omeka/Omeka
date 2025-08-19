@@ -96,7 +96,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
      * @return void
      * @throws Zend_Queue_Exception
      */
-    public function __construct($options, Zend_Queue $queue = null)
+    public function __construct($options, ?Zend_Queue $queue = null)
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();

@@ -121,7 +121,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
      *
      * @param  Zend_Controller_Request_Abstract|null $request
      */
-    public function setRequest(Zend_Controller_Request_Abstract $request = null)
+    public function setRequest(?Zend_Controller_Request_Abstract $request = null)
     {
         $this->_request = $request;
     }

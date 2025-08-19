@@ -48,7 +48,7 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
      * @param  Zend_Layout $layout
      * @return void
      */
-    public function __construct(Zend_Layout $layout = null)
+    public function __construct(?Zend_Layout $layout = null)
     {
         if (null !== $layout) {
             $this->setLayout($layout);

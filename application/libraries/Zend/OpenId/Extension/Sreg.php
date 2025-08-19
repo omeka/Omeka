@@ -53,7 +53,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
      * @param float $version SREG version
      * @return array
      */
-    public function __construct(array $props=null, $policy_url=null, $version=1.0)
+    public function __construct(?array $props=null, $policy_url=null, $version=1.0)
     {
         $this->_props = $props;
         $this->_policy_url = $policy_url;

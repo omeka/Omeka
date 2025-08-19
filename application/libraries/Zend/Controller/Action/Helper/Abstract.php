@@ -52,7 +52,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
      * @param  Zend_Controller_Action $actionController
      * @return Zend_Controller_ActionHelper_Abstract Provides a fluent interface
      */
-    public function setActionController(Zend_Controller_Action $actionController = null)
+    public function setActionController(?Zend_Controller_Action $actionController = null)
     {
         $this->_actionController = $actionController;
         return $this;

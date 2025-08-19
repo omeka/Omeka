@@ -91,7 +91,7 @@ class Zend_View_Helper_Navigation
      * @return Zend_View_Helper_Navigation           fluent interface, returns
      *                                               self
      */
-    public function navigation(Zend_Navigation_Container $container = null)
+    public function navigation(?Zend_Navigation_Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -342,7 +342,7 @@ class Zend_View_Helper_Navigation
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */
-    public function render(Zend_Navigation_Container $container = null)
+    public function render(?Zend_Navigation_Container $container = null)
     {
         $helper = $this->findHelper($this->getDefaultProxy());
         return $helper->render($container);
