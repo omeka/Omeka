@@ -39,7 +39,7 @@ class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      *
      * @var array
      */
-    protected $_elementsToSave = array();
+    protected $_elementsToSave = [];
 
     /**
      * The name of the item type element set.

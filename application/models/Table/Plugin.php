@@ -33,7 +33,7 @@ class Table_Plugin extends Omeka_Db_Table
     {
         // This loops through all the records in the plugins table, and updates the version for each plugin
         $plugins = $this->findAll();
-        $pluginsWithIniFiles = array();
+        $pluginsWithIniFiles = [];
         foreach ($plugins as $plugin) {
             $path = PLUGIN_DIR . '/' . $plugin->name . '/plugin.ini';
             if (file_exists($path)) {
@@ -46,6 +46,6 @@ class Table_Plugin extends Omeka_Db_Table
     public function findByDirectoryName($pluginDirName)
     {
         $select = $this->getSelect()->where('plugins.name = ?')->limit(1);
-        return $this->fetchObject($select, array($pluginDirName));
+        return $this->fetchObject($select, [$pluginDirName]);
     }
 }

@@ -2,10 +2,10 @@
 $title = __('Batch Edit All Searched Items');
 if (!$isPartial):
     echo head(
-        array(
+        [
             'title' => $title,
             'bodyclass' => 'items batch-edit',
-        )
+        ]
     );
 endif;
 ?>
@@ -31,9 +31,9 @@ endif;
             ?>
         </fieldset>
 
-        <?php echo common('batch-edit-common', array(), 'items'); ?>
+        <?php echo common('batch-edit-common', [], 'items'); ?>
 
-        <?php fire_plugin_hook('admin_items_batch_edit_form', array('view' => $this)); ?>
+        <?php fire_plugin_hook('admin_items_batch_edit_form', ['view' => $this]); ?>
     </section>
 
     <section class="three columns omega">

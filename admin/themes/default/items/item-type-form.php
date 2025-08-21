@@ -7,7 +7,7 @@
         echo $this->formSelect(
             'item_type_id',
             $item->item_type_id,
-            array('id' => 'item-type'),
+            ['id' => 'item-type'],
             get_table_options('ItemType')
         );
     ?>
@@ -17,4 +17,4 @@
 <div id="type-metadata-form">
 <?php echo common('change-type', compact('item'), 'items'); ?>
 </div>
-<?php fire_plugin_hook('admin_items_form_item_types', array('item' => $item, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_items_form_item_types', ['item' => $item, 'view' => $this]); ?>

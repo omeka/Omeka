@@ -2,10 +2,10 @@
 
 class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
 {
-    private $_options = array(
+    private $_options = [
         'localDir' => '/foo/bar',
         'webDir' => '/foobar',
-    );
+    ];
 
     public static $tempDir;
 
@@ -46,7 +46,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
     public function testInvalidOption()
     {
         $this->setExpectedException('Omeka_Storage_Exception');
-        $storage = new Omeka_Storage_Adapter_Filesystem(array('foobar' => true));
+        $storage = new Omeka_Storage_Adapter_Filesystem(['foobar' => true]);
     }
 
     public function testCanStore()
@@ -54,19 +54,19 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
         $cantStore = new Omeka_Storage_Adapter_Filesystem($this->_options);
         $this->assertFalse($cantStore->canStore());
         $tempDir = self::$tempDir;
-        $canStore = new Omeka_Storage_Adapter_Filesystem(array(
+        $canStore = new Omeka_Storage_Adapter_Filesystem([
             'localDir' => $tempDir,
-        ));
+        ]);
         $canStore->setUp();
         $this->assertTrue($canStore->canStore());
     }
 
     public static function localDirs()
     {
-        return array(
-            array(null, false),
-            array('/foo/bar' . mt_rand(), true),
-        );
+        return [
+            [null, false],
+            ['/foo/bar' . mt_rand(), true],
+        ];
     }
 
     /**
@@ -81,9 +81,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
             $localDir = self::$tempDir;
         }
 
-        $storage = new Omeka_Storage_Adapter_Filesystem(array(
+        $storage = new Omeka_Storage_Adapter_Filesystem([
             'localDir' => $localDir,
-        ));
+        ]);
         $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
         $storage->move(basename($testFile), 'foo.txt');
         if (!$throwsException) {
@@ -103,9 +103,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
             $localDir = self::$tempDir;
         }
 
-        $storage = new Omeka_Storage_Adapter_Filesystem(array(
+        $storage = new Omeka_Storage_Adapter_Filesystem([
             'localDir' => $localDir,
-        ));
+        ]);
         $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
         $storage->store($testFile, 'foo.txt');
         if (!$throwsException) {
@@ -116,9 +116,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
     public function testDelete()
     {
         $tempDir = self::$tempDir;
-        $storage = new Omeka_Storage_Adapter_Filesystem(array(
+        $storage = new Omeka_Storage_Adapter_Filesystem([
             'localDir' => $tempDir,
-        ));
+        ]);
         $testFile = tempnam($tempDir, 'omeka_storage_filesystem_test');
 
         $storage->delete(basename($testFile));
@@ -133,12 +133,12 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
 
     public static function notWritable()
     {
-        return array(
-            array('store', array(self::_getRandomFilename(),
-                                 self::_getRandomFilename())),
-            array('move', array(self::_getRandomFilename(),
-                                self::_getRandomFilename())),
-        );
+        return [
+            ['store', [self::_getRandomFilename(),
+                                 self::_getRandomFilename()]],
+            ['move', [self::_getRandomFilename(),
+                                self::_getRandomFilename()]],
+        ];
     }
 
     /**
@@ -148,10 +148,10 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
     {
         $this->setExpectedException('Omeka_Storage_Exception');
         // Random directory should not exist, therefore not writable.
-        $storage = new Omeka_Storage_Adapter_Filesystem(array(
+        $storage = new Omeka_Storage_Adapter_Filesystem([
             'localDir' => '/foo/bar' . mt_rand(),
-        ));
-        call_user_func_array(array($storage, $method), $args);
+        ]);
+        call_user_func_array([$storage, $method], $args);
         $this->fail();
     }
 

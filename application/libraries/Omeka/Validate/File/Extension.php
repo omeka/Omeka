@@ -26,10 +26,10 @@ class Omeka_Validate_File_Extension extends Zend_Validate_File_Extension
      * Overrides default error message templates.
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::FALSE_EXTENSION => "The file '%value%' could not be ingested because it has a disallowed file extension (%target_extension%).",
         self::NOT_FOUND => "The file '%value%' is missing and could not be ingested."
-    );
+    ];
 
     /**
      * The extension of the file being validated

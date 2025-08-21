@@ -36,7 +36,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         }
 
         $form->setDefaults($bootstrap->getResource('Options'));
-        fire_plugin_hook('general_settings_form', array('form' => $form));
+        fire_plugin_hook('general_settings_form', ['form' => $form]);
         $form->removeDecorator('Form');
         $this->view->form = $form;
 
@@ -67,7 +67,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             if ($form->isValid($_POST)) {
                 // Any changes to this list should be reflected in the install
                 // script (and possibly the view functions).
-                $options = array(
+                $options = [
                     Omeka_Validate_File_Extension::WHITELIST_OPTION,
                     Omeka_Validate_File_MimeType::WHITELIST_OPTION,
                     File::DISABLE_DEFAULT_VALIDATION_OPTION,
@@ -76,7 +76,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                     'html_purifier_allowed_html_attributes',
                     Omeka_Captcha::PUBLIC_KEY_OPTION,
                     Omeka_Captcha::PRIVATE_KEY_OPTION,
-                );
+                ];
                 foreach ($form->getValues() as $key => $value) {
                     if (in_array($key, $options)) {
                         set_option($key, $value);
@@ -117,7 +117,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                 if (isset($_POST['search_record_types'])) {
                     $option = serialize($_POST['search_record_types']);
                 } else {
-                    $option = serialize(array());
+                    $option = serialize([]);
                 }
                 set_option('search_record_types', $option);
                 $this->_helper->flashMessenger(__('You have changed which records are searchable in Omeka. Please re-index the records using the form below.'), 'success');

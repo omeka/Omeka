@@ -20,19 +20,19 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        $representation = array(
+        $representation = [
             'id' => $record->id,
             'url' => self::getResourceUrl("/elements/{$record->id}"),
             'order' => $record->order,
             'name' => $record->name,
             'description' => $record->description,
             'comment' => $record->comment,
-            'element_set' => array(
+            'element_set' => [
                 'id' => $record->element_set_id,
                 'url' => self::getResourceUrl("/element_sets/{$record->element_set_id}"),
                 'resource' => 'element_sets',
-            ),
-        );
+            ],
+        ];
         return $representation;
     }
 

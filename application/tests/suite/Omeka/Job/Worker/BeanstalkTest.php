@@ -11,13 +11,13 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 
     public function setUpLegacy()
     {
-        $this->pheanstalk = $this->getMock('Pheanstalk_Pheanstalk', array(), array('0.0.0.0'));
+        $this->pheanstalk = $this->getMock('Pheanstalk_Pheanstalk', [], ['0.0.0.0']);
         $this->jobFactory = $this->getMock('Omeka_Job_Factory');
         $this->dbAdapter = $this->getMock('Zend_Test_DbAdapter');
         $this->dbAdapter->method('getServerVersion')->will($this->returnValue('1.0.0'));
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pheanJob = new Pheanstalk_Job(1, 'foo');
-        $this->omekaJob = $this->getMock('Omeka_Job_JobInterface', array(), array(array()));
+        $this->omekaJob = $this->getMock('Omeka_Job_JobInterface', [], [[]]);
         $this->worker = new Omeka_Job_Worker_Beanstalk($this->pheanstalk,
             $this->jobFactory, $this->db);
     }
@@ -95,11 +95,11 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 
     public static function exceptionReleases()
     {
-        return array(
-            array('Omeka_Job_Worker_InterruptException', true),
-            array('LogicException', false),
-            array('Zend_Db_Exception', false),
-        );
+        return [
+            ['Omeka_Job_Worker_InterruptException', true],
+            ['LogicException', false],
+            ['Zend_Db_Exception', false],
+        ];
     }
 
     /**

@@ -27,14 +27,14 @@ abstract class Omeka_Record_Builder_AbstractBuilder
      *
      * @var array
      */
-    protected $_settableProperties = array();
+    protected $_settableProperties = [];
 
     /**
      * Parsed metadata options for the builder.
      *
      * @var array
      */
-    private $_metadataOptions = array();
+    private $_metadataOptions = [];
 
     /**
      * Record being built or updated.

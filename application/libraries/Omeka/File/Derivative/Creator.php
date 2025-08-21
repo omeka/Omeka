@@ -18,7 +18,7 @@ class Omeka_File_Derivative_Creator
      */
     private $_strategy;
 
-    private $_derivatives = array();
+    private $_derivatives = [];
 
     /**
      * @var array|null

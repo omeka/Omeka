@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Appearance');
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
+echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
 <?php echo common('appearance-nav'); ?>
 
@@ -12,13 +12,13 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
         
     <?php echo $this->form; ?>
     
-    <?php fire_plugin_hook('admin_appearance_settings_form', array('form' => $form, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_appearance_settings_form', ['form' => $form, 'view' => $this]); ?>
 
 </section>
 
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
+        <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), ['class'=>'submit full-width green button']); ?>
     </div>
 </section>
 

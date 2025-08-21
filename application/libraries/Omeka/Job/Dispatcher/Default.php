@@ -131,7 +131,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
      * the task needs in order to do its job. Note that all options should be 
      * primitive data types (or arrays containing primitive data types).
      */
-    public function send($jobClass, $options = array())
+    public function send($jobClass, $options = [])
     {
         $metadata = $this->_getJobMetadata($jobClass, $options);
         $this->_defaultAdapter->send($this->_toJson($metadata), $metadata);
@@ -145,7 +145,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
      * the task needs in order to do its job. Note that all options should be 
      * primitive data types (or arrays containing primitive data types).
      */
-    public function sendLongRunning($jobClass, $options = array())
+    public function sendLongRunning($jobClass, $options = [])
     {
         $metadata = $this->_getJobMetadata($jobClass, $options);
         $this->_longRunningAdapter->send($this->_toJson($metadata), $metadata);
@@ -153,21 +153,21 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
 
     private function _getJobMetadata($class, $options)
     {
-        return array(
+        return [
             'className' => $class,
             'options' => $options,
             'createdAt' => Zend_Date::now(),
             'createdBy' => $this->_user,
-        );
+        ];
     }
 
     private function _toJson($metadata)
     {
-        $encodable = array(
+        $encodable = [
             'className' => $metadata['className'],
             'options' => $metadata['options'],
             'createdAt' => $metadata['createdAt']->toString(Zend_Date::ISO_8601),
-        );
+        ];
         if ($metadata['createdBy'] instanceof User) {
             $encodable['createdBy'] = $metadata['createdBy']->id;
         }

@@ -51,7 +51,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_setLinkHeader($perPage, $page, $totalResults, $resource);
 
         // Build the data array.
-        $data = array();
+        $data = [];
         $recordAdapter = $this->_getRecordAdapter($recordType);
         foreach ($records as $record) {
             $data[] = $this->_getRepresentation($recordAdapter, $record, $resource);
@@ -236,7 +236,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
             if (!$acl->isAllowed($currentUser, $record, $privilege)) {
                 throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
             }
-        } elseif (in_array($this->getRequest()->getMethod(), array('POST', 'PUT', 'DELETE'))) {
+        } elseif (in_array($this->getRequest()->getMethod(), ['POST', 'PUT', 'DELETE'])) {
             $recordType = get_class($record);
             throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must define an ACL resource.", 500);
         }
@@ -271,10 +271,10 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
 
         // Calculate the first, last, prev, and next page numbers.
-        $linkPages = array(
+        $linkPages = [
             'first' => 1,
             'last' => ceil($totalResults / $perPage),
-        );
+        ];
         if (1 < $page) {
             $linkPages['prev'] = $page - 1;
         }
@@ -283,9 +283,9 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
 
         // Build the Link value.
-        $linkValues = array();
+        $linkValues = [];
         foreach ($linkPages as $rel => $page) {
-            $linkQuery = array_merge($linkGet, array('page' => $page, 'per_page' => $perPage));
+            $linkQuery = array_merge($linkGet, ['page' => $page, 'per_page' => $perPage]);
             $linkValues[] = "<" . absolute_url("api/$resource", $linkQuery) . ">; rel=\"$rel\"";
         }
 
@@ -303,8 +303,8 @@ class ApiController extends Omeka_Controller_AbstractActionController
         Omeka_Record_AbstractRecord $record,
         $resource
     ) {
-        $extend = array();
-        $extendTemp = apply_filters("api_extend_$resource", array(), array('record' => $record));
+        $extend = [];
+        $extendTemp = apply_filters("api_extend_$resource", [], ['record' => $record]);
         $apiResources = $this->getFrontController()->getParam('api_resources');
 
         // Validate each extended resource. Each must be registered as an API

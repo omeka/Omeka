@@ -7,8 +7,8 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 
-queue_js_file(array('vendor/tinymce/tinymce.min', 'elements', 'tabs'));
-echo head(array('title' => $fileTitle, 'bodyclass' => 'files edit'));
+queue_js_file(['vendor/tinymce/tinymce.min', 'elements', 'tabs']);
+echo head(['title' => $fileTitle, 'bodyclass' => 'files edit']);
 include 'form-tabs.php';
 echo flash();
 ?>
@@ -27,16 +27,16 @@ echo flash();
             <?php endif; ?>
             <?php endforeach; ?>
         </div> <!-- end file-metadata div -->
-        <?php fire_plugin_hook('admin_files_form', array('file' => $file, 'view' => $this)); ?>
+        <?php fire_plugin_hook('admin_files_form', ['file' => $file, 'view' => $this]); ?>
     </section>
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
             <input type="submit" name="submit" class="submit big green button" value="<?php echo __('Save Changes'); ?>" id="file_edit" /> 
             <?php if (is_allowed('Files', 'delete')): ?>
-                <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
+                <?php echo link_to($file, 'delete-confirm', __('Delete'), ['class' => 'big red button delete-confirm']); ?>
             <?php endif; ?>
-            <?php fire_plugin_hook("admin_files_panel_buttons", array('view'=>$this, 'record'=>$file)); ?>
+            <?php fire_plugin_hook("admin_files_panel_buttons", ['view'=>$this, 'record'=>$file]); ?>
             <div id="alt-text-form" class="field">
                 <?php echo $this->formLabel('file-alt-text', __('Alt Text'));?>
                 <div class="inputs">
@@ -45,15 +45,15 @@ echo flash();
                         echo $this->formTextarea(
                             'alt_text',
                             $file->alt_text,
-                            array(
+                            [
                                 'id' => 'file-alt-text',
                                 'rows' => '5'
-                            )
+                            ]
                         );
                     ?>
                 </div>
             </div>
-            <?php fire_plugin_hook("admin_files_panel_fields", array('view'=>$this, 'record'=>$file)); ?>
+            <?php fire_plugin_hook("admin_files_panel_fields", ['view'=>$this, 'record'=>$file]); ?>
         </div>
     </section>
 </form>

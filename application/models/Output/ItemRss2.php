@@ -13,7 +13,7 @@ class Output_ItemRss2
 {
     public function render(array $records)
     {
-        $entries = array();
+        $entries = [];
         foreach ($records as $record) {
             $entries[] = $this->itemToRss($record);
             release_object($record);
@@ -27,7 +27,7 @@ class Output_ItemRss2
 
     protected function buildRSSHeaders()
     {
-        $headers = array();
+        $headers = [];
 
         // How do we determine what title to give the RSS feed?
         $headers['title'] = option('site_title');
@@ -61,11 +61,11 @@ class Output_ItemRss2
 
     protected function itemToRSS($item)
     {
-        $entry = array();
+        $entry = [];
         set_current_record('item', $item, true);
 
         // Title is a CDATA section, so no need for extra escaping.
-        $entry['title'] = metadata($item, 'display_title', array('no_escape' => true));
+        $entry['title'] = metadata($item, 'display_title', ['no_escape' => true]);
         $entry['description'] = $this->buildDescription($item);
 
         $entry['link'] = xml_escape(record_url($item, null, true));
@@ -74,7 +74,7 @@ class Output_ItemRss2
 
         //List the first file as an enclosure (only one per RSS feed)
         if (($files = $item->Files) && ($file = current($files))) {
-            $entry['enclosure'] = array();
+            $entry['enclosure'] = [];
             $fileDownloadUrl = file_display_url($file);
             $enc['url'] = $fileDownloadUrl;
             $enc['type'] = $file->mime_type;

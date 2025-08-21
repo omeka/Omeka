@@ -8,14 +8,14 @@ if ($this->pageCount > 1):
         <!-- Previous page link -->
         <li class="pagination_previous">
             <?php $getParams['page'] = $previous; ?>
-            <a rel="prev" href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('Previous Page'); ?></a>
+            <a rel="prev" href="<?php echo html_escape($this->url([], null, $getParams)); ?>"><?php echo __('Previous Page'); ?></a>
         </li>
         <?php endif; ?>
 
         <li class="page-input">
         <form action="<?php echo html_escape($this->url()); ?>" method="get" accept-charset="utf-8">
         <?php
-        $hiddenParams = array();
+        $hiddenParams = [];
         $entries = explode('&', http_build_query($getParams));
         foreach ($entries as $entry) {
             if (!$entry) {
@@ -27,7 +27,7 @@ if ($this->pageCount > 1):
 
         foreach ($hiddenParams as $key => $value) {
             if ($key != 'page') {
-                echo $this->formHidden($key, $value, array('id' => ''));
+                echo $this->formHidden($key, $value, ['id' => '']);
             }
         }
 
@@ -48,7 +48,7 @@ if ($this->pageCount > 1):
         <!-- Next page link -->
         <li class="pagination_next">
             <?php $getParams['page'] = $next; ?>
-            <a rel="next" href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('Next Page'); ?></a>
+            <a rel="next" href="<?php echo html_escape($this->url([], null, $getParams)); ?>"><?php echo __('Next Page'); ?></a>
         </li>
         <?php endif; ?>
     </ul>

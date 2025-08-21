@@ -23,17 +23,17 @@ class Omeka_View_Helper_UrlTest extends Omeka_Test_TestCase
 
     public function testStringUrlWithQueryParameters()
     {
-        $url = $this->helper->url('items/browse', array('param1' => 'foo', 'param2' => 'bar'));
+        $url = $this->helper->url('items/browse', ['param1' => 'foo', 'param2' => 'bar']);
         $this->assertEquals("/items/browse?param1=foo&param2=bar", $url);
     }
 
     public function testArrayUrlWithDefaultRouteAndQueryParameters()
     {
-        $url = $this->helper->url(array('controller' => 'items',
-                                        'action' => 'browse'),
+        $url = $this->helper->url(['controller' => 'items',
+                                        'action' => 'browse'],
                                   null,
-                                  array('param1' => 'foo',
-                                        'param2' => 'bar'));
+                                  ['param1' => 'foo',
+                                        'param2' => 'bar']);
 
         $this->assertEquals("/items/browse?param1=foo&param2=bar", $url);
     }

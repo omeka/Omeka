@@ -97,7 +97,7 @@ class Installer_Default implements Installer_InstallerInterface
     private function _addOptions()
     {
         $task = new Installer_Task_Options();
-        $task->setOptions(array(
+        $task->setOptions([
             'administrator_email' => $this->_getValue('administrator_email'),
             'copyright' => $this->_getValue('copyright'),
             'site_title' => $this->_getValue('site_title'),
@@ -127,7 +127,7 @@ class Installer_Default implements Installer_InstallerInterface
             'api_per_page' => 50,
             'show_element_set_headings' => 1,
             'use_square_thumbnail' => 1
-        ));
+        ]);
         $task->install($this->_db);
     }
 

@@ -76,10 +76,10 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->_addHiddenElement();
         $this->_addHomepageSelectElement();
         $this->addElement('hash', 'navigation_csrf',
-            array(
-                'decorators' => array('ViewHelper'),
+            [
+                'decorators' => ['ViewHelper'],
                 'timeout' => 3600
-            )
+            ]
         );
     }
 
@@ -90,15 +90,15 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         $this->addElement('hidden',
             self::HIDDEN_ELEMENT_ID,
-            array(
+            [
                 'value' => '',
-                'decorators' => array(
+                'decorators' => [
                     'ViewHelper',
-                    array('Description', array('escape' => false, 'tag' => false)),
-                    array('HtmlTag', array('tag' => 'div')),
-                    array('Label'),
-                    'Errors', )
-        ));
+                    ['Description', ['escape' => false, 'tag' => false]],
+                    ['HtmlTag', ['tag' => 'div']],
+                    ['Label'],
+                    'Errors', ]
+        ]);
     }
 
     /**
@@ -106,30 +106,30 @@ class Omeka_Form_Navigation extends Omeka_Form
      */
     protected function _addHomepageSelectElement()
     {
-        $elementIds = array();
-        $pageLinks = array();
+        $elementIds = [];
+        $pageLinks = [];
         $pageLinks['/'] = __('[Default]'); // Add the default homepage link option
         $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
             $pageLinks[$page->getHref()] = $page->getLabel();
         }
-        $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, array(
+        $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, [
             'label' => __('Select a Homepage'),
             'multiOptions' => $pageLinks,
             'value' => get_option(self::HOMEPAGE_URI_OPTION_NAME),
             'registerInArrayValidator' => false,
-            'decorators' => array(
+            'decorators' => [
                     'ViewHelper',
-                    array('Description', array('escape' => false, 'tag' => false)),
-                    array('HtmlTag', array('tag' => 'div')),
-                    array('Label'),
-                    'Errors', )
-        ));
+                    ['Description', ['escape' => false, 'tag' => false]],
+                    ['HtmlTag', ['tag' => 'div']],
+                    ['Label'],
+                    'Errors', ]
+        ]);
         $elementIds[] = self::SELECT_HOMEPAGE_ELEMENT_ID;
         $this->addDisplayGroup(
             $elementIds,
             self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID,
-            array('class' => 'field')
+            ['class' => 'field']
         );
     }
 
@@ -152,14 +152,14 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         $nav = new Omeka_Navigation();
         $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
-        $pageUids = array();
+        $pageUids = [];
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID)) {
             if ($pageLinks = json_decode($pageLinks, true)) {
                 // add and update the pages in the navigation
                 $pageOrder = 0;
-                $pages = array();
-                $parentPageIds = array();
-                $pageIdsToPageUids = array();
+                $pages = [];
+                $parentPageIds = [];
+                $pageIdsToPageUids = [];
                 foreach ($pageLinks as $pageLink) {
                     $pageOrder++;
                     // add or update the page in the navigation
@@ -205,7 +205,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         }
         // prune the remaining expired pages from navigation
         $otherPages = $nav->getOtherPages($pageUids);
-        $expiredPages = array();
+        $expiredPages = [];
         foreach ($otherPages as $otherPage) {
             $nav->prunePage($otherPage);
         }
@@ -248,7 +248,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         $missingLabel = false;
         $missingURI = false;
         $duplicateURI = false;
-        $uids = array();
+        $uids = [];
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID)) {
             if ($pageLinks = json_decode($pageLinks, true)) {
                 foreach ($pageLinks as $pageLink) {
@@ -298,7 +298,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         // get undeleteable page uids from new navigation
         $nav = $this->_getNavigationFromPost();
         $iterator = new RecursiveIteratorIterator($nav, RecursiveIteratorIterator::SELF_FIRST);
-        $newUndeleteableUids = array();
+        $newUndeleteableUids = [];
         foreach ($iterator as $page) {
             if ($page->can_delete == false) {
                 $newUndeleteableUids[] = $page->uid;

@@ -1,10 +1,10 @@
 <?php
 $title = __('Batch Delete All Searched Items');
 if (!$isPartial):
-    echo head(array(
+    echo head([
         'title' => $title,
         'bodyclass' => 'items batch-edit',
-    ));
+    ]);
 endif;
 ?>
 <div title="<?php echo $title; ?>">

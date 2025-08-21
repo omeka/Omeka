@@ -49,7 +49,7 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
         $this->dbAdapter->appendLastInsertIdToStack(self::USER_ID);
         $this->dbAdapter->appendLastInsertIdToStack(self::ENTITY_ID);
         $installer = new Installer_Default($this->db);
-        $this->form->setDefaults(array(
+        $this->form->setDefaults([
             'username' => 'foobar',
             'password' => 'foobar',
             'password_confirm' => 'foobar',
@@ -67,7 +67,7 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
             'show_empty_elements' => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'path_to_convert' => '',
             'tag_delimiter' => ',',
-        ));
+        ]);
         $installer->setForm($this->form);
         $installer->install();
         $this->profilerHelper->assertDbQuery("CREATE TABLE IF NOT EXISTS `omeka_collections`",
@@ -76,22 +76,22 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
             "Installer should have created the timestamp migrations table.");
         $this->profilerHelper->assertDbQuery("INSERT INTO `omeka_users`",
             "Installer should have created a new user.");
-        $this->profilerHelper->assertDbQuery(array(
+        $this->profilerHelper->assertDbQuery([
             "INSERT INTO `omeka_options`",
-            array(1 => 'site_title',
+            [1 => 'site_title',
                   2 => 'Automated Test Installation',
                   3 => 'site_title',
-                  4 => 'Automated Test Installation')
-        ), "Installer should have added appropriate database options.");
+                  4 => 'Automated Test Installation']
+        ], "Installer should have added appropriate database options.");
     }
 
     public function testIsInstalled()
     {
         $installer = new Installer_Default($this->db);
         $this->assertFalse($installer->isInstalled());
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(
+        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement([
             'omeka_options'
-        )));
+        ]));
         $this->assertTrue($installer->isInstalled());
         $this->profilerHelper->assertDbQuery("SHOW TABLES LIKE 'omeka_options'");
     }

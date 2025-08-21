@@ -1,5 +1,5 @@
 <?php
-echo head(array('bodyclass'=>'error405', 'title' => __('405: Method Not Allowed')));
+echo head(['bodyclass'=>'error405', 'title' => __('405: Method Not Allowed')]);
 echo flash();
 ?>
 

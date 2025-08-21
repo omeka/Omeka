@@ -158,10 +158,10 @@ abstract class Omeka_Plugin_AbstractPlugin
             if (!is_string($callback)) {
                 $callback = 'hook' . Inflector::camelize($hook);
             }
-            if (!is_callable(array($this, $callback))) {
+            if (!is_callable([$this, $callback])) {
                 throw new Omeka_Plugin_Exception('Hook callback "' . $callback . '" does not exist.');
             }
-            add_plugin_hook($hook, array($this, $callback));
+            add_plugin_hook($hook, [$this, $callback]);
         }
     }
 
@@ -177,10 +177,10 @@ abstract class Omeka_Plugin_AbstractPlugin
             if (!is_string($callback)) {
                 $callback = 'filter' . Inflector::camelize($filter);
             }
-            if (!is_callable(array($this, $callback))) {
+            if (!is_callable([$this, $callback])) {
                 throw new Omeka_Plugin_Exception('Filter callback "' . $callback . '" does not exist.');
             }
-            add_filter($filter, array($this, $callback));
+            add_filter($filter, [$this, $callback]);
         }
     }
 }

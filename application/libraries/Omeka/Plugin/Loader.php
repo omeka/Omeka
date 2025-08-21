@@ -50,7 +50,7 @@ class Omeka_Plugin_Loader
      *
      * @var array List of Plugin objects.
      */
-    protected $_plugins = array();
+    protected $_plugins = [];
 
     /**
      * @param Omeka_Plugin_Broker $broker Plugin broker.
@@ -138,7 +138,7 @@ class Omeka_Plugin_Loader
      * @param array $pluginsWaitingToLoad Plugins waiting to be loaded
      * @throws Omeka_Plugin_Loader_Exception
      */
-    public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())
+    public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = [])
     {
         $this->registerPlugin($plugin);
 

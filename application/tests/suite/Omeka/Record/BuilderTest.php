@@ -33,10 +33,10 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
     public function testSetRecordMetadata()
     {
         $builder = new DummyRecordBuilder($this->db);
-        $builder->setRecordMetadata(array(
+        $builder->setRecordMetadata([
             'description' => 'foobar'
-        ));
-        $this->assertEquals(array('description' => 'foobar'), $builder->getRecordMetadata());
+        ]);
+        $this->assertEquals(['description' => 'foobar'], $builder->getRecordMetadata());
     }
 
     public function testBuildIgnoresUnsettableRecordColumns()
@@ -44,10 +44,10 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $builder = new DummyRecordBuilder($this->db);
         $builder->setTest($this);
-        $builder->setRecordMetadata(array(
+        $builder->setRecordMetadata([
             'id' => 3,
             'shazbot' => true
-        ));
+        ]);
         $record = $builder->build();
         $this->assertFalse(isset($record->shazbot));
         $this->assertNotEquals(3, $record->id);
@@ -80,9 +80,9 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
     {
         $builder = new DummyRecordBuilder($this->db);
         $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array('id' => self::DUMMY_RECORD_ID, 'description' => 'foobar')
-            )
+            [
+                ['id' => self::DUMMY_RECORD_ID, 'description' => 'foobar']
+            ]
         ));
         $builder->setRecord(self::DUMMY_RECORD_ID);
         $record = $builder->getRecord();
@@ -129,7 +129,7 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
 class DummyRecordBuilder extends Omeka_Record_Builder_AbstractBuilder
 {
     protected $_recordClass = 'DummyRecordBuilderRecord';
-    protected $_settableProperties = array('description');
+    protected $_settableProperties = ['description'];
 
     private $_test;
 

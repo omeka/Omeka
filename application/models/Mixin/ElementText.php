@@ -19,14 +19,14 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      *
      * @var array
      */
-    protected $_textsByNaturalOrder = array();
+    protected $_textsByNaturalOrder = [];
 
     /**
      * ElementText records indexed by the element_id.
      * 
      * @var array
      */
-    protected $_textsByElementId = array();
+    protected $_textsByElementId = [];
 
     /**
      * Element records indexed by set name and element name, so it looks like:
@@ -35,14 +35,14 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      *
      * @var array
      */
-    protected $_elementsBySet = array();
+    protected $_elementsBySet = [];
 
     /**
      * Element records indexed by ID.
      *
      * @var array
      */
-    protected $_elementsById = array();
+    protected $_elementsById = [];
 
     /**
      * List of elements that were output on the form.  This can be used to 
@@ -51,7 +51,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * @see ActsAsElementText::_getElementTextsToSaveFromPost()
      * @var array
      */
-    protected $_elementsOnForm = array();
+    protected $_elementsOnForm = [];
 
     /**
      * Set of ElementText records to save when submitting the form.  These will 
@@ -59,7 +59,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      *
      * @var array
      */
-    protected $_textsToSave = array();
+    protected $_textsToSave = [];
 
     /**
      * Whether the elements and texts have been loaded yet.
@@ -81,7 +81,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * 
      * @var array 
      */
-    private static $_elementsByRecordType = array();
+    private static $_elementsByRecordType = [];
 
     /**
      * Omeka_Record_AbstractRecord callback for afterSave. Saves the ElementText 
@@ -196,7 +196,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         if (array_key_exists($element->id, $this->_textsByElementId)) {
             return $this->_textsByElementId[$element->id];
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -255,7 +255,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         }
 
         $elements = @$this->_elementsBySet[$elementSetName];
-        return !empty($elements) ? $elements : array();
+        return !empty($elements) ? $elements : [];
     }
 
     /**
@@ -322,7 +322,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      */
     private function _indexTextsByElementId($textRecords)
     {
-        $indexed = array();
+        $indexed = [];
         foreach ($textRecords as $textRecord) {
             $indexed[$textRecord->element_id][] = $textRecord;
         }
@@ -342,7 +342,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      */
     private function _indexElementsBySet(array $elementRecords)
     {
-        $indexed = array();
+        $indexed = [];
         foreach ($elementRecords as $record) {
             $indexed[$record->set_name][$record->name] = $record;
         }
@@ -357,7 +357,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      */
     private function _indexElementsById(array $elementRecords)
     {
-        $indexed = array();
+        $indexed = [];
         foreach ($elementRecords as $record) {
             $indexed[$record->id] = $record;
         }
@@ -513,11 +513,11 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                 $elementText = $this->getTextStringFromFormPost($textAttributes, $element);
 
                 // Save element text filter.
-                $filterName = array('Save', $this->_getRecordType(), $element->set_name, $element->name);
+                $filterName = ['Save', $this->_getRecordType(), $element->set_name, $element->name];
                 $elementText = apply_filters(
                     $filterName,
                     $elementText,
-                    array('record' => $this->_record, 'element' => $element)
+                    ['record' => $this->_record, 'element' => $element]
                 );
 
                 // Ignore fields that are empty (no text)
@@ -543,18 +543,18 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
     public function getTextStringFromFormPost($postArray, $element)
     {
         // Attempt to override the defaults with plugin behavior.
-        $filterName = array(
+        $filterName = [
             'Flatten',
             $this->_getRecordType(),
             $element->set_name,
-            $element->name);
+            $element->name];
 
         // If no filters, this should return null.
         $flatText = null;
         $flatText = apply_filters(
             $filterName,
             $flatText,
-            array('post_array' => $postArray, 'element' => $element)
+            ['post_array' => $postArray, 'element' => $element]
         );
 
         // If we got something back, short-circuit the built-in processing.
@@ -607,7 +607,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         //      }
         // }
 
-        $filterName = array('Validate', $this->_getRecordType(), $elementRecord->set_name, $elementRecord->name);
+        $filterName = ['Validate', $this->_getRecordType(), $elementRecord->set_name, $elementRecord->name];
         // Order of the parameters that are passed to this:
         // $isValid = the current value indicating whether or not the element text has validated.
         // $textValue = the string value that needs to be validated
@@ -616,11 +616,11 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         $isValid = apply_filters(
             $filterName,
             $isValid,
-            array(
+            [
                 'text' => $textValue,
                 'record' => $this->_record,
                 'element' => $elementRecord,
-            )
+            ]
         );
 
         return $isValid;
@@ -682,8 +682,8 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         // Cause texts to be re-loaded if accessed after save.
         $this->_recordsAreLoaded = false;
         $this->_replaceElementTexts = false;
-        $this->_textsToSave = array();
-        $this->_elementsOnForm = array();
+        $this->_textsToSave = [];
+        $this->_elementsOnForm = [];
     }
 
     /**
@@ -692,7 +692,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * @param array
      * @return bool
      */
-    public function deleteElementTextsByElementId(array $elementIdArray = array())
+    public function deleteElementTextsByElementId(array $elementIdArray = [])
     {
         $db = $this->_getDb();
         $recordTypeName = $db->quote($this->_getRecordType());

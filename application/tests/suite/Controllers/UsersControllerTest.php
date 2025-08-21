@@ -25,12 +25,12 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     public function testAddingNewUserSendsActivationEmail()
     {
         $this->_authenticateUser($this->_getDefaultUser());
-        $post = array('username' => 'foobar',
+        $post = ['username' => 'foobar',
                       'name' => 'foobar',
                       'email' => $this->email,
                       'role' => 'admin',
                       'active' => '1',
-                      'user_csrf' => $this->_getCsrfToken());
+                      'user_csrf' => $this->_getCsrfToken()];
         $this->getRequest()->setPost($post);
         $this->getRequest()->setMethod('post');
         $this->dispatch('users/add');
@@ -48,9 +48,9 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     public function testForgotPasswordForInvalidEmail()
     {
         $invalidEmail = 'bananabanana@example.com';
-        $this->request->setPost(array(
+        $this->request->setPost([
             'email' => $invalidEmail
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
@@ -60,9 +60,9 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
     public function testSendingEmailForForgottenPassword()
     {
-        $this->request->setPost(array(
+        $this->request->setPost([
             'email' => Omeka_Test_Resource_Db::SUPER_EMAIL
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $mail = $this->mailHelper->getMailText();
@@ -81,9 +81,9 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $user->active = 0;
         $user->save();
         $inactiveEmail = $user->email;
-        $this->request->setPost(array(
+        $this->request->setPost([
             'email' => $inactiveEmail
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
@@ -94,12 +94,12 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     public function testEditOtherRedirect()
     {
         $this->_authenticateUser($this->_getDefaultUser());
-        $userInfo = array(
+        $userInfo = [
             'name' => 'New User',
             'email' => $this->email,
             'role' => 'super',
             'username' => 'newuser'
-        );
+        ];
 
         $user = new User;
         $user->setPostData($userInfo);
@@ -108,13 +108,13 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $id = $user->id;
 
         $request = $this->getRequest();
-        $request->setPost(array(
+        $request->setPost([
             'username' => 'differentuser',
             'name' => 'Different User',
             'email' => $this->email,
             'role' => 'super',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
         $this->assertRedirectTo("/users/edit/$id");
@@ -127,13 +127,13 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $id = $user->id;
 
         $request = $this->getRequest();
-        $request->setPost(array(
+        $request->setPost([
             'username' => 'differentuser',
             'name' => 'Different User',
             'email' => $this->email,
             'role' => 'super',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
         $this->assertRedirectTo("/users/edit/$id");

@@ -2,7 +2,7 @@
 if ($versionNotifications):
     queue_js_file('vendor/semver.min', 'javascripts');
 endif;
-echo head(array('title' => __('Appearance'), 'bodyclass' => 'themes'));
+echo head(['title' => __('Appearance'), 'bodyclass' => 'themes']);
 echo common('appearance-nav');
 echo flash();
 
@@ -45,7 +45,7 @@ if ($current->image) {
 
 <p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own</a>!'); ?></p>
 <div class="themes group">
-    <form method="post" id="themes-form" action="<?php echo $this->url(array('controller' => 'themes', 'action' => 'switch'), 'default'); ?>">
+    <form method="post" id="themes-form" action="<?php echo $this->url(['controller' => 'themes', 'action' => 'switch'], 'default'); ?>">
 <?php
 $i = 1;
 foreach ($themes as $theme):
@@ -69,7 +69,7 @@ foreach ($themes as $theme):
                 <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?></a></p>
                 <p class="theme-support-link"><a href="<?php echo $theme->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
             </div>
-            <?php fire_plugin_hook('admin_themes_browse_each', array('theme' => $theme, 'view' => $this)); ?>
+            <?php fire_plugin_hook('admin_themes_browse_each', ['theme' => $theme, 'view' => $this]); ?>
         </div>
 <?php
 endforeach;
@@ -77,7 +77,7 @@ echo $csrf;
 ?>
     </form>
 </div>
-<div style="clear:both"><?php fire_plugin_hook('admin_themes_browse', array('themes' => $themes, 'view' => $this)); ?></div>
+<div style="clear:both"><?php fire_plugin_hook('admin_themes_browse', ['themes' => $themes, 'view' => $this]); ?></div>
 <?php if ($versionNotifications): ?>
 <script>
     Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_theme.json');

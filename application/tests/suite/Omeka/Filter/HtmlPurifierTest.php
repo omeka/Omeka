@@ -54,13 +54,13 @@ class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $htmlPurifier = $this->_getHtmlPurifier();
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
 
-        $htmlPurifier = $this->_getHtmlPurifier(array('p', 'strong'));
+        $htmlPurifier = $this->_getHtmlPurifier(['p', 'strong']);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
 
-        $htmlPurifier = $this->_getHtmlPurifier(null, array('*.class'));
+        $htmlPurifier = $this->_getHtmlPurifier(null, ['*.class']);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
 
-        $htmlPurifier = $this->_getHtmlPurifier(array('p', 'strong'), array('*.class'));
+        $htmlPurifier = $this->_getHtmlPurifier(['p', 'strong'], ['*.class']);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
     }
 
@@ -71,17 +71,17 @@ class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
         $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
 
-        $htmlPurifier = $this->_getHtmlPurifier(array('p', 'strong'));
+        $htmlPurifier = $this->_getHtmlPurifier(['p', 'strong']);
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
         $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
 
-        $htmlPurifier = $this->_getHtmlPurifier(null, array('*.class'));
+        $htmlPurifier = $this->_getHtmlPurifier(null, ['*.class']);
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
         $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
 
-        $htmlPurifier = $this->_getHtmlPurifier(array('p', 'strong'), array('*.class'));
+        $htmlPurifier = $this->_getHtmlPurifier(['p', 'strong'], ['*.class']);
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
         $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
@@ -130,19 +130,19 @@ class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
 
     public function testFilterAttributesWithMissingElements()
     {
-        $htmlElements = array();
-        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class', 'p.id', 'a.href');
-        $cleanHtmlAttributes = array();
+        $htmlElements = [];
+        $dirtyHtmlAttributes = ['strong.id', 'div.class', '*.class', 'p.id', 'a.href'];
+        $cleanHtmlAttributes = [];
         $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));
 
-        $htmlElements = array('h1');
-        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class', 'p.id', 'a.href');
-        $cleanHtmlAttributes = array('*.class');
+        $htmlElements = ['h1'];
+        $dirtyHtmlAttributes = ['strong.id', 'div.class', '*.class', 'p.id', 'a.href'];
+        $cleanHtmlAttributes = ['*.class'];
         $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));
 
-        $htmlElements = array('p', 'strong');
-        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class', 'p.id', 'a.href');
-        $cleanHtmlAttributes = array('strong.id', '*.class', 'p.id');
+        $htmlElements = ['p', 'strong'];
+        $dirtyHtmlAttributes = ['strong.id', 'div.class', '*.class', 'p.id', 'a.href'];
+        $cleanHtmlAttributes = ['strong.id', '*.class', 'p.id'];
         $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));
     }
 }

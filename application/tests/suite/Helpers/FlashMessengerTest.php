@@ -26,11 +26,11 @@ class Omeka_Controller_Action_Helper_FlashMessengerTest extends Omeka_Test_AppTe
         $this->messenger->addMessage("Second message to error namespace", 'error');
         $this->messenger->addMessage("Third message to success namespace", 'success');
 
-        $this->assertEquals(array(
-            'default' => array('First message to default namespace'),
-            'error' => array('Second message to error namespace'),
-            'success' => array('Third message to success namespace')
-            ), $this->messenger->getCurrentMessages());
+        $this->assertEquals([
+            'default' => ['First message to default namespace'],
+            'error' => ['Second message to error namespace'],
+            'success' => ['Third message to success namespace']
+            ], $this->messenger->getCurrentMessages());
     }
 
     public function testHasCurrentMessages()

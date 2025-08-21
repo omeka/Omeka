@@ -16,14 +16,14 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
         // get the names and descriptions from old collections
         $sql = "SELECT `id`, `name`, `description`, `collectors` FROM `{$this->db->Collection}`";
         $results = $this->db->query($sql)->fetchAll();
-        $collections = array();
+        $collections = [];
         foreach ($results as $result) {
-            $collections[] = array(
+            $collections[] = [
                 'id' => $result['id'],
                 'name' => $result['name'],
                 'description' => $result['description'],
                 'collectors' => $result['collectors']
-            );
+            ];
         }
 
         // remove the name and description columns from the Collection table
@@ -50,13 +50,13 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
      */
     protected function _addElementText($recordId, $recordType, $elementId, $html, $text)
     {
-        $this->db->query("INSERT INTO `{$this->db->ElementText}` (`record_id`, `record_type`, `element_id`, `html`, `text`) VALUES (?, ?, ?, ?, ?)", array(
+        $this->db->query("INSERT INTO `{$this->db->ElementText}` (`record_id`, `record_type`, `element_id`, `html`, `text`) VALUES (?, ?, ?, ?, ?)", [
             $recordId,
             $recordType,
             $elementId,
             $html,
             $text
-        ));
+        ]);
     }
 
     /**
@@ -67,7 +67,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
      */
     protected function _getElementId($elementSetName, $elementName)
     {
-        $result = $this->db->query("SELECT `a`.`id` FROM `{$this->db->Element}` AS `a`, `{$this->db->ElementSet}` AS `b` WHERE `a`.`element_set_id` = `b`.`id` AND `b`.`name` = ? AND `a`.`name` = ? LIMIT 1", array($elementSetName, $elementName))->fetch();
+        $result = $this->db->query("SELECT `a`.`id` FROM `{$this->db->Element}` AS `a`, `{$this->db->ElementSet}` AS `b` WHERE `a`.`element_set_id` = `b`.`id` AND `b`.`name` = ? AND `a`.`name` = ? LIMIT 1", [$elementSetName, $elementName])->fetch();
         return intval($result['id'], 10);
     }
 
@@ -124,11 +124,11 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
             if ($collectors != '') {
                 $collectors = explode($delimiter, $collectors);
                 $collectors = array_map('trim', $collectors);
-                $collectors = array_diff($collectors, array(''));
+                $collectors = array_diff($collectors, ['']);
                 $collectors = array_values($collectors);
                 return $collectors;
             }
         }
-        return array();
+        return [];
     }
 }

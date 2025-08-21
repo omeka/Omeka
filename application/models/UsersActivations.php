@@ -39,7 +39,7 @@ class UsersActivations extends Omeka_Record_AbstractRecord
      *
      * @var array
      */
-    protected $_related = array('User' => 'getUser');
+    protected $_related = ['User' => 'getUser'];
 
     /**
      * Get a new UsersActivations for a User.

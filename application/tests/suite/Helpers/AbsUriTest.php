@@ -14,7 +14,7 @@ class Omeka_Helper_AbsUriTest extends Omeka_Test_AppTestCase
     public function testAbsUriUsesHttpHost()
     {
         $_SERVER['HTTP_HOST'] = 'www.example.com';
-        $uri = absolute_url(array('controller' => 'items', 'action' => 'browse'), 'default');
+        $uri = absolute_url(['controller' => 'items', 'action' => 'browse'], 'default');
         $this->assertEquals('http://www.example.com/items/browse', $uri);
     }
 }

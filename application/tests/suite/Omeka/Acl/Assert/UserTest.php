@@ -26,38 +26,38 @@ class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
 
     public static function aclProvider()
     {
-        return array(
+        return [
             // $isAllowed, $roleUser, $resourceUser, $privilege
-            array(false, 'admin', 'admin', 'change-status'),
-            array(false, 'super', 'super', 'change-status'),
-            array(true, 'super', 'admin', 'change-status'),
-            array(false, 'admin', 'super', 'change-status'),
+            [false, 'admin', 'admin', 'change-status'],
+            [false, 'super', 'super', 'change-status'],
+            [true, 'super', 'admin', 'change-status'],
+            [false, 'admin', 'super', 'change-status'],
 
-            array(false, 'admin', 'admin', 'change-role'),
-            array(false, 'super', 'super', 'change-role'),
-            array(true, 'super', 'admin', 'change-role'),
-            array(false, 'admin', 'super', 'change-role'),
+            [false, 'admin', 'admin', 'change-role'],
+            [false, 'super', 'super', 'change-role'],
+            [true, 'super', 'admin', 'change-role'],
+            [false, 'admin', 'super', 'change-role'],
 
-            array(true, 'admin', 'admin', 'change-password'),
-            array(true, 'super', 'admin', 'change-password'),
-            array(true, 'super', 'super', 'change-password'),
-            array(false, 'admin', 'super', 'change-password'),
+            [true, 'admin', 'admin', 'change-password'],
+            [true, 'super', 'admin', 'change-password'],
+            [true, 'super', 'super', 'change-password'],
+            [false, 'admin', 'super', 'change-password'],
 
-            array(true, 'admin', 'admin', 'edit'),
-            array(true, 'super', 'admin', 'edit'),
-            array(true, 'super', 'super', 'edit'),
-            array(false, 'admin', 'super', 'edit'),
+            [true, 'admin', 'admin', 'edit'],
+            [true, 'super', 'admin', 'edit'],
+            [true, 'super', 'super', 'edit'],
+            [false, 'admin', 'super', 'edit'],
 
-            array(true, 'admin', 'admin', 'show'),
-            array(true, 'super', 'admin', 'show'),
-            array(true, 'super', 'super', 'show'),
-            array(false, 'admin', 'super', 'show'),
+            [true, 'admin', 'admin', 'show'],
+            [true, 'super', 'admin', 'show'],
+            [true, 'super', 'super', 'show'],
+            [false, 'admin', 'super', 'show'],
 
-            array(false, 'admin', 'admin', 'delete'),
-            array(false, 'super', 'super', 'delete'),
-            array(true, 'super', 'admin', 'delete'),
-            array(false, 'admin', 'super', 'delete'),
-        );
+            [false, 'admin', 'admin', 'delete'],
+            [false, 'super', 'super', 'delete'],
+            [true, 'super', 'admin', 'delete'],
+            [false, 'admin', 'super', 'delete'],
+        ];
     }
 
     /**

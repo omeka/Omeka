@@ -25,7 +25,7 @@ class Omeka_Plugin_Ini
      *
      * @var array
      */
-    protected $_configs = array();
+    protected $_configs = [];
 
     /**
      * @param string $pluginsRootDir Plugins directory.
@@ -102,7 +102,7 @@ class Omeka_Plugin_Ini
             return;
         }
 
-        $setters = array(
+        $setters = [
             'setDisplayName' => 'name',
             'setAuthor' => 'author',
             'setDescription' => 'description',
@@ -114,7 +114,7 @@ class Omeka_Plugin_Ini
             'setOptionalPlugins' => 'optional_plugins',
             'setIniTags' => 'tags',
             'setSupportLinkUrl' => 'support_link'
-        );
+        ];
 
         foreach ($setters as $method => $iniField) {
             $plugin->$method($this->getPluginIniValue($plugin, $iniField));

@@ -1,6 +1,6 @@
 <?php
-queue_js_file(array('vendor/tinymce/tinymce.min', 'themes'));
-echo head(array('title'=> __('Appearance'), 'bodyclass' => 'themes theme-configuration'));
+queue_js_file(['vendor/tinymce/tinymce.min', 'themes']);
+echo head(['title'=> __('Appearance'), 'bodyclass' => 'themes theme-configuration']);
 echo common('appearance-nav');
 echo flash();
 ?>
@@ -13,7 +13,7 @@ echo flash();
     </section>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+            <?php echo $this->formSubmit('submit', __('Save Changes'), ['class'=>'submit big green button']); ?>
         </div>
     </section>
 </form>

@@ -32,7 +32,7 @@ abstract class Omeka_Job_AbstractJob implements Omeka_Job_JobInterface
      */
     protected $_user;
 
-    protected $_options = array();
+    protected $_options = [];
 
     public function __construct(array $options)
     {

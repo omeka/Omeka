@@ -1,11 +1,11 @@
 <?php
-$doNotDelete = array('Dublin Core', 'Item Type Metadata');
+$doNotDelete = ['Dublin Core', 'Item Type Metadata'];
 
 echo head(
-    array(
+    [
         'title' => __('Settings'),
         'bodyclass'=>'element-sets'
-    )
+    ]
 );
 echo common('settings-nav');
 echo flash();
@@ -27,10 +27,10 @@ echo flash();
                     <ul class="action-links">
                         <li><?php echo link_to($elementSet, 'edit', __('Edit')); ?></li>
                         <?php if (!in_array($elementSet->name, $doNotDelete)): ?>
-                        <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete-confirm')); ?></li>
+                        <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), ['class' => 'delete-confirm']); ?></li>
                         <?php endif; ?>
                     </ul>
-                    <?php fire_plugin_hook('admin_element_sets_browse_each', array('element_set' => $elementSet, 'view' => $this)); ?>
+                    <?php fire_plugin_hook('admin_element_sets_browse_each', ['element_set' => $elementSet, 'view' => $this]); ?>
                 </td>
                 <td>
                     <?php echo html_escape(__($elementSet->description)); ?>
@@ -40,5 +40,5 @@ echo flash();
         </tbody>
     </table>
 </div>
-<?php fire_plugin_hook('admin_element_sets_browse', array('element_sets' => $element_sets, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_element_sets_browse', ['element_sets' => $element_sets, 'view' => $this]); ?>
 <?php echo foot(); ?>

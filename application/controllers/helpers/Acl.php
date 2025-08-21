@@ -33,7 +33,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      *
      * @var array
      */
-    protected $_allowed = array();
+    protected $_allowed = [];
 
     /**
      * Whether we should automatically try to set the resource object.
@@ -81,7 +81,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
             $this->getRequest()->setControllerName('error')
                                ->setActionName('forbidden')
                                ->setModuleName('default')
-                               ->setParams(array())
+                               ->setParams([])
                                ->setDispatched(false);
         } elseif (!$this->_isLoginRequest()) {
             $this->getRequest()->setControllerName('users')

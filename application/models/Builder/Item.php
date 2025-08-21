@@ -31,15 +31,15 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
     const IS_FEATURED = 'featured';
 
     protected $_recordClass = 'Item';
-    protected $_settableProperties = array(
+    protected $_settableProperties = [
         self::ITEM_TYPE_ID,
         self::COLLECTION_ID,
         self::IS_PUBLIC,
         self::IS_FEATURED
-    );
+    ];
 
-    private $_elementTexts = array();
-    private $_fileMetadata = array();
+    private $_elementTexts = [];
+    private $_fileMetadata = [];
 
     /**
      * Set the element texts for the item.
@@ -73,7 +73,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
         if (array_key_exists(self::ITEM_TYPE_NAME, $metadata)) {
             $itemType = $this->_db->getTable('ItemType')
                                   ->findBySql('name = ?',
-                                              array($metadata[self::ITEM_TYPE_NAME]),
+                                              [$metadata[self::ITEM_TYPE_NAME]],
                                               true);
             if (!$itemType) {
                 throw new Omeka_Record_Builder_Exception("Invalid type named {$metadata[self::ITEM_TYPE_NAME]} provided!");
@@ -182,7 +182,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      * @return array Set of File records ingested.  May be empty if no files 
      * were ingested.
      */
-    public function addFiles($transferStrategy, $files, array $options = array())
+    public function addFiles($transferStrategy, $files, array $options = [])
     {
         if ($transferStrategy instanceof Omeka_File_Ingest_AbstractIngest) {
             $ingester = $transferStrategy;
@@ -225,10 +225,10 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
     protected function _addIngestValidators(Omeka_File_Ingest_AbstractIngest $ingester)
     {
         $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION)
-                    ? array()
-                    : array(
+                    ? []
+                    : [
                         'extension whitelist' => new Omeka_Validate_File_Extension,
-                        'MIME type whitelist' => new Omeka_Validate_File_MimeType);
+                        'MIME type whitelist' => new Omeka_Validate_File_MimeType];
 
         $validators = apply_filters(self::FILE_INGEST_VALIDATORS_FILTER, $validators);
 

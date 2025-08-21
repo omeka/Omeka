@@ -8,7 +8,7 @@ if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
 $itemTitle = __('Item #%s', metadata('item', 'id')) . $itemTitle;
 
 
-echo head(array('title' => $itemTitle, 'bodyclass'=>'items show'));
+echo head(['title' => $itemTitle, 'bodyclass'=>'items show']);
 echo flash();
 ?>
 
@@ -16,11 +16,11 @@ echo flash();
     <?php echo flash(); ?>
     <?php
     echo item_image_gallery(
-        array('linkWrapper' => array('class' => 'admin-thumb panel')),
+        ['linkWrapper' => ['class' => 'admin-thumb panel']],
         'square_thumbnail', true);
     ?>
     <?php echo all_element_texts('item'); ?>
-    <?php fire_plugin_hook('admin_items_show', array('item' => $item, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_items_show', ['item' => $item, 'view' => $this]); ?>
 </section>
 
 <section class="three columns omega">
@@ -40,11 +40,11 @@ echo flash();
     <div id="edit" class="panel">
         <?php if (is_allowed($item, 'edit')): ?>
         <?php 
-        echo link_to_item(__('Edit'), array('class'=>'big green button'), 'edit'); ?>
+        echo link_to_item(__('Edit'), ['class'=>'big green button'], 'edit'); ?>
         <?php endif; ?>
         <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
         <?php if (is_allowed($item, 'delete')): ?>
-        <?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
+        <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm big red button'], 'delete-confirm'); ?>
         <?php endif; ?>
     </div>
     
@@ -73,11 +73,11 @@ echo flash();
         <h4><?php echo __('File Metadata'); ?></h4>
         <div id="file-list">
             <?php if (!metadata('item', 'has files')):?>
-                <p><?php echo __('There are no files for this item yet.');?><br/><?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
+                <p><?php echo __('There are no files for this item yet.');?><br/><?php echo link_to_item(__('Add a File'), [], 'edit'); ?>.</p>
             <?php else: ?>
                 <ul>
                     <?php foreach (loop('files', $this->item->Files) as $file): ?>
-                        <li><?php echo link_to_file_show(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
+                        <li><?php echo link_to_file_show(['class'=>'show', 'title'=>__('View File Metadata')]); ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif;?>
@@ -92,11 +92,11 @@ echo flash();
     <div class="info panel">
         <h4><?php echo __('Bibliographic Citation'); ?></h4>
         <div>
-            <p><?php echo metadata('item', 'citation', array('no_escape' => true));?></p>
+            <p><?php echo metadata('item', 'citation', ['no_escape' => true]);?></p>
         </div>
     </div>
 
-    <?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_items_show_sidebar', ['item' => $item, 'view' => $this]); ?>
 </section>
 
 <?php echo foot();?>

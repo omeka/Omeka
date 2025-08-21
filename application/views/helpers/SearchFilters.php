@@ -20,7 +20,7 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
      * - id (string): the ID of the filter wrapping div.
      * @return string
      */
-    public function searchFilters(array $options = array())
+    public function searchFilters(array $options = [])
     {
         $validQueryTypes = get_search_query_types();
         $validRecordTypes = get_custom_search_record_types();
@@ -38,7 +38,7 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
         }
 
         if (isset($_GET['record_types'])) {
-            $recordTypes = array();
+            $recordTypes = [];
             foreach ($_GET['record_types'] as $recordType) {
                 if (isset($validRecordTypes[$recordType])) {
                     $recordTypes[] = $validRecordTypes[$recordType];
@@ -53,10 +53,10 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
 
         return $this->view->partial(
             'search/search-filters.php',
-            array('options' => $options,
+            ['options' => $options,
                   'query' => $query,
                   'query_type' => $validQueryTypes[$queryType],
-                  'record_types' => $recordTypes)
+                  'record_types' => $recordTypes]
         );
     }
 }

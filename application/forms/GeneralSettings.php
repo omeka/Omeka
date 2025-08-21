@@ -18,33 +18,33 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         $this->setMethod('post');
         $this->setAttrib('id', 'settings-form');
 
-        $this->addElement('text', 'site_title', array(
+        $this->addElement('text', 'site_title', [
             'label' => __('Site Title')
-        ));
+        ]);
 
-        $this->addElement('textarea', 'description', array(
+        $this->addElement('textarea', 'description', [
             'label' => __('Site Description'),
             'rows' => 10
-        ));
+        ]);
 
-        $this->addElement('text', 'administrator_email', array(
+        $this->addElement('text', 'administrator_email', [
             'label' => __('Administrator Email'),
-            'validators' => array('EmailAddress'),
+            'validators' => ['EmailAddress'],
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'copyright', array(
+        $this->addElement('text', 'copyright', [
             'label' => __('Site Copyright Information')
-        ));
+        ]);
 
-        $this->addElement('text', 'author', array(
+        $this->addElement('text', 'author', [
             'label' => __('Site Author Information')
-        ));
+        ]);
 
-        $this->addElement('text', 'tag_delimiter', array(
+        $this->addElement('text', 'tag_delimiter', [
             'label' => __('Tag Delimiter'),
             'description' => __('Separate tags using this character or string. Be careful when changing this setting. You run the risk of splitting tags that contain the old delimiter.'),
-        ));
+        ]);
 
         // Allow the tag delimiter to be a whitespace character(s) (except for
         // new lines). The NotEmpty validator (and therefore the required flag)
@@ -53,19 +53,19 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         // "empty" value to the validators, and then, using the Regex validator,
         // match the value to a string containing one or more characters.
         $this->getElement('tag_delimiter')->setAllowEmpty(false);
-        $this->getElement('tag_delimiter')->addValidator('regex', false, array('/^.+$/'));
+        $this->getElement('tag_delimiter')->addValidator('regex', false, ['/^.+$/']);
 
-        $this->addElement('text', 'path_to_convert', array(
+        $this->addElement('text', 'path_to_convert', [
             'label' => __('ImageMagick Directory Path')
-        ));
+        ]);
 
-        $this->addElement('hash', 'settings_csrf', array(
+        $this->addElement('hash', 'settings_csrf', [
             'timeout' => 3600
-        ));
+        ]);
 
         $this->addDisplayGroup(
-            array('administrator_email', 'site_title', 'description',
-                  'copyright', 'author', 'tag_delimiter', 'path_to_convert'),
-            'site_settings', array('legend' => __('General Settings')));
+            ['administrator_email', 'site_title', 'description',
+                  'copyright', 'author', 'tag_delimiter', 'path_to_convert'],
+            'site_settings', ['legend' => __('General Settings')]);
     }
 }

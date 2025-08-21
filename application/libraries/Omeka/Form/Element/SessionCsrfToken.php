@@ -55,7 +55,7 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
         $this->_initToken()
              ->setAllowEmpty(false)
              ->setRequired(true)
-             ->setDecorators(array('ViewHelper'))
+             ->setDecorators(['ViewHelper'])
              ->_initCsrfValidator();
     }
 
@@ -143,7 +143,7 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
     protected function _initCsrfValidator()
     {
         $rightToken = $this->_token;
-        $this->addValidator('Identical', true, array($rightToken));
+        $this->addValidator('Identical', true, [$rightToken]);
         return $this;
     }
 

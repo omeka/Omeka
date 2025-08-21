@@ -17,15 +17,15 @@ class Omeka_Plugin_BrokerTest extends Omeka_Test_TestCase
     public function setUpLegacy()
     {
         $this->broker = new Omeka_Plugin_Broker;
-        $this->testHooksFired = array();
-        $this->broker->addHook('initialize', array($this, 'hookImpl1'), 'foobar');
-        $this->broker->addHook('initialize', array($this, 'hookImpl2'), 'bazfoo');
+        $this->testHooksFired = [];
+        $this->broker->addHook('initialize', [$this, 'hookImpl1'], 'foobar');
+        $this->broker->addHook('initialize', [$this, 'hookImpl2'], 'bazfoo');
     }
 
     public function testHookStorage()
     {
         $callback = $this->broker->getHook('foobar', 'initialize');
-        $this->assertEquals(array($this, 'hookImpl1'), $callback[0]);
+        $this->assertEquals([$this, 'hookImpl1'], $callback[0]);
     }
 
     public function testHookStorageViaAddPluginHookFunction()
@@ -41,7 +41,7 @@ class Omeka_Plugin_BrokerTest extends Omeka_Test_TestCase
 
     public function testCallSingleHook()
     {
-        $this->broker->callHook('initialize', array('special info', '2nd argument'), 'foobar');
+        $this->broker->callHook('initialize', ['special info', '2nd argument'], 'foobar');
         // Only one of the two possible hooks should have be called.
         $this->assertEquals(1, count($this->testHooksFired));
 
@@ -53,7 +53,7 @@ class Omeka_Plugin_BrokerTest extends Omeka_Test_TestCase
     public function testCallSetOfHooks()
     {
         $this->assertEquals(0, count($this->testHooksFired));
-        $this->broker->callHook('initialize', array('special info', '2nd argument'));
+        $this->broker->callHook('initialize', ['special info', '2nd argument']);
         $this->assertEquals(2, count($this->testHooksFired));
         // Make sure that arguments were passed correctly to both of these hook
         // implementations.

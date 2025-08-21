@@ -20,17 +20,17 @@ class Omeka_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::INVALID_TYPE => "The file '%file%' could not be ingested because it has a disallowed MIME type (%mimetype%).",
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'file' => '_file',
         'mimetype' => '_mimeType',
-    );
+    ];
 
     /**
      * @var string

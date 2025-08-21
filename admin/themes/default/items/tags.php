@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Items by Tag');
-echo head(array('title' => $pageTitle));
+echo head(['title' => $pageTitle]);
 echo flash();
 ?>
 <?php if (count($tags)): ?>

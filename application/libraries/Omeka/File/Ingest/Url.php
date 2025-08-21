@@ -53,8 +53,8 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
      */
     protected function _getHttpClient($source)
     {
-        return $this->_client = new Zend_Http_Client($source, array(
-                'useragent' => 'Omeka/' . OMEKA_VERSION));
+        return $this->_client = new Zend_Http_Client($source, [
+                'useragent' => 'Omeka/' . OMEKA_VERSION]);
     }
 
     /**

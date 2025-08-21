@@ -46,7 +46,7 @@ SQL
 );
 
         foreach ($entityData as $row) {
-            $nameParts = array();
+            $nameParts = [];
             if (!empty($row['first_name'])) {
                 $nameParts[] = $row['first_name'];
             }
@@ -64,8 +64,8 @@ SQL
             }
 
             $this->db->update($this->db->User,
-                array('name' => $name, 'email' => $row['email']),
-                array('id = ?' => $row['id'])
+                ['name' => $name, 'email' => $row['email']],
+                ['id = ?' => $row['id']]
             );
         }
     }

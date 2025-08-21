@@ -76,7 +76,7 @@ class Omeka_Test_Helper_Mail
      */
     public function getMailText($index = 0)
     {
-        $mails = array();
+        $mails = [];
         foreach ($this->_getIterator() as $file) {
             if ($this->_isMailFile($file)) {
                 $mails[] = $file->getRealPath();

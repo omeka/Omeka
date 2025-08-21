@@ -40,7 +40,7 @@ class Table_SearchText extends Omeka_Db_Table
 
         // Set the base select statement.
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->columns(array('record_type', 'record_id', 'title'));
+        $select->columns(['record_type', 'record_id', 'title']);
 
         // Set the where clause according to the query type.
         if ('exact_match' == $params['query_type']) {
@@ -57,7 +57,7 @@ class Table_SearchText extends Omeka_Db_Table
         // "search_text_browse_sql" hook to ensure that the subsequent WHERE
         // clauses are not reset. This hook can be used when a custom search
         // strategy is added using the "search_query_types" filter.
-        fire_plugin_hook('search_sql', array('select' => $select, 'params' => $params));
+        fire_plugin_hook('search_sql', ['select' => $select, 'params' => $params]);
 
         // Search only those record types that are configured to be searched.
         $searchRecordTypes = get_custom_search_record_types();

@@ -3,7 +3,7 @@ $class = get_class($record);
 $pageTitle = __('Delete %s', __(Inflector::titleize($class)));
 
 if (!$isPartial):
-    echo head(array('title' => $pageTitle));
+    echo head(['title' => $pageTitle]);
 endif;
 ?>
 <div title="<?php echo $pageTitle; ?>">

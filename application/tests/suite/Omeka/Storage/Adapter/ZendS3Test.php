@@ -2,11 +2,11 @@
 
 class Omeka_Storage_Adapter_ZendS3Test extends Omeka_Test_TestCase
 {
-    private $_options = array(
+    private $_options = [
         'accessKeyId' => 'accessKey',
         'secretAccessKey' => 'secretKey',
         'bucket' => 'my-bucket'
-        );
+        ];
 
     public function testAllOptions()
     {
@@ -84,12 +84,12 @@ class Omeka_Storage_Adapter_ZendS3Test extends Omeka_Test_TestCase
     public function getUriOptionsProvider()
     {
         $options = $this->_options;
-        return array(
-            array($options, false),
-            array($options + array('expiration' => '0'), false),
-            array($options + array('expiration' => 'notANumber'), false),
-            array($options + array('expiration' => '-10'), false),
-            array($options + array('expiration' => '10'), true)
-        );
+        return [
+            [$options, false],
+            [$options + ['expiration' => '0'], false],
+            [$options + ['expiration' => 'notANumber'], false],
+            [$options + ['expiration' => '-10'], false],
+            [$options + ['expiration' => '10'], true]
+        ];
     }
 }

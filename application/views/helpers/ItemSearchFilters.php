@@ -30,7 +30,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         }
 
         $db = get_db();
-        $displayArray = array();
+        $displayArray = [];
         foreach ($requestArray as $key => $value) {
             if ($value != null) {
                 $filter = ucfirst($key);
@@ -52,7 +52,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
 
                         $collection = $db->getTable('Collection')->find($value);
                         if ($collection) {
-                            $displayValue = metadata($collection, 'display_title', array('no_escape' => true));
+                            $displayValue = metadata($collection, 'display_title', ['no_escape' => true]);
                         }
                         break;
 
@@ -80,13 +80,13 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
             }
         }
 
-        $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray));
+        $displayArray = apply_filters('item_search_filters', $displayArray, ['request_array' => $requestArray]);
 
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to
         // the ability to add fields.
         if (array_key_exists('advanced', $requestArray)) {
-            $advancedArray = array();
+            $advancedArray = [];
             $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
                 if (!$row['element_id'] || !$row['type']) {

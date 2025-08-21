@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Collections');
-echo head(array('title' => $pageTitle, 'bodyclass' => 'collections browse'));
+echo head(['title' => $pageTitle, 'bodyclass' => 'collections browse']);
 ?>
 
 <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_results); ?></h1>
@@ -20,12 +20,12 @@ $sortLinks[__('Date Added')] = 'added';
 
     <h2><?php echo link_to_collection(); ?></h2>
     <?php if ($collectionImage = record_image('collection')): ?>
-        <?php echo link_to_collection($collectionImage, array('class' => 'image', 'role' => 'presentation')); ?>
+        <?php echo link_to_collection($collectionImage, ['class' => 'image', 'role' => 'presentation']); ?>
     <?php endif; ?>
 
-    <?php if (metadata('collection', array('Dublin Core', 'Description'))): ?>
+    <?php if (metadata('collection', ['Dublin Core', 'Description'])): ?>
     <div class="collection-description">
-        <?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'), array('snippet' => 150))); ?>
+        <?php echo text_to_paragraphs(metadata('collection', ['Dublin Core', 'Description'], ['snippet' => 150])); ?>
     </div>
     <?php endif; ?>
 
@@ -33,14 +33,14 @@ $sortLinks[__('Date Added')] = 'added';
     <div class="collection-contributors">
         <p>
         <strong><?php echo __('Contributors'); ?>:</strong>
-        <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all' => true, 'delimiter' => ', ')); ?>
+        <?php echo metadata('collection', ['Dublin Core', 'Contributor'], ['all' => true, 'delimiter' => ', ']); ?>
         </p>
     </div>
     <?php endif; ?>
 
-    <?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'rich_title', array('no_escape' => true))), array('collection' => metadata('collection', 'id')), array('class' => 'view-items-link')); ?>
+    <?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'rich_title', ['no_escape' => true])), ['collection' => metadata('collection', 'id')], ['class' => 'view-items-link']); ?>
 
-    <?php fire_plugin_hook('public_collections_browse_each', array('view' => $this, 'collection' => $collection)); ?>
+    <?php fire_plugin_hook('public_collections_browse_each', ['view' => $this, 'collection' => $collection]); ?>
 
 </div><!-- end class="collection" -->
 
@@ -48,6 +48,6 @@ $sortLinks[__('Date Added')] = 'added';
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
 
-<?php fire_plugin_hook('public_collections_browse', array('collections' => $collections, 'view' => $this)); ?>
+<?php fire_plugin_hook('public_collections_browse', ['collections' => $collections, 'view' => $this]); ?>
 
 <?php echo foot(); ?>

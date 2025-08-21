@@ -19,7 +19,7 @@ class Table_Tag extends Omeka_Db_Table
         FROM {$db->Tag} tags
         WHERE tags.name = ?
         LIMIT 1";
-        $tag = $this->fetchObject($sql, array($name));
+        $tag = $this->fetchObject($sql, [$name]);
 
         if (!$tag) {
             $tag = new Tag;
@@ -64,7 +64,7 @@ class Table_Tag extends Omeka_Db_Table
 
         switch ($sortField) {
             case 'time':
-                $select->order(array("records_tags.time $sortDir", 'tags.name ASC'));
+                $select->order(["records_tags.time $sortDir", 'tags.name ASC']);
                 break;
             case 'count':
                 $select->order("tagCount $sortDir");
@@ -87,15 +87,15 @@ class Table_Tag extends Omeka_Db_Table
         $recordType = $db->quote($type);
         //Redo the "from" so we can change the join condition
         $select->reset(Zend_Db_Select::FROM)
-               ->from(array('tags' => $db->Tag), array())
-               ->joinLeft(array('records_tags' => $db->RecordsTags),
+               ->from(['tags' => $db->Tag], [])
+               ->joinLeft(['records_tags' => $db->RecordsTags],
                     "records_tags.tag_id = tags.id AND records_tags.record_type = $recordType",
-                    array());
+                    []);
 
         //Showing tags related to items
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
-            $select->joinLeft(array('items' => $db->Item), "items.id = records_tags.record_id", array());
+            $select->joinLeft(['items' => $db->Item], "items.id = records_tags.record_id", []);
             $permissions = new Omeka_Db_Select_PublicPermissions('Items');
             $permissions->apply($select, 'items');
         }
@@ -122,7 +122,7 @@ class Table_Tag extends Omeka_Db_Table
      *        'like' => partial_tag_name
      *        'type' => tag_type
      */
-    public function applySearchFilters($select, $params = array())
+    public function applySearchFilters($select, $params = [])
     {
         $db = $this->getDb();
 
@@ -161,8 +161,8 @@ class Table_Tag extends Omeka_Db_Table
 
         $db = $this->getDb();
 
-        $select->from(array('tags' => $db->Tag), array('tags.*', 'tagCount' => 'COUNT(records_tags.id)'))
-                ->joinLeft(array('records_tags' => $db->RecordsTags), 'records_tags.tag_id = tags.id', array())
+        $select->from(['tags' => $db->Tag], ['tags.*', 'tagCount' => 'COUNT(records_tags.id)'])
+                ->joinLeft(['records_tags' => $db->RecordsTags], 'records_tags.tag_id = tags.id', [])
                 ->group('tags.id');
 
         return $select;
@@ -172,12 +172,12 @@ class Table_Tag extends Omeka_Db_Table
      * @internal Avoid the unnecessary expense of joining if we're just counting
      * all the tags.
      */
-    public function getSelectForCount($params = array())
+    public function getSelectForCount($params = [])
     {
         if (!$params) {
             $select = new Omeka_Db_Select;
             $db = $this->getDb();
-            $select->from(array('tags' => $db->Tag), array('COUNT(*)'));
+            $select->from(['tags' => $db->Tag], ['COUNT(*)']);
         } else {
             $select = parent::getSelectForCount($params);
         }
@@ -188,7 +188,7 @@ class Table_Tag extends Omeka_Db_Table
     {
         $db = $this->getDb();
         $sql = "SELECT tags.name FROM $db->Tag tags WHERE tags.name LIKE ? LIMIT $limit";
-        $tags = $db->fetchCol($sql, array($partialName . '%'));
+        $tags = $db->fetchCol($sql, [$partialName . '%']);
         return $tags;
     }
 }

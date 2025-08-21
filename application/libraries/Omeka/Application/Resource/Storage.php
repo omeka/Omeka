@@ -24,7 +24,7 @@ class Omeka_Application_Resource_Storage extends Zend_Application_Resource_Resou
         if ($config) {
             $storageOptions = $config->toArray();
         } else {
-            $storageOptions = array();
+            $storageOptions = [];
         }
 
         if (empty($storageOptions[Omeka_Storage::OPTION_ADAPTER])) {

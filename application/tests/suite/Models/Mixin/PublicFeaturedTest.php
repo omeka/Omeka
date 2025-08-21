@@ -27,13 +27,13 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $mixin = new Mixin_PublicFeatured($item);
         $this->assertFalse($mixin->isPublic());
 
-        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
+        $mock = $this->getMockBuilder('stdClass')->setMethods(['myCallBack'])->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_public';
-        $callback = array($mock, 'myCallBack');
+        $callback = [$mock, 'myCallBack'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
@@ -48,13 +48,13 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $mixin = new Mixin_PublicFeatured($item);
         $this->assertFalse($mixin->isFeatured());
 
-        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
+        $mock = $this->getMockBuilder('stdClass')->setMethods(['myCallBack'])->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_featured';
-        $callback = array($mock, 'myCallBack');
+        $callback = [$mock, 'myCallBack'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
@@ -70,23 +70,23 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $this->assertFalse($mixin->isPublic());
         $this->assertFalse($mixin->isFeatured());
 
-        $mockA = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackA'))->getMock();
+        $mockA = $this->getMockBuilder('stdClass')->setMethods(['myCallBackA'])->getMock();
         $mockA->expects($this->once())
              ->method('myCallBackA')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_public';
-        $callback = array($mockA, 'myCallBackA');
+        $callback = [$mockA, 'myCallBackA'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
-        $mockB = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackB'))->getMock();
+        $mockB = $this->getMockBuilder('stdClass')->setMethods(['myCallBackB'])->getMock();
         $mockB->expects($this->once())
              ->method('myCallBackB')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_featured';
-        $callback = array($mockB, 'myCallBackB');
+        $callback = [$mockB, 'myCallBackB'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
@@ -106,13 +106,13 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $item->save();
         $this->assertTrue($mixin->isPublic());
 
-        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
+        $mock = $this->getMockBuilder('stdClass')->setMethods(['myCallBack'])->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_not_public';
-        $callback = array($mock, 'myCallBack');
+        $callback = [$mock, 'myCallBack'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
@@ -130,13 +130,13 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $item->save();
         $this->assertTrue($mixin->isFeatured());
 
-        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
+        $mock = $this->getMockBuilder('stdClass')->setMethods(['myCallBack'])->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
 
         $hookName = 'make_item_not_featured';
-        $callback = array($mock, 'myCallBack');
+        $callback = [$mock, 'myCallBack'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
@@ -157,23 +157,23 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $this->assertTrue($mixin->isPublic());
         $this->assertTrue($mixin->isFeatured());
 
-        $mockA = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackA'))->getMock();
+        $mockA = $this->getMockBuilder('stdClass')->setMethods(['myCallBackA'])->getMock();
         $mockA->expects($this->once())
               ->method('myCallBackA')
               ->will($this->returnValue(true));
 
         $hookName = 'make_item_not_public';
-        $callback = array($mockA, 'myCallBackA');
+        $callback = [$mockA, 'myCallBackA'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
-        $mockB = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackB'))->getMock();
+        $mockB = $this->getMockBuilder('stdClass')->setMethods(['myCallBackB'])->getMock();
         $mockB->expects($this->once())
               ->method('myCallBackB')
               ->will($this->returnValue(true));
 
         $hookName = 'make_item_not_featured';
-        $callback = array($mockB, 'myCallBackB');
+        $callback = [$mockB, 'myCallBackB'];
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 

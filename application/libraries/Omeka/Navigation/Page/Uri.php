@@ -56,10 +56,10 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     protected function _normalizeHref($href)
     {
         if ($href === null || trim($href) == '') {
-            return array(
+            return [
                 'uri' => '',
                 'fragment' => null
-            );
+            ];
         }
         $href = trim($href);
         $isPath = false;
@@ -100,19 +100,19 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 if (strpos($href, '#')) {
                     $uri .= '#'; // add the hash to the uri
                 }
-                return array(
+                return [
                     'uri' => $uri,
                     'fragment' => $fragment,
-                );
+                ];
             }
         } catch (Zend_Uri_Exception $e) {
             if (filter_var($href, FILTER_VALIDATE_URL)) {
                 $scheme = parse_url($href, PHP_URL_SCHEME);
                 if ($scheme === 'javascript') {
-                    return array(
+                    return [
                         'uri' => '',
                         'fragment' => null,
-                    );
+                    ];
                 }
                 $fragmentPos = strrpos($href, '#');
                 if ($fragmentPos !== false) {
@@ -126,10 +126,10 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                     $uri = $href;
                     $fragment = null;
                 }
-                return array(
+                return [
                     'uri' => $uri,
                     'fragment' => $fragment
-                );
+                ];
             }
         }
         throw new Omeka_Navigation_Page_Uri_Exception(__('Invalid URI for Omeka_Navigation_Page_Uri object: %s', $href));

@@ -53,9 +53,9 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      *
      * @see Omeka_Record_AbstractRecord::__get
      */
-    protected $_related = array(
+    protected $_related = [
         'ElementTexts' => 'getAllElementTexts'
-    );
+    ];
 
     /**
      * Initialize the mixins.
@@ -104,7 +104,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      */
     public function totalItems()
     {
-        return $this->getDb()->getTable('Item')->count(array('collection' => $this->id));
+        return $this->getDb()->getTable('Item')->count(['collection' => $this->id]);
     }
 
     /**
@@ -155,11 +155,11 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace' => 'Omeka_Filter');
+        $options = ['inputNamespace' => 'Omeka_Filter'];
 
         // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('public' => 'Boolean',
-                         'featured' => 'Boolean');
+        $filters = ['public' => 'Boolean',
+                         'featured' => 'Boolean'];
 
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         $post = $filter->getUnescaped();
@@ -184,8 +184,8 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     protected function _dissociateItems()
     {
         $db = $this->getDb();
-        $db->update($db->Item, array('collection_id' => null),
-            array('collection_id = ?' => $this->id));
+        $db->update($db->Item, ['collection_id' => null],
+            ['collection_id = ?' => $this->id]);
     }
 
     /**
@@ -221,12 +221,12 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     public function getFile()
     {
         $itemTable = $this->getDb()->getTable('Item');
-        $itemArray = $itemTable->findBy(array(
+        $itemArray = $itemTable->findBy([
             'collection' => $this->id,
             'hasImage' => true,
             'sort_field' => 'featured',
             'sort_dir' => 'd'
-        ), 1);
+        ], 1);
         if ($itemArray) {
             return ($itemArray[0]->getFile());
         } else {

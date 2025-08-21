@@ -128,7 +128,7 @@ class Output_ItemAtom
             $feedEntryElement->appendChild($feedEntryIdElement);
 
             // feed/entry/title
-            if (!$feedEntryTitle = metadata($item, array('Dublin Core', 'Title'))) {
+            if (!$feedEntryTitle = metadata($item, ['Dublin Core', 'Title'])) {
                 $feedEntryTitle = 'Untitled';
             }
             $feedEntryTitleElement = $doc->createElement('title');
@@ -136,7 +136,7 @@ class Output_ItemAtom
             $feedEntryElement->appendChild($feedEntryTitleElement);
 
             // feed/entry/summary
-            if ($feedEntrySummary = metadata($item, array('Dublin Core', 'Description'))) {
+            if ($feedEntrySummary = metadata($item, ['Dublin Core', 'Description'])) {
                 $feedEntrySummaryElement = $doc->createElement('summary');
                 $feedEntrySummaryElement->appendChild($doc->createCDATASection($feedEntrySummary));
                 $feedEntryElement->appendChild($feedEntrySummaryElement);
@@ -192,7 +192,7 @@ class Output_ItemAtom
      */
     private function _getFeedLinks(array $items)
     {
-        $feedLinks = array();
+        $feedLinks = [];
 
         // There is always a self link.
         $feedLinks['self'] = get_view()->serverUrl(isset($_SERVER['REQUEST_URI']));
@@ -208,20 +208,20 @@ class Output_ItemAtom
             $pages = $paginator->getPages();
 
             // first
-            $feedLinks['first'] = absolute_url(array('page' => $pages->first), 'default', $_GET);
+            $feedLinks['first'] = absolute_url(['page' => $pages->first], 'default', $_GET);
 
             // previous
             if (isset($pages->previous)) {
-                $feedLinks['previous'] = absolute_url(array('page' => $pages->previous), 'default', $_GET);
+                $feedLinks['previous'] = absolute_url(['page' => $pages->previous], 'default', $_GET);
             }
 
             // next
             if (isset($pages->next)) {
-                $feedLinks['next'] = absolute_url(array('page' => $pages->next), 'default', $_GET);
+                $feedLinks['next'] = absolute_url(['page' => $pages->next], 'default', $_GET);
             }
 
             // last
-            $feedLinks['last'] = absolute_url(array('page' => $pages->last), 'default', $_GET);
+            $feedLinks['last'] = absolute_url(['page' => $pages->last], 'default', $_GET);
 
         // If pagination is not registered, assume item show.
         } else {

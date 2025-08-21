@@ -13,7 +13,7 @@
  */
 class Installer_Task_Options implements Installer_TaskInterface
 {
-    private $_expectedOptions = array(
+    private $_expectedOptions = [
         'administrator_email',
         'copyright',
         'site_title',
@@ -43,9 +43,9 @@ class Installer_Task_Options implements Installer_TaskInterface
         'api_per_page',
         'show_element_set_headings',
         'use_square_thumbnail'
-    );
+    ];
 
-    private $_options = array();
+    private $_options = [];
 
     /**
      * Set the key value pairs that will correspond to database options.
@@ -68,7 +68,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         }
 
         foreach ($this->_options as $name => $value) {
-            $db->insert('Option', array('name' => $name, 'value' => $value));
+            $db->insert('Option', ['name' => $name, 'value' => $value]);
         }
     }
 }

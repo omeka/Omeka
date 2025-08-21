@@ -15,42 +15,42 @@ class Omeka_Form_Login extends Omeka_Form
     {
         parent::init();
 
-        $decorators = array(
+        $decorators = [
             'ViewHelper',
-            array('Errors', array('class' => 'error')),
-            array(array('input' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
-            array('Label', array('tag' => 'div', 'tagClass' => 'field-meta')),
-            array('HtmlTag', array('tag' => 'div', 'class' => 'field'))
-        );
+            ['Errors', ['class' => 'error']],
+            [['input' => 'HtmlTag'], ['tag' => 'div', 'class' => 'inputs']],
+            ['Label', ['tag' => 'div', 'tagClass' => 'field-meta']],
+            ['HtmlTag', ['tag' => 'div', 'class' => 'field']]
+        ];
 
         $this->setMethod('post');
         $this->setAttrib('id', 'login-form');
-        $this->addElement('text', 'username', array(
+        $this->addElement('text', 'username', [
             'label' => __('Username'),
             'required' => true,
-            'validators' => array(
-                    array('validator' => 'NotEmpty',
-                          'options' => array(
-                              'messages' => array(
-                                  'isEmpty' => __('Username cannot be empty.'))))),
+            'validators' => [
+                    ['validator' => 'NotEmpty',
+                          'options' => [
+                              'messages' => [
+                                  'isEmpty' => __('Username cannot be empty.')]]]],
             'decorators' => $decorators,
-        ));
-        $this->addElement('password', 'password', array(
+        ]);
+        $this->addElement('password', 'password', [
             'label' => __('Password'),
             'required' => true,
-            'validators' => array(
-                    array('validator' => 'NotEmpty',
-                          'options' => array(
-                              'messages' => array(
-                                  'isEmpty' => __('Password cannot be empty.'))))),
+            'validators' => [
+                    ['validator' => 'NotEmpty',
+                          'options' => [
+                              'messages' => [
+                                  'isEmpty' => __('Password cannot be empty.')]]]],
             'decorators' => $decorators,
-        ));
-        $this->addElement('checkbox', 'remember', array(
+        ]);
+        $this->addElement('checkbox', 'remember', [
             'class' => 'checkbox',
             'label' => __('Remember Me?'),
             'decorators' => $decorators,
-        ));
-        $this->addDisplayGroup(array('username', 'password', 'remember'), 'login');
-        $this->addElement('submit', 'submit', array('label' => __('Log In')));
+        ]);
+        $this->addDisplayGroup(['username', 'password', 'remember'], 'login');
+        $this->addElement('submit', 'submit', ['label' => __('Log In')]);
     }
 }

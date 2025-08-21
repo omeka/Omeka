@@ -15,7 +15,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
 
     const DUMMY_RECORD_ID = 1;
 
-    private static $_eventStack = array();
+    private static $_eventStack = [];
 
     private $dbAdapter;
     private $db;
@@ -57,7 +57,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $bootstrap);
 
         $this->assertSame($this->pluginBroker, $record->getPluginBroker());
-        $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
+        $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', [], [], '', false);
         $record->setPluginBroker($mockPluginBroker);
         $this->assertSame($mockPluginBroker, $record->getPluginBroker());
     }
@@ -166,7 +166,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $record->do_not_set = 'foobar';
         $dummyTable = new Omeka_Db_Table('DummyRecord', $this->db);
         $this->db->setTable('DummyRecord', $dummyTable);
-        $this->assertEquals(array('id' => 1, 'do_not_set' => 'foobar', 'other_field' => null), $record->toArray());
+        $this->assertEquals(['id' => 1, 'do_not_set' => 'foobar', 'other_field' => null], $record->toArray());
     }
 
     public function testSaveInsertsNewRecord()
@@ -194,10 +194,10 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
         $record->save();
-        $this->assertEquals(array(
+        $this->assertEquals([
             'DummyRecord::beforeSave(), insert = true',
             'DummyRecord::afterSave(), insert = true',
-        ), $this->_simpleStack());
+        ], $this->_simpleStack());
     }
 
     public function testForceSaveThrowsExceptionForUnsaveableRecord()
@@ -244,7 +244,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
     public function testSetArray()
     {
         $record = new DummyRecord($this->db);
-        $record->setArray(array('id' => 1, 'do_not_set' => 'whatever'));
+        $record->setArray(['id' => 1, 'do_not_set' => 'whatever']);
         $this->assertEquals(1, $record->id);
         $this->assertEquals('whatever', $record->do_not_set);
     }
@@ -253,9 +253,9 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
     {
         $this->setExpectedException('Omeka_Validate_Exception');
         $record = new DummyRecord($this->db);
-        $post = array(
+        $post = [
             'do_not_set' => 'foobar'
-        );
+        ];
         try {
             $record->setPostData($post);
             $record->save();
@@ -269,16 +269,16 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
-        $post = array(
+        $post = [
             'id' => 2,
-        );
+        ];
         $record->setPostData($post);
         $this->assertNotEquals(2, $record->id);
     }
 
     public function tearDownLegacy()
     {
-        self::$_eventStack = array();
+        self::$_eventStack = [];
         Zend_Registry::_unsetInstance();
     }
 
@@ -311,7 +311,7 @@ class DummyRecord extends Omeka_Record_AbstractRecord
 
     public $other_field = null;
 
-    protected $_related = array('Foobar' => 'getFoobar');
+    protected $_related = ['Foobar' => 'getFoobar'];
 
     protected function _initializeMixins()
     {

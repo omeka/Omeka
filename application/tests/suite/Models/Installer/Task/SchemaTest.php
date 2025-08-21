@@ -31,9 +31,9 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
     {
         $collectionSql = SCHEMA_DIR . '/collections.sql';
         $this->schemaTask->addTable('collections', $collectionSql);
-        $this->assertEquals(array(
+        $this->assertEquals([
             'collections' => $collectionSql
-        ), $this->schemaTask->getTables());
+        ], $this->schemaTask->getTables());
     }
 
     public function testAddNonExistentTable()
@@ -51,7 +51,7 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
     {
         $this->assertEquals(0, count($this->schemaTask->getTables()));
         $this->schemaTask->useDefaultTables();
-        $this->assertEquals(array(
+        $this->assertEquals([
             'collections' => SCHEMA_DIR . '/collections.sql',
             'element_texts' => SCHEMA_DIR . '/element_texts.sql',
             'item_types' => SCHEMA_DIR . '/item_types.sql',
@@ -70,40 +70,40 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
             'sessions' => SCHEMA_DIR . '/sessions.sql',
             'search_texts' => SCHEMA_DIR . '/search_texts.sql',
             'keys' => SCHEMA_DIR . '/keys.sql'
-        ), $this->schemaTask->getTables());
+        ], $this->schemaTask->getTables());
     }
 
     public function testAddTables()
     {
-        $expectedTables = array(
+        $expectedTables = [
             'collections' => SCHEMA_DIR . '/collections.sql',
             'items' => SCHEMA_DIR . '/items.sql'
-        );
+        ];
         $this->schemaTask->addTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
     }
 
     public function testSetTables()
     {
-        $expectedTables = array(
+        $expectedTables = [
             'collections' => SCHEMA_DIR . '/collections.sql',
             'items' => SCHEMA_DIR . '/items.sql'
-        );
+        ];
         $this->schemaTask->setTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
     }
 
     public function testRemoveTable()
     {
-        $someTables = array(
+        $someTables = [
             'collections' => SCHEMA_DIR . '/collections.sql',
             'items' => SCHEMA_DIR . '/items.sql'
-        );
+        ];
         $this->schemaTask->addTables($someTables);
         $this->schemaTask->removeTable('collections');
-        $this->assertEquals(array(
+        $this->assertEquals([
             'items' => $someTables['items']
-        ), $this->schemaTask->getTables());
+        ], $this->schemaTask->getTables());
     }
 
     public function testInstallFailsWithNoTables()
@@ -131,7 +131,7 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
         $task = new Installer_Task_Schema();
         $task->useDefaultTables();
         $task->install($this->db);
-        $expectedTables = array(
+        $expectedTables = [
             'test_collections',
             'test_elements',
             'test_element_sets',
@@ -147,7 +147,7 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
             'test_records_tags',
             'test_users',
             'test_users_activations'
-        );
+        ];
         foreach ($expectedTables as $tableName) {
             $this->profilerHelper->assertDbQuery("CREATE TABLE IF NOT EXISTS `$tableName`");
         }

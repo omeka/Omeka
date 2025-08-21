@@ -46,7 +46,7 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
         }
 
         if (!is_array($meta)) {
-            $meta = array();
+            $meta = [];
         }
 
         if (!isset($meta[self::S3_CONTENT_TYPE_HEADER])) {
@@ -74,7 +74,7 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
     public function putObject($object, $data, $meta=null)
     {
         $object = $this->_fixupObjectName($object);
-        $headers = (is_array($meta)) ? $meta : array();
+        $headers = (is_array($meta)) ? $meta : [];
 
         if(!is_resource($data)) {
             $headers['Content-MD5'] = base64_encode(md5($data, true));
@@ -105,12 +105,12 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
      * @param  string|resource $data        Request data
      * @return Zend_Http_Response
      */
-    public function _makeRequest($method, $path='', $params=null, $headers=array(), $data=null)
+    public function _makeRequest($method, $path='', $params=null, $headers=[], $data=null)
     {
         $retry_count = 0;
 
         if (!is_array($headers)) {
-            $headers = array($headers);
+            $headers = [$headers];
         }
 
         if (!isset($headers['x-amz-content-sha256'])) {
@@ -236,7 +236,7 @@ class Omeka_Service_Amazon_S3V4Auth extends Zend_Service_Amazon_S3
             $canonicalQueryString = substr($canonicalQueryString, 0, -1);
         }
 
-        $canonicalHeadersArr = array();
+        $canonicalHeadersArr = [];
         foreach ($headers as $header => $value) {
             $lowerHeader = strtolower($header);
             $canonicalHeadersArr[$lowerHeader] = $lowerHeader . ':' . trim($value);

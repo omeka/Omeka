@@ -72,7 +72,7 @@ class Omeka_Db_Migration_Manager
         $db->query($tableSql);
         // Setting an empty value ensures that the database is flagged as
         // needing an upgrade.
-        $db->insert('Option', array('name' => self::VERSION_OPTION_NAME, 'value' => ''));
+        $db->insert('Option', ['name' => self::VERSION_OPTION_NAME, 'value' => '']);
     }
 
     /**
@@ -202,7 +202,7 @@ class Omeka_Db_Migration_Manager
      */
     private function _getMigrationFileList()
     {
-        $fileList = array();
+        $fileList = [];
         foreach (new DirectoryIterator($this->_migrationsDir) as $entry) {
             if ($entry->isFile()
                 && preg_match('/^(\d*)_.*\.php$/', $entry->getFilename(), $matches) === 1
@@ -292,6 +292,6 @@ class Omeka_Db_Migration_Manager
      */
     private function _recordMigration($time)
     {
-        $this->_db->getAdapter()->insert($this->_getMigrationTableName(), array('version' => $time));
+        $this->_db->getAdapter()->insert($this->_getMigrationTableName(), ['version' => $time]);
     }
 }

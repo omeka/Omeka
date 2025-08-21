@@ -26,17 +26,17 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * @var All controller actions that are legal for the API.
      */
-    protected $_legalActions = array('index', 'get', 'post', 'put', 'delete');
+    protected $_legalActions = ['index', 'get', 'post', 'put', 'delete'];
 
     /**
      * @var GET parameters that are legal for all actions.
      */
-    protected $_legalParams = array('key', 'callback', 'pretty_print');
+    protected $_legalParams = ['key', 'callback', 'pretty_print'];
 
     /**
      * @var GET parameters that are legal for index actions.
      */
-    protected $_legalIndexParams = array('page', 'per_page', 'sort_field', 'sort_dir');
+    protected $_legalIndexParams = ['page', 'per_page', 'sort_field', 'sort_dir'];
 
     public static function getInstance(Zend_Config $config)
     {
@@ -77,7 +77,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         $resource = $matches[1];
 
         // Extract path parameters. Not to be confused with request parameters.
-        $params = array();
+        $params = [];
         if (isset($matches[2]) && '/' != $matches[2]) {
             $params = explode('/', $matches[2]);
             array_shift($params);
@@ -104,19 +104,19 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
         // Set the route variables. Namespace the API parameters to prevent
         // collisions with the request parameters.
-        $routeVars = array(
+        $routeVars = [
             'module' => $module,
             'controller' => $controller,
             'action' => $action,
             'api_resource' => $resource,
             'api_record_type' => $recordType,
             'api_params' => $params,
-        );
+        ];
 
         return $routeVars;
     }
 
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = [], $reset = false, $encode = false)
     {
     }
 
@@ -210,7 +210,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             throw new Omeka_Controller_Exception_Api('POST requests must not include an ID.', 405);
         }
 
-        if (!$params && in_array($action, array('put', 'delete'))) {
+        if (!$params && in_array($action, ['put', 'delete'])) {
             throw new Omeka_Controller_Exception_Api('PUT and DELETE requests must include an ID.', 405);
         }
 

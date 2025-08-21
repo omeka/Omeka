@@ -13,7 +13,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
 {
     protected $_autoCsrfProtection = true;
 
-    public $contexts = array('show' => array('omeka-xml'));
+    public $contexts = ['show' => ['omeka-xml']];
 
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 
@@ -29,7 +29,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     {
         parent::showAction();
         $this->view->items = $this->_helper->db->getTable('Item')->findBy(
-            array('collection' => $this->view->collection->id), $this->_getBrowseRecordsPerPage());
+            ['collection' => $this->view->collection->id], $this->_getBrowseRecordsPerPage());
     }
 
     /**
@@ -99,7 +99,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     protected function _getElementMetadata($collection, $elementSetName, $elementName)
     {
         $m = new Omeka_View_Helper_Metadata;
-        return strip_formatting($m->metadata($collection, array($elementSetName, $elementName)));
+        return strip_formatting($m->metadata($collection, [$elementSetName, $elementName]));
     }
 
     /**
@@ -114,6 +114,6 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     
     protected function _getBrowseDefaultSort()
     {
-        return array('added', 'd');
+        return ['added', 'd'];
     }
 }

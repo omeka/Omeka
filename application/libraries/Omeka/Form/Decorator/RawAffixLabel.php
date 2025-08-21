@@ -108,7 +108,7 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
         if (!empty($label)) {
             $label = trim($label);
 
-            $formLabelOptions = array();
+            $formLabelOptions = [];
             $formLabelOptions['id'] = $id;
             $formLabelOptions['class'] = $class;
 
@@ -168,12 +168,12 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
             require_once 'Zend/Form/Decorator/HtmlTag.php';
             $decorator = new Zend_Form_Decorator_HtmlTag();
             if (null !== $this->_tagClass) {
-                $decorator->setOptions(array('tag'   => $tag,
+                $decorator->setOptions(['tag'   => $tag,
                                              'id'    => $id . '-label',
-                                             'class' => $tagClass));
+                                             'class' => $tagClass]);
             } else {
-                $decorator->setOptions(array('tag'   => $tag,
-                                             'id'    => $id . '-label'));
+                $decorator->setOptions(['tag'   => $tag,
+                                             'id'    => $id . '-label']);
             }
 
             $label = $decorator->render($label);

@@ -92,7 +92,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
 
     private function _addElementsToItemType()
     {
-        $elements = array();
+        $elements = [];
         foreach ($this->_elementInfos as $elementInfo) {
             $elements[] = $elementInfo['element'];
         }
@@ -102,7 +102,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
 
     private function _reorderItemTypeElements()
     {
-        $elementOrders = array();
+        $elementOrders = [];
         foreach ($this->_elementInfos as $elementInfo) {
             $elementOrders[$elementInfo['element']['id']] = $elementInfo['order'];
         }
@@ -120,15 +120,15 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         }
 
         // set the default element infos
-        $this->_elementInfos = array();
+        $this->_elementInfos = [];
         if ($this->_itemType) {
             $elementOrder = 1;
             foreach ($this->_itemType->Elements as $element) {
-                $elementInfo = array(
+                $elementInfo = [
                     'element' => $element,
                     'temp_id' => null,
                     'order' => $elementOrder,
-                );
+                ];
                 $this->_elementInfos[] = $elementInfo;
                 $elementOrder++;
             }
@@ -137,33 +137,33 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         $this->clearElements();
 
         $this->addElement('text', self::NAME_ELEMENT_ID,
-            array(
+            [
                 'label' => __('Name'),
                 'description' => __('The name of the item type.'),
                 'required' => true,
                 'value' => $itemTypeName,
-            )
+            ]
         );
 
         $this->addElement('textarea', self::DESCRIPTION_ELEMENT_ID,
-            array(
+            [
                 'label' => __('Description'),
                 'description' => __('The description of the item type.'),
                 'value' => $itemTypeDescription,
                 'cols' => 50,
                 'rows' => 5,
-            )
+            ]
         );
 
-        $this->addElement('hidden', self::REMOVE_HIDDEN_ELEMENT_ID, array('value' => ''));
+        $this->addElement('hidden', self::REMOVE_HIDDEN_ELEMENT_ID, ['value' => '']);
         $this->addElement('sessionCsrfToken', 'csrf_token');
     }
 
     private function _checkForDuplicateElements()
     {
         // Check for duplicate elements and throw an exception if a duplicate is found
-        $elementIds = array();
-        $elementNames = array();
+        $elementIds = [];
+        $elementNames = [];
         foreach ($this->_elementInfos as $elementInfo) {
             $element = $elementInfo['element'];
 
@@ -206,16 +206,16 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     private function _getElementInfosFromPost()
     {
         $elementTable = get_db()->getTable('Element');
-        $elementInfos = array();
+        $elementInfos = [];
 
         if (isset($_POST[self::ELEMENTS_INPUT_NAME])) {
             $currentElements = $_POST[self::ELEMENTS_INPUT_NAME];
             foreach ($currentElements as $elementId => $info) {
-                $elementInfos[] = array(
+                $elementInfos[] = [
                     'element' => $elementTable->find($elementId),
                     'temp_id' => null,
                     'order' => $info['order']
-                );
+                ];
             }
         }
 
@@ -226,11 +226,11 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                     continue;
                 }
 
-                $elementInfos[] = array(
+                $elementInfos[] = [
                     'element' => $elementTable->find($info['id']),
                     'temp_id' => $tempId,
                     'order' => $info['order']
-                );
+                ];
             }
         }
 
@@ -247,11 +247,11 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $element->setDescription($info['description']);
                 $element->order = null;
 
-                $elementInfos[] = array(
+                $elementInfos[] = [
                     'element' => $element,
                     'temp_id' => $tempId,
                     'order' => $info['order']
-                );
+                ];
             }
         }
 

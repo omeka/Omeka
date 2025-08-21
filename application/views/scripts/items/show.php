@@ -1,9 +1,9 @@
 <?php
 $title = metadata('item', 'display_title');
-echo head(array('title' => $title, 'bodyclass' => 'items show'));
+echo head(['title' => $title, 'bodyclass' => 'items show']);
 ?>
 
-<h1><?php echo metadata('item', 'rich_title', array('no_escape' => true)); ?></h1>
+<h1><?php echo metadata('item', 'rich_title', ['no_escape' => true]); ?></h1>
 
 <?php echo all_element_texts('item'); ?>
 
@@ -34,7 +34,7 @@ echo head(array('title' => $title, 'bodyclass' => 'items show'));
 <!-- The following prints a citation for this item. -->
 <div id="item-citation" class="element">
     <h3><?php echo __('Citation'); ?></h3>
-    <div class="element-text"><?php echo metadata('item', 'citation', array('no_escape' => true)); ?></div>
+    <div class="element-text"><?php echo metadata('item', 'citation', ['no_escape' => true]); ?></div>
 </div>
 
 <div id="item-output-formats" class="element">
@@ -42,7 +42,7 @@ echo head(array('title' => $title, 'bodyclass' => 'items show'));
     <div class="element-text"><?php echo output_format_list(); ?></div>
 </div>
 
-<?php fire_plugin_hook('public_items_show', array('view' => $this, 'item' => $item)); ?>
+<?php fire_plugin_hook('public_items_show', ['view' => $this, 'item' => $item]); ?>
 
 <nav>
 <ul class="item-pagination navigation">

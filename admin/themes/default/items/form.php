@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
     Omeka.Items.enableTagRemoval();
     Omeka.Items.makeFileWindow();
     Omeka.Items.enableSorting();
-    Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+    Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(['controller'=>'tags', 'action'=>'autocomplete'], 'default', [], true)); ?>);
 
     Omeka.wysiwyg({
         selector: false,

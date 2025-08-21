@@ -15,7 +15,7 @@ class Installer_Test extends Installer_Default
 {
     const TEST_ITEM_TITLE = 'Foobar';
 
-    private $_testDefaults = array(
+    private $_testDefaults = [
         'administrator_email' => Omeka_Test_Resource_Db::SUPER_EMAIL,
         'copyright' => Omeka_Test_Resource_Db::DEFAULT_COPYRIGHT,
         'site_title' => Omeka_Test_Resource_Db::DEFAULT_SITE_TITLE,
@@ -31,7 +31,7 @@ class Installer_Test extends Installer_Default
         'username' => Omeka_Test_Resource_Db::SUPER_USERNAME,
         'password' => Omeka_Test_Resource_Db::SUPER_PASSWORD,
         'super_email' => Omeka_Test_Resource_Db::SUPER_EMAIL
-    );
+    ];
 
     /**
      * Overridden to retrieve values only from a predefined array.
@@ -58,17 +58,17 @@ class Installer_Test extends Installer_Default
         // Item should be public to avoid weird issues with ACL integration
         // (test must authenticate a user in order to retrieve non-public
         // items).
-        $itemBuilder->setRecordMetadata(array(
+        $itemBuilder->setRecordMetadata([
             'public' => 1,
-        ));
-        $itemBuilder->setElementTexts(array(
-            'Dublin Core' => array(
-                'Title' => array(
-                    array('text' => self::TEST_ITEM_TITLE,
-                          'html' => 0),
-                ),
-            ),
-        ));
+        ]);
+        $itemBuilder->setElementTexts([
+            'Dublin Core' => [
+                'Title' => [
+                    ['text' => self::TEST_ITEM_TITLE,
+                          'html' => 0],
+                ],
+            ],
+        ]);
         $item = $itemBuilder->build();
         release_object($item);
     }

@@ -76,7 +76,7 @@ class SystemInfoController extends Omeka_Controller_AbstractActionController
     {
         $pluginTable = $this->_db->getTable('Plugin');
         $plugins = $pluginTable->findAll();
-        $info['Plugins'] = array();
+        $info['Plugins'] = [];
 
         foreach ($plugins as $plugin) {
             $inactive = $plugin->active == '0';
@@ -95,7 +95,7 @@ class SystemInfoController extends Omeka_Controller_AbstractActionController
     {
         $themes = Theme::getAllThemes();
         $currentTheme = get_option('public_theme');
-        $info['Themes'] = array();
+        $info['Themes'] = [];
 
         foreach ($themes as $name => $theme) {
             $themeInfo = @$theme->version;

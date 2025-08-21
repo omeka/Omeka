@@ -42,64 +42,64 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
      * "default" and "api". Resources using the default controller MUST include 
      * a "record_type". Remove "actions" that are not wanted or not implemented.
      */
-    protected static $_apiResources = array(
-        'site' => array(
+    protected static $_apiResources = [
+        'site' => [
             'controller' => 'site',
-            'actions' => array('index'),
-        ),
-        'resources' => array(
+            'actions' => ['index'],
+        ],
+        'resources' => [
             'controller' => 'resources',
-            'actions' => array('index')
-        ),
-        'collections' => array(
+            'actions' => ['index']
+        ],
+        'collections' => [
             'record_type' => 'Collection',
-            'actions' => array('index', 'get', 'post', 'put', 'delete'),
-            'index_params' => array(
+            'actions' => ['index', 'get', 'post', 'put', 'delete'],
+            'index_params' => [
                 'public', 'featured', 'added_since', 'modified_since', 'owner',
-            ),
-        ),
-        'items' => array(
+            ],
+        ],
+        'items' => [
             'record_type' => 'Item',
-            'actions' => array('index', 'get', 'post', 'put', 'delete'),
-            'index_params' => array(
+            'actions' => ['index', 'get', 'post', 'put', 'delete'],
+            'index_params' => [
                 'collection', 'item_type', 'featured', 'public', 'added_since',
                 'modified_since', 'owner', 'tags', 'excludeTags', 'hasImage',
                 'range', 'search', 'advanced'
-            ),
-        ),
-        'files' => array(
+            ],
+        ],
+        'files' => [
             'controller' => 'files',
             'record_type' => 'File',
-            'actions' => array('index', 'get', 'post', 'put', 'delete'),
-            'index_params' => array(
+            'actions' => ['index', 'get', 'post', 'put', 'delete'],
+            'index_params' => [
                 'item', 'order', 'size_greater_than', 'has_derivative_image',
                 'mime_type', 'modified_since', 'added_since',
-            ),
-        ),
-        'item_types' => array(
+            ],
+        ],
+        'item_types' => [
             'record_type' => 'ItemType',
-            'actions' => array('index', 'get', 'post', 'put', 'delete'),
-            'index_params' => array('name'),
-        ),
-        'elements' => array(
+            'actions' => ['index', 'get', 'post', 'put', 'delete'],
+            'index_params' => ['name'],
+        ],
+        'elements' => [
             'record_type' => 'Element',
-            'actions' => array('index', 'get', 'post', 'put', 'delete'),
-            'index_params' => array('element_set', 'name', 'item_type'),
-        ),
-        'element_sets' => array(
+            'actions' => ['index', 'get', 'post', 'put', 'delete'],
+            'index_params' => ['element_set', 'name', 'item_type'],
+        ],
+        'element_sets' => [
             'record_type' => 'ElementSet',
-            'actions' => array('index', 'get', 'post', 'delete'),
-            'index_params' => array('name', 'record_type'),
-        ),
-        'users' => array(
+            'actions' => ['index', 'get', 'post', 'delete'],
+            'index_params' => ['name', 'record_type'],
+        ],
+        'users' => [
             'record_type' => 'User',
-            'actions' => array('get'),
-        ),
-        'tags' => array(
+            'actions' => ['get'],
+        ],
+        'tags' => [
             'record_type' => 'Tag',
-            'actions' => array('index', 'get', 'delete'),
-        ),
-    );
+            'actions' => ['index', 'get', 'delete'],
+        ],
+    ];
 
     /**
      * Handle API-specific controller logic.
@@ -118,7 +118,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         $front->setParam('api_resources', self::getApiResources());
 
         // Set the API controller directories.
-        $apiControllerDirectories = array();
+        $apiControllerDirectories = [];
         $controllerDirectories = $front->getControllerDirectory();
         foreach ($controllerDirectories as $module => $controllerDirectory) {
             $apiControllerDirectories[$module] = "$controllerDirectory/api";

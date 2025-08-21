@@ -13,7 +13,7 @@ class UpgradeController extends Zend_Controller_Action
 {
     public function __construct(Zend_Controller_Request_Abstract $request,
                                 Zend_Controller_Response_Abstract $response,
-                                array $invokeArgs = array())
+                                array $invokeArgs = [])
     {
         parent::__construct($request, $response, $invokeArgs);
     }
@@ -60,7 +60,7 @@ class UpgradeController extends Zend_Controller_Action
      */
     protected function _checkRequirements()
     {
-        $errors = array();
+        $errors = [];
         if (version_compare(PHP_VERSION, Installer_Requirements::OMEKA_PHP_VERSION, '<')) {
             $errors[] = __('Omeka requires PHP version %1$s or higher, but this server is ' .
                 'running PHP version %2$s. Please update the installed version of PHP and try again.',

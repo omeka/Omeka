@@ -22,18 +22,18 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
      * - form_attributes: an array containing form tag attributes.
      * @return string The search form markup.
      */
-    public function searchForm(array $options = array())
+    public function searchForm(array $options = [])
     {
         $defaultQueryType = get_option('search_query_type') ?: 'keyword';
         $validQueryTypes = get_search_query_types();
         $validRecordTypes = get_custom_search_record_types();
 
-        $filters = array(
+        $filters = [
             'query' => apply_filters('search_form_default_query', ''),
             'query_type' => apply_filters('search_form_default_query_type', $defaultQueryType),
             'record_types' => apply_filters('search_form_default_record_types',
                 array_keys($validRecordTypes))
-        );
+        ];
 
         if (isset($_GET['submit_search'])) {
             if (isset($_GET['query'])) {
@@ -59,7 +59,7 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
 
         // Set the default form attributes.
         if (!isset($options['form_attributes'])) {
-            $options['form_attributes'] = array();
+            $options['form_attributes'] = [];
         }
         if (!isset($options['form_attributes']['action'])) {
             $url = apply_filters('search_form_default_action', url('search'));
@@ -73,12 +73,12 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         }
         $options['form_attributes']['method'] = 'get';
 
-        $formParams = array(
+        $formParams = [
             'options' => $options,
             'filters' => $filters,
             'query_types' => $validQueryTypes,
             'record_types' => $validRecordTypes
-        );
+        ];
 
         $form = $this->view->partial('search/search-form.php', $formParams);
 

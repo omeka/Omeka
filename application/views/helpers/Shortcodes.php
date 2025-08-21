@@ -18,7 +18,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      *
      * @var array
      */
-    protected static $shortcodeCallbacks = array(
+    protected static $shortcodeCallbacks = [
         'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItems',
         'recent_items' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentItems',
         'featured_items' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedItems',
@@ -26,7 +26,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         'recent_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentCollections',
         'featured_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedCollections',
         'file' => 'Omeka_View_Helper_Shortcodes::shortcodeFile',
-        );
+        ];
 
     /**
      * Add a new shortcode.
@@ -60,7 +60,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         . '\]'          // Closing bracket
         . '/s';
 
-        return preg_replace_callback($pattern, array($this, 'handleShortcode'), $content);
+        return preg_replace_callback($pattern, [$this, 'handleShortcode'], $content);
     }
 
     /**
@@ -88,7 +88,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     public function parseShortcodeAttributes($text)
     {
-        $args = array();
+        $args = [];
         if ($text === '') {
             return $args;
         }
@@ -187,7 +187,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     public static function shortcodeItems($args, $view)
     {
-        $params = array();
+        $params = [];
 
         if (isset($args['is_featured'])) {
             $params['featured'] = $args['is_featured'];
@@ -235,7 +235,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $content = '';
         foreach ($items as $item) {
-            $content .= $view->partial('items/single.php', array('item' => $item));
+            $content .= $view->partial('items/single.php', ['item' => $item]);
         }
 
         return $content;
@@ -250,7 +250,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     public static function shortcodeCollections($args, $view)
     {
-        $params = array();
+        $params = [];
 
         if (isset($args['ids'])) {
             $params['range'] = $args['ids'];
@@ -278,7 +278,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $content = '';
         foreach ($collections as $collection) {
-            $content .= $view->partial('collections/single.php', array('collection' => $collection));
+            $content .= $view->partial('collections/single.php', ['collection' => $collection]);
         }
 
         return $content;
@@ -337,7 +337,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     {
         $recordId = $args['id'];
 
-        $props = array();
+        $props = [];
 
         if (isset($args['size'])) {
             $props['imageSize'] = $args['size'];

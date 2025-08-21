@@ -2,7 +2,7 @@
 $pageTitle = __('Reset Navigation');
 
 if (!$isPartial):
-    echo head(array('title' => $pageTitle));
+    echo head(['title' => $pageTitle]);
 endif;
 ?>
 <div title="<?php echo $pageTitle; ?>">

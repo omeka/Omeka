@@ -58,11 +58,11 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
 
     public function testWithNoStyles()
     {
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/public.css?v='.OMEKA_VERSION
-        );
+        ];
 
-        $this->_assertStylesheets($this->_getCssOutput(), array());
+        $this->_assertStylesheets($this->_getCssOutput(), []);
 
         $frontController = Zend_Controller_Front::getInstance()->setParam('admin', false);
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
@@ -73,9 +73,9 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
     {
         queue_css_file('style');
 
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/style.css?v='.OMEKA_VERSION
-        );
+        ];
 
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
@@ -85,9 +85,9 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
         $version = '1.2x';
         queue_css_file('style', 'all', false, 'css', $version);
 
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/style.css?v='.$version
-        );
+        ];
 
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
@@ -96,33 +96,33 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
     {
         queue_css_file('style', 'all', false, 'css', null);
 
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/style.css'
-        );
+        ];
 
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
 
     public function testQueueCssArrayWithDefaultVersion()
     {
-        queue_css_file(array('style', 'jquery-ui'));
+        queue_css_file(['style', 'jquery-ui']);
 
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/style.css?v='.OMEKA_VERSION,
             self::ASSET_PATH_ROOT . '/css/jquery-ui.css?v='.OMEKA_VERSION
-        );
+        ];
 
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
 
     public function testQueueCssArrayWithNoVersion()
     {
-        queue_css_file(array('style', 'jquery-ui'), 'all', false, 'css', null);
+        queue_css_file(['style', 'jquery-ui'], 'all', false, 'css', null);
 
-        $styles = array(
+        $styles = [
             self::ASSET_PATH_ROOT . '/css/style.css',
             self::ASSET_PATH_ROOT . '/css/jquery-ui.css'
-        );
+        ];
 
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
@@ -150,13 +150,13 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
         $style = 'Inline stylesheet.';
         queue_css_string($style, 'screen');
 
-        $matcher = array(
+        $matcher = [
             'tag' => 'style',
-            'attributes' => array(
+            'attributes' => [
                 'type' => 'text/css',
                 'media' => 'screen'
-            )
-        );
+            ]
+        ];
 
         $output = $this->_getCssOutput();
 

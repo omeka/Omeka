@@ -33,7 +33,7 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
                 // The class is not a valid record.
                 continue;
             }
-            if (!is_callable(array($record, 'addSearchText'))) {
+            if (!is_callable([$record, 'addSearchText'])) {
                 // The record does not implement the search mixin.
                 continue;
             }

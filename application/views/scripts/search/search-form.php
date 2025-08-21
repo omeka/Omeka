@@ -1,10 +1,10 @@
 <?php echo $this->form('search-form', $options['form_attributes']); ?>
     <?php 
-        echo $this->formText('query', $filters['query'], array(
+        echo $this->formText('query', $filters['query'], [
             'title' => __('Query'), 
             'aria-label' => __('Query'), 
             'aria-labelledby' => 'search-form query'
-        )); 
+        ]); 
     ?>
     <?php if ($options['show_advanced']): ?>
     <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
@@ -19,7 +19,7 @@
         <fieldset id="record-types">
             <legend><?php echo __('Search only these record types:'); ?></legend>
             <?php foreach ($record_types as $key => $value): ?>
-            <?php echo $this->formCheckbox('record_types[]', $key, array('checked' => in_array($key, $filters['record_types']), 'id' => 'record_types-' . $key)); ?> <?php echo $this->formLabel('record_types-' . $key, $value);?><br>
+            <?php echo $this->formCheckbox('record_types[]', $key, ['checked' => in_array($key, $filters['record_types']), 'id' => 'record_types-' . $key]); ?> <?php echo $this->formLabel('record_types-' . $key, $value);?><br>
             <?php endforeach; ?>
         </fieldset>
         <?php elseif (is_admin_theme()): ?>
@@ -30,11 +30,11 @@
     <?php else: ?>
         <?php echo $this->formHidden('query_type', $filters['query_type']); ?>
         <?php foreach ($filters['record_types'] as $type): ?>
-        <?php echo $this->formHidden('record_types[]', $type, array('id' => '')); ?>
+        <?php echo $this->formHidden('record_types[]', $type, ['id' => '']); ?>
         <?php endforeach; ?>
     <?php endif; ?>
     <?php 
-        echo $this->formButton('submit_search', $options['submit_value'], array(
+        echo $this->formButton('submit_search', $options['submit_value'], [
             'type' => 'submit', 
             'title' => __('Submit'), 
             'class' => 'button', 
@@ -42,7 +42,7 @@
             'escape' => false,
             'aria-label' => __('Submit'),
             'aria-labelledby' => 'search-form submit_search'
-            )
+            ]
         ); 
     ?>
 </form>

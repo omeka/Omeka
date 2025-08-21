@@ -15,7 +15,7 @@
  */
 class Installer_Task_Schema implements Installer_TaskInterface
 {
-    private $_defaultTables = array(
+    private $_defaultTables = [
         'collections',
         'element_texts',
         'item_types',
@@ -34,9 +34,9 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'sessions',
         'search_texts',
         'keys',
-    );
+    ];
 
-    private $_tables = array();
+    private $_tables = [];
 
     /**
      * Add an SQL table to the list of tables to create.
@@ -71,7 +71,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
      */
     public function setTables(array $tables)
     {
-        $this->_tables = array();
+        $this->_tables = [];
         $this->addTables($tables);
     }
 

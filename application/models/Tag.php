@@ -39,7 +39,7 @@ class Tag extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inter
     {
         $taggings = $this->getDb()
                          ->getTable('RecordsTags')
-                         ->findBySql('tag_id = ?', array((int) $this->id));
+                         ->findBySql('tag_id = ?', [(int) $this->id]);
 
         foreach ($taggings as $tagging) {
             $tagging->delete();
@@ -74,13 +74,13 @@ class Tag extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inter
      */
     public function rename($new_names)
     {
-        $taggings = $this->getTable('RecordsTags')->findBy(array('tag' => $this->name));
+        $taggings = $this->getTable('RecordsTags')->findBy(['tag' => $this->name]);
         $keepOldTaggings = false;
 
         // If the current tag is in the new tag list, we don't need
         // to do anything to it or its taggings.
         if (in_array($this->name, $new_names)) {
-            $new_names = array_diff($new_names, array($this->name));
+            $new_names = array_diff($new_names, [$this->name]);
 
             // If the current name was the only new name, stop.
             if (!count($new_names)) {

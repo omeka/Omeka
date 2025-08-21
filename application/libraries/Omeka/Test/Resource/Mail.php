@@ -28,9 +28,9 @@ class Omeka_Test_Resource_Mail extends Zend_Application_Resource_ResourceAbstrac
         $path = "{$tempDir}/mail";
         mkdir($path);
 
-        $transport = new Zend_Mail_Transport_File(array(
+        $transport = new Zend_Mail_Transport_File([
             'path' => $path,
-            'callback' => array(get_class($this), 'mailCallback')));
+            'callback' => [get_class($this), 'mailCallback']]);
         Zend_Mail::setDefaultTransport($transport);
         Zend_Registry::set('test_mail_dir', $path);
 

@@ -22,13 +22,13 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
     public function testDefaultOutput()
     {
         $citationHtml = $this->_createItemCitationString('Item Title', 'Item Creator');
-        $this->assertEquals($citationHtml, metadata('item', 'citation', array('no_escape' => true)));
+        $this->assertEquals($citationHtml, metadata('item', 'citation', ['no_escape' => true]));
     }
 
     public function testOutputWithoutCreator()
     {
         $citationHtml = $this->_createItemCitationString('Item Title');
-        $this->assertEquals($citationHtml, metadata('item', 'citation', array('no_escape' => true)));
+        $this->assertEquals($citationHtml, metadata('item', 'citation', ['no_escape' => true]));
     }
 
     /**
@@ -44,10 +44,10 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
      */
     protected function _createItemCitationString($title = null, $creator = null)
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $title, 'html' => false)),
-            'Creator' => array(array('text' => $creator, 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => $title, 'html' => false]],
+            'Creator' => [['text' => $creator, 'html' => false]]
+        ]];
 
         $item = new Item;
         $item->addElementTextsByArray($elementTexts);

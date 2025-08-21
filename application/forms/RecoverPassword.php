@@ -23,25 +23,25 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
 
         $this->setAttrib('id', 'recover-password');
 
-        $this->addElement('text', 'email', array(
+        $this->addElement('text', 'email', [
             'label' => __('Email'),
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'validator' => 'NotEmpty',
                     'breakChainOnFailure' => true,
-                    'options' => array(
-                        'messages' => array(
+                    'options' => [
+                        'messages' => [
                             Zend_Validate_NotEmpty::IS_EMPTY =>
                                 __('Email address is required.')
-                        )
-                    )
-                ),
-                array(
+                        ]
+                    ]
+                ],
+                [
                     'validator' => 'EmailAddress',
                     'breakChainOnFailure' => true,
-                    'options' => array(
-                        'messages' => array(
+                    'options' => [
+                        'messages' => [
                             Zend_Validate_EmailAddress::INVALID =>
                                 __('Invalid email address given.'),
                             Zend_Validate_EmailAddress::INVALID_FORMAT =>
@@ -53,22 +53,22 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                             //Zend_Validate_EmailAddress::QUOTED_STRING => '',
                             //Zend_Validate_EmailAddress::INVALID_LOCAL_PART => '',
                             //Zend_Validate_EmailAddress::LENGTH_EXCEEDED => '',
-                        )
-                    )
-                ),
-                array(
+                        ]
+                    ]
+                ],
+                [
                     'validator' => 'Db_RecordExists',
-                    'options' => array(
+                    'options' => [
                         'table' => $this->_db->User,
                         'field' => 'email',
                         'adapter' => $this->_db->getAdapter(),
-                        'messages' => array(
+                        'messages' => [
                             'noRecordFound' => __("Invalid email address")
-                        )
-                    )
-                )
-            )
-        ));
+                        ]
+                    ]
+                ]
+            ]
+        ]);
 
         $this->addElement('submit', 'Submit');
     }

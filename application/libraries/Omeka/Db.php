@@ -35,7 +35,7 @@ class Omeka_Db
      *
      * @var array
      */
-    protected $_tables = array();
+    protected $_tables = [];
 
     /**
      * The logger to use for logging SQL queries. If not set, no logging will 
@@ -70,14 +70,14 @@ class Omeka_Db
         }
 
         // Log SQL for certain adapter calls.
-        $logFor = array('fetchOne', 'fetchAll', 'prepare', 'query', 'fetchRow',
-                        'fetchAssoc', 'fetchCol', 'fetchPairs');
+        $logFor = ['fetchOne', 'fetchAll', 'prepare', 'query', 'fetchRow',
+                        'fetchAssoc', 'fetchCol', 'fetchPairs'];
         if (in_array($m, $logFor)) {
             $this->log($a[0]);
         }
 
         try {
-            return call_user_func_array(array($this->_adapter, $m), $a);
+            return call_user_func_array([$this->_adapter, $m], $a);
 
         // Zend_Db_Statement_Mysqli does not consider a connection that returns
         // a "MySQL server has gone away" error to be disconnected. Catch these
@@ -87,7 +87,7 @@ class Omeka_Db
                 $this->_adapter->closeConnection();
                 $this->_adapter->getConnection();
                 $this->_adapter->query($this->_getInitCommand());
-                return call_user_func_array(array($this->_adapter, $m), $a);
+                return call_user_func_array([$this->_adapter, $m], $a);
             }
             throw $e;
         }
@@ -216,7 +216,7 @@ class Omeka_Db
      * @param array $values Rows to insert (or update).
      * @return int The ID for the row that got inserted (or updated).
      */
-    public function insert($table, array $values = array())
+    public function insert($table, array $values = [])
     {
         if (empty($values)) {
             return false;
@@ -232,7 +232,7 @@ class Omeka_Db
         $query .= implode(', ', array_fill(0, count($values), '?')) . ')';
 
         $insertParams = array_values($values);
-        $updateQuery = array();
+        $updateQuery = [];
         $updateParams = $values;
 
         foreach ($cols as $col) {

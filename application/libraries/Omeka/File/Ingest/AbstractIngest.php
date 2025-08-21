@@ -40,7 +40,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      *
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * Set of validators implementing Zend_Validate_Interface.
@@ -48,7 +48,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @var array
      * @see Omeka_File_Ingest_AbstractIngest::addValidator()
      */
-    private $_validators = array();
+    private $_validators = [];
 
     /**
      * The current validated file MIME type.
@@ -76,7 +76,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @param array $options
      * @return Omeka_File_Ingest_AbstractIngest
      */
-    final public static function factory($adapterName, $item, $options = array())
+    final public static function factory($adapterName, $item, $options = [])
     {
         $className = 'Omeka_File_Ingest_' . $adapterName;
         if (class_exists($className, true)) {
@@ -166,7 +166,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
         $fileInfoArray = $this->_parseFileInfo($fileInfo);
 
         // Iterate the files.
-        $fileObjs = array();
+        $fileObjs = [];
         foreach ($fileInfoArray as $file) {
             try {
                 // This becomes the file's identifier (stored in the
@@ -177,7 +177,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
 
                 // Create the file object.
                 if ($fileDestinationPath) {
-                    $fileMetadata = $file['metadata'] ?? array();
+                    $fileMetadata = $file['metadata'] ?? [];
                     $fileOrder = $file['order'] ?? null;
                     $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $fileMetadata, $fileOrder);
                 }
@@ -234,7 +234,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @uses ActsAsElementText::addElementTextsByArray()
      * @return File
      */
-    private function _createFile($newFilePath, $oldFilename, $elementMetadata = array(), $order = null)
+    private function _createFile($newFilePath, $oldFilename, $elementMetadata = [], $order = null)
     {
         // Normally, the MIME type validator sets the type to this class's
         // static $mimeType property during validation. If that validator has
@@ -263,7 +263,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
                 $file->order = $order;
             }
 
-            fire_plugin_hook('after_ingest_file', array('file' => $file, 'item' => $this->_item));
+            fire_plugin_hook('after_ingest_file', ['file' => $file, 'item' => $this->_item]);
 
             $this->_item->addFile($file);
         } catch (Exception $e) {
@@ -353,7 +353,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      */
     protected function _validateFile($filePath, $fileInfo)
     {
-        $validationErrors = array();
+        $validationErrors = [];
         foreach ($this->_validators as $validator) {
             // Aggregate all the error messages.
             if (!$validator->isValid($filePath, $fileInfo)) {

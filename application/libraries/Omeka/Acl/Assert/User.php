@@ -14,18 +14,18 @@
  */
 class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
 {
-    private $_allowSelf = array(
+    private $_allowSelf = [
         'show',
         'edit',
         'change-password',
         'api-keys'
-    );
+    ];
 
-    private $_denySelf = array(
+    private $_denySelf = [
         'delete',
         'change-role',
         'change-status',
-    );
+    ];
 
     /**
      * Assert whether or not the ACL should allow access.

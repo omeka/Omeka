@@ -20,7 +20,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery("input#public");
         $this->assertQuery("input#featured");
 
-        $elementNames = array('Title', 'Description', 'Contributor');
+        $elementNames = ['Title', 'Description', 'Contributor'];
         foreach ($elementNames as $elementName) {
             $element = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', $elementName);
             $this->assertQuery('textarea#Elements-' . $element->id . '-0-text');
@@ -40,7 +40,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery("input#public");
         $this->assertQuery("input#featured");
 
-        $elementNames = array('Title', 'Description', 'Contributor');
+        $elementNames = ['Title', 'Description', 'Contributor'];
         foreach ($elementNames as $elementName) {
             $element = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', $elementName);
             $this->assertQuery('textarea#Elements-' . $element->id . '-0-text');
@@ -54,7 +54,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($user);
 
         $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');
-        $this->request->setPost(array('Elements' => array(), 'csrf_token' => $csrf->getToken()));
+        $this->request->setPost(['Elements' => [], 'csrf_token' => $csrf->getToken()]);
         $this->request->setMethod('post');
         $this->dispatch('collections/add');
         $this->assertRedirect();
@@ -73,18 +73,18 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
 
         //create collection
         $collection = new Collection;
-        $elementTexts = array(
-            'Dublin Core' => array(
-                'Title' => array(array('text' => 'foobar', 'html' => false)),
-                'Description' => array(array('text' => 'baz', 'html' => false))
-            )
-        );
+        $elementTexts = [
+            'Dublin Core' => [
+                'Title' => [['text' => 'foobar', 'html' => false]],
+                'Description' => [['text' => 'baz', 'html' => false]]
+            ]
+        ];
         $collection->addElementTextsByArray($elementTexts);
         $collection->owner_id = $user->id + 1;
         $collection->save();
 
         $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');
-        $this->request->setPost(array('Elements' => array(), 'csrf_token' => $csrf->getToken()));
+        $this->request->setPost(['Elements' => [], 'csrf_token' => $csrf->getToken()]);
         $this->request->setMethod('post');
         $this->dispatch('collections/edit/' . $collection->id);
         $this->assertRedirect();

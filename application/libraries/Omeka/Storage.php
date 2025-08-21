@@ -61,7 +61,7 @@ class Omeka_Storage
             throw new Omeka_Storage_Exception(self::MSG_NOT_INITIALIZED);
         }
 
-        $callback = array($this->_adapter, $name);
+        $callback = [$this->_adapter, $name];
 
         if (is_callable($callback)) {
             return call_user_func_array($callback, $arguments);
@@ -87,7 +87,7 @@ class Omeka_Storage
         foreach ($options as $key => $value) {
             switch ($key) {
             case self::OPTION_ADAPTER:
-                $adapterOptions = array();
+                $adapterOptions = [];
                 if (isset($options[self::OPTION_ADAPTER_OPTIONS])) {
                     $adapterOptions = $options[self::OPTION_ADAPTER_OPTIONS];
                 }
@@ -116,7 +116,7 @@ class Omeka_Storage
      * @param array|null $options If a string is passed to $adapter,
      *  this array of options is passed to the class' constructor.
      */
-    public function setAdapter($adapter, array $options = array())
+    public function setAdapter($adapter, array $options = [])
     {
         if (is_string($adapter) && class_exists($adapter)) {
             $adapter = new $adapter($options);
@@ -177,7 +177,7 @@ class Omeka_Storage
         return apply_filters(
             'storage_path',
             $type . "/$filename",
-            array('filename' => $filename, 'type' => $type)
+            ['filename' => $filename, 'type' => $type]
         );
     }
 }

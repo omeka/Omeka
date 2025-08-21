@@ -38,6 +38,6 @@ class Omeka_Helper_LinkFunctions_LinkToItemTest extends Omeka_Test_AppTestCase
     {
         $linkToItemHtml = '<a href="/items/show/1">' . Installer_Test::TEST_ITEM_TITLE
             . '</a>';
-        $this->assertEquals($linkToItemHtml, link_to_item(null, array(), 'show', $this->item));
+        $this->assertEquals($linkToItemHtml, link_to_item(null, [], 'show', $this->item));
     }
 }

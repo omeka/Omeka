@@ -19,7 +19,7 @@ require_once "{$baseDir}/../../bootstrap.php";
 require_once "{$baseDir}/../libraries/Omeka/Application.php";
 
 // Set the command line arguments.
-$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
+$options = new Zend_Console_Getopt(['process|p=i' => 'process to run']);
 
 try {
     $options->parse();
@@ -30,10 +30,10 @@ try {
 
 // Load a core set of resources.
 $application = new Omeka_Application(APPLICATION_ENV);
-$application->bootstrap(array(
+$application->bootstrap([
     'Config', 'Logger', 'Db', 'Options', 'Pluginbroker', 'View', 'Locale', 'Mail',
     'Plugins', 'Jobs', 'Storage', 'Filederivatives'
-));
+]);
 
 // Get the database object.
 $db = get_db();

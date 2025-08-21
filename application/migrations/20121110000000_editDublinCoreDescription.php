@@ -19,6 +19,6 @@ class editDublinCoreDescription extends Omeka_Db_Migration_AbstractMigration
       . 'http://dublincore.org/documents/dces/.';
 
         $sql = "UPDATE {$this->db->ElementSet} SET description = ? WHERE name = ?";
-        $this->db->query($sql, array($dcDescription, 'Dublin Core'));
+        $this->db->query($sql, [$dcDescription, 'Dublin Core']);
     }
 }

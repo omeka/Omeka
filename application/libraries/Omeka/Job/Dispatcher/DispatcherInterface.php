@@ -31,5 +31,5 @@ interface Omeka_Job_Dispatcher_DispatcherInterface
      * should be primitive data types (or arrays containing primitive data
      * types).
      */
-    public function send($jobClass, $options = array());
+    public function send($jobClass, $options = []);
 }

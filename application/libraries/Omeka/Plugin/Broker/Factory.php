@@ -27,12 +27,12 @@ class Omeka_Plugin_Broker_Factory
                                                 $pluginIniReader,
                                                 $pluginMvc,
                                                 $this->_basePluginDir);
-        $set = array(
+        $set = [
             'pluginbroker' => $pluginBroker,
             'plugin_loader' => $pluginLoader,
             'plugin_ini_reader' => $pluginIniReader,
             'plugin_mvc' => $pluginMvc,
-        );
+        ];
         $this->_register($set);
         return $set;
     }

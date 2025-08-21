@@ -13,10 +13,10 @@
  */
 class Builder_ElementSet extends Omeka_Record_Builder_AbstractBuilder
 {
-    protected $_settableProperties = array('name', 'description', 'record_type');
+    protected $_settableProperties = ['name', 'description', 'record_type'];
     protected $_recordClass = 'ElementSet';
 
-    private $_elementInfo = array();
+    private $_elementInfo = [];
 
     /**
      * Set the elements to add to the element set.

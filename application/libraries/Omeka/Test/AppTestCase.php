@@ -58,7 +58,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      * XPath namespaces
      * @var array
      */
-    protected $_xpathNamespaces = array();
+    protected $_xpathNamespaces = [];
 
     /**
      * Overloading: prevent overloading to special properties
@@ -69,7 +69,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      */
     public function __set($name, $value)
     {
-        if (in_array($name, array('request', 'response', 'frontController'))) {
+        if (in_array($name, ['request', 'response', 'frontController'])) {
             require_once 'Zend/Exception.php';
             throw new Zend_Exception(sprintf('Setting %s object manually is not allowed', $name));
         }
@@ -166,10 +166,10 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      */
     public function reset()
     {
-        $_SESSION = array();
-        $_GET     = array();
-        $_POST    = array();
-        $_COOKIE  = array();
+        $_SESSION = [];
+        $_GET     = [];
+        $_POST    = [];
+        $_COOKIE  = [];
         $this->resetRequest();
         $this->resetResponse();
         Zend_Layout::resetMvcInstance();
@@ -185,7 +185,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
     protected function _resetPlaceholders()
     {
         $registry = Zend_Registry::getInstance();
-        $remove   = array();
+        $remove   = [];
         foreach ($registry as $key => $value) {
             if (strstr($key, '_View_')) {
                 $remove[] = $key;
@@ -462,7 +462,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      * @throws Zend_Controller_Router_Exception
      * @return string
      */
-    public function url($urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function url($urlOptions = [], $name = null, $reset = false, $encode = true)
     {
         $frontController = $this->getFrontController();
         $router = $frontController->getRouter();
@@ -486,7 +486,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
     {
         $ccToDash = new Zend_Filter_Word_CamelCaseToDash();
         foreach ($urlOptions as $n => $v) {
-            if (in_array($n, array('action', 'controller', 'module'))) {
+            if (in_array($n, ['action', 'controller', 'module'])) {
                 $urlOptions[$n] = $ccToDash->filter($v);
             }
         }
@@ -516,7 +516,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      */
     public function setUpLegacy()
     {
-        $this->bootstrap = array($this, 'appBootstrap');
+        $this->bootstrap = [$this, 'appBootstrap'];
         $this->bootstrap();
     }
 
@@ -549,8 +549,8 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
      */
     public function appBootstrap()
     {
-        $this->application = new Omeka_Application('testing', array(
-            'config' => CONFIG_DIR . '/' . 'application.ini'));
+        $this->application = new Omeka_Application('testing', [
+            'config' => CONFIG_DIR . '/' . 'application.ini']);
 
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
@@ -638,24 +638,24 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
             case 'admin':
                 $this->frontController->setParam('admin', true);
                 $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
-                $this->application->getBootstrap()->setOptions(array(
-                    'resources' => array(
-                        'theme' => array(
+                $this->application->getBootstrap()->setOptions([
+                    'resources' => [
+                        'theme' => [
                             'basePath' => ADMIN_THEME_DIR,
                             'webBasePath' => '/admin/themes/'
-                        )
-                    )
-                ));
+                        ]
+                    ]
+                ]);
                 break;
             case 'public':
-                $this->application->getBootstrap()->setOptions(array(
-                    'resources' => array(
-                        'theme' => array(
+                $this->application->getBootstrap()->setOptions([
+                    'resources' => [
+                        'theme' => [
                             'basePath' => PUBLIC_THEME_DIR,
                             'webBasePath' => '/themes/'
-                        )
-                    )
-                ));
+                        ]
+                    ]
+                ]);
                 break;
             default:
                 throw new InvalidArgumentException("Invalid theme type given.");

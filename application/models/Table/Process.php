@@ -16,12 +16,12 @@ class Table_Process extends Omeka_Db_Table
     public function findByClass($className)
     {
         $select = $this->getSelect()->where('processes.class = ?');
-        return $this->fetchObjects($select, array($className));
+        return $this->fetchObjects($select, [$className]);
     }
 
     public function findByStatus($status)
     {
         $select = $this->getSelect()->where('processes.status = ?');
-        return $this->fetchObjects($select, array($status));
+        return $this->fetchObjects($select, [$status]);
     }
 }

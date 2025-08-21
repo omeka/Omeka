@@ -7,7 +7,7 @@ if ($type_name != '') {
 }
 $title = __('Edit Item Type #%s', $item_type->id) . $type_name;
 
-echo head(array('title'=> $title,'bodyclass'=>'item-types'));
+echo head(['title'=> $title,'bodyclass'=>'item-types']);
 echo flash();
 ?>
 
@@ -17,10 +17,10 @@ echo flash();
         <div id="save" class="panel">
             <input type="submit" class="full-width green button" name="submit" value="<?php echo __('Save Changes'); ?>">
             <?php if (is_allowed('ItemTypes', 'delete')): ?>
-                <?php echo link_to($item_type, 'delete-confirm', __('Delete'), array('class' => 'full-width red button delete-confirm')); ?>
+                <?php echo link_to($item_type, 'delete-confirm', __('Delete'), ['class' => 'full-width red button delete-confirm']); ?>
             <?php endif; ?>
-            <?php fire_plugin_hook("admin_item_types_panel_buttons", array('view'=>$this, 'record'=>$item_type)); ?>
-            <?php fire_plugin_hook("admin_item_types_panel_fields", array('view'=>$this, 'record'=>$item_type)); ?>
+            <?php fire_plugin_hook("admin_item_types_panel_buttons", ['view'=>$this, 'record'=>$item_type]); ?>
+            <?php fire_plugin_hook("admin_item_types_panel_fields", ['view'=>$this, 'record'=>$item_type]); ?>
         </div>
     </section>
 </form>

@@ -1,5 +1,5 @@
 <?php
-echo head(array('title' => __('Settings'), 'bodyclass'=>'settings edit-api'));
+echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-api']);
 echo common('settings-nav');
 echo flash();
 ?>
@@ -14,7 +14,7 @@ echo flash();
                 <p class="explanation"><?php echo __(
                     'Enable or disable the API by checking or unchecking the box below.'
                 ); ?></p>
-                <?php echo $this->formCheckbox('api_enable', null, array('checked' => (bool) get_option('api_enable'))); ?>
+                <?php echo $this->formCheckbox('api_enable', null, ['checked' => (bool) get_option('api_enable')]); ?>
             </div>
         </div>
         <div class="field">
@@ -27,7 +27,7 @@ echo flash();
                     'API will respect the display element and element text filters when ' .
                     'outputting element text representations.'
                 ); ?></p>
-                <?php echo $this->formCheckbox('api_filter_element_texts', null, array('checked' => (bool) get_option('api_filter_element_texts'))); ?>
+                <?php echo $this->formCheckbox('api_filter_element_texts', null, ['checked' => (bool) get_option('api_filter_element_texts')]); ?>
             </div>
         </div>
         <div class="field">
@@ -63,7 +63,7 @@ echo flash();
 	            </thead>
 	            <tbody>
 	            <?php foreach ($this->api_resources as $resourceName => $resourceInfo): ?>
-	            <?php if (in_array($resourceName, array('site', 'resources'))): continue; endif; ?>
+	            <?php if (in_array($resourceName, ['site', 'resources'])): continue; endif; ?>
 	            <tr>
 	                <td><?php echo $resourceName; ?></td>
 	                <td style="text-align: center;"><?php if (in_array('get', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
@@ -76,12 +76,12 @@ echo flash();
 	            </tbody>
 	        </table>
         </div>
-        <?php fire_plugin_hook('admin_settings_api_form', array('view' => $this)); ?>
+        <?php fire_plugin_hook('admin_settings_api_form', ['view' => $this]); ?>
     </section>
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
+            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), ['class'=>'submit full-width green button']); ?>
         </div>
     </section>
 </form>

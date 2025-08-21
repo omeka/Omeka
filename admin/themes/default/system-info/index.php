@@ -1,6 +1,6 @@
 <?php
 $title = __('System Information');
-echo head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
+echo head(['title' => $title, 'bodyclass' => 'system-info']); ?>
 
 <?php echo flash(); ?>
 <div class="table-responsive">
@@ -16,5 +16,5 @@ echo head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
 	<?php endforeach; ?>
 	</table>
 </div>
-<?php fire_plugin_hook('admin_system_info', array('system_info' => $info, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_system_info', ['system_info' => $info, 'view' => $this]); ?>
 <?php echo foot();

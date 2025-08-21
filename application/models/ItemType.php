@@ -45,24 +45,24 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      *
      * @var array
      */
-    protected $_related = array(
+    protected $_related = [
         'Elements' => 'getElements',
         'Items' => 'getItems'
-    );
+    ];
 
     /**
      * New Elements to be added for this type.
      *
      * @var array
      */
-    private $_elementsToSave = array();
+    private $_elementsToSave = [];
 
     /**
      * Elements to be removed from this type.
      *
      * @var array
      */
-    private $_elementsToRemove = array();
+    private $_elementsToRemove = [];
 
     /**
      * Get an array of element objects associated with this item type.
@@ -83,7 +83,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      */
     protected function getItems($count = 10, $recent = true)
     {
-        $params = array('type' => $this->id);
+        $params = ['type' => $this->id];
         if ($recent) {
             $params['sort_field'] = 'added';
             $params['sort_dir'] = 'd';
@@ -112,11 +112,11 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace' => 'Omeka_Filter');
+        $options = ['inputNamespace' => 'Omeka_Filter'];
 
         // User form input does not allow superfluous whitespace
-        $filters = array('name' => array('StripTags', 'StringTrim'),
-                        'description' => array('StringTrim'));
+        $filters = ['name' => ['StripTags', 'StringTrim'],
+                        'description' => ['StringTrim']];
 
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
 
@@ -133,7 +133,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      */
     protected function _delete()
     {
-        $tm_objs = $this->getDb()->getTable('ItemTypesElements')->findBySql('item_type_id = ?', array( (int) $this->id));
+        $tm_objs = $this->getDb()->getTable('ItemTypesElements')->findBySql('item_type_id = ?', [ (int) $this->id]);
         foreach ($tm_objs as $tm) {
             $tm->delete();
         }
@@ -202,10 +202,10 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      * @uses Element::setArray() For details on the format for passing metadata
      * through $elementInfo.
      */
-    public function addElements($elements = array())
+    public function addElements($elements = [])
     {
-        $elementsToSave = array();
-        $elementsToSaveIds = array();
+        $elementsToSave = [];
+        $elementsToSaveIds = [];
         foreach ($elements as $element) {
             $elementToSave = null;
             if (is_array($element)) {
@@ -254,7 +254,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
             $table = $this->getDb()->getTable('ItemTypesElements');
             $select = $table->getSelectForCount()
                     ->where('item_types_elements.item_type_id = ?');
-            $iteJoin->order = (int) $table->fetchOne($select, array($this->id)) + 1;
+            $iteJoin->order = (int) $table->fetchOne($select, [$this->id]) + 1;
             $iteJoin->save();
         }
     }
@@ -297,7 +297,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         }
 
         // Remove the element from the elements to save
-        $elementsToSave = array();
+        $elementsToSave = [];
         foreach ($this->_elementsToSave as $elementToSave) {
             if ($elementToSave->id != $elementId) {
                 $elementsToSave[] = $elementToSave;
@@ -330,7 +330,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         $elementId = $element->id;
 
         // Find the join record and delete it.
-        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?', array($elementId, $this->id), true);
+        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?', [$elementId, $this->id], true);
 
         if (!$iteJoin) {
             throw new Omeka_Record_Exception(__('Item type does not contain an element with the ID %s!', $elementId));
@@ -358,7 +358,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         }
         $db = $this->getDb();
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?',
-                                    array($elementId, $this->id),
+                                    [$elementId, $this->id],
                                     true);
         return (boolean) $iteJoin;
     }
@@ -372,7 +372,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     {
         // This will query the ItemTable for a count of all items associated with
         // the item type
-        return $this->getDb()->getTable('Item')->count(array('type' => $this->id));
+        return $this->getDb()->getTable('Item')->count(['type' => $this->id]);
     }
 
     /**
@@ -383,7 +383,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     public static function getItemTypeElementSet()
     {
         // Element should belong to the 'Item Type' element set.
-        return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ElementSet::ITEM_TYPE_NAME), true);
+        return get_db()->getTable('ElementSet')->findBySql('name = ?', [ElementSet::ITEM_TYPE_NAME], true);
     }
 
     /**
@@ -404,7 +404,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     protected function _dissociateItems()
     {
         $db = $this->getDb();
-        $db->update($db->Item, array('item_type_id' => null),
-            array('item_type_id = ?' => $this->id));
+        $db->update($db->Item, ['item_type_id' => null],
+            ['item_type_id = ?' => $this->id]);
     }
 }

@@ -19,30 +19,30 @@ class Omeka_Form_ResetPassword extends Omeka_Form
 
         $this->setAttrib('id', 'reset-password');
 
-        $this->addElement('password', 'new_password', array(
+        $this->addElement('password', 'new_password', [
             'label' => __('Create a Password'),
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'options' => array(
-                    'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'options' => [
+                    'messages' => [
                         'isEmpty' => __('Password is required.')
-                    )
-                )),
-                array('validator' => 'Confirmation', 'options' => array(
+                    ]
+                ]],
+                ['validator' => 'Confirmation', 'options' => [
                     'field' => 'new_password_confirm',
-                    'messages' => array(
-                        'notMatch' => __("Typed passwords do not match."))
-                )),
-                array('validator' => 'StringLength', 'options' => array(
+                    'messages' => [
+                        'notMatch' => __("Typed passwords do not match.")]
+                ]],
+                ['validator' => 'StringLength', 'options' => [
                     'min' => User::PASSWORD_MIN_LENGTH,
-                    'messages' => array(
-                        'stringLengthTooShort' => "Password must be at least %min% characters in length.")
-                ))
-            )
-        ));
+                    'messages' => [
+                        'stringLengthTooShort' => "Password must be at least %min% characters in length."]
+                ]]
+            ]
+        ]);
 
-        $this->addElement('password', 'new_password_confirm', array(
+        $this->addElement('password', 'new_password_confirm', [
             'label' => __('Re-type the Password')
-        ));
+        ]);
 
         $this->addElement('submit', 'Submit');
     }

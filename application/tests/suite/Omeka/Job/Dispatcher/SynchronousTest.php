@@ -17,7 +17,7 @@ class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends Omeka_Test_TestCase
 
     public function testSend()
     {
-        $job = $this->adapter->send('foobar', array());
+        $job = $this->adapter->send('foobar', []);
         $this->assertTrue($job->performed);
     }
 
@@ -39,6 +39,6 @@ class Omeka_Job_FactoryMock
     public function from($str)
     {
         $this->string = $str;
-        return new Omeka_Job_Mock(array());
+        return new Omeka_Job_Mock([]);
     }
 }

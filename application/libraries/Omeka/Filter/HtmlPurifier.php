@@ -15,27 +15,27 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
 {
     private static $_purifier = null;
 
-    private static $_purifierConfig = array(
+    private static $_purifierConfig = [
         'Core.Encoding' => 'UTF-8',
         'Cache.DefinitionImpl' => null, // Caching disabled
-        'Attr.AllowedFrameTargets' => array('_blank'),
+        'Attr.AllowedFrameTargets' => ['_blank'],
         'Attr.EnableID' => true,
         'Attr.ID.HTML5' => true,
         'HTML.TidyLevel' => 'none',
-        'HTML.AllowedElements' => array(
+        'HTML.AllowedElements' => [
             'p', 'br', 'strong', 'em', 'span', 'div', 'ul', 'ol', 'li', 'a',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'address', 'pre', 'table',
             'tr', 'td', 'blockquote', 'thead', 'tfoot', 'tbody', 'th', 'dl',
             'dt', 'dd', 'q', 'small', 'strike', 'sup', 'sub', 'b', 'i', 'big',
             'small', 'tt'
-        ),
-        'HTML.AllowedAttributes' => array(
+        ],
+        'HTML.AllowedAttributes' => [
             '*.style', '*.class', 'a.href', 'a.title', 'a.target'
-        ),
+        ],
         // Note: this allows "unsafe" elements/attributes, but only when they
         // are also in the Allowed lists configured by the user.
         'HTML.Trusted' => true
-    );
+    ];
 
     /**
      * Filter the value
@@ -143,24 +143,24 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         $purifierConfig->set('HTML.AllowedAttributes', $allowedHtmlAttributes);
 
         // allow plugins to inject HTMLPurifier config/definitions
-        $purifierConfig = apply_filters('html_purifier_config_setup', $purifierConfig, array(
+        $purifierConfig = apply_filters('html_purifier_config_setup', $purifierConfig, [
             'defaults' => self::$_purifierConfig,
             'allowedHtmlElements' => $allowedHtmlElements,
             'allowedHtmlAttributes' => $allowedHtmlAttributes
-        ));
+        ]);
 
         $purifier = HTMLPurifier::instance($purifierConfig);
         return $purifier;
     }
 
     public static function filterAttributesWithMissingElements(
-        $htmlAttributes = array(),
-        $htmlElements = array()
+        $htmlAttributes = [],
+        $htmlElements = []
     ) {
         if (!count($htmlElements)) {
-            return array();
+            return [];
         }
-        $cleanHtmlAttributes = array();
+        $cleanHtmlAttributes = [];
         foreach ($htmlAttributes as $attr) {
             $attr = trim($attr);
             $attrParts = explode('.', $attr);

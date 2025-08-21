@@ -29,16 +29,16 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
         $researcher->role = 'researcher';
         $researcher->id = 3;
 
-        $this->_users = array(
+        $this->_users = [
             'super' => $super,
             'contributor' => $contributor,
             'researcher' => $researcher
-        );
+        ];
 
-        $this->_collections = array(
+        $this->_collections = [
             'addedBySelf' => $this->_getMockCollection(true),
             'notAddedBySelf' => $this->_getMockCollection(false),
-        );
+        ];
     }
 
     public function tearDownLegacy()
@@ -82,12 +82,12 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
 
     public function userResourceProvider()
     {
-        return array(
+        return [
             // $userKey, $whenOwner, $whenNotOwner, $generally
-            array('super', true, true, true),
-            array('contributor', true, false, true),
-            array('researcher', false, false, false)
-        );
+            ['super', true, true, true],
+            ['contributor', true, false, true],
+            ['researcher', false, false, false]
+        ];
     }
 
     /**
@@ -99,7 +99,7 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
      */
     private function _getMockCollection($addedBySelf)
     {
-        $collection = $this->getMockBuilder('Collection')->setMethods(array('getResourceId', 'isOwnedBy'))->getMock();
+        $collection = $this->getMockBuilder('Collection')->setMethods(['getResourceId', 'isOwnedBy'])->getMock();
         $collection->expects($this->any())
              ->method('getResourceId')
              ->will($this->returnValue('Collections'));

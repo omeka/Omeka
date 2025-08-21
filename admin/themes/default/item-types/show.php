@@ -6,7 +6,7 @@ if ($type_name != '') {
     $type_name = '';
 }
 $title = __('Item Type #%s', $item_type->id) . $type_name;
-echo head(array('title'=> $title,'bodyclass'=>'item-types'));
+echo head(['title'=> $title,'bodyclass'=>'item-types']);
 echo flash();
 ?>
 <section class="seven columns alpha">
@@ -32,7 +32,7 @@ echo flash();
         <ul>
         <?php set_loop_records('items', $item_type->Items); ?>
         <?php foreach (loop('items') as $item): ?>
-        <li><span class="date"><?php echo format_date(metadata('item', 'Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', array('Dublin Core', 'Title')) . '</span>') ?></li>
+        <li><span class="date"><?php echo format_date(metadata('item', 'Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', ['Dublin Core', 'Title']) . '</span>') ?></li>
         <?php endforeach;?>
         </ul>
         <?php else: ?>
@@ -42,7 +42,7 @@ echo flash();
         <h2><?php echo __('Total Number of Items'); ?></h2>
         <p><?php echo link_to_items_with_item_type(); ?></p>
     </div>
-    <?php fire_plugin_hook('admin_item_types_show', array('item_type' => $item_type, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_item_types_show', ['item_type' => $item_type, 'view' => $this]); ?>
 </section>
 
 <section class="three columns omega">

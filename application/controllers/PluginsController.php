@@ -57,7 +57,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             }
 
             try {
-                $this->_pluginBroker->callHook('config', array('post' => $_POST), $plugin);
+                $this->_pluginBroker->callHook('config', ['post' => $_POST], $plugin);
                 $this->_helper->flashMessenger(
                     __('The %s plugin was successfully configured!', $plugin->getDisplayName()),
                     'success'
@@ -105,7 +105,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
 
             // Only redirect to the config form if there is a config hook for this plugin.
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
-                return $this->_helper->redirector('config', 'plugins', 'default', array('name' => $plugin->getDirectoryName()));
+                return $this->_helper->redirector('config', 'plugins', 'default', ['name' => $plugin->getDirectoryName()]);
             }
         } catch (Omeka_Plugin_Installer_Exception $e) {
             // Taken from Plugin_Installer::install().
@@ -238,7 +238,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 __("The %s plugin was successfully upgraded!", $name),
                 'success');
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
-                $this->_helper->redirector('config', 'plugins', 'default', array('name' => $name));
+                $this->_helper->redirector('config', 'plugins', 'default', ['name' => $name]);
             } else {
                 $this->_helper->redirector('index');
             }

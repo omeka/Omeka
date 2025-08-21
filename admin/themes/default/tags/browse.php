@@ -6,10 +6,10 @@ $pageTitle = __('Browse Tags');
 $pageTitle .= ' ' . __('(%s total)', $total_results);
 
 if ($canEdit) {
-    queue_js_file(array('tags', 'vendor/jquery-editable-poshytip.min'));
+    queue_js_file(['tags', 'vendor/jquery-editable-poshytip.min']);
 }
 
-echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
+echo head(['title'=>$pageTitle,'bodyclass'=>'tags browse-tags']);
 echo flash();
 
 ?>
@@ -39,7 +39,7 @@ echo flash();
         <option><?php echo __('Record Types'); ?></option>
         <option value="<?php echo $this->url(); ?>"><?php echo __('All'); ?></option>
         <?php foreach($record_types as $record_type): ?>
-        <option value="<?php echo url('tags', array('type' => $record_type)); ?>"><?php echo __($record_type); ?></option>
+        <option value="<?php echo url('tags', ['type' => $record_type]); ?>"><?php echo __($record_type); ?></option>
         <?php endforeach; ?>
         </select>
 </form>
@@ -61,11 +61,11 @@ echo flash();
     <section>
         <div id="tags-nav">
             <?php
-            $sortOptions = array(
-                __('Name') => array('sort_field' => 'name', 'sort_dir'=> ($sort['sort_field'] == 'name' && $sort['sort_dir'] == 'a') ? 'd' : 'a'),
-                __('Count') => array('sort_field' => 'count', 'sort_dir' => ($sort['sort_field'] == 'count' && $sort['sort_dir'] == 'd') ? 'a' : 'd'),
-                __('Date created') => array('sort_field' => 'time', 'sort_dir' => ($sort['sort_field'] == 'time' && $sort['sort_dir'] == 'a') ? 'd' : 'a')
-            );
+            $sortOptions = [
+                __('Name') => ['sort_field' => 'name', 'sort_dir'=> ($sort['sort_field'] == 'name' && $sort['sort_dir'] == 'a') ? 'd' : 'a'],
+                __('Count') => ['sort_field' => 'count', 'sort_dir' => ($sort['sort_field'] == 'count' && $sort['sort_dir'] == 'd') ? 'a' : 'd'],
+                __('Date created') => ['sort_field' => 'time', 'sort_dir' => ($sort['sort_field'] == 'time' && $sort['sort_dir'] == 'a') ? 'd' : 'a']
+            ];
 
             foreach ($sortOptions as $label => $sortParams) {
                 $uri = html_escape(current_url($sortParams + $params));
@@ -83,7 +83,7 @@ echo flash();
         <?php foreach ($tags as $tag): ?>
             <li>
             <?php if($browse_for == 'Item'):?>
-                <a href="<?php echo html_escape(url('items/browse', array('tags' => $tag->name))); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
+                <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
             <?php else: ?>
                 <span class="count"><?php echo $tag['tagCount']; ?></span>
             <?php endif; ?>
@@ -93,12 +93,12 @@ echo flash();
                 <span class="tag"><?php echo html_escape($tag->name); ?></span>
             <?php endif; ?>
             <?php if ($canDelete): ?>
-                <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', array('class' => 'delete-confirm')); ?></span>
+                <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm']); ?></span>
             <?php endif; ?>
             </li>
         <?php endforeach; ?>
         </ul>
-        <?php fire_plugin_hook('admin_tags_browse', array('tags' => $tags, 'view' => $this)); ?>
+        <?php fire_plugin_hook('admin_tags_browse', ['tags' => $tags, 'view' => $this]); ?>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>

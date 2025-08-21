@@ -26,19 +26,19 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         return $htmlPurifier;
     }
 
-    protected function _addPostElements($dirtyHtml, $cleanHtml, $post = array())
+    protected function _addPostElements($dirtyHtml, $cleanHtml, $post = [])
     {
         // post looks like Elements[element_id][index] = array([text], [html])
-        $post['Elements'] = array(
-            array(
-                array('text' => $dirtyHtml, 'html' => true),
-                array('text' => $dirtyHtml, 'html' => false)
-            ),
-            array(
-                array('text' => $dirtyHtml, 'html' => false),
-                array('text' => $dirtyHtml, 'html' => true)
-            )
-        );
+        $post['Elements'] = [
+            [
+                ['text' => $dirtyHtml, 'html' => true],
+                ['text' => $dirtyHtml, 'html' => false]
+            ],
+            [
+                ['text' => $dirtyHtml, 'html' => false],
+                ['text' => $dirtyHtml, 'html' => true]
+            ]
+        ];
 
         return $post;
     }
@@ -53,7 +53,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
 
     public function testIsFormSubmission()
     {
-        $formActions = array('add', 'edit', 'config');
+        $formActions = ['add', 'edit', 'config'];
         foreach ($formActions as $formAction) {
             $request = new Zend_Controller_Request_HttpTestCase();
             $request->setActionName($formAction);
@@ -76,7 +76,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array(), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin([], []);
         $htmlPurifierPlugin->filterCollectionsForm($request);
 
         // Make sure the description post variable is clean
@@ -96,7 +96,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], []);
         $htmlPurifierPlugin->filterCollectionsForm($request);
 
         // Make sure the description post variable is clean
@@ -116,7 +116,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p', 'br'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p', 'br'], []);
         $htmlPurifierPlugin->filterCollectionsForm($request);
 
         // Make sure the description post variable is clean
@@ -136,7 +136,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], []);
         $htmlPurifierPlugin->filterCollectionsForm($request);
 
         // Make sure the description post variable is clean
@@ -156,7 +156,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array('*.class'));
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], ['*.class']);
         $htmlPurifierPlugin->filterCollectionsForm($request);
 
         // Make sure the description post variable is clean
@@ -178,7 +178,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array(), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin([], []);
         $htmlPurifierPlugin->filterItemsForm($request);
 
         // Make sure the description post variable is clean
@@ -199,7 +199,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], []);
         $htmlPurifierPlugin->filterItemsForm($request);
 
         // Make sure the description post variable is clean
@@ -221,7 +221,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p', 'br'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p', 'br'], []);
         $htmlPurifierPlugin->filterItemsForm($request);
 
         // Make sure the description post variable is clean
@@ -242,7 +242,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], []);
         $htmlPurifierPlugin->filterItemsForm($request);
 
         // Make sure the description post variable is clean
@@ -263,7 +263,7 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p'), array('*.class'));
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p'], ['*.class']);
         $htmlPurifierPlugin->filterItemsForm($request);
 
         // Make sure the description post variable is clean
@@ -280,25 +280,25 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request = new Zend_Controller_Request_HttpTestCase();
 
         // post can be any nested array of strings
-        $post = array(
+        $post = [
             'whatever' => $dirtyHtml,
-            'NestedArray' => array(
-                array(
-                    array('text' => $dirtyHtml),
-                    array('text' => $dirtyHtml)
-                ),
-                array(
-                    array('text' => $dirtyHtml),
-                    array('text' => $dirtyHtml)
-                )
-            ),
+            'NestedArray' => [
+                [
+                    ['text' => $dirtyHtml],
+                    ['text' => $dirtyHtml]
+                ],
+                [
+                    ['text' => $dirtyHtml],
+                    ['text' => $dirtyHtml]
+                ]
+            ],
             'whatever2' => $dirtyHtml
-        );
+        ];
 
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p', 'br'), array());
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p', 'br'], []);
         $htmlPurifierPlugin->filterThemesForm($request);
 
         // Make sure the description post variable is clean
@@ -320,25 +320,25 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request = new Zend_Controller_Request_HttpTestCase();
 
         // post can be any nested array of strings
-        $post = array(
+        $post = [
             'whatever' => $dirtyHtml,
-            'NestedArray' => array(
-                0 => array(
-                        array('text' => $dirtyHtml),
-                        array('text' => $dirtyHtml)
-                 ),
-                1 => array(
-                        array('text' => $dirtyHtml),
-                        array('text' => $dirtyHtml)
-                 )
-            ),
+            'NestedArray' => [
+                0 => [
+                        ['text' => $dirtyHtml],
+                        ['text' => $dirtyHtml]
+                 ],
+                1 => [
+                        ['text' => $dirtyHtml],
+                        ['text' => $dirtyHtml]
+                 ]
+            ],
             'whatever2' => $dirtyHtml
-        );
+        ];
 
         $request->setPost($post);
 
         // Html purify the request
-        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(array('p', 'br'), array('*.class'));
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin(['p', 'br'], ['*.class']);
         $htmlPurifierPlugin->filterThemesForm($request);
 
         // Make sure the description post variable is clean

@@ -52,7 +52,7 @@ ORDER BY added DESC
 ADDED
 );
         foreach ($addedTimestamps as $timestamp) {
-            $db->update("$db->Collection", array('added' => $timestamp['added']), 'id = ' . (int) $timestamp['collection_id']);
+            $db->update("$db->Collection", ['added' => $timestamp['added']], 'id = ' . (int) $timestamp['collection_id']);
         }
     }
 
@@ -69,7 +69,7 @@ ORDER BY modified DESC
 MOD
 );
         foreach ($modifiedTimestamps as $timestamp) {
-            $db->update("$db->Collection", array('modified' => $timestamp['modified']), 'id = ' . (int) $timestamp['collection_id']);
+            $db->update("$db->Collection", ['modified' => $timestamp['modified']], 'id = ' . (int) $timestamp['collection_id']);
         }
     }
 
@@ -87,7 +87,7 @@ GROUP BY collection_id
 OWNERS
 );
         foreach ($ownerIds as $owner) {
-            $db->update("$db->Collection", array('owner_id' => $owner['owner_id']), 'id = ' . (int) $owner['collection_id']);
+            $db->update("$db->Collection", ['owner_id' => $owner['owner_id']], 'id = ' . (int) $owner['collection_id']);
         }
     }
 
@@ -104,7 +104,7 @@ INNER JOIN $db->Entity e ON e.id = er.entity_id
 WHERE er.type = "Collection"            
 COLLECTORS
 );
-        $indexedCollectors = array();
+        $indexedCollectors = [];
         foreach ($collectors as $collector) {
             $name = trim($collector['name']);
             $institution = trim($collector['institution']);
@@ -131,7 +131,7 @@ COLLECTORS
         }
 
         foreach ($indexedCollectors as $collectionId => $collectorArray) {
-            $db->update($db->Collection, array('collectors' => implode("\n", $collectorArray)), 'id = ' . (int) $collectionId);
+            $db->update($db->Collection, ['collectors' => implode("\n", $collectorArray)], 'id = ' . (int) $collectionId);
         }
     }
 }

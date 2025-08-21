@@ -22,7 +22,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
     /**
      * @var array Set of options for the {@link $_adapter} instance.
      */
-    protected $_adapterOptions = array();
+    protected $_adapterOptions = [];
 
     /**
      * Create a ZF HTTP file transfer adapter.

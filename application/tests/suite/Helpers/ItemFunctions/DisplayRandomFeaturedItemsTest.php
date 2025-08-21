@@ -37,16 +37,16 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     {
         $db = $this->db;
 
-        $ids = array();
+        $ids = [];
 
         for ($i = 1; $i < 6; $i++) {
             $title = "Title $i";
             $description = "Description for item $i.";
 
-            $elementTexts = array('Dublin Core' => array(
-                'Title' => array(array('text' => $title, 'html' => false)),
-                'Description' => array(array('text' => $description, 'html' => false))
-            ));
+            $elementTexts = ['Dublin Core' => [
+                'Title' => [['text' => $title, 'html' => false]],
+                'Description' => [['text' => $description, 'html' => false]]
+            ]];
 
             $item = new Item;
             $item->public = 1;

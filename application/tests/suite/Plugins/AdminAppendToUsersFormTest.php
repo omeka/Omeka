@@ -41,7 +41,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 
     public function testCanAppendHtmlToAdminUsersEditForm()
     {
-        add_plugin_hook('users_form', array($this, 'appendExtraFormInput'));
+        add_plugin_hook('users_form', [$this, 'appendExtraFormInput']);
 
         $this->dispatch('/users/edit/1');
         $this->assertNotRedirect();
@@ -51,7 +51,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 
     public function testCanAppendHtmlToAdminUsersAddForm()
     {
-        add_plugin_hook('users_form', array($this, 'appendExtraFormInput'));
+        add_plugin_hook('users_form', [$this, 'appendExtraFormInput']);
         $this->dispatch('/users/add');
         $this->assertNotRedirect();
         $this->assertQueryContentContains("label", "TEST HOOK CONTENT");
@@ -59,6 +59,6 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 
     public function appendExtraFormInput($args)
     {
-        $args['form']->addElement('text', 'foobar', array('label' => 'TEST HOOK CONTENT'));
+        $args['form']->addElement('text', 'foobar', ['label' => 'TEST HOOK CONTENT']);
     }
 }

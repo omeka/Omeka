@@ -22,27 +22,27 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
     {
         // Get the item type elements.
         $itemTypeElements = $record->getTable('ItemTypesElements')
-            ->findBy(array('item_type_id' => $record->id, Omeka_Db_Table::SORT_PARAM => 'order'));
-        $elements = array();
+            ->findBy(['item_type_id' => $record->id, Omeka_Db_Table::SORT_PARAM => 'order']);
+        $elements = [];
         foreach ($itemTypeElements as $element) {
-            $elements[] = array(
+            $elements[] = [
                 'id' => $element->element_id,
                 'url' => self::getResourceUrl("/elements/{$element->element_id}"),
-            );
+            ];
         }
 
-        $representation = array(
+        $representation = [
             'id' => $record->id,
             'url' => self::getResourceUrl("/item_types/{$record->id}"),
             'name' => $record->name,
             'description' => $record->description,
             'elements' => $elements,
-            'items' => array(
-                'count' => $record->getTable('Item')->count(array('item_type_id' => $record->id)),
+            'items' => [
+                'count' => $record->getTable('Item')->count(['item_type_id' => $record->id]),
                 'url' => self::getResourceUrl("/items/?item_type={$record->id}"),
                 'resource' => 'items',
-            ),
-        );
+            ],
+        ];
         return $representation;
     }
 
@@ -61,7 +61,7 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
             $record->description = $data->description;
         }
         if (isset($data->elements) && is_array($data->elements)) {
-            $elements = array();
+            $elements = [];
             foreach ($data->elements as $element) {
                 if (!is_object($element)) {
                     continue;

@@ -15,7 +15,7 @@ class Omeka_StorageTest extends Omeka_Test_TestCase
     public function testNonExistingAdapterName()
     {
         $this->setExpectedException('Omeka_Storage_Exception');
-        new Omeka_Storage(array('adapter' => 'NotAClass'));
+        new Omeka_Storage(['adapter' => 'NotAClass']);
     }
 
     /**
@@ -25,7 +25,7 @@ class Omeka_StorageTest extends Omeka_Test_TestCase
     public function testBadAdapterName()
     {
         $this->setExpectedException('Omeka_Storage_Exception');
-        new Omeka_Storage(array('adapter' => 'stdClass'));
+        new Omeka_Storage(['adapter' => 'stdClass']);
     }
 
     /**
@@ -35,7 +35,7 @@ class Omeka_StorageTest extends Omeka_Test_TestCase
     public function testNullAdapter()
     {
         $this->setExpectedException('Omeka_Storage_Exception');
-        new Omeka_Storage(array('adapter' => null));
+        new Omeka_Storage(['adapter' => null]);
     }
 
     /**
@@ -46,7 +46,7 @@ class Omeka_StorageTest extends Omeka_Test_TestCase
     {
         $this->setExpectedException('Omeka_Storage_Exception');
         $class = new stdClass;
-        new Omeka_Storage(array('adapter' => $class));
+        new Omeka_Storage(['adapter' => $class]);
     }
 
     /**

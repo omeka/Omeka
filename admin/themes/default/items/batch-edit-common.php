@@ -6,11 +6,11 @@
         <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
         <div class="inputs five columns omega">
             <?php
-            $publicOptions = array(''  => __('Select Below'),
+            $publicOptions = [''  => __('Select Below'),
                                    '1' => __('Public'),
                                    '0' => __('Not Public')
-                                   );
-            echo $this->formSelect('metadata[public]', null, array(), $publicOptions); ?>
+                                   ];
+            echo $this->formSelect('metadata[public]', null, [], $publicOptions); ?>
         </div>
     </div>
     <?php endif; ?>
@@ -20,11 +20,11 @@
         <label class="two columns alpha" for="metadata[featured]"><?php echo __('Featured?'); ?></label>
         <div class="inputs five columns omega">
             <?php
-            $featuredOptions = array(''  => __('Select Below'),
+            $featuredOptions = [''  => __('Select Below'),
                                      '1' => __('Featured'),
                                      '0' => __('Not Featured')
-                                     );
-            echo $this->formSelect('metadata[featured]', null, array(), $featuredOptions); ?>
+                                     ];
+            echo $this->formSelect('metadata[featured]', null, [], $featuredOptions); ?>
         </div>
     </div>
     <?php endif; ?>
@@ -34,8 +34,8 @@
         <div class="inputs five columns omega">
         <?php
         $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
-        $itemTypeOptions = array('' => __('Select Below')) + $itemTypeOptions;
-        echo $this->formSelect('metadata[item_type_id]', null, array(), $itemTypeOptions);
+        $itemTypeOptions = ['' => __('Select Below')] + $itemTypeOptions;
+        echo $this->formSelect('metadata[item_type_id]', null, [], $itemTypeOptions);
         ?>
             <div class="batch-edit-remove">
                 <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
@@ -49,8 +49,8 @@
         <div class="inputs five columns omega">
             <?php
             $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
-            $collectionOptions = array('' => __('Select Below')) + $collectionOptions;
-            echo $this->formSelect('metadata[collection_id]', null, array(), $collectionOptions);
+            $collectionOptions = ['' => __('Select Below')] + $collectionOptions;
+            echo $this->formSelect('metadata[collection_id]', null, [], $collectionOptions);
             ?>
             <div class="batch-edit-remove">
                 <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
@@ -62,7 +62,7 @@
     <div class="field">
         <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
         <div class="inputs five columns omega">
-            <?php echo $this->formText('metadata[tags]', null, array('size' => 32)); ?>
+            <?php echo $this->formText('metadata[tags]', null, ['size' => 32]); ?>
             <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', option('tag_delimiter')); ?></p>
         </div>
     </div>

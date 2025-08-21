@@ -7,7 +7,7 @@ if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
 }
 $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
-<?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
+<?php echo head(['title'=> $collectionTitle, 'bodyclass'=>'collections show']); ?>
 
 <section class="seven columns alpha">
     <?php echo flash(); ?>
@@ -23,17 +23,17 @@ $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collect
     </ul>
     <?php endif; ?>
 
-    <?php fire_plugin_hook('admin_collections_show', array('collection' => $collection, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_collections_show', ['collection' => $collection, 'view' => $this]); ?>
 </section>
 
 <section class="three columns omega">
     <div id="edit" class="panel">
         <?php if (is_allowed(get_current_record('collection'), 'edit')): ?>    
-            <?php echo link_to_collection(__('Edit'), array('class'=>'full-width green button'), 'edit'); ?>
+            <?php echo link_to_collection(__('Edit'), ['class'=>'full-width green button'], 'edit'); ?>
         <?php endif; ?>
         <a href="<?php echo html_escape(public_url('collections/show/'.metadata('collection', 'id'))); ?>" class="full-width blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
         <?php if (is_allowed(get_current_record('collection'), 'delete')): ?>    
-            <?php echo link_to_collection(__('Delete'), array('class'=>'full-width red button delete-confirm'), 'delete-confirm'); ?>
+            <?php echo link_to_collection(__('Delete'), ['class'=>'full-width red button delete-confirm'], 'delete-confirm'); ?>
         <?php endif; ?>
     </div>       
     
@@ -51,7 +51,7 @@ $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collect
         <h4><?php echo __('Contributors'); ?></h4>
         <ul id="contributor-list">
             <?php if ($collection->hasContributor()): ?> 
-            <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
+            <li><?php echo metadata('collection', ['Dublin Core', 'Contributor'], ['all'=>true, 'delimiter'=>'</li><li>']); ?></li>
             <?php else: ?>
             <li><?php echo __('No contributors.'); ?></li>
             <?php endif; ?> 
@@ -62,7 +62,7 @@ $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collect
         <h4><?php echo __('Output Formats'); ?></h4>
         <div><?php echo output_format_list(); ?></div>
     </div>
-    <?php fire_plugin_hook('admin_collections_show_sidebar', array('view'=>$this, 'collection'=>$collection)); ?>
+    <?php fire_plugin_hook('admin_collections_show_sidebar', ['view'=>$this, 'collection'=>$collection]); ?>
 </section>
 
 <?php echo foot(); ?>

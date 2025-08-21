@@ -1,8 +1,8 @@
 <?php
-queue_js_file(array('vendor/jquery.nestedSortable', 'navigation'));
+queue_js_file(['vendor/jquery.nestedSortable', 'navigation']);
 
 $pageTitle = __('Appearance');
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
+echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
 <?php echo common('appearance-nav'); ?>
 <?php echo flash(); ?>
@@ -16,7 +16,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
     . 'in the main navigation. Click and drag the links into the preferred ' 
     . 'display order.'); ?></p>
     <?php echo $this->form->displayNavigationLinks(); ?>
-    <?php echo $this->partial('settings/edit-navigation-link.php', array('template' => true)); ?>
+    <?php echo $this->partial('settings/edit-navigation-link.php', ['template' => true]); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
         <div class="add-new" id="add-new-heading"><?php echo __('Add a Link to the Navigation'); ?></div>
         <div id="add-new-options" class="drawer-contents opened">
@@ -29,11 +29,11 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
             <div class="flash alert" style="display: none;" id="uri-required" aria-live="polite"><?php echo __('required field'); ?> <span class="sr-only"><?php echo __('URI'); ?></span></div>
             <button type="button" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></button>
         </div>
-    <?php fire_plugin_hook('admin_appearance_navigation_form', array('form' => $form, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_appearance_navigation_form', ['form' => $form, 'view' => $this]); ?>
 </section>
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
+        <?php echo $this->formSubmit('submit', __('Save Changes'), ['class'=>'submit full-width green button']); ?>
         <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
     </div>
     <div id="reset" class="panel">

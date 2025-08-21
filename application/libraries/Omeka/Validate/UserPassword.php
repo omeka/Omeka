@@ -25,9 +25,9 @@ class Omeka_Validate_UserPassword extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::INVALID => "Password is invalid."
-    );
+    ];
 
     /**
      * User to check the password against.

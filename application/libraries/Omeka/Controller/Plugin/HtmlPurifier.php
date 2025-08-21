@@ -67,7 +67,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
 
         // Let plugins hook into this to process form submissions in their own way.
-        fire_plugin_hook('html_purifier_form_submission', array('purifier' => $purifier));
+        fire_plugin_hook('html_purifier_form_submission', ['purifier' => $purifier]);
 
         // No processing for users form, since it's already properly filtered by
         // User::filterPostData(). No processing for tags form, none of the tags
@@ -85,7 +85,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      **/
     public function isFormSubmission($request)
     {
-        return in_array($request->getActionName(), array('add', 'edit', 'config')) and $request->isPost();
+        return in_array($request->getActionName(), ['add', 'edit', 'config']) and $request->isPost();
     }
 
     /**
@@ -148,7 +148,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
      * @return array A purified array of string or array values
      **/
-    protected function _purifyArray($dataArray = array(), $htmlPurifierFilter = null)
+    protected function _purifyArray($dataArray = [], $htmlPurifierFilter = null)
     {
         if ($htmlPurifierFilter === null) {
             $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();

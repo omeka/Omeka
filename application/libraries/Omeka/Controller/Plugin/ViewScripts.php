@@ -25,7 +25,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      *
      * @var array
      */
-    protected $_dbOptions = array();
+    protected $_dbOptions = [];
 
     /**
      * Base path to themes directory.
@@ -75,7 +75,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         // to the view script.
 
         $moduleName = $request->getModuleName();
-        $isPluginModule = !in_array($moduleName, array('default', null));
+        $isPluginModule = !in_array($moduleName, ['default', null]);
         $themeType = is_admin_theme() ? 'admin' : 'public';
 
         $pluginScriptDirs = $this->_pluginMvc->getViewScriptDirs($themeType);

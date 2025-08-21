@@ -16,7 +16,7 @@ class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
     public function setUpLegacy()
     {
         // Somehow a previous GET request is leaking into these tests.
-        $_GET = array();
+        $_GET = [];
         parent::setUpLegacy();
     }
 

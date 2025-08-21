@@ -48,27 +48,27 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals('', (string) get_theme_option('logo', $themeName));
 
         // specify the files array for the post
-        $_FILES = array(
+        $_FILES = [
             'logo' =>
-                array(
+                [
                   'name' => '',
                   'type' => '',
                   'tmp_name' => '',
                   'error' => 4,
                   'size' => 0
-              ),
+              ],
             'header_background' =>
-                array(
+                [
                   'name' => '',
                   'type' => '',
                   'tmp_name' => '',
                   'error' => 4,
                   'size' => 0
-              )
-        );
+              ]
+        ];
 
         // specify the theme options for the post
-        $themeOptions = array(
+        $themeOptions = [
           'display_featured_item' => '1',
           'display_featured_collection' => '1',
           'display_featured_exhibit' => '1',
@@ -76,19 +76,19 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
           'homepage_text' => '',
           'footer_text' => '',
           'display_footer_copyright' => '0'
-        );
+        ];
 
         $csrf = new Zend_Form_Element_Hash('theme_config_csrf');
         $csrf->initCsrfToken();
 
         // specify other post data
-        $otherPostData = array(
+        $otherPostData = [
           'hidden_file_logo' => '',
           'hidden_file_header_background' => '',
           'MAX_FILE_SIZE' => '33554432',
           'submit' => 'Save Changes',
           'theme_config_csrf' => $csrf->getHash()
-        );
+        ];
 
         // set the the post data
         $post = array_merge($themeOptions, $otherPostData);

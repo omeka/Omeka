@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Uninstall Plugin: %s', $plugin->getDisplayName());
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'plugins'));
+echo head(['title'=>$pageTitle, 'bodyclass'=>'plugins']);
 echo flash();
 ?>
 <section class="six columns alpha">

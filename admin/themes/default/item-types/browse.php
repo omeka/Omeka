@@ -1,12 +1,12 @@
 <?php
 $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_results);
-$totalItemsWithoutType = get_db()->getTable('Item')->count(array('item_type' => 0));
-echo head(array('title' => $pageTitle,'bodyclass' => 'item-types browse'));
+$totalItemsWithoutType = get_db()->getTable('Item')->count(['item_type' => 0]);
+echo head(['title' => $pageTitle,'bodyclass' => 'item-types browse']);
 echo flash();
 ?>
 
 <?php if (is_allowed('ItemTypes', 'add')): ?>
-<?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
+<?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
 <?php endif ?>
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
@@ -40,7 +40,7 @@ echo flash();
                         <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $item_type->id)); ?>"><?php echo __('Edit'); ?></a></li>
                     <?php endif; ?>
                     </ul>
-                    <?php fire_plugin_hook('admin_item_types_browse_each', array('item_type' => $item_type, 'view' => $this)); ?>
+                    <?php fire_plugin_hook('admin_item_types_browse_each', ['item_type' => $item_type, 'view' => $this]); ?>
                 </td>
                 <td class="itemtype-description"><?php echo html_escape($item_type->description); ?></td>
                 <td><?php echo link_to_items_with_item_type(); ?></td>
@@ -51,13 +51,13 @@ echo flash();
 </div>
 
 <?php if (is_allowed('ItemTypes', 'add')): ?>
-<?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
+<?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
 <?php endif ?>
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
 
 <p class="without-item-type"><?php echo $withoutTypeMessage; ?></p>
 
-<?php fire_plugin_hook('admin_item_types_browse', array('item_types' => $this->item_types, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_item_types_browse', ['item_types' => $this->item_types, 'view' => $this]); ?>
 
 <?php echo foot(); ?>

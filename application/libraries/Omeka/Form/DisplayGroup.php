@@ -19,10 +19,10 @@ class Omeka_Form_DisplayGroup extends Zend_Form_DisplayGroup
      */
     public function loadDefaultDecorators()
     {
-        $this->setDecorators(array(
-            array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),
+        $this->setDecorators([
+            ['Description', ['tag' => 'p', 'class' => 'explanation', 'escape' => false]],
             'FormElements',
             'Fieldset'
-        ));
+        ]);
     }
 }

@@ -26,7 +26,7 @@ class ElementSetsController extends ApiController
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
 
-        if (in_array($elementSet->name, array('Dublin Core', ElementSet::ITEM_TYPE_NAME))) {
+        if (in_array($elementSet->name, ['Dublin Core', ElementSet::ITEM_TYPE_NAME])) {
             throw new Omeka_Controller_Exception_Api('Invalid record. "Dublin Core" and "Item Type Metadata" element sets may not be deleted.', 404);
         }
 

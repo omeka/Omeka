@@ -2,10 +2,10 @@
 $title = __('Batch Edit Items');
 if (!$isPartial):
     echo head(
-        array(
+        [
             'title' => $title, 
             'bodyclass' => 'items batch-edit',
-        )
+        ]
     );
 endif;
 ?>
@@ -17,7 +17,7 @@ endif;
             <h2><?php echo __('Items'); ?></h2>
             <ul>
             <?php 
-            $itemCheckboxes = array();
+            $itemCheckboxes = [];
             foreach ($itemIds as $id) {
                 if (!($item = get_record_by_id('item', $id))) {
                     continue;
@@ -27,18 +27,18 @@ endif;
                 if (!is_allowed($item, 'edit') || !is_allowed($item, 'delete')) {
                     $showItemFields = false;
                 }
-                $itemCheckboxes[$id] = metadata($item, 'display_title', array('no_escape' => true));
+                $itemCheckboxes[$id] = metadata($item, 'display_title', ['no_escape' => true]);
                 release_object($item);
             }
-            echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>';
+            echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked'], $itemCheckboxes, '</li><li>') . '</li>';
             ?>
             </ul>
             <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
         </fieldset>
 
-        <?php echo common('batch-edit-common', array(), 'items'); ?>
+        <?php echo common('batch-edit-common', [], 'items'); ?>
 
-        <?php fire_plugin_hook('admin_items_batch_edit_form', array('view' => $this)); ?>
+        <?php fire_plugin_hook('admin_items_batch_edit_form', ['view' => $this]); ?>
     
         <?php if ($showItemFields): ?>
         <fieldset>

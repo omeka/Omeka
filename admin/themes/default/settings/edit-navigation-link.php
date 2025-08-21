@@ -1,14 +1,14 @@
 <?php
     $template = isset($template);
-    $checkboxClasses = array('link-status');
+    $checkboxClasses = ['link-status'];
     if (!$template) {
         $checkboxId = 'main_nav_checkboxes_' . $pageCount;
-        $checkboxValue = array(
+        $checkboxValue = [
             'can_delete' => (bool) $page->can_delete,
             'uri' => $page->getHref(),
             'label' => $page->getLabel(),
             'visible' => $page->isVisible(),
-        );
+        ];
         $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
         if ($page->can_delete) {
             $checkboxClasses[] = 'can_delete_nav_link';

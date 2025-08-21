@@ -24,7 +24,7 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
      * @param array $queryParams
      * @return string
      */
-    public function recordUrl($record, $action = null, $getAbsoluteUrl = false, $queryParams = array())
+    public function recordUrl($record, $action = null, $getAbsoluteUrl = false, $queryParams = [])
     {
         // Get the current record from the view if passed as a string.
         if (is_string($record)) {

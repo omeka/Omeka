@@ -58,9 +58,9 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
     private function _isLoginRequest($request)
     {
         // Logins should be protected in all configurations.
-        if (!in_array($this->_sslConfig, array(
+        if (!in_array($this->_sslConfig, [
             self::LOGINS, self::SESSIONS, self::ALWAYS
-        ))) {
+        ])) {
             return false;
         }
 

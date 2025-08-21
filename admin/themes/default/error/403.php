@@ -1,5 +1,5 @@
 <?php
-echo head(array('bodyclass' => 'error403', 'title' => __('403: Forbidden')));
+echo head(['bodyclass' => 'error403', 'title' => __('403: Forbidden')]);
 echo flash();
 ?>
 

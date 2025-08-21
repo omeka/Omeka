@@ -32,10 +32,10 @@ class Omeka_Captcha
             return null;
         }
 
-        return new Ghost_Captcha_ReCaptcha2(array(
+        return new Ghost_Captcha_ReCaptcha2([
             'pubKey' => $publicKey,
             'privKey' => $privateKey,
-        ));
+        ]);
     }
 
     /**

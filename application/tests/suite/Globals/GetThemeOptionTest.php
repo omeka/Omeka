@@ -15,21 +15,21 @@ class Globals_GetThemeOptionTest extends Omeka_Test_TestCase
 {
     const THEME_NAME = 'foobar';
 
-    private $_themeOptions = array(
+    private $_themeOptions = [
         'logo' => 'foobar.jpg',
         'show_title' => true,
         'show_description' => false
-    );
+    ];
 
     public function setUpLegacy()
     {
         // Configure the options so that get_theme_option() can automatically retrieve
         // options for the given theme.
         $bootstrap = new Omeka_Test_Bootstrap;
-        $bootstrap->getContainer()->options = array(
+        $bootstrap->getContainer()->options = [
             Theme::PUBLIC_THEME_OPTION => self::THEME_NAME,
             'theme_' . self::THEME_NAME . '_options' => serialize($this->_themeOptions)
-        );
+        ];
         Zend_Registry::set('bootstrap', $bootstrap);
     }
 

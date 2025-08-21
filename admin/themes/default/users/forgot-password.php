@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Forgot Password');
-echo head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
+echo head(['title' => $pageTitle, 'bodyclass' => 'login'], $header);
 ?>
 <h1><?php echo $pageTitle; ?></h1>
 
@@ -14,7 +14,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 <form method="post" accept-charset="utf-8">
     <div class="field">    
         <div class="inputs six columns offset-by-one omega">
-            <?php echo $this->formText('email', @$_POST['email'], array('required' => 'required')); ?>
+            <?php echo $this->formText('email', @$_POST['email'], ['required' => 'required']); ?>
         </div>
     </div>
 
@@ -25,4 +25,4 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 <span id="backtologin"><?php echo link_to('users', 'login', __('Back to Log In')); ?></span>
 </p>
 </div>
-<?php echo foot(array(), $footer); ?>
+<?php echo foot([], $footer); ?>

@@ -30,18 +30,18 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::NOT_MATCH => 'Confirmation does not match'
-    );
+    ];
 
     /**
      * Error message replace variables.
      *
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'field' => '_field'
-    );
+    ];
 
     /**
      * Sets validator options

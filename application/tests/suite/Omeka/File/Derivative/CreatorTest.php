@@ -89,7 +89,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
 
     public function testCreateWithDerivativeImgSize()
     {
-        $this->strategy->setOptions(array('path_to_convert' => $this->convertDir));
+        $this->strategy->setOptions(['path_to_convert' => $this->convertDir]);
         $this->creator->addDerivative($this->fullsizeImgType, 10);
         $this->creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
         $newFilePath = dirname($this->validFilePath) . '/'
@@ -100,7 +100,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
 
     public function testCreateWithInvalidConvertPath()
     {
-        $this->strategy->setOptions(array('path_to_convert' => '/foo/bar'));
+        $this->strategy->setOptions(['path_to_convert' => '/foo/bar']);
         $this->creator->addDerivative($this->fullsizeImgType, 10);
         try {
             $this->creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);

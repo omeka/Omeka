@@ -31,30 +31,30 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 
     public static function formXPaths()
     {
-        return array(
-            array('//input[@id="username"][@value="adminuser"]',
+        return [
+            ['//input[@id="username"][@value="adminuser"]',
                 "There should be a 'username' element on this form with a default "
-                . "value."),
-            array(
+                . "value."],
+            [
                 '//input[@id="name"][@value="Admin User"]',
                 "There should be a 'name' element on this form with a default "
-                . "value."),
-            array(
+                . "value."],
+            [
                 '//input[@id="email"][@value="admin@example.com"]',
-                "There should be a 'email' element on this form with a default value.")
-        );
+                "There should be a 'email' element on this form with a default value."]
+        ];
     }
 
     public static function formQueries()
     {
-        return array(
-            array("form select#role", "There should be a 'role' select on this "
-            . "form."),
-            array('form input[name="active"]', "There should be an 'active' "
-            . "element on this form."),
-            array('form input[type="submit"]', "There should be a submit button on "
-            . "this form."),
-        );
+        return [
+            ["form select#role", "There should be a 'role' select on this "
+            . "form."],
+            ['form input[name="active"]', "There should be an 'active' "
+            . "element on this form."],
+            ['form input[type="submit"]', "There should be a submit button on "
+            . "this form."],
+        ];
     }
 
     /**
@@ -81,14 +81,14 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     {
         $expectedUsername = 'newuser' . mt_rand();
         $this->_authenticateUser($this->superUser);
-        $this->request->setPost(array(
+        $this->request->setPost([
             'username' => $expectedUsername,
             'name' => 'foobar',
             'email' => 'admin' . mt_rand() . '@example.com',
             'role' => 'admin',
             'active' => '1',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $newUsername = $this->db->getTable('User')->find($this->adminUser->id)->username;
@@ -100,13 +100,13 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     {
         $user = $this->superUser;
         $this->_authenticateUser($user);
-        $this->request->setPost(array(
+        $this->request->setPost([
             'username' => 'newusername',
             'name' => 'foobar foobar',
             'email' => 'foobar' . mt_rand() . '@example.com',
             'active' => '1',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $this->assertRedirectTo('/users/edit/' . $this->currentuser->id);
@@ -117,14 +117,14 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     public function testGivingInvalidEmailCausesValidationError()
     {
         $this->_authenticateUser($this->superUser);
-        $this->request->setPost(array(
+        $this->request->setPost([
             'username' => 'newusername',
             'first_name' => 'foobar foobar',
             'email' => 'invalid.email',
             'role' => 'super',
             'active' => '1',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertNotRedirect("This should not have redirected since the form submission was invalid.");
@@ -135,14 +135,14 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     public function testCannotSetActiveFlagOrRoleFieldWithoutAdequatePermissions()
     {
         $this->_authenticateUser($this->adminUser);
-        $this->request->setPost(array(
+        $this->request->setPost([
             'username' => 'newusername',
             'name' => 'foobar foobar',
             'email' => 'foobar@example.com',
             'role' => 'super',
             'active' => '0',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $newAdminUser = $this->db->getTable('User')->find($this->adminUser->id);
@@ -154,7 +154,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     {
         $user = $this->adminUser;
         $this->_authenticateUser($user);
-        $this->request->setPost(array(
+        $this->request->setPost([
             'username' => 'newusername',
             'name' => 'foobar foobar',
             'email' => 'foobar@example.com',
@@ -163,7 +163,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'salt' => 'foobar',
             'password' => 'some-arbitrary-hash',
             'user_csrf' => $this->_getCsrfToken()
-        ));
+        ]);
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $changedUser = $this->db->getTable('User')->find($user->id);
@@ -194,7 +194,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 
     private function _getUser($username)
     {
-        return $this->db->getTable('User')->findBySql("username = ?", array($username), true);
+        return $this->db->getTable('User')->findBySql("username = ?", [$username], true);
     }
 
     private function _getCsrfToken()

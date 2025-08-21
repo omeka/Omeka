@@ -22,7 +22,7 @@
     <?php echo auto_discovery_link_tags(); ?>
 
     <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('public_head', array('view' => $this)); ?>
+    <?php fire_plugin_hook('public_head', ['view' => $this]); ?>
 
     <!-- Stylesheets -->
     <?php
@@ -34,14 +34,14 @@
     <?php echo head_js(); ?>
 </head>
 
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+<?php echo body_tag(['id' => @$bodyid, 'class' => @$bodyclass]); ?>
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
-    <?php fire_plugin_hook('public_body', array('view' => $this)); ?>
+    <?php fire_plugin_hook('public_body', ['view' => $this]); ?>
     <div id="wrap">
 
         <header role="banner">
 
-            <?php fire_plugin_hook('public_header', array('view' => $this)); ?>
+            <?php fire_plugin_hook('public_header', ['view' => $this]); ?>
 
             <?php echo theme_header_image(); ?>
 
@@ -59,4 +59,4 @@
         
         <article id="content" role="main">
         
-            <?php fire_plugin_hook('public_content_top', array('view' => $this)); ?>
+            <?php fire_plugin_hook('public_content_top', ['view' => $this]); ?>

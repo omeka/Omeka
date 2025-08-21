@@ -20,7 +20,7 @@ class Omeka_Validate_Errors extends ArrayObject
      *
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
 
     /**
      * @param array|null $errors Initial errors to set.
@@ -88,7 +88,7 @@ class Omeka_Validate_Errors extends ArrayObject
      */
     public function __toString()
     {
-        $msgs = array();
+        $msgs = [];
         foreach ($this->_errors as $field => $error) {
             $msgs[] = (!is_numeric($field) ? (Inflector::humanize($field, 'all'). ": ") : '') . $error;
         }

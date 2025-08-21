@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_results);
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'users'));
+echo head(['title'=>$pageTitle, 'bodyclass'=>'users']);
 echo flash();
 ?>
 
@@ -28,7 +28,7 @@ echo flash();
 
 
 <?php if (is_allowed('Users', 'add')): ?>
-        <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'green button')); ?>
+        <?php echo link_to('users', 'add', __('Add a User'), ['class'=>'green button']); ?>
     <?php endif; ?>
 
 <form id='search-users' method='GET'>
@@ -47,14 +47,14 @@ echo flash();
     <table id="users">
         <thead>
             <tr>
-            <?php $sortLinks = array(
+            <?php $sortLinks = [
                     __('Username') => 'username',
                     __('Display Name') => 'name',
                     __('Email') => 'email',
                     __('Role') => 'role'
-                    );
+                    ];
             ?>
-            <?php echo browse_sort_links($sortLinks,  array('link_tag' => 'th scope="col"', 'list_tag' => '')); ?>
+            <?php echo browse_sort_links($sortLinks,  ['link_tag' => 'th scope="col"', 'list_tag' => '']); ?>
             </tr>
         </thead>
         <tbody>
@@ -64,13 +64,13 @@ echo flash();
                 <?php echo html_escape($user->username); ?> <?php if(!$user->active): ?>(<?php echo __('inactive'); ?>)<?php endif; ?>
                 <ul class="action-links group">
                     <?php if (is_allowed($user, 'edit')): ?>
-                    <li><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
+                    <li><?php echo link_to($user, 'edit', __('Edit'), ['class'=>'edit']); ?></li>
                     <?php endif; ?>
                     <?php if (is_allowed($user, 'delete')): ?>
-                    <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete-confirm')); ?></li>
+                    <li><?php echo link_to($user, 'delete-confirm', __('Delete'), ['class'=>'delete-confirm']); ?></li>
                     <?php endif; ?>
                 </ul>
-                <?php fire_plugin_hook('admin_users_browse_each', array('user' => $user, 'view' => $this)); ?>
+                <?php fire_plugin_hook('admin_users_browse_each', ['user' => $user, 'view' => $this]); ?>
                </td>
                 <td><?php echo html_escape($user->name); ?></td>
                 <td><?php echo html_escape($user->email); ?></td>
@@ -81,5 +81,5 @@ echo flash();
     </table>
 </div>
 <?php echo pagination_links(); ?>
-<?php fire_plugin_hook('admin_users_browse', array('users' => $users, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_users_browse', ['users' => $users, 'view' => $this]); ?>
 <?php echo foot();?>

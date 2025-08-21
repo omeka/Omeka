@@ -21,9 +21,9 @@ class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
 
     public function testCanSetItemTypeByName()
     {
-        $this->builder->setRecordMetadata(array(
+        $this->builder->setRecordMetadata([
             Builder_Item::ITEM_TYPE_NAME => 'Still Image'
-        ));
+        ]);
         $item = $this->builder->build();
         $this->assertNotNull($item->item_type_id);
         $itemType = $item->getItemType();
@@ -33,9 +33,9 @@ class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
 
     public function testCanAddTagsToItem()
     {
-        $this->builder->setRecordMetadata(array(
+        $this->builder->setRecordMetadata([
             Builder_Item::TAGS => 'foo, bar'
-        ));
+        ]);
         $item = $this->builder->build();
         $tags = $item->getTags();
         $this->assertEquals(2, count($tags));

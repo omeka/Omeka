@@ -48,7 +48,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      *
      * @var array
      */
-    protected $_elementSetsToShow = array();
+    protected $_elementSetsToShow = [];
 
     /**
      * Type of data to return.
@@ -79,7 +79,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string|array
      */
-    public function allElementTexts($record, array $options = array())
+    public function allElementTexts($record, array $options = [])
     {
         if (is_string($record)) {
             $record = $this->view->{$this->view->singularize($record)};
@@ -90,7 +90,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         }
 
         $this->_record = $record;
-        $this->_setOptions(apply_filters('all_element_texts_options', $options, array('record' => $record)));
+        $this->_setOptions(apply_filters('all_element_texts_options', $options, ['record' => $record]));
         return $this->_getOutput();
     }
 
@@ -218,7 +218,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      */
     protected function _getFormattedElementTexts($record, $metadata)
     {
-        return $this->view->metadata($record, $metadata, array('all' => true));
+        return $this->view->metadata($record, $metadata, ['all' => true]);
     }
 
     /**
@@ -231,21 +231,21 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         // need for method calls by default in the view partial.
         $elementSets = $this->_getElementsBySet();
         $emptyString = html_escape(__($this->_emptyElementString));
-        $elementsForDisplay = array();
+        $elementsForDisplay = [];
         foreach ($elementSets as $setName => $elementsInSet) {
-            $setInfo = array();
+            $setInfo = [];
             foreach ($elementsInSet as $elementName => $element) {
                 $elementTexts = $this->_getFormattedElementTexts(
-                    $this->_record, array($element->set_name, $element->name)
+                    $this->_record, [$element->set_name, $element->name]
                 );
                 if (!$this->_elementIsShowable($element, $elementTexts)) {
                     continue;
                 }
 
-                $displayInfo = array();
+                $displayInfo = [];
                 $displayInfo['element'] = $element;
                 if (empty($elementTexts)) {
-                    $displayInfo['texts'] = array($emptyString);
+                    $displayInfo['texts'] = [$emptyString];
                 } else {
                     $displayInfo['texts'] = $elementTexts;
                 }
@@ -257,11 +257,11 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
             }
         }
         // We're done preparing the data for display, so display it.
-        return $this->_loadViewPartial(array(
+        return $this->_loadViewPartial([
             'elementsForDisplay' => $elementsForDisplay,
             'record' => $this->_record,
             'showElementSetHeadings' => $this->_showElementSetHeadings
-        ));
+        ]);
     }
 
     /**
@@ -272,12 +272,12 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
     protected function _getOutputAsArray()
     {
         $elementSets = $this->_getElementsBySet();
-        $outputArray = array();
+        $outputArray = [];
         foreach ($elementSets as $setName => $elementsInSet) {
-            $outputArray[$setName] = array();
+            $outputArray[$setName] = [];
             foreach ($elementsInSet as $key => $element) {
                 $elementName = $element->name;
-                $textArray = $this->_getFormattedElementTexts($this->_record, array($element->set_name, $elementName));
+                $textArray = $this->_getFormattedElementTexts($this->_record, [$element->set_name, $elementName]);
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;
                 }
@@ -309,7 +309,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      * @param array $vars Variables to pass to the partial.
      * @return string
      */
-    protected function _loadViewPartial($vars = array())
+    protected function _loadViewPartial($vars = [])
     {
         return $this->view->partial($this->_partial, $vars);
     }

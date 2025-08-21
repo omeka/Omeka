@@ -13,9 +13,9 @@
  */
 class Omeka_Job_Factory
 {
-    private $_options = array();
+    private $_options = [];
 
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->_options = $options;
     }
@@ -59,7 +59,7 @@ class Omeka_Job_Factory
             throw new Omeka_Job_Factory_MissingClassException("Job class named $className does not exist.");
         }
         if (!isset($data['options'])) {
-            $data['options'] = array();
+            $data['options'] = [];
         }
         if (isset($this->_options['db']) && isset($data['createdBy'])) {
             $user = $this->_options['db']->getTable('User')->find($data['createdBy']);

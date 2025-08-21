@@ -19,7 +19,7 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        $representation = array(
+        $representation = [
             'id' => $record->id,
             'url' => self::getResourceUrl("/users/{$record->id}"),
             'username' => $record->username,
@@ -27,7 +27,7 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
             'active' => (bool) $record->active,
             'email' => $record->email,
             'role' => $record->role,
-        );
+        ];
         return $representation;
     }
 }

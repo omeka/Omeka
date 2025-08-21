@@ -51,7 +51,7 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
         $this->collection = new Collection($db);
         $profilerHelper = new Omeka_Test_Helper_DbProfiler($db->getAdapter()->getProfiler(), $this);
 
-        $dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(array(3))));
+        $dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement([[3]]));
 
         $this->assertEquals(3, $this->collection->totalItems());
     }
@@ -69,10 +69,10 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testHasContributorTrueBeforeSave()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Description' => array(array('text' => '', 'html' => false)),
-            'Contributor' => array(array('text' => 'Willy', 'html' => false)),
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Description' => [['text' => '', 'html' => false]],
+            'Contributor' => [['text' => 'Willy', 'html' => false]],
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
 
         // added contributors are NOT recognized until the collection is saved.
@@ -81,14 +81,14 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testHasContributorTrueAfterSave()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Description' => array(array('text' => '', 'html' => false)),
-            'Contributor' => array(array('text' => 'Willy', 'html' => false)),
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Description' => [['text' => '', 'html' => false]],
+            'Contributor' => [['text' => 'Willy', 'html' => false]],
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
         $this->collection->save();
 
-        $this->assertEquals('Willy', metadata($this->collection, array('Dublin Core', 'Contributor')));
+        $this->assertEquals('Willy', metadata($this->collection, ['Dublin Core', 'Contributor']));
 
         $this->assertTrue($this->collection->hasContributor());
     }
@@ -104,19 +104,19 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
         $contributorTextBefore = '<span>Willy</span> jumped high.';
         $contributorTextAfter = '';
 
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $titleTextBefore, 'html' => false)),
-            'Creator' => array(array('text' => $creatorTextBefore, 'html' => true)),
-            'Description' => array(array('text' => $descriptionTextBefore, 'html' => false)),
-            'Contributor' => array(array('text' => $contributorTextBefore, 'html' => false)),
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => $titleTextBefore, 'html' => false]],
+            'Creator' => [['text' => $creatorTextBefore, 'html' => true]],
+            'Description' => [['text' => $descriptionTextBefore, 'html' => false]],
+            'Contributor' => [['text' => $contributorTextBefore, 'html' => false]],
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
 
         // element texts are NOT recognized until the collection is saved.
-        $this->assertEquals($titleTextAfter, metadata($this->collection, array('Dublin Core', 'Title')));
-        $this->assertEquals($creatorTextAfter, metadata($this->collection, array('Dublin Core', 'Creator')));
-        $this->assertEquals($descriptionTextAfter, metadata($this->collection, array('Dublin Core', 'Description')));
-        $this->assertEquals($contributorTextAfter, metadata($this->collection, array('Dublin Core', 'Contributor')));
+        $this->assertEquals($titleTextAfter, metadata($this->collection, ['Dublin Core', 'Title']));
+        $this->assertEquals($creatorTextAfter, metadata($this->collection, ['Dublin Core', 'Creator']));
+        $this->assertEquals($descriptionTextAfter, metadata($this->collection, ['Dublin Core', 'Description']));
+        $this->assertEquals($contributorTextAfter, metadata($this->collection, ['Dublin Core', 'Contributor']));
     }
 
     public function testAddElementTextsByArrayAfterSave()
@@ -130,28 +130,28 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
         $contributorTextBefore = '<span>Willy</span> jumped high.';
         $contributorTextAfter = '<span>Willy</span> jumped high.';
 
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $titleTextBefore, 'html' => false)),
-            'Creator' => array(array('text' => $creatorTextBefore, 'html' => true)),
-            'Description' => array(array('text' => $descriptionTextBefore, 'html' => false)),
-            'Contributor' => array(array('text' => $contributorTextBefore, 'html' => false)),
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => $titleTextBefore, 'html' => false]],
+            'Creator' => [['text' => $creatorTextBefore, 'html' => true]],
+            'Description' => [['text' => $descriptionTextBefore, 'html' => false]],
+            'Contributor' => [['text' => $contributorTextBefore, 'html' => false]],
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
         $this->collection->save();
 
         // element texts are NOT recognized until the collection is saved.
-        $this->assertEquals($titleTextAfter, metadata($this->collection, array('Dublin Core', 'Title')));
-        $this->assertEquals($creatorTextAfter, metadata($this->collection, array('Dublin Core', 'Creator')));
-        $this->assertEquals($descriptionTextAfter, metadata($this->collection, array('Dublin Core', 'Description')));
-        $this->assertEquals($contributorTextAfter, metadata($this->collection, array('Dublin Core', 'Contributor')));
+        $this->assertEquals($titleTextAfter, metadata($this->collection, ['Dublin Core', 'Title']));
+        $this->assertEquals($creatorTextAfter, metadata($this->collection, ['Dublin Core', 'Creator']));
+        $this->assertEquals($descriptionTextAfter, metadata($this->collection, ['Dublin Core', 'Description']));
+        $this->assertEquals($contributorTextAfter, metadata($this->collection, ['Dublin Core', 'Contributor']));
     }
 
     public function testValidCollectionTitle()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => str_repeat('b', 150), 'html' => false)),
-            'Description' => array(array('text' => '', 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => str_repeat('b', 150), 'html' => false]],
+            'Description' => [['text' => '', 'html' => false]]
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
 
         $this->assertTrue($this->collection->isValid());
@@ -159,10 +159,10 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testInsertSetsAddedDate()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => 'foobar', 'html' => false)),
-            'Description' => array(array('text' => '', 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => 'foobar', 'html' => false]],
+            'Description' => [['text' => '', 'html' => false]]
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
         $this->collection->save();
 
@@ -173,10 +173,10 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testInsertSetsModifiedDate()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => 'foobar', 'html' => false)),
-            'Description' => array(array('text' => '', 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => 'foobar', 'html' => false]],
+            'Description' => [['text' => '', 'html' => false]]
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
         $this->collection->save();
 
@@ -187,10 +187,10 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testUpdateSetsModifiedDate()
     {
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => 'foobar', 'html' => false)),
-            'Description' => array(array('text' => '', 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => 'foobar', 'html' => false]],
+            'Description' => [['text' => '', 'html' => false]]
+        ]];
         $this->collection->addElementTextsByArray($elementTexts);
         $this->collection->save();
 

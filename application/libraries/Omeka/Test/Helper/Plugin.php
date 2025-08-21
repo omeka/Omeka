@@ -62,9 +62,9 @@ class Omeka_Test_Helper_Plugin
         $this->_defineResponseContexts();
         $bootstrap = Zend_Registry::get('bootstrap');
 
-        $this->pluginBroker->callHook('initialize', array(), $pluginName);
-        $this->pluginBroker->callHook('define_acl', array('acl' => $bootstrap->getResource('Acl')), $pluginName);
-        $this->pluginBroker->callHook('define_routes', array('router' => $bootstrap->getResource('Router')), $pluginName);
+        $this->pluginBroker->callHook('initialize', [], $pluginName);
+        $this->pluginBroker->callHook('define_acl', ['acl' => $bootstrap->getResource('Acl')], $pluginName);
+        $this->pluginBroker->callHook('define_routes', ['router' => $bootstrap->getResource('Router')], $pluginName);
     }
 
     /**

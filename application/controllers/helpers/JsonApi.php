@@ -28,8 +28,8 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
         // Add header data for JSONP requests.
         if (isset($_GET['callback'])) {
             $response->setHeader('Content-Type', 'application/javascript', true);
-            $headers = array('status' => $response->getHttpResponseCode());
-            $data = array('headers' => $headers, 'data' => $data);
+            $headers = ['status' => $response->getHttpResponseCode()];
+            $data = ['headers' => $headers, 'data' => $data];
         }
 
         $flags = 0;

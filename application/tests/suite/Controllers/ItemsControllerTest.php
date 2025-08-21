@@ -37,12 +37,12 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public static function routes()
     {
-        return array(
-            array('/items/add', 'items', 'add'),
-            array('/items/edit/1', 'items', 'edit'),
-            array('/items/search', 'items', 'search'),
-            array('/items/tags', 'items', 'tags')
-        );
+        return [
+            ['/items/add', 'items', 'add'],
+            ['/items/edit/1', 'items', 'edit'],
+            ['/items/search', 'items', 'search'],
+            ['/items/tags', 'items', 'tags']
+        ];
     }
 
     /**
@@ -57,11 +57,11 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public static function formPresence()
     {
-        return array(
-            array('/items/add', 'form#item-form'),
-            array('/items/edit/1', 'form#item-form'),
-            array('/items/search', 'form#advanced-search-form'),
-        );
+        return [
+            ['/items/add', 'form#item-form'],
+            ['/items/edit/1', 'form#item-form'],
+            ['/items/search', 'form#advanced-search-form'],
+        ];
     }
 
     /**
@@ -75,9 +75,9 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public static function ajaxRequired()
     {
-        return array(
-            array('/items/change-type')
-        );
+        return [
+            ['/items/change-type']
+        ];
     }
 
     /**
@@ -94,12 +94,12 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public static function postRequired()
     {
-        return array(
-            array('/items/modify-tags'),
-            array('/items/delete/1'),
-            array('/items/change-type', '_makeXmlHttpRequest'),
-            array('/items/batch-edit-save'),
-        );
+        return [
+            ['/items/modify-tags'],
+            ['/items/delete/1'],
+            ['/items/change-type', '_makeXmlHttpRequest'],
+            ['/items/batch-edit-save'],
+        ];
     }
 
     /**
@@ -114,21 +114,21 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public static function ajaxPartials()
     {
-        return array(
-            array('/items/search'),
-        );
+        return [
+            ['/items/search'],
+        ];
     }
 
     public function testAdvancedSearchXSSInjection()
     {
-        $url = '/items/search?' . http_build_query(array(
+        $url = '/items/search?' . http_build_query([
             'search' => self::XSS_QUERY_STRING,
-            'advanced' => array(
-                array('element_id' => self::XSS_QUERY_STRING,
+            'advanced' => [
+                ['element_id' => self::XSS_QUERY_STRING,
                       'type' => self::XSS_QUERY_STRING,
                       'terms' => self::XSS_QUERY_STRING,
-                )
-            ),
+                ]
+            ],
             'range' => self::XSS_QUERY_STRING,
             'collection' => self::XSS_QUERY_STRING,
             'type' => self::XSS_QUERY_STRING,
@@ -137,7 +137,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             'public' => self::XSS_QUERY_STRING,
             'featured' => self::XSS_QUERY_STRING,
             'submit_search' => self::XSS_QUERY_STRING,
-        ));
+        ]);
         $this->dispatch($url);
         $this->assertController('items');
         $this->assertAction('search');
@@ -154,9 +154,9 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         $hash = new Zend_Form_Element_Hash('confirm_delete_hash');
         $hash->initCsrfToken();
-        $this->_makePost(array(
+        $this->_makePost([
             'confirm_delete_hash' => $hash->getHash()
-        ));
+        ]);
         $this->dispatch('/items/delete/1');
         $this->assertEquals(0, $this->db->getTable('Item')->count());
         $this->assertRedirectTo('/items/browse');
@@ -172,10 +172,10 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public function testChangeTypeXmlHttpRequest()
     {
         $this->_makeXmlHttpRequest();
-        $this->_makePost(array(
+        $this->_makePost([
             'item_id' => 1,
             'type_id' => 1,
-        ));
+        ]);
         $this->dispatch('/items/change-type');
         $this->assertNotRedirect();
     }

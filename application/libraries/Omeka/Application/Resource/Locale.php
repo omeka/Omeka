@@ -38,12 +38,12 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
             $cache = 'locale';
         }
 
-        $this->setOptions(array('cache' => $cache));
+        $this->setOptions(['cache' => $cache]);
 
         if ($localeName) {
-            $this->setOptions(array(
+            $this->setOptions([
                 'default' => $localeName,
-            ));
+            ]);
             $this->_setTranslate($localeName, $cache);
         }
 
@@ -61,13 +61,13 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
      */
     private function _setTranslate($locale, $cache)
     {
-        $options = array(
+        $options = [
             'bootstrap' => $this->getBootstrap(),
             'locale' => $locale,
             'localeName' => $locale, //this isn't munged by Zend_Locale
             'adapter' => 'gettext',
             'disableNotices' => true,
-        );
+        ];
 
         if ($cache) {
             $options['cache'] = $cache;

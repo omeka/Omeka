@@ -56,10 +56,10 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $params = $this->getAllParams();
         unset($params['admin'], $params['module'], $params['controller'], $params['action'], $params['include_zero']);
 
-        $sort = array(
+        $sort = [
             'sort_field' => $this->getParam('sort_field'),
             'sort_dir' => $this->getParam('sort_dir', 'a'),
-        );
+        ];
 
         //dig up the record types for filtering
         $db = get_db();
@@ -85,14 +85,14 @@ class TagsController extends Omeka_Controller_AbstractActionController
      */
     protected function _getBrowseDefaultSort()
     {
-        return array('name', 'a');
+        return ['name', 'a'];
     }
 
     public function autocompleteAction()
     {
         $tagText = $this->_getParam('term');
         if (empty($tagText)) {
-            $this->_helper->json(array());
+            $this->_helper->json([]);
         }
         $tagNames = $this->_helper->db->getTable()->findTagNamesLike($tagText);
         $this->_helper->json($tagNames);

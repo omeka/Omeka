@@ -28,8 +28,8 @@ class Omeka_Application_Resource_Jobs extends Zend_Application_Resource_Resource
 
         // Get the dispatcher configurations.
         $config = $this->getBootstrap()->config->jobs;
-        $defaultOptions = array();
-        $longRunningOptions = array();
+        $defaultOptions = [];
+        $longRunningOptions = [];
         if ($config) {
             if (isset($config->dispatcher->default)) {
                 $defaultClass = $config->dispatcher->default;
@@ -71,10 +71,10 @@ class Omeka_Application_Resource_Jobs extends Zend_Application_Resource_Resource
         Zend_Registry::set('job_dispatcher', $dispatcher);
 
         // Register the job factory.
-        $factory = new Omeka_Job_Factory(array(
+        $factory = new Omeka_Job_Factory([
             'db' => $this->getBootstrap()->db,
             'jobDispatcher' => $dispatcher,
-        ));
+        ]);
         Zend_Registry::set('job_factory', $factory);
 
         // Return the job dispatcher.

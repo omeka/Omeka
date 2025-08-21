@@ -2,10 +2,10 @@
 queue_js_file('items-browse');
 $pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_results);
 echo head(
-    array(
+    [
         'title' => $pageTitle,
         'bodyclass' => 'items browse'
-    )
+    ]
 );
 echo flash();
 echo item_search_filters();
@@ -16,8 +16,8 @@ echo item_search_filters();
     <?php if (is_allowed('Items', 'add')): ?>
     <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
     <?php endif; ?>
-    <?php echo link_to_item_search(__('Search Items'), array('class' => 'blue full-width-mobile advanced-search-link button')); ?>
-    <?php echo common('quick-filters', array(), 'items'); ?>
+    <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
+    <?php echo common('quick-filters', [], 'items'); ?>
 
     <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
         <div class="table-actions batch-edit-option">
@@ -47,7 +47,7 @@ echo item_search_filters();
                     $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                     $browseHeadings[__('Type')] = null;
                     $browseHeadings[__('Date Added')] = 'added';
-                    echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => ''));
+                    echo browse_sort_links($browseHeadings, ['link_tag' => 'th scope="col"', 'list_tag' => '']);
                     ?>
                 </tr>
             </thead>
@@ -62,7 +62,7 @@ echo item_search_filters();
                         <input type="checkbox" name="items[]" value="<?php echo $id; ?>"
                             aria-label="<?php echo html_escape(
                                 __('Select item "%s"',
-                                    metadata('item', 'display_title', array('no_escape' => true))
+                                    metadata('item', 'display_title', ['no_escape' => true])
                                 )
                             ); ?>"
                         >
@@ -72,7 +72,7 @@ echo item_search_filters();
                     <td class="item-info">
 
                         <?php if (metadata('item', 'has files')): ?>
-                        <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
+                        <?php echo link_to_item(item_image('square_thumbnail', [], 0, $item), ['class' => 'item-thumbnail'], 'show', $item); ?>
                         <?php endif; ?>
 
                         <span class="title">
@@ -91,22 +91,22 @@ echo item_search_filters();
                             <?php if (is_allowed($item, 'edit')): ?>
                             <li>
                                 <span class="spacer" aria-hidden="true"></span>
-                                <?php echo link_to_item(__('Edit'), array('class' => 'edit'), 'edit'); ?>
+                                <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
                             </li>
                             <?php endif; ?>
 
                             <?php if (is_allowed($item, 'delete')): ?>
                             <li>
                                 <span class="spacer" aria-hidden="true"></span>
-                                <?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?>
+                                <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
                             </li>
                             <?php endif; ?>
                         </ul>
 
-                        <?php fire_plugin_hook('admin_items_browse_simple_each', array('item' => $item, 'view' => $this)); ?>
+                        <?php fire_plugin_hook('admin_items_browse_simple_each', ['item' => $item, 'view' => $this]); ?>
 
                         <div class="details">
-                            <?php $itemDescription = snippet_by_word_count(metadata('item', array('Dublin Core', 'Description')), 40); ?>
+                            <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
                             <?php if ($itemDescription !== ''): ?>
                                 <p class="description"><?php echo $itemDescription; ?></p>
                             <?php endif; ?>
@@ -118,15 +118,15 @@ echo item_search_filters();
                                 <strong><?php echo __('Tags'); ?>:</strong>
                                 <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
                             </p>
-                            <?php fire_plugin_hook('admin_items_browse_detailed_each', array('item' => $item, 'view' => $this)); ?>
+                            <?php fire_plugin_hook('admin_items_browse_detailed_each', ['item' => $item, 'view' => $this]); ?>
                         </div>
                     </td>
-                    <td><?php echo strip_formatting(metadata('item', array('Dublin Core', 'Creator'))); ?></td>
+                    <td><?php echo strip_formatting(metadata('item', ['Dublin Core', 'Creator'])); ?></td>
                     <td>
                         <?php
                         echo ($typeName = metadata('item', 'Item Type Name'))
                             ? $typeName
-                            : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35));
+                            : metadata('item', ['Dublin Core', 'Type'], ['snippet' => 35]);
                         ?>
                     </td>
                     <td><?php echo format_date(metadata('item', 'added')); ?></td>
@@ -153,8 +153,8 @@ echo item_search_filters();
     <?php if (is_allowed('Items', 'add')): ?>
     <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
     <?php endif; ?>
-    <?php echo link_to_item_search(__('Search Items'), array('class' => 'blue full-width-mobile advanced-search-link button')); ?>
-    <?php echo common('quick-filters', array(), 'items'); ?>
+    <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
+    <?php echo common('quick-filters', [], 'items'); ?>
 
 
     <div id="outputs">
@@ -188,6 +188,6 @@ echo item_search_filters();
     <?php endif; ?>
 <?php endif; ?>
 
-<?php fire_plugin_hook('admin_items_browse', array('items' => $items, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_items_browse', ['items' => $items, 'view' => $this]); ?>
 
 <?php echo foot(); ?>

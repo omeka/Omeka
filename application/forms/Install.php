@@ -27,116 +27,116 @@ class Omeka_Form_Install extends Omeka_Form
         $this->setMethod('post');
 
 
-        $defaultLabelOptions = array('placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field')));
+        $defaultLabelOptions = ['placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field'))];
         $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
 
-        $decorators = array(
-                        array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape' => false)),
+        $decorators = [
+                        ['Description', ['tag' => 'p', 'class' => 'explanation', 'escape' => false]],
                         'ViewHelper',
-                        array('Errors', array('class' => 'error')),
-                        array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')),
+                        ['Errors', ['class' => 'error']],
+                        [['InputsTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'inputs five columns omega']],
                         'Label' => $defaultLabel,
-                        array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
-                    );
+                        [['FieldTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'field']]
+                    ];
 
-        $this->addElement('text', 'username', array(
+        $this->addElement('text', 'username', [
             'label' => __('Username'),
             'description' => __('must be 30 characters or fewer with no whitespace'),
-            'validators' => array(
-                array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH)),
-                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
-                    array(
+            'validators' => [
+                ['StringLength', false, [User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH]],
+                ['validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
+                    [
                         'pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u',
-                        'messages' => array(
+                        'messages' => [
                             Zend_Validate_Regex::NOT_MATCH =>
                                 __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _')
-                        )
-                    )
-                )
-            ),
+                        ]
+                    ]
+                ]
+            ],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('password', 'password', array(
+        $this->addElement('password', 'password', [
             'label' => __('Password'),
             'description' => __('must be at least 6 characters'),
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'options' => array(
-                    'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'options' => [
+                    'messages' => [
                         'isEmpty' => 'Password is required.'
-                    )
-                )),
-                array('validator' => 'Confirmation', 'options' => array(
+                    ]
+                ]],
+                ['validator' => 'Confirmation', 'options' => [
                     'field' => 'password_confirm',
-                    'messages' => array(
-                        'notMatch' => "Typed passwords do not match.")
-                )),
-                array('validator' => 'StringLength', 'options' => array(
+                    'messages' => [
+                        'notMatch' => "Typed passwords do not match."]
+                ]],
+                ['validator' => 'StringLength', 'options' => [
                     'min' => User::PASSWORD_MIN_LENGTH,
-                    'messages' => array(
-                        'stringLengthTooShort' => "Password must be at least %min% characters in length.")
-                ))
-            ),
+                    'messages' => [
+                        'stringLengthTooShort' => "Password must be at least %min% characters in length."]
+                ]]
+            ],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('password', 'password_confirm', array(
+        $this->addElement('password', 'password_confirm', [
             'label' => __('Re-type the Password'),
             'description' => __('Confirm your password.'),
             'required' => true,
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'options' => array(
-                    'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'options' => [
+                    'messages' => [
                         'isEmpty' => 'Password confirmation is required.'
-                    )
-                ))
-            ),
+                    ]
+                ]]
+            ],
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('text', 'super_email', array(
+        $this->addElement('text', 'super_email', [
             'label' => __('Email'),
-            'validators' => array('EmailAddress'),
+            'validators' => ['EmailAddress'],
             'decorators' => $decorators,
             'required' => true,
-        ));
+        ]);
 
-        $this->addElement('text', 'site_title', array(
+        $this->addElement('text', 'site_title', [
             'label' => __('Site Title'),
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('textarea', 'description', array(
+        $this->addElement('textarea', 'description', [
             'label' => __('Site Description'),
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('text', 'administrator_email', array(
+        $this->addElement('text', 'administrator_email', [
             'label' => __('Administrator Email'),
-            'validators' => array('EmailAddress'),
+            'validators' => ['EmailAddress'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'copyright', array(
+        $this->addElement('text', 'copyright', [
             'label' => __('Site Copyright Information'),
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('text', 'author', array(
+        $this->addElement('text', 'author', [
             'label' => __('Site Author Information'),
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('text', 'tag_delimiter', array(
+        $this->addElement('text', 'tag_delimiter', [
             'label' => __('Tag Delimiter'),
             'description' => __('Separate tags using this character or string.'),
             'value' => self::DEFAULT_TAG_DELIMITER,
             'decorators' => $decorators,
-        ));
+        ]);
 
         // Allow the tag delimiter to be a whitespace character(s) (except for
         // new lines). The NotEmpty validator (and therefore the required flag)
@@ -145,89 +145,89 @@ class Omeka_Form_Install extends Omeka_Form
         // "empty" value to the validators, and then, using the Regex validator,
         // match the value to a string containing one or more characters.
         $this->getElement('tag_delimiter')->setAllowEmpty(false);
-        $this->getElement('tag_delimiter')->addValidator('regex', false, array('/^.+$/'));
+        $this->getElement('tag_delimiter')->addValidator('regex', false, ['/^.+$/']);
 
-        $this->addElement('text', 'fullsize_constraint', array(
+        $this->addElement('text', 'fullsize_constraint', [
             'label' => __('Fullsize Image Size'),
             'description' => __('Maximum fullsize image size constraint (in pixels)'),
             'value' => self::DEFAULT_FULLSIZE_CONSTRAINT,
-            'validators' => array('Digits'),
+            'validators' => ['Digits'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'thumbnail_constraint', array(
+        $this->addElement('text', 'thumbnail_constraint', [
             'label' => __('Thumbnail Size'),
             'description' => __('Maximum thumbnail size constraint (in pixels)'),
             'value' => self::DEFAULT_THUMBNAIL_CONSTRAINT,
-            'validators' => array('Digits'),
+            'validators' => ['Digits'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'square_thumbnail_constraint', array(
+        $this->addElement('text', 'square_thumbnail_constraint', [
             'label' => __('Square Thumbnail Size'),
             'description' => __('Maximum square thumbnail size constraint (in pixels)'),
             'value' => self::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT,
-            'validators' => array('Digits'),
+            'validators' => ['Digits'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'per_page_admin', array(
+        $this->addElement('text', 'per_page_admin', [
             'label' => __('Items Per Page (admin)'),
             'description' => __('Limit the number of items displayed per page in the administrative interface.'),
             'value' => self::DEFAULT_PER_PAGE_ADMIN,
-            'validators' => array('Digits'),
+            'validators' => ['Digits'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('text', 'per_page_public', array(
+        $this->addElement('text', 'per_page_public', [
             'label' => __('Items Per Page (public)'),
             'description' => __('Limit the number of items displayed per page in the public interface.'),
             'value' => self::DEFAULT_PER_PAGE_PUBLIC,
-            'validators' => array('Digits'),
+            'validators' => ['Digits'],
             'decorators' => $decorators,
             'required' => true
-        ));
+        ]);
 
-        $this->addElement('checkbox', 'show_empty_elements', array(
+        $this->addElement('checkbox', 'show_empty_elements', [
             'label' => __('Show Empty Elements'),
             'class' => 'checkbox',
             'description' => __('Check box to show metadata elements with no text.'),
             'value' => self::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('text', 'path_to_convert', array(
+        $this->addElement('text', 'path_to_convert', [
             'label' => __('ImageMagick Directory Path'),
             'decorators' => $decorators,
-        ));
+        ]);
 
-        $this->addElement('submit', 'install_submit', array(
+        $this->addElement('submit', 'install_submit', [
             'label' => __('Install'),
-            'decorators' => array('Tooltip', 'ViewHelper')
-        ));
+            'decorators' => ['Tooltip', 'ViewHelper']
+        ]);
 
         $this->addDisplayGroup(
-            array('username', 'password', 'password_confirm', 'super_email'),
+            ['username', 'password', 'password_confirm', 'super_email'],
             'superuser_account',
-            array('legend' => __('Default Superuser Account'))
+            ['legend' => __('Default Superuser Account')]
         );
 
         $this->addDisplayGroup(
-            array('administrator_email', 'site_title', 'description',
+            ['administrator_email', 'site_title', 'description',
                   'copyright', 'author', 'tag_delimiter', 'fullsize_constraint',
                   'thumbnail_constraint', 'square_thumbnail_constraint',
                   'per_page_admin', 'per_page_public', 'show_empty_elements',
-                  'path_to_convert'),
+                  'path_to_convert'],
             'site_settings',
-            array('legend' => __('Site Settings'))
+            ['legend' => __('Site Settings')]
         );
 
         $this->addDisplayGroup(
-            array('install_submit'),
+            ['install_submit'],
             'submit'
         );
     }

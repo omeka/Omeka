@@ -45,8 +45,8 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
             $status = 'alert';
         }
 
-        return $this->_messenger->addMessage(array(self::MESSAGE_KEY => $message,
-            self::STATUS_KEY => $status));
+        return $this->_messenger->addMessage([self::MESSAGE_KEY => $message,
+            self::STATUS_KEY => $status]);
     }
 
     /**
@@ -61,7 +61,7 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
 
     public function _filterMessages($messages)
     {
-        $filtered = array();
+        $filtered = [];
         foreach ($messages as $message) {
             $filtered[$message[self::STATUS_KEY]][] = $message[self::MESSAGE_KEY];
         }

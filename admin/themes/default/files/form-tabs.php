@@ -1,6 +1,6 @@
 <?php
  
-$tabs = array();
+$tabs = [];
 foreach ($elementSets as $key => $elementSet) {
     $tabName = $elementSet->name;
     $tabContent  = '<p class="element-set-description" id="';
@@ -10,7 +10,7 @@ foreach ($elementSets as $key => $elementSet) {
     $tabs[$tabName] = $tabContent;    
 }
 
-$tabs = apply_filters('admin_files_form_tabs', $tabs, array('file' => $file));
+$tabs = apply_filters('admin_files_form_tabs', $tabs, ['file' => $file]);
 ?>
 
 <!-- Create the sections for the various element sets -->

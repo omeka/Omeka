@@ -25,112 +25,112 @@ class Omeka_Form_User extends Omeka_Form
     {
         parent::init();
 
-        $this->addElement('text', 'username', array(
+        $this->addElement('text', 'username', [
             'label' => __('Username'),
             'description' => __('Username must be 30 characters or fewer. Whitespace is not allowed.'),
             'required' => true,
             'size' => '30',
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    [
+                        'messages' => [
                             Zend_Validate_NotEmpty::IS_EMPTY => __('Username is required.')
-                        )
-                    )
-                ),
-                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
-                    array(
+                        ]
+                    ]
+                ],
+                ['validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
+                    [
                         'pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u',
-                        'messages' => array(
+                        'messages' => [
                             Zend_Validate_Regex::NOT_MATCH =>
                                 __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _')
-                        )
-                    )
-                ),
-                array('validator' => 'StringLength', 'breakChainOnFailure' => true, 'options' =>
-                    array(
+                        ]
+                    ]
+                ],
+                ['validator' => 'StringLength', 'breakChainOnFailure' => true, 'options' =>
+                    [
                         'min' => User::USERNAME_MIN_LENGTH,
                         'max' => User::USERNAME_MAX_LENGTH,
-                        'messages' => array(
+                        'messages' => [
                             Zend_Validate_StringLength::TOO_SHORT =>
                                 __('Username must be at least %min% characters long.'),
                             Zend_Validate_StringLength::TOO_LONG =>
                                 __('Username must be at most %max% characters long.')
-                        )
-                    )
-                ),
-                array('validator' => 'Db_NoRecordExists', 'options' =>
-                    array(
+                        ]
+                    ]
+                ],
+                ['validator' => 'Db_NoRecordExists', 'options' =>
+                    [
                         'table' => $this->_user->getTable()->getTableName(),
                         'field' => 'username',
-                        'exclude' => array(
+                        'exclude' => [
                             'field' => 'id',
                             'value' => (int) $this->_user->id
-                        ),
+                        ],
                         'adapter' => $this->_user->getDb()->getAdapter(),
-                        'messages' => array(
+                        'messages' => [
                             'recordFound' => __('This username is already in use.')
-                        )
-                    )
-                )
-            ),
+                        ]
+                    ]
+                ]
+            ],
 
-        ));
+        ]);
 
-        $this->addElement('text', 'name', array(
+        $this->addElement('text', 'name', [
             'label' => __('Display Name'),
             'description' => __('Name as it should be displayed on the site'),
             'size' => '30',
             'required' => true,
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
-                    'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => [
+                    'messages' => [
                         Zend_Validate_NotEmpty::IS_EMPTY => __('Real Name is required.')
-                    )
-                ))
-            )
-        ));
+                    ]
+                ]]
+            ]
+        ]);
 
         $invalidEmailMessage = __('This email address is invalid.');
-        $this->addElement('text', 'email', array(
+        $this->addElement('text', 'email', [
             'label' => __('Email'),
             'size' => '30',
             'required' => true,
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
-                    'messages' => array(
+            'validators' => [
+                ['validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => [
+                    'messages' => [
                         Zend_Validate_NotEmpty::IS_EMPTY => __('Email is required.')
-                    )
-                )),
-                array('validator' => 'EmailAddress', 'options' => array(
-                    'messages' => array(
+                    ]
+                ]],
+                ['validator' => 'EmailAddress', 'options' => [
+                    'messages' => [
                         Zend_Validate_EmailAddress::INVALID => $invalidEmailMessage,
                         Zend_Validate_EmailAddress::INVALID_FORMAT => $invalidEmailMessage,
                         Zend_Validate_EmailAddress::INVALID_HOSTNAME => $invalidEmailMessage
-                    )
-                )),
-                array('validator' => 'Db_NoRecordExists', 'options' => array(
+                    ]
+                ]],
+                ['validator' => 'Db_NoRecordExists', 'options' => [
                     'table' => $this->_user->getTable()->getTableName(),
                     'field' => 'email',
-                    'exclude' => array(
+                    'exclude' => [
                         'field' => 'id',
                         'value' => (int) $this->_user->id
-                    ),
+                    ],
                     'adapter' => $this->_user->getDb()->getAdapter(),
-                    'messages' => array(
+                    'messages' => [
                         'recordFound' => __('This email address is already in use.')
-                    )
-                )),
-            )
-        ));
+                    ]
+                ]],
+            ]
+        ]);
 
         if ($this->_hasRoleElement) {
-            $this->addElement('select', 'role', array(
+            $this->addElement('select', 'role', [
                 'label' => __('Role'),
                 'description' => __("Roles describe the permissions a user has. See <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> for details."),
                 'multiOptions' => get_user_roles(),
                 'required' => true
-            ));
+            ]);
         }
 
         if ($this->_hasActiveElement) {
@@ -138,15 +138,15 @@ class Omeka_Form_User extends Omeka_Form
             if (($this->_user->active == 0) && ($this->_usersActivations)) {
                 $description .= '<br>' . __('Activation has been pending since %s.', format_date($this->_usersActivations->added));
             }
-            $this->addElement('checkbox', 'active', array(
+            $this->addElement('checkbox', 'active', [
                 'label' => __('Active?'),
                 'description' => $description
-            ));
+            ]);
         }
 
-        $this->addElement('hash', 'user_csrf', array(
+        $this->addElement('hash', 'user_csrf', [
             'timeout' => 3600
-        ));
+        ]);
     }
 
     public function setHasRoleElement($flag)

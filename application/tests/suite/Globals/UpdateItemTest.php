@@ -11,7 +11,7 @@ class Globals_UpdateItemTest extends Omeka_Test_AppTestCase
     public function setUpLegacy()
     {
         parent::setUpLegacy();
-        $this->item = insert_item(array('public' => '0'));
+        $this->item = insert_item(['public' => '0']);
     }
 
     public function assertPreConditionsLegacy()
@@ -21,7 +21,7 @@ class Globals_UpdateItemTest extends Omeka_Test_AppTestCase
 
     public function testCanUpdateItem()
     {
-        $this->item = update_item($this->item, array('public' => '1'));
+        $this->item = update_item($this->item, ['public' => '1']);
 
         $isPublic = $this->db->fetchOne("SELECT public FROM {$this->db->Item} WHERE id = {$this->item->id}");
         $this->assertEquals(1, $isPublic,

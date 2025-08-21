@@ -47,27 +47,27 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $inputNameStemId = "Elements-" . $this->_element->id . "-" . $index;
         $displayIndex = $index + 1;
 
-        $components = array(
+        $components = [
             'input' => $this->_getInputComponent($inputNameStem, $inputNameStemId, $value),
             'form_controls' => $this->_getControlsComponent($inputNameStemId),
             'html_checkbox' => $this->_getHtmlCheckboxComponent($inputNameStem, $inputNameStemId, $isHtml),
             'html' => null
-        );
+        ];
 
-        $filterName = array('ElementInput',
+        $filterName = ['ElementInput',
                             get_class($this->_record),
                             $this->_element->set_name,
-                            $this->_element->name);
+                            $this->_element->name];
 
         // Plugins should apply a filter to this HTML in order to display it in a certain way.
         $components = apply_filters($filterName,
                                     $components,
-                                    array('input_name_stem' => $inputNameStem,
+                                    ['input_name_stem' => $inputNameStem,
                                           'value' => $value,
                                           'record' => $this->_record,
                                           'element' => $this->_element,
                                           'index' => $index,
-                                          'is_html' => $isHtml));
+                                          'is_html' => $isHtml]);
 
         if ($components['html'] !== null) {
             return strval($components['html']);
@@ -102,9 +102,9 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $thisId = $inputNameStemId . '-text';
         $html = $this->view->formTextarea($inputNameStem . '[text]',
                                           $value,
-                                          array('rows' => 3,
+                                          ['rows' => 3,
                                                 'cols' => 50,
-                                                'aria-labelledby' => join(' ', array($elementLabelId, $inputNameStemId))));
+                                                'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId])]);
         return $html;
     }
 
@@ -122,11 +122,11 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $html = '<div class="controls">'
               . $this->view->formSubmit(null,
                                        __('Remove'),
-                                       array(
+                                       [
                                          'class' => 'remove-element red button',
                                          'id' => $thisId,
-                                         'aria-labelledby' => join(' ', array($elementLabelId, $inputNameStemId, $thisId))
-                                       ))
+                                         'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId, $thisId])
+                                       ])
               . '</div>';
 
         return $html;
@@ -146,9 +146,9 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         // Add a checkbox for the 'html' flag (always for any field)
         $html = '<label id = "' . $thisId . '" class="use-html">'
               . __('Use HTML')
-              . $this->view->formCheckbox($inputNameStem . '[html]', 1, array(
+              . $this->view->formCheckbox($inputNameStem . '[html]', 1, [
                 'checked' => $isHtml, 'class' => 'use-html-checkbox',
-                'aria-labelledby' => join(' ', array($elementLabelId, $inputNameStemId, $thisId))))
+                'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId, $thisId])])
               . '</label>';
 
         return $html;

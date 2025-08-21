@@ -23,16 +23,16 @@ class Omeka_Plugin_Mvc
      * View script directories that have been added by plugins.
      * @var array
      */
-    protected $_pluginViewDirs = array(
-        'admin' => array(),
-        'public' => array(),
-    );
+    protected $_pluginViewDirs = [
+        'admin' => [],
+        'public' => [],
+    ];
 
     /**
      * View helper directories from plugins.
      * @var array
      */
-    protected $_pluginHelpersDirs = array();
+    protected $_pluginHelpersDirs = [];
 
     /**
      * @param string $basePath Plugins directory path.

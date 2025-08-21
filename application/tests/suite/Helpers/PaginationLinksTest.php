@@ -20,12 +20,12 @@ class Omeka_Helper_PaginationLinksTest extends Omeka_Test_AppTestCase
         // be added to the View instance.
 
         $this->dispatch($attackUrl);
-        Zend_Registry::set('pagination', array(
+        Zend_Registry::set('pagination', [
           "menu" => null,
           "page" => "2",
           "per_page" => 2,
           "total_results" => 10,
-          "link" => ""));
+          "link" => ""]);
 
         $html = pagination_links();
         $this->assertStringContainsString("href=\"$escapedUrl\"",

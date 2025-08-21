@@ -45,7 +45,7 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
         // This needs the plugin broker to be built out already.
         $bootstrap->bootstrap('Pluginbroker');
         $dbOptions = $bootstrap->getResource('Options');
-        $pluginOptions = array('dbOptions' => $dbOptions, 'baseThemePath' => $this->_basePath, 'webBaseThemePath' => $this->_webBasePath);
+        $pluginOptions = ['dbOptions' => $dbOptions, 'baseThemePath' => $this->_basePath, 'webBaseThemePath' => $this->_webBasePath];
         $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts($pluginOptions, Zend_Registry::get('plugin_mvc')));
     }
 

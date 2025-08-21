@@ -18,14 +18,14 @@ class SiteController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        $site = array(
+        $site = [
             'omeka_url' => WEB_ROOT,
             'omeka_version' => OMEKA_VERSION,
             'title' => get_option('site_title'),
             'description' => get_option('description'),
             'author' => get_option('author'),
             'copyright' => get_option('copyright'),
-        );
+        ];
         $this->_helper->jsonApi($site);
     }
 }

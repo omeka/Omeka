@@ -21,12 +21,12 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
         //hooks echo the content, so stuff the hook results into an output buffer
         //then put that ob content into a variable
         ob_start();
-        fire_plugin_hook("admin_" . $type . "_panel_buttons", array('view' => $this, 'record' => $record));
+        fire_plugin_hook("admin_" . $type . "_panel_buttons", ['view' => $this, 'record' => $record]);
         $buttonsHtml = ob_get_contents();
         ob_end_clean();
 
         ob_start();
-        fire_plugin_hook("admin_" . $type . "_panel_fields", array('view' => $this, 'record' => $record));
+        fire_plugin_hook("admin_" . $type . "_panel_fields", ['view' => $this, 'record' => $record]);
         $fieldsHtml = ob_get_contents();
         ob_end_clean();
 

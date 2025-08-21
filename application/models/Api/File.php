@@ -19,15 +19,15 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        $representation = array(
+        $representation = [
             'id' => $record->id,
             'url' => self::getResourceUrl("/files/{$record->id}"),
-            'file_urls' => array(
+            'file_urls' => [
                 'original' => $record->getWebPath(),
                 'fullsize' => $record->has_derivative_image ? $record->getWebPath('fullsize') : null,
                 'thumbnail' => $record->has_derivative_image ? $record->getWebPath('thumbnail') : null,
                 'square_thumbnail' => $record->has_derivative_image ? $record->getWebPath('square_thumbnail') : null,
-            ),
+            ],
             'added' => self::getDate($record->added),
             'modified' => self::getDate($record->modified),
             'filename' => $record->filename,
@@ -40,12 +40,12 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
             'stored' => (bool) $record->stored,
             'type_os' => $record->type_os,
             'metadata' => json_decode($record->metadata, true),
-        );
-        $representation['item'] = array(
+        ];
+        $representation['item'] = [
             'id' => $record->item_id,
             'url' => self::getResourceUrl("/items/{$record->item_id}"),
             'resource' => 'items',
-        );
+        ];
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
 
         return $representation;

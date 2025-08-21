@@ -44,14 +44,14 @@ class Omeka_Form_Admin extends Omeka_Form
         $this->_editDisplayGroup = new Zend_Form_DisplayGroup('edit-form', $this->getPluginLoader(self::DECORATOR));
         $this->_saveDisplayGroup = new Zend_Form_DisplayGroup('save', $this->getPluginLoader(self::DECORATOR));
 
-        $this->addDisplayGroups(array($this->_editDisplayGroup, $this->_saveDisplayGroup));
+        $this->addDisplayGroups([$this->_editDisplayGroup, $this->_saveDisplayGroup]);
 
         //create the decorators with CSS classes set up via options
-        $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag' => 'section', 'class' => $this->_editGroupCssClass));
-        $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag' => 'section', 'id' => 'save', 'class' => $this->_saveGroupCssClass));
-        $panelDecorator = new Zend_Form_Decorator_HtmlTag(array('tag' => 'div',  'class' => 'panel'));
+        $editDecorator = new Zend_Form_Decorator_HtmlTag(['tag' => 'section', 'class' => $this->_editGroupCssClass]);
+        $saveDecorator = new Zend_Form_Decorator_HtmlTag(['tag' => 'section', 'id' => 'save', 'class' => $this->_saveGroupCssClass]);
+        $panelDecorator = new Zend_Form_Decorator_HtmlTag(['tag' => 'div',  'class' => 'panel']);
 
-        $hookDecoratorOptions = array('type' => $this->_type, 'hasPublicPage' => $this->_hasPublicPage);
+        $hookDecoratorOptions = ['type' => $this->_type, 'hasPublicPage' => $this->_hasPublicPage];
         $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction($hookDecoratorOptions);
         if ($this->_record) {
             $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
@@ -59,8 +59,8 @@ class Omeka_Form_Admin extends Omeka_Form
         }
         $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook($hookDecoratorOptions);
         //Pro tip: order of adding decorators matters! if reversed, group elements would appear after the div!
-        $this->_editDisplayGroup->setDecorators(array('FormElements', $editDecorator));
-        $this->_saveDisplayGroup->setDecorators(array($this->_saveDisplayGroupActionDecorator, 'FormElements', $savePanelHookDecorator, 'panelDecorator' => $panelDecorator, $saveDecorator));
+        $this->_editDisplayGroup->setDecorators(['FormElements', $editDecorator]);
+        $this->_saveDisplayGroup->setDecorators([$this->_saveDisplayGroupActionDecorator, 'FormElements', $savePanelHookDecorator, 'panelDecorator' => $panelDecorator, $saveDecorator]);
     }
 
     /**
@@ -132,14 +132,14 @@ class Omeka_Form_Admin extends Omeka_Form
      */
     public function getSaveGroupDefaultElementDecorators()
     {
-        return array(
+        return [
                 'ViewHelper',
-                array('Description', array('tag' => 'p', 'class' => 'explanation')),
+                ['Description', ['tag' => 'p', 'class' => 'explanation']],
                 'Errors',
-                array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
-                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
-                array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
-        );
+                [['InputsTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'inputs']],
+                ['Label', ['tag' => 'div', 'tagClass' => 'two columns alpha']],
+                [['FieldTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'field']]
+        ];
     }
 
     /**

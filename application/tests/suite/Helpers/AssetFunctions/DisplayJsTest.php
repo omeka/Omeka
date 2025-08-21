@@ -61,24 +61,24 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
 
     public function testQueueJsWithDefaultVersion()
     {
-        queue_js_file(array('items-search', 'vendor/tinymce/tinymce.min'));
+        queue_js_file(['items-search', 'vendor/tinymce/tinymce.min']);
 
-        $scripts = array(
+        $scripts = [
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js?v='.OMEKA_VERSION,
             self::ASSET_PATH_ROOT . '/javascripts/vendor/tinymce/tinymce.min.js?v='.OMEKA_VERSION
-        );
+        ];
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
     }
 
     public function testQueueJsWithNoVersion()
     {
-        queue_js_file(array('items-search', 'vendor/tinymce/tinymce.min'), 'javascripts', array(), null);
+        queue_js_file(['items-search', 'vendor/tinymce/tinymce.min'], 'javascripts', [], null);
 
-        $scripts = array(
+        $scripts = [
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js',
             self::ASSET_PATH_ROOT . '/javascripts/vendor/tinymce/tinymce.min.js'
-        );
+        ];
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
     }
@@ -88,12 +88,12 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
         $script = 'Inline JS script.';
         queue_js_string($script);
 
-        $matcher = array(
+        $matcher = [
             'tag' => 'script',
-            'attributes' => array(
+            'attributes' => [
                 'type' => 'text/javascript'
-            )
-        );
+            ]
+        ];
 
         $output = $this->_getJsOutput(false);
         $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
@@ -105,7 +105,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
 
     public function testQueueJsConditional()
     {
-        queue_js_file('items-search', 'javascripts', array('conditional' => 'lt IE 9'));
+        queue_js_file('items-search', 'javascripts', ['conditional' => 'lt IE 9']);
 
         $output = $this->_getJsOutput(false);
 
@@ -115,7 +115,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
     public function testQueueJsStringConditional()
     {
         $script = 'Inline JS script.';
-        queue_js_string($script, array('conditional' => 'lt IE 9'));
+        queue_js_string($script, ['conditional' => 'lt IE 9']);
 
         $output = $this->_getJsOutput(false);
 

@@ -32,7 +32,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form = new Omeka_Form_AppearanceSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         $form->removeDecorator('Form');
-        fire_plugin_hook('appearance_settings_form', array('form' => $form));
+        fire_plugin_hook('appearance_settings_form', ['form' => $form]);
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
@@ -55,7 +55,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
     public function editNavigationAction()
     {
         $form = new Omeka_Form_Navigation();
-        fire_plugin_hook('navigation_form', array('form' => $form));
+        fire_plugin_hook('navigation_form', ['form' => $form]);
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
@@ -102,11 +102,11 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
     protected function _getResetForm()
     {
         $form = new Zend_Form();
-        $form->setElementDecorators(array('ViewHelper'));
+        $form->setElementDecorators(['ViewHelper']);
         $form->removeDecorator('HtmlTag');
         $form->addElement('hash', 'confirm_reset_hash');
-        $form->addElement('submit', 'Reset', array('class' => 'delete red button'));
-        $form->setAction($this->view->url(array('action' => 'reset-navigation')));
+        $form->addElement('submit', 'Reset', ['class' => 'delete red button']);
+        $form->setAction($this->view->url(['action' => 'reset-navigation']));
         return $form;
     }
 }

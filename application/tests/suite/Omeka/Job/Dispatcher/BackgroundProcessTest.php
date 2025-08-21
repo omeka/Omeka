@@ -1,12 +1,12 @@
 <?php
 class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends Omeka_Test_TestCase
 {
-    public $jobMetadata = array(
+    public $jobMetadata = [
         'createdAt' => 'now',
         'createdBy' => 1,
         'className' => 'foobar',
-        'options' => array('baz' => true),
-    );
+        'options' => ['baz' => true],
+    ];
 
     private $processDispatcher;
     private $adapter;
@@ -36,7 +36,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends Omeka_Test_Test
     {
         $this->adapter->setProcessDispatcher($this->processDispatcher);
         $this->adapter->send('foobar', $this->jobMetadata);
-        $this->assertEquals(array('job' => 'foobar'), MockProcessDispatcher::$args);
+        $this->assertEquals(['job' => 'foobar'], MockProcessDispatcher::$args);
         $this->assertEquals('Omeka_Job_Process_Wrapper', MockProcessDispatcher::$processClass);
         $this->assertEquals(1, MockProcessDispatcher::$user);
     }

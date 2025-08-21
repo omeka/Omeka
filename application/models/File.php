@@ -126,12 +126,12 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @var array
      */
-    private static $_pathsByType = array(
+    private static $_pathsByType = [
         'original' => 'original',
         'fullsize' => 'fullsize',
         'thumbnail' => 'thumbnails',
         'square_thumbnail' => 'square_thumbnails'
-    );
+    ];
 
     /**
      * Get a property or special value of this record.
@@ -151,7 +151,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'square_thumbnail_uri':
                 return $this->getWebPath('square_thumbnail');
             case 'permalink':
-                return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
+                return absolute_url(['controller' => 'files', 'action' => 'show', 'id' => $this->id]);
             case 'display_title':
                 return $this->getDisplayTitle($this->original_filename);
             case 'rich_title':
@@ -203,8 +203,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     protected function filterPostData($post)
     {
-        $immutable = array('id', 'modified', 'added', 'authentication', 'filename',
-                           'original_filename', 'mime_type', 'type_os', 'item_id');
+        $immutable = ['id', 'modified', 'added', 'authentication', 'filename',
+                           'original_filename', 'mime_type', 'type_os', 'item_id'];
         foreach ($immutable as $value) {
             unset($post[$value]);
         }
@@ -233,7 +233,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         if ($args['insert']) {
             $dispatcher = Zend_Registry::get('job_dispatcher');
             $dispatcher->setQueueName('uploads');
-            $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
+            $dispatcher->send('Job_FileProcessUpload', ['fileData' => $this->toArray()]);
         }
 
         $item = $this->getItem();
@@ -335,7 +335,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * 
      * @param string
      */
-    public function setDefaults($filepath, array $options = array())
+    public function setDefaults($filepath, array $options = [])
     {
         $this->size = filesize($filepath);
         $this->authentication = md5_file($filepath);
@@ -352,7 +352,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function unlinkFile()
     {
         $storage = $this->getStorage();
-        $files = array($this->getStoragePath('original'));
+        $files = [$this->getStoragePath('original')];
         if ($this->has_derivative_image) {
             $types = self::$_pathsByType;
             unset($types['original']);
@@ -409,11 +409,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return false;
         }
         getid3_lib::CopyTagsToComments($id3->info);
-        $metadata = array();
-        $keys = array(
+        $metadata = [];
+        $keys = [
             'mime_type', 'audio', 'video', 'comments', 'comments_html',
             'iptc', 'jpg'
-        );
+        ];
         foreach ($keys as $key) {
             if (array_key_exists($key, $id3->info)) {
                 $metadata[$key] = $id3->info[$key];

@@ -14,7 +14,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     private $_tagTable;
     private $_joinTable;
     private $_type;
-    private $_tagsToSave = array();
+    private $_tagsToSave = [];
 
     public function __construct(Omeka_Record_AbstractRecord $record)
     {
@@ -39,7 +39,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     public function afterSave($args)
     {
         // Save tag/record relations.
-        $addedTags = array();
+        $addedTags = [];
         foreach ($this->_tagsToSave as $tag) {
             $join = $this->_joinTable->findForRecordAndTag($this->_record, $tag);
             if (!$join) {
@@ -53,7 +53,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         }
         if ($addedTags) {
             $nameForHook = strtolower($this->_type);
-            fire_plugin_hook("add_{$nameForHook}_tag", array('record' => $this->_record, 'added' => $addedTags));
+            fire_plugin_hook("add_{$nameForHook}_tag", ['record' => $this->_record, 'added' => $addedTags]);
         }
 
         // Add tags to this record's search text.
@@ -66,10 +66,10 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     {
         $db = $this->_record->getDb();
 
-        $db->delete($db->RecordsTags, array(
+        $db->delete($db->RecordsTags, [
             'record_id = ?' => (int) $this->_record->id,
             'record_type = ?' => $this->_type
-            )
+            ]
         );
     }
 
@@ -81,7 +81,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
      */
     public function getTaggings()
     {
-        return $this->_joinTable->findBy(array('record' => $this->_record));
+        return $this->_joinTable->findBy(['record' => $this->_record]);
     }
 
     /**
@@ -90,7 +90,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
      * @see TagTable::applySearchFilters
      * @return array of Tag
      */
-    public function getTags($order = array())
+    public function getTags($order = [])
     {
         if (isset($order['sort_field'])) {
             $sortField = $order['sort_field'];
@@ -103,7 +103,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             $sortField = 'name';
             $sortDir = 'a';
         }
-        return $this->_tagTable->findBy(array('record' => $this->_record, 'sort_field' => $sortField, 'sort_dir' => $sortDir));
+        return $this->_tagTable->findBy(['record' => $this->_record, 'sort_field' => $sortField, 'sort_dir' => $sortDir]);
     }
 
     /**
@@ -134,14 +134,14 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         $findWith['record'] = $this->_record;
 
         $taggings = $this->_joinTable->findBy($findWith);
-        $removed = array();
+        $removed = [];
         foreach ($taggings as $tagging) {
             $removed[] = $this->_tagTable->find($tagging->tag_id);
             $tagging->delete();
         }
 
         $nameForHook = strtolower($this->_type);
-        fire_plugin_hook("remove_{$nameForHook}_tag", array('record' => $this->_record, 'removed' => $removed));
+        fire_plugin_hook("remove_{$nameForHook}_tag", ['record' => $this->_record, 'removed' => $removed]);
         return !empty($taggings);
     }
 
@@ -153,7 +153,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
      */
     public function hasTag($tag)
     {
-        $count = $this->_joinTable->count(array('tag' => $tag, 'record' => $this->_record));
+        $count = $this->_joinTable->count(['tag' => $tag, 'record' => $this->_record]);
         return $count > 0;
     }
 
@@ -169,7 +169,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         if (is_null($delimiter)) {
             $delimiter = get_option('tag_delimiter');
         }
-        return array_diff(array_map('trim', explode($delimiter, $string)), array(''));
+        return array_diff(array_map('trim', explode($delimiter, $string)), ['']);
     }
 
     /**
@@ -220,7 +220,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         if (!$tags) {
             $tags = $this->_record->Tags;
         }
-        $existingTags = array();
+        $existingTags = [];
         foreach ($tags as $key => $tag) {
             if ($tag instanceof Tag || is_array($tag)) {
                 $existingTags[$key] = trim($tag["name"]);
@@ -229,7 +229,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             }
         }
 
-        $arr = array();
+        $arr = [];
         if (!empty($existingTags)) {
             $arr['removed'] = array_values(array_diff($existingTags, $inputTags));
         }

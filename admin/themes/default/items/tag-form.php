@@ -28,4 +28,4 @@
     <?php endif; ?>
     </div>
 </div>
-<?php fire_plugin_hook('admin_items_form_tags', array('item' => $item, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_items_form_tags', ['item' => $item, 'view' => $this]); ?>

@@ -25,13 +25,13 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
      *
      * @var string
      */
-    protected $_adminWhitelist = array(
-        array('controller' => 'users', 'action' => 'activate'),
-        array('controller' => 'users', 'action' => 'login'),
-        array('controller' => 'users', 'action' => 'forgot-password'),
-        array('controller' => 'installer', 'action' => 'notify'),
-        array('controller' => 'error', 'action' => 'error')
-    );
+    protected $_adminWhitelist = [
+        ['controller' => 'users', 'action' => 'activate'],
+        ['controller' => 'users', 'action' => 'login'],
+        ['controller' => 'users', 'action' => 'forgot-password'],
+        ['controller' => 'installer', 'action' => 'notify'],
+        ['controller' => 'error', 'action' => 'error']
+    ];
 
     /**
      * Direct requests to the admin interface.

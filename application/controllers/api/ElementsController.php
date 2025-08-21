@@ -26,7 +26,7 @@ class ElementsController extends ApiController
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
 
-        $elementSet = $file->getTable('ElementSet')->findBy(array('name' => ElementSet::ITEM_TYPE_NAME));
+        $elementSet = $file->getTable('ElementSet')->findBy(['name' => ElementSet::ITEM_TYPE_NAME]);
         if ($element->element_set_id != $elementSet->id) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Only elements belonging to the "Item Type Metadata" element set may be deleted.', 400);
         }

@@ -29,11 +29,11 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
         $researcher->role = 'researcher';
         $researcher->id = 3;
 
-        $this->_users = array(
+        $this->_users = [
             'super' => $super,
             'contributor' => $contributor,
             'researcher' => $researcher
-        );
+        ];
     }
 
     public function tearDownLegacy()
@@ -55,10 +55,10 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
     {
         $user = $this->_users[$userKey];
 
-        $items = array(
+        $items = [
             'addedBySelf' => $this->_getMockItem(true),
             'notAddedBySelf' => $this->_getMockItem(false),
-        );
+        ];
 
         foreach ($items as $itemKey => $item) {
             if ($itemKey == 'addedBySelf') {
@@ -82,12 +82,12 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
 
     public function userResourceProvider()
     {
-        return array(
+        return [
             // $userKey, $whenOwner, $whenNotOwner, $generally
-            array('super', true, true, true),
-            array('contributor', true, false, true),
-            array('researcher', false, false, false)
-        );
+            ['super', true, true, true],
+            ['contributor', true, false, true],
+            ['researcher', false, false, false]
+        ];
     }
 
     /**
@@ -102,7 +102,7 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
      */
     private function _getMockItem($addedBySelf)
     {
-        $item = $this->getMockBuilder('Item')->setMethods(array('getResourceId', 'isOwnedBy'))->getMock();
+        $item = $this->getMockBuilder('Item')->setMethods(['getResourceId', 'isOwnedBy'])->getMock();
         $item->expects($this->any())
              ->method('getResourceId')
              ->will($this->returnValue('Items'));

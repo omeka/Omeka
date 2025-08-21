@@ -15,11 +15,11 @@ class Globals_InsertItemTypeTest extends Omeka_Test_AppTestCase
     {
         $urlElement = get_db()->getTable('Element')->findByElementSetNameAndElementName('Item Type Metadata', 'URL');
         $itemType = insert_item_type(
-            array('name' => 'foobar', 'description' => 'also foobar'),
-            array(
-                array('name' => 'new element'),
+            ['name' => 'foobar', 'description' => 'also foobar'],
+            [
+                ['name' => 'new element'],
                 $urlElement
-                )
+                ]
         );
         $this->assertThat($itemType, $this->isInstanceOf('ItemType'));
         $this->assertTrue($itemType->exists());

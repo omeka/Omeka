@@ -40,7 +40,7 @@ class Omeka_Test_Helper_Db
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_dbAdapter, $method), $args);
+        return call_user_func_array([$this->_dbAdapter, $method], $args);
     }
 
     /**

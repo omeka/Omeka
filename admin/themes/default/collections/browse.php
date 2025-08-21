@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Browse Collections') . ' ' . __('(%s total)', $total_results);
-$totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections browse'));
+$totalItemsWithoutCollection = get_db()->getTable('Item')->count(['collection' => 0]);
+echo head(['title'=>$pageTitle, 'bodyclass'=>'collections browse']);
 echo flash();
 ?>
 
@@ -27,14 +27,14 @@ echo flash();
                 <thead>
                     <tr>
                     <?php
-                    $sortLinks = array(
+                    $sortLinks = [
                         __('Title') => 'Dublin Core,Title',
                         __('Contributors') => null,
                         __('Date Added') => 'added',
                         __('Total Number of Items') => null
-                    );
+                    ];
                     ?>
-                    <?php echo browse_sort_links($sortLinks, array('link_tag' => 'th scope="col"', 'list_tag' => '')); ?>
+                    <?php echo browse_sort_links($sortLinks, ['link_tag' => 'th scope="col"', 'list_tag' => '']); ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@ echo flash();
                     <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                         <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                             <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
-                                <?php echo link_to_collection($collectionImage, array('class' => 'image')); ?>
+                                <?php echo link_to_collection($collectionImage, ['class' => 'image']); ?>
                             <?php endif; ?>
 
 
@@ -62,14 +62,14 @@ echo flash();
 
                             <?php if (is_allowed($collection, 'edit')): ?>
                             <ul class="action-links">
-                                <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
+                                <li><?php echo link_to_collection(__('Edit'), ['class'=>'edit'], 'edit'); ?></li>
                             </ul>
                             <?php endif; ?>
-                            <?php fire_plugin_hook('admin_collections_browse_each', array('collection' => $collection, 'view' => $this)); ?>
+                            <?php fire_plugin_hook('admin_collections_browse_each', ['collection' => $collection, 'view' => $this]); ?>
                         </td>
                         <td>
                             <?php if ($collection->hasContributor()): ?>
-                                <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'<br>')); ?>
+                                <?php echo metadata('collection', ['Dublin Core', 'Contributor'], ['all'=>true, 'delimiter'=>'<br>']); ?>
                             <?php else: ?>
                                 <?php echo __('No contributors'); ?>
                             <?php endif; ?>
@@ -102,6 +102,6 @@ echo flash();
     <?php endif; ?>
 <?php endif; ?>
 
-<?php fire_plugin_hook('admin_collections_browse', array('collections' => $collections, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_collections_browse', ['collections' => $collections, 'view' => $this]); ?>
 
 <?php echo foot(); ?>

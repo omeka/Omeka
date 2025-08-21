@@ -55,7 +55,7 @@ abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_Migratio
      */
     public function __call($m, $a)
     {
-        return call_user_func_array(array($this->getDb(), $m), $a);
+        return call_user_func_array([$this->getDb(), $m], $a);
     }
 
     /**

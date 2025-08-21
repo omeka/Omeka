@@ -13,16 +13,16 @@
     <title><?php echo implode(' &middot; ', $titleParts); ?></title>
 
 <?php
-    queue_css_file(array('iconfonts', 'skeleton', 'jquery-ui', 'style'));
+    queue_css_file(['iconfonts', 'skeleton', 'jquery-ui', 'style']);
     queue_css_url('//fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400');
 
-    queue_js_file(array('vendor/respond', 'vendor/modernizr'));
-    queue_js_file('vendor/selectivizr', 'javascripts', array('conditional' => '(gte IE 6)&(lte IE 8)'));
+    queue_js_file(['vendor/respond', 'vendor/modernizr']);
+    queue_js_file('vendor/selectivizr', 'javascripts', ['conditional' => '(gte IE 6)&(lte IE 8)']);
     queue_js_file('globals');
 ?>
 
 <!-- Plugin Stuff -->
-<?php fire_plugin_hook('admin_head', array('view'=>$this)); ?>
+<?php fire_plugin_hook('admin_head', ['view'=>$this]); ?>
 
 <!-- Stylesheets -->
 <?php echo head_css(); ?>
@@ -32,13 +32,13 @@
 
 </head>
 
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+<?php echo body_tag(['id' => @$bodyid, 'class' => @$bodyclass]); ?>
 <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 
 <header role="banner">
-    <?php fire_plugin_hook('admin_header_top', array('view'=>$this)); ?>
+    <?php fire_plugin_hook('admin_header_top', ['view'=>$this]); ?>
     <div id="site-title" class="two columns">
-        <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
+        <?php echo link_to_home_page(option('site_title'), ['target' => '_blank']); ?>
     </div>
 	<button id="mobile-navbar-toggle" class="mobile-menu" data-target="#global-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
 
@@ -60,15 +60,15 @@
         <?php endif; ?>
         </ul>
     </nav>
-    <?php fire_plugin_hook('admin_header_bottom', array('view'=>$this)); ?>
+    <?php fire_plugin_hook('admin_header_bottom', ['view'=>$this]); ?>
 </header>
 
 <div class="container container-twelve">
-    <?php echo common('content-nav', array('title' => $title)); ?>
+    <?php echo common('content-nav', ['title' => $title]); ?>
 
     <div id="content" class="ten columns omega offset-by-two" role="main" aria-labelledby="content-heading">
 	    <div class="subhead">
-	        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
+	        <?php echo search_form(['show_advanced' => true, 'form_attributes'=> ['role'=>'search']]); ?>
 	        <?php if (isset($title)) : ?>
 	            <h1 id="content-heading" class="section-title"><?php echo $title ?></h1>
 	        <?php endif; ?>

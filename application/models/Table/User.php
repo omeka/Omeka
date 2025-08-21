@@ -27,16 +27,16 @@ class Table_User extends Omeka_Db_Table
 
     protected function _getColumnPairs()
     {
-        return array(
+        return [
             'users.id',
-            'users.name');
+            'users.name'];
     }
 
     public function findByEmail($email)
     {
         $select = $this->getSelect();
         $select->where('users.email = ?')->limit(1);
-        return $this->fetchObject($select, array($email));
+        return $this->fetchObject($select, [$email]);
     }
 
     public function applySearchFilters($select, $params)

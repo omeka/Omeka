@@ -1,10 +1,10 @@
 <?php
 $title = __('Batch Delete Items');
 if (!$isPartial):
-    echo head(array(
+    echo head([
         'title' => $title,
         'bodyclass' => 'items batch-edit',
-    ));
+    ]);
 endif;
 ?>
 <div title="<?php echo $title; ?>">
@@ -16,7 +16,7 @@ endif;
             <div class="five columns omega">
                 <ul>
                 <?php
-                $itemCheckboxes = array();
+                $itemCheckboxes = [];
                 $excludedItems = false;
                 foreach ($itemIds as $id) {
                     if (!($item = get_record_by_id('item', $id))) {
@@ -24,13 +24,13 @@ endif;
                     }
 
                     if (is_allowed($item, 'delete')) {
-                        $itemCheckboxes[$id] = metadata($item, 'display_title', array('no_escape' => true));
+                        $itemCheckboxes[$id] = metadata($item, 'display_title', ['no_escape' => true]);
                     } else {
                         $excludedItems = true;
                     }
                     release_object($item);
                 }
-                echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>'; ?>
+                echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked'], $itemCheckboxes, '</li><li>') . '</li>'; ?>
                 </ul>
                 <?php if ($excludedItems): ?>
                 <p class="explanation"><?php echo __('Some items were excluded because you do not have permission to delete them.'); ?></p>

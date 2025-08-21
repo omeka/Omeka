@@ -82,7 +82,7 @@ class Table_File extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         $db = $this->getDb();
-        $select->joinInner(array('items' => $db->Item), 'items.id = files.item_id', array());
+        $select->joinInner(['items' => $db->Item], 'items.id = files.item_id', []);
 
         $permissions = new Omeka_Db_Select_PublicPermissions('Items');
         $permissions->apply($select, 'items');
@@ -104,7 +104,7 @@ class Table_File extends Omeka_Db_Table
                        ->order('RAND()')
                        ->limit(1);
 
-        return $this->fetchObject($select, array($itemId));
+        return $this->fetchObject($select, [$itemId]);
     }
 
     /**
@@ -118,7 +118,7 @@ class Table_File extends Omeka_Db_Table
      *  'order', following the user's specified order.
      * @return array
      */
-    public function findByItem($itemId, $fileIds = array(), $sort = 'order')
+    public function findByItem($itemId, $fileIds = [], $sort = 'order')
     {
         $select = $this->getSelect();
         $select->where('files.item_id = ?');
@@ -128,7 +128,7 @@ class Table_File extends Omeka_Db_Table
 
         $this->_orderFilesBy($select, $sort);
 
-        return $this->fetchObjects($select, array($itemId));
+        return $this->fetchObjects($select, [$itemId]);
     }
 
     /**
@@ -148,7 +148,7 @@ class Table_File extends Omeka_Db_Table
         $this->_orderFilesBy($select, $sort);
         $select->limit(1, $index);
 
-        return $this->fetchObject($select, array($itemId));
+        return $this->fetchObject($select, [$itemId]);
     }
 
     /**
@@ -171,10 +171,10 @@ class Table_File extends Omeka_Db_Table
         $this->_orderFilesBy($select, $sort);
 
         if ($index === null) {
-            return $this->fetchObjects($select, array($itemId));
+            return $this->fetchObjects($select, [$itemId]);
         } else {
             $select->limit(1, $index);
-            return $this->fetchObject($select, array($itemId));
+            return $this->fetchObject($select, [$itemId]);
         }
     }
 

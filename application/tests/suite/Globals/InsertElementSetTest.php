@@ -14,10 +14,10 @@ class Globals_InsertElementSetTest extends Omeka_Test_AppTestCase
     public function testCanInsertElementSet()
     {
         $elementSet = insert_element_set(
-            array('name' => 'Foobar Element Set', 'description' => 'foobar'),
-            array(
-                array('name' => 'Element Name', 'description' => 'Element Description')
-            )
+            ['name' => 'Foobar Element Set', 'description' => 'foobar'],
+            [
+                ['name' => 'Element Name', 'description' => 'Element Description']
+            ]
         );
         $this->assertThat($elementSet, $this->isInstanceOf('ElementSet'));
         $this->assertTrue($elementSet->exists());

@@ -28,7 +28,7 @@ class Output_FileOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
             $this->_record->authentication, null, $fileElement);
         $this->_buildElementSetContainerForRecord($this->_record, $fileElement);
 
-        if (in_array($this->_context, array('file'))) {
+        if (in_array($this->_context, ['file'])) {
             $item = get_db()->getTable('Item')->find($this->_record->item_id);
             $itemOmekaXml = new Output_ItemOmekaXml($item, $this->_context);
             $itemElement = $this->_doc->importNode($itemOmekaXml->_node, true);

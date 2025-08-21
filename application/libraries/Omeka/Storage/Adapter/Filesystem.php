@@ -23,13 +23,13 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      */
     protected $_localDir;
 
-    protected $_subDirs = array(
+    protected $_subDirs = [
         'thumbnails',
         'square_thumbnails',
         'fullsize',
         'original',
         'theme_uploads'
-    );
+    ];
 
     /**
      * Web-accesible path that corresponds to $_localDir.
@@ -50,7 +50,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         foreach ($options as $key => $value) {
             switch ($key) {
@@ -182,10 +182,10 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      */
     public function getOptions()
     {
-        return array(
+        return [
             'localDir' => $this->_localDir,
             'webDir' => $this->_webDir,
-        );
+        ];
     }
 
     /**

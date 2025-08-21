@@ -15,8 +15,8 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
 
     public function setUpLegacy()
     {
-        $this->application = new Omeka_Application('testing', array(
-            'config' => CONFIG_DIR . '/' . 'application.ini'));
+        $this->application = new Omeka_Application('testing', [
+            'config' => CONFIG_DIR . '/' . 'application.ini']);
 
         $this->db = $this->application->getBootstrap()->bootstrap('Db')->db;
 
@@ -36,7 +36,7 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
                              "There should be a 'migration' option in the database.");
         $this->assertFalse($this->db->fetchOne("SELECT value FROM omeka_options WHERE name = 'omeka_version'"),
                              "There should not be an 'omeka_version' option in the database.");
-        $this->assertEquals($this->db->fetchCol("SHOW TABLES LIKE 'omeka_schema_migrations'"), array(),
+        $this->assertEquals($this->db->fetchCol("SHOW TABLES LIKE 'omeka_schema_migrations'"), [],
                             "There should not be an 'omeka_schema_migrations' table.");
     }
 
@@ -51,7 +51,7 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
         '',
         "There should be an empty string for 'omeka_version' that signals the " .
         "need to continue upgrading the database.");
-        $this->assertEquals($this->db->fetchCol("SHOW TABLES LIKE 'omeka_schema_migrations'"), array('omeka_schema_migrations'),
+        $this->assertEquals($this->db->fetchCol("SHOW TABLES LIKE 'omeka_schema_migrations'"), ['omeka_schema_migrations'],
                             "There should be an 'omeka_schema_migrations' table.");
     }
 }

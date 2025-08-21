@@ -2,8 +2,8 @@
 if (!empty($formActionUri)):
     $formAttributes['action'] = $formActionUri;
 else:
-    $formAttributes['action'] = url(array('controller' => 'items',
-                                          'action' => 'browse'));
+    $formAttributes['action'] = url(['controller' => 'items',
+                                          'action' => 'browse']);
 endif;
 $formAttributes['method'] = 'GET';
 ?>
@@ -16,7 +16,7 @@ $formAttributes['method'] = 'GET';
             echo $this->formText(
                 'search',
                 @$_REQUEST['search'],
-                array('id' => 'keyword-search', 'size' => '40')
+                ['id' => 'keyword-search', 'size' => '40']
             );
         ?>
         </div>
@@ -38,7 +38,7 @@ $formAttributes['method'] = 'GET';
         if (!empty($_GET['advanced'])) {
             $search = $_GET['advanced'];
         } else {
-            $search = array(array('field' => '', 'type' => '', 'value' => ''));
+            $search = [['field' => '', 'type' => '', 'value' => '']];
         }
 
         //Here is where we actually build the search form
@@ -56,14 +56,14 @@ $formAttributes['method'] = 'GET';
                     echo $this->formSelect(
                         "advanced[$i][joiner]",
                         @$rows['joiner'],
-                        array(
+                        [
                             'id' => null,
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-joiner',
-                        ),
-                        array(
+                        ],
+                        [
                             'and' => __('AND'),
                             'or' => __('OR'),
-                        )
+                        ]
                     );
                     ?>
                 </div>
@@ -73,13 +73,13 @@ $formAttributes['method'] = 'GET';
                     echo $this->formSelect(
                         "advanced[$i][element_id]",
                         @$rows['element_id'],
-                        array(
+                        [
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-property',
                             'id' => null,
-                        ),
-                        get_table_options('Element', null, array(
-                            'record_types' => array('Item', 'All'),
-                            'sort' => 'orderBySet')
+                        ],
+                        get_table_options('Element', null, [
+                            'record_types' => ['Item', 'All'],
+                            'sort' => 'orderBySet']
                         )
                     );
                     ?>
@@ -90,18 +90,18 @@ $formAttributes['method'] = 'GET';
                     echo $this->formSelect(
                         "advanced[$i][type]",
                         @$rows['type'],
-                        array(
+                        [
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-type',
                             'id' => null,
-                        ),
-                        label_table_options(array(
+                        ],
+                        label_table_options([
                             'contains' => __('contains'),
                             'does not contain' => __('does not contain'),
                             'is exactly' => __('is exactly'),
                             'is empty' => __('is empty'),
                             'is not empty' => __('is not empty'),
                             'starts with' => __('starts with'),
-                            'ends with' => __('ends with'))
+                            'ends with' => __('ends with')]
                         )
                     );
                     ?>
@@ -112,11 +112,11 @@ $formAttributes['method'] = 'GET';
                     echo $this->formText(
                         "advanced[$i][terms]",
                         @$rows['terms'],
-                        array(
+                        [
                             'size' => '20',
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-terms',
                             'id' => null,
-                        )
+                        ]
                     );
                     ?>
                 </div>
@@ -132,7 +132,7 @@ $formAttributes['method'] = 'GET';
         <div class="inputs">
         <?php
             echo $this->formText('range', @$_GET['range'],
-                array('size' => '40')
+                ['size' => '40']
             );
         ?>
         </div>
@@ -145,8 +145,8 @@ $formAttributes['method'] = 'GET';
             echo $this->formSelect(
                 'collection',
                 @$_REQUEST['collection'],
-                array('id' => 'collection-search'),
-                get_table_options('Collection', null, array('include_no_collection' => true))
+                ['id' => 'collection-search'],
+                get_table_options('Collection', null, ['include_no_collection' => true])
             );
         ?>
         </div>
@@ -159,7 +159,7 @@ $formAttributes['method'] = 'GET';
             echo $this->formSelect(
                 'type',
                 @$_REQUEST['type'],
-                array('id' => 'item-type-search'),
+                ['id' => 'item-type-search'],
                 get_table_options('ItemType')
             );
         ?>
@@ -175,7 +175,7 @@ $formAttributes['method'] = 'GET';
             echo $this->formSelect(
                 'user',
                 @$_REQUEST['user'],
-                array('id' => 'user-search'),
+                ['id' => 'user-search'],
                 get_table_options('User')
             );
         ?>
@@ -188,7 +188,7 @@ $formAttributes['method'] = 'GET';
         <div class="inputs">
         <?php
             echo $this->formText('tags', @$_REQUEST['tags'],
-                array('size' => '40', 'id' => 'tag-search')
+                ['size' => '40', 'id' => 'tag-search']
             );
         ?>
         </div>
@@ -203,11 +203,11 @@ $formAttributes['method'] = 'GET';
             echo $this->formSelect(
                 'public',
                 @$_REQUEST['public'],
-                array(),
-                label_table_options(array(
+                [],
+                label_table_options([
                     '1' => __('Only Public Items'),
                     '0' => __('Only Non-Public Items')
-                ))
+                ])
             );
         ?>
         </div>
@@ -221,17 +221,17 @@ $formAttributes['method'] = 'GET';
             echo $this->formSelect(
                 'featured',
                 @$_REQUEST['featured'],
-                array(),
-                label_table_options(array(
+                [],
+                label_table_options([
                     '1' => __('Only Featured Items'),
                     '0' => __('Only Non-Featured Items')
-                ))
+                ])
             );
         ?>
         </div>
     </div>
 
-    <?php fire_plugin_hook('public_items_search', array('view' => $this)); ?>
+    <?php fire_plugin_hook('public_items_search', ['view' => $this]); ?>
     <div>
         <?php if (!isset($buttonText)) {
             $buttonText = __('Search for items');

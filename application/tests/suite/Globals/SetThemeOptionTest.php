@@ -16,11 +16,11 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
     const THEME = 'foobar';
     const THEME_OPTIONS_OPTION = 'theme_foobar_options';
 
-    private $_themeOptions = array(
+    private $_themeOptions = [
         'logo' => 'foobar.jpg',
         'show_title' => true,
         'show_description' => false
-    );
+    ];
 
     private $dbAdapter;
     private $db;
@@ -28,10 +28,10 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
     public function setUpLegacy()
     {
         $bootstrap = new Omeka_Test_Bootstrap;
-        $bootstrap->getContainer()->options = array(
+        $bootstrap->getContainer()->options = [
             Theme::PUBLIC_THEME_OPTION => self::THEME,
             self::THEME_OPTIONS_OPTION => serialize($this->_themeOptions)
-        );
+        ];
 
         $this->dbAdapter = new Zend_Test_DbAdapter();
         $this->db = new Omeka_Db($this->dbAdapter, 'omeka_');
@@ -53,9 +53,9 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
         $profile = $this->dbAdapter->getProfiler()->getLastQueryProfile();
         $this->assertEquals("REPLACE INTO omeka_options (name, value) VALUES (?, ?)",
                             $profile->getQuery());
-        $this->assertEquals(array(1 => self::THEME_OPTIONS_OPTION,
+        $this->assertEquals([1 => self::THEME_OPTIONS_OPTION,
                                   2 => serialize($expectedThemeOptions)
-                            ),
+                            ],
                             $profile->getQueryParams());
     }
 

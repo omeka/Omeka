@@ -22,8 +22,8 @@ class Helpers_GetRecordsTest extends Omeka_Test_TestCase
     public function setUpLegacy()
     {
         // Link a mock collections table to a mock database.
-        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->collectionTable = $this->getMock('Table_Collection', array(), array(), '', false);
+        $this->db = $this->getMock('Omeka_Db', [], [], '', false);
+        $this->collectionTable = $this->getMock('Table_Collection', [], [], '', false);
         $this->db->expects($this->any())
                  ->method('getTable')
                  ->with('Collection')
@@ -41,13 +41,13 @@ class Helpers_GetRecordsTest extends Omeka_Test_TestCase
 
     public function testDelegatesToCollectionTable()
     {
-        $params = array('foobar' => true);
+        $params = ['foobar' => true];
         $limit = 5;
         $collection = new Collection;
         $this->collectionTable->expects($this->once())
                  ->method('findBy')
                  ->with($params, $limit)
-                 ->will($this->returnValue(array($collection)));
-        $this->assertEquals(array($collection), get_records('Collection', $params, $limit));
+                 ->will($this->returnValue([$collection]));
+        $this->assertEquals([$collection], get_records('Collection', $params, $limit));
     }
 }

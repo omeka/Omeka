@@ -128,15 +128,15 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace' => 'Omeka_Filter');
+        $options = ['inputNamespace' => 'Omeka_Filter'];
 
         // Alphanumeric with no whitespace allowed, lowercase
-        $username_filter = array(new Zend_Filter_Alnum(false), 'StringToLower');
+        $username_filter = [new Zend_Filter_Alnum(false), 'StringToLower'];
 
         // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('*' => array('StripTags', 'StringTrim'),
+        $filters = ['*' => ['StripTags', 'StringTrim'],
                          'username' => 'StringTrim',
-                         'active' => 'Boolean');
+                         'active' => 'Boolean'];
 
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
 
@@ -187,7 +187,7 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         // Validate the username
         if (strlen($this->username) < self::USERNAME_MIN_LENGTH || strlen($this->username) > self::USERNAME_MAX_LENGTH) {
             $this->addError('username', __('The username "%1$s" must be between %2$s and %3$s characters.', $this->username, self::USERNAME_MIN_LENGTH, self::USERNAME_MAX_LENGTH));
-        } elseif (! Zend_Validate::is($this->username, 'Regex', array('pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u'))) {
+        } elseif (! Zend_Validate::is($this->username, 'Regex', ['pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u'])) {
             $this->addError('username', __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _'));
         } elseif (!$this->fieldIsUnique('username')) {
             $this->addError('username', __("'%s' is already in use. Please choose another username.", $this->username));
@@ -210,7 +210,7 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         if (is_string($username)) {
             $userTable = get_db()->getTable('User');
-            $user = $userTable->findBySql("username = ?", array($username), true);
+            $user = $userTable->findBySql("username = ?", [$username], true);
         } else {
             $user = $username;
         }

@@ -56,7 +56,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
         if (!method_exists($this->_defaultTable, $method)) {
             throw new BadMethodCallException("Method named '$method' does not exist in the default table, which is an instance of '" . get_class($this->_defaultTable) . "'.");
         }
-        return call_user_func_array(array($this->_defaultTable, $method), $args);
+        return call_user_func_array([$this->_defaultTable, $method], $args);
     }
 
     /**

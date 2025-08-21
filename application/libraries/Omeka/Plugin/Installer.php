@@ -47,7 +47,7 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 1;
         $plugin->save();
-        $this->_broker->callHook('activate', array(), $plugin);
+        $this->_broker->callHook('activate', [], $plugin);
     }
 
     /**
@@ -59,7 +59,7 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 0;
         $plugin->save();
-        $this->_broker->callHook('deactivate', array(), $plugin);
+        $this->_broker->callHook('deactivate', [], $plugin);
     }
 
     /**
@@ -90,8 +90,8 @@ class Omeka_Plugin_Installer
         // run the upgrade hook for the plugin.
         $this->_broker->callHook(
             'upgrade',
-            array('old_version' => $oldVersion,
-                  'new_version' => $plugin->getIniVersion()),
+            ['old_version' => $oldVersion,
+                  'new_version' => $plugin->getIniVersion()],
             $plugin
         );
 
@@ -123,7 +123,7 @@ class Omeka_Plugin_Installer
             }
 
             //Now run the installer for the plugin
-            $this->_broker->callHook('install', array('plugin_id' => $plugin->id), $plugin);
+            $this->_broker->callHook('install', ['plugin_id' => $plugin->id], $plugin);
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();
@@ -149,7 +149,7 @@ class Omeka_Plugin_Installer
             $this->_loader->load($plugin, true);
         }
 
-        $this->_broker->callHook('uninstall', array(), $plugin);
+        $this->_broker->callHook('uninstall', [], $plugin);
         $plugin->delete();
     }
 }

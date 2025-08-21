@@ -8,7 +8,7 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 
-echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary'));
+echo head(['title' => $fileTitle, 'bodyclass'=>'files show primary-secondary']);
 echo flash();
 ?>
 
@@ -17,23 +17,23 @@ echo flash();
     
     <?php echo all_element_texts('file'); ?>
     
-    <?php fire_plugin_hook('admin_files_show', array('file' => $file, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_files_show', ['file' => $file, 'view' => $this]); ?>
 </section>
 
 <section class="three columns omega">
     <div id="edit" class="panel">
         <?php if (is_allowed($file, 'edit')): ?>
-            <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
+            <?php echo link_to($file, 'edit', __('Edit'), ['class'=>'big green button']); ?>
         <?php endif; ?>
         <a href="<?php echo html_escape(public_url('files/show/'.metadata('file', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
         <?php if (is_allowed($file, 'delete')): ?>
-            <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
+            <?php echo link_to($file, 'delete-confirm', __('Delete'), ['class' => 'big red button delete-confirm']); ?>
         <?php endif; ?>
     </div>
     
     <div id="file-item" class="panel">
         <h4><?php echo __('Item'); ?></h4>
-        <p><?php echo link_to_item(null, array(), 'show', $file->getItem()); ?></p>
+        <p><?php echo link_to_item(null, [], 'show', $file->getItem()); ?></p>
     </div>
 
     <?php
@@ -106,7 +106,7 @@ echo flash();
         <?php echo output_format_list(); ?>
     </div>
 
-    <?php fire_plugin_hook('admin_files_show_sidebar', array('file' => $file, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_files_show_sidebar', ['file' => $file, 'view' => $this]); ?>
 </section>
     
 <?php echo foot();?>

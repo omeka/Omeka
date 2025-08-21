@@ -1,5 +1,5 @@
 <?php 
-echo head(array('bodyclass' => 'error404', 'title' => __('404: Page Not Found')));
+echo head(['bodyclass' => 'error404', 'title' => __('404: Page Not Found')]);
 echo flash();
 ?>
 
@@ -21,7 +21,7 @@ echo flash();
         <div class="recent-row">
             <p class="recent"><?php echo link_to_item(); ?></p>
             <?php if (is_allowed($item, 'edit')): ?>
-            <p class="dash-edit"><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></p>
+            <p class="dash-edit"><?php echo link_to_item(__('Edit'), [], 'edit'); ?></p>
             <?php endif; ?>
         </div>
         <?php endforeach; ?>
@@ -42,7 +42,7 @@ echo flash();
         <div class="recent-row">
             <p class="recent"><?php echo link_to_collection(); ?></p>
             <?php if (is_allowed($collection, 'edit')): ?>
-            <p class="dash-edit"><?php echo link_to_collection(__('Edit'), array(), 'edit'); ?></p>
+            <p class="dash-edit"><?php echo link_to_collection(__('Edit'), [], 'edit'); ?></p>
             <?php endif; ?>
         </div>
         <?php endforeach; ?>

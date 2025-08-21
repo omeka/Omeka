@@ -36,7 +36,7 @@ class Omeka_Storage_Adapter_ZendS3Cloudfront extends Omeka_Storage_Adapter_ZendS
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -78,18 +78,18 @@ class Omeka_Storage_Adapter_ZendS3Cloudfront extends Omeka_Storage_Adapter_ZendS
             // "Chunk" expirations to allow browser caching
             $expires = $expires + $expirationSeconds - ($expires % $expirationSeconds);
 
-            $statement = json_encode(array(
-                'Statement' => array(
-                    array(
+            $statement = json_encode([
+                'Statement' => [
+                    [
                         'Resource' => $uri,
-                        'Condition' => array(
-                            'DateLessThan' => array(
+                        'Condition' => [
+                            'DateLessThan' => [
                                 'AWS:EpochTime' => $expires,
-                            ),
-                        ),
-                    ),
-                ),
-            ), JSON_UNESCAPED_SLASHES);
+                            ],
+                        ],
+                    ],
+                ],
+            ], JSON_UNESCAPED_SLASHES);
 
             $key = openssl_pkey_get_private('file://' . $this->_cloudfrontKeyPath, $this->_cloudfrontKeyPassphrase);
             if (!$key) {
@@ -119,7 +119,7 @@ class Omeka_Storage_Adapter_ZendS3Cloudfront extends Omeka_Storage_Adapter_ZendS
 
     private function _getOpensslErrors()
     {
-        $errors = array();
+        $errors = [];
         while (($error = openssl_error_string()) !== false) {
             $errors[] = $error;
         }

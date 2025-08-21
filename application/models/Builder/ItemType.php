@@ -15,9 +15,9 @@ class Builder_ItemType extends Omeka_Record_Builder_AbstractBuilder
 {
     protected $_recordClass = 'ItemType';
 
-    protected $_settableProperties = array('name', 'description');
+    protected $_settableProperties = ['name', 'description'];
 
-    private $_elements = array();
+    private $_elements = [];
 
     /**
      * Set the elements that will be attached to the built ItemType record.

@@ -20,13 +20,13 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
     const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
 
     protected $_recordClass = 'Collection';
-    protected $_settableProperties = array(
+    protected $_settableProperties = [
         self::OWNER_ID,
         self::IS_PUBLIC,
         self::IS_FEATURED
-    );
+    ];
 
-    private $_elementTexts = array();
+    private $_elementTexts = [];
 
     /**
      * Set the element texts for the collection.

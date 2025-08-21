@@ -48,7 +48,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function metadata($record, $metadata, $options = array())
+    public function metadata($record, $metadata, $options = [])
     {
         if (is_string($record)) {
             $record = $this->view->getCurrentRecord($record);
@@ -118,11 +118,11 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      */
     protected function _getOptions($options)
     {
-        $converted = array();
+        $converted = [];
         if (is_integer($options)) {
-            $converted = array(self::INDEX => $options);
+            $converted = [self::INDEX => $options];
         } elseif (self::ALL == $options) {
-            $converted = array(self::ALL => true);
+            $converted = [self::ALL => true];
         } else {
             $converted = (array) $options;
         }
@@ -254,12 +254,12 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
     {
         // Build the name of the filter to use. This will end up looking like:
         // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
-        $filterName = array('Display', get_class($record));
+        $filterName = ['Display', get_class($record)];
         if (is_array($metadata)) {
             $filterName = array_merge($filterName, $metadata);
         } else {
             $filterName[] = $metadata;
         }
-        return apply_filters($filterName, $text, array('record' => $record, 'element_text' => $elementText));
+        return apply_filters($filterName, $text, ['record' => $record, 'element_text' => $elementText]);
     }
 }

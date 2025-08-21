@@ -13,7 +13,7 @@ class Table_ItemType extends Omeka_Db_Table
 {
     protected function _getColumnPairs()
     {
-        return array($this->_name . '.id', $this->_name . '.name');
+        return [$this->_name . '.id', $this->_name . '.name'];
     }
 
     public function findByName($itemTypeName)

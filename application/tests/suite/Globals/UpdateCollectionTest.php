@@ -29,16 +29,16 @@ class Globals_UpdateCollectionTest extends Omeka_Test_AppTestCase
         $isHtml = true;
         $isPublic = true;
         $isFeatured = true;
-        $metadata = array('public' => $isPublic, 'featured' => $isFeatured);
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(
-                array('text' => $titleText, 'html' => $isHtml)
-             ),
-             'Description' => array(
-                 array('text' => $descriptionTextA, 'html' => $isHtml),
-                 array('text' => $descriptionTextB, 'html' => $isHtml)
-              )
-        ));
+        $metadata = ['public' => $isPublic, 'featured' => $isFeatured];
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [
+                ['text' => $titleText, 'html' => $isHtml]
+             ],
+             'Description' => [
+                 ['text' => $descriptionTextA, 'html' => $isHtml],
+                 ['text' => $descriptionTextB, 'html' => $isHtml]
+              ]
+        ]];
 
         $updatedCollection = update_collection($oldCollection, $metadata, $elementTexts);
 

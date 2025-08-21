@@ -43,8 +43,8 @@ class Table_Element extends Omeka_Db_Table
         $db = $this->getDb();
 
         // Join on the element_sets table to retrieve set name
-        $select->joinLeft(array('element_sets' => $db->ElementSet), 'element_sets.id = elements.element_set_id',
-            array('set_name' => 'element_sets.name'));
+        $select->joinLeft(['element_sets' => $db->ElementSet], 'element_sets.id = elements.element_set_id',
+            ['set_name' => 'element_sets.name']);
         return $select;
     }
 
@@ -56,7 +56,7 @@ class Table_Element extends Omeka_Db_Table
      */
     protected function _getColumnPairs()
     {
-        return array('elements.id', 'elements.name');
+        return ['elements.id', 'elements.name'];
     }
 
     protected function orderElements($select)
@@ -100,18 +100,18 @@ class Table_Element extends Omeka_Db_Table
     {
         $select = $this->getSelect();
         $db = $this->getDb();
-        $select->joinInner(array('item_types_elements' => $db->ItemTypesElements), 'item_types_elements.element_id = elements.id', array());
+        $select->joinInner(['item_types_elements' => $db->ItemTypesElements], 'item_types_elements.element_id = elements.id', []);
         $select->where('item_types_elements.item_type_id = ?');
         $select->order('item_types_elements.order ASC');
 
-        $elements = $this->fetchObjects($select, array($itemTypeId));
+        $elements = $this->fetchObjects($select, [$itemTypeId]);
 
         return $elements;
     }
 
     public function findByElementSetNameAndElementName($elementSetName, $elementName)
     {
-        $select = $this->getSelectForFindBy(array('element_set_name' => $elementSetName, 'element_name' => $elementName));
+        $select = $this->getSelectForFindBy(['element_set_name' => $elementSetName, 'element_name' => $elementName]);
         return $this->fetchObject($select);
     }
 
@@ -134,7 +134,7 @@ class Table_Element extends Omeka_Db_Table
 
         // Retrieve only elements matching a specific record type.
         if (array_key_exists('record_types', $params)) {
-            $where = array();
+            $where = [];
             foreach ($params['record_types'] as $recordTypeName) {
                 if ($recordTypeName == 'All') {
                     $where[] = 'element_sets.record_type IS NULL';
@@ -165,16 +165,16 @@ class Table_Element extends Omeka_Db_Table
 
         // Retrive results including, but not limited to, a specific item type.
         if (array_key_exists('item_type_id', $params)) {
-            $select->joinLeft(array('item_types_elements' => $db->ItemTypesElements),
-                'item_types_elements.element_id = elements.id', array());
+            $select->joinLeft(['item_types_elements' => $db->ItemTypesElements],
+                'item_types_elements.element_id = elements.id', []);
             $select->where('item_types_elements.item_type_id = ? OR item_types_elements.item_type_id IS NULL',
                 (int) $params['item_type_id']);
         } elseif (array_key_exists('exclude_item_type', $params)) {
             $select->where('element_sets.name != ?', ElementSet::ITEM_TYPE_NAME);
         } elseif (array_key_exists('item_type', $params)) {
             //for the API for item_types
-            $select->joinLeft(array('item_types_elements' => $db->ItemTypesElements),
-                    'item_types_elements.element_id = elements.id', array());
+            $select->joinLeft(['item_types_elements' => $db->ItemTypesElements],
+                    'item_types_elements.element_id = elements.id', []);
             $select->where('item_types_elements.item_type_id = ? ', (int) $params['item_type']);
         }
 
@@ -196,25 +196,25 @@ class Table_Element extends Omeka_Db_Table
      * @see Omeka_Db_Table::findPairsForSelectForm()
      * @return array
      */
-    public function findPairsForSelectForm(array $options = array())
+    public function findPairsForSelectForm(array $options = [])
     {
         $db = $this->getDb();
         // For backwards-compatibility.
         if (!array_key_exists('record_types', $options)) {
-            $options['record_types'] = array('Item', 'All');
+            $options['record_types'] = ['Item', 'All'];
         }
         $optgroups = get_option('show_element_set_headings');
 
         $select = $this->getSelectForFindBy($options);
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->from(array(), array(
+        $select->from([], [
             'id' => 'elements.id',
             'name' => 'elements.name',
             'set_name' => 'element_sets.name',
-        ));
+        ]);
 
         $elements = $this->fetchAll($select);
-        $selectOptions = array();
+        $selectOptions = [];
         foreach ($elements as $element) {
             if ($optgroups) {
                 $selectOptions[__($element['set_name'])][$element['id']] = __($element['name']);

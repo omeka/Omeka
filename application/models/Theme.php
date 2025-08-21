@@ -254,7 +254,7 @@ class Theme
          * Create an array of themes, with the directory paths
          * theme.ini files and images paths if they are present
          */
-        $themes = array();
+        $themes = [];
         foreach (new DirectoryIterator(PUBLIC_THEME_DIR) as $entry) {
             $filename = $entry->getFilename();
             if (!$entry->isDir() || $filename[0] === '.') {
@@ -277,7 +277,7 @@ class Theme
          * Create an array of themes, with the directory paths
          * theme.ini files and images paths if they are present
          */
-        $themes = array();
+        $themes = [];
         foreach (new DirectoryIterator(ADMIN_THEME_DIR) as $entry) {
             $filename = $entry->getFilename();
             if (!$entry->isDir() || $filename[0] === '.') {
@@ -335,12 +335,12 @@ class Theme
         $themeConfigOptions = apply_filters(
             'theme_options',
             $themeConfigOptions,
-            array('theme_name' => $themeName)
+            ['theme_name' => $themeName]
         );
         if ($themeConfigOptions) {
             $themeConfigOptions = unserialize($themeConfigOptions);
         } else {
-            $themeConfigOptions = array();
+            $themeConfigOptions = [];
         }
         return $themeConfigOptions;
     }

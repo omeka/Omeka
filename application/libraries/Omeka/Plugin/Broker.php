@@ -23,7 +23,7 @@ class Omeka_Plugin_Broker
      *
      * @var array
      */
-    protected $_callbacks = array();
+    protected $_callbacks = [];
 
     /**
      * Stores all defined filters.
@@ -35,7 +35,7 @@ class Omeka_Plugin_Broker
      * space (in the manner of Wordpress).
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
 
     /**
      * The directory name of the current plugin (used for calling hooks)
@@ -128,7 +128,7 @@ class Omeka_Plugin_Broker
      * @param array $args Arguments to be passed to the hook implementations.
      * @param Plugin|string $plugin Name of the plugin that will invoke the hook.
      */
-    public function callHook($name, array $args = array(), $plugin = null)
+    public function callHook($name, array $args = [], $plugin = null)
     {
         // Check if callbacks were registered for this hook.
         if (empty($this->_callbacks[$name])) {
@@ -214,7 +214,7 @@ class Omeka_Plugin_Broker
     {
         $filterKey = $this->_getFilterKey($hookName);
         if (!isset($this->_filters[$filterKey])) {
-            return array();
+            return [];
         }
 
         $filters = (array) $this->_filters[$filterKey];
@@ -235,7 +235,7 @@ class Omeka_Plugin_Broker
         if ($name) {
             unset($this->_filters[$this->_getFilterKey($name)]);
         } else {
-            $this->_filters = array();
+            $this->_filters = [];
         }
     }
 
@@ -248,7 +248,7 @@ class Omeka_Plugin_Broker
      * @param array $args Additional arguments to pass to filter implementations.
      * @return mixed Result of applying filters to $value.
      */
-    public function applyFilters($name, $value, array $args = array())
+    public function applyFilters($name, $value, array $args = [])
     {
         $filters = $this->getFilters($name);
         if ($filters) {

@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('403 Page Forbidden');
-echo head(array('title' => $pageTitle));
+echo head(['title' => $pageTitle]);
 ?>
 
 <h1><?php echo $pageTitle; ?></h1>

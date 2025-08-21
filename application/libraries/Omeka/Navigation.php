@@ -133,26 +133,26 @@ class Omeka_Navigation extends Zend_Navigation
 
         $theme = null;
         // get default pages for the filter
-        $pageLinks = array();
+        $pageLinks = [];
         switch ($filterName) {
             case self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME:
                 // add the standard Browse Items and Browse Collections links to the main nav
-                $pageLinks = array(
-                    new Omeka_Navigation_Page_Mvc(array(
+                $pageLinks = [
+                    new Omeka_Navigation_Page_Mvc([
                         'label' => __('Browse Items'),
                         'controller' => 'items',
                         'action' => 'browse',
                         'visible' => true,
                         'theme' => 'public'
-                    )),
-                    new Omeka_Navigation_Page_Mvc(array(
+                    ]),
+                    new Omeka_Navigation_Page_Mvc([
                         'label' => __('Browse Collections'),
                         'controller' => 'collections',
                         'action' => 'browse',
                         'visible' => true,
                         'theme' => 'public'
-                    )),
-                );
+                    ]),
+                ];
                 $theme = 'public';
             break;
         }
@@ -168,10 +168,10 @@ class Omeka_Navigation extends Zend_Navigation
         foreach ($pageLinks as $pageLink) {
             // normalize the page and its subpages
             $page = $filterNav->_normalizePageRecursive($pageLink,
-                array(
+                [
                     'can_delete' => false,
                     'theme' => $theme
-                )
+                ]
             );
             $filterNav->baseAddNormalizedPage($page);
         }
@@ -309,7 +309,7 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function getExpiredPagesFromNav(Omeka_Navigation $freshNav)
     {
-        $expiredPages = array();
+        $expiredPages = [];
         $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
             $freshPage = $freshNav->getPageByUid($page->uid);
@@ -342,7 +342,7 @@ class Omeka_Navigation extends Zend_Navigation
     public function getOtherPages($excludePageUids = null)
     {
         // get other pages
-        $otherPages = array();
+        $otherPages = [];
         $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
             if ($excludePageUids === null ||
@@ -441,7 +441,7 @@ class Omeka_Navigation extends Zend_Navigation
      * @return Omeka_Navigation_Page_Uri|Omeka_Navigation_Page_Mvc|null The normalized page
      * @throws Zend_Navigation_Exception if a page or subpage is invalid  
      */
-    protected function _normalizePageRecursive($page, $pageOptions = array())
+    protected function _normalizePageRecursive($page, $pageOptions = [])
     {
         if ($page === $this) {
             require_once 'Zend/Navigation/Exception.php';
@@ -479,7 +479,7 @@ class Omeka_Navigation extends Zend_Navigation
         $uid = $this->createPageUid($page->getHref());
         $page->uid = $uid;
         // normalize sub pages
-        $subPages = array();
+        $subPages = [];
         foreach ($page->getPages() as $subPage) {
             $subPages[] = $this->_normalizePageRecursive($subPage, $pageOptions);
         }
@@ -532,7 +532,7 @@ class Omeka_Navigation extends Zend_Navigation
         // change the nested subarrays located in the childKey
         if (isset($array[$childKey])) {
             $subArrays = $array[$childKey];
-            $newSubArrays = array();
+            $newSubArrays = [];
             foreach ($subArrays as $subArray) {
                 $newSubArrays[] = $this->_conditionalReplaceValueInArray($subArray,
                                                                          $childKey,

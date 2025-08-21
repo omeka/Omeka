@@ -18,7 +18,7 @@ class Omeka_Validate_Exception extends Exception
      *
      * @var string
      */
-    protected $_errors = array();
+    protected $_errors = [];
 
     /**
      * @param $errors string|Omeka_Validate_Errors If a string, it is a

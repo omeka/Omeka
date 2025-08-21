@@ -16,7 +16,7 @@ class InsertFilesForItemTest extends Omeka_Test_AppTestCase
     public function setUpLegacy()
     {
         parent::setUpLegacy();
-        $this->item = insert_item(array('public' => true));
+        $this->item = insert_item(['public' => true]);
         set_option('disable_default_file_validation', 1);
     }
 
@@ -29,7 +29,7 @@ class InsertFilesForItemTest extends Omeka_Test_AppTestCase
     public function testCanInsertFilesForAnItem()
     {
         $fileUrl = TEST_DIR . '/_files/test.txt';
-        $files = insert_files_for_item($this->item, 'Filesystem', array($fileUrl));
+        $files = insert_files_for_item($this->item, 'Filesystem', [$fileUrl]);
         $this->assertEquals(1, count($files));
         $this->assertThat($files[0], $this->isInstanceOf('File'));
         $this->assertTrue($files[0]->exists());

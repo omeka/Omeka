@@ -13,7 +13,7 @@
  */
 abstract class Omeka_Job_Dispatcher_Adapter_AbstractAdapter implements Omeka_Job_Dispatcher_Adapter_AdapterInterface
 {
-    private $_options = array();
+    private $_options = [];
 
     /**
      * @param array|null $options Optional Options to instantiate in the adapter.

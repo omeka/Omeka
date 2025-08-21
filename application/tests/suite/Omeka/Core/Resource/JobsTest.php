@@ -16,18 +16,18 @@ class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
         Zend_Registry::_unsetInstance();
         $this->application = new Zend_Application('testing');
         $this->bootstrap = new Omeka_Application_Bootstrap_Mock($this->application);
-        $this->config = new Zend_Config(array(
-            'jobs' => array(
-                'dispatcher' => array(
+        $this->config = new Zend_Config([
+            'jobs' => [
+                'dispatcher' => [
                     'default' => 'Omeka_Job_Dispatcher_Adapter_Array',
-                    'defaultOptions' => array(),
-                )
-            )
-        ), true);
+                    'defaultOptions' => [],
+                ]
+            ]
+        ], true);
         $this->bootstrap->setResource('config', $this->config);
         $this->user = new stdClass;
         $this->bootstrap->setResource('currentuser', $this->user);
-        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
+        $this->db = $this->getMock('Omeka_Db', [], [], '', false);
         $this->bootstrap->setResource('db', $this->db);
     }
 
@@ -79,7 +79,7 @@ class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
 
 class Omeka_Application_Bootstrap_Mock extends Zend_Application_Bootstrap_BootstrapAbstract
 {
-    private $_mockResources = array();
+    private $_mockResources = [];
 
     public function run()
     {

@@ -43,7 +43,7 @@ function set_option($name, $value)
 {
     $db = get_db();
     $sql = "REPLACE INTO {$db->Option} (name, value) VALUES (?, ?)";
-    $db->query($sql, array($name, $value));
+    $db->query($sql, [$name, $value]);
 
     // Update the options cache.
     $bootstrap = Zend_Registry::get('bootstrap');
@@ -62,7 +62,7 @@ function delete_option($name)
 {
     $db = get_db();
     $sql = "DELETE FROM {$db->Option} WHERE `name` = ?";
-    $db->query($sql, array($name));
+    $db->query($sql, [$name]);
 
     // Update the options cache.
     $bootstrap = Zend_Registry::get('bootstrap');
@@ -83,7 +83,7 @@ function delete_option($name)
  */
 function pluck($col, $array)
 {
-    $res = array();
+    $res = [];
     foreach ($array as $k => $row) {
         $res[$k] = $row[$col];
     }
@@ -182,7 +182,7 @@ function add_plugin_hook($hook, $callback)
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
  */
-function fire_plugin_hook($name, array $args = array())
+function fire_plugin_hook($name, array $args = [])
 {
     if ($pluginBroker = get_plugin_broker()) {
         $pluginBroker->callHook($name, $args);
@@ -198,7 +198,7 @@ function fire_plugin_hook($name, array $args = array())
  * @param array $args Arguments to be passed to the hook implementations.
  * @return string
  */
-function get_plugin_hook_output($name, array $args = array())
+function get_plugin_hook_output($name, array $args = [])
 {
     ob_start();
     fire_plugin_hook($name, $args);
@@ -220,7 +220,7 @@ function get_plugin_hook_output($name, array $args = array())
  * @param mixed $args Any arguments to be passed to the hook implementation.
  * @return string|null
  */
-function get_specific_plugin_hook_output($pluginName, $hookName, $args = array())
+function get_specific_plugin_hook_output($pluginName, $hookName, $args = [])
 {
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
@@ -284,7 +284,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  * @param callback $callback Any valid callback.
  * @param array $options
  */
-function add_file_display_callback($fileIdentifiers, $callback, array $options = array())
+function add_file_display_callback($fileIdentifiers, $callback, array $options = [])
 {
     Omeka_View_Helper_FileMarkup::addMimeTypes($fileIdentifiers, $callback, $options);
 }
@@ -318,7 +318,7 @@ function add_file_fallback_image($mimeType, $image)
  * @param array $args Additional arguments to pass to filter implementations.
  * @return mixed Result of applying filters to $value.
  */
-function apply_filters($name, $value, array $args = array())
+function apply_filters($name, $value, array $args = [])
 {
     if ($pluginBroker = get_plugin_broker()) {
         return $pluginBroker->applyFilters($name, $value, $args);
@@ -405,11 +405,11 @@ function is_admin_theme()
  */
 function get_search_record_types()
 {
-    $searchRecordTypes = array(
+    $searchRecordTypes = [
         'Item' => __('Item'),
         'File' => __('File'),
         'Collection' => __('Collection'),
-    );
+    ];
     $searchRecordTypes = apply_filters('search_record_types', $searchRecordTypes);
     return $searchRecordTypes;
 }
@@ -426,7 +426,7 @@ function get_custom_search_record_types()
     // Get the custom search record types from the database.
     $customSearchRecordTypes = unserialize(get_option('search_record_types'));
     if (!is_array($customSearchRecordTypes)) {
-        $customSearchRecordTypes = array();
+        $customSearchRecordTypes = [];
     }
 
     // Compare the custom list to the full list.
@@ -464,11 +464,11 @@ function get_search_query_types()
         return $searchQueryTypes;
     }
 
-    $searchQueryTypes = array(
+    $searchQueryTypes = [
         'keyword' => __('Keyword'),
         'boolean' => __('Boolean'),
         'exact_match' => __('Exact match'),
-    );
+    ];
     $searchQueryTypes = apply_filters('search_query_types', $searchQueryTypes);
     return $searchQueryTypes;
 }
@@ -530,7 +530,7 @@ function get_search_query_types()
  *
  * @return Item
  */
-function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
+function insert_item($metadata = [], $elementTexts = [], $fileMetadata = [])
 {
     $builder = new Builder_Item(get_db());
     $builder->setRecordMetadata($metadata);
@@ -560,7 +560,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  *    when a file input is left empty on a form.
  * @return array The added File records.
  */
-function insert_files_for_item($item, $transferStrategy, $files, $options = array())
+function insert_files_for_item($item, $transferStrategy, $files, $options = [])
 {
     $builder = new Builder_Item(get_db());
     $builder->setRecord($item);
@@ -579,7 +579,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  * @param array $fileMetadata File ingest data. See insert_item() for details.
  * @return Item
  */
-function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
+function update_item($item, $metadata = [], $elementTexts = [], $fileMetadata = [])
 {
     $builder = new Builder_Item(get_db());
     $builder->setRecord($item);
@@ -600,7 +600,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @param array $elementTexts The element texts for the collection.
  * @return Collection
  */
-function update_collection($collection, $metadata = array(), $elementTexts = array())
+function update_collection($collection, $metadata = [], $elementTexts = [])
 {
     $builder = new Builder_Collection(get_db());
     $builder->setRecord($collection);
@@ -639,7 +639,7 @@ function update_collection($collection, $metadata = array(), $elementTexts = arr
  * </code>
  * @return ItemType
  */
-function insert_item_type($metadata = array(), $elementInfos = array())
+function insert_item_type($metadata = [], $elementInfos = [])
 {
     $builder = new Builder_ItemType(get_db());
     $builder->setRecordMetadata($metadata);
@@ -687,7 +687,7 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  * </code>
  * @return Collection
  */
-function insert_collection($metadata = array(), $elementTexts = array())
+function insert_collection($metadata = [], $elementTexts = [])
 {
     $builder = new Builder_Collection(get_db());
     $builder->setRecordMetadata($metadata);
@@ -727,11 +727,11 @@ function insert_collection($metadata = array(), $elementTexts = array())
  * </code>
  * @return ElementSet
  */
-function insert_element_set($elementSetMetadata = array(), array $elements = array())
+function insert_element_set($elementSetMetadata = [], array $elements = [])
 {
     // Set the element set name if a string is provided.
     if (is_string($elementSetMetadata)) {
-        $elementSetMetadata = array('name' => $elementSetMetadata);
+        $elementSetMetadata = ['name' => $elementSetMetadata];
     }
 
     $builder = new Builder_ElementSet(get_db());
@@ -933,7 +933,7 @@ function __($msgid)
  */
 function plural($msgid, $msgid_plural, $n)
 {
-    return array($msgid, $msgid_plural, $n);
+    return [$msgid, $msgid_plural, $n];
 }
 
 /**
@@ -958,10 +958,10 @@ function add_translation_source($dir)
     $locale = $translate->getAdapter()->getOptions('localeName');
 
     try {
-        $translate->addTranslation(array(
+        $translate->addTranslation([
             'content' => "$dir/$locale.mo",
             'locale' => $locale
-        ));
+        ]);
     } catch (Zend_Translate_Exception $e) {
         // Do nothing, allow the user to set a locale or dir without a
         // translation.
@@ -1021,7 +1021,7 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
  * @param array $options An array of options.
  * @param mixed $version Version number. By default OMEKA_VERSION.
  */
-function queue_js_file($file, $dir = 'javascripts', $options = array(), $version = OMEKA_VERSION)
+function queue_js_file($file, $dir = 'javascripts', $options = [], $version = OMEKA_VERSION)
 {
     if (is_array($file)) {
         foreach ($file as $singleFile) {
@@ -1044,7 +1044,7 @@ function queue_js_file($file, $dir = 'javascripts', $options = array(), $version
  * @param string $string URL to script.
  * @param array $options An array of options.
  */
-function queue_js_url($url, $options = array())
+function queue_js_url($url, $options = [])
 {
     get_view()->headScript()->appendFile($url, null, $options);
 }
@@ -1060,7 +1060,7 @@ function queue_js_url($url, $options = array())
  * @param string $string JavaScript string to include.
  * @param array $options An array of options.
  */
-function queue_js_string($string, $options = array())
+function queue_js_string($string, $options = [])
 {
     get_view()->headScript()->appendScript($string, null, $options);
 }
@@ -1126,7 +1126,7 @@ function queue_css_url($url, $media = 'all', $conditional = false)
  */
 function queue_css_string($string, $media = 'all', $conditional = false)
 {
-    $attrs = array();
+    $attrs = [];
     if ($media) {
         $attrs['media'] = $media;
     }
@@ -1317,7 +1317,7 @@ function random_featured_collection()
 {
     $collection = get_random_featured_collection();
     if ($collection) {
-        $html = get_view()->partial('collections/single.php', array('collection' => $collection));
+        $html = get_view()->partial('collections/single.php', ['collection' => $collection]);
         release_object($collection);
     } else {
         $html = '<p>' . __('No featured collections are available.') . '</p>';
@@ -1350,7 +1350,7 @@ function get_collection_for_item($item = null)
  */
 function get_recent_collections($num = 10)
 {
-    return get_records('Collection', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_records('Collection', ['sort_field' => 'added', 'sort_dir' => 'd'], $num);
 }
 
 /**
@@ -1384,7 +1384,7 @@ function latest_omeka_version()
     }
     $check = unserialize($updateOption);
     if (!$check) {
-        $check = array();
+        $check = [];
     }
 
     // This a timestamp corresponding to the last time we checked for
@@ -1443,12 +1443,12 @@ function max_file_size()
  * file in a div.
  * @return string HTML
  */
-function file_markup($files, array $options = array(), $wrapperAttributes = array('class' => 'item-file'))
+function file_markup($files, array $options = [], $wrapperAttributes = ['class' => 'item-file'])
 {
     if (!is_array($files)) {
-        $files = array($files);
+        $files = [$files];
     }
-    $files = apply_filters('file_markup_files', $files, array('options' => $options));
+    $files = apply_filters('file_markup_files', $files, ['options' => $options]);
     $helper = new Omeka_View_Helper_FileMarkup;
     $output = '';
     foreach ($files as $file) {
@@ -1467,7 +1467,7 @@ function file_markup($files, array $options = array(), $wrapperAttributes = arra
  *  file is used.
  * @return string|array
  */
-function file_id3_metadata(array $options = array(), $file = null)
+function file_id3_metadata(array $options = [], $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
@@ -1485,7 +1485,7 @@ function file_id3_metadata(array $options = array(), $file = null)
  */
 function get_recent_files($num = 10)
 {
-    return get_records('File', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_records('File', ['sort_field' => 'added', 'sort_dir' => 'd'], $num);
 }
 
 /**
@@ -1507,7 +1507,7 @@ function tag_attributes($attributes)
         $toProcess = $attributes;
     }
 
-    $attr = array();
+    $attr = [];
     foreach ($toProcess as $key => $attribute) {
         // Reject weird attribute names (a little more restrictively than necessary)
         if (preg_match('/[^A-Za-z0-9_:.-]/', $key)) {
@@ -1532,7 +1532,7 @@ function tag_attributes($attributes)
  * - form_attributes (array): an array containing form tag attributes.
  * @return string The search form markup.
  */
-function search_form(array $options = array())
+function search_form(array $options = [])
 {
     return get_view()->searchForm($options);
 }
@@ -1546,7 +1546,7 @@ function search_form(array $options = array())
  * - id (string): the value of the div wrapping the filters.
  * @return string
  */
-function search_filters(array $options = array())
+function search_filters(array $options = [])
 {
     return get_view()->searchFilters($options);
 }
@@ -1573,7 +1573,7 @@ function search_filters(array $options = array())
  * @param array $options
  * @return string HTML
  */
-function element_form($element, $record, $options = array())
+function element_form($element, $record, $options = [])
 {
     $html = '';
     // If we have an array of Elements, loop through the form to display them.
@@ -1605,11 +1605,11 @@ function element_set_form($record, $elementSetName)
     } else {
         $elements = get_db()->getTable('Element')->findBySet($elementSetName);
     }
-    $filterName = array('ElementSetForm', $recordType, $elementSetName);
+    $filterName = ['ElementSetForm', $recordType, $elementSetName];
     $elements = apply_filters(
         $filterName,
         $elements,
-        array('record_type' => $recordType, 'record' => $record, 'element_set_name' => $elementSetName)
+        ['record_type' => $recordType, 'record' => $record, 'element_set_name' => $elementSetName]
     );
     $html = element_form($elements, $record);
     return $html;
@@ -1628,7 +1628,7 @@ function label_table_options($options, $labelOption = null)
     if ($labelOption === null) {
         $labelOption = __('Select Below ');
     }
-    return array('' => $labelOption) + $options;
+    return ['' => $labelOption] + $options;
 }
 
 /**
@@ -1640,7 +1640,7 @@ function label_table_options($options, $labelOption = null)
  * @param string $labelOption
  * @param array $searchParams search parameters on table.
  */
-function get_table_options($tableClass, $labelOption = null, $searchParams = array())
+function get_table_options($tableClass, $labelOption = null, $searchParams = [])
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
     $options = apply_filters(Inflector::tableize($tableClass) . '_select_options', $options);
@@ -1687,7 +1687,7 @@ function auto_discovery_link_tags()
  * @param string $dir Defaults to 'common'
  * @return string
  */
-function common($file, $vars = array(), $dir = 'common')
+function common($file, $vars = [], $dir = 'common')
 {
     return get_view()->partial($dir . '/' . $file . '.php', $vars);
 }
@@ -1701,7 +1701,7 @@ function common($file, $vars = array(), $dir = 'common')
  * @param string $file Filename of header script (defaults to 'header')
  * @return string
  */
-function head($vars = array(), $file = 'header')
+function head($vars = [], $file = 'header')
 {
     return common($file, $vars);
 }
@@ -1715,7 +1715,7 @@ function head($vars = array(), $file = 'header')
  * @param string $file Filename of footer script (defaults to 'footer')
  * @return string
  */
-function foot($vars = array(), $file = 'footer')
+function foot($vars = [], $file = 'footer')
 {
     return common($file, $vars);
 }
@@ -1762,7 +1762,7 @@ function option($name)
  *
  * @return array An array of result records (of $recordType).
  */
-function get_records($recordType, $params = array(), $limit = 10)
+function get_records($recordType, $params = [], $limit = 10)
 {
     return get_db()->getTable($recordType)->findBy($params, $limit);
 }
@@ -1777,7 +1777,7 @@ function get_records($recordType, $params = array(), $limit = 10)
  * @param array $params Array of search parameters for records.
  * @return object An object of result records (of $recordType).
  */
-function get_record($recordType, $params = array())
+function get_record($recordType, $params = [])
 {
     $record = get_records($recordType, $params, 1);
     return reset($record);
@@ -1935,8 +1935,8 @@ function output_format_list($list = true, $delimiter = ', ')
 {
     return get_view()->partial(
         'common/output-format-list.php',
-        array('output_formats' => get_current_action_contexts(), 'query' => $_GET,
-              'list' => $list, 'delimiter' => $delimiter)
+        ['output_formats' => get_current_action_contexts(), 'query' => $_GET,
+              'list' => $list, 'delimiter' => $delimiter]
     );
 }
 
@@ -1954,7 +1954,7 @@ function output_format_list($list = true, $delimiter = ', ')
  *
  * @return string
  */
-function browse_sort_links($links, $wrapperTags = array())
+function browse_sort_links($links, $wrapperTags = [])
 {
     $sortParam = Omeka_Db_Table::SORT_PARAM;
     $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
@@ -1962,22 +1962,22 @@ function browse_sort_links($links, $wrapperTags = array())
     $currentSort = $req->getParam($sortParam);
     $currentDir = $req->getParam($sortDirParam);
 
-    $defaults = array(
+    $defaults = [
         'link_tag' => 'li',
         'list_tag' => 'ul',
-        'link_attr' => array(),
-        'list_attr' => array( 'id' => 'sort-links-list' )
-    );
+        'link_attr' => [],
+        'list_attr' => [ 'id' => 'sort-links-list' ]
+    ];
 
     $sortlistWrappers = array_merge($defaults, $wrapperTags);
 
-    $linkAttrArray = array();
+    $linkAttrArray = [];
     foreach ($sortlistWrappers['link_attr'] as $key => $attribute) {
         $linkAttrArray[$key] = $key . '="' . html_escape($attribute) . '"';
     }
     $linkAttr = join(' ', $linkAttrArray);
 
-    $listAttrArray = array();
+    $listAttrArray = [];
     foreach ($sortlistWrappers['list_attr'] as $key => $attribute) {
         $listAttrArray[$key] = $key . '="' . html_escape($attribute) . '"';
     }
@@ -2006,7 +2006,7 @@ function browse_sort_links($links, $wrapperTags = array())
                     $sortingLabel = __('Sorting ascending');
                 }
             }
-            $url = html_escape(url(array(), null, $urlParams));
+            $url = html_escape(url([], null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
                 $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\" title=\"$sortingLabel\">$label <span role=\"presentation\" class=\"sort-icon\"></span></a></{$sortlistWrappers['link_tag']}>";
             } else {
@@ -2032,7 +2032,7 @@ function browse_sort_links($links, $wrapperTags = array())
  * @param array $attributes
  * @return string An HTML <body> tag with attributes and their values.
  */
-function body_tag($attributes = array())
+function body_tag($attributes = [])
 {
     $attributes = apply_filters('body_tag_attributes', $attributes);
     if ($attributes = tag_attributes($attributes)) {
@@ -2068,7 +2068,7 @@ function item_search_filters(?array $params = null)
  * @param array $options Options for getting the metadata.
  * @return mixed
  */
-function metadata($record, $metadata, $options = array())
+function metadata($record, $metadata, $options = [])
 {
     return get_view()->metadata($record, $metadata, $options);
 }
@@ -2084,7 +2084,7 @@ function metadata($record, $metadata, $options = array())
  * @param array $options Options for getting the metadata.
  * @return string|array
  */
-function all_element_texts($record, $options = array())
+function all_element_texts($record, $options = [])
 {
     return get_view()->allElementTexts($record, $options);
 }
@@ -2099,7 +2099,7 @@ function all_element_texts($record, $options = array())
  * @param Item|null $item Check for this specific item record (current item if null).
  * @return string HTML
  */
-function files_for_item($options = array(), $wrapperAttributes = array('class' => 'item-file'), $item = null)
+function files_for_item($options = [], $wrapperAttributes = ['class' => 'item-file'], $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2156,7 +2156,7 @@ function get_previous_item($item = null)
  * @param array $props HTML attributes for the img tag
  * @return string
  */
-function record_image($record, $imageType = null, $props = array())
+function record_image($record, $imageType = null, $props = [])
 {
     if (is_string($record)) {
         $record = get_current_record($record);
@@ -2205,7 +2205,7 @@ function record_image_url($record, $imageType = null)
  *  is the first file.
  * @param Item|null Check for this specific item record (current item if null).
  */
-function item_image($imageType = null, $props = array(), $index = 0, $item = null)
+function item_image($imageType = null, $props = [], $index = 0, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2225,7 +2225,7 @@ function item_image($imageType = null, $props = array(), $index = 0, $item = nul
  * @param array $props HTML attributes for the img tag.
  * @param File|null Check for this specific file record (current file if null).
  */
-function file_image($imageType, $props = array(), $file = null)
+function file_image($imageType, $props = [], $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
@@ -2247,7 +2247,7 @@ function file_image($imageType, $props = array(), $file = null)
  * @param Item $item The Item to use, the current item if omitted.
  * @return string
  */
-function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $filesShow = null, $item = null)
+function item_image_gallery($attrs = [], $imageType = 'square_thumbnail', $filesShow = null, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2258,12 +2258,12 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
         return '';
     }
 
-    $defaultAttrs = array(
-        'wrapper' => array('id' => 'item-images'),
-        'linkWrapper' => array(),
-        'link' => array(),
-        'image' => array()
-    );
+    $defaultAttrs = [
+        'wrapper' => ['id' => 'item-images'],
+        'linkWrapper' => [],
+        'link' => [],
+        'image' => []
+    ];
     if ($filesShow === null) {
         $filesShow = get_option('link_to_file_metadata');
     }
@@ -2282,7 +2282,7 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
         if ($filesShow) {
             $html .= link_to($file, 'show', $image, $attrs['link']);
         } else {
-            $linkAttrs = $attrs['link'] + array('href' => $file->getWebPath('original'));
+            $linkAttrs = $attrs['link'] + ['href' => $file->getWebPath('original')];
             $html .= '<a ' . tag_attributes($linkAttrs) . '>' . $image . '</a>';
         }
 
@@ -2308,11 +2308,11 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
  *  the default text 'Search for items' is used.
  * @return string
  */
-function items_search_form($props = array(), $formActionUri = null, $buttonText = null)
+function items_search_form($props = [], $formActionUri = null, $buttonText = null)
 {
     return get_view()->partial(
         'items/search-form.php',
-        array('formAttributes' => $props, 'formActionUri' => $formActionUri, 'buttonText' => $buttonText)
+        ['formAttributes' => $props, 'formActionUri' => $formActionUri, 'buttonText' => $buttonText]
     );
 }
 
@@ -2326,7 +2326,7 @@ function items_search_form($props = array(), $formActionUri = null, $buttonText 
  */
 function get_recent_items($num = 10)
 {
-    return get_db()->getTable('Item')->findBy(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_db()->getTable('Item')->findBy(['sort_field' => 'added', 'sort_dir' => 'd'], $num);
 }
 
 /**
@@ -2340,9 +2340,9 @@ function get_recent_items($num = 10)
  */
 function get_random_featured_items($num = 5, $hasImage = null)
 {
-    return get_records('Item', array('featured' => 1,
+    return get_records('Item', ['featured' => 1,
                                      'sort_field' => 'random',
-                                     'hasImage' => $hasImage), $num);
+                                     'hasImage' => $hasImage], $num);
 }
 
 /**
@@ -2360,7 +2360,7 @@ function recent_items($count = 10)
     if ($items) {
         $html = '';
         foreach ($items as $item) {
-            $html .= get_view()->partial('items/single.php', array('item' => $item));
+            $html .= get_view()->partial('items/single.php', ['item' => $item]);
             release_object($item);
         }
     } else {
@@ -2381,34 +2381,34 @@ function recent_items($count = 10)
  * @param array $query Query passed to get_records to get the records to display; default is "random featured"
  * @return array
  */
-function get_display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
+function get_display_records($recordType, $count = 3, $partialPath = null, $partialParams = [], $query = [])
 {
     $displayRecords = [];
 
-    $recordTypes = array(
-        'Item' => array('partial' => 'items/single.php', 'alias' => 'item'),
-        'Collection' => array('partial' => 'collections/single.php', 'alias' => 'collection')
-    );
+    $recordTypes = [
+        'Item' => ['partial' => 'items/single.php', 'alias' => 'item'],
+        'Collection' => ['partial' => 'collections/single.php', 'alias' => 'collection']
+    ];
 
     $recordTypes = apply_filters('display_records_types', $recordTypes);
     if (!isset($recordTypes[$recordType]['partial'])) {
         return $displayRecords;
     }
 
-    $defaultQuery = array(
+    $defaultQuery = [
         'featured' => '1',
         'sort_field' => 'random'
-    );
+    ];
     $query = array_merge($defaultQuery, $query);
     $records = get_records($recordType, $query, $count);
 
     if ($records) {
         foreach ($records as $record) {
             $recordConfig = $recordTypes[$recordType];
-            $defaultPartialParams = array(
+            $defaultPartialParams = [
                 'record' => $record,
                 'recordType' => $recordType
-            );
+            ];
             if (isset($recordConfig['alias'])) {
                 $defaultPartialParams[$recordConfig['alias']] = $record;
             }
@@ -2435,7 +2435,7 @@ function get_display_records($recordType, $count = 3, $partialPath = null, $part
  * @param array $query Query passed to get_records to get the records to display; default is "random featured"
  * @return string
  */
-function display_records($recordType, $count = 3, $partialPath = null, $partialParams = array(), $query = array())
+function display_records($recordType, $count = 3, $partialPath = null, $partialParams = [], $query = [])
 {
     $records = get_display_records($recordType, $count, $partialPath, $partialParams, $query);
 
@@ -2460,7 +2460,7 @@ function random_featured_items($count = 5, $hasImage = null)
     if ($items) {
         $html = '';
         foreach ($items as $item) {
-            $html .= get_view()->partial('items/single.php', array('item' => $item));
+            $html .= get_view()->partial('items/single.php', ['item' => $item]);
             release_object($item);
         }
     } else {
@@ -2484,7 +2484,7 @@ function item_type_elements($item = null)
     }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
-        $elementText[$element->name] = metadata($item, array(ElementSet::ITEM_TYPE_NAME, $element->name));
+        $elementText[$element->name] = metadata($item, [ElementSet::ITEM_TYPE_NAME, $element->name]);
     }
     return $elementText;
 }
@@ -2508,14 +2508,14 @@ function item_type_elements($item = null)
  * @param array $queryParams the parameters in the uri query
  * @return string HTML
  */
-function link_to($record, $action = null, $text = null, $props = array(), $queryParams = array())
+function link_to($record, $action = null, $text = null, $props = [], $queryParams = [])
 {
     // If we're linking directly to a record, use the URI for that record.
     if ($record instanceof Omeka_Record_AbstractRecord) {
         $url = record_url($record, $action, false, $queryParams);
     // Otherwise $record is the name of the controller to link to.
     } else {
-        $urlOptions = array();
+        $urlOptions = [];
         //Use Zend Framework's built-in 'default' route
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
@@ -2540,7 +2540,7 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
  * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
-function link_to_item_search($text = null, $props = array(), $uri = null)
+function link_to_item_search($text = null, $props = [], $uri = null)
 {
     if (!$text) {
         $text = __('Search Items');
@@ -2564,7 +2564,7 @@ function link_to_item_search($text = null, $props = array(), $uri = null)
  * @param array $linkProperties HTML attributes for the link.
  * @return string HTML
  */
-function link_to_items_browse($text, $browseParams = array(), $linkProperties = array())
+function link_to_items_browse($text, $browseParams = [], $linkProperties = [])
 {
     return link_to('items', 'browse', $text, $linkProperties, $browseParams);
 }
@@ -2582,7 +2582,7 @@ function link_to_items_browse($text, $browseParams = array(), $linkProperties = 
  * @param string $action 'show' by default.
  * @return string
  */
-function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
+function link_to_collection_for_item($text = null, $props = [], $action = 'show')
 {
     if ($collection = get_collection_for_item()) {
         return link_to_collection($text, $props, $action, $collection);
@@ -2601,13 +2601,13 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
  * @param Collection $collectionObj
  * @return string
  */
-function link_to_items_in_collection($text = null, $props = array(),
+function link_to_items_in_collection($text = null, $props = [],
     $action = 'browse', $collectionObj = null
 ) {
     if (!$collectionObj) {
         $collectionObj = get_current_record('collection');
     }
-    $queryParams = array();
+    $queryParams = [];
     $queryParams['collection'] = $collectionObj->id;
     if ($text === null) {
         $text = $collectionObj->totalItems();
@@ -2626,13 +2626,13 @@ function link_to_items_in_collection($text = null, $props = array(),
  * @param Collection $collectionObj
  * @return string
  */
-function link_to_items_with_item_type($text = null, $props = array(),
+function link_to_items_with_item_type($text = null, $props = [],
     $action = 'browse', $itemTypeObj = null
 ) {
     if (!$itemTypeObj) {
         $itemTypeObj = get_current_record('item_type');
     }
-    $queryParams = array();
+    $queryParams = [];
     $queryParams['type'] = $itemTypeObj->id;
     if ($text === null) {
         $text = $itemTypeObj->totalItems();
@@ -2654,13 +2654,13 @@ function link_to_items_with_item_type($text = null, $props = array(),
  * @param File|null $file
  * @return string
  */
-function link_to_file_show($attributes = array(), $text = null, $file = null)
+function link_to_file_show($attributes = [], $text = null, $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
     }
     if (!$text) {
-        $text = metadata($file, 'rich_title', array('no_escape' => true));
+        $text = metadata($file, 'rich_title', ['no_escape' => true]);
     }
     return link_to($file, 'show', $text, $attributes);
 }
@@ -2681,13 +2681,13 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
  * outside the context of a loop.
  * @return string HTML
  */
-function link_to_item($text = null, $props = array(), $action = 'show', $item = null)
+function link_to_item($text = null, $props = [], $action = 'show', $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
     }
     if (empty($text)) {
-        $text = metadata($item, 'rich_title', array('no_escape' => true));
+        $text = metadata($item, 'rich_title', ['no_escape' => true]);
     }
     return link_to($item, $action, $text, $props);
 }
@@ -2703,7 +2703,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
  * page, and array('foo'=>'bar') was passed as this argument, the new URI would
  * be items/browse?collection=1&foo=bar.
  */
-function link_to_items_rss($text = null, $params = array())
+function link_to_items_rss($text = null, $params = [])
 {
     if (!$text) {
         $text = __('RSS');
@@ -2720,7 +2720,7 @@ function link_to_items_rss($text = null, $params = array())
  * @param array $props
  * @return string
  */
-function link_to_next_item_show($text = null, $props = array())
+function link_to_next_item_show($text = null, $props = [])
 {
     if (!$text) {
         $text = __("Next Item &rarr;");
@@ -2740,7 +2740,7 @@ function link_to_next_item_show($text = null, $props = array())
  * @param array $props
  * @return string
  */
-function link_to_previous_item_show($text = null, $props = array())
+function link_to_previous_item_show($text = null, $props = [])
 {
     if (!$text) {
         $text = __('&larr; Previous Item');
@@ -2768,13 +2768,13 @@ function link_to_previous_item_show($text = null, $props = array())
  * override the collection object retrieved by get_current_record().
  * @return string
  */
-function link_to_collection($text = null, $props = array(), $action = 'show', $collectionObj = null)
+function link_to_collection($text = null, $props = [], $action = 'show', $collectionObj = null)
 {
     if (!$collectionObj) {
         $collectionObj = get_current_record('collection');
     }
 
-    $collectionTitle = metadata($collectionObj, 'rich_title', array('no_escape' => true));
+    $collectionTitle = metadata($collectionObj, 'rich_title', ['no_escape' => true]);
     $text = !empty($text) ? $text : $collectionTitle;
     return link_to($collectionObj, $action, $text, $props);
 }
@@ -2787,7 +2787,7 @@ function link_to_collection($text = null, $props = array(), $action = 'show', $c
  * @param array $props
  * @return string
  */
-function link_to_home_page($text = null, $props = array())
+function link_to_home_page($text = null, $props = [])
 {
     if (!$text) {
         $text = option('site_title');
@@ -2805,7 +2805,7 @@ function link_to_home_page($text = null, $props = array())
  * @param array $props
  * @return string
  */
-function link_to_admin_home_page($text = null, $props = array())
+function link_to_admin_home_page($text = null, $props = [])
 {
     if (!$text) {
         $text = option('site_title');
@@ -2826,7 +2826,7 @@ function link_to_admin_home_page($text = null, $props = array())
  * @return Zend_View_Helper_Navigation_Menu The navigation menu object. Can
  *  generally be treated simply as a string.
  */
-function nav(array $navLinks, $name = null, array $args = array())
+function nav(array $navLinks, $name = null, array $args = [])
 {
     if ($name !== null) {
         $navLinks = apply_filters($name, $navLinks, $args);
@@ -2864,7 +2864,7 @@ function nav(array $navLinks, $name = null, array $args = array())
  *
  * @return string HTML for the pagination links.
  */
-function pagination_links($options = array())
+function pagination_links($options = [])
 {
     if (Zend_Registry::isRegistered('pagination')) {
         // If the pagination variables are registered, set them for local use.
@@ -2872,7 +2872,7 @@ function pagination_links($options = array())
     } else {
         // If the pagination variables are not registered, set required defaults
         // arbitrarily to avoid errors.
-        $p = array('total_results' => 1, 'page' => 1, 'per_page' => 1);
+        $p = ['total_results' => 1, 'page' => 1, 'per_page' => 1];
     }
 
     // Set preferred settings.
@@ -2927,21 +2927,21 @@ function public_nav_main()
 function public_nav_items(?array $navArray = null, $maxDepth = 0)
 {
     if (!$navArray) {
-        $navArray = array(
-            array(
+        $navArray = [
+            [
                 'label' => __('Browse All'),
                 'uri' => url('items/browse'),
-            ));
+            ]];
         if (total_records('Tag')) {
-            $navArray[] = array(
+            $navArray[] = [
                     'label' => __('Browse by Tag'),
                     'uri' => url('items/tags')
-                );
+                ];
         }
-        $navArray[] = array(
+        $navArray[] = [
                 'label' => __('Search Items'),
                 'uri' => url('items/search')
-            );
+            ];
     }
     return nav($navArray, 'public_navigation_items');
 }
@@ -3146,7 +3146,7 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
     $id = preg_replace('/[^\w\-]/', '', $id);
     $id = trim($id, $delimiter);
     $prepend = (string) $prepend;
-    return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
+    return !empty($prepend) ? join($delimiter, [$prepend, $id]) : $id;
 }
 
 /**
@@ -3185,7 +3185,7 @@ function url_to_link_callback($matches)
  */
 function get_recent_tags($limit = 10)
 {
-    return get_records('Tag', array('sort_field' => 'time', 'sort_dir' => 'd'), $limit);
+    return get_records('Tag', ['sort_field' => 'time', 'sort_dir' => 'd'], $limit);
 }
 
 /**
@@ -3204,7 +3204,7 @@ function get_recent_tags($limit = 10)
 function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumber = false, $tagNumberOrder = null)
 {
     if (!$recordOrTags) {
-        $tags = array();
+        $tags = [];
     } elseif (is_string($recordOrTags)) {
         $tags = get_current_record($recordOrTags)->Tags;
     } elseif ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
@@ -3236,7 +3236,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
         $class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
         $html .= '<li class="' . $class . '">';
         if ($link) {
-            $html .= '<a href="' . html_escape(url($link, array('tags' => $tag['name']))) . '">';
+            $html .= '<a href="' . html_escape(url($link, ['tags' => $tag['name']])) . '">';
         }
         if ($tagNumber && $tagNumberOrder == 'before') {
             $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
@@ -3274,7 +3274,7 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
     }
 
     if (!$recordOrTags) {
-        $tags = array();
+        $tags = [];
     } elseif (is_string($recordOrTags)) {
         $tags = get_current_record($recordOrTags)->Tags;
     } elseif ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
@@ -3287,13 +3287,13 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
         return '';
     }
 
-    $tagStrings = array();
+    $tagStrings = [];
     foreach ($tags as $tag) {
         $name = $tag['name'];
         if (!$link) {
             $tagStrings[] = html_escape($name);
         } else {
-            $tagStrings[] = '<a href="' . html_escape(url($link, array('tags' => $name))) . '" rel="tag">' . html_escape($name) . '</a>';
+            $tagStrings[] = '<a href="' . html_escape(url($link, ['tags' => $name])) . '" rel="tag">' . html_escape($name) . '</a>';
         }
     }
     return join(html_escape($delimiter), $tagStrings);
@@ -3318,7 +3318,7 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
  * @param bool $encode Whether the URL should be URL-encoded
  * @return string HTML
  */
-function url($options = array(), $route = null, $queryParams = array(),
+function url($options = [], $route = null, $queryParams = [],
     $reset = false, $encode = true
 ) {
     $helper = new Omeka_View_Helper_Url;
@@ -3345,7 +3345,7 @@ function url($options = array(), $route = null, $queryParams = array(),
  * @param bool $encode Whether the URL should be URL-encoded
  * @return string HTML
  */
-function absolute_url($options = array(), $route = null, $queryParams = array(),
+function absolute_url($options = [], $route = null, $queryParams = [],
     $reset = false, $encode = true
 ) {
     $serverUrlHelper = new Zend_View_Helper_ServerUrl;
@@ -3363,7 +3363,7 @@ function absolute_url($options = array(), $route = null, $queryParams = array(),
  * @param array $params
  * @return string
  */
-function current_url(array $params = array())
+function current_url(array $params = [])
 {
     // Get the URL before the ?.
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -3395,7 +3395,7 @@ function is_current_url($url)
 
     // Strip out the protocol, host, base URL, and rightmost slash before
     // comparing the URL to the current one
-    $stripOut = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $baseUrl);
+    $stripOut = [WEB_DIR, @$_SERVER['HTTP_HOST'], $baseUrl];
     $currentUrl = rtrim(str_replace($stripOut, '', $currentUrl), '/');
     $url = rtrim(str_replace($stripOut, '', $url), '/');
 
@@ -3416,7 +3416,7 @@ function is_current_url($url)
  * @param array $queryParams
  * @return string
  */
-function record_url($record, $action = null, $getAbsoluteUrl = false, $queryParams = array())
+function record_url($record, $action = null, $getAbsoluteUrl = false, $queryParams = [])
 {
     return get_view()->recordUrl($record, $action, $getAbsoluteUrl, $queryParams);
 }
@@ -3430,9 +3430,9 @@ function record_url($record, $action = null, $getAbsoluteUrl = false, $queryPara
  * @param array $otherParams
  * @return string
  */
-function items_output_url($output, $otherParams = array())
+function items_output_url($output, $otherParams = [])
 {
-    $queryParams = array();
+    $queryParams = [];
 
     // Provide additional query parameters if the current page is items/browse.
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -3447,7 +3447,7 @@ function items_output_url($output, $otherParams = array())
     $queryParams = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
 
-    return url(array('controller' => 'items', 'action' => 'browse'), 'default', $queryParams);
+    return url(['controller' => 'items', 'action' => 'browse'], 'default', $queryParams);
 }
 
 /**
@@ -3656,7 +3656,7 @@ function queue_lightgallery_assets()
 {
     queue_css_file('lightgallery');
     queue_css_file('lightgallery-bundle.min', 'all', false, 'javascripts/vendor/lightgallery/css');
-    queue_js_file(array(
+    queue_js_file([
             'vendor/lightgallery/lightgallery.min',
             'vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min',
             'vendor/lightgallery/plugins/video/lg-video.min',
@@ -3664,7 +3664,7 @@ function queue_lightgallery_assets()
             'vendor/lightgallery/plugins/hash/lg-hash.min',
             'vendor/lightgallery/plugins/zoom/lg-zoom.min',
             'lightgallery-init',
-        )
+        ]
     );
 }
 

@@ -15,14 +15,14 @@
     <!-- JavaScripts -->
     <?php
     queue_js_file('vendor/modernizr');
-    queue_js_file('vendor/selectivizr', 'javascripts', array('conditional' => '(gte IE 6)&(lte IE 8)'));
+    queue_js_file('vendor/selectivizr', 'javascripts', ['conditional' => '(gte IE 6)&(lte IE 8)']);
     queue_js_file('vendor/respond');
 
     echo head_js();
     ?>
 
     <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('admin_head', array('view'=>$this)); ?>
+    <?php fire_plugin_hook('admin_head', ['view'=>$this]); ?>
 </head>
 <body id="login">
     <div class="container container-sixteen">

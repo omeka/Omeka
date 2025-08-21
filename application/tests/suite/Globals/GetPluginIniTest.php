@@ -13,7 +13,7 @@ class Globals_GetPluginIniTest extends Omeka_Test_TestCase
 {
     public function testGetPluginIni()
     {
-        $iniReader = $this->getMock('Omeka_Plugin_Ini', array(), array(), '', false);
+        $iniReader = $this->getMock('Omeka_Plugin_Ini', [], [], '', false);
 
         $iniReader->expects($this->once())
                  ->method('hasPluginIniFile')

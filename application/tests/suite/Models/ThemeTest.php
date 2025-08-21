@@ -57,7 +57,7 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
     public function testGetOptions()
     {
         $themeName = 'seasons';
-        $options = array();
+        $options = [];
         $this->assertEquals($options, Theme::getOptions($themeName));
     }
 
@@ -65,11 +65,11 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
     {
         $themeName = 'seasons';
 
-        $options = array();
+        $options = [];
         Theme::setOptions($themeName, $options);
         $this->assertEquals($options, Theme::getOptions($themeName));
 
-        $options = array('a' => '1', 'b' => '2', 'c' => '3');
+        $options = ['a' => '1', 'b' => '2', 'c' => '3'];
         Theme::setOptions($themeName, $options);
         $this->assertEquals($options, Theme::getOptions($themeName));
     }

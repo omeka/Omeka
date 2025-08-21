@@ -7,12 +7,12 @@
                 <?php $fileId = $file->id; ?>
                 <div class="sortable-item">
                     <span id="move-<?php echo $fileId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>"></span>
-                    <?php echo file_image('square_thumbnail', array(), $file); ?>
-                    <?php echo link_to($file, 'show', html_escape($file->original_filename), array('class' => 'drawer-name', 'id' => 'file-' . $fileId)); ?>
-                    <?php echo $this->formHidden("order[{$file->id}]", $file->order, array('class' => 'file-order')); ?>
+                    <?php echo file_image('square_thumbnail', [], $file); ?>
+                    <?php echo link_to($file, 'show', html_escape($file->original_filename), ['class' => 'drawer-name', 'id' => 'file-' . $fileId]); ?>
+                    <?php echo $this->formHidden("order[{$file->id}]", $file->order, ['class' => 'file-order']); ?>
                     <ul class="action-links">
-                        <li><?php echo link_to($file, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
-                        <li><a href="#" class="delete"><?php echo __('Delete '); ?></a> <?php echo $this->formCheckbox('delete_files[]', $file->id, array('checked' => false)); ?></li>
+                        <li><?php echo link_to($file, 'edit', __('Edit'), ['class'=>'edit']); ?></li>
+                        <li><a href="#" class="delete"><?php echo __('Delete '); ?></a> <?php echo $this->formCheckbox('delete_files[]', $file->id, ['checked' => false]); ?></li>
                     </ul>
                 </div>
             </li>
@@ -44,4 +44,4 @@ FILE_TEMPLATE;
     <div class="files four columns omega" data-file-container-template="<?php echo utf8_htmlspecialchars($fileTemplate); ?>"></div>
 </div>
 
-<?php fire_plugin_hook('admin_items_form_files', array('item' => $item, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_items_form_files', ['item' => $item, 'view' => $this]); ?>

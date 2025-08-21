@@ -83,11 +83,11 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 
     public function testChangingPassword()
     {
-        $this->_dispatchChangePassword(array(
+        $this->_dispatchChangePassword([
             'current_password' => Omeka_Test_Resource_Db::SUPER_PASSWORD,
             'new_password' => 'foobar6789',
             'new_password_confirm' => 'foobar6789'
-        ));
+        ]);
         $this->_assertPasswordIs('foobar6789');
     }
 
@@ -95,30 +95,30 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     {
         $this->user->role = 'super';
         $this->user->save();
-        $this->_dispatchChangePassword(array(
+        $this->_dispatchChangePassword([
             'new_password' => 'foobar6789',
             'new_password_confirm' => 'foobar6789'
-        ));
+        ]);
         $this->_assertPasswordIs('foobar6789',
             "Super user was not able to change the password without knowing the original.");
     }
 
     public function testChangingPasswordFailsWithInvalidPassword()
     {
-        $this->_dispatchChangePassword(array(
+        $this->_dispatchChangePassword([
             'current_password' => 'wrongpassword',
             'new_password' => 'foo',
             'new_password_confirm' => 'foo'
-        ));
+        ]);
         $this->_assertPasswordNotChanged();
     }
 
     public function testChangePasswordFailsIfPasswordNotConfirmed()
     {
-        $this->_dispatchChangePassword(array(
+        $this->_dispatchChangePassword([
             'current_password' => 'foobar123',
             'new_password' => 'foo'
-        ));
+        ]);
         $this->_assertPasswordNotChanged();
     }
 

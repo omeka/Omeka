@@ -19,7 +19,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
     {
         parent::setUpLegacy();
         $this->_nav = new Omeka_Navigation();
-        $this->_beforePages = array();
+        $this->_beforePages = [];
     }
 
     public function testEmptyOmekaNavigation()
@@ -34,12 +34,12 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitVisibleOmekaNavigationPageMvc()
     {
-        $page = new Omeka_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -76,11 +76,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleImplicitVisibleOmekaNavigationPageMvc()
     {
-        $page = new Omeka_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -117,12 +117,12 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitNotVisibleOmekaNavigationPageMvc()
     {
-        $page = new Omeka_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => false
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -159,12 +159,12 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitVisibleZendNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Zend_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -211,11 +211,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleImplicitVisibleZendNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Zend_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -262,12 +262,12 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitNotVisibleZendNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Zend_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => false
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -314,11 +314,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitVisibleZendNavigationPageUri()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Zend_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => true
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -364,10 +364,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleImplicitVisibleZendNavigationPageUri()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Zend_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -413,11 +413,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitNotVisibleZendNavigationPageUri()
     {
-        $page = new Zend_Navigation_Page_Uri(array(
+        $page = new Zend_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => false
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -463,11 +463,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitVisibleUriArray()
     {
-        $page = array(
+        $page = [
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => true
-        );
+        ];
 
         $this->_nav->addPage($page);
 
@@ -508,10 +508,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleImplicitVisibleUriArray()
     {
-        $page = array(
+        $page = [
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
-        );
+        ];
 
         $this->_nav->addPage($page);
 
@@ -552,11 +552,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitNotVisibleUriArray()
     {
-        $page = array(
+        $page = [
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => false
-        );
+        ];
 
         $this->_nav->addPage($page);
 
@@ -597,11 +597,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitVisibleOmekaNavigationPageUri()
     {
-        $page = new Omeka_Navigation_Page_Uri(array(
+        $page = new Omeka_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => true
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -644,10 +644,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleImplicitVisibleOmekaNavigationPageUri()
     {
-        $page = new Omeka_Navigation_Page_Uri(array(
+        $page = new Omeka_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -690,11 +690,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddSingleExplicitNotVisibleOmekaNavigationPageUri()
     {
-        $page = new Omeka_Navigation_Page_Uri(array(
+        $page = new Omeka_Navigation_Page_Uri([
             'label' => __('Browse Items'),
             'uri' => url('items/browse'),
             'visible' => false
-        ));
+        ]);
 
         $this->assertNull($page->get('uid'));
 
@@ -737,43 +737,43 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddDifferentPagesFlatArray()
     {
-        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc(array(
+        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true
-        ));
+        ]);
 
-        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri(array(
+        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri([
             'label' => __('Browse Collections'),
             'uri' => url('collections/browse'),
-        ));
+        ]);
 
-        $notVisibleNavPageUriArray = array(
+        $notVisibleNavPageUriArray = [
             'label' => __('Edit Items'),
             'uri' => url('items/edit'),
             'visible' => false
-        );
+        ];
 
-        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri([
             'label' => __('Edit Collections'),
             'uri' => url('collections/edit'),
             'visible' => false
-        ));
+        ]);
 
-        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri([
             'label' => __('Omeka'),
             'uri' => 'http://omeka.org',
             'visible' => true
-        ));
+        ]);
 
-        $pages = array(
+        $pages = [
             $explicitVisibleZendNavPageMvc,
             $implicitVisibleZendNavPageUri,
             $notVisibleNavPageUriArray,
             $notVisibleOmekaNavPageUri,
             $explicitVisibleOmekaNavPageUri
-        );
+        ];
 
         $this->_nav->addPages($pages);
 
@@ -822,54 +822,54 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     public function testAddDifferentPagesNestedArray()
     {
-        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri([
             'label' => __('CHNM'),
             'uri' => 'http://chnm.gmu.edu',
             'visible' => true
-        ));
+        ]);
 
-        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri(array(
+        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri([
             'label' => __('Browse Collections'),
             'uri' => url('collections/browse'),
-            'pages' => array(
+            'pages' => [
                 $explicitVisibleOmekaNavPageUri
-            )
-        ));
+            ]
+        ]);
 
-        $notVisibleNavPageUriArray = array(
+        $notVisibleNavPageUriArray = [
             'label' => __('Edit Items'),
             'uri' => url('items/edit'),
             'visible' => false
-        );
+        ];
 
-        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc(array(
+        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc([
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true,
-            'pages' => array(
+            'pages' => [
                 $implicitVisibleZendNavPageUri,
                 $notVisibleNavPageUriArray,
-            )
-        ));
+            ]
+        ]);
 
-        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri([
             'label' => __('Edit Collections'),
             'uri' => url('collections/edit'),
             'visible' => false
-        ));
+        ]);
 
-        $explicitVisibleOmekaNavPageUri2 = new Omeka_Navigation_Page_Uri(array(
+        $explicitVisibleOmekaNavPageUri2 = new Omeka_Navigation_Page_Uri([
             'label' => __('Omeka'),
             'uri' => 'http://omeka.org',
             'visible' => true
-        ));
+        ]);
 
-        $pages = array(
+        $pages = [
             $explicitVisibleZendNavPageMvc,
             $notVisibleOmekaNavPageUri,
             $explicitVisibleOmekaNavPageUri2,
-        );
+        ];
 
         $this->assertEquals(0, $this->_nav->count());
 
@@ -957,7 +957,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     protected function _getSimpleArray($a)
     {
-        $aa = array();
+        $aa = [];
         foreach ($a as $k => $v) {
             $aa[] = $v;
         }
@@ -977,22 +977,22 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
     {
         $this->_addFlatPagesArray();
 
-        $testPageInfos = array();
-        $hrefPageIds = array(1, 2, 4, 5);
+        $testPageInfos = [];
+        $hrefPageIds = [1, 2, 4, 5];
         foreach ($hrefPageIds as $pageId) {
             $page = $this->_beforePages[__('Page ' . $pageId)];
-            $testPageInfos[] = array(
+            $testPageInfos[] = [
                 'label' => $page->getLabel(),
                 'href' => $page->getHref(),
-            );
+            ];
         }
-        $arrayPageIds = array(3);
+        $arrayPageIds = [3];
         foreach ($arrayPageIds as $pageId) {
             $page = $this->_beforePages[__('Page ' . $pageId)];
-            $testPageInfos[] = array(
+            $testPageInfos[] = [
                 'label' => $page['label'],
                 'href' => $page['uri'],
-            );
+            ];
         }
 
         foreach ($testPageInfos as $pageInfo) {
@@ -1005,60 +1005,60 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     protected function _addNestedPagesArray()
     {
-        $page1 = new Omeka_Navigation_Page_Uri(array(
+        $page1 = new Omeka_Navigation_Page_Uri([
             'label' => __('Page 1'),
             'uri' => 'http://chnm.gmu.edu',
             'visible' => true
-        ));
+        ]);
         $this->_beforePages[__('Page 1')] = $page1;
 
-        $page2 = new Zend_Navigation_Page_Uri(array(
+        $page2 = new Zend_Navigation_Page_Uri([
             'label' => __('Page 2'),
             'uri' => url('collections/browse'),
-            'pages' => array(
+            'pages' => [
                 $page1
-            )
-        ));
+            ]
+        ]);
         $this->_beforePages[__('Page 2')] = $page2;
 
-        $page3 = array(
+        $page3 = [
             'label' => __('Page 3'),
             'uri' => url('items/edit'),
             'visible' => false
-        );
+        ];
         $this->_beforePages[__('Page 3')] = $page3;
 
-        $page4 = new Omeka_Navigation_Page_Mvc(array(
+        $page4 = new Omeka_Navigation_Page_Mvc([
             'label' => __('Page 4'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true,
-            'pages' => array(
+            'pages' => [
                 $page2,
                 $page3,
-            )
-        ));
+            ]
+        ]);
         $this->_beforePages[__('Page 4')] = $page4;
 
-        $page5 = new Omeka_Navigation_Page_Uri(array(
+        $page5 = new Omeka_Navigation_Page_Uri([
             'label' => __('Page 5'),
             'uri' => url('collections/edit'),
             'visible' => false
-        ));
+        ]);
         $this->_beforePages[__('Page 5')] = $page5;
 
-        $page6 = new Omeka_Navigation_Page_Uri(array(
+        $page6 = new Omeka_Navigation_Page_Uri([
             'label' => __('Page 6'),
             'uri' => 'http://omeka.org',
             'visible' => true
-        ));
+        ]);
         $this->_beforePages[__('Page 6')] = $page6;
 
-        $pages = array(
+        $pages = [
             $page4,
             $page5,
             $page6
-        );
+        ];
 
         $this->assertEquals(0, $this->_nav->count());
         $this->_nav->addPages($pages);
@@ -1067,48 +1067,48 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 
     protected function _addFlatPagesArray()
     {
-        $page1 = new Omeka_Navigation_Page_Mvc(array(
+        $page1 = new Omeka_Navigation_Page_Mvc([
             'label' => __('Page 1'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true
-        ));
+        ]);
         $this->_beforePages[__('Page 1')] = $page1;
 
-        $page2 = new Zend_Navigation_Page_Uri(array(
+        $page2 = new Zend_Navigation_Page_Uri([
             'label' => __('Page 2'),
             'uri' => url('collections/browse'),
-        ));
+        ]);
         $this->_beforePages[__('Page 2')] = $page2;
 
-        $page3 = array(
+        $page3 = [
             'label' => __('Page 3'),
             'uri' => url('items/edit'),
             'visible' => false
-        );
+        ];
         $this->_beforePages[__('Page 3')] = $page3;
 
-        $page4 = new Omeka_Navigation_Page_Uri(array(
+        $page4 = new Omeka_Navigation_Page_Uri([
             'label' => __('Page 4'),
             'uri' => url('collections/edit'),
             'visible' => false
-        ));
+        ]);
         $this->_beforePages[__('Page 4')] = $page4;
 
-        $page5 = new Omeka_Navigation_Page_Uri(array(
+        $page5 = new Omeka_Navigation_Page_Uri([
             'label' => __('Page 5'),
             'uri' => 'http://omeka.org',
             'visible' => true
-        ));
+        ]);
         $this->_beforePages[__('Page 5')] = $page5;
 
-        $pages = array(
+        $pages = [
            $page1,
            $page2,
            $page3,
            $page4,
            $page5
-        );
+        ];
 
         $this->assertEquals(0, $this->_nav->count());
         $this->_nav->addPages($pages);
@@ -1122,22 +1122,22 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $addedPages = $this->_nav->getPages();
         $this->assertCount(3, $addedPages);
 
-        $testPageInfos = array();
-        $hrefPageIds = array(1, 2, 4, 5, 6);
+        $testPageInfos = [];
+        $hrefPageIds = [1, 2, 4, 5, 6];
         foreach ($hrefPageIds as $pageId) {
             $page = $this->_beforePages[__('Page ' . $pageId)];
-            $testPageInfos[] = array(
+            $testPageInfos[] = [
                 'label' => $page->getLabel(),
                 'href' => $page->getHref(),
-            );
+            ];
         }
-        $arrayPageIds = array(3);
+        $arrayPageIds = [3];
         foreach ($arrayPageIds as $pageId) {
             $page = $this->_beforePages[__('Page ' . $pageId)];
-            $testPageInfos[] = array(
+            $testPageInfos[] = [
                 'label' => $page['label'],
                 'href' => $page['uri'],
-            );
+            ];
         }
 
         foreach ($testPageInfos as $pageInfo) {
@@ -1159,12 +1159,12 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $afterPrunePages = $this->_nav->getPages();
         $this->assertNotContains($prunePage, $afterPrunePages);
         $this->assertCount(4, $afterPrunePages);
-        $labels = array(
+        $labels = [
             __('Page 2'),
             __('Page 3'),
             __('Page 4'),
             __('Page 5'),
-        );
+        ];
         $i = 0;
         foreach ($afterPrunePages as $afterPrunePage) {
             $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
@@ -1178,11 +1178,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $afterPrunePages = $this->_nav->getPages();
         $this->assertNotContains($prunePage, $afterPrunePages);
         $this->assertCount(3, $afterPrunePages);
-        $labels = array(
+        $labels = [
             __('Page 2'),
             __('Page 3'),
             __('Page 4'),
-        );
+        ];
         $i = 0;
         foreach ($afterPrunePages as $afterPrunePage) {
             $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
@@ -1196,10 +1196,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $afterPrunePages = $this->_nav->getPages();
         $this->assertNotContains($prunePage, $afterPrunePages);
         $this->assertCount(2, $afterPrunePages);
-        $labels = array(
+        $labels = [
             __('Page 2'),
             __('Page 4'),
-        );
+        ];
         $i = 0;
         foreach ($afterPrunePages as $afterPrunePage) {
             $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
@@ -1218,10 +1218,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $afterPrunePages = $this->_nav->getPages();
         $this->assertNotContains($prunePage, $afterPrunePages);
         $this->assertCount(2, $afterPrunePages);
-        $labels = array(
+        $labels = [
             __('Page 4'),
             __('Page 5'),
-        );
+        ];
         $i = 0;
         foreach ($afterPrunePages as $afterPrunePage) {
             $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
@@ -1236,10 +1236,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertNotContains($prunePage, $afterPrunePages);
         $this->assertNull($this->_nav->getPageByUid($beforePrunePage->getHref()));
         $this->assertCount(2, $afterPrunePages);
-        $labels = array(
+        $labels = [
             __('Page 4'),
             __('Page 5'),
-        );
+        ];
         $i = 0;
         foreach ($afterPrunePages as $afterPrunePage) {
             $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
@@ -1251,10 +1251,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $page4 = $this->_nav->getPageByUid($beforePage4->getHref());
         $childPages = $page4->getPages();
         $this->assertCount(2, $childPages);
-        $labels = array(
+        $labels = [
             __('Page 3'),
             __('Page 1'),
-        );
+        ];
         $i = 0;
         foreach ($childPages as $page) {
             $this->assertEquals($labels[$i], $page->getLabel());

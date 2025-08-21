@@ -16,20 +16,20 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';
     const MAX_UPLOAD_SIZE = '1MB';
 
-    public static $allowedMimeTypes = array(
+    public static $allowedMimeTypes = [
         'image/png',
         'image/gif',
         'image/jpeg',
         'image/jpg',
         'image/pjpeg'
-    );
+    ];
 
-    public static $allowedExtensions = array(
+    public static $allowedExtensions = [
         'png',
         'jpg',
         'jpeg',
         'gif'
-    );
+    ];
 
     protected $_themeName;
     protected $_themeOptions;
@@ -46,9 +46,9 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
             // get the theme configuration form specification
             $formIni = new Zend_Config_Ini($themeConfigIni);
-            $configSource = array(
+            $configSource = [
                 'elements' => $formIni->config
-            );
+            ];
             if (isset($formIni->groups)) {
                 $configSource['displayGroups'] = $formIni->groups;
             }
@@ -77,9 +77,9 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 }
             }
         }
-        $this->addElement('hash', 'theme_config_csrf', array(
+        $this->addElement('hash', 'theme_config_csrf', [
             'timeout' => 3600
-        ));
+        ]);
     }
 
     public function setThemeName($themeName)
@@ -125,7 +125,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
             $element->addValidator(new Omeka_Validate_File_Extension(self::$allowedExtensions));
             $element->addValidator(new Omeka_Validate_File_MimeType(self::$allowedMimeTypes));
-            $element->addValidator(new Zend_Validate_File_Size(array('max' => self::MAX_UPLOAD_SIZE)));
+            $element->addValidator(new Zend_Validate_File_Size(['max' => self::MAX_UPLOAD_SIZE]));
         }
 
         // Make sure the file was uploaded before adding the Rename filter to the element
@@ -136,7 +136,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         // add a hidden field to store whether already exists
         $hiddenElement = new Zend_Form_Element_Hidden(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName());
         $hiddenElement->setValue($fileUri);
-        $hiddenElement->setDecorators(array('ViewHelper', 'Errors'));
+        $hiddenElement->setDecorators(['ViewHelper', 'Errors']);
         $hiddenElement->setIgnore(true);
         $this->addElement($hiddenElement);
     }
@@ -152,6 +152,6 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $fileName = $element->getFileName(null, false);
         $uploadedFileName = Theme::getUploadedFileName($this->getThemeName(), $elementName, $fileName);
         $uploadedFilePath = $element->getDestination() . '/' . $uploadedFileName;
-        $element->addFilter('Rename', array('target' => $uploadedFilePath, 'overwrite' => true));
+        $element->addFilter('Rename', ['target' => $uploadedFilePath, 'overwrite' => true]);
     }
 }

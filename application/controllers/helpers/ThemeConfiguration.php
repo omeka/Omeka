@@ -15,8 +15,8 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
 {
     const THEME_UPLOAD_TYPE = 'theme_uploads';
 
-    private $_themeOptions = array();
-    private $_formValues = array();
+    private $_themeOptions = [];
+    private $_formValues = [];
     private $_form;
 
     /**
@@ -31,7 +31,7 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
      * @return array|bool Array of options if the form was validly
      *  submitted, false otherwise.
      */
-    public function processForm(Zend_Form $form, $data, $originalOptions = array())
+    public function processForm(Zend_Form $form, $data, $originalOptions = [])
     {
         $this->_form = $form;
 

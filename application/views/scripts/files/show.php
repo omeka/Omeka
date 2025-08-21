@@ -8,19 +8,19 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
-<?php echo head(array('title' => $fileTitle, 'bodyclass' => 'files show primary-secondary')); ?>
+<?php echo head(['title' => $fileTitle, 'bodyclass' => 'files show primary-secondary']); ?>
 
 <h1><?php echo $fileTitle; ?></h1>
 
 <div id="primary">
-    <?php echo file_markup($file, array('imageSize' => 'fullsize')); ?>
+    <?php echo file_markup($file, ['imageSize' => 'fullsize']); ?>
     <?php echo all_element_texts('file'); ?>
 </div>
 
 <aside id="sidebar">
     <div id="item-metadata">
         <h2><?php echo __('Item'); ?></h2>
-        <?php echo link_to_item(null, array(), 'show', $file->getItem()); ?>
+        <?php echo link_to_item(null, [], 'show', $file->getItem()); ?>
     </div><!-- end item-metadata -->
 
     <div id="format-metadata">

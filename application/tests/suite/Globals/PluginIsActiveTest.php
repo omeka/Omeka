@@ -44,15 +44,15 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
 
     public static function versions()
     {
-        return array(
-            array('1.0', '>=', true),
-            array('1.1', '>', false),
-            array('0.9', '>=', true),
-            array('1.0', '=', true),
-            array('1.1', null, false), // Default should be false
-            array('0.9', null, true),
-            array('1.0', null, true),
-        );
+        return [
+            ['1.0', '>=', true],
+            ['1.1', '>', false],
+            ['0.9', '>=', true],
+            ['1.0', '=', true],
+            ['1.1', null, false], // Default should be false
+            ['0.9', null, true],
+            ['1.0', null, true],
+        ];
     }
 
     /**

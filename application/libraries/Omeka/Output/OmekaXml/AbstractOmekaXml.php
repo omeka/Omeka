@@ -161,8 +161,8 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
      */
     protected function _getElemetSetsByElementTexts(Omeka_Record_AbstractRecord $record, $getItemType = false)
     {
-        $elementSets = array();
-        $itemType = array();
+        $elementSets = [];
+        $itemType = [];
 
         // Get all element texts associated with the provided record.
         $elementTexts = $record->getAllElementTexts();
@@ -396,7 +396,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
     {
         // Get items belonging to this collection.
-        $items = get_db()->getTable('Item')->findBy(array('collection' => $collection->id));
+        $items = get_db()->getTable('Item')->findBy(['collection' => $collection->id]);
 
         // Return if the collection has no items.
         if (!$items) {

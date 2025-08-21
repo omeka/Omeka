@@ -28,10 +28,10 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
     public function testThrowsExceptionForMissingOptions()
     {
         $task = new Installer_Task_Options;
-        $task->setOptions(array(
+        $task->setOptions([
             'foobar' => 'This option is fake',
             'site_title' => 'This option exists'
-        ));
+        ]);
         try {
             $task->install($this->db);
             $this->fail("Should have thrown an exception when missing specific options.");
@@ -45,7 +45,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
     public function testThrowsExceptionForUnexpectedOptions()
     {
         $task = new Installer_Task_Options;
-        $task->setOptions(array(
+        $task->setOptions([
             'fake_option' => 'This option does not exist.',
             'administrator_email' => 'foobar',
             'copyright' => 'foobar',
@@ -76,7 +76,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
             'use_square_thumbnail' => '1'
-        ));
+        ]);
         try {
             $task->install($this->db);
             $this->fail("Should have thrown an exception when unknown options were given.");
@@ -90,7 +90,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
     public function testInsertsOptions()
     {
         $task = new Installer_Task_Options();
-        $task->setOptions(array(
+        $task->setOptions([
             'administrator_email' => 'foobar',
             'copyright' => 'foobar',
             'site_title' => 'foobar',
@@ -120,16 +120,16 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
             'use_square_thumbnail' => '1'
-        ));
+        ]);
         $task->install($this->db);
-        $this->profilerHelper->assertDbQuery(array(
+        $this->profilerHelper->assertDbQuery([
             "INSERT INTO `test_options`",
-            array(
+            [
                 1 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
                 2 => (string) !extension_loaded('fileinfo'),
                 3 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
                 4 => (string) !extension_loaded('fileinfo')
-            )
-        ), "Should have inserted options into the database.");
+            ]
+        ], "Should have inserted options into the database.");
     }
 }

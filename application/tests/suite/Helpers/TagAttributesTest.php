@@ -18,7 +18,7 @@ class TagAttributesTest extends Omeka_Test_TestCase
      */
     public function testAttributesWithValues()
     {
-        $attributesWithValues = array('id' => 'elementid', 'class' => 'element class', 'title' => 'Element title');
+        $attributesWithValues = ['id' => 'elementid', 'class' => 'element class', 'title' => 'Element title'];
         $html = 'id="elementid" class="element class" title="Element title"';
         $this->assertEquals($html, tag_attributes($attributesWithValues));
     }
@@ -28,7 +28,7 @@ class TagAttributesTest extends Omeka_Test_TestCase
      */
     public function testAttributesWithNullValues()
     {
-        $attributesWithNullValues = array('id' => null, 'class' => 'element class', 'title' => null);
+        $attributesWithNullValues = ['id' => null, 'class' => 'element class', 'title' => null];
         $html = 'class="element class"';
         $this->assertEquals($html, tag_attributes($attributesWithNullValues));
     }
@@ -38,7 +38,7 @@ class TagAttributesTest extends Omeka_Test_TestCase
      */
     public function testAttributesWithEmptyStringValues()
     {
-        $attributesWithEmptyStringValues = array('id' => '', 'class' => '', 'title' => '');
+        $attributesWithEmptyStringValues = ['id' => '', 'class' => '', 'title' => ''];
         $html = 'id="" class="" title=""';
         $this->assertEquals($html, tag_attributes($attributesWithEmptyStringValues));
     }
@@ -48,14 +48,14 @@ class TagAttributesTest extends Omeka_Test_TestCase
      */
     public function testAttributesWithMixedValues()
     {
-        $attributesWithMixedValues = array('id' => null, 'class' => 'element class', 'title' => '', 'boolean' => true, 'boolean-no' => false);
+        $attributesWithMixedValues = ['id' => null, 'class' => 'element class', 'title' => '', 'boolean' => true, 'boolean-no' => false];
         $html = 'class="element class" title="" boolean';
         $this->assertEquals($html, tag_attributes($attributesWithMixedValues));
     }
 
     public function testNumericAttributes()
     {
-        $attrs = array('int1' => 0, 'int2' => 100, 'float' => 1.5);
+        $attrs = ['int1' => 0, 'int2' => 100, 'float' => 1.5];
         $html = 'int1="0" int2="100" float="1.5"';
         $this->assertEquals($html, tag_attributes($attrs));
     }

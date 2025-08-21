@@ -57,7 +57,7 @@ class Inflector
      */
     public static function pluralize($word)
     {
-        $plural = array(
+        $plural = [
         '/(quiz)$/i' => '\1zes',
         '/^(ox)$/i' => '\1en',
         '/([m|l])ouse$/i' => '\1ice',
@@ -75,17 +75,17 @@ class Inflector
         '/(octop|vir)us$/i' => '\1i',
         '/(ax|test)is$/i' => '\1es',
         '/s$/i' => 's',
-        '/$/' => 's');
+        '/$/' => 's'];
 
-        $uncountable = array('equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep');
+        $uncountable = ['equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep'];
 
-        $irregular = array(
+        $irregular = [
         'person' => 'people',
         'man' => 'men',
         'child' => 'children',
         'sex' => 'sexes',
         'move' => 'moves',
-        'human' => 'humans');
+        'human' => 'humans'];
 
         $lowercased_word = strtolower($word);
 
@@ -122,7 +122,7 @@ class Inflector
      */
     public static function singularize($word)
     {
-        $singular = array(
+        $singular = [
         '/(quiz)zes$/i' => '\\1',
         '/(matr)ices$/i' => '\\1ix',
         '/(vert|ind)ices$/i' => '\\1ex',
@@ -147,17 +147,17 @@ class Inflector
         '/([ti])a$/i' => '\\1um',
         '/(n)ews$/i' => '\\1ews',
         '/s$/i' => '',
-        );
+        ];
 
-        $uncountable = array('equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep');
+        $uncountable = ['equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep'];
 
-        $irregular = array(
+        $irregular = [
         'person' => 'people',
         'man' => 'men',
         'child' => 'children',
         'sex' => 'sexes',
         'move' => 'moves',
-        'human' => 'humans');
+        'human' => 'humans'];
 
         $lowercased_word = strtolower($word);
         foreach ($uncountable as $_uncountable) {

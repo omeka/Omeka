@@ -38,12 +38,12 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
         $convertPath = $this->_getConvertPath();
         $inputArgs = $this->_getInputArgs($sourcePath, $mimeType);
         $convertArgs = $this->_getConvertArgs($type, $sizeConstraint);
-        $cmd = join(' ', array(
+        $cmd = join(' ', [
             escapeshellarg($convertPath),
             $inputArgs,
             $convertArgs,
             escapeshellarg($destPath)
-        ));
+        ]);
 
         self::executeCommand($cmd, $status, $output, $errors);
 
@@ -92,7 +92,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
      */
     protected function _getInputArgs($sourcePath, $mimeType)
     {
-        $args = array();
+        $args = [];
         $page = (int) $this->getOption('page', 0);
 
         if ($mimeType === 'application/pdf') {
@@ -119,17 +119,17 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
         $alphaRemoveArg = version_compare($version, '6.7.5-1', '>=') ? '-alpha remove' : '-flatten';
 
         if ($type != 'square_thumbnail') {
-            $args = array(
+            $args = [
                 '-background white',
                 '+repage',
                 $alphaRemoveArg,
                 '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>")
-            );
+            ];
         } else {
             $gravity = $this->getOption('gravity', 'Center');
             // Native square thumbnail resize requires at least version 6.3.8-3.
             if (version_compare($version, '6.3.8-3', '>=')) {
-                $args = array(
+                $args = [
                     '-background white',
                     '+repage',
                     $alphaRemoveArg,
@@ -137,9 +137,9 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
                     '-gravity ' . escapeshellarg($gravity),
                     '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
                     '+repage'
-                );
+                ];
             } else {
-                $args = array(
+                $args = [
                     '-thumbnail ' . escapeshellarg('x' . $constraint * 2),
                     '-resize ' . escapeshellarg($constraint * 2 . 'x<'),
                     '-resize 50%',
@@ -149,7 +149,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
                     '-gravity ' . escapeshellarg($gravity),
                     '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
                     '+repage'
-                );
+                ];
             }
         }
 
@@ -218,11 +218,11 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
         // fails with a "Permission Denied" error because the current working
         // directory cannot be set properly via exec().  Note that exec() works
         // fine when executing in the web environment but fails in CLI.
-        $descriptorSpec = array(
-            0 => array("pipe", "r"), //STDIN
-            1 => array("pipe", "w"), //STDOUT
-            2 => array("pipe", "w"), //STDERR
-        );
+        $descriptorSpec = [
+            0 => ["pipe", "r"], //STDIN
+            1 => ["pipe", "w"], //STDOUT
+            2 => ["pipe", "w"], //STDERR
+        ];
         if (function_exists('proc_open') && $proc = proc_open($cmd, $descriptorSpec, $pipes, getcwd())) {
             $output = stream_get_contents($pipes[1]);
             $errors = stream_get_contents($pipes[2]);

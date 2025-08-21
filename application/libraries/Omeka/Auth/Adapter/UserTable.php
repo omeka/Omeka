@@ -66,7 +66,7 @@ class Omeka_Auth_Adapter_UserTable implements Zend_Auth_Adapter_Interface
 
         $sql = "SELECT id, password FROM `{$db->User}` WHERE username = ? AND active = 1";
         try {
-            $resultIdentities = $this->_db->fetchAll($sql, array($identity), Zend_Db::FETCH_ASSOC);
+            $resultIdentities = $this->_db->fetchAll($sql, [$identity], Zend_Db::FETCH_ASSOC);
         } catch (Exception $e) {
             throw new Zend_Auth_Adapter_Exception('The supplied parameters failed to produce a valid sql statement.', 0, $e);
         }
@@ -89,6 +89,6 @@ class Omeka_Auth_Adapter_UserTable implements Zend_Auth_Adapter_Interface
                 $message = 'Supplied credential is invalid.';
             }
         }
-        return new Zend_Auth_Result($code, $identity, array($message));
+        return new Zend_Auth_Result($code, $identity, [$message]);
     }
 }

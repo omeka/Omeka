@@ -3,7 +3,7 @@ if ($versionNotifications):
     queue_js_file('vendor/semver.min', 'javascripts');
 endif;
 $pageTitle = __('Plugins') . ' ' . __('(%s total)', $plugin_count);
-echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins browse'));
+echo head(['title' => $pageTitle, 'bodyclass' => 'plugins browse']);
 echo flash();
 ?>
 
@@ -12,7 +12,7 @@ echo flash();
         <?php
         $displayName = $plugin->getDisplayName();
         $requiredPluginDirNames = $plugin->getRequiredPlugins();
-        $missingPluginNames = array();
+        $missingPluginNames = [];
         
         foreach($requiredPluginDirNames as $requiredPluginDirName) {
             $requiredPlugin = $loader->getPlugin($requiredPluginDirName);
@@ -23,7 +23,7 @@ echo flash();
             }
         }
         
-        $loadErrors = array();
+        $loadErrors = [];
         if (!$plugin->meetsOmekaMinimumVersion()) {
             $minVersion = $plugin->getMinimumOmekaVersion();
             $loadErrors[] = __('This version of %1$s requires at least Omeka %2$s.', $displayName, $minVersion);
@@ -117,7 +117,7 @@ echo flash();
                     <?php if (is_allowed($plugin, 'activate')  && !$cannotLoad): ?>
                         <li>
                         <?php if (is_allowed($plugin, 'config') && $plugin->hasConfig()): ?>
-                        <a href="<?php echo html_escape(url('plugins/config', array('name' => $plugin->getDirectoryName()))); ?>" class="blue button"><?php echo __('Configure'); ?></a>
+                        <a href="<?php echo html_escape(url('plugins/config', ['name' => $plugin->getDirectoryName()])); ?>" class="blue button"><?php echo __('Configure'); ?></a>
                         <?php endif; ?>
                         </li>
                         <li>
@@ -132,7 +132,7 @@ echo flash();
                     <?php endif; ?>
                         <li>
                     <?php if (is_allowed($plugin, 'uninstall') && !$cannotLoad): ?>
-                            <form action="<?php echo html_escape(url(array('controller' => 'plugins', 'action' => 'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
+                            <form action="<?php echo html_escape(url(['controller' => 'plugins', 'action' => 'uninstall'], 'default')); ?>" method="post" accept-charset="utf-8">
 
                             <button name="uninstall" type="submit" class="uninstall red button"><?php echo __('Uninstall'); ?></button>
                             <input type="hidden" name="name" value="<?php echo html_escape($plugin->name); ?>" />
@@ -161,7 +161,7 @@ echo flash();
 <?php else: ?>
     <p><?php echo __('You do not have any plugins installed. Add them to the plugins directory to see them listed here.'); ?></p>
 <?php endif; ?>
-<?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_plugins_browse', ['plugins' => $plugins, 'view' => $this]); ?>
 <?php if($versionNotifications): ?>
 <script>
     Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_plugin.json');

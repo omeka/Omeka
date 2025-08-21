@@ -54,8 +54,8 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
             // Delete existing element order to prevent duplicate indices.
             $db->getDb()->update(
                 $db->getDb()->Element,
-                array('order' => null),
-                array('element_set_id = ?' => $this->getRequest()->getParam('id'))
+                ['order' => null],
+                ['element_set_id = ?' => $this->getRequest()->getParam('id')]
             );
 
             // Update the elements.

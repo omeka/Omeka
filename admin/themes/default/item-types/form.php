@@ -43,7 +43,7 @@ jQuery(document).ready(function () {
                     <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
                     <button type="button" id="remove-element-link-<?php echo $elementId; ?>" class="delete-drawer" data-action-selector="deleted" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>" aria-labelledby="remove-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name"><span class="icon" aria-hidden="true"></span></button>
                     <button type="button" id="return-element-link-<?php echo $elementId; ?>" class="undo-delete" data-action-selector="deleted" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="return-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name"><span class="icon" aria-hidden="true"></span></button>
-                    <?php echo $this->formHidden("elements[$elementId][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
+                    <?php echo $this->formHidden("elements[$elementId][order]", $elementOrder, ['size'=>2, 'class' => 'element-order']); ?>
                     <?php endif; ?>
                     </div>
                     
@@ -55,24 +55,24 @@ jQuery(document).ready(function () {
                     <?php if (!$element->exists()):  ?>
                     <?php echo $this->action(
                         'add-new-element', 'item-types', null,
-                        array(
+                        [
                             'from_post' => true,
                             'elementTempId' => $elementTempId,
                             'elementName' => $element->name,
                             'elementDescription' => $element->description,
                             'elementOrder' => $elementOrder
-                        )
+                        ]
                     );
                     ?>
                     <?php else: ?>
                     <?php echo $this->action(
                         'add-existing-element', 'item-types', null,
-                        array(
+                        [
                             'from_post' => true,
                             'elementTempId' => $elementTempId,
                             'elementId' => $elementId,
                             'elementOrder' => $elementOrder
-                        )
+                        ]
                     );
                     ?>
                     <?php endif; ?>
@@ -96,5 +96,5 @@ jQuery(document).ready(function () {
         </div>
     </fieldset>
     <?php echo $this->form->getElement('csrf_token') ?>
-    <?php fire_plugin_hook('admin_item_types_form', array('item_type' => $item_type, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_item_types_form', ['item_type' => $item_type, 'view' => $this]); ?>
 </section>

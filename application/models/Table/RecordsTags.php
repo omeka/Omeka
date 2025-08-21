@@ -11,16 +11,16 @@
  */
 class Table_RecordsTags extends Omeka_Db_Table
 {
-    public function applySearchFilters($select, $params = array())
+    public function applySearchFilters($select, $params = [])
     {
         $db = $this->getDb();
         if (isset($params['tag'])) {
             $tag = $params['tag'];
-            $select->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array());
+            $select->joinInner(['tags' => $db->Tag], 'tags.id = records_tags.tag_id', []);
 
             if (is_array($tag)) {
-                $wheres = array();
-                $names = array();
+                $wheres = [];
+                $names = [];
                 foreach ($tag as $t) {
                     $name = ($t instanceof Tag) ? $t->name : $t;
                     $wheres[] = 'tags.name = '.$db->quote($t);
@@ -44,7 +44,7 @@ class Table_RecordsTags extends Omeka_Db_Table
 
     public function findForRecordAndTag($record, $tag)
     {
-        $select = $this->getSelectForFindBy(array('record' => $record, 'tag' => $tag));
+        $select = $this->getSelectForFindBy(['record' => $record, 'tag' => $tag]);
         return $this->fetchObject($select);
     }
 }

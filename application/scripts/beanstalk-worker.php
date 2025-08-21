@@ -18,11 +18,11 @@ require_once "Omeka/Application.php";
 declare(ticks=1);
 
 // Set the command line arguments.
-$options = new Zend_Console_Getopt(array(
+$options = new Zend_Console_Getopt([
     'queue|q=s' => 'Name of queue (tube) to use',
     'host|h=s' => 'Beanstalkd host IP',
     'port|p-i' => 'Beanstalkd port',
-));
+]);
 
 try {
     $options->parse();
@@ -52,7 +52,7 @@ function handle_signal($signal)
 }
 pcntl_signal(SIGINT, "handle_signal");
 
-$application->bootstrap(array('Logger'));
+$application->bootstrap(['Logger']);
 $host = $options->host ?? '127.0.0.1';
 $port = $options->port ?? 11300;
 $pheanstalk = new Pheanstalk_Pheanstalk("$host:$port");
@@ -70,10 +70,10 @@ if (!$pheanJob) {
     echo "Beanstalk worker timed out when reserving a job.";
     exit(0);
 }
-$application->bootstrap(array(
+$application->bootstrap([
     'Config', 'Logger', 'Db', 'Options', 'Pluginbroker', 'View', 'Locale', 'Mail',
     'Plugins', 'Jobs', 'Storage', 'Filederivatives'
-));
+]);
 
 // resend() must send jobs to the original queue by default.
 $jobDispatcher = Zend_Registry::get('job_dispatcher');

@@ -74,7 +74,7 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         $queryCount = $profiler->getTotalNumQueries();
         $longestTime = 0;
         $longestQuery = null;
-        $lines = array();
+        $lines = [];
         $html = "<h2>Db Profiler</h2>\n";
 
         $lines[] = "The following queries were executed during the request:";

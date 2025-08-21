@@ -50,7 +50,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * @var array
      */
-    public $contexts = array();
+    public $contexts = [];
 
     /**
      * Array of contexts, indexed by action
@@ -59,7 +59,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * @var array
      */
-    public $ajaxable = array();
+    public $ajaxable = [];
 
     /**
      * Base controller constructor.
@@ -82,7 +82,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      */
     public function __construct(Zend_Controller_Request_Abstract $request,
                                 Zend_Controller_Response_Abstract $response,
-                                array $invokeArgs = array()
+                                array $invokeArgs = []
     ) {
         parent::__construct($request, $response, $invokeArgs);
         $this->_setActionContexts();
@@ -116,7 +116,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     public function browseAction()
     {
         // Respect only GET parameters when browsing.
-        $this->getRequest()->setParamSources(array('_GET'));
+        $this->getRequest()->setParamSources(['_GET']);
 
         // Inflect the record type from the model name.
         $pluralName = $this->view->pluralize($this->_helper->db->getDefaultModelName());
@@ -125,7 +125,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         if (!$this->_getParam('sort_field')) {
             $defaultSort = apply_filters("{$pluralName}_browse_default_sort",
                 $this->_getBrowseDefaultSort(),
-                array('params' => $this->getAllParams())
+                ['params' => $this->getAllParams()]
             );
             if (is_array($defaultSort) && isset($defaultSort[0])) {
                 $this->setParam('sort_field', $defaultSort[0]);
@@ -146,14 +146,14 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
 
         // Add pagination data to the registry. Used by pagination_links().
         if ($recordsPerPage) {
-            Zend_Registry::set('pagination', array(
+            Zend_Registry::set('pagination', [
                 'page' => $currentPage,
                 'per_page' => $recordsPerPage,
                 'total_results' => $totalRecords,
-            ));
+            ]);
         }
 
-        $this->view->assign(array($pluralName => $records, 'total_results' => $totalRecords));
+        $this->view->assign([$pluralName => $records, 'total_results' => $totalRecords]);
     }
 
     /**
@@ -168,7 +168,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         $singularName = $this->view->singularize($this->_helper->db->getDefaultModelName());
         $record = $this->_helper->db->findById();
-        $this->view->assign(array($singularName => $record));
+        $this->view->assign([$singularName => $record]);
     }
 
     /**
@@ -361,7 +361,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
 
         if ($pluralName) {
             $perPage = apply_filters("{$pluralName}_browse_per_page", $perPage,
-                array('controller' => $this));
+                ['controller' => $this]);
         }
         return $perPage;
     }
@@ -448,7 +448,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      */
     protected function _redirectAfterEdit($record)
     {
-        $this->_helper->redirector('show', null, null, array('id' => $record->id));
+        $this->_helper->redirector('show', null, null, ['id' => $record->id]);
     }
 
     /**
@@ -472,7 +472,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     protected function _setActionContexts()
     {
         $contextSwitcher = $this->_helper->getHelper('contextSwitch');
-        $contextArray = !empty($this->contexts) ? $this->contexts : array();
+        $contextArray = !empty($this->contexts) ? $this->contexts : [];
 
         // Plugins can hook in to add contexts to actions
         if ($broker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker')) {
@@ -482,7 +482,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             $contextArray = $broker->applyFilters(
                 'action_contexts',
                 $contextArray,
-                array('controller' => $this, 'context_switcher' => $contextSwitcher)
+                ['controller' => $this, 'context_switcher' => $contextSwitcher]
             );
         }
 
@@ -501,11 +501,11 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     protected function _getDeleteForm()
     {
         $form = new Zend_Form();
-        $form->setElementDecorators(array('ViewHelper'));
+        $form->setElementDecorators(['ViewHelper']);
         $form->removeDecorator('HtmlTag');
         $form->addElement('hash', 'confirm_delete_hash');
-        $form->addElement('submit', 'Delete', array('class' => 'delete red button'));
-        $form->setAction($this->view->url(array('action' => 'delete')));
+        $form->addElement('submit', 'Delete', ['class' => 'delete red button']);
+        $form->setAction($this->view->url(['action' => 'delete']));
         $form->setAttrib('class', 'delete-confirm-form');
         return $form;
     }

@@ -1,1 +1,1 @@
-<?php echo element_form($element, $record, array('divWrap'=>false, 'extraFieldCount'=>1)); ?>
+<?php echo element_form($element, $record, ['divWrap'=>false, 'extraFieldCount'=>1]); ?>

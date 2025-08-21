@@ -22,17 +22,17 @@ class Omeka_Helpers_AllElementTextsTest extends Omeka_Test_AppTestCase
         $subject = 'subject';
         $description = 'description';
 
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $title, 'html' => false)),
-            'Subject' => array(array('text' => $subject, 'html' => false)),
-            'Description' => array(array('text' => $description, 'html' => false))
-        ));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [['text' => $title, 'html' => false]],
+            'Subject' => [['text' => $subject, 'html' => false]],
+            'Description' => [['text' => $description, 'html' => false]]
+        ]];
 
         $item = new Item;
         $item->addElementTextsByArray($elementTexts);
         $item->save();
 
-        $metadataOutput = all_element_texts($item, array('return_type' => 'array'));
+        $metadataOutput = all_element_texts($item, ['return_type' => 'array']);
 
         $this->assertTrue(is_array($metadataOutput));
         $this->assertArrayHasKey('Dublin Core', $metadataOutput);
@@ -51,12 +51,12 @@ class Omeka_Helpers_AllElementTextsTest extends Omeka_Test_AppTestCase
         $item = new Item;
         $item->item_type_id = 1;
 
-        $metadataOutput = all_element_texts($item, array('return_type' => 'array'));
+        $metadataOutput = all_element_texts($item, ['return_type' => 'array']);
 
         set_current_record('item', $item, true);
 
         // Compare runs with and without item set on view, they should be
         // the same.
-        $this->assertEquals($metadataOutput, all_element_texts('item', array('return_type' => 'array')));
+        $this->assertEquals($metadataOutput, all_element_texts('item', ['return_type' => 'array']));
     }
 }

@@ -22,12 +22,12 @@ class Globals_InsertCollectionTest extends Omeka_Test_AppTestCase
         $titleText = 'foobar';
 
         // Insert an collection
-        $metadata = array();
+        $metadata = [];
 
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(
-                array('text' => $titleText, 'html' => $isHtml)
-             )));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [
+                ['text' => $titleText, 'html' => $isHtml]
+             ]]];
 
         $collection = insert_collection($metadata, $elementTexts);
         $this->assertInstanceOf('Collection', $collection);
@@ -58,8 +58,8 @@ class Globals_InsertCollectionTest extends Omeka_Test_AppTestCase
         $isFeatured = false;
 
         // Insert an collection
-        $metadata = array();
-        $elementTexts = array();
+        $metadata = [];
+        $elementTexts = [];
 
         $collection = insert_collection($metadata, $elementTexts);
         $this->assertInstanceOf('Collection', $collection);
@@ -132,12 +132,12 @@ class Globals_InsertCollectionTest extends Omeka_Test_AppTestCase
         $titleText = 'foobar';
 
         // Insert an collection
-        $metadata = array('public' => $isPublic, 'featured' => $isFeatured);
+        $metadata = ['public' => $isPublic, 'featured' => $isFeatured];
 
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(
-                array('text' => $titleText, 'html' => $isHtml)
-             )));
+        $elementTexts = ['Dublin Core' => [
+            'Title' => [
+                ['text' => $titleText, 'html' => $isHtml]
+             ]]];
 
         $collection = insert_collection($metadata, $elementTexts);
         $this->assertInstanceOf('Collection', $collection);

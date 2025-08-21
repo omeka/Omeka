@@ -84,14 +84,14 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      * 
      * @var array 
      */
-    protected $_requiredPlugins = array();
+    protected $_requiredPlugins = [];
 
     /**
      * Directory names of optional plugins.
      * 
      * @var array
      */
-    protected $_optionalPlugins = array();
+    protected $_optionalPlugins = [];
 
     /**
      * Minimum Omeka version requirement for the plugin.
@@ -120,7 +120,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      * 
      * @var array
      */
-    protected $_iniTags = array();
+    protected $_iniTags = [];
 
     /**
      * Validate the plugin.

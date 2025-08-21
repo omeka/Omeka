@@ -37,7 +37,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $item = new Item;
         $item->id = 100;
 
-        $atom = new Output_ItemAtom(array($item));
+        $atom = new Output_ItemAtom([$item]);
 
         $feed = $atom->getFeed();
         $dom = new Zend_Dom_Query($feed);
@@ -64,9 +64,9 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $file->filename = $filename;
         $file->mime_type = $mimeType;
         $file->size = $size;
-        $item->Files = array($file);
+        $item->Files = [$file];
 
-        $atom = new Output_ItemAtom(array($item));
+        $atom = new Output_ItemAtom([$item]);
 
         $feed = $atom->getFeed();
 
@@ -79,7 +79,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
 
     private function _assertAtomFeed($dom)
     {
-        $dom->registerXpathNamespaces(array('atom' => 'http://www.w3.org/2005/Atom'));
+        $dom->registerXpathNamespaces(['atom' => 'http://www.w3.org/2005/Atom']);
         $queryResult = $dom->queryXpath("/atom:feed/atom:entry/atom:content[@type='html']");
         $this->assertCount(1, $queryResult, 'The generated feed was not a valid Atom feed.');
     }

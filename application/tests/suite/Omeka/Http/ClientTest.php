@@ -56,7 +56,7 @@ class Omeka_Http_ClientTest extends Omeka_Test_TestCase
     {
         $expectedResponse = new Zend_Http_Response(
             200,
-            array('header' => 'a header'),
+            ['header' => 'a header'],
             'body'
         );
         $this->exceptionAdapter->expects($this->at(0))

@@ -23,7 +23,7 @@ class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends Omeka_Test_TestCase
     public function testSetQueueNameWithInvalidHost()
     {
         $this->setExpectedException('Pheanstalk_Exception_ConnectionException');
-        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(['host' => 'example.test']);
         $this->adapter->setQueueName('foobar');
     }
 
@@ -34,7 +34,7 @@ class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends Omeka_Test_TestCase
     public function testSendWithInvalidHost()
     {
         $this->setExpectedException('Pheanstalk_Exception_ConnectionException');
-        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
-        $this->adapter->send('foobar', array());
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(['host' => 'example.test']);
+        $this->adapter->send('foobar', []);
     }
 }

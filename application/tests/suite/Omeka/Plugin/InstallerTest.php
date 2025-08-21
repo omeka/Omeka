@@ -19,14 +19,14 @@ class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
 
     public function setUpLegacy()
     {
-        $this->broker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
-        $this->loader = $this->getMock('Omeka_Plugin_Loader', array(), array(), '', false);
-        $this->iniReader = $this->getMock('Omeka_Plugin_Ini', array(), array(), '', false);
+        $this->broker = $this->getMock('Omeka_Plugin_Broker', [], [], '', false);
+        $this->loader = $this->getMock('Omeka_Plugin_Loader', [], [], '', false);
+        $this->iniReader = $this->getMock('Omeka_Plugin_Ini', [], [], '', false);
         $this->installer = new Omeka_Plugin_Installer($this->broker,
                                                       $this->loader,
                                                       $this->iniReader);
         // Plugin record with a mocked out database connection.
-        $this->plugin = $this->getMock('Plugin', array(), array(), '', false);
+        $this->plugin = $this->getMock('Plugin', [], [], '', false);
         $this->plugin->id = 1;
         $this->plugin->expects($this->any())
                  ->method('getDirectoryName')
@@ -77,7 +77,7 @@ class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
         // whether it actually calls the 'upgrade' hook.
         $this->broker->expects($this->once())
                  ->method('callHook')
-                 ->with('upgrade', array('old_version' => '1.0', 'new_version' => '1.1'), $this->isInstanceOf('Plugin'));
+                 ->with('upgrade', ['old_version' => '1.0', 'new_version' => '1.1'], $this->isInstanceOf('Plugin'));
 
         $this->installer->upgrade($this->plugin);
     }
@@ -94,7 +94,7 @@ class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
 
         $this->broker->expects($this->once())
                  ->method('callHook')
-                 ->with('install', array('plugin_id' => 1), $this->isInstanceOf('Plugin'));
+                 ->with('install', ['plugin_id' => 1], $this->isInstanceOf('Plugin'));
 
         $this->installer->install($this->plugin);
     }
@@ -112,7 +112,7 @@ class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
 
         $this->broker->expects($this->once())
               ->method('callHook')
-              ->with('uninstall', array(), $this->isInstanceOf('Plugin'));
+              ->with('uninstall', [], $this->isInstanceOf('Plugin'));
 
         // The plugin record should be deleted at the end of the process.
         $this->plugin->expects($this->once())
@@ -133,7 +133,7 @@ class Omeka_Plugin_InstallerTest extends Omeka_Test_TestCase
 
         $this->broker->expects($this->once())
                 ->method('callHook')
-                ->with('uninstall', array(), $this->isInstanceOf('Plugin'));
+                ->with('uninstall', [], $this->isInstanceOf('Plugin'));
 
         $this->installer->uninstall($this->plugin);
     }

@@ -6,8 +6,8 @@ if ($userTitle != '') {
     $userTitle = '';
 }
 $userTitle = __('Edit User #%s', $user->id) . $userTitle;
-echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
-echo common('users-nav', array('user' => $user));
+echo head(['title' => $userTitle, 'bodyclass' => 'users']);
+echo common('users-nav', ['user' => $user]);
 echo flash();
 ?>
 <form method="post">
@@ -17,19 +17,19 @@ echo flash();
 <section class="three columns omega">
     <div id="save" class="panel">
         <?php
-        echo $this->formSubmit('submit', __('Save Changes'), array('class' => 'submit full-width green button'));
+        echo $this->formSubmit('submit', __('Save Changes'), ['class' => 'submit full-width green button']);
         if (!$user->active):
-            echo $this->formSubmit('resend_activation_email', __('Resend Activation Email'), array('class' => 'submit full-width blue button'));
+            echo $this->formSubmit('resend_activation_email', __('Resend Activation Email'), ['class' => 'submit full-width blue button']);
         endif;
         if (is_allowed($user, 'delete')):
-            echo link_to($user, 'delete-confirm', __('Delete'), array('class' => 'full-width red button delete-confirm'));
+            echo link_to($user, 'delete-confirm', __('Delete'), ['class' => 'full-width red button delete-confirm']);
         endif;
         ?>
-        <?php fire_plugin_hook('admin_users_panel_buttons', array('record' => $user, 'view' => $this)); ?>
-        <?php fire_plugin_hook('admin_users_panel_fields', array('record' => $user, 'view' => $this)); ?>
+        <?php fire_plugin_hook('admin_users_panel_buttons', ['record' => $user, 'view' => $this]); ?>
+        <?php fire_plugin_hook('admin_users_panel_fields', ['record' => $user, 'view' => $this]); ?>
     </div>
 </section>
 </form>
-<?php fire_plugin_hook('admin_users_form', array('user' => $user, 'form' => $form, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_users_form', ['user' => $user, 'form' => $form, 'view' => $this]); ?>
 
 <?php echo foot();?>

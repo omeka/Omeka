@@ -6,8 +6,8 @@ if ($userTitle != '') {
     $userTitle = '';
 }
 $userTitle = __('Edit User #%s', $user->id) . $userTitle;
-echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
-echo common('users-nav', array('user' => $user));
+echo head(['title' => $userTitle, 'bodyclass' => 'users']);
+echo common('users-nav', ['user' => $user]);
 echo flash();
 ?>
 <section class="seven columns alpha">
@@ -53,7 +53,7 @@ echo flash();
                     <td style="font-family: monospace;"><?php echo $key->key; ?></td>
                     <td><?php echo $key->ip ? inet_ntop($key->ip) : ''; ?></td>
                     <td><?php echo $key->accessed; ?></td>
-                    <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id, array('aria-labelledby' => 'rescind')); ?></td>
+                    <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id, ['aria-labelledby' => 'rescind']); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -64,7 +64,7 @@ echo flash();
 </section>
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('update_api_keys', __('Update API Keys'), array('class' => 'submit full-width green button')); ?>
+        <?php echo $this->formSubmit('update_api_keys', __('Update API Keys'), ['class' => 'submit full-width green button']); ?>
     </div>
 </section>
 </form>

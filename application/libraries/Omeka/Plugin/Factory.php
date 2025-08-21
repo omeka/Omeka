@@ -38,13 +38,13 @@ class Omeka_Plugin_Factory
     public function getNewPlugins(array $existingPlugins)
     {
         $dirListing = $this->_getDirectoryList();
-        $existingPluginNames = array();
+        $existingPluginNames = [];
         foreach ($existingPlugins as $plugin) {
             $existingPluginNames[] = $plugin->getDirectoryName();
         }
         $newPluginDirNames = array_diff($dirListing, $existingPluginNames);
 
-        $newPlugins = array();
+        $newPlugins = [];
         foreach ($newPluginDirNames as $pluginDirName) {
             $newPlugin = new Plugin;
             $newPlugin->setDirectoryName($pluginDirName);
@@ -65,7 +65,7 @@ class Omeka_Plugin_Factory
         // Loop through all the plugins in the plugin directory,
         // and add each plugin directory name that has a plugin.php file
         // to the list of all plugin directory names
-        $dirs = array();
+        $dirs = [];
         foreach (new DirectoryIterator($this->_basePath) as $entry) {
             $filename = $entry->getFilename();
             if (!$entry->isDir() || $filename[0] === '.') {

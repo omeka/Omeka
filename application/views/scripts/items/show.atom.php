@@ -1,3 +1,3 @@
 <?php
-$atom = new Output_ItemAtom(array($item));
+$atom = new Output_ItemAtom([$item]);
 echo $atom->getFeed();

@@ -13,7 +13,7 @@
  */
 abstract class Omeka_File_Derivative_AbstractStrategy implements Omeka_File_Derivative_StrategyInterface
 {
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * Set options for the derivative strategy.

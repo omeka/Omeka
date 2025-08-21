@@ -13,9 +13,9 @@ class FilesController extends Omeka_Controller_AbstractActionController
 {
     protected $_autoCsrfProtection = true;
 
-    public $contexts = array(
-        'show' => array('omeka-xml')
-    );
+    public $contexts = [
+        'show' => ['omeka-xml']
+    ];
 
     public function init()
     {
@@ -51,7 +51,7 @@ class FilesController extends Omeka_Controller_AbstractActionController
 
          // Remove legacy file element sets that will most likely be phased out
          // in later versions.
-         $legacyElementSetNames = array('Omeka Image File', 'Omeka Video File');
+         $legacyElementSetNames = ['Omeka Image File', 'Omeka Video File'];
         foreach ($elementSets as $key => $elementSet) {
             if (in_array($elementSet->name, $legacyElementSetNames)) {
                 unset($elementSets[$key]);
@@ -70,6 +70,6 @@ class FilesController extends Omeka_Controller_AbstractActionController
     {
         // Redirect back to the item show page for this file
         $this->_helper->flashMessenger(__('The file was successfully deleted.'), 'success');
-        $this->_helper->redirector('show', 'items', null, array('id' => $record->item_id));
+        $this->_helper->redirector('show', 'items', null, ['id' => $record->item_id]);
     }
 }

@@ -19,7 +19,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ no salt).
         $dbAdapter->update('omeka_users',
-            array('password' => sha1('foobar'), 'salt' => null),
+            ['password' => sha1('foobar'), 'salt' => null],
             'id = 1'
         );
 
@@ -39,7 +39,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ salt).
         $dbAdapter->update('omeka_users',
-            array('password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'),
+            ['password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'],
             'id = 1'
         );
 
@@ -72,7 +72,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ no salt).
         $dbAdapter->update('omeka_users',
-            array('password' => sha1('foobar'), 'salt' => null),
+            ['password' => sha1('foobar'), 'salt' => null],
             'id = 1'
         );
 
@@ -87,7 +87,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ salt).
         $dbAdapter->update('omeka_users',
-            array('password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'),
+            ['password' => sha1('0123456789abcdef' . 'barbaz'), 'salt' => '0123456789abcdef'],
             'id = 1'
         );
 
@@ -100,7 +100,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     {
         $dbAdapter = $this->db->getAdapter();
         $dbAdapter->update('omeka_users',
-            array('active' => '0'),
+            ['active' => '0'],
             'id = 1'
         );
         $this->_login(Omeka_Test_Resource_Db::SUPER_USERNAME, Omeka_Test_Resource_Db::SUPER_PASSWORD);
@@ -110,12 +110,12 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
 
     public static function roles()
     {
-        return array(
-            array('researcher'),
-            array('contributor'),
-            array('admin'),
-            array('super'),
-        );
+        return [
+            ['researcher'],
+            ['contributor'],
+            ['admin'],
+            ['super'],
+        ];
     }
 
     /**
@@ -134,8 +134,8 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     private function _login($username, $password)
     {
         $r = $this->getRequest();
-        $r->setPost(array('username' => $username,
-                          'password' => $password))
+        $r->setPost(['username' => $username,
+                          'password' => $password])
           ->setMethod('post');
 
         $this->dispatch('users/login');

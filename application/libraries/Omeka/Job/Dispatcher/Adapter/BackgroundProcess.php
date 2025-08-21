@@ -28,7 +28,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends
     public function send($encodedJob, array $metadata)
     {
         $this->getProcessDispatcher()->startProcess('Omeka_Job_Process_Wrapper',
-            $metadata['createdBy'], array('job' => $encodedJob));
+            $metadata['createdBy'], ['job' => $encodedJob]);
     }
 
     /**

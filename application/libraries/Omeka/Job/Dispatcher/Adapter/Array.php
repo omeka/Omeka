@@ -18,7 +18,7 @@ class Omeka_Job_Dispatcher_Adapter_Array implements Omeka_Job_Dispatcher_Adapter
 {
     private $_queueName = 'default';
 
-    private $_jobs = array();
+    private $_jobs = [];
 
     public function setQueueName($name)
     {
@@ -27,11 +27,11 @@ class Omeka_Job_Dispatcher_Adapter_Array implements Omeka_Job_Dispatcher_Adapter
 
     public function send($encodedJob, array $metadata)
     {
-        $this->_jobs[] = array(
+        $this->_jobs[] = [
             'encoded' => $encodedJob,
             'metadata' => $metadata,
             'queue' => $this->_queueName,
-        );
+        ];
     }
 
     public function getJobs()

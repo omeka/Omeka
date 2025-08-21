@@ -56,18 +56,18 @@ class Table_Item extends Omeka_Db_Table
         }
 
         $select->joinLeft(
-            array('_simple_records_tags' => $db->RecordsTags),
+            ['_simple_records_tags' => $db->RecordsTags],
             "_simple_records_tags.record_id = items.id AND _simple_records_tags.record_type = 'Item'",
-            array()
+            []
         );
         $select->joinLeft(
-            array('_simple_tags' => $db->Tag),
+            ['_simple_tags' => $db->Tag],
             '_simple_tags.id = _simple_records_tags.tag_id',
-            array()
+            []
         );
 
         $subquery = new Omeka_Db_Select;
-        $subquery->from(array('_simple_etx' => $db->ElementText), '_simple_etx.record_id')
+        $subquery->from(['_simple_etx' => $db->ElementText], '_simple_etx.record_id')
             ->where("_simple_etx.record_type = 'Item'")
             ->where('_simple_etx.text LIKE ?', '%' . $terms . '%');
 
@@ -156,7 +156,7 @@ class Table_Item extends Omeka_Db_Table
                 $whereClause = $predicateClause;
             }
 
-            $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
+            $select->joinLeft([$alias => $db->ElementText], $joinCondition, []);
             if ($where == '') {
                 $where = $whereClause;
             } elseif ($joiner == 'or') {
@@ -183,7 +183,7 @@ class Table_Item extends Omeka_Db_Table
     public function filterByCollection($select, $collections)
     {
         if (!is_array($collections)) {
-            $collections = array($collections);
+            $collections = [$collections];
         }
 
         $collectionIds = array_map(function ($collection) {
@@ -203,9 +203,9 @@ class Table_Item extends Omeka_Db_Table
         $collectionIds = array_filter($collectionIds);
         if (!empty($collectionIds)) {
             $select->joinLeft(
-                array('collections' => $this->getDb()->Collection),
+                ['collections' => $this->getDb()->Collection],
                 'items.collection_id = collections.id',
-                array());
+                []);
             $condition = 'collections.id IN (?)';
             if ($hasEmpty) {
                 $condition .= ' OR items.collection_id IS NULL';
@@ -228,7 +228,7 @@ class Table_Item extends Omeka_Db_Table
     public function filterByItemType($select, $types)
     {
         if (!is_array($types)) {
-            $types = array($types);
+            $types = [$types];
         }
 
         $typeIdsOrNames = array_map(function ($type) {
@@ -250,23 +250,23 @@ class Table_Item extends Omeka_Db_Table
         $hasEmpty = in_array(null, $typeIdsOrNames);
         $typeIdsOrNames = array_filter($typeIdsOrNames);
         if ($typeIdsOrNames) {
-            $select->joinLeft(array(
-                'item_types' => $this->getDb()->ItemType),
+            $select->joinLeft([
+                'item_types' => $this->getDb()->ItemType],
                 'items.item_type_id = item_types.id',
-                array());
+                []);
             $typeIds = array_filter($typeIdsOrNames, 'is_integer');
             $typeNames = array_diff($typeIdsOrNames, $typeIds);
             if (!empty($typeIds)) {
                 if (!empty($typeNames)) {
                     $conditions = 'item_types.id IN (' . implode(',', $typeIds) . ') OR item_types.name IN (?)';
-                    $bind = array($typeNames);
+                    $bind = [$typeNames];
                 } else {
                     $conditions = 'item_types.id IN (?)';
-                    $bind = array($typeIds);
+                    $bind = [$typeIds];
                 }
             } else {
                 $conditions = 'item_types.name IN (?)';
-                $bind = array($typeNames);
+                $bind = [$typeNames];
             }
             if ($hasEmpty) {
                 $conditions .= ' OR items.item_type_id IS NULL';
@@ -319,8 +319,8 @@ class Table_Item extends Omeka_Db_Table
         // appended to the main query by WHERE i.id IN (SUBQUERY).
         foreach ($tags as $tagName) {
             $subSelect = new Omeka_Db_Select;
-            $subSelect->from(array('records_tags' => $db->RecordsTags), array('items.id' => 'records_tags.record_id'))
-                ->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array())
+            $subSelect->from(['records_tags' => $db->RecordsTags], ['items.id' => 'records_tags.record_id'])
+                ->joinInner(['tags' => $db->Tag], 'tags.id = records_tags.tag_id', [])
                 ->where('tags.name = ? AND records_tags.`record_type` = "Item"', trim($tagName));
 
             $select->where('items.id IN (' . (string) $subSelect . ')');
@@ -342,13 +342,13 @@ class Table_Item extends Omeka_Db_Table
             $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
-        $subSelect->from(array('items' => $db->Item), 'items.id')
-                         ->joinInner(array('records_tags' => $db->RecordsTags),
+        $subSelect->from(['items' => $db->Item], 'items.id')
+                         ->joinInner(['records_tags' => $db->RecordsTags],
                                      'records_tags.record_id = items.id AND records_tags.record_type = "Item"',
-                                     array())
-                         ->joinInner(array('tags' => $db->Tag),
+                                     [])
+                         ->joinInner(['tags' => $db->Tag],
                                      'records_tags.tag_id = tags.id',
-                                     array());
+                                     []);
 
         foreach ($tags as $key => $tag) {
             $subSelect->where('tags.name LIKE ?', $tag);
@@ -371,7 +371,7 @@ class Table_Item extends Omeka_Db_Table
 
         $db = $this->getDb();
 
-        $select->joinLeft(array('files' => "$db->File"), 'files.item_id = items.id', array());
+        $select->joinLeft(['files' => "$db->File"], 'files.item_id = items.id', []);
         $select->where('files.has_derivative_image = ?', $hasDerivativeImage);
     }
 
@@ -451,12 +451,12 @@ class Table_Item extends Omeka_Db_Table
         if (count($fieldData) == 2) {
             $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
             if ($element) {
-                $select->joinLeft(array('et_sort' => $db->ElementText),
+                $select->joinLeft(['et_sort' => $db->ElementText],
                                   "et_sort.record_id = items.id AND et_sort.record_type = 'Item' AND et_sort.element_id = {$element->id}",
-                                  array())
+                                  [])
                        ->group('items.id')
-                       ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
-                                     "et_sort.text $sortDir"));
+                       ->order(["IF(ISNULL(et_sort.text), 1, 0) $sortDir",
+                                     "et_sort.text $sortDir"]);
             }
         }
     }

@@ -1,4 +1,4 @@
-<?php echo head(array('bodyid' => 'home')); ?>
+<?php echo head(['bodyid' => 'home']); ?>
 
 <?php if (get_theme_option('Homepage Text')): ?>
 <p><?php echo get_theme_option('Homepage Text'); ?></p>
@@ -43,6 +43,6 @@ if ($recentItems):
 </div><!--end recent-items -->
 <?php endif; ?>
 
-<?php fire_plugin_hook('public_home', array('view' => $this)); ?>
+<?php fire_plugin_hook('public_home', ['view' => $this]); ?>
 
 <?php echo foot(); ?>

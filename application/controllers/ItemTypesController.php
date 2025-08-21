@@ -26,7 +26,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
                 try {
                     $itemType = $form->saveFromPost();
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully added.', $itemType->name), 'success');
-                    $this->_helper->redirector('show', null, null, array('id' => $itemType->id));
+                    $this->_helper->redirector('show', null, null, ['id' => $itemType->id]);
                 } catch (Omeka_Validate_Exception $e) {
                     $itemType->delete();
                     $this->_helper->flashMessenger($e);
@@ -53,7 +53,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
                 try {
                     $form->saveFromPost();
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully updated.', $itemType->name), 'success');
-                    $this->_helper->redirector('show', null, null, array('id' => $itemType->id));
+                    $this->_helper->redirector('show', null, null, ['id' => $itemType->id]);
                 } catch (Omeka_Validate_Exception $e) {
                     $this->_helper->flashMessenger($e);
                 }
@@ -86,14 +86,14 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         $elementDescriptionName = $stem . '[description]';
         $elementOrderName = $stem . '[order]';
 
-        $this->view->assign(array('element_name_name' => $elementNameName,
+        $this->view->assign(['element_name_name' => $elementNameName,
                                   'element_name_value' => $elementName,
                                   'element_id_temp' => $elementTempId,
                                   'element_description_name' => $elementDescriptionName,
                                   'element_description_value' => $elementDescription,
                                   'element_order_name' => $elementOrderName,
                                   'element_order_value' => $elementOrder,
-                                   ));
+                                   ]);
     }
 
     public function addExistingElementAction()
@@ -117,13 +117,13 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         $elementIdName = $stem .'[id]';
         $elementOrderName = $stem .'[order]';
 
-        $this->view->assign(array('element_id_name' => $elementIdName,
+        $this->view->assign(['element_id_name' => $elementIdName,
                                   'element_id_temp' => $elementTempId,
                                   'element_id_value' => $elementId,
                                   'element_description' => $elementDescription,
                                   'element_order_name' => $elementOrderName,
                                   'element_order_value' => $elementOrder,
-                                  ));
+                                  ]);
     }
 
     public function changeExistingElementAction()
@@ -136,7 +136,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
             $elementDescription = $element->description;
         }
 
-        $data = array();
+        $data = [];
         $data['elementDescription'] = $elementDescription;
 
         $this->_helper->json($data);
@@ -164,7 +164,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
     {
         $form = new Omeka_Form_ItemTypes;
         $form->setItemType($itemType);
-        fire_plugin_hook('item_types_form', array('form' => $form));
+        fire_plugin_hook('item_types_form', ['form' => $form]);
         return $form;
     }
 }

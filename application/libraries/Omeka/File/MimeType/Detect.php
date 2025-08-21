@@ -21,7 +21,7 @@ class Omeka_File_MimeType_Detect
     /**
      * @var array The MIME type detection strategies in priority order.
      */
-    protected $_strategies = array();
+    protected $_strategies = [];
 
     /**
      * @var string The definitive MIME type of this file.
@@ -31,17 +31,17 @@ class Omeka_File_MimeType_Detect
     /**
      * @var array The MIME types of this file, one for each detection strategy.
      */
-    protected $_mimeTypes = array();
+    protected $_mimeTypes = [];
 
     /**
      * @var array A list of MIME types that are deemed ambiguous.
      */
-    protected $_ambiguousMimeTypes = array(
+    protected $_ambiguousMimeTypes = [
         'text/plain',
         'application/octet-stream',
         'application/x-empty',
         'regular file',
-    );
+    ];
 
     /**
      * Set the required properties for detecting the MIME types of a file.
@@ -51,7 +51,7 @@ class Omeka_File_MimeType_Detect
      * priority order. If none are passed, a default list will be set. All 
      * strategies must implement Omeka_File_MimeType_Detect_StrategyInterface.
      */
-    public function __construct($file, array $strategies = array())
+    public function __construct($file, array $strategies = [])
     {
         // Set the file path if a File record was passed.
         if ($file instanceof File) {
@@ -69,12 +69,12 @@ class Omeka_File_MimeType_Detect
 
         if (empty($strategies)) {
             // Set the default strategies, in default priority order.
-            $strategies = array(
+            $strategies = [
                 new Omeka_File_MimeType_Detect_Strategy_Fileinfo,
                 new Omeka_File_MimeType_Detect_Strategy_FileCommand,
                 new Omeka_File_MimeType_Detect_Strategy_MimeContentType,
                 new Omeka_File_MimeType_Detect_Strategy_GetId3,
-            );
+            ];
         } else {
             // Validate the passed strategies.
             foreach ($strategies as $strategy) {
@@ -131,7 +131,7 @@ class Omeka_File_MimeType_Detect
         // Detect some common "plain text" via the extension. Most important
         // ones are json and xml.
         if ($this->_mimeType == 'text/plain') {
-            $extensions = array(
+            $extensions = [
                 'css' => 'text/css',
                 'csv' => 'text/csv',
                 'htm' => 'text/html',
@@ -143,7 +143,7 @@ class Omeka_File_MimeType_Detect
                 'tsv' => 'text/tab-separated-values',
                 'xhtml' => 'application/xhtml+xml',
                 'xml' => 'text/xml',
-            );
+            ];
             $extension = strtolower(pathinfo($this->_file, PATHINFO_EXTENSION));
             if (isset($extensions[$extension])) {
                 $this->_mimeType = $extensions[$extension];

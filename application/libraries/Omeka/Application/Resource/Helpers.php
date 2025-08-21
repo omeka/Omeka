@@ -89,24 +89,24 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
      */
     public static function getDefaultResponseContexts()
     {
-        return array(
-             'omeka-xml' => array(
+        return [
+             'omeka-xml' => [
                 'suffix' => 'omeka-xml',
-                'headers' => array('Content-Type' => 'text/xml')
-             ),
-             'dcmes-xml' => array(
+                'headers' => ['Content-Type' => 'text/xml']
+             ],
+             'dcmes-xml' => [
                  'suffix' => 'dcmes-xml',
-                 'headers' => array('Content-Type' => 'application/rdf+xml; charset=utf-8')
-             ),
-             'rss2' => array(
+                 'headers' => ['Content-Type' => 'application/rdf+xml; charset=utf-8']
+             ],
+             'rss2' => [
                  'suffix' => 'rss2',
-                 'headers' => array('Content-Type' => 'application/rss+xml; charset=utf-8')
-             ),
-             'atom' => array(
+                 'headers' => ['Content-Type' => 'application/rss+xml; charset=utf-8']
+             ],
+             'atom' => [
                  'suffix' => 'atom',
-                 'headers' => array('Content-Type' => 'application/atom+xml; charset=utf-8')
-             )
-         );
+                 'headers' => ['Content-Type' => 'application/atom+xml; charset=utf-8']
+             ]
+         ];
     }
 
     private function _initAclHelper()

@@ -47,24 +47,24 @@ abstract class Omeka_File_Ingest_AbstractSourceIngest extends Omeka_File_Ingest_
      */
     protected function _parseFileInfo($files)
     {
-        $infoArray = array();
+        $infoArray = [];
 
         if (is_array($files)) {
             // If we have an array representing a single source.
             if (array_key_exists('source', $files)) {
-                $infoArray = array($files);
+                $infoArray = [$files];
             } else {
                 foreach ($files as $key => $value) {
                     // Convert an array of strings, an array of arrays, or a
                     // mix of the two, into an array of arrays.
                     $infoArray[$key] = !is_array($value)
-                                          ? array('source' => $value)
+                                          ? ['source' => $value]
                                           : $value;
                 }
             }
         // If it's a string, make sure that represents the 'source' attribute.
         } elseif (is_string($files)) {
-            $infoArray = array(array('source' => $files));
+            $infoArray = [['source' => $files]];
         } else {
             throw new Omeka_File_Ingest_Exception('File info is incorrectly formatted!');
         }

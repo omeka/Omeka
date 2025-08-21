@@ -7,7 +7,7 @@ class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
 
     public function setUpLegacy()
     {
-        $this->user = $this->getMock('User', array(), array(), '', false);
+        $this->user = $this->getMock('User', [], [], '', false);
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_Array();
         $this->dispatcher = new Omeka_Job_Dispatcher_Default($this->adapter, $this->adapter, $this->user);
     }
@@ -35,12 +35,12 @@ class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
 
     public static function metadataKeys()
     {
-        return array(
-            array('className'),
-            array('options'),
-            array('createdAt'),
-            array('createdBy')
-        );
+        return [
+            ['className'],
+            ['options'],
+            ['createdAt'],
+            ['createdBy']
+        ];
     }
 
     /**
@@ -69,8 +69,8 @@ class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
      */
     public function testOptions()
     {
-        $this->dispatcher->send('Omeka_Job_Mock', array('foobar' => true));
+        $this->dispatcher->send('Omeka_Job_Mock', ['foobar' => true]);
         $job = $this->adapter->getJob();
-        $this->assertEquals(array('foobar' => true), $job['metadata']['options']);
+        $this->assertEquals(['foobar' => true], $job['metadata']['options']);
     }
 }

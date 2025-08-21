@@ -107,7 +107,7 @@ class Omeka_Job_Process_Dispatcher
          */
         // Try to execute PHP and check for appropriate version
         $command = escapeshellarg($cliPath) . ' -v';
-        $output = array();
+        $output = [];
         exec($command, $output, $returnCode);
 
         if ($returnCode != 0) {

@@ -34,7 +34,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         $select = $this->_table
             ->getSelectForFindBy($params)
             ->reset(Zend_Db_Select::COLUMNS)
-            ->columns(array("$alias.id"));
+            ->columns(["$alias.id"]);
         $itemIds = get_db()->fetchCol($select);
         if (!$itemIds) {
             _log(__('Batch Edit All Items: No item matches the specified filters.'), Zend_Log::WARN);
@@ -108,7 +108,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         }
 
         // Check to see if anything but 'tag'.
-        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$aclHelper->isAllowed('edit', $item)) {
+        if ($metadata && array_diff_key($metadata, ['tags' => '']) && !$aclHelper->isAllowed('edit', $item)) {
             $message = __('User is not allowed to edit this item.');
             $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
@@ -124,11 +124,11 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         $message = apply_filters(
             'items_batch_edit_error',
             $message,
-            array(
-                'item_ids' => array($itemId),
+            [
+                'item_ids' => [$itemId],
                 'metadata' => $metadata,
                 'custom' => $custom,
-            )
+            ]
         );
         if ($message) {
             $this->_logProcessedItem($message, Zend_Log::ERR);
@@ -148,7 +148,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
             try {
                 update_item($item, $metadata);
                 fire_plugin_hook('items_batch_edit_custom',
-                    array('item' => $item, 'custom' => $custom));
+                    ['item' => $item, 'custom' => $custom]);
             } catch (Exception $e) {
                 $message = __('An error occured when the item was updated: %s', $e->getMessage());
                 $this->_logProcessedItem($message, Zend_Log::ERR);

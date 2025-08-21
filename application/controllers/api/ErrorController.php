@@ -21,7 +21,7 @@ class ErrorController extends Omeka_Controller_AbstractActionController
      */
     public function errorAction()
     {
-        $data = array();
+        $data = [];
         $exception = $this->_getParam('error_handler')->exception;
 
         // Add code and message to response.

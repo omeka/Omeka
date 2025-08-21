@@ -41,21 +41,21 @@ class Table_Collection extends Omeka_Db_Table
         }
     }
 
-    public function findPairsForSelectForm(array $options = array())
+    public function findPairsForSelectForm(array $options = [])
     {
         $db = $this->getDb();
 
         $subquery = new Omeka_Db_Select;
-        $subquery->from(array('element_texts' => $db->ElementText), 'id');
+        $subquery->from(['element_texts' => $db->ElementText], 'id');
         $subquery->joinInner(
-            array('elements' => $db->Element),
+            ['elements' => $db->Element],
             'elements.id = element_texts.element_id',
-            array()
+            []
         );
         $subquery->joinInner(
-            array('element_sets' => $db->ElementSet),
+            ['element_sets' => $db->ElementSet],
             'element_sets.id = elements.element_set_id',
-            array()
+            []
         );
         $subquery->where("element_sets.name = 'Dublin Core'");
         $subquery->where("elements.name = 'Title'");
@@ -65,13 +65,13 @@ class Table_Collection extends Omeka_Db_Table
 
         $select = $this->getSelectForFindBy($options);
         $select->joinLeft(
-            array('element_texts' => $db->ElementText),
+            ['element_texts' => $db->ElementText],
             "element_texts.id = ($subquery)",
-            array()
+            []
         );
 
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->from(array(), array('collections.id', 'element_texts.text'));
+        $select->from([], ['collections.id', 'element_texts.text']);
         $select->order('element_texts.text');
 
         $pairs = $db->fetchPairs($select);
@@ -84,7 +84,7 @@ class Table_Collection extends Omeka_Db_Table
         }
 
         if (isset($options['include_no_collection']) && $options['include_no_collection']) {
-            $pairs = array(__('No Collection')) + $pairs;
+            $pairs = [__('No Collection')] + $pairs;
         }
         return $pairs;
     }
@@ -125,12 +125,12 @@ class Table_Collection extends Omeka_Db_Table
         if (count($fieldData) == 2) {
             $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
             if ($element) {
-                $select->joinLeft(array('et_sort' => $db->ElementText),
+                $select->joinLeft(['et_sort' => $db->ElementText],
                                   "et_sort.record_id = collections.id AND et_sort.record_type = 'Collection' AND et_sort.element_id = {$element->id}",
-                                  array())
+                                  [])
                        ->group('collections.id')
-                       ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
-                                     "et_sort.text $sortDir"));
+                       ->order(["IF(ISNULL(et_sort.text), 1, 0) $sortDir",
+                                     "et_sort.text $sortDir"]);
             }
         }
     }

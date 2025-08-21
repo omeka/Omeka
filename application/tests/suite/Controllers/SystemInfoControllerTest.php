@@ -24,13 +24,13 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
 
     public static function roles()
     {
-        return array(
-            array(null, false),
-            array('researcher', false),
-            array('contributor', false),
-            array('admin', false),
-            array('super', true),
-        );
+        return [
+            [null, false],
+            ['researcher', false],
+            ['contributor', false],
+            ['admin', false],
+            ['super', true],
+        ];
     }
 
     /**

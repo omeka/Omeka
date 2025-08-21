@@ -1,29 +1,29 @@
 <?php
 $pageTitle = __('Dashboard');
-echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
+echo head(['bodyclass'=>'index primary-secondary', 'title'=>$pageTitle]); ?>
     
 <?php
 $total_items = total_records('Item');
 $total_collections = total_records('Collection');
 $total_tags = total_records('Tag');
-$stats = array(
-    'items' => array($total_items, __(plural('item', 'items', $total_items))),
-    'collections' => array($total_collections, __(plural('collection', 'collections', $total_collections))),
-    'tags' => array($total_tags, __(plural('tag', 'tags', $total_tags)))
-); ?>
+$stats = [
+    'items' => [$total_items, __(plural('item', 'items', $total_items))],
+    'collections' => [$total_collections, __(plural('collection', 'collections', $total_collections))],
+    'tags' => [$total_tags, __(plural('tag', 'tags', $total_tags))]
+]; ?>
 <?php if (is_allowed('Plugins', 'edit')):
     $total_plugins = total_records('Plugin');
-    $stats['plugins'] = array($total_plugins, __(plural('plugin', 'plugins', $total_plugins)));
+    $stats['plugins'] = [$total_plugins, __(plural('plugin', 'plugins', $total_plugins))];
 endif; ?>
 <?php if (is_allowed('Users', 'edit')):
     $total_users = total_records('User');
-    $stats['users'] = array($total_users, __(plural('user', 'users', $total_users)));
+    $stats['users'] = [$total_users, __(plural('user', 'users', $total_users))];
 endif; ?>
 <?php if (is_allowed('Themes', 'edit')):
     $themeName = Theme::getTheme(Theme::getCurrentThemeName('public'))->title;
-    $stats['themes'] = array($themeName, __('theme'));
+    $stats['themes'] = [$themeName, __('theme')];
 endif; ?>
-<?php $stats = apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
+<?php $stats = apply_filters('admin_dashboard_stats', $stats, ['view' => $this]); ?>
 
 <?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
 <?php $userRole = current_user()->role; ?>
@@ -42,11 +42,11 @@ endif; ?>
 
 <section id="stats">
     <?php foreach ($stats as $statKey => $statInfo): ?>
-    <p><?php echo link_to($statKey, null, '<span class="number">' . $statInfo[0] . '</span><br>' . $statInfo[1], array('class' => 'stat')); ?></p>
+    <p><?php echo link_to($statKey, null, '<span class="number">' . $statInfo[0] . '</span><br>' . $statInfo[1], ['class' => 'stat']); ?></p>
     <?php endforeach; ?>
 </section>
 
-<?php $panels = array(); ?>
+<?php $panels = []; ?>
 
 <?php ob_start(); ?>
 <h2><?php echo __('Recent Items'); ?></h2>
@@ -57,7 +57,7 @@ endif; ?>
     <div class="recent-row">
         <p class="recent"><?php echo link_to_item(); ?></p>
         <?php if (is_allowed($item, 'edit')): ?>
-        <p class="dash-edit"><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></p>
+        <p class="dash-edit"><?php echo link_to_item(__('Edit'), [], 'edit'); ?></p>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
@@ -76,7 +76,7 @@ endif; ?>
     <div class="recent-row">
         <p class="recent"><?php echo link_to_collection() . " (" . metadata($collection, 'total_items') . ")"; ?></p>
         <?php if (is_allowed($collection, 'edit')): ?>
-        <p class="dash-edit"><?php echo link_to_collection(__('Edit'), array(), 'edit'); ?></p>
+        <p class="dash-edit"><?php echo link_to_collection(__('Edit'), [], 'edit'); ?></p>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
@@ -85,13 +85,13 @@ endif; ?>
     <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
-<?php $panels = apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>
+<?php $panels = apply_filters('admin_dashboard_panels', $panels, ['view' => $this]); ?>
 <div role="group" class="panels">
     <?php for ($i = 0; $i < count($panels); $i++): ?>
     <section class="panel five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
         <?php echo $panels[$i]; ?>
     </section>
     <?php endfor; ?>
-    <?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
+    <?php fire_plugin_hook('admin_dashboard', ['view' => $this]); ?>
 </div>
 <?php echo foot(); ?>

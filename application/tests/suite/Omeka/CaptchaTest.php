@@ -16,7 +16,7 @@ class Omeka_CaptchaTest extends Omeka_Test_TestCase
     public function setUpLegacy()
     {
         $this->bootstrap = new Omeka_Test_Bootstrap;
-        $this->bootstrap->getContainer()->options = array();
+        $this->bootstrap->getContainer()->options = [];
         Zend_Registry::set('bootstrap', $this->bootstrap);
     }
 
@@ -29,10 +29,10 @@ class Omeka_CaptchaTest extends Omeka_Test_TestCase
     {
         $this->assertFalse(Omeka_Captcha::isConfigured());
 
-        $options = array(
+        $options = [
             Omeka_Captcha::PUBLIC_KEY_OPTION => 'public_key',
             Omeka_Captcha::PRIVATE_KEY_OPTION => 'private_key'
-            );
+            ];
         $this->bootstrap->getContainer()->options = $options;
 
         $this->assertTrue(Omeka_Captcha::isConfigured());
@@ -40,10 +40,10 @@ class Omeka_CaptchaTest extends Omeka_Test_TestCase
 
     public function testGetCaptchaVersion2()
     {
-        $options = array(
+        $options = [
             Omeka_Captcha::PUBLIC_KEY_OPTION => 'public_key',
             Omeka_Captcha::PRIVATE_KEY_OPTION => 'private_key',
-            );
+            ];
         $this->bootstrap->getContainer()->options = $options;
 
         $captcha = Omeka_Captcha::getCaptcha();

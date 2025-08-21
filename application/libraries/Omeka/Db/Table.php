@@ -82,7 +82,7 @@ class Omeka_Db_Table
         if (!method_exists($this->_db, $m) && !method_exists($this->_db->getAdapter(), $m)) {
             throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
         }
-        return call_user_func_array(array($this->_db, $m), $a);
+        return call_user_func_array([$this->_db, $m], $a);
     }
 
     /**
@@ -211,7 +211,7 @@ class Omeka_Db_Table
     public function find($id)
     {
         $select = $this->getSelectForFind($id);
-        return $this->fetchObject($select, array());
+        return $this->fetchObject($select, []);
     }
 
     /**
@@ -238,11 +238,11 @@ class Omeka_Db_Table
      * filtering results.
      * @return array
      */
-    public function findPairsForSelectForm(array $options = array())
+    public function findPairsForSelectForm(array $options = [])
     {
         $select = $this->getSelectForFindBy($options);
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->from(array(), $this->_getColumnPairs());
+        $select->from([], $this->_getColumnPairs());
         $pairs = $this->getDb()->fetchPairs($select);
         return $pairs;
     }
@@ -272,7 +272,7 @@ class Omeka_Db_Table
      * @param int $page Page to retrieve.
      * @return array|null The set of objects that is returned
      */
-    public function findBy($params = array(), $limit = null, $page = null)
+    public function findBy($params = [], $limit = null, $page = null)
     {
         $select = $this->getSelectForFindBy($params);
         if ($limit) {
@@ -290,7 +290,7 @@ class Omeka_Db_Table
     {
         $select = new Omeka_Db_Select($this->getDb()->getAdapter());
         $alias = $this->getTableAlias();
-        $select->from(array($alias => $this->getTableName()), "$alias.*");
+        $select->from([$alias => $this->getTableName()], "$alias.*");
         return $select;
     }
 
@@ -301,7 +301,7 @@ class Omeka_Db_Table
      * @param array $params optional Set of named search parameters.
      * @return Omeka_Db_Select
      */
-    public function getSelectForFindBy($params = array())
+    public function getSelectForFindBy($params = [])
     {
         $params = apply_filters($this->_getHookName('browse_params'), $params);
 
@@ -323,7 +323,7 @@ class Omeka_Db_Table
         $this->applySearchFilters($select, $params);
 
         fire_plugin_hook($this->_getHookName('browse_sql'),
-                         array('select' => $select, 'params' => $params));
+                         ['select' => $select, 'params' => $params]);
 
         return $select;
     }
@@ -422,7 +422,7 @@ class Omeka_Db_Table
      * record or the whole set (retrieve all by default).
      * @return array|Omeka_Record_AbstractRecord|false
      */
-    public function findBySql($sqlWhereClause, array $params = array(), $findOne = false)
+    public function findBySql($sqlWhereClause, array $params = [], $findOne = false)
     {
         $select = $this->getSelect();
         $select->where($sqlWhereClause);
@@ -437,7 +437,7 @@ class Omeka_Db_Table
      * the count.
      * @return int
      */
-    public function count($params = array())
+    public function count($params = [])
     {
         $select = $this->getSelectForCount($params);
         return $this->getDb()->fetchOne($select);
@@ -514,7 +514,7 @@ class Omeka_Db_Table
     public function filterBySince(Omeka_Db_Select $select, $dateSince, $dateField)
     {
         // Reject invalid date fields.
-        if (!in_array($dateField, array('added', 'modified'))) {
+        if (!in_array($dateField, ['added', 'modified'])) {
             return;
         }
 
@@ -542,7 +542,7 @@ class Omeka_Db_Table
     public function filterByUser(Omeka_Db_Select $select, $userId, $userField)
     {
         // Reject invalid user ID fields.
-        if (!in_array($userField, array('owner_id', 'user_id'))) {
+        if (!in_array($userField, ['owner_id', 'user_id'])) {
             return;
         }
         $alias = $this->getTableAlias();
@@ -564,7 +564,7 @@ class Omeka_Db_Table
         $exprs = explode(',', $range);
 
         // Construct a SQL clause where every entry in this array is linked by 'OR'
-        $wheres = array();
+        $wheres = [];
 
         $alias = $this->getTableAlias();
 
@@ -598,14 +598,14 @@ class Omeka_Db_Table
      * @param array $params optional Set of search filters.
      * @return Omeka_Db_Select
      */
-    public function getSelectForCount($params = array())
+    public function getSelectForCount($params = [])
     {
         $select = $params ? $this->getSelectForFindBy($params) : $this->getSelect();
 
         // Make sure the SELECT only pulls down the COUNT() column.
         $select->reset(Zend_Db_Select::COLUMNS);
         $alias = $this->getTableAlias();
-        $select->from(array(), "COUNT(DISTINCT($alias.id))");
+        $select->from([], "COUNT(DISTINCT($alias.id))");
 
         // Reset the GROUP and ORDER BY clauses if necessary.
         $select->reset(Zend_Db_Select::ORDER)->reset(Zend_Db_Select::GROUP);
@@ -642,13 +642,13 @@ class Omeka_Db_Table
      * @return array|null Set of Omeka_Record_AbstractRecord instances, or null 
      * if none can be found.
      */
-    public function fetchObjects($sql, $params = array())
+    public function fetchObjects($sql, $params = [])
     {
         $res = $this->getDb()->query($sql, $params);
         $data = $res->fetchAll();
 
         // Would use fetchAll() but it can be memory-intensive.
-        $objs = array();
+        $objs = [];
         foreach ($data as $k => $row) {
             $objs[$k] = $this->recordFromData($row);
         }
@@ -664,7 +664,7 @@ class Omeka_Db_Table
      * @param string $params Parameters to substitute into SQL query.
      * @return Omeka_Record_AbstractRecord or null if no record 
      */
-    public function fetchObject($sql, array $params = array())
+    public function fetchObject($sql, array $params = [])
     {
         $row = $this->getDb()->fetchRow($sql, $params);
         return !empty($row) ? $this->recordFromData($row): null;
@@ -708,7 +708,7 @@ class Omeka_Db_Table
                     $dir = 'DESC';
                 }
             }
-            return array($sortField, $dir);
+            return [$sortField, $dir];
         }
         return null;
     }

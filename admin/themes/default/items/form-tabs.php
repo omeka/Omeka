@@ -1,5 +1,5 @@
 <?php 
-$tabs = array();
+$tabs = [];
 foreach ($elementSets as $key => $elementSet) {
     $tabName = $elementSet->name;
         
@@ -30,7 +30,7 @@ require 'tag-form.php';
 $tabs['Tags'] = ob_get_contents();
 ob_end_clean();
 
-$tabs = apply_filters('admin_items_form_tabs', $tabs, array('item' => $item));
+$tabs = apply_filters('admin_items_form_tabs', $tabs, ['item' => $item]);
 ?>
 
 <!-- Create the sections for the various element sets -->

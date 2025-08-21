@@ -210,7 +210,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     private function _getElementSetId($elementSetName)
     {
-        $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array($elementSetName), true);
+        $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', [$elementSetName], true);
         if (!$elementSet) {
             throw new Omeka_Record_Exception(__('Cannot set element set ID: set named "%s" does not exist.', $elementSetName));
         }
@@ -226,7 +226,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
     {
         $db = $this->getDb();
         $sql = "SELECT COUNT(id) FROM $db->Element WHERE name = ? AND element_set_id = ?";
-        $params = array($elementName, $elementSetId);
+        $params = [$elementName, $elementSetId];
         if ($this->exists()) {
             $sql .= " AND id != ?";
             $params[] = $this->id;

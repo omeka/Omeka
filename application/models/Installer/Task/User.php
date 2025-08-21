@@ -53,14 +53,14 @@ class Installer_Task_User implements Installer_TaskInterface
 
     public function install(Omeka_Db $db)
     {
-        $required = array(
+        $required = [
             '_username' => 'username',
             '_password' => 'password',
             '_email' => 'email',
             '_name' => 'name',
             '_active' => 'active',
             '_role' => 'role'
-        );
+        ];
         foreach ($required as $propName => $fieldName) {
             if (!$this->$propName) {
                 throw new Installer_Task_Exception("Required field '$fieldName' not given.");

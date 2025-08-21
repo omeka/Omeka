@@ -18,16 +18,16 @@ class Omeka_View_Helper_MediaTest extends Omeka_Test_TestCase
 
     public function setUpLegacy()
     {
-        $this->view = $this->getMock('Omeka_View', array(), array(), '', false);
+        $this->view = $this->getMock('Omeka_View', [], [], '', false);
         $this->helper = new Omeka_View_Helper_FileMarkup;
-        $this->file = $this->getMock('File', array(), array(), '', false);
+        $this->file = $this->getMock('File', [], [], '', false);
     }
 
     public function testAddMimeTypes()
     {
-        add_file_display_callback(array('image/jpeg'),
-                              array($this, 'mimeTypeCallback'),
-                              array('foo' => 'bar'));
+        add_file_display_callback(['image/jpeg'],
+                              [$this, 'mimeTypeCallback'],
+                              ['foo' => 'bar']);
 
         // File should be of the 'image/jpeg' type.
         $this->file->mime_type = 'image/jpeg';
@@ -44,6 +44,6 @@ class Omeka_View_Helper_MediaTest extends Omeka_Test_TestCase
 
     public function __sleep()
     {
-        return array('helper');
+        return ['helper'];
     }
 }

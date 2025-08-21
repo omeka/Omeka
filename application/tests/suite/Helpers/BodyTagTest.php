@@ -14,7 +14,7 @@ class Omeka_Helper_BodyTagTest extends Omeka_Test_AppTestCase
 {
     public function testBodyTagWithAttributes()
     {
-        $attributes = array('id' => 'my-id', 'class' => 'my-class');
+        $attributes = ['id' => 'my-id', 'class' => 'my-class'];
         $html = "<body id=\"my-id\" class=\"my-class\">\n";
         $this->assertEquals($html, body_tag($attributes));
     }
@@ -30,18 +30,18 @@ class Omeka_Helper_BodyTagTest extends Omeka_Test_AppTestCase
      */
     public function testBodyTagWithNullAttributes()
     {
-        $attributes = array('id' => null, 'class' => null);
+        $attributes = ['id' => null, 'class' => null];
         $html = "<body>\n";
         $this->assertEquals($html, body_tag($attributes));
     }
 
     public function testBodyTagWithFilter()
     {
-        $attributes = array('id' => 'my-id', 'class' => 'my-class');
+        $attributes = ['id' => 'my-id', 'class' => 'my-class'];
         $defaultHtml = "<body id=\"my-id\" class=\"my-class\">\n";
         $this->assertEquals($defaultHtml, body_tag($attributes));
 
-        add_filter('body_tag_attributes', array($this, 'bodyTagAttributesFilter'));
+        add_filter('body_tag_attributes', [$this, 'bodyTagAttributesFilter']);
 
         $filteredHtml = "<body id=\"my-id\" class=\"my-class new-class\">\n";
         $this->assertEquals($filteredHtml, body_tag($attributes));

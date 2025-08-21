@@ -64,7 +64,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->dispatch('/collections/edit/' . $this->collection->id);
 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, ['Dublin Core', 'Title']));
     }
 
     public function testHtmlPurifyCollectionFormWithAllowedElementAndUnallowedAttributeInDescription()
@@ -82,7 +82,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->dispatch('/collections/edit/' . $this->collection->id);
 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, ['Dublin Core', 'Title']));
     }
 
     public function testHtmlPurifyCollectionFormWithUnallowedElementAndAllowedAttributeInDescription()
@@ -100,7 +100,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->dispatch('/collections/edit/' . $this->collection->id);
 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, ['Dublin Core', 'Title']));
     }
 
     public function testHtmlPurifyCollectionFormWithUnallowedElementAndUnallowedAttributeInDescription()
@@ -118,7 +118,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->dispatch('/collections/edit/' . $this->collection->id);
 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, ['Dublin Core', 'Title']));
     }
 
     public function testHtmlPurifyCollectionFormWithAllowedAndUnallowedElementsAndAttributesInDescription()
@@ -139,7 +139,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->dispatch('/collections/edit/' . $this->collection->id);
 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, ['Dublin Core', 'Title']));
     }
 
     /**
@@ -150,12 +150,12 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
      * @param string $post The post array to which to add an element text    
      * @return array $post
      **/
-    protected function _addElementTextWithDirtyHtmlToPost($dirtyHtml, $elementSetName, $elementName, $post = array())
+    protected function _addElementTextWithDirtyHtmlToPost($dirtyHtml, $elementSetName, $elementName, $post = [])
     {
         $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
 
-        $elementsArray = array();
-        $elementsArray[strval($titleElement->id)] = array(array('text' => $dirtyHtml, 'html' => 1));
+        $elementsArray = [];
+        $elementsArray[strval($titleElement->id)] = [['text' => $dirtyHtml, 'html' => 1]];
         $post['Elements'] = $elementsArray;
 
         $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');

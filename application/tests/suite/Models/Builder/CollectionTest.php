@@ -29,11 +29,11 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
     public function testBuildReturnsSavedCollection()
     {
         // build collection
-        $elementTexts = array(
-            'Dublin Core' => array(
-                'Title' => array(array('text' => 'foobar name', 'html' => false)),
-            )
-        );
+        $elementTexts = [
+            'Dublin Core' => [
+                'Title' => [['text' => 'foobar name', 'html' => false]],
+            ]
+        ];
         $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
 
@@ -44,22 +44,22 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
     public function testCanSetValidPropertiesForCollection()
     {
         // build the collection
-        $this->builder->setRecordMetadata(array(
+        $this->builder->setRecordMetadata([
             'public' => true,
             'featured' => false,
             'owner_id' => self::USER_ID
-        ));
-        $elementTexts = array(
-            'Dublin Core' => array(
-                'Title' => array(array('text' => 'foobar', 'html' => false)),
-                'Description' => array(array('text' => 'foobar desc', 'html' => false)),
-            )
-        );
+        ]);
+        $elementTexts = [
+            'Dublin Core' => [
+                'Title' => [['text' => 'foobar', 'html' => false]],
+                'Description' => [['text' => 'foobar desc', 'html' => false]],
+            ]
+        ];
         $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
 
-        $this->assertEquals('foobar', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))));
-        $this->assertEquals('foobar desc', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))));
+        $this->assertEquals('foobar', strip_formatting(metadata($collection, ['Dublin Core', 'Title'])));
+        $this->assertEquals('foobar desc', strip_formatting(metadata($collection, ['Dublin Core', 'Description'])));
         $this->assertEquals("1", $collection->public);
         $this->assertEquals("0", $collection->featured);
         $this->assertEquals(self::USER_ID, $collection->owner_id,
@@ -68,18 +68,18 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
 
     public function testCannotSetInvalidPropertiesForCollection()
     {
-        $this->builder->setRecordMetadata(array(
+        $this->builder->setRecordMetadata([
             'public' => true,
             'featured' => false,
             'owner_id' => self::USER_ID,
             'jabberwocky' => 'huzzah'
-        ));
-        $elementTexts = array(
-            'Dublin Core' => array(
-                'Title' => array(array('text' => 'foobar', 'html' => false)),
-                'Description' => array(array('text' => 'foobar desc', 'html' => false)),
-            )
-        );
+        ]);
+        $elementTexts = [
+            'Dublin Core' => [
+                'Title' => [['text' => 'foobar', 'html' => false]],
+                'Description' => [['text' => 'foobar desc', 'html' => false]],
+            ]
+        ];
         $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
         $this->assertFalse(isset($collection->jabberwocky));

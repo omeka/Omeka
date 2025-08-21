@@ -19,11 +19,11 @@ class Api_Tag extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        $representation = array(
+        $representation = [
             'id' => $record->id,
             'url' => self::getResourceUrl("/tags/{$record->id}"),
             'name' => $record->name,
-        );
+        ];
         return $representation;
     }
 }

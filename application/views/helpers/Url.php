@@ -73,7 +73,7 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
      * @param bool $encode
      * @return string
      */
-    public function url($options = array(), $name = null, array $queryParams = array(),
+    public function url($options = [], $name = null, array $queryParams = [],
         $reset = false, $encode = true
     ) {
         $url = '';

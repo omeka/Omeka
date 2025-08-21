@@ -15,21 +15,21 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 
-    public $contexts = array(
-            'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'atom'),
-            'show' => array('json', 'dcmes-xml', 'omeka-xml', 'atom')
-    );
+    public $contexts = [
+            'browse' => ['json', 'dcmes-xml', 'rss2', 'omeka-xml', 'atom'],
+            'show' => ['json', 'dcmes-xml', 'omeka-xml', 'atom']
+    ];
 
-    private $_ajaxRequiredActions = array(
+    private $_ajaxRequiredActions = [
         'change-type',
-    );
+    ];
 
-    private $_methodRequired = array(
-        'modify-tags' => array('POST'),
-        'power-edit' => array('POST'),
-        'change-type' => array('POST'),
-        'batch-edit-save' => array('POST'),
-    );
+    private $_methodRequired = [
+        'modify-tags' => ['POST'],
+        'power-edit' => ['POST'],
+        'change-type' => ['POST'],
+        'batch-edit-save' => ['POST'],
+    ];
 
     public function init()
     {
@@ -135,7 +135,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     protected function _getElementMetadata($item, $elementSetName, $elementName)
     {
         $m = new Omeka_View_Helper_Metadata;
-        return strip_formatting($m->metadata($item, array($elementSetName, $elementName)));
+        return strip_formatting($m->metadata($item, [$elementSetName, $elementName]));
     }
 
     public function addAction()
@@ -154,9 +154,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     public function tagsAction()
     {
         $params = array_merge(
-            array('sort_field' => 'name'),
+            ['sort_field' => 'name'],
             $this->_getAllParams(),
-            array('type' => 'Item')
+            ['type' => 'Item']
         );
         $tags = $this->_helper->db->getTable('Tag')->findBy($params);
         $this->view->assign(compact('tags'));
@@ -182,7 +182,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     protected function _getBrowseDefaultSort()
     {
-        return array('added', 'd');
+        return ['added', 'd'];
     }
 
     ///// AJAX ACTIONS /////
@@ -221,7 +221,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         $batchAll = (boolean) $this->_getParam('batch-all');
         // Process all searched items.
         if ($batchAll) {
-            $params = json_decode($this->_getParam('params'), true) ?: array();
+            $params = json_decode($this->_getParam('params'), true) ?: [];
             unset($params['admin']);
             unset($params['module']);
             unset($params['controller']);
@@ -244,7 +244,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 return;
             }
 
-            $this->view->assign(array('params' => $params, 'totalRecords' => $totalRecords));
+            $this->view->assign(['params' => $params, 'totalRecords' => $totalRecords]);
             if ($delete) {
                 $this->render('batch-delete-all');
             } else {
@@ -320,7 +320,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                         }
 
                         // Check to see if anything but 'tag'
-                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$aclHelper->isAllowed('edit', $item)) {
+                        if ($metadata && array_diff_key($metadata, ['tags' => '']) && !$aclHelper->isAllowed('edit', $item)) {
                             $errorMessage = __('User is not allowed to edit selected items.');
                             break;
                         }
@@ -338,23 +338,23 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             $errorMessage = apply_filters(
                 'items_batch_edit_error',
                 $errorMessage,
-                array(
+                [
                     'metadata' => $metadata,
                     'custom' => $custom,
                     'item_ids' => $itemIds,
-                )
+                ]
             );
 
             if ($errorMessage) {
                 $this->_helper->flashMessenger($errorMessage, 'error');
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
-                $options = array(
+                $options = [
                     'itemIds' => $itemIds,
                     'delete' => $delete,
                     'metadata' => $metadata,
                     'custom' => $custom,
-                );
+                ];
                 $dispatcher->send('Job_ItemBatchEdit', $options);
 
                 if ($delete) {
@@ -377,7 +377,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     protected function _batchEditAllSave()
     {
         // Get the record ids filtered to Omeka_Db_Table::applySearchFilters().
-        $params = json_decode($this->_getParam('params'), true) ?: array();
+        $params = json_decode($this->_getParam('params'), true) ?: [];
         $totalRecords = $this->_helper->db->count($params);
         if ($totalRecords) {
             $metadata = $this->_getParam('metadata');
@@ -414,12 +414,12 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 $this->_helper->flashMessenger($errorMessage, 'error');
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
-                $options = array(
+                $options = [
                     'params' => $params,
                     'delete' => $delete,
                     'metadata' => $metadata,
                     'custom' => $custom,
-                );
+                ];
                 $dispatcher->sendLongRunning('Job_ItemBatchEditAll', $options);
 
                 if ($delete) {
