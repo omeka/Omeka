@@ -3,6 +3,7 @@
 
 # php-cs-fixer cache
 /.php_cs.cache
+/.php-cs-fixer.cache
 
 # dist directory
 /dist/
