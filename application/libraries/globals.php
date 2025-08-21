@@ -1278,7 +1278,7 @@ function physical_path_to($file)
 {
     $paths = get_view()->getAssetPaths();
     foreach ($paths as $path) {
-        list($physical, $web) = $path;
+        [$physical, $web] = $path;
         if (file_exists($physical . '/' . $file)) {
             return $physical . '/' . $file;
         }
@@ -1299,7 +1299,7 @@ function web_path_to($file)
     $view = get_view();
     $paths = $view->getAssetPaths();
     foreach ($paths as $path) {
-        list($physical, $web) = $path;
+        [$physical, $web] = $path;
         if (file_exists($physical . '/' . $file)) {
             return $web . '/' . $file;
         }
@@ -2876,8 +2876,8 @@ function pagination_links($options = array())
     }
 
     // Set preferred settings.
-    $scrollingStyle = isset($options['scrolling_style']) ? $options['scrolling_style'] : 'Sliding';
-    $partial = isset($options['partial_file']) ? $options['partial_file'] : 'common/pagination_control.php';
+    $scrollingStyle = $options['scrolling_style'] ?? 'Sliding';
+    $partial = $options['partial_file'] ?? 'common/pagination_control.php';
     $pageRange = isset($options['page_range']) ? (int) $options['page_range'] : 5;
     $totalCount = isset($options['total_results']) ? (int) $options['total_results'] : (int) $p['total_results'];
     $pageNumber = isset($options['page']) ? (int) $options['page'] : (int) $p['page'];

@@ -94,7 +94,7 @@ class Table_Item extends Omeka_Db_Table
                 continue;
             }
 
-            $value = isset($v['terms']) ? $v['terms'] : null;
+            $value = $v['terms'] ?? null;
             $type = $v['type'];
             $elementId = (int) $v['element_id'];
             $alias = "_advanced_{$advancedIndex}";

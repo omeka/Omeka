@@ -263,7 +263,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     public function browseAction()
     {
         $config = $this->getInvokeArg('bootstrap')->getResource('Config');
-        $versionNotifications = isset($config->versionNotifications) ? $config->versionNotifications : true;
+        $versionNotifications = $config->versionNotifications ?? true;
 
         // Get installed plugins, includes active and inactive.
         $installedPlugins = $this->_pluginLoader->getPlugins();

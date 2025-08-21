@@ -21,7 +21,7 @@ if ($this->pageCount > 1):
             if (!$entry) {
                 continue;
             }
-            list($key, $value) = explode('=', $entry);
+            [$key, $value] = explode('=', $entry);
             $hiddenParams[urldecode($key)] = urldecode($value);
         }
 

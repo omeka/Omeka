@@ -53,8 +53,8 @@ function handle_signal($signal)
 pcntl_signal(SIGINT, "handle_signal");
 
 $application->bootstrap(array('Logger'));
-$host = isset($options->host) ? $options->host : '127.0.0.1';
-$port = isset($options->port) ? $options->port : 11300;
+$host = $options->host ?? '127.0.0.1';
+$port = $options->port ?? 11300;
 $pheanstalk = new Pheanstalk_Pheanstalk("$host:$port");
 if (isset($options->queue) && $options->queue != 'default') {
     $pheanstalk->watch($options->queue)

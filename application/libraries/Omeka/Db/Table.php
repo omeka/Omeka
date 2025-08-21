@@ -309,7 +309,7 @@ class Omeka_Db_Table
         $sortParams = $this->_getSortParams($params);
 
         if ($sortParams) {
-            list($sortField, $sortDir) = $sortParams;
+            [$sortField, $sortDir] = $sortParams;
             $this->applySorting($select, $sortField, $sortDir);
 
             if ($select->getPart(Zend_Db_Select::ORDER)
@@ -572,7 +572,7 @@ class Omeka_Db_Table
             // If it has a '-' in it, it is a range of item IDs.  Otherwise it is
             // a single item ID
             if (strpos($expr, '-') !== false) {
-                list($start, $finish) = explode('-', $expr);
+                [$start, $finish] = explode('-', $expr);
 
                 // Naughty naughty koolaid, no SQL injection for you
                 $start = (int) trim($start);

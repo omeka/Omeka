@@ -46,8 +46,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
     public function elementForm(Element $element, Omeka_Record_AbstractRecord $record, $options = array())
     {
-        $divWrap = isset($options['divWrap']) ? $options['divWrap'] : true;
-        $extraFieldCount = isset($options['extraFieldCount']) ? $options['extraFieldCount'] : null;
+        $divWrap = $options['divWrap'] ?? true;
+        $extraFieldCount = $options['extraFieldCount'] ?? null;
 
         $this->_element = $element;
 

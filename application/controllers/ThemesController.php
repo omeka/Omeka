@@ -14,7 +14,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
     public function browseAction()
     {
         $config = $this->getInvokeArg('bootstrap')->getResource('Config');
-        $versionNotifications = isset($config->versionNotifications) ? $config->versionNotifications : true;
+        $versionNotifications = $config->versionNotifications ?? true;
 
         $csrfForm = new Omeka_Form_SessionCsrf;
         $themes = apply_filters('browse_themes', Theme::getAllThemes());

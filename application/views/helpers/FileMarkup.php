@@ -309,9 +309,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             $html = metadata($file, 'rich_title', array('no_escape' => true));
         }
 
-        $linkAttributes = isset($options['linkAttributes'])
-                        ? $options['linkAttributes']
-                        : array();
+        $linkAttributes = $options['linkAttributes'] ?? array();
 
         if ($options['linkToMetadata']) {
             $html = link_to_file_show($linkAttributes, $html, $file);
