@@ -100,7 +100,6 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
         $class     = $this->getClass();
         $options   = $this->getOptions();
 
-
         if (empty($label) && empty($tag)) {
             return $content;
         }
@@ -115,6 +114,10 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
             // Give formLabel already escaped label content alongside
             // non-escaped required markup.
             $formLabelOptions['escape'] = false;
+
+            if ($element instanceof Zend_Form_Element_Radio || $element instanceof Zend_Form_Element_Checkbox) {
+                $formLabelOptions['disableFor'] = true;
+            }
 
             // Escape the label, but not the required markup.
             if (!isset($options['escape']) || ($options['escape'] == true)){

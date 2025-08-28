@@ -55,10 +55,8 @@ class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
         parent::loadDefaultDecorators();
 
         // Disable 'for' attribute
-        if (isset($this->_decorators['Label'])
-            && !isset($this->_decorators['Label']['options']['disableFor']))
-        {
-             $this->_decorators['Label']['options']['disableFor'] = true;
+        if (false !== $decorator = $this->getDecorator('label')) {
+            $decorator->setOption('disableFor', true);
         }
 
         return $this;
