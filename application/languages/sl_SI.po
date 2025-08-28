@@ -2185,7 +2185,7 @@ msgstr "Uporabniki"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:43
+#: admin/themes/default/users/show.php:17 application/forms/Install.php:43
 #: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr ""
@@ -2193,7 +2193,7 @@ msgstr ""
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:100
+#: admin/themes/default/users/show.php:21 application/forms/Install.php:100
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2209,7 +2209,7 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/browse.php:52
-#: admin/themes/default/users/show.php:20 application/forms/User.php:81
+#: admin/themes/default/users/show.php:19 application/forms/User.php:81
 msgid "Display Name"
 msgstr ""
 
@@ -2274,7 +2274,7 @@ msgstr ""
 msgid "User #%s"
 msgstr ""
 
-#: admin/themes/default/users/show.php:15
+#: admin/themes/default/users/show.php:14
 msgid "Edit this User"
 msgstr ""
 
@@ -2904,9 +2904,9 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:82
 msgid ""
-"Default element to use in describing visual files to screen reader users via"
-" the image tag's alt attribute. This can be overridden using the file form's"
-" \"Alt Text\" field."
+"Default file element to use in describing visual files to screen reader "
+"users via the image tag's alt attribute. This can be overridden using the "
+"file form's \"Alt Text\" field."
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:95
