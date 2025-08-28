@@ -65,8 +65,9 @@ msgstr "Тема ресурса"
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:18
 #: admin/themes/default/item-types/browse.php:29
+#: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/item-types/show.php:14
-#: admin/themes/default/settings/edit-item-type-elements.php:27
+#: admin/themes/default/settings/edit-item-type-elements.php:29
 #: application/forms/ItemTypes.php:150
 msgid "Description"
 msgstr "Описание"
@@ -344,31 +345,58 @@ msgid ""
 "links into the preferred display order."
 msgstr "Проверьте ссылки для их отображения в главной навигации. Нажмите и перетащите ссылки для предпочтительного порядка расположения."
 
-#: admin/themes/default/appearance/edit-navigation.php:20
+#: admin/themes/default/appearance/edit-navigation.php:21
 msgid "Add a Link to the Navigation"
 msgstr "Добавить ссылку для навигации"
 
-#: admin/themes/default/appearance/edit-navigation.php:22
-#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/appearance/edit-navigation.php:23
+msgid "New Link Added. Total links: "
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:24
+#: admin/themes/default/appearance/edit-navigation.php:26
+#: admin/themes/default/appearance/edit-navigation.php:46
+#: admin/themes/default/settings/edit-navigation-link.php:43
 #: admin/themes/default/users/api-keys.php:42
-#: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Метка"
 
-#: admin/themes/default/appearance/edit-navigation.php:24
-#: admin/themes/default/appearance/edit-navigation.php:43
-#: application/forms/Navigation.php:135
+#. /label>
+#. <div class="inputs">
+#. <input name="whatever" type="text" />
+#. <ul class="errors">
+#. <li>Here's your error</li>
+#. </ul>
+#. </div>
+#. <p class="explanation">Here's the explanation</p>
+#. </div>
+#. <div>
+#. <input type="submit" />
+#. </div>
+#: admin/themes/default/appearance/edit-navigation.php:26
+#: admin/themes/default/appearance/edit-navigation.php:29
+#: application/forms/Install.php:30 application/libraries/Omeka/Form.php:83
+msgid "required field"
+msgstr "Обязательное поле для заполнения"
+
+#: admin/themes/default/appearance/edit-navigation.php:27
+#: admin/themes/default/appearance/edit-navigation.php:47
+#: admin/themes/default/settings/edit-navigation-link.php:44
 msgid "URL"
 msgstr "URL"
 
-#: admin/themes/default/appearance/edit-navigation.php:26
+#: admin/themes/default/appearance/edit-navigation.php:29
+msgid "URI"
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:30
 msgid "Add Link"
 msgstr "Добавить ссылку"
 
-#: admin/themes/default/appearance/edit-navigation.php:32
+#: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
-#: admin/themes/default/element-sets/edit.php:41
+#: admin/themes/default/element-sets/edit.php:45
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit-all.php:41
@@ -376,22 +404,22 @@ msgstr "Добавить ссылку"
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:84
-#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-item-type-elements.php:46
 #: admin/themes/default/settings/edit-search.php:52
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21
+#: admin/themes/default/users/edit.php:20
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: admin/themes/default/appearance/edit-navigation.php:36
+#: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
 msgstr ""
 
-#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/appearance/edit-navigation.php:48
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -401,7 +429,7 @@ msgstr ""
 msgid "View Public Page"
 msgstr "Просмотреть открытую страницу"
 
-#: admin/themes/default/appearance/edit-navigation.php:45
+#: admin/themes/default/appearance/edit-navigation.php:49
 #: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:30
@@ -415,9 +443,8 @@ msgstr "Просмотреть открытую страницу"
 #: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
-#: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:70
-#: admin/themes/default/users/edit.php:26
+#: admin/themes/default/users/edit.php:25
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
 msgstr "Удалить"
@@ -495,6 +522,17 @@ msgstr "Просмотр коллекций"
 msgid "(%s total)"
 msgstr "(%s всего)"
 
+#: admin/themes/default/collections/browse.php:9
+#: admin/themes/default/item-types/browse.php:12
+#: admin/themes/default/items/browse.php:15
+#: admin/themes/default/search/index.php:8
+#: admin/themes/default/users/browse.php:45
+#: application/views/scripts/collections/browse.php:7
+#: application/views/scripts/items/browse.php:14
+#: application/views/scripts/search/index.php:9
+msgid "Top pagination"
+msgstr ""
+
 #: admin/themes/default/collections/browse.php:17
 #, php-format
 msgid "%s%d item%s has no collection."
@@ -515,7 +553,7 @@ msgid "Contributors"
 msgstr "Соавторы"
 
 #: admin/themes/default/collections/browse.php:33
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:78
 #: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
@@ -544,7 +582,7 @@ msgstr "(Личный)"
 #: admin/themes/default/items/browse.php:30
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/browse.php:143
-#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
@@ -553,6 +591,16 @@ msgstr "Редактировать"
 #: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
 msgstr "Нет соисполнителей"
+
+#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/item-types/browse.php:57
+#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/search/index.php:36
+#: application/views/scripts/collections/browse.php:49
+#: application/views/scripts/items/browse.php:57
+#: application/views/scripts/search/index.php:37
+msgid "Bottom pagination"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
@@ -615,7 +663,7 @@ msgid "No contributors."
 msgstr "Нет соисполнителей."
 
 #: admin/themes/default/collections/show.php:62
-#: admin/themes/default/files/show.php:93
+#: admin/themes/default/files/show.php:105
 #: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
@@ -787,7 +835,7 @@ msgstr "Ключи API"
 
 #: admin/themes/default/element-sets/browse.php:17
 #: admin/themes/default/tags/browse.php:50
-#: admin/themes/default/tags/browse.php:68
+#: admin/themes/default/tags/browse.php:65
 #: admin/themes/default/users/browse.php:13
 #: application/forms/ItemTypes.php:141
 msgid "Name"
@@ -803,7 +851,20 @@ msgid ""
 "right arrows to add customized comments to element descriptions."
 msgstr "Нажмите и перетащите ссылки для предпочтительного порядка расположения. Нажмите на правую стрелку, чтобы добавить собственные комментарии к описаниям элементов."
 
+#: admin/themes/default/element-sets/edit.php:25
+#: admin/themes/default/item-types/form.php:39
+#: admin/themes/default/items/files-form.php:9
+#: admin/themes/default/settings/edit-navigation-link.php:28
+msgid "Move"
+msgstr ""
+
 #: admin/themes/default/element-sets/edit.php:29
+#: admin/themes/default/item-types/form.php:42
+msgid "Show"
+msgstr ""
+
+#: admin/themes/default/element-sets/edit.php:29
+#: admin/themes/default/element-sets/edit.php:33
 msgid "Comment"
 msgstr "Комментировать"
 
@@ -873,6 +934,15 @@ msgstr "Вы должны использовать другой способ д�
 msgid "Edit File #%s"
 msgstr "Редактировать файл #%s"
 
+#: admin/themes/default/files/edit.php:41
+#: admin/themes/default/files/show.php:44
+msgid "Alt Text"
+msgstr ""
+
+#: admin/themes/default/files/edit.php:43
+msgid "Provide a brief description of visual files to screen reader users."
+msgstr ""
+
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
@@ -885,80 +955,80 @@ msgstr "Файл #%s"
 msgid "Item"
 msgstr "Документ"
 
-#: admin/themes/default/files/show.php:40
+#: admin/themes/default/files/show.php:52
 msgid "Direct Links"
 msgstr "Прямые ссылки"
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:54
 msgid "Original"
 msgstr "Исходный"
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:56
 msgid "Fullsize"
 msgstr "Полноразмерный"
 
-#: admin/themes/default/files/show.php:45
+#: admin/themes/default/files/show.php:57
 msgid "Thumbnail"
 msgstr "Уменьшенное растровое изображение"
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:58
 msgid "Square Thumbnail"
 msgstr "Прямоугольник уменьшенного растрового изображения"
 
-#: admin/themes/default/files/show.php:52
+#: admin/themes/default/files/show.php:64
 #: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
 msgstr "Формат метаданных"
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:66
 msgid "Filename"
 msgstr "Имя файла"
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:68
 #: application/views/scripts/files/show.php:29
 msgid "Original Filename"
 msgstr "Оригинальное имя файла"
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "Размер файла"
 
-#: admin/themes/default/files/show.php:59
+#: admin/themes/default/files/show.php:71
 #: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
 msgstr "%s байт"
 
-#: admin/themes/default/files/show.php:64
+#: admin/themes/default/files/show.php:76
 msgid "File History"
 msgstr "История"
 
-#: admin/themes/default/files/show.php:68
+#: admin/themes/default/files/show.php:80
 msgid "Date Modified"
 msgstr "Дата изменения"
 
-#: admin/themes/default/files/show.php:70
+#: admin/themes/default/files/show.php:82
 #: application/views/scripts/files/show.php:39
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: admin/themes/default/files/show.php:76
+#: admin/themes/default/files/show.php:88
 #: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
 msgstr "Тип метаданных"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:90
 #: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Тип MIME"
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:92
 #: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
 msgstr "Тип файла/OS"
 
-#: admin/themes/default/files/show.php:87
+#: admin/themes/default/files/show.php:99
 msgid "Embedded Metadata"
 msgstr "Встроенные метаданные"
 
@@ -1015,19 +1085,35 @@ msgstr "Новая версия Omeka доступна для скачивани
 msgid "Upgrade to %s"
 msgstr "Обновите до %s"
 
-#: admin/themes/default/item-types/add-existing-element.php:22
-#: admin/themes/default/item-types/add-new-element.php:15
-#: admin/themes/default/item-types/form.php:43
+#: admin/themes/default/item-types/add-existing-element.php:25
+#: admin/themes/default/item-types/add-new-element.php:12
+#: admin/themes/default/item-types/form.php:45
+#: admin/themes/default/items/tag-form.php:22
+#: admin/themes/default/settings/edit-item-type-elements.php:24
+#: admin/themes/default/settings/edit-navigation-link.php:38
+msgid "Undo"
+msgstr "Аннулировать"
+
+#: admin/themes/default/item-types/add-existing-element.php:25
+#: admin/themes/default/item-types/add-existing-element.php:26
+#: admin/themes/default/item-types/add-new-element.php:12
+#: admin/themes/default/item-types/add-new-element.php:13
+#: admin/themes/default/item-types/form.php:44
+#: admin/themes/default/item-types/form.php:45
 #: admin/themes/default/items/tag-form.php:23
+#: admin/themes/default/settings/edit-item-type-elements.php:24
+#: admin/themes/default/settings/edit-item-type-elements.php:25
+#: admin/themes/default/settings/edit-navigation-link.php:38
+#: admin/themes/default/settings/edit-navigation-link.php:39
 #: application/views/helpers/ElementInput.php:124
 msgid "Remove"
 msgstr "Удалить"
 
-#: admin/themes/default/item-types/add-new-element.php:6
+#: admin/themes/default/item-types/add-new-element.php:7
 msgid "Element Name"
 msgstr "Наименование документа"
 
-#: admin/themes/default/item-types/add-new-element.php:22
+#: admin/themes/default/item-types/add-new-element.php:26
 msgid "Element Description"
 msgstr "Описание элемента"
 
@@ -1075,35 +1161,25 @@ msgstr "Редактировать тип документа #%s"
 msgid "Item Type Information"
 msgstr "Информация о типе документа"
 
-#: admin/themes/default/item-types/form.php:15
-#: admin/themes/default/users/add.php:7
-#: admin/themes/default/users/change-password.php:15
-#: admin/themes/default/users/edit.php:15
-#: install/views/scripts/index/index.phtml:14
-msgid "required field"
-msgstr "Обязательное поле для заполнения"
-
-#: admin/themes/default/item-types/form.php:25
+#: admin/themes/default/item-types/form.php:24
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
 msgstr "Элементы"
 
-#: admin/themes/default/item-types/form.php:42
-#: admin/themes/default/items/tag-form.php:22
-#: admin/themes/default/settings/edit-item-type-elements.php:22
-msgid "Undo"
-msgstr "Аннулировать"
-
-#: admin/themes/default/item-types/form.php:80
-#: admin/themes/default/item-types/form.php:87
+#: admin/themes/default/item-types/form.php:83
+#: admin/themes/default/item-types/form.php:91
 msgid "Add Element"
 msgstr "Добавить элемент"
 
-#: admin/themes/default/item-types/form.php:84
+#: admin/themes/default/item-types/form.php:86
+msgid "New element added. Total Elements: "
+msgstr ""
+
+#: admin/themes/default/item-types/form.php:88
 msgid "Existing"
 msgstr "Существующий"
 
-#: admin/themes/default/item-types/form.php:85
+#: admin/themes/default/item-types/form.php:89
 msgid "New"
 msgstr "Новый"
 
@@ -1301,8 +1377,8 @@ msgstr "Просмотр документов"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2460
-#: application/libraries/globals.php:2851
+#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2942
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Поиск документов"
@@ -1378,23 +1454,24 @@ msgstr "Редактировать документ #%s"
 msgid "Click and drag the files into the preferred display order."
 msgstr "Нажмите и перетащите файлы для предпочтительного порядка расположения. "
 
-#: admin/themes/default/items/files-form.php:13
+#: admin/themes/default/items/files-form.php:15
 msgid "Delete "
 msgstr "Удалить"
 
-#: admin/themes/default/items/files-form.php:22
+#: admin/themes/default/items/files-form.php:24
 msgid "Add New Files"
 msgstr "Добавить новые файлы"
 
-#: admin/themes/default/items/files-form.php:24
+#: admin/themes/default/items/files-form.php:26
 #, php-format
 msgid "The maximum file size is %s."
 msgstr "Максимальный размер файла %s."
 
-#: admin/themes/default/items/files-form.php:27
+#: admin/themes/default/items/files-form.php:29
 msgid "Find a File"
 msgstr "Найти файл"
 
+#: admin/themes/default/items/files-form.php:30
 #: admin/themes/default/items/form.php:23
 msgid "Add Another File"
 msgstr "Добавить другой файл"
@@ -1429,6 +1506,7 @@ msgid "Narrow by Specific Fields"
 msgstr "Сузить по определённым полям"
 
 #: admin/themes/default/items/search-form.php:30
+#: application/views/helpers/ElementForm.php:91
 #: application/views/scripts/items/search-form.php:25
 #, php-format
 msgid "Number of rows in \"%s\":"
@@ -1653,7 +1731,7 @@ msgid "Browse Items by Tag"
 msgstr "Просмотр документов по меткам"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:107
+#: admin/themes/default/tags/browse.php:103
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Нет меток для отображения. Вначале вы должны отметить несколько документов."
 
@@ -1713,7 +1791,7 @@ msgid "Uninstall"
 msgstr "Удалить"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:204
+#: application/forms/Install.php:209
 msgid "Install"
 msgstr "Установить"
 
@@ -1753,7 +1831,7 @@ msgid "or"
 msgstr "или"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:19
-#: admin/themes/default/settings/edit-item-type-elements.php:51
+#: admin/themes/default/settings/edit-item-type-elements.php:59
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -1815,20 +1893,28 @@ msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
 msgstr "Настроить описания элементов ниже, чтобы изменить порядок элементов %s."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Confirm Delete"
 msgstr "Подтвердить удаление"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:44
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
 msgstr "Вы уверены, что хотите удалить выбранные элементы типа документа из базы данных? Вы потеряете весь текст, связанный с выбранными элементами. Это не может быть отменено."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:51
+#: admin/themes/default/settings/edit-item-type-elements.php:59
 msgid "Ok"
 msgstr "Ok"
+
+#: admin/themes/default/settings/edit-navigation-link.php:32
+msgid "Enable"
+msgstr ""
+
+#: admin/themes/default/settings/edit-navigation-link.php:36
+msgid "Show Options"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
@@ -1927,11 +2013,11 @@ msgstr ""
 msgid "Reset results"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:69
+#: admin/themes/default/tags/browse.php:66
 msgid "Count"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:70
+#: admin/themes/default/tags/browse.php:67
 msgid "Date created"
 msgstr ""
 
@@ -2034,7 +2120,7 @@ msgstr ""
 msgid "Create a Password"
 msgstr "Создать пароль"
 
-#: admin/themes/default/users/activate.php:23 application/forms/Install.php:81
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:86
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -2044,7 +2130,7 @@ msgstr "Введите пароль ещё раз"
 msgid "Add New User"
 msgstr "Добавить нового пользователя"
 
-#: admin/themes/default/users/add.php:13
+#: admin/themes/default/users/add.php:12
 msgid "Add User"
 msgstr "Добавить пользователя"
 
@@ -2102,7 +2188,7 @@ msgstr "Просмотр пользователей"
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:43
 #: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr "Имя пользователя"
@@ -2110,7 +2196,7 @@ msgstr "Имя пользователя"
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:100
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2121,7 +2207,6 @@ msgid "Add a User"
 msgstr "Добавить пользователя"
 
 #: admin/themes/default/users/browse.php:37
-#: application/views/scripts/search/search-form.php:10
 msgid "Options"
 msgstr ""
 
@@ -2143,11 +2228,11 @@ msgstr "Роль"
 msgid "inactive"
 msgstr "неактивный"
 
-#: admin/themes/default/users/change-password.php:20
+#: admin/themes/default/users/change-password.php:19
 msgid "Save Password"
 msgstr "Сохранить пароль"
 
-#: admin/themes/default/users/edit.php:23
+#: admin/themes/default/users/edit.php:22
 msgid "Resend Activation Email"
 msgstr ""
 
@@ -2322,7 +2407,7 @@ msgstr "Тип документа \"%s\" был успешно добавлен.
 msgid "The item type \"%s\" was successfully updated."
 msgstr "Тип документа \"%s\" был успешно обновлен."
 
-#: application/controllers/ItemTypesController.php:150
+#: application/controllers/ItemTypesController.php:152
 #, php-format
 msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
@@ -2330,7 +2415,7 @@ msgid ""
 "lose all metadata that is specific to the item type."
 msgstr "Это приведет к удалению \"%s\" типа документа, но не будут удалены элементы, установленные для этого типа документа. Документы, которые назначены к этому типу документа, потеряют все метаданные, специфичные для типа документа."
 
-#: application/controllers/ItemTypesController.php:158
+#: application/controllers/ItemTypesController.php:160
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
@@ -2603,15 +2688,23 @@ msgstr "Тема была успешна изменена."
 msgid "The theme settings were successfully saved!"
 msgstr "Настройки темы были успешно сохранены!"
 
-#: application/controllers/UpgradeController.php:53
+#: application/controllers/UpgradeController.php:51
 msgid "SQL error in migration: "
 msgstr "Ошибка SQL в переносе:"
 
-#: application/controllers/UpgradeController.php:66
+#: application/controllers/UpgradeController.php:65
 #, php-format
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
+msgstr ""
+
+#: application/controllers/UpgradeController.php:72
+#, php-format
+msgid ""
+"Omeka requires MySQL version %1$s or higher, but this server is running "
+"MySQL version %2$s. Please update the installed version of MySQL and try "
+"again."
 msgstr ""
 
 #: application/controllers/UsersController.php:74
@@ -2737,7 +2830,7 @@ msgid ""
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:146
+#: application/forms/Install.php:151
 msgid "Fullsize Image Size"
 msgstr "Размер изображения в полную величину"
 
@@ -2746,7 +2839,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максимальный размер  изображения (в пикселях)."
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:155
+#: application/forms/Install.php:160
 msgid "Thumbnail Size"
 msgstr "Размер уменьшенного растрового изображения"
 
@@ -2755,7 +2848,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максимальный размер уменьшенного растрового изображения (в пикселях)."
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:164
+#: application/forms/Install.php:169
 msgid "Square Thumbnail Size"
 msgstr "Прямоугольник уменьшенного растрового изображения"
 
@@ -2783,7 +2876,7 @@ msgid ""
 msgstr "Ограничьте число результатов, отображаемых на странице в общедоступном интерфейсе."
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:191
+#: application/forms/Install.php:196
 msgid "Show Empty Elements"
 msgstr "Показать пустые элементы"
 
@@ -2808,19 +2901,30 @@ msgid ""
 "Have item files link to the file metadata instead of the file directly."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:85
+#: application/forms/AppearanceSettings.php:81
+msgid "File Alt Text Element"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:82
+msgid ""
+"Default element to use in describing visual files to screen reader users via"
+" the image tag's alt attribute. This can be overridden using the file form's"
+" \"Alt Text\" field."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:95
 msgid "Admin Theme"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:99
+#: application/forms/AppearanceSettings.php:109
 msgid "Derivative Size Constraints"
 msgstr "Вторичные ограничения размера"
 
-#: application/forms/AppearanceSettings.php:107
+#: application/forms/AppearanceSettings.php:117
 msgid "Display Settings"
 msgstr "Отобразить настройки"
 
-#: application/forms/AppearanceSettings.php:115
+#: application/forms/AppearanceSettings.php:125
 msgid "Admin Themes"
 msgstr ""
 
@@ -2858,27 +2962,27 @@ msgstr "Новый пароль должен состоять из %миниму
 msgid "Repeat New Password"
 msgstr "Повторите новый пароль"
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:107
 msgid "Site Title"
 msgstr "Название сайта"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:113
 msgid "Site Description"
 msgstr "Описание сайта"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:118
 msgid "Administrator Email"
 msgstr "Электронная почта администратора"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:125
 msgid "Site Copyright Information"
 msgstr "Информация об авторском праве для этого сайта"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:130
 msgid "Site Author Information"
 msgstr "Информация об авторе сайта"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:135
 msgid "Tag Delimiter"
 msgstr "Разделитель меток"
 
@@ -2888,7 +2992,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Разделяйте метки, используя этот символ или строку. Будьте осторожны при изменении этого параметра. Вы рискуете разъединить метки, которые содержат старый разделитель."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:204
 msgid "ImageMagick Directory Path"
 msgstr "Путь к каталогу ImageMagic"
 
@@ -2896,72 +3000,72 @@ msgstr "Путь к каталогу ImageMagic"
 msgid "General Settings"
 msgstr ""
 
-#: application/forms/Install.php:39
+#: application/forms/Install.php:44
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr ""
 
-#: application/forms/Install.php:47 application/forms/User.php:46
-#: application/models/User.php:188
+#: application/forms/Install.php:52 application/forms/User.php:46
+#: application/models/User.php:191
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr ""
 
-#: application/forms/Install.php:57 application/forms/Login.php:39
+#: application/forms/Install.php:62 application/forms/Login.php:39
 msgid "Password"
 msgstr "Пароль"
 
-#: application/forms/Install.php:58
+#: application/forms/Install.php:63
 msgid "must be at least 6 characters"
 msgstr "должно быть по крайней мере 6 символов"
 
-#: application/forms/Install.php:82
+#: application/forms/Install.php:87
 msgid "Confirm your password."
 msgstr "Подтвердите пароль."
 
-#: application/forms/Install.php:131
+#: application/forms/Install.php:136
 msgid "Separate tags using this character or string."
 msgstr "Разделите метки, используя этот символ или строку."
 
-#: application/forms/Install.php:147
+#: application/forms/Install.php:152
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Максимальный размер  изображения, (в пикселях)"
 
-#: application/forms/Install.php:156
+#: application/forms/Install.php:161
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Максимальный размер уменьшенного растрового изображения (в пикселях)"
 
-#: application/forms/Install.php:165
+#: application/forms/Install.php:170
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Максимальный прямоугольник уменьшенного растрового изображения (в пикселях)"
 
-#: application/forms/Install.php:173
+#: application/forms/Install.php:178
 msgid "Items Per Page (admin)"
 msgstr "Количество документов на странице (администраторские)"
 
-#: application/forms/Install.php:174
+#: application/forms/Install.php:179
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Ограничьте количество документов, отображаемых на странице в административном интерфейсе."
 
-#: application/forms/Install.php:182
+#: application/forms/Install.php:187
 msgid "Items Per Page (public)"
 msgstr "Количество документов на странице (доступных)"
 
-#: application/forms/Install.php:183
+#: application/forms/Install.php:188
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Ограничьте количество документов, отображаемых на странице в общедоступном интерфейсе."
 
-#: application/forms/Install.php:193
+#: application/forms/Install.php:198
 msgid "Check box to show metadata elements with no text."
 msgstr "Поставьте галочку, чтобы показывать метаданные без текста."
 
-#: application/forms/Install.php:211
+#: application/forms/Install.php:216
 msgid "Default Superuser Account"
 msgstr "Аккаунт суперпользователя по умолчанию"
 
-#: application/forms/Install.php:221
+#: application/forms/Install.php:226
 msgid "Site Settings"
 msgstr "Настройки сайта"
 
@@ -2990,32 +3094,32 @@ msgstr "Пароль не может быть пустым."
 msgid "Remember Me?"
 msgstr "Запомнить меня?"
 
-#: application/forms/Navigation.php:157
+#: application/forms/Navigation.php:111
 msgid "[Default]"
 msgstr "[По умолчанию]"
 
-#: application/forms/Navigation.php:163
+#: application/forms/Navigation.php:117
 msgid "Select a Homepage"
 msgstr "Выберите домашнюю страницу"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:198
 msgid "Cannot find parent navigation page."
 msgstr "Не удается найти исходную страницу навигации."
 
-#: application/forms/Navigation.php:324
+#: application/forms/Navigation.php:261
 msgid "All navigation links must have URIs."
 msgstr "Все навигационные ссылки должны иметь URIs."
 
-#: application/forms/Navigation.php:337
+#: application/forms/Navigation.php:274
 msgid "All navigation links must have different URIs."
 msgstr "Все навигационные ссылки должны иметь разные URIs."
 
-#: application/forms/Navigation.php:343
+#: application/forms/Navigation.php:280
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "Неверный адрес \"%s\" навигационной ссылки: \"%s\""
 
-#: application/forms/Navigation.php:376
+#: application/forms/Navigation.php:313
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "Навигационные ссылки, которые имеют не удаляемые субссылки не могут быть удалены."
 
@@ -3157,7 +3261,7 @@ msgstr "Такое имя уже используется."
 msgid "Name as it should be displayed on the site"
 msgstr "Имя, как это должно быть отображено на сайте"
 
-#: application/forms/User.php:88 application/models/User.php:168
+#: application/forms/User.php:88 application/models/User.php:171
 msgid "Real Name is required."
 msgstr "Требуется настоящее имя."
 
@@ -3264,79 +3368,83 @@ msgstr " Логическое выражение"
 msgid "Exact match"
 msgstr "Точное совпадение"
 
-#: application/libraries/globals.php:1275
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1286
+#: application/libraries/globals.php:1307
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Файл не найден %s!"
 
-#: application/libraries/globals.php:1312
+#: application/libraries/globals.php:1323
 msgid "No featured collections are available."
 msgstr "Отмеченные коллекции отсутствуют."
 
-#: application/libraries/globals.php:1618
+#: application/libraries/globals.php:1629
 msgid "Select Below "
 msgstr "Выберите ниже"
 
-#: application/libraries/globals.php:1661
+#: application/libraries/globals.php:1672
 msgid "Omeka RSS Feed"
 msgstr "Лента RSS Omeka "
 
-#: application/libraries/globals.php:1662
+#: application/libraries/globals.php:1673
 msgid "Omeka Atom Feed"
 msgstr "Лента Atom Omeka "
 
-#: application/libraries/globals.php:1981
+#: application/libraries/globals.php:1992
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:1991
+#: application/libraries/globals.php:2002
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:1995
+#: application/libraries/globals.php:2006
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2355
+#: application/libraries/globals.php:2367
 msgid "No recent items available."
 msgstr "Нет недавних доступных документов."
 
-#: application/libraries/globals.php:2381
+#: application/libraries/globals.php:2467
 msgid "No featured items are available."
 msgstr "Отмеченные документы отсутствуют."
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2528
 msgid "View"
 msgstr "Режим просмотра"
 
-#: application/libraries/globals.php:2504
+#: application/libraries/globals.php:2590
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Нет коллекции"
 
-#: application/libraries/globals.php:2623
+#: application/libraries/globals.php:2709
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2640
+#: application/libraries/globals.php:2726
 msgid "Next Item &rarr;"
 msgstr "Следующий документ &rarr;"
 
-#: application/libraries/globals.php:2660
+#: application/libraries/globals.php:2746
 msgid "&larr; Previous Item"
 msgstr "&larr; Предыдущий документ"
 
-#: application/libraries/globals.php:2841
+#: application/libraries/globals.php:2887
+msgid "Pagination"
+msgstr ""
+
+#: application/libraries/globals.php:2932
 msgid "Browse All"
 msgstr "Просмотреть все"
 
-#: application/libraries/globals.php:2846
+#: application/libraries/globals.php:2937
 msgid "Browse by Tag"
 msgstr "Просмотр по меткам"
 
-#: application/libraries/globals.php:3126
+#: application/libraries/globals.php:3217
 msgid "No tags are available."
 msgstr "Нет доступных меток."
 
@@ -3386,11 +3494,11 @@ msgstr "Все текстовые элементы должны иметь ти�
 msgid "Invalid element ID."
 msgstr "Недопустимый идентификатор элемента"
 
-#: application/models/File.php:237
+#: application/models/File.php:268
 msgid "Cannot get the local path for a stored file."
 msgstr "Не удается получить локальный путь для сохраняемого файла."
 
-#: application/models/File.php:456
+#: application/models/File.php:487
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" недопустимая модификация файла."
@@ -3596,24 +3704,24 @@ msgstr "Метки должны иметь названия."
 msgid "That name is already taken for this tag."
 msgstr "Для этой метки уже используется данное имя."
 
-#: application/models/User.php:109
+#: application/models/User.php:112
 msgid "User may not change permissions to super-user"
 msgstr "Пользователь не может изменять разрешения супер-пользователю"
 
-#: application/models/User.php:112
+#: application/models/User.php:115
 msgid "User may not change roles."
 msgstr "Пользователь не может менять роли."
 
-#: application/models/User.php:181 application/models/User.php:229
+#: application/models/User.php:184 application/models/User.php:247
 msgid "The user must be assigned a role."
 msgstr "Пользователю должна быть присвоена роль."
 
-#: application/models/User.php:186
+#: application/models/User.php:189
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
 msgstr "Имя пользователя \"%1$s\" должно быть между %2$s и %3$s символами."
 
-#: application/models/User.php:190
+#: application/models/User.php:193
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
 msgstr "'%s' уже используется. Пожалуйста, выберите другое имя пользователя."
@@ -3648,6 +3756,7 @@ msgstr "Редактировать коллекции"
 #: application/tests/suite/Omeka/NavigationTest.php:820
 #: application/tests/suite/Omeka/NavigationTest.php:863
 #: application/tests/suite/Omeka/NavigationTest.php:955
+#: application/views/scripts/common/admin-bar.php:1
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr "Omeka"
@@ -3729,7 +3838,7 @@ msgstr "Страница 6"
 msgid "[no text]"
 msgstr "[нет текста]"
 
-#: application/views/helpers/ElementForm.php:273
+#: application/views/helpers/ElementForm.php:276
 msgid "Add Input"
 msgstr "Добавить ввод"
 
@@ -3798,10 +3907,6 @@ msgstr "На текущий момент в данной коллекции не
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Сайт работает на <a href=\"http://omeka.org\">Omeka</a>."
-
-#: application/views/scripts/common/pagination_control.php:5
-msgid "Pagination"
-msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
@@ -3899,6 +4004,10 @@ msgstr "Типы записи:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:10
+msgid "Search options"
 msgstr ""
 
 #: application/views/scripts/search/search-form.php:15

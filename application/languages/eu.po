@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Adriana Hernández, 2023
+# Alexander Gabilondo <alexgabi@disroot.org>, 2024-2025
 # Imanol Ortiz <imanol.ortiz@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Adriana Hernández, 2023\n"
+"Last-Translator: Alexander Gabilondo <alexgabi@disroot.org>, 2024-2025\n"
 "Language-Team: Basque (http://app.transifex.com/omeka/omeka/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "El conjunto de elementos de metadatos Dublin Core es común a todos los registros Omeka, incluyendo elementos, archivos, y colecciones. Para más información ver: http://dublincore.org/documents/dces/."
+msgstr "Dublin Core metadatuen elementu multzoa komuna da Omeka erregistro guztietan, elementuak, fitxategiak eta bildumak barne. Informazio gehiagorako, ikus http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:31
@@ -34,17 +35,17 @@ msgstr "El conjunto de elementos de metadatos Dublin Core es común a todos los 
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:14
 msgid "Title"
-msgstr "Izenburu"
+msgstr "Izenburua"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Izen bat baliabideei emateko"
+msgstr "Baliabideari emandako izena"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Egile"
+msgstr "Egilea"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
@@ -56,13 +57,14 @@ msgstr "Gaia"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "Baliabideko gaia"
+msgstr "Baliabidearen gaia"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:18
 #: admin/themes/default/item-types/browse.php:29
+#: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/item-types/show.php:14
-#: admin/themes/default/settings/edit-item-type-elements.php:27
+#: admin/themes/default/settings/edit-item-type-elements.php:29
 #: application/forms/ItemTypes.php:150
 msgid "Description"
 msgstr "Deskribapena"
@@ -77,16 +79,16 @@ msgstr "Editorea"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Erakunde bat, baliabide erabilgarria egiteko"
+msgstr "Baliabidea eskuragarri jartzeaz arduratzen den erakundea"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Laguntzaile"
+msgstr "Laguntzailea"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Erakunde bat, baliabideei laguntasunak emateko"
+msgstr "Baliabideari ekarpenak egiteaz arduratzen den erakundea"
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -96,7 +98,7 @@ msgstr "Data"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "Un punto o período de tiempo asociado con un evento en el ciclo vital del recurso"
+msgstr "Baliabidearen bizi-zikloko gertakari bati lotutako puntu edo denbora-tarte bat"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
@@ -107,31 +109,31 @@ msgstr "Mota"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "Baliabideko mota edo klase"
+msgstr "Baliabidearen izaera edo generoa"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Formatu"
+msgstr "Formatua"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "Artxiboko formatu, euskarri fisiko edo baliabideko tamaina"
+msgstr "Fitxategiaren formatua, euskarri fisikoa edo baliabidearen tamaina"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Identifikadore"
+msgstr "Identifikatzailea"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "Baliabideei erreferentzi on bat testuinguruen barruan"
+msgstr "Testuinguru jakin bateko baliabideari buruzko erreferentzia argia"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Iturri"
+msgstr "Iturria"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "Un recurso relacionado del cual se deriva el recurso descrito."
+msgstr "Deskribatutako baliabidearen iturriko baliabidea"
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -139,15 +141,15 @@ msgstr "Hizkuntza"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "Balizabideko hizkuntza"
+msgstr "Baliabidearen hizkuntza"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Erlazio"
+msgstr "Erlazioa"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "Erlazioko baliabidea"
+msgstr "Erlazionatutako baliabide bat"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
@@ -157,7 +159,7 @@ msgstr "Estaldura"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "El tóopico espacial o temporal del recurso, la pertinencia espacial del recurso, o la jurisdicción bajo la cual el recurso es relevante"
+msgstr "Baliabidearen espazio edo denborazko erreferentzia, baliabidearen aplikagarritasun espaziala edo baliabidea esanguratsua den jurisdikzioa"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -165,21 +167,21 @@ msgstr "Egile-eskubideak"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "Información sobre los derechos vigentes en y sobre el recurso"
+msgstr "Baliabidearen eta horren gaineko eskubideei buruzko informazioa"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Item Type Metadata"
+msgstr "Elementu motako metadatuak"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "El conjunto de items de metadatos de tipo de elemento, que consta de todos los tipos de item de elementos incluidos en Omeka, y todos los tipos de item de elementos creados por un administrador."
+msgstr "Elementu motako metadatuen multzoa, Omekarekin bildutako elementu motako elementu guztiek eta administratzaile batek sortutako elementu guztiek osatzen dute."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omekako Legacy-ko artxiboa "
+msgstr "Omeka fitxategi zaharra"
 
 #. Omeka Legacy File description
 msgid ""
@@ -187,11 +189,11 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "El conjunto de elementos de metadatos que, adicionales al conjunto de elementos Dublin Core, fue incluido en la tabla de 'archivos' en versiones previas de Omeka. Estos elementos son comunes a todos los archivos Omeka. Este conjunto puede quedar obsoleto en futuras versiones."
+msgstr "Dublin Core elementu multzoaz gain, Omekaren aurreko bertsioetan `fitxategiak' taulan sartu zen metadatu-elementu multzoa. Elementu hauek komunak dira Omeka fitxategi guztietan. Baliteke multzo hau zaharkituta egotea etorkizuneko bertsioetan."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Beste egile"
+msgstr "Beste egilerik"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
@@ -203,11 +205,11 @@ msgstr "Produktorea"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Render-eko tresna"
+msgstr "Errendatze gailua"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Render xehetazunak"
+msgstr "Errendatze xehetasunak"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
@@ -215,7 +217,7 @@ msgstr "Grabaketako data"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Grabaketako tresna"
+msgstr "Grabaketako gailua"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
@@ -223,33 +225,33 @@ msgstr "Grabaketako xehetazunak"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Historia aldatu"
+msgstr "Aldatu historia"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Watemark"
+msgstr "Ur-marka"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Zifratu"
+msgstr "Zifratzea"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Kompresio"
+msgstr "Trinkotzea"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Prozesatu gero"
+msgstr "Postprozesamendua"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omekako irudiko artxiboa"
+msgstr "Omekaren irudi fitxategia"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "El conjunto de elementos de metadatos que se incluyó en la tabla de 'files_images' en versiones anteriores de Omeka. Estos elementos son comunes a todos los archivos de imagen."
+msgstr "Omekaren aurreko bertsioetan `fitxategiak_irudiak` taulan sartu zen metadatu-elementu multzoa. Elementu hauek irudi-fitxategi guztietan komunak dira."
 
 #. Omeka Image File: Width element
 msgid "Width"
@@ -261,7 +263,7 @@ msgstr "Luzera"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit-eko sakontasuna"
+msgstr "Bit-sakonera"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
@@ -269,33 +271,33 @@ msgstr "Kanalak"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif-eko esaldi"
+msgstr "Exif katea"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif-eko array"
+msgstr "Exif array"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC-eko esaldi"
+msgstr "IPTC katea"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC-eko array"
+msgstr "IPTC array"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omekako bideoko artxiboa"
+msgstr "Omekaren bideo artxiboa"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "El conjunto de elementos de metadatos incluido en la tabla de 'files_videos' en versiones anteriores de Omeka. Estos elementos son comunes a todos los archivos de video."
+msgstr "Omekaren aurreko bertsioetan `fitxategiak_bideoak` taulan sartu zen metadatu-elementu multzoa. Elementu horiek komunak dira bideo-fitxategi guztietan."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr "Bit-tasa"
 
 # Omeka Video File: Duration element
 msgid "Duration"
@@ -303,19 +305,19 @@ msgstr "Iraupena"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr "Lagin-tasa"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Kodek"
+msgstr "Kodeka"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Formatu (Legacy) Metadata"
+msgstr ""
 
 #. User role: Super
 msgid "Super"
-msgstr "Nagusi"
+msgstr "Nagusia"
 
 #. User role: Admin
 #: admin/themes/default/common/header.php:43
@@ -338,33 +340,60 @@ msgstr "Itxura"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr "Consulta los enlaces para mostrarlos en la navegación principal. Haga clic y arrastre los enlaces en el orden de visualización preferido."
+msgstr "Egiaztatu estekak nabigazio nagusian bistaratzeko. Egin klik eta arrastatu estekak bistaratze-ordena hobetsikora."
 
-#: admin/themes/default/appearance/edit-navigation.php:20
+#: admin/themes/default/appearance/edit-navigation.php:21
 msgid "Add a Link to the Navigation"
-msgstr "Linka gehitu"
+msgstr "Gehitu esteka bat nabigazioari"
 
-#: admin/themes/default/appearance/edit-navigation.php:22
-#: admin/themes/default/appearance/edit-navigation.php:42
+#: admin/themes/default/appearance/edit-navigation.php:23
+msgid "New Link Added. Total links: "
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:24
+#: admin/themes/default/appearance/edit-navigation.php:26
+#: admin/themes/default/appearance/edit-navigation.php:46
+#: admin/themes/default/settings/edit-navigation-link.php:43
 #: admin/themes/default/users/api-keys.php:42
-#: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Etiketa"
 
-#: admin/themes/default/appearance/edit-navigation.php:24
-#: admin/themes/default/appearance/edit-navigation.php:43
-#: application/forms/Navigation.php:135
-msgid "URL"
-msgstr "URL"
-
+#. /label>
+#. <div class="inputs">
+#. <input name="whatever" type="text" />
+#. <ul class="errors">
+#. <li>Here's your error</li>
+#. </ul>
+#. </div>
+#. <p class="explanation">Here's the explanation</p>
+#. </div>
+#. <div>
+#. <input type="submit" />
+#. </div>
 #: admin/themes/default/appearance/edit-navigation.php:26
-msgid "Add Link"
-msgstr "Linka gehitu"
+#: admin/themes/default/appearance/edit-navigation.php:29
+#: application/forms/Install.php:30 application/libraries/Omeka/Form.php:83
+msgid "required field"
+msgstr "beharrezko eremua"
 
-#: admin/themes/default/appearance/edit-navigation.php:32
+#: admin/themes/default/appearance/edit-navigation.php:27
+#: admin/themes/default/appearance/edit-navigation.php:47
+#: admin/themes/default/settings/edit-navigation-link.php:44
+msgid "URL"
+msgstr "URLa"
+
+#: admin/themes/default/appearance/edit-navigation.php:29
+msgid "URI"
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:30
+msgid "Add Link"
+msgstr "Gehitu esteka"
+
+#: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
-#: admin/themes/default/element-sets/edit.php:41
+#: admin/themes/default/element-sets/edit.php:45
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit-all.php:41
@@ -372,22 +401,22 @@ msgstr "Linka gehitu"
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:84
-#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-item-type-elements.php:46
 #: admin/themes/default/settings/edit-search.php:52
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21
+#: admin/themes/default/users/edit.php:20
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
 msgid "Save Changes"
 msgstr "Gorde aldaketak"
 
-#: admin/themes/default/appearance/edit-navigation.php:36
+#: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr "Restablecer la navegación"
+msgstr "Berrezarri nabigazioa"
 
-#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/appearance/edit-navigation.php:48
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -395,9 +424,9 @@ msgstr "Restablecer la navegación"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:72
 msgid "View Public Page"
-msgstr "Orrialde publiko ikusi"
+msgstr "Orrialde publikoa ikusi"
 
-#: admin/themes/default/appearance/edit-navigation.php:45
+#: admin/themes/default/appearance/edit-navigation.php:49
 #: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:30
@@ -411,9 +440,8 @@ msgstr "Orrialde publiko ikusi"
 #: admin/themes/default/items/browse.php:146
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
-#: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:70
-#: admin/themes/default/users/edit.php:26
+#: admin/themes/default/users/edit.php:25
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
 msgstr "Ezabatu"
@@ -422,24 +450,24 @@ msgstr "Ezabatu"
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Zihur zaude?"
+msgstr "Ziur zaude?"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:10
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr "Se perderán todas las personalizaciones. El orden y las etiquetas serán restablecidas a la versión por defecto de Omeka. Se perderán los enlaces personalizados."
+msgstr "Pertsonalizazio guztiak galduko dira. Ordena eta etiketak Omeka lehenespenetara itzuliko dira. Esteka pertsonalizatuak galduko dira."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
 #: admin/themes/default/collections/browse.php:91
 #: admin/themes/default/collections/browse.php:101
 msgid "Add a Collection"
-msgstr "Sortari gehitu"
+msgstr "Gehitu bilduma bat"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Sorta bat gehitu"
+msgstr "Gehitu bilduma"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:32
@@ -450,7 +478,7 @@ msgstr "Sorta bat gehitu"
 #: admin/themes/default/items/quick-filters.php:4
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "Publiko"
+msgstr "Publikoa"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/browse.php:54
@@ -465,7 +493,7 @@ msgstr "Publiko"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Nabarmena"
+msgstr "Funtzionala"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -475,7 +503,7 @@ msgstr "Nabarmena"
 #: application/tests/suite/Omeka/NavigationTest.php:951
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Sortari begirada"
+msgstr "Arakatu bildumak"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -489,7 +517,18 @@ msgstr "Sortari begirada"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s Guztia)"
+msgstr "(%s guztira)"
+
+#: admin/themes/default/collections/browse.php:9
+#: admin/themes/default/item-types/browse.php:12
+#: admin/themes/default/items/browse.php:15
+#: admin/themes/default/search/index.php:8
+#: admin/themes/default/users/browse.php:45
+#: application/views/scripts/collections/browse.php:7
+#: application/views/scripts/items/browse.php:14
+#: application/views/scripts/search/index.php:9
+msgid "Top pagination"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
@@ -500,32 +539,32 @@ msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr "Todos los items están en una colección."
+msgstr "Elementu guztiak bilduma batean daude."
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr "Laguntzaileak"
+msgstr "Kolaboratzaileak"
 
 #: admin/themes/default/collections/browse.php:33
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:78
 #: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Data eranskin"
+msgstr "Data gehitu da"
 
 #: admin/themes/default/collections/browse.php:34
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Item-eko guztira"
+msgstr "Elementu kopurua guztira"
 
 #: admin/themes/default/collections/browse.php:59
 #: admin/themes/default/items/browse.php:87
 msgid "(Private)"
-msgstr "(Pribatu)"
+msgstr "(Pribatua)"
 
 #: admin/themes/default/collections/browse.php:65
 #: admin/themes/default/collections/show.php:32
@@ -538,7 +577,7 @@ msgstr "(Pribatu)"
 #: admin/themes/default/items/browse.php:30
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/browse.php:143
-#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
@@ -546,23 +585,33 @@ msgstr "Editatu"
 
 #: admin/themes/default/collections/browse.php:74
 msgid "No contributors"
-msgstr "Laguntzaleak gabe"
+msgstr "Kolaboratzailerik ez"
+
+#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/item-types/browse.php:57
+#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/search/index.php:36
+#: application/views/scripts/collections/browse.php:49
+#: application/views/scripts/items/browse.php:57
+#: application/views/scripts/search/index.php:37
+msgid "Bottom pagination"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:95
 msgid "There are no collections on this page."
-msgstr "Ez dago sortarik orrialde honetan"
+msgstr "Ez dago bildumarik orri honetan."
 
 #: admin/themes/default/collections/browse.php:95
 msgid "View All Collections"
-msgstr "Sorta guztiak ikusi"
+msgstr "Ikusi bilduma guztiak"
 
 #: admin/themes/default/collections/browse.php:98
 msgid "You have no collections."
-msgstr "Zuk ez daukazu sortarik"
+msgstr "Ez daukazu bildumarik."
 
 #: admin/themes/default/collections/browse.php:100
 msgid "Get started by adding your first collection."
-msgstr "Hasi zure lehenengo sorta gehitzen"
+msgstr "Hasi zure lehenengo bilduma gehitzen"
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -570,23 +619,23 @@ msgstr "Hasi zure lehenengo sorta gehitzen"
 #: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Sin-título]"
+msgstr "[Izenbururik gabe]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Sortako editatu #%s"
+msgstr "Editatu #%s bilduma"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "Sortako #%s"
+msgstr "#%s bilduma"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "Duela gutxi Items-k gehitutakoak"
+msgstr "Duela gutxi gehitutako elementuak"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -606,16 +655,16 @@ msgstr "Ez"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Laguntzailearik gabe"
+msgstr "Kolaboratzailerik ez."
 
 #: admin/themes/default/collections/show.php:62
-#: admin/themes/default/files/show.php:93
+#: admin/themes/default/files/show.php:105
 #: admin/themes/default/items/browse.php:161
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
 msgid "Output Formats"
-msgstr "Formatuak irteera"
+msgstr "Irteerako formatuak"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -623,7 +672,7 @@ msgstr "Gaiak"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "Nabigazio"
+msgstr "Nabigazioa"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:22
@@ -634,17 +683,17 @@ msgstr "Nabigazio"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Doikuntzak"
+msgstr "Ezarpenak"
 
 #: admin/themes/default/common/content-nav.php:1
 #: admin/themes/default/common/content-nav.php:2
 msgid "Main Menu"
-msgstr "Menu nagusi"
+msgstr "Menu nagusia"
 
 #: admin/themes/default/common/content-nav.php:2
 #: application/views/scripts/common/pagination_control.php:38
 msgid "Current Page"
-msgstr "Página actual"
+msgstr "Uneko orria"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
@@ -655,15 +704,15 @@ msgstr "Taula"
 #: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "Items-k"
+msgstr "Elementuak"
 
 #: admin/themes/default/common/content-nav.php:14
 msgid "Collections"
-msgstr "Sortak"
+msgstr "Bildumak"
 
 #: admin/themes/default/common/content-nav.php:18
 msgid "Item Types"
-msgstr "Items-eko mota"
+msgstr "Elementu motak"
 
 #: admin/themes/default/common/content-nav.php:22
 #: admin/themes/default/items/browse.php:118
@@ -671,7 +720,7 @@ msgstr "Items-eko mota"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
 msgid "Tags"
-msgstr "Tags"
+msgstr "Etiketak"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
@@ -682,7 +731,7 @@ msgstr "Ezabatu %s"
 #: admin/themes/default/common/footer.php:9
 #: admin/themes/default/common/login-footer.php:6
 msgid "Powered by Omeka"
-msgstr "Omekako ekintza"
+msgstr "Omekak egina"
 
 #: admin/themes/default/common/footer.php:10
 msgid "Documentation"
@@ -690,11 +739,11 @@ msgstr "Dokumentazioa"
 
 #: admin/themes/default/common/footer.php:11
 msgid "Support Forums"
-msgstr "Euskarriko foroak"
+msgstr "Laguntza foroak"
 
 #: admin/themes/default/common/footer.php:12
 msgid "Back to top"
-msgstr "Volver arriba"
+msgstr "Itzuli gora"
 
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
@@ -703,17 +752,17 @@ msgstr "Volver arriba"
 #: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "Version %s"
-msgstr "Bertsio %s"
+msgstr "%s bertsioa"
 
 #: admin/themes/default/common/footer.php:18
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Sistemako informazioa"
+msgstr "Sistemaren informazioa"
 
 #: admin/themes/default/common/global-nav.php:4
 #: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Pluginak"
 
 #: admin/themes/default/common/global-nav.php:16
 msgid "Users"
@@ -744,7 +793,7 @@ msgstr "Irten"
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr "Nagusi"
+msgstr "Orokorra"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
@@ -759,20 +808,20 @@ msgstr "Bilatu"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Osagaiko doikuntzak"
+msgstr "Osagai multzoak"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Item Type Elements"
+msgstr "Elementu motaren osagaiak"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr "API"
+msgstr "APIa"
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
 msgid "Change Password"
-msgstr "Pasahitza aldatu"
+msgstr "Aldatu pasahitza"
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:16
@@ -781,7 +830,7 @@ msgstr "API giltzak"
 
 #: admin/themes/default/element-sets/browse.php:17
 #: admin/themes/default/tags/browse.php:50
-#: admin/themes/default/tags/browse.php:68
+#: admin/themes/default/tags/browse.php:65
 #: admin/themes/default/users/browse.php:13
 #: application/forms/ItemTypes.php:141
 msgid "Name"
@@ -789,17 +838,30 @@ msgstr "Izena"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Elementu set editatu"
+msgstr "Editatu elementu multzoa"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "Hacer clic y arrastrar los elementos en el orden preferido para que se muestren. Hacer clic en las flechas de la derecha para añadir comentarios personalizados a la descripción de los elementos."
+msgstr "Egin klik eta arrastatu elementuak bistaratze-ordena hobetsikora. Egin klik eskuineko gezietan elementuen deskribapenetan iruzkin pertsonalizatuak gehitzeko."
+
+#: admin/themes/default/element-sets/edit.php:25
+#: admin/themes/default/item-types/form.php:39
+#: admin/themes/default/items/files-form.php:9
+#: admin/themes/default/settings/edit-navigation-link.php:28
+msgid "Move"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
+#: admin/themes/default/item-types/form.php:42
+msgid "Show"
+msgstr ""
+
+#: admin/themes/default/element-sets/edit.php:29
+#: admin/themes/default/element-sets/edit.php:33
 msgid "Comment"
-msgstr "Komentario"
+msgstr "Iruzkina"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -812,183 +874,192 @@ msgstr "Barkatu, zuk ez daukazu baimenik horri honetara joateko"
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "Administratzailea lekua"
+msgstr "guneko administratzailea"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Si piensas que deberías tener permiso, intenta contactar al %s."
+msgstr "Baimena izan behar duzula uste baduzu, saiatu harremanetan jartzen %s-rekin."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Horri bilatu gabe"
+msgstr "404: Ez da orria aurkitu"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "Haz &#8217; intentado acceder a una página que parece que ya no existe. Esto ocurre en ocaciones. Debajo hay un rápido desglose de los items, colecciones, y exposiciones en éste Sitio."
+msgstr "Ez dagoen orri batera sartzen saiatu zara. Batzuetan hau gertatzen da. Jarraian, gune honetako elementuak, bildumak eta erakusketak laburbiltzen dira."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Si esto no ayuda, intenta contactar al %s."
+msgstr "Horrek laguntzen ez badu, saiatu harremanetan jartzen %s-rekin."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
-msgstr "Item berriak"
+msgstr "Azken elementuak"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
-msgstr "Item berri bat gehitu"
+msgstr "Gehitu elementu berri bat"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
-msgstr "Sorta Berriak"
+msgstr "Azken bildumak"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
-msgstr "Sorta berri bat gehitu"
+msgstr "Gehitu bilduma berri bat"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Método no permitido"
+msgstr "405: Metodoa ez da onartzen"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Debes usar otro método de acceso a ésta URL. Si has llegado a ésta página siguiendo un enlace o haciendo clic en un botón en Omeka, por favor contacta al %s."
+msgstr "URL honetara sartzeko beste metodo bat erabili behar duzu. Esteka bati jarraituz edo Omeka-ko botoi batean klik eginez orrialde honetara iritsi bazara, jarri harremanetan %s-rekin."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Fitxategia editatu #%s"
+msgstr "Editatu #%s fitxategia"
+
+#: admin/themes/default/files/edit.php:41
+#: admin/themes/default/files/show.php:44
+msgid "Alt Text"
+msgstr ""
+
+#: admin/themes/default/files/edit.php:43
+msgid "Provide a brief description of visual files to screen reader users."
+msgstr ""
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Fitxategi #%s"
+msgstr "#%s fitxategia"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
 #: application/views/scripts/files/show.php:22
 msgid "Item"
-msgstr "Item"
+msgstr "Elementua"
 
-#: admin/themes/default/files/show.php:40
+#: admin/themes/default/files/show.php:52
 msgid "Direct Links"
-msgstr "Enlaces directos"
+msgstr "Esteka zuzenak"
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:54
 msgid "Original"
-msgstr "Originala"
+msgstr "Jatorrizkoa"
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:56
 msgid "Fullsize"
 msgstr "Neurri osoa"
 
-#: admin/themes/default/files/show.php:45
+#: admin/themes/default/files/show.php:57
 msgid "Thumbnail"
-msgstr "Miniaturas"
+msgstr "Miniaturak"
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:58
 msgid "Square Thumbnail"
-msgstr "Miniaturas en recuadro"
+msgstr "Miniatura karratua"
 
-#: admin/themes/default/files/show.php:52
+#: admin/themes/default/files/show.php:64
 #: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
-msgstr "Dar formato a los metadatos"
+msgstr "Formatu eman metadatuei"
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:66
 msgid "Filename"
 msgstr "Fitxategi izena"
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:68
 #: application/views/scripts/files/show.php:29
 msgid "Original Filename"
-msgstr "Fitxategiaren izen originala"
+msgstr "Fitxategiaren jatorrizko izena"
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "Fitxategiaren neurria"
 
-#: admin/themes/default/files/show.php:59
+#: admin/themes/default/files/show.php:71
 #: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
-msgstr "%s bytes"
-
-#: admin/themes/default/files/show.php:64
-msgid "File History"
-msgstr "Fitxategiko historia"
-
-#: admin/themes/default/files/show.php:68
-msgid "Date Modified"
-msgstr "Aldatuta data"
-
-#: admin/themes/default/files/show.php:70
-#: application/views/scripts/files/show.php:39
-msgid "Authentication"
-msgstr "Autenticación"
+msgstr "%s byte"
 
 #: admin/themes/default/files/show.php:76
+msgid "File History"
+msgstr "Fitxategiaren historia"
+
+#: admin/themes/default/files/show.php:80
+msgid "Date Modified"
+msgstr "Aldaketa data"
+
+#: admin/themes/default/files/show.php:82
+#: application/views/scripts/files/show.php:39
+msgid "Authentication"
+msgstr "Autentifikazioa"
+
+#: admin/themes/default/files/show.php:88
 #: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
-msgstr ""
+msgstr "Idatzi metadatuak"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:90
 #: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Mime mota"
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:92
 #: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
-msgstr ""
+msgstr "Fitxategi mota / OS"
 
-#: admin/themes/default/files/show.php:87
+#: admin/themes/default/files/show.php:99
 msgid "Embedded Metadata"
-msgstr "Metadatos incrustados"
+msgstr "Kapsulatutako metadatuak"
 
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "elementu"
+msgstr[1] "elementu"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
 msgstr[0] "Sorta"
-msgstr[1] "Sortak"
+msgstr[1] "bilduma"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "etiketa"
+msgstr[1] "etiketa"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "plugin"
+msgstr[1] "plugin"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "erabiltzaile"
+msgstr[1] "erabiltzaile"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
-msgstr ""
+msgstr "gaia"
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
@@ -997,37 +1068,53 @@ msgstr "Omekako bertsio bat dago deskargatuko"
 #: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Eguneratu %s-ra"
 
-#: admin/themes/default/item-types/add-existing-element.php:22
-#: admin/themes/default/item-types/add-new-element.php:15
-#: admin/themes/default/item-types/form.php:43
+#: admin/themes/default/item-types/add-existing-element.php:25
+#: admin/themes/default/item-types/add-new-element.php:12
+#: admin/themes/default/item-types/form.php:45
+#: admin/themes/default/items/tag-form.php:22
+#: admin/themes/default/settings/edit-item-type-elements.php:24
+#: admin/themes/default/settings/edit-navigation-link.php:38
+msgid "Undo"
+msgstr "Desegin"
+
+#: admin/themes/default/item-types/add-existing-element.php:25
+#: admin/themes/default/item-types/add-existing-element.php:26
+#: admin/themes/default/item-types/add-new-element.php:12
+#: admin/themes/default/item-types/add-new-element.php:13
+#: admin/themes/default/item-types/form.php:44
+#: admin/themes/default/item-types/form.php:45
 #: admin/themes/default/items/tag-form.php:23
+#: admin/themes/default/settings/edit-item-type-elements.php:24
+#: admin/themes/default/settings/edit-item-type-elements.php:25
+#: admin/themes/default/settings/edit-navigation-link.php:38
+#: admin/themes/default/settings/edit-navigation-link.php:39
 #: application/views/helpers/ElementInput.php:124
 msgid "Remove"
 msgstr "Ezabatu"
 
-#: admin/themes/default/item-types/add-new-element.php:6
+#: admin/themes/default/item-types/add-new-element.php:7
 msgid "Element Name"
 msgstr "Elementuaren izena"
 
-#: admin/themes/default/item-types/add-new-element.php:22
+#: admin/themes/default/item-types/add-new-element.php:26
 msgid "Element Description"
 msgstr "Elementuaren describapena"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "Item-eko mota gehitu"
+msgstr "Gehitu elementu mota"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr ""
+msgstr "Arakatu elementu motak"
 
 #: admin/themes/default/item-types/browse.php:9
 #: admin/themes/default/item-types/browse.php:54
 msgid "Add an Item Type"
-msgstr ""
+msgstr "Gehitu elementu mota"
 
 #: admin/themes/default/item-types/browse.php:16
 #, php-format
@@ -1038,61 +1125,51 @@ msgstr[1] ""
 
 #: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
-msgstr ""
+msgstr "Elementu guztiek dute motaren bat."
 
 #: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
-msgstr "Motako izena"
+msgstr "Idatzi izena"
 
 #: admin/themes/default/item-types/browse.php:30
 msgid "Total Items"
-msgstr "Item osoak"
+msgstr "Elementuak guztira"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr ""
+msgstr "Editatu #%s elementu mota"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr ""
+msgstr "Elementu motari buruzko informazioa"
 
-#: admin/themes/default/item-types/form.php:15
-#: admin/themes/default/users/add.php:7
-#: admin/themes/default/users/change-password.php:15
-#: admin/themes/default/users/edit.php:15
-#: install/views/scripts/index/index.phtml:14
-msgid "required field"
-msgstr ""
-
-#: admin/themes/default/item-types/form.php:25
+#: admin/themes/default/item-types/form.php:24
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
 msgstr "Elementuak"
 
-#: admin/themes/default/item-types/form.php:42
-#: admin/themes/default/items/tag-form.php:22
-#: admin/themes/default/settings/edit-item-type-elements.php:22
-msgid "Undo"
-msgstr "atzera"
-
-#: admin/themes/default/item-types/form.php:80
-#: admin/themes/default/item-types/form.php:87
+#: admin/themes/default/item-types/form.php:83
+#: admin/themes/default/item-types/form.php:91
 msgid "Add Element"
-msgstr "elementu gehitu"
+msgstr "Gehitu elementua"
 
-#: admin/themes/default/item-types/form.php:84
-msgid "Existing"
+#: admin/themes/default/item-types/form.php:86
+msgid "New element added. Total Elements: "
 msgstr ""
 
-#: admin/themes/default/item-types/form.php:85
+#: admin/themes/default/item-types/form.php:88
+msgid "Existing"
+msgstr "Daudenak"
+
+#: admin/themes/default/item-types/form.php:89
 msgid "New"
-msgstr "berria"
+msgstr "Berria"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr ""
+msgstr "#%s elementu mota"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
@@ -1100,18 +1177,18 @@ msgstr "Ez dago elementurik"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr ""
+msgstr "Ez dago duela gutxi gehitutako elementurik."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
 #: admin/themes/default/items/browse.php:154
 #: admin/themes/default/items/browse.php:181
 msgid "Add an Item"
-msgstr "Item bat gehitu"
+msgstr "Gehitu elementu bat"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Item gehitu"
+msgstr "Gehitu elementua"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
@@ -1121,7 +1198,7 @@ msgstr "Item gehitu"
 #: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
-msgstr "Sorta"
+msgstr "Bilduma"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
@@ -1130,22 +1207,22 @@ msgstr ""
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Goiko bilaketa-iragazkiekin bat datozen %d elementuak ezabatuko dira."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "%delementuak ezabatuko dira."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Ezabaketak atzeko planoan prozesatuko dira elementuz elementu."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
 #: admin/themes/default/items/batch-edit.php:45
 msgid "Delete Items"
-msgstr "Item ezabatu"
+msgstr "Ezabatu elementuak"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1154,21 +1231,21 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Elementu batzuk baztertu egin dira, haiek ezabatzeko baimenik ez duzulako."
 
 #: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "Markatutako elementuak ezabatu egingo dira."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Editatu multzoka aurkitutako elementu guztiak"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Aldaketak goiko bilaketa-iragazkiekin bat datozen %delementuei aplikatuko zaizkie."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
@@ -1185,14 +1262,14 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
-msgstr "Publiko"
+msgstr "Publikoa?"
 
 #: admin/themes/default/items/batch-edit-common.php:9
 #: admin/themes/default/items/batch-edit-common.php:23
 #: admin/themes/default/items/batch-edit-common.php:37
 #: admin/themes/default/items/batch-edit-common.php:52
 msgid "Select Below"
-msgstr "Behera aukeratu"
+msgstr "Hautatu behean"
 
 #: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
@@ -1200,36 +1277,36 @@ msgstr "Ez da publiko"
 
 #: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
-msgstr "¿Nabarmena?"
+msgstr "Funtzionala?"
 
 #: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
-msgstr "Ez da nabarmen"
+msgstr "Ez da funtzionala"
 
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Item mota"
+msgstr "Elementu mota"
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
 msgid "Remove?"
-msgstr "¿Ezabatu?"
+msgstr "Ezabatu?"
 
 #: admin/themes/default/items/batch-edit-common.php:63
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr ""
+msgstr "Gehitu etiketak"
 
 #: admin/themes/default/items/batch-edit-common.php:66
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
+msgstr "Markatutako elementu guztiei gehitzeko etiketen zerrenda, %s-ren bidez bereizita."
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr ""
+msgstr "Editatu elementuak multzoka"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
@@ -1278,36 +1355,36 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Arakatu elementuak"
 
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:156
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2460
-#: application/libraries/globals.php:2851
+#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2942
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Bilatu elementuak"
 
 #: admin/themes/default/items/browse.php:25
 #: admin/themes/default/items/browse.php:140
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Hautatu %semaitzak"
 
 #: admin/themes/default/items/browse.php:26
 #: admin/themes/default/items/browse.php:141
 msgid "items selected"
-msgstr ""
+msgstr "Hautatutako elementuak"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Hautatu errenkada guztiak"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Hautatu \"%s\" elementua"
 
 #: admin/themes/default/items/browse.php:119
 msgid "No Tags"
@@ -1337,17 +1414,17 @@ msgstr "Hasi lehen item gehitu"
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kontsultak elementu 1 bilatu du eta ez du emaitzarik eman."
+msgstr[1] "Kontsultak %s elementu bilatu ditu eta ez du emaitzarik eman."
 
 #: admin/themes/default/items/browse.php:186
 msgid "refine your search"
-msgstr ""
+msgstr "hobetu zure bilaketa"
 
 #: admin/themes/default/items/browse.php:186
 #, php-format
 msgid "Would you like to %s?"
-msgstr ""
+msgstr "Nahi al duzu %s?"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1356,50 +1433,51 @@ msgstr "Item editatu #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Egin klik eta arrastatu fitxategiak hobetsitako bistaratze-ordenera."
 
-#: admin/themes/default/items/files-form.php:13
+#: admin/themes/default/items/files-form.php:15
 msgid "Delete "
-msgstr ""
-
-#: admin/themes/default/items/files-form.php:22
-msgid "Add New Files"
-msgstr ""
+msgstr "Ezabatu"
 
 #: admin/themes/default/items/files-form.php:24
+msgid "Add New Files"
+msgstr "Gehitu fitxategi berriak"
+
+#: admin/themes/default/items/files-form.php:26
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "Fitxategiaren gehienezko tamaina %s da."
 
-#: admin/themes/default/items/files-form.php:27
+#: admin/themes/default/items/files-form.php:29
 msgid "Find a File"
-msgstr ""
+msgstr "Bilatu fitxategi bat"
 
+#: admin/themes/default/items/files-form.php:30
 #: admin/themes/default/items/form.php:23
 msgid "Add Another File"
-msgstr ""
+msgstr "Gehitu beste fitxategi bat"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "Aukeratu mota hau"
 
 #: admin/themes/default/items/quick-filters.php:1
 #: admin/themes/default/items/quick-filters.php:2
 msgid "Quick Filter"
-msgstr ""
+msgstr "Iragazki bizkorra"
 
 #: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
-msgstr ""
+msgstr "Ikusi guztiak"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "Private"
-msgstr ""
+msgstr "Pribatua"
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr ""
+msgstr "Bilatu gako-hitzak"
 
 #: admin/themes/default/items/search-form.php:30
 #: admin/themes/default/items/search-form.php:33
@@ -1409,6 +1487,7 @@ msgid "Narrow by Specific Fields"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:30
+#: application/views/helpers/ElementForm.php:91
 #: application/views/scripts/items/search-form.php:25
 #, php-format
 msgid "Number of rows in \"%s\":"
@@ -1534,7 +1613,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:142
 msgid "Search By Collection"
-msgstr ""
+msgstr "Bilatu bildumaren arabera"
 
 #: admin/themes/default/items/search-form.php:164
 #: application/views/scripts/items/search-form.php:156
@@ -1633,7 +1712,7 @@ msgid "Browse Items by Tag"
 msgstr ""
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:107
+#: admin/themes/default/tags/browse.php:103
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
 
@@ -1693,7 +1772,7 @@ msgid "Uninstall"
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:204
+#: application/forms/Install.php:209
 msgid "Install"
 msgstr ""
 
@@ -1733,7 +1812,7 @@ msgid "or"
 msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:19
-#: admin/themes/default/settings/edit-item-type-elements.php:51
+#: admin/themes/default/settings/edit-item-type-elements.php:59
 msgid "Cancel"
 msgstr ""
 
@@ -1795,19 +1874,27 @@ msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
 msgstr ""
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Confirm Delete"
 msgstr ""
 
-#: admin/themes/default/settings/edit-item-type-elements.php:44
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
 msgstr ""
 
-#: admin/themes/default/settings/edit-item-type-elements.php:51
+#: admin/themes/default/settings/edit-item-type-elements.php:59
 msgid "Ok"
+msgstr ""
+
+#: admin/themes/default/settings/edit-navigation-link.php:32
+msgid "Enable"
+msgstr ""
+
+#: admin/themes/default/settings/edit-navigation-link.php:36
+msgid "Show Options"
 msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
@@ -1907,11 +1994,11 @@ msgstr ""
 msgid "Reset results"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:69
+#: admin/themes/default/tags/browse.php:66
 msgid "Count"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:70
+#: admin/themes/default/tags/browse.php:67
 msgid "Date created"
 msgstr ""
 
@@ -2014,7 +2101,7 @@ msgstr ""
 msgid "Create a Password"
 msgstr ""
 
-#: admin/themes/default/users/activate.php:23 application/forms/Install.php:81
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:86
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -2024,7 +2111,7 @@ msgstr ""
 msgid "Add New User"
 msgstr ""
 
-#: admin/themes/default/users/add.php:13
+#: admin/themes/default/users/add.php:12
 msgid "Add User"
 msgstr ""
 
@@ -2082,7 +2169,7 @@ msgstr ""
 #: admin/themes/default/users/browse.php:16
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:51
-#: admin/themes/default/users/show.php:18 application/forms/Install.php:38
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:43
 #: application/forms/Login.php:29 application/forms/User.php:29
 msgid "Username"
 msgstr ""
@@ -2090,7 +2177,7 @@ msgstr ""
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/browse.php:53
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:95
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:100
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
@@ -2101,7 +2188,6 @@ msgid "Add a User"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:37
-#: application/views/scripts/search/search-form.php:10
 msgid "Options"
 msgstr ""
 
@@ -2123,11 +2209,11 @@ msgstr ""
 msgid "inactive"
 msgstr ""
 
-#: admin/themes/default/users/change-password.php:20
+#: admin/themes/default/users/change-password.php:19
 msgid "Save Password"
 msgstr ""
 
-#: admin/themes/default/users/edit.php:23
+#: admin/themes/default/users/edit.php:22
 msgid "Resend Activation Email"
 msgstr ""
 
@@ -2206,32 +2292,32 @@ msgstr ""
 #: application/controllers/CollectionsController.php:59
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr ""
+msgstr " \"%s\"  bilduma behar bezala gehitu da!"
 
 #: application/controllers/CollectionsController.php:61
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr " #%s  bilduma behar bezala gehitu da!"
 
 #: application/controllers/CollectionsController.php:69
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr ""
+msgstr " \"%s\" bilduma behar bezala aldatu da!"
 
 #: application/controllers/CollectionsController.php:71
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "#%s bilduma behar bezala aldatu da!"
 
 #: application/controllers/CollectionsController.php:79
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "\"%s\" bilduma behar bezala ezabatu da!"
 
 #: application/controllers/CollectionsController.php:81
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "#%s bilduma behar bezala ezabatu da!"
 
 #: application/controllers/CollectionsController.php:89
 #, php-format
@@ -2239,7 +2325,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Honek \"%s\" bilduma eta hari lotutako metadatuak ezabatuko ditu. Horrek ez du bilduma honetako elementurik ezabatuko, baina elementu bakoitzean bilduma honen erreferentzia ezabatuko da."
 
 #: application/controllers/CollectionsController.php:93
 #, php-format
@@ -2247,7 +2333,7 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Honek #%s bilduma eta hari lotutako metadatuak ezabatuko ditu. Horrek ez du bilduma honetako elementurik ezabatuko, baina elementu bakoitzean bilduma honen erreferentzia ezabatuko da."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -2302,7 +2388,7 @@ msgstr ""
 msgid "The item type \"%s\" was successfully updated."
 msgstr ""
 
-#: application/controllers/ItemTypesController.php:150
+#: application/controllers/ItemTypesController.php:152
 #, php-format
 msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
@@ -2310,7 +2396,7 @@ msgid ""
 "lose all metadata that is specific to the item type."
 msgstr ""
 
-#: application/controllers/ItemTypesController.php:158
+#: application/controllers/ItemTypesController.php:160
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
@@ -2583,15 +2669,23 @@ msgstr ""
 msgid "The theme settings were successfully saved!"
 msgstr ""
 
-#: application/controllers/UpgradeController.php:53
+#: application/controllers/UpgradeController.php:51
 msgid "SQL error in migration: "
 msgstr ""
 
-#: application/controllers/UpgradeController.php:66
+#: application/controllers/UpgradeController.php:65
 #, php-format
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
+msgstr ""
+
+#: application/controllers/UpgradeController.php:72
+#, php-format
+msgid ""
+"Omeka requires MySQL version %1$s or higher, but this server is running "
+"MySQL version %2$s. Please update the installed version of MySQL and try "
+"again."
 msgstr ""
 
 #: application/controllers/UsersController.php:74
@@ -2684,7 +2778,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s sistematik ezabatuko da. Erabiltzaile honek sortutako elementuak, bildumak eta etiketak sisteman jarraituko dute, baina ez dira erabiltzaile honekin lotuko."
 
 #: application/controllers/UsersController.php:388
 msgid "Welcome!"
@@ -2717,7 +2811,7 @@ msgid ""
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:27
-#: application/forms/Install.php:146
+#: application/forms/Install.php:151
 msgid "Fullsize Image Size"
 msgstr ""
 
@@ -2726,7 +2820,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:34
-#: application/forms/Install.php:155
+#: application/forms/Install.php:160
 msgid "Thumbnail Size"
 msgstr ""
 
@@ -2735,7 +2829,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:41
-#: application/forms/Install.php:164
+#: application/forms/Install.php:169
 msgid "Square Thumbnail Size"
 msgstr ""
 
@@ -2763,9 +2857,9 @@ msgid ""
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:62
-#: application/forms/Install.php:191
+#: application/forms/Install.php:196
 msgid "Show Empty Elements"
-msgstr ""
+msgstr "Erakutsi elementu hutsak"
 
 #: application/forms/AppearanceSettings.php:63
 msgid "Include empty elements in show pages."
@@ -2788,30 +2882,41 @@ msgid ""
 "Have item files link to the file metadata instead of the file directly."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:85
+#: application/forms/AppearanceSettings.php:81
+msgid "File Alt Text Element"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:82
+msgid ""
+"Default element to use in describing visual files to screen reader users via"
+" the image tag's alt attribute. This can be overridden using the file form's"
+" \"Alt Text\" field."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:95
 msgid "Admin Theme"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:99
+#: application/forms/AppearanceSettings.php:109
 msgid "Derivative Size Constraints"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:107
+#: application/forms/AppearanceSettings.php:117
 msgid "Display Settings"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:115
+#: application/forms/AppearanceSettings.php:125
 msgid "Admin Themes"
 msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr ""
+msgstr "Uneko pasahitza"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Pasahitzak 6 karaktere izan behar ditu gutxienez."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
@@ -2819,11 +2924,11 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr ""
+msgstr "Pasahitz berria"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Pasahitz berria sartu behar da."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
@@ -2838,27 +2943,27 @@ msgstr ""
 msgid "Repeat New Password"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:102
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:107
 msgid "Site Title"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:108
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:113
 msgid "Site Description"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:113
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:118
 msgid "Administrator Email"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:120
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:125
 msgid "Site Copyright Information"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:125
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:130
 msgid "Site Author Information"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:130
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:135
 msgid "Tag Delimiter"
 msgstr ""
 
@@ -2868,7 +2973,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:199
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:204
 msgid "ImageMagick Directory Path"
 msgstr ""
 
@@ -2876,72 +2981,72 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
-#: application/forms/Install.php:39
+#: application/forms/Install.php:44
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr ""
 
-#: application/forms/Install.php:47 application/forms/User.php:46
-#: application/models/User.php:188
+#: application/forms/Install.php:52 application/forms/User.php:46
+#: application/models/User.php:191
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
 msgstr ""
 
-#: application/forms/Install.php:57 application/forms/Login.php:39
+#: application/forms/Install.php:62 application/forms/Login.php:39
 msgid "Password"
 msgstr ""
 
-#: application/forms/Install.php:58
+#: application/forms/Install.php:63
 msgid "must be at least 6 characters"
 msgstr ""
 
-#: application/forms/Install.php:82
+#: application/forms/Install.php:87
 msgid "Confirm your password."
 msgstr ""
 
-#: application/forms/Install.php:131
+#: application/forms/Install.php:136
 msgid "Separate tags using this character or string."
 msgstr ""
 
-#: application/forms/Install.php:147
+#: application/forms/Install.php:152
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr ""
 
-#: application/forms/Install.php:156
+#: application/forms/Install.php:161
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr ""
 
-#: application/forms/Install.php:165
+#: application/forms/Install.php:170
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr ""
 
-#: application/forms/Install.php:173
+#: application/forms/Install.php:178
 msgid "Items Per Page (admin)"
 msgstr ""
 
-#: application/forms/Install.php:174
+#: application/forms/Install.php:179
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr ""
 
-#: application/forms/Install.php:182
+#: application/forms/Install.php:187
 msgid "Items Per Page (public)"
 msgstr ""
 
-#: application/forms/Install.php:183
+#: application/forms/Install.php:188
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr ""
 
-#: application/forms/Install.php:193
+#: application/forms/Install.php:198
 msgid "Check box to show metadata elements with no text."
 msgstr ""
 
-#: application/forms/Install.php:211
+#: application/forms/Install.php:216
 msgid "Default Superuser Account"
 msgstr ""
 
-#: application/forms/Install.php:221
+#: application/forms/Install.php:226
 msgid "Site Settings"
 msgstr ""
 
@@ -2970,32 +3075,32 @@ msgstr ""
 msgid "Remember Me?"
 msgstr ""
 
-#: application/forms/Navigation.php:157
+#: application/forms/Navigation.php:111
 msgid "[Default]"
 msgstr ""
 
-#: application/forms/Navigation.php:163
+#: application/forms/Navigation.php:117
 msgid "Select a Homepage"
 msgstr ""
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:198
 msgid "Cannot find parent navigation page."
 msgstr ""
 
-#: application/forms/Navigation.php:324
+#: application/forms/Navigation.php:261
 msgid "All navigation links must have URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:337
+#: application/forms/Navigation.php:274
 msgid "All navigation links must have different URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:343
+#: application/forms/Navigation.php:280
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr ""
 
-#: application/forms/Navigation.php:376
+#: application/forms/Navigation.php:313
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr ""
 
@@ -3137,7 +3242,7 @@ msgstr ""
 msgid "Name as it should be displayed on the site"
 msgstr ""
 
-#: application/forms/User.php:88 application/models/User.php:168
+#: application/forms/User.php:88 application/models/User.php:171
 msgid "Real Name is required."
 msgstr ""
 
@@ -3244,79 +3349,83 @@ msgstr ""
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1275
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1286
+#: application/libraries/globals.php:1307
 #, php-format
 msgid "Could not find file %s!"
 msgstr ""
 
-#: application/libraries/globals.php:1312
+#: application/libraries/globals.php:1323
 msgid "No featured collections are available."
-msgstr ""
+msgstr "Ez dago bilduma funtzionalik eskuragarri."
 
-#: application/libraries/globals.php:1618
+#: application/libraries/globals.php:1629
 msgid "Select Below "
 msgstr ""
 
-#: application/libraries/globals.php:1661
+#: application/libraries/globals.php:1672
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1662
+#: application/libraries/globals.php:1673
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1981
+#: application/libraries/globals.php:1992
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:1991
+#: application/libraries/globals.php:2002
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:1995
+#: application/libraries/globals.php:2006
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2355
+#: application/libraries/globals.php:2367
 msgid "No recent items available."
 msgstr ""
 
-#: application/libraries/globals.php:2381
+#: application/libraries/globals.php:2467
 msgid "No featured items are available."
 msgstr ""
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2528
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2504
+#: application/libraries/globals.php:2590
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
-msgstr ""
+msgstr "Bildumarik ez"
 
-#: application/libraries/globals.php:2623
+#: application/libraries/globals.php:2709
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2640
+#: application/libraries/globals.php:2726
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2660
+#: application/libraries/globals.php:2746
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2841
+#: application/libraries/globals.php:2887
+msgid "Pagination"
+msgstr ""
+
+#: application/libraries/globals.php:2932
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2846
+#: application/libraries/globals.php:2937
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:3126
+#: application/libraries/globals.php:3217
 msgid "No tags are available."
 msgstr ""
 
@@ -3326,7 +3435,7 @@ msgstr ""
 
 #: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Ezin da bilduma gorde gabeko erabiltzaile batekin lotu."
 
 #: application/models/Element.php:174
 msgid "The element name must not be empty."
@@ -3366,11 +3475,11 @@ msgstr ""
 msgid "Invalid element ID."
 msgstr ""
 
-#: application/models/File.php:237
+#: application/models/File.php:268
 msgid "Cannot get the local path for a stored file."
 msgstr ""
 
-#: application/models/File.php:456
+#: application/models/File.php:487
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
@@ -3418,7 +3527,7 @@ msgstr ""
 
 #: application/models/Item.php:543
 msgid "Invalid collection."
-msgstr ""
+msgstr "Bilduma baliogabea"
 
 #: application/models/ItemType.php:102
 #, php-format
@@ -3572,24 +3681,24 @@ msgstr ""
 msgid "That name is already taken for this tag."
 msgstr ""
 
-#: application/models/User.php:109
+#: application/models/User.php:112
 msgid "User may not change permissions to super-user"
 msgstr ""
 
-#: application/models/User.php:112
+#: application/models/User.php:115
 msgid "User may not change roles."
 msgstr ""
 
-#: application/models/User.php:181 application/models/User.php:229
+#: application/models/User.php:184 application/models/User.php:247
 msgid "The user must be assigned a role."
 msgstr ""
 
-#: application/models/User.php:186
+#: application/models/User.php:189
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
 msgstr ""
 
-#: application/models/User.php:190
+#: application/models/User.php:193
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
 msgstr ""
@@ -3618,12 +3727,13 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:857
 #: application/tests/suite/Omeka/NavigationTest.php:954
 msgid "Edit Collections"
-msgstr ""
+msgstr "Editatu bildumak"
 
 #: application/tests/suite/Omeka/NavigationTest.php:765
 #: application/tests/suite/Omeka/NavigationTest.php:820
 #: application/tests/suite/Omeka/NavigationTest.php:863
 #: application/tests/suite/Omeka/NavigationTest.php:955
+#: application/views/scripts/common/admin-bar.php:1
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:21
 msgid "Omeka"
 msgstr ""
@@ -3705,7 +3815,7 @@ msgstr ""
 msgid "[no text]"
 msgstr ""
 
-#: application/views/helpers/ElementForm.php:273
+#: application/views/helpers/ElementForm.php:276
 msgid "Add Input"
 msgstr ""
 
@@ -3756,7 +3866,7 @@ msgstr ""
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Bildumaren elementuak"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
@@ -3767,14 +3877,10 @@ msgstr[1] ""
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "Une honetan ez dago bilduma honetan elementurik."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
-
-#: application/views/scripts/common/pagination_control.php:5
-msgid "Pagination"
 msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:11
@@ -3844,7 +3950,7 @@ msgstr ""
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr ""
+msgstr "Bilduma funtzionala"
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
@@ -3873,6 +3979,10 @@ msgstr ""
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
+msgstr ""
+
+#: application/views/scripts/search/search-form.php:10
+msgid "Search options"
 msgstr ""
 
 #: application/views/scripts/search/search-form.php:15
