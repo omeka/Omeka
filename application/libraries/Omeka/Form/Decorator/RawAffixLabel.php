@@ -115,7 +115,7 @@ class Omeka_Form_Decorator_RawAffixLabel extends Zend_Form_Decorator_Label
             // non-escaped required markup.
             $formLabelOptions['escape'] = false;
 
-            if ($element instanceof Zend_Form_Element_Radio || $element instanceof Zend_Form_Element_Checkbox) {
+            if ($element instanceof Zend_Form_Element_Radio || $element instanceof Zend_Form_Element_MultiCheckbox) {
                 $formLabelOptions['disableFor'] = true;
             }
 
