@@ -696,11 +696,11 @@ class Omeka_Db_Table
      */
     private function _getSortParams($params)
     {
-        if (array_key_exists(self::SORT_PARAM, $params)) {
+        if (isset($params[self::SORT_PARAM])) {
             $sortField = trim($params[self::SORT_PARAM]);
             $dir = 'ASC';
             // Default to ascending sort with no dir param.
-            if (array_key_exists(self::SORT_DIR_PARAM, $params)) {
+            if (isset($params[self::SORT_DIR_PARAM])) {
                 $sortDir = trim($params[self::SORT_DIR_PARAM]);
                 if ($sortDir === 'a') {
                     $dir = 'ASC';
