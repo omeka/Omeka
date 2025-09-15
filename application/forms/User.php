@@ -127,7 +127,7 @@ class Omeka_Form_User extends Omeka_Form
         if ($this->_hasRoleElement) {
             $this->addElement('select', 'role', [
                 'label' => __('Role'),
-                'description' => __("Roles describe the permissions a user has. See <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> for details."),
+                'description' => __("Roles describe the permissions a user has. See <a href='https://omeka.org/classic/docs/Admin/Users/' target='_blank'>documentation</a> for details."),
                 'multiOptions' => get_user_roles(),
                 'required' => true
             ]);
