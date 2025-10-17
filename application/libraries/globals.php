@@ -1167,9 +1167,9 @@ function head_js($includeDefaults = true)
                 ->prependFile(src('vendor/jquery', $dir, 'js'));
         } else {
             $headScript->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
-                ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+                ->prependFile('https://code.jquery.com/ui/1.14.1/jquery-ui.min.js')
+                ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . '); window.jQuery.uiBackCompat = true')
+                ->prependFile('https://code.jquery.com/jquery-3.7.1.min.js');
         }
     }
     return $headScript;
