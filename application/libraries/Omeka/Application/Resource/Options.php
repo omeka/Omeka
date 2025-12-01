@@ -62,7 +62,7 @@ class Omeka_Application_Resource_Options extends Zend_Application_Resource_Resou
      */
     public function setInstallerRedirect($flag)
     {
-        $this->_installerRedirect = (boolean) $flag;
+        $this->_installerRedirect = (bool) $flag;
     }
 
     /**

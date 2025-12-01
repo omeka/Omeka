@@ -360,7 +360,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?',
                                     [$elementId, $this->id],
                                     true);
-        return (boolean) $iteJoin;
+        return (bool) $iteJoin;
     }
 
     /**

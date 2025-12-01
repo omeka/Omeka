@@ -81,7 +81,7 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
             return false;
         }
 
-        return (boolean) $this->_auth->getStorage()->read();
+        return (bool) $this->_auth->getStorage()->read();
     }
 
     private function _isSslRequest($request)

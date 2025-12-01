@@ -216,9 +216,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
          */
         $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
 
-        $delete = (boolean) $this->_getParam('submit-batch-delete');
+        $delete = (bool) $this->_getParam('submit-batch-delete');
 
-        $batchAll = (boolean) $this->_getParam('batch-all');
+        $batchAll = (bool) $this->_getParam('batch-all');
         // Process all searched items.
         if ($batchAll) {
             $params = json_decode($this->_getParam('params'), true) ?: [];

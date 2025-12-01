@@ -151,12 +151,12 @@ class Omeka_Form_User extends Omeka_Form
 
     public function setHasRoleElement($flag)
     {
-        $this->_hasRoleElement = (boolean) $flag;
+        $this->_hasRoleElement = (bool) $flag;
     }
 
     public function setHasActiveElement($flag)
     {
-        $this->_hasActiveElement = (boolean) $flag;
+        $this->_hasActiveElement = (bool) $flag;
     }
 
     public function setUser(User $user)

@@ -74,7 +74,7 @@ class Omeka_Test_Helper_Db
     public function tableExists($tableName)
     {
         $result = $this->_dbAdapter->fetchOne("SHOW TABLES LIKE '$tableName'");
-        return (boolean) $result;
+        return (bool) $result;
     }
 
     /**

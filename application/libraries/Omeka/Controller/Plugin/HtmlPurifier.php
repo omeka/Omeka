@@ -204,7 +204,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         foreach ($post['Elements'] as $elementId => $texts) {
             foreach ($texts as $index => $values) {
                 if (array_key_exists('text', $values)) {
-                    if (array_key_exists('html', $values) && (boolean) $values['html']) {
+                    if (array_key_exists('html', $values) && (bool) $values['html']) {
                         $post['Elements'][$elementId][$index]['text'] = $htmlPurifierFilter->filter($values['text']);
                     }
                 }

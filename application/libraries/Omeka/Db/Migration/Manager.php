@@ -273,7 +273,7 @@ class Omeka_Db_Migration_Manager
         // Now remove from this list any migrations that are too new.
         foreach ($pending as $time => $filename) {
             // Too big to use int.
-            if ((double) $time > (double) $stopAt) {
+            if ((float) $time > (float) $stopAt) {
                 unset($pending[$time]);
             }
             // Not exactly sure why, but sometimes empty migrations get into this list.

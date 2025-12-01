@@ -36,7 +36,7 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin_AbstractMixin
     public function isPublic()
     {
         $this->setPublic($this->_record->public); // normalize public
-        return (boolean) $this->_record->public;
+        return (bool) $this->_record->public;
     }
 
     /**
@@ -58,7 +58,7 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin_AbstractMixin
     public function isFeatured()
     {
         $this->setFeatured($this->_record->featured); // normalize featured
-        return (boolean) $this->_record->featured;
+        return (bool) $this->_record->featured;
     }
 
     /**

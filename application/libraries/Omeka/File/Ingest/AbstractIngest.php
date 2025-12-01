@@ -202,7 +202,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      */
     private function _ignoreIngestErrors()
     {
-        return (boolean) $this->_options['ignore_invalid_files'];
+        return (bool) $this->_options['ignore_invalid_files'];
     }
 
     /**

@@ -94,7 +94,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      */
     public function setInstall($flag)
     {
-        $this->_runInstaller = (boolean) $flag;
+        $this->_runInstaller = (bool) $flag;
     }
 
     public function getDbAdapter()

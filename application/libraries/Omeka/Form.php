@@ -157,7 +157,7 @@ class Omeka_Form extends Zend_Form
      */
     public function setAutoApplyOmekaStyles($flag)
     {
-        $this->_autoApplyOmekaStyles = (boolean) $flag;
+        $this->_autoApplyOmekaStyles = (bool) $flag;
     }
 
     /**

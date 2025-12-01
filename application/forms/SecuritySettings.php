@@ -63,7 +63,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         );
 
         $this->addElement('checkbox', 'html_purifier_is_enabled', [
-            'checked' => (boolean) get_option('html_purifier_is_enabled'),
+            'checked' => (bool) get_option('html_purifier_is_enabled'),
             'description' => __('Check this field if you would like to filter HTML elements or attributes from form input.'),
             'label' => __('Enable HTML Filtering')
         ]);

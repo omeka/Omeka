@@ -103,6 +103,6 @@ class ElementText extends Omeka_Record_AbstractRecord
      */
     public function isHtml()
     {
-        return (boolean) $this->html;
+        return (bool) $this->html;
     }
 }

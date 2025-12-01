@@ -526,7 +526,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                 }
 
                 $isHtml = isset($textAttributes['html'])
-                        ? (int) (boolean) $textAttributes['html']
+                        ? (int) (bool) $textAttributes['html']
                         : 0;
                 $this->addTextForElement($element, $elementText, $isHtml);
             }

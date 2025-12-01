@@ -188,11 +188,11 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     {
         $isHtml = false;
         if ($this->_isPosted()) {
-            $isHtml = (boolean) @$_POST['Elements'][$this->_element['id']][$index]['html'];
+            $isHtml = (bool) @$_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
             $elementText = $this->getElementTexts($index);
             if (isset($elementText)) {
-                $isHtml = (boolean) $elementText->html;
+                $isHtml = (bool) $elementText->html;
             }
         }
         return $isHtml;

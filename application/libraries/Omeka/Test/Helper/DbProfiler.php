@@ -70,7 +70,7 @@ class Omeka_Test_Helper_DbProfiler
     public function assertTotalNumQueries($queryCount, $msg = null)
     {
         if (!$msg) {
-            $msg = "Failed asserting that " . (integer) $queryCount . " SQL queries were made.";
+            $msg = "Failed asserting that " . (int) $queryCount . " SQL queries were made.";
         }
         $this->_test->assertEquals($queryCount, $this->_profiler->getTotalNumQueries(),
             $msg);
