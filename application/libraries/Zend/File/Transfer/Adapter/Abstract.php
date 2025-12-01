@@ -575,7 +575,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                         case 'ignoreNoFile' :
                         case 'useByteString' :
                         case 'detectInfos' :
-                            $this->_files[$key]['options'][$name] = (boolean) $value;
+                            $this->_files[$key]['options'][$name] = (bool) $value;
                             break;
 
                         default:
