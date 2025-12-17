@@ -18,13 +18,19 @@ if (!Omeka) {
             menubar: false,
             statusbar: false,
             toolbar_items_size: "small",
-            toolbar: "bold italic underline | alignleft aligncenter alignright | bullist numlist | link formatselect code",
-            plugins: "lists,link,code,paste,media,autoresize",
+            toolbar: [
+                { name: 'formatting', items: [ 'bold', 'italic', 'underline' ] },
+                { name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright' ] },
+                { name: 'lists', items: [ 'bullist', 'numlist' ] },
+                { name: 'advanced', items: [ 'link', 'formatselect', 'code' ] },
+            ],
+            plugins: "lists,link,code,paste,media,autoresize,help",
             autoresize_max_height: 500,
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
             verify_html: false,
             add_unload_trigger: false,
             cache_suffix: '?v=' + tinymce.majorVersion + '.' + tinymce.minorVersion,
+            help_accessibility: true,
         };
 
         tinymce.init($.extend(initParams, params));
