@@ -271,11 +271,23 @@ hr {
 }
 
 .section-title {
-  width: 50%;
+  width: 70%;
+  padding-right: 20px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .section-title {
+    width: 60%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .section-title {
+    width: 50%;
+  }
 }
 @media (max-width: 767px) {
   .section-title {
     width: 100%;
+    padding-right: 0;
     margin-top: 80px;
   }
 }

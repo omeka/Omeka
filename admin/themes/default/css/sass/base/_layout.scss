@@ -126,10 +126,20 @@ hr {
 }
 
 .section-title { 
-	width: 50%; 
-	
+	width: 70%;
+	padding-right: $spacing-l;
+
+    @include screen-md {
+	    width: 60%;
+	}
+
+	@include screen-sm {
+		width: 50%;
+	}
+
 	@include screen-xs {
-		width: 100%;   
+		width: 100%;
+		padding-right: 0;
 		margin-top: 80px;
 	}
 }
