@@ -45,9 +45,16 @@ function set_option($name, $value)
     $sql = "REPLACE INTO {$db->Option} (name, value) VALUES (?, ?)";
     $db->query($sql, [$name, $value]);
 
-    // Update the options cache.
     $bootstrap = Zend_Registry::get('bootstrap');
     $options = $bootstrap->getResource('Options');
+
+    if (!isset($options[$name])) {
+        fire_plugin_hook('insert_option', ['name' => $name, 'value' => $value]);
+    } elseif ($options[$name] !== $value) {
+        fire_plugin_hook('update_option', ['name' => $name, 'value' => $value]);
+    }
+
+    // Update the options cache.
     $options[$name] = $value;
     $bootstrap->getContainer()->options = $options;
 }
@@ -71,6 +78,8 @@ function delete_option($name)
         unset($options[$name]);
     }
     $bootstrap->getContainer()->options = $options;
+
+    fire_plugin_hook('delete_option', ['name' => $name]);
 }
 
 /**
