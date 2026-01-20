@@ -48,7 +48,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 1;
         $plugin->save();
         $this->_broker->callHook('activate', [], $plugin);
-        fire_plugin_hook('after_activate_plugin', ['plugin' => $plugin]);
+        fire_plugin_hook('activate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -61,7 +61,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 0;
         $plugin->save();
         $this->_broker->callHook('deactivate', [], $plugin);
-        fire_plugin_hook('after_deactivate_plugin', ['plugin' => $plugin]);
+        fire_plugin_hook('deactivate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -79,12 +79,13 @@ class Omeka_Plugin_Installer
         }
 
         $oldVersion = $plugin->getDbVersion();
+        $newVersion = $plugin->getIniVersion();
 
         // activate the plugin so that it can be loaded.
         $plugin->setActive(true);
         // update version of the plugin stored in the database.
         // NOTE: This is required for the loader to work.
-        $plugin->setDbVersion($plugin->getIniVersion());
+        $plugin->setDbVersion($newVersion);
 
         // load the plugin files.
         $this->_loader->load($plugin, true);
@@ -92,16 +93,18 @@ class Omeka_Plugin_Installer
         // run the upgrade hook for the plugin.
         $this->_broker->callHook(
             'upgrade',
-            ['old_version' => $oldVersion,
-                  'new_version' => $plugin->getIniVersion()],
+            [
+                'old_version' => $oldVersion,
+                'new_version' => $newVersion,
+            ],
             $plugin
         );
 
         $plugin->save();
-        fire_plugin_hook('after_upgrade_plugin', [
+        fire_plugin_hook('upgrade_plugin', [
             'plugin' => $plugin,
             'old_version' => $oldVersion,
-            'new_version' => $plugin->getIniVersion(),
+            'new_version' => $newVersion,
         ]);
     }
 
@@ -131,7 +134,7 @@ class Omeka_Plugin_Installer
 
             //Now run the installer for the plugin
             $this->_broker->callHook('install', ['plugin_id' => $plugin->id], $plugin);
-            fire_plugin_hook('after_install_plugin', ['plugin' => $plugin]);
+            fire_plugin_hook('install_plugin', ['plugin' => $plugin]);
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();
@@ -159,6 +162,6 @@ class Omeka_Plugin_Installer
 
         $this->_broker->callHook('uninstall', [], $plugin);
         $plugin->delete();
-        fire_plugin_hook('after_uninstall_plugin', ['plugin' => $plugin]);
+        fire_plugin_hook('uninstall_plugin', ['plugin' => $plugin]);
     }
 }
