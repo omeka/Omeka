@@ -1,14 +1,14 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Changes the state of any given plugin (installed/uninstalled/activated/deactivated)
- * 
+ *
  * @package Omeka\Plugin\Installer
  */
 class Omeka_Plugin_Installer
@@ -48,6 +48,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 1;
         $plugin->save();
         $this->_broker->callHook('activate', [], $plugin);
+        fire_plugin_hook('after_activate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -60,6 +61,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 0;
         $plugin->save();
         $this->_broker->callHook('deactivate', [], $plugin);
+        fire_plugin_hook('after_deactivate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -96,6 +98,11 @@ class Omeka_Plugin_Installer
         );
 
         $plugin->save();
+        fire_plugin_hook('after_upgrade_plugin', [
+            'plugin' => $plugin,
+            'old_version' => $oldVersion,
+            'new_version' => $plugin->getIniVersion(),
+        ]);
     }
 
     /**
@@ -124,6 +131,7 @@ class Omeka_Plugin_Installer
 
             //Now run the installer for the plugin
             $this->_broker->callHook('install', ['plugin_id' => $plugin->id], $plugin);
+            fire_plugin_hook('after_install_plugin', ['plugin' => $plugin]);
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();
@@ -132,11 +140,11 @@ class Omeka_Plugin_Installer
     }
 
     /**
-     * Uninstall a plugin.  
+     * Uninstall a plugin.
      *
      * This will run the 'uninstall' hook for the given plugin, and then it
      * will remove the entry in the DB corresponding to the plugin.
-     * 
+     *
      * @param Plugin $plugin Plugin to uninstall.
      * @throws Omeka_Plugin_Loader_Exception
      */
@@ -151,5 +159,6 @@ class Omeka_Plugin_Installer
 
         $this->_broker->callHook('uninstall', [], $plugin);
         $plugin->delete();
+        fire_plugin_hook('after_uninstall_plugin', ['plugin' => $plugin]);
     }
 }
