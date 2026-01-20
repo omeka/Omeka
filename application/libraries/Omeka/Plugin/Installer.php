@@ -1,14 +1,14 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Changes the state of any given plugin (installed/uninstalled/activated/deactivated)
- * 
+ *
  * @package Omeka\Plugin\Installer
  */
 class Omeka_Plugin_Installer
@@ -48,6 +48,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 1;
         $plugin->save();
         $this->_broker->callHook('activate', [], $plugin);
+        fire_plugin_hook('activate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -60,6 +61,7 @@ class Omeka_Plugin_Installer
         $plugin->active = 0;
         $plugin->save();
         $this->_broker->callHook('deactivate', [], $plugin);
+        fire_plugin_hook('deactivate_plugin', ['plugin' => $plugin]);
     }
 
     /**
@@ -77,12 +79,13 @@ class Omeka_Plugin_Installer
         }
 
         $oldVersion = $plugin->getDbVersion();
+        $newVersion = $plugin->getIniVersion();
 
         // activate the plugin so that it can be loaded.
         $plugin->setActive(true);
         // update version of the plugin stored in the database.
         // NOTE: This is required for the loader to work.
-        $plugin->setDbVersion($plugin->getIniVersion());
+        $plugin->setDbVersion($newVersion);
 
         // load the plugin files.
         $this->_loader->load($plugin, true);
@@ -90,12 +93,19 @@ class Omeka_Plugin_Installer
         // run the upgrade hook for the plugin.
         $this->_broker->callHook(
             'upgrade',
-            ['old_version' => $oldVersion,
-                  'new_version' => $plugin->getIniVersion()],
+            [
+                'old_version' => $oldVersion,
+                'new_version' => $newVersion,
+            ],
             $plugin
         );
 
         $plugin->save();
+        fire_plugin_hook('upgrade_plugin', [
+            'plugin' => $plugin,
+            'old_version' => $oldVersion,
+            'new_version' => $newVersion,
+        ]);
     }
 
     /**
@@ -124,6 +134,7 @@ class Omeka_Plugin_Installer
 
             //Now run the installer for the plugin
             $this->_broker->callHook('install', ['plugin_id' => $plugin->id], $plugin);
+            fire_plugin_hook('install_plugin', ['plugin' => $plugin]);
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();
@@ -132,11 +143,11 @@ class Omeka_Plugin_Installer
     }
 
     /**
-     * Uninstall a plugin.  
+     * Uninstall a plugin.
      *
      * This will run the 'uninstall' hook for the given plugin, and then it
      * will remove the entry in the DB corresponding to the plugin.
-     * 
+     *
      * @param Plugin $plugin Plugin to uninstall.
      * @throws Omeka_Plugin_Loader_Exception
      */
@@ -151,5 +162,6 @@ class Omeka_Plugin_Installer
 
         $this->_broker->callHook('uninstall', [], $plugin);
         $plugin->delete();
+        fire_plugin_hook('uninstall_plugin', ['plugin' => $plugin]);
     }
 }
