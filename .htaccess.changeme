@@ -19,6 +19,9 @@
 
 RewriteEngine on
 
+# Forbid access to all dot files, except well-known.
+RewriteRule (?:^|/)\.(?!well-known(?:/.*)?$) - [F,NC]
+
 # If you know mod_rewrite is enabled, but you are still getting mod_rewrite
 # errors, uncomment the line below and replace "/" with your base directory.
 #
