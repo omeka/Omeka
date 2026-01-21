@@ -16,6 +16,7 @@ class Table_File extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         $boolean = new Omeka_Filter_Boolean;
+        $genericParams = array();
 
         foreach ($params as $paramName => $paramValue) {
             if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
@@ -24,8 +25,7 @@ class Table_File extends Omeka_Db_Table
 
             switch ($paramName) {
                 case 'item':
-                case 'item_id':
-                    $select->where('files.item_id = ?', $paramValue);
+                    $genericParams['item_id'] = $paramValue;
                     break;
 
                 case 'order':
@@ -36,20 +36,12 @@ class Table_File extends Omeka_Db_Table
                     }
                     break;
 
-                case 'original_filename':
-                    $select->where('files.original_filename = ?', $paramValue);
-                    break;
-
                 case 'size_greater_then':
                     $select->where('files.size > ?', $paramValue);
                     break;
 
                 case 'has_derivative_image':
                     $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
-                    break;
-
-                case 'mime_type':
-                    $select->where('files.mime_type = ?', $paramValue);
                     break;
 
                 case 'added_since':
@@ -59,7 +51,14 @@ class Table_File extends Omeka_Db_Table
                 case 'modified_since':
                     $this->filterBySince($select, $paramValue, 'modified');
                     break;
+
+                default:
+                    $genericParams[$paramName] = $paramValue;
             }
+        }
+
+        if (!empty($genericParams)) {
+            parent::applySearchFilters($select, $genericParams);
         }
     }
 
