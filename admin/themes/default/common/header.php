@@ -33,9 +33,9 @@
 </head>
 
 <?php echo body_tag(['id' => @$bodyid, 'class' => @$bodyclass]); ?>
-<a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 
 <header role="banner">
+    <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('admin_header_top', ['view'=>$this]); ?>
     <div id="site-title" class="two columns">
         <?php echo link_to_home_page(option('site_title'), ['target' => '_blank']); ?>
