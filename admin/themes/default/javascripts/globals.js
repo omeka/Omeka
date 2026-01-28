@@ -150,6 +150,10 @@ if (!Omeka) {
         });
     };
 
+    Omeka.tooltips = function () {
+        Array.from(document.querySelectorAll('.tooltip-container')).forEach(element => new Tooltip(element));
+    };
+
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
     };
@@ -287,4 +291,5 @@ if (!Omeka) {
             return false;
         });
     }
+
 })(jQuery);

@@ -7,9 +7,12 @@
         ]); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
-        <span class="icon" aria-hidden="true"></span>
-    </button>
+    <div class="tooltip-container" data-tooltip-position="top">
+        <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" aria-labelledby="advanced-search-tooltip">
+            <span class="icon" aria-hidden="true"></span>
+        </button>
+        <span id="advanced-search-tooltip" class="hidden"><?php echo __('Search options'); ?></span>
+    </div>
     <div id="advanced-form">
         <fieldset id="query-types">
             <legend><?php echo __('Search using this query type:'); ?></legend>

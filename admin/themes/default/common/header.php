@@ -16,7 +16,7 @@
     queue_css_file(['iconfonts', 'skeleton', 'jquery-ui', 'style']);
     queue_css_url('//fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400');
 
-    queue_js_file(['vendor/respond', 'vendor/modernizr']);
+    queue_js_file(['vendor/respond', 'vendor/modernizr', 'vendor/tooltips']);
     queue_js_file('vendor/selectivizr', 'javascripts', ['conditional' => '(gte IE 6)&(lte IE 8)']);
     queue_js_file('globals');
 ?>
