@@ -25,7 +25,7 @@
 <div class="drawer-contents opened">
     <p><?php echo __('The maximum file size is %s.', max_file_size()); ?></p>
 
-    <div class="field two columns alpha" id="file-inputs">
+    <div id="file-inputs">
         <label><?php echo __('Find a File'); ?></label>
         <button type="button" id="add-file" class="add-file button"><?php echo __('Add Another File'); ?></button>
     </div>
@@ -41,7 +41,7 @@
     </div>
 FILE_TEMPLATE;
     ?>
-    <div class="files four columns omega" data-file-container-template="<?php echo utf8_htmlspecialchars($fileTemplate); ?>"></div>
+    <div class="files" data-file-container-template="<?php echo utf8_htmlspecialchars($fileTemplate); ?>"></div>
 </div>
 
 <?php fire_plugin_hook('admin_items_form_files', ['item' => $item, 'view' => $this]); ?>

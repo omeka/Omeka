@@ -2388,11 +2388,39 @@ ul.details li:last-child {
   border-bottom: 1px solid #D6D5C2;
 }
 
+#files-metadata .add-new + .drawer-contents {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  container: filesContainer/inline-size;
+}
+
+@container filesContainer (width < 500px) {
+  #file-inputs,
+  #file-inputs + .files {
+    grid-column: 1/3;
+  }
+}
+#files-metadata .add-new + .drawer-contents p {
+  grid-column: 1/3;
+  margin: 0;
+}
+
+#file-list img {
+  max-height: 24px;
+  width: auto;
+  float: left;
+  margin: -3px 10px 0 0;
+  border: 1px solid #D6D5C2;
+}
+
 .file-container {
   border: 1px solid #D6D5C2;
   border-bottom: 0;
-  margin-bottom: 20px;
   border-radius: 2px;
+}
+.file-container:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .file-thumbnail:not(:empty) {
@@ -2935,14 +2963,6 @@ ul.details li:last-child {
   #section-nav ul a.active {
     border: 1px solid #ddd;
   }
-}
-
-#file-list img {
-  max-height: 24px;
-  width: auto;
-  float: left;
-  margin: -3px 10px 0 0;
-  border: 1px solid #D6D5C2;
 }
 
 /* Edit Item Types
