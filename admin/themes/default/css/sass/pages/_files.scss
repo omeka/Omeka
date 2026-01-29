@@ -54,7 +54,7 @@
 
 #file-list .file .drawer-name {
     flex: 2;
-    word-break: break-all;
+    word-break: break-word;
     padding-right: $spacing-m;
 }
 
