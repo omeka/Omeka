@@ -5,6 +5,7 @@
     top: 0;
     right: 0;
     z-index: 1001;
+    display: flex;
     
     @include screen-md {
 	    width: 40%;
@@ -25,12 +26,7 @@
     
     input[type=text] {
         width: 100%;
-        padding-right: 36px;
         height: 36px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        margin: 0;
     }
     
     &.with-advanced input[type=text] {
@@ -39,18 +35,16 @@
     
 }
 
+#search-form #query {
+    margin-bottom: 0;
+}
+
 #advanced-search,
 #search-form button {
     width: 36px;
     height: 36px;
-    padding: 0 5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    text-indent: -9999px;
     transition: 0.5s background;
     margin: 0;
-    
     color: #fff;
     background: $darkred;
     border-radius: 0;
@@ -74,15 +68,12 @@
         color: white;
     }
 }
-
 #advanced-search.button {
-    position: absolute;
-    top: 0;
-    right: 37px;
+    margin-right: 1px;
+}
 
-    &:after {
-        content: "\f141";
-    }
+#advanced-search.button:after {
+    content: "\f141";
 }
 
 #advanced-form {
@@ -111,7 +102,7 @@
     }
 }
 
-.show-advanced.open + #advanced-form {
+.advanced-open #advanced-form {
     display: block;
 }
 

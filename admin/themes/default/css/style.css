@@ -1680,6 +1680,7 @@ header nav {
   top: 0;
   right: 0;
   z-index: 1001;
+  display: flex;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   #search-form {
@@ -1704,26 +1705,20 @@ header nav {
 }
 #search-form input[type=text] {
   width: 100%;
-  padding-right: 36px;
   height: 36px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
 }
 #search-form.with-advanced input[type=text] {
   padding-right: 72px;
+}
+
+#search-form #query {
+  margin-bottom: 0;
 }
 
 #advanced-search,
 #search-form button {
   width: 36px;
   height: 36px;
-  padding: 0 5px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-indent: -9999px;
   transition: 0.5s background;
   margin: 0;
   color: #fff;
@@ -1752,10 +1747,9 @@ header nav {
 }
 
 #advanced-search.button {
-  position: absolute;
-  top: 0;
-  right: 37px;
+  margin-right: 1px;
 }
+
 #advanced-search.button:after {
   content: "\f141";
 }
@@ -1786,7 +1780,7 @@ header nav {
   margin: 20px 0 10px;
 }
 
-.show-advanced.open + #advanced-form {
+.advanced-open #advanced-form {
   display: block;
 }
 

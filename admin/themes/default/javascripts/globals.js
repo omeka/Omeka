@@ -129,10 +129,11 @@ if (!Omeka) {
     };
 
     Omeka.showAdvancedForm = function () {
-        $('#search-form').on('click', '.show-advanced', function() {
+        var searchForm = $('#search-form');
+        searchForm.on('click', '.show-advanced', function() {
             var advanced_toggle = $(this);
-            advanced_toggle.toggleClass('open');
-            if (advanced_toggle.hasClass('open')) {
+            searchForm.toggleClass('advanced-open');
+            if (searchForm.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
             } else {
                 advanced_toggle.attr('aria-expanded', false);
@@ -243,7 +244,8 @@ if (!Omeka) {
         [Omeka.skipNav, null],
         [Omeka.moveNavList, null],
         [Omeka.mediaFallback, null],
-        [Omeka.warnIfUnsaved, null]
+        [Omeka.warnIfUnsaved, null],
+        [Omeka.tooltips, null]
     ];
 
     /**

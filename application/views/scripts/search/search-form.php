@@ -8,10 +8,10 @@
     ?>
     <?php if ($options['show_advanced']): ?>
     <div class="tooltip-container" data-tooltip-position="top">
-        <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" aria-labelledby="advanced-search-tooltip">
+        <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" aria-labelledby="advanced-search-tooltip" data-tooltip-trigger>
             <span class="icon" aria-hidden="true"></span>
         </button>
-        <span id="advanced-search-tooltip" class="hidden"><?php echo __('Search options'); ?></span>
+        <span id="advanced-search-tooltip" role="tooltip" class="hidden"><?php echo __('Search options'); ?></span>
     </div>
     <div id="advanced-form">
         <fieldset id="query-types">
@@ -36,16 +36,18 @@
         <?php echo $this->formHidden('record_types[]', $type, ['id' => '']); ?>
         <?php endforeach; ?>
     <?php endif; ?>
-    <?php 
-        echo $this->formButton('submit_search', $options['submit_value'], [
-            'type' => 'submit', 
-            'title' => __('Submit'), 
-            'class' => 'button', 
-            'content' => '<span class="icon" aria-hidden="true"></span>', 
-            'escape' => false,
-            'aria-label' => __('Submit'),
-            'aria-labelledby' => 'search-form submit_search'
-            ]
-        ); 
-    ?>
+    <div class="tooltip-container" data-tooltip-position="top">
+        <?php 
+            echo $this->formButton('submit_search', $options['submit_value'], [
+                'type' => 'submit', 
+                'class' => 'button', 
+                'content' => '<span class="icon" aria-hidden="true"></span>', 
+                'escape' => false,
+                'aria-labelledby' => 'search-submit-tooltip',
+                'data-tooltip-trigger' => ''
+                ]
+            ); 
+        ?>
+        <span id="search-submit-tooltip" role="tooltip" class="hidden"><?php echo __('Search'); ?></span>
+    </div>
 </form>
