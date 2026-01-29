@@ -2406,6 +2406,16 @@ ul.details li:last-child {
   margin: 0;
 }
 
+#file-list .file .drawer-name {
+  flex: 2;
+  word-break: break-all;
+  padding-right: 10px;
+}
+
+#file-list .file .actions {
+  flex: 1;
+}
+
 #file-list img {
   max-height: 24px;
   width: auto;

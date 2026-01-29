@@ -52,11 +52,21 @@
     margin: 0;
 }
 
+#file-list .file .drawer-name {
+    flex: 2;
+    word-break: break-all;
+    padding-right: $spacing-m;
+}
+
+#file-list .file .actions {
+    flex: 1;
+}
+
 #file-list img {
     max-height: 24px;
     width: auto;
     float: left;
-    margin: -3px 10px 0 0;
+    margin: -3px $spacing-m 0 0;
     border: 1px solid $darkgrayborder;
 }
 
