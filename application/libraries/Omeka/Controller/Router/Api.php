@@ -1,14 +1,14 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Router for the Omeka API.
- * 
+ *
  * @package Omeka\Controller\Router
  */
 class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
@@ -45,10 +45,10 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Match the user submitted path.
-     * 
-     * Via Omeka_Application_Resource_Router, this is the only available route 
+     *
+     * Via Omeka_Application_Resource_Router, this is the only available route
      * for API requests.
-     * 
+     *
      * @throws Omeka_Controller_Exception_Api
      * @param Zend_Controller_Request_Http $request
      * @return array|false
@@ -113,6 +113,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             'api_params' => $params,
         ];
 
+        // The custom route option "index_acl_resource" validates the user
+        // against the passed resource during the index action.
+        if ('index' === $action) {
+            $routeVars['index_acl_resource'] = $apiResources[$resource]['index_acl_resource'] ?? null;
+        }
+
         return $routeVars;
     }
 
@@ -122,7 +128,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Return this route's resource.
-     * 
+     *
      * @throws Omeka_Controller_Exception_Api
      * @param string $resource
      * @param array $apiResources
@@ -138,7 +144,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Return this route's record type.
-     * 
+     *
      * @throws Omeka_Controller_Exception_Api
      * @param string $resource
      * @param array $apiResources
@@ -160,7 +166,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Return this route's module.
-     * 
+     *
      * @param string $resource
      * @param array $apiResources
      * @return string
@@ -175,7 +181,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Return this route's controller.
-     * 
+     *
      * @param string $resource
      * @param array $apiResources
      * @return string
@@ -190,7 +196,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Return this route's action.
-     * 
+     *
      * @throws Omeka_Controller_Exception_Api
      * @param string $method
      * @param array $params
@@ -228,7 +234,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Validate the GET parameters against the whitelist.
-     * 
+     *
      * @throws Omeka_Controller_Exception_Api
      * @param string $action
      * @param string $resource

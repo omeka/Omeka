@@ -1,14 +1,14 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * The default controller for API resources.
- * 
+ *
  * @package Omeka\Controller
  */
 class ApiController extends Omeka_Controller_AbstractActionController
@@ -31,6 +31,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
         $page = $request->getQuery('page', 1);
+
+        $indexAclResource = $request->getParam('index_acl_resource');
+        if ($indexAclResource) {
+            $this->_validateUser($indexAclResource, 'index');
+        }
 
         $this->_validateRecordType($recordType);
 
@@ -197,7 +202,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
 
     /**
      * Validate a record type.
-     * 
+     *
      * @param string $recordType
      */
     protected function _validateRecordType($recordType)
@@ -218,33 +223,33 @@ class ApiController extends Omeka_Controller_AbstractActionController
 
     /**
      * Validate a user against a privilege.
-     * 
-     * For GET requests, assume that records without an ACL resource do not 
-     * require a permission check. Note that for POST, PUT, and DELETE, all 
+     *
+     * For GET requests, assume that records without an ACL resource do not
+     * require a permission check. Note that for POST, PUT, and DELETE, all
      * records must define an ACL resource.
-     * 
-     * @param Omeka_Record_AbstractRecord $record
+     *
+     * @param Omeka_Record_AbstractRecord|string $record
      * @param string $privilege
      */
-    protected function _validateUser(Omeka_Record_AbstractRecord $record, $privilege)
+    protected function _validateUser($record, $privilege)
     {
+        if ($record instanceof Omeka_Record_AbstractRecord) {
+            if (!($record instanceof Zend_Acl_Resource_Interface) && in_array($this->getRequest()->getMethod(), ['POST', 'PUT', 'DELETE'])) {
+                $recordType = get_class($record);
+                throw new Omeka_Controller_Exception_Api(sprintf('Invalid record. Record "%s" must define an ACL resource.', $recordType), 500);
+            }
+        }
         $bootstrap = Zend_Registry::get('bootstrap');
         $currentUser = $bootstrap->getResource('CurrentUser');
         $acl = $bootstrap->getResource('Acl');
-
-        if ($record instanceof Zend_Acl_Resource_Interface) {
-            if (!$acl->isAllowed($currentUser, $record, $privilege)) {
-                throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
-            }
-        } elseif (in_array($this->getRequest()->getMethod(), ['POST', 'PUT', 'DELETE'])) {
-            $recordType = get_class($record);
-            throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must define an ACL resource.", 500);
+        if (!$acl->isAllowed($currentUser, $record, $privilege)) {
+            throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
         }
     }
 
     /**
      * Get the adapter for a record type.
-     * 
+     *
      * @param string $recordType
      * @return Omeka_Record_Api_AbstractRecordAdapter
      */
@@ -256,7 +261,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
 
     /**
      * Set the Link header for pagination.
-     * 
+     *
      * @param int $perPage
      * @param int $page
      * @param int $totalResults
@@ -294,7 +299,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
 
     /**
      * Get the representation of a record.
-     * 
+     *
      * @param Omeka_Record_AbstractRecord $record
      * @param string $resource
      */
