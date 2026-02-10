@@ -19,10 +19,10 @@ if (!Omeka) {
             statusbar: false,
             toolbar_items_size: "small",
             toolbar: [
-                { name: 'formatting', items: [ 'bold', 'italic', 'underline' ] },
-                { name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright' ] },
-                { name: 'lists', items: [ 'bullist', 'numlist' ] },
-                { name: 'advanced', items: [ 'link', 'formatselect', 'code' ] },
+                { name: 'formatting', items: ['bold', 'italic', 'underline'] },
+                { name: 'alignment', items: ['alignleft', 'aligncenter', 'alignright'] },
+                { name: 'lists', items: ['bullist', 'numlist'] },
+                { name: 'advanced', items: ['link', 'formatselect', 'code'] },
             ],
             plugins: "lists,link,code,paste,media,autoresize,help",
             autoresize_max_height: 500,
@@ -49,24 +49,24 @@ if (!Omeka) {
                 return;
             }
 
-            $.post(url, function (response){
-                $(response).dialog({modal:true});
+            $.post(url, function (response) {
+                $(response).dialog({ modal: true });
             });
         });
     };
 
     Omeka.saveScroll = function () {
-        var $save   = $("#save"),
+        var $save = $("#save"),
             $window = $(window),
-            offset  = $save.offset(),
+            offset = $save.offset(),
             topPadding = 62,
             $contentDiv = $("#content");
         if (document.getElementById("save")) {
             $window.scroll(function () {
-                if($window.scrollTop() > offset.top && $window.width() > 991 && ($window.height() - topPadding - 85) >  $save.height()) {
+                if ($window.scrollTop() > offset.top && $window.width() > 991 && ($window.height() - topPadding - 85) > $save.height()) {
                     $save.stop().animate({
                         marginTop: $window.scrollTop() - offset.top + topPadding
-                        });
+                    });
                 } else {
                     $save.stop().animate({
                         marginTop: 0
@@ -83,7 +83,7 @@ if (!Omeka) {
         if (!containerName) {
             containerName = '.element';
         }
-        $(drawerList).on('click', containerName + ' > .drawer button', function() { 
+        $(drawerList).on('click', containerName + ' > .drawer button', function () {
             var drawerButton = $(this);
             var container = drawerButton.parents(containerName).first();
             var drawerActionSelector = drawerButton.data('action-selector');
@@ -96,7 +96,7 @@ if (!Omeka) {
             if (drawerButton.hasClass('delete-drawer')) {
                 container.find('.undo-delete').first().focus();
                 drawerButton.trigger('omeka:delete-drawer');
-                
+
             }
             if (drawerButton.hasClass('undo-delete')) {
                 container.find('.delete-drawer').first().focus();
@@ -105,31 +105,31 @@ if (!Omeka) {
         });
     };
 
-    Omeka.toggleAriaExpanded = function(element) {
+    Omeka.toggleAriaExpanded = function (element) {
         if (element.attr('aria-expanded') == 'true') {
             element.attr('aria-expanded', 'false');
         } else {
             element.attr('aria-expanded', 'true');
         }
     };
-    
-    Omeka.toggleMobileMenu = function() {
-	    $('.mobile-menu').click(function (event) {
+
+    Omeka.toggleMobileMenu = function () {
+        $('.mobile-menu').click(function (event) {
             var button = $(this);
-			var target = button.data('target');
-			$(target).toggleClass('in');
+            var target = button.data('target');
+            $(target).toggleClass('in');
             button.parent('nav').toggleClass('open');
             Omeka.toggleAriaExpanded(button);
-	    });
+        });
     };
-    
+
     Omeka.moveNavList = function () {
         nav = $('.content-wrapper > .navigation');
         nav.insertAfter(nav.parent().parent().find('.subhead'));
     };
 
     Omeka.showAdvancedForm = function () {
-        $('#search-form').on('click', '.show-advanced', function() {
+        $('#search-form').on('click', '.show-advanced', function () {
             var advanced_toggle = $(this);
             advanced_toggle.toggleClass('open');
             if (advanced_toggle.hasClass('open')) {
@@ -141,7 +141,7 @@ if (!Omeka) {
     };
 
     Omeka.skipNav = function () {
-        $("#skipnav").click(function() {
+        $("#skipnav").click(function () {
             $("#content").attr("tabindex", -1).focus();
         });
 
@@ -149,6 +149,50 @@ if (!Omeka) {
             $(this).removeAttr("tabindex");
         });
     };
+
+    Omeka.setupTooltips = function () {
+        const tooltips = $('.tooltip');
+        const buttons = $('.has-tooltip');
+
+        function addEventListeners(i) {
+            buttons[i].addEventListener("mouseover", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+            });
+            buttons[i].addEventListener("mouseout", () => {
+                tooltips[i].hidePopover();
+            });
+            buttons[i].addEventListener("focus", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+            });
+            buttons[i].addEventListener("blur", () => {
+                tooltips[i].hidePopover();
+            });
+        }
+
+        for (let i = 0; i < buttons.length; i++) {
+            addEventListeners(i);
+        }
+    };
+
+    Omeka.setupModals = function () {
+        const modalTriggers = document.getElementsByClassName('o-modal-trigger');
+        const modalClosers = document.getElementsByClassName('o-modal-close');
+
+        function addEventListeners(i) {
+            modalTriggers[i].addEventListener("click", () => {
+                const modal = document.getElementById(modalTriggers[i].getAttribute('data-modal-target'));
+                modal.showModal();
+            });
+            modalClosers[i].addEventListener("click", () => {
+                modalClosers[i].parentElement.close();
+            })
+        };
+
+        for (let i = 0; i < modalTriggers.length; i++) {
+            addEventListeners(i);
+        }
+    };
+
 
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
@@ -171,7 +215,7 @@ if (!Omeka) {
         });
     };
 
-    Omeka.warnIfUnsaved = function() {
+    Omeka.warnIfUnsaved = function () {
         var deleteConfirmed = false;
         var setSubmittedFlag = function () {
             $(this).data('omekaFormSubmitted', true);
@@ -193,7 +237,7 @@ if (!Omeka) {
             deleteConfirmed = true;
         });
 
-        $(window).on('beforeunload', function() {
+        $(window).on('beforeunload', function () {
             var preventNav = false;
             formsToCheck.each(function () {
                 var form = $(this);
@@ -235,8 +279,9 @@ if (!Omeka) {
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
         [Omeka.toggleMobileMenu, null],
-        [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],
+        [Omeka.setupTooltips, null],
+        [Omeka.setupModals, null],
         [Omeka.moveNavList, null],
         [Omeka.mediaFallback, null],
         [Omeka.warnIfUnsaved, null]
@@ -254,15 +299,15 @@ if (!Omeka) {
      * @param string endpoint
      */
     Omeka.runVersionNotification = function (endpoint) {
-        $.get(endpoint).done(function(data) {
-            var normalizeVersion = function(version) {
+        $.get(endpoint).done(function (data) {
+            var normalizeVersion = function (version) {
                 version = String(version);
                 if (1 === (version.split('.').length - 1)) {
                     version = version + '.0';
                 }
                 return version;
             };
-            $('.version-notification').each(function(index) {
+            $('.version-notification').each(function (index) {
                 var addon = $(this);
                 var addonId = addon.data('addon-id');
                 if (addonId in data) {
@@ -279,11 +324,11 @@ if (!Omeka) {
 
     Omeka.quickFilter = function () {
         var quickFilterSelect = $('select.quick-filter');
-        quickFilterSelect.change(function() {
+        quickFilterSelect.change(function () {
             var url = $(this).val();
             if (url) {
                 window.location = url;
-            } 
+            }
             return false;
         });
     }

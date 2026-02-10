@@ -1,10 +1,7 @@
 #search-form {
     width: 30%;
-    float: left;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1001;
+    float: right;
+    display: flex;
     
     @include screen-md {
 	    width: 40%;
@@ -25,11 +22,7 @@
     
     input[type=text] {
         width: 100%;
-        padding-right: 36px;
         height: 36px;
-        position: absolute;
-        top: 0;
-        left: 0;
         margin: 0;
     }
     
@@ -40,17 +33,12 @@
 }
 
 #advanced-search,
-#search-form button {
+#search-form [type="submit"] {
     width: 36px;
     height: 36px;
     padding: 0 5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    text-indent: -9999px;
     transition: 0.5s background;
-    margin: 0;
-    
+    margin: 0;    
     color: #fff;
     background: $darkred;
     border-radius: 0;
@@ -60,12 +48,11 @@
     justify-content: center;
     align-items: center;
     
-    &:after {
+    .icon:after {
         font-family: "Font Awesome 5 Free";
-        position: absolute;
         display: block;
         font-weight: 900;
-        content: "\f002";
+        content: "\f002" / "";
         text-indent: 0;
         text-align: center;
     }
@@ -75,32 +62,13 @@
     }
 }
 
-#advanced-search.button {
-    position: absolute;
-    top: 0;
-    right: 37px;
-
-    &:after {
-        content: "\f141";
-    }
+#advanced-search.button .icon:after {
+    content: "\f141" / "";
 }
 
 #advanced-form {
-    display: none;
     background-color: #fff;
-    overflow: auto;
-    clear: both;
-    z-index: 1001;
-    position: absolute;
-    top: 36px;
-    left: 0;
-    padding: 0 $spacing-l 1em $spacing-l;
-    border: 1px solid $darkgrayborder;
-    border-top: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
+    padding: $spacing-l;
 
     input[type=radio] { margin: 0 9px 0 0; }
     input[type=checkbox] { margin-right: 5px; }
@@ -109,10 +77,6 @@
         font-size: 16px;
         margin: $spacing-l 0 $spacing-m;
     }
-}
-
-.show-advanced.open + #advanced-form {
-    display: block;
 }
 
 #advanced-search-form {

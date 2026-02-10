@@ -7,10 +7,16 @@
         ]); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
+    <button id="advanced-search" type="button" aria-expanded="false" popovertarget="advanced-search-tooltip" popovertargetaction="toggle" class="show-advanced has-tooltip button o-modal-trigger" data-modal-target="advanced-form">
         <span class="icon" aria-hidden="true"></span>
+        <div id="advanced-search-tooltip" class="tooltip" popover="hint"><?php echo __('Search options') ?></div>
     </button>
-    <div id="advanced-form">
+    <dialog id="advanced-form" class="o-modal">
+        <button type="button" class="o-modal-close o-icon-close has-tooltip">
+            <span class="icon" aria-hidden="true"></span>
+            <div id="advanced-search-tooltip" class="tooltip" popover="hint"><?php echo __('Close') ?></div>
+        </button>
+        <h2><?php echo __('Search options'); ?></h2>
         <fieldset id="query-types">
             <legend><?php echo __('Search using this query type:'); ?></legend>
             <?php echo $this->formRadio('query_type', $filters['query_type'], null, $query_types); ?>
@@ -26,7 +32,7 @@
             <p><a href="<?php echo url('settings/edit-search'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
         <?php endif; ?>
         <p><?php echo link_to_item_search(__('Advanced Search (Items only)')); ?></p>
-    </div>
+    </dialog>
     <?php else: ?>
         <?php echo $this->formHidden('query_type', $filters['query_type']); ?>
         <?php foreach ($filters['record_types'] as $type): ?>
@@ -37,11 +43,11 @@
         echo $this->formButton('submit_search', $options['submit_value'], [
             'type' => 'submit', 
             'title' => __('Submit'), 
-            'class' => 'button', 
-            'content' => '<span class="icon" aria-hidden="true"></span>', 
+            'class' => 'has-tooltip button', 
+            'content' => '<span class="icon" aria-hidden="true"></span><div id="search-submit-tooltip" class="tooltip" popover="hint">' . __('Submit') . '</div>', 
             'escape' => false,
-            'aria-label' => __('Submit'),
-            'aria-labelledby' => 'search-form submit_search'
+            'popovertarget' => 'search-submit-tooltip',
+            'popoveraction' => 'toggle'
             ]
         ); 
     ?>

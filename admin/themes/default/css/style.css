@@ -273,6 +273,7 @@ hr {
 .section-title {
   width: 70%;
   padding-right: 20px;
+  box-sizing: border-box;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .section-title {
@@ -620,6 +621,25 @@ a.button.green *,
 input[type=submit].green *,
 button.green * {
   color: rgb(49.9390243902, 97.5, 0);
+}
+
+/* Tooltips
+================================================== */
+.has-tooltip {
+  position: relative;
+}
+
+[popover=hint] {
+  inset: unset;
+  position: absolute;
+  top: calc(anchor(bottom) + 5px);
+  margin: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: #271717;
+  color: whitesmoke;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
 }
 
 /* jQuery UI overrides
@@ -1292,6 +1312,36 @@ select[multiple=multiple] {
   margin: 0 5px;
 }
 
+dialog.o-modal {
+  min-width: 500px;
+  max-width: 1000px;
+  border: 0;
+}
+
+dialog.o-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+dialog .o-modal-close {
+  float: right;
+  background-color: transparent;
+  color: #82423B;
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+  min-width: 30px;
+}
+
+dialog .o-modal-close .icon:after {
+  content: "\f00d"/"";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+dialog h2 {
+  margin-top: 0;
+}
+
 header {
   left: 0;
   right: 0;
@@ -1675,11 +1725,8 @@ header nav {
 
 #search-form {
   width: 30%;
-  float: left;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1001;
+  float: right;
+  display: flex;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   #search-form {
@@ -1704,11 +1751,7 @@ header nav {
 }
 #search-form input[type=text] {
   width: 100%;
-  padding-right: 36px;
   height: 36px;
-  position: absolute;
-  top: 0;
-  left: 0;
   margin: 0;
 }
 #search-form.with-advanced input[type=text] {
@@ -1716,14 +1759,10 @@ header nav {
 }
 
 #advanced-search,
-#search-form button {
+#search-form [type=submit] {
   width: 36px;
   height: 36px;
   padding: 0 5px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-indent: -9999px;
   transition: 0.5s background;
   margin: 0;
   color: #fff;
@@ -1735,45 +1774,28 @@ header nav {
   justify-content: center;
   align-items: center;
 }
-#advanced-search:after,
-#search-form button:after {
+#advanced-search .icon:after,
+#search-form [type=submit] .icon:after {
   font-family: "Font Awesome 5 Free";
-  position: absolute;
   display: block;
   font-weight: 900;
-  content: "\f002";
+  content: "\f002"/"";
   text-indent: 0;
   text-align: center;
 }
 #advanced-search:hover,
-#search-form button:hover {
+#search-form [type=submit]:hover {
   background: #68302C;
   color: white;
 }
 
-#advanced-search.button {
-  position: absolute;
-  top: 0;
-  right: 37px;
-}
-#advanced-search.button:after {
-  content: "\f141";
+#advanced-search.button .icon:after {
+  content: "\f141"/"";
 }
 
 #advanced-form {
-  display: none;
   background-color: #fff;
-  overflow: auto;
-  clear: both;
-  z-index: 1001;
-  position: absolute;
-  top: 36px;
-  left: 0;
-  padding: 0 20px 1em 20px;
-  border: 1px solid #D6D5C2;
-  border-top: 0;
-  box-sizing: border-box;
-  width: 100%;
+  padding: 20px;
 }
 #advanced-form input[type=radio] {
   margin: 0 9px 0 0;
@@ -1784,10 +1806,6 @@ header nav {
 #advanced-form legend {
   font-size: 16px;
   margin: 20px 0 10px;
-}
-
-.show-advanced.open + #advanced-form {
-  display: block;
 }
 
 #advanced-search-form .advanced-search-terms {

@@ -128,6 +128,7 @@ hr {
 .section-title { 
 	width: 70%;
 	padding-right: $spacing-l;
+	box-sizing: border-box;
 
     @include screen-md {
 	    width: 60%;

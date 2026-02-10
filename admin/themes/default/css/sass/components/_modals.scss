@@ -1,0 +1,29 @@
+dialog.o-modal {
+    min-width: 500px;
+    max-width: 1000px;
+    border: 0;
+}
+
+dialog.o-modal::backdrop {
+    background-color: rgba(0,0,0,.45);
+}
+
+dialog .o-modal-close {
+    float: right;
+    background-color: transparent;
+    color: $darkred;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    min-width: 1.5 * $spacing-l;
+}
+
+dialog .o-modal-close .icon:after {
+    content: "\f00d" / "";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+dialog h2 { 
+    margin-top: 0;
+}

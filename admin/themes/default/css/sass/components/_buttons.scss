@@ -162,7 +162,26 @@ button {
         @include green;
     }
 }
-           
+
+/* Tooltips
+================================================== */
+
+.has-tooltip {
+    position: relative;
+}
+
+[popover="hint"] {
+  inset: unset;
+  position: absolute;
+  top: calc(anchor(bottom) + 5px);
+  margin: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: #271717;
+  color: whitesmoke;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
+}
 
 /* jQuery UI overrides
 ================================================== */
