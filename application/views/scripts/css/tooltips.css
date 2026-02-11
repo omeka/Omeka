@@ -1,0 +1,81 @@
+/* Modified from https://zoebijl.github.io/apg-tooltip/ */
+
+:root {
+  --tooltip-thingy-height: .5em;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* The arrow (or tooltip thingy) that connects the tooltip to the container */
+.tooltip-container::before {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: var(--tooltip-thingy-height) solid transparent;
+  border-bottom-color: black;
+}
+
+/* This allows users to move their cursor from the button to the tooltip */
+.tooltip-container::after {
+  position: absolute;
+  right: -20%;
+  top: 100%;
+  left: -20%;
+  display: block;
+  height: calc(var(--tooltip-thingy-height) * 2);
+}
+
+.tooltip-container.tooltip-visible::before,
+.tooltip-container.tooltip-visible::after {
+  content: '';
+}
+
+.tooltip-container.top::before,
+.tooltip-container.top::after,
+.tooltip-container.top [role="tooltip"] {
+  top: unset;
+  bottom: 100%;
+  z-index: 10000;
+}
+
+.tooltip-container.top::before {
+  border-top-color: black;
+  border-bottom-color: transparent;
+}
+
+.tooltip-container.top [role="tooltip"] {
+  bottom: calc(100% + calc(var(--tooltip-thingy-height) * 2));
+}
+
+/* Tooltip styles */
+[role="tooltip"] {
+  position: absolute;
+  top: calc(100% + calc(var(--tooltip-thingy-height) * 2));
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: .5em 1em;
+  border-radius: .25em;
+  color: white;
+  background: black;
+  min-width: max-content;
+  max-width: 10em;
+  box-shadow: 0 1px 2px hsl(0, 0%, 0%);
+}
+
+/* Hides the tooltip */
+.hidden {
+  display: none;
+}
+
+/*
+  Removes the emoji container from the pointer event targets.
+  If removed the globalPointerDown() function will break when you click/tap exactly on the emoji.
+*/
+[aria-hidden="true"] {
+  pointer-events: none;
+}
