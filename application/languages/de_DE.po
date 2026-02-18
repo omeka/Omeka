@@ -904,7 +904,7 @@ msgstr "Falls dies nicht hilft kontaktieren Sie bitte den %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
-msgstr "Neuste Objekte"
+msgstr "Neueste Objekte"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
@@ -912,7 +912,7 @@ msgstr "Neues Objekt hinzufügen"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
-msgstr "Neuste Sammlungen"
+msgstr "Neueste Sammlungen"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
