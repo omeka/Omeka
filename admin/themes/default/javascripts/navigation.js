@@ -23,6 +23,10 @@ Omeka.Navigation = {};
         $('#navigation_main_list').on('click', '.link-status', function(e) {
             e.stopPropagation();
         });
+
+        $('#navigation_main_list').on('change', function () {
+            $('#navigation_form').data('omekaFormDirty', true);
+        });
     };
 
     Omeka.Navigation.updateSelectHomepageOptions = function () {
@@ -44,7 +48,6 @@ Omeka.Navigation = {};
         
         select.val(selectedValue);
     };
-
 
     Omeka.Navigation.updateVisitButtons = function () {
         $('#navigation_main_list .link-status').each(function () {
@@ -108,11 +111,9 @@ Omeka.Navigation = {};
 
                 var needIdUpdates = ['.link-status', '.drawer-name', '.drawer-toggle', '.undo-delete', '.delete-drawer', '.drawer-contents', '.navigation-label', '.navigation-uri'];
                 var needForUpdates = ['.label-label', '.uri-label'];
-                var needNameUpdates = ['.link-status', '.navigation-label', '.navigation-uri'];
                 var needLabelledByUpdates = ['.link-status', '.drawer-toggle', '.undo-delete', '.delete-drawer'];
                 Omeka.Navigation.populateNewNavLinkAttributes(needIdUpdates, timeId, 'id', newLink);
                 Omeka.Navigation.populateNewNavLinkAttributes(needForUpdates, timeId, 'for', newLink);
-                Omeka.Navigation.populateNewNavLinkAttributes(needNameUpdates, timeId, 'name', newLink);
                 Omeka.Navigation.populateNewNavLinkAttributes(needLabelledByUpdates, timeId, 'aria-labelledby', newLink);
 
                 newLink.find('.drawer-name').text(n_label);
@@ -128,6 +129,8 @@ Omeka.Navigation = {};
                 var totalLinks = $('#navigation_main_list .main_link').length;
                 $('.link-count').text(totalLinks);
                 $('#new-link-success').show();
+
+                $('#navigation_form').data('omekaFormDirty', true);
                 Omeka.Navigation.updateForNewLinks();
             } else {
                 if (!n_label) { $('#label-required').show(); }

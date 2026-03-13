@@ -22,10 +22,10 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
         <div id="add-new-options" class="drawer-contents opened">
             <div id="new-link-success" class="sr-only flash" style="display: none" aria-live="polite"><?php echo __('New Link Added. Total links: '); ?><span class="link-count"></span></div>
             <label id="new_nav_link_label_label"><?php echo __('Label'); ?></label>
-            <input type="text" id="new_nav_link_label" aria-labelledby="add-new-heading new_nav_link_label_label" name="new_nav_link_label" />
+            <input type="text" id="new_nav_link_label" aria-labelledby="add-new-heading new_nav_link_label_label">
             <div class="flash alert" style="display: none;" id="label-required" aria-live="polite"><?php echo __('required field'); ?> <span class="sr-only"><?php echo __('Label'); ?></span></div>
             <label id="new_nav_link_uri_label"><?php echo __('URL'); ?></label>
-            <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" aria-labelledby="add-new-heading new_nav_link_uri_label" />
+            <input type="text" id="new_nav_link_uri" aria-labelledby="add-new-heading new_nav_link_uri_label">
             <div class="flash alert" style="display: none;" id="uri-required" aria-live="polite"><?php echo __('required field'); ?> <span class="sr-only"><?php echo __('URI'); ?></span></div>
             <button type="button" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></button>
         </div>
