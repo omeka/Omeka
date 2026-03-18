@@ -11,12 +11,12 @@
         <span class="icon" aria-hidden="true"></span>
         <div id="advanced-search-tooltip" class="tooltip" popover="hint"><?php echo __('Search options') ?></div>
     </button>
-    <dialog id="advanced-form" class="o-modal">
+    <dialog id="advanced-form" class="o-modal" aria-labelledby="advanced-options-heading">
         <button type="button" class="o-modal-close o-icon-close has-tooltip">
             <span class="icon" aria-hidden="true"></span>
             <div id="advanced-close-tooltip" class="tooltip" popover="hint"><?php echo __('Close') ?></div>
         </button>
-        <h2><?php echo __('Search options'); ?></h2>
+        <h2 id="advanced-options-heading"><?php echo __('Search options'); ?></h2>
         <fieldset id="query-types">
             <legend><?php echo __('Search using this query type:'); ?></legend>
             <?php echo $this->formRadio('query_type', $filters['query_type'], null, $query_types); ?>
