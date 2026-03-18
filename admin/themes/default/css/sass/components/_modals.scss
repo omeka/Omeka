@@ -2,6 +2,7 @@ dialog.o-modal {
     min-width: 500px;
     max-width: 1000px;
     border: 0;
+    position: relative;
 }
 
 dialog.o-modal::backdrop {
@@ -10,6 +11,7 @@ dialog.o-modal::backdrop {
 
 dialog .o-modal-close {
     float: right;
+    margin: 0;
     background-color: transparent;
     color: $darkred;
     box-shadow: none;

@@ -640,6 +640,7 @@ button.green * {
   color: whitesmoke;
   box-shadow: 1px 1px 3px #999;
   border: none;
+  justify-self: anchor-center;
 }
 
 /* jQuery UI overrides
@@ -1316,6 +1317,7 @@ dialog.o-modal {
   min-width: 500px;
   max-width: 1000px;
   border: 0;
+  position: relative;
 }
 
 dialog.o-modal::backdrop {
@@ -1324,6 +1326,7 @@ dialog.o-modal::backdrop {
 
 dialog .o-modal-close {
   float: right;
+  margin: 0;
   background-color: transparent;
   color: #82423B;
   box-shadow: none;
