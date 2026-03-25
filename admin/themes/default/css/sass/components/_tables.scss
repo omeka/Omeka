@@ -1,5 +1,5 @@
 .table-responsive {
-	display: block;
+    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -37,7 +37,7 @@ table {
 }
 
 th {
-    background-color: rgba(200,200,200,0.5);
+    background-color: rgba(200, 200, 200, 0.5);
     border: 1px solid #DCDCDC;
     padding: $spacing-s $spacing-m;
     text-align: left;
@@ -47,8 +47,8 @@ th {
         position: relative;
     }
 
-	a .sort-icon:before,
-	a .sort-icon:after {
+    a .sort-icon:before,
+    a .sort-icon:after {
         width: 10px;
         height: 100%;
         content: "\f0dc" / "";
@@ -70,48 +70,56 @@ th {
         height: 10px;
     }
 
-	a .sort-icon:after {
+    a .sort-icon:after {
         content: none;
         opacity: 1;
     }
 
-    a:link, 
-    a:visited { 
-	    opacity: 0.75;
-	    
-	    &:hover {
-		    opacity: 1;
+    a:link,
+    a:visited {
+        opacity: 0.75;
+
+        &:hover {
+            opacity: 1;
             color: #000;
-	    }
-	}
-	
-	&.sorting { 
-		a { 
-			opacity: 1;
+        }
+    }
+
+    &.sorting {
+        a {
+            opacity: 1;
             color: #000;
             font-weight: bold;
-		}
-	}
+        }
+    }
 
     &.desc a .sort-icon:before,
     &.asc a .sort-icon:before {
         opacity: .2;
     }
 
-    &.desc a .sort-icon:after { content: "\f0dd" / ""; }
-    &.asc a .sort-icon:after { content: "\f0de" / ""; }
+    &.desc a .sort-icon:after {
+        content: "\f0dd" / "";
+    }
+
+    &.asc a .sort-icon:after {
+        content: "\f0de" / "";
+    }
 }
 
-tr { background-color: rgba(255,255,255,.5); }
+tr {
+    background-color: rgba(255, 255, 255, .5);
+}
 
 td {
     border: 1px solid #DCDCDC;
     padding: $spacing-m;
     vertical-align: top;
-    
+
     .even & {
-        background-color: rgba(241,242,242,0.5);
+        background-color: rgba(241, 242, 242, 0.5);
     }
+
     .odd & {
         background-color: #fff;
     }
@@ -127,20 +135,22 @@ td {
         padding-top: $spacing-s;
     }
 
-    a { color: $blue; }
+    a {
+        color: $blue;
+    }
 
-    li { 
-	    display: inline-block; 
-	    
+    li {
+        display: inline-block;
+
         .spacer {
             display: inline-block;
         }
 
-        .spacer:after { 
-            content: ' \00b7'; 
-            margin-left: 3px; 
+        .spacer:after {
+            content: ' \00b7';
+            margin-left: 3px;
             margin-right: 3px;
-            
+
             @include screen-xs {
                 content: '';
                 margin: 0;
@@ -150,8 +160,11 @@ td {
         @include screen-xs {
             margin-bottom: $spacing-s;
         }
-        
-        &:last-child:after { content: ''; margin: 0; }
+
+        &:last-child:after {
+            content: '';
+            margin: 0;
+        }
     }
 }
 
@@ -160,47 +173,88 @@ td {
     text-align: center;
 }
 
-.batch-edit-heading + th {
+.batch-edit-heading+th {
     width: 50%;
 }
 
+.browse .record-info .title img {
+    float: left;
+    margin: 0 10px 0 0;
+    max-width: 20%;
+    box-sizing: border-box;
+    border: 1px solid $lightgrayborder;
+}
+
+@include screen-xs {
+    .browse .record-info .title img {
+        width: auto;
+        max-height: 6rem;
+        margin-bottom: $spacing-s;
+    }
+}
+
 span.title {
-	margin: 0 $spacing-s $spacing-s 0;
-	font-weight: 700;
-	line-height: 20px;
-    	
-	small {
-		font-weight: 400;
-		color: gray;
-	}
+    margin: 0 $spacing-s $spacing-s 0;
+    font-weight: 700;
+    line-height: 20px;
+
+    small {
+        font-weight: 400;
+        color: gray;
+    }
 
     @include screen-xs {
-        margin-bottom: $spacing-m;
         display: block;
     }
 }
 
-.featured-icon,
-.private {
-    display: inline-block;
+.labels {
+    margin-top: .5 * $spacing-s;
 }
 
-span.featured:after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: '\f005';
-    width: 24px;
-    height: 24px;
-    color: $darkred;
+.labels .label {
+    display: inline-flex;
+    gap: 3px;
+    border-radius: 2px;
+    padding: (.5 * $spacing-s) $spacing-s;
+    font-weight: bold;
+    font-size: 12px;
+    align-items: center;
+    border: 0 !important;
+    background-color: $lightgray;
+
+
+    &:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 10px;
+    }
 }
 
-span.private {
-    font-weight: normal;
+.featured.label {
+    color: $green;
+    border-color: rgba($green, 0.65);
+    background: $lightgreen;
+
+
+    &:before {
+        content: '\f005' / '';
+    }
+}
+
+.private.label {
+    color: $blue;
+    border-color: rgba($blue, 0.65);
+    background: darken(#EEF3FA, 5%);
+
+    &:before {
+        content: '\f070' / '';
+    }
 }
 
 .details {
     background-color: #fff;
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(255, 255, 255, .5);
     border: 1px solid $lightgrayborder;
     margin-top: $spacing-m;
     padding: $spacing-m;
@@ -212,22 +266,29 @@ span.private {
     display: inline-flex;
     flex-wrap: wrap;
 
-	p { 
+    p {
         margin: 0 $spacing-l 0 0;
         display: inline-block;
-	}
+    }
 }
 
 ul.details {
     margin-bottom: 0;
     padding: $spacing-m $spacing-m $spacing-m $spacing-l;
 
-    li { margin-bottom: $spacing-m; }
-    li:last-child { margin-bottom: 0; }
+    li {
+        margin-bottom: $spacing-m;
+    }
+
+    li:last-child {
+        margin-bottom: 0;
+    }
 
 }
 
-.inactive { opacity: .65; }
+.inactive {
+    opacity: .65;
+}
 
 .mobile {
     max-width: 100%;
@@ -235,5 +296,7 @@ ul.details {
     display: none;
     word-break: break-word;
 
-	.mobile th { width: 20%; }
+    .mobile th {
+        width: 20%;
+    }
 }
