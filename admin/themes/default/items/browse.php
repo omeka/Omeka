@@ -72,19 +72,21 @@ echo item_search_filters();
                     <td class="record-info">
                         <?php 
                         $itemTitle = metadata($item, 'rich_title', ['no_escape' => true]); 
+                        if (metadata('item', 'has files')) {
+                            $itemTitle = item_image('square_thumbnail', ['class' => 'item-thumbnail', 'alt' => ''], 0, $item) . $itemTitle; 
+                        }
                         $itemFeatured = $item->featured;
                         $itemPrivate = !$item->public;
                         ?>
-                        <span class="title">
-                            <?php if (metadata('item', 'has files')): ?>
-                                <?php $itemTitle = item_image('square_thumbnail', ['class' => 'item-thumbnail', 'alt' => ''], 0, $item) . $itemTitle; ?>
-                            <?php endif; ?>
-                            <?php echo link_to_item($itemTitle); ?>
-                        </span>
+                        <span class="title"><?php echo link_to_item($itemTitle); ?></span>
                         <?php if ($itemFeatured || $itemPrivate): ?>
                         <div class="labels">
-                            <?php echo ($itemFeatured) ? '<span class="featured label">' . __('Featured') . '</span>': ''; ?>
-                            <?php echo ($itemPrivate) ? '<span class="private label">' . __('Private') . '</span>': ''; ?>
+                            <?php if ($itemFeatured): ?>
+                            <span class="featured label"><?php echo __('Featured'); ?></span>
+                            <?php endif; ?>
+                            <?php if ($itemPrivate): ?>
+                            <span class="private label"><?php echo __('Private'); ?></span>
+                            <?php endif; ?>
                         </div>
                         <?php endif; ?>
                         <ul class="action-links group">
