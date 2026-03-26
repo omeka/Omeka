@@ -102,6 +102,57 @@ class Omeka_Form_Navigation extends Omeka_Form
     }
 
     /**
+     * Returns the html for a navigation page link and its sublinks. 
+     *
+     * @param Zend_Navigation_Page $page The navigation page
+     * @param int $pageCount The number of pages added so far to the form
+     * @return String The html for a navigation page link and its sublinks
+     */
+    protected function _displayNavigationPageLink(Zend_Navigation_Page $page, &$pageCount)
+    {
+        $pageCount++;
+        $checkboxId = 'main_nav_checkboxes_' . $pageCount;
+        $checkboxValue = $this->_getPageHiddenInfo($page);
+        $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
+        $checkboxClasses = array();
+        if ($page->can_delete) {
+            $checkboxClasses[] = 'can_delete_nav_link';
+        }
+        $checkboxClass = implode(' ', $checkboxClasses);
+        $html = '<li>';
+        $html .= '<div class="main_link">';
+        $html .= '<div class="sortable-item">';
+        $html .= '<input type="checkbox" name="'
+                 . $checkboxId
+                 . '" id="'
+                 . $checkboxId
+                 . '" value="' . html_escape($checkboxValue)
+                 . '" '
+                 . $checkboxChecked
+                 . ' class="'
+                 . $checkboxClass
+                 . '">';
+        $html .= html_escape($page->getLabel());
+        $html .= '<button type="button" class="keyboard-reorder" aria-label="' . __('Reorder with keyboard') . ' title="' . __('Reorder with keyboard') . '"></button>';
+        $html .= '</div>';
+        $html .= '<div class="drawer-contents">';
+        $html .= '<label>' . __('Label') . '</label><input type="text" class="navigation-label" />';
+        $html .= '<label>' . __('URL') . '</label><input type="text" class="navigation-uri" />';
+        $html .= '<div class="main_link_buttons"></div>';
+        $html .= '</div>';
+        $html .= '</div>';
+        if ($page->hasChildren()) {
+            $html .= '<ul>';
+            foreach ($page as $childPage) {
+                $html .= $this->_displayNavigationPageLink($childPage, $pageCount);
+            }
+            $html .= '</ul>';
+        }
+        $html .= '</li>';
+        return $html;
+    }
+
+    /**
      * Adds the homepage select element to the form 
      */
     protected function _addHomepageSelectElement()
