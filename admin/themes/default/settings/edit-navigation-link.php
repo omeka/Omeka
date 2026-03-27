@@ -33,6 +33,13 @@
             <span class="drawer-name" id="drawer-<?php echo $pageCount; ?>">
             <?php echo (!$template) ? html_escape($page->getLabel()) : ''; ?>
             </span>
+            <button type="button" class="keyboard-reorder" aria-label="<?php echo __('Reorder with keyboard'); ?> title="<?php echo __('Reorder with keyboard'); ?>" aria-expanded="false" aria-controls="keyboard-reorder-<?php echo $pageCount; ?>"></button>
+            <div class="keyboard-reorder-panel" id="keyboard-reorder-<?php echo $pageCount; ?>">
+                <button type="button" class="keyboard-reorder-up" aria-label="<?php echo __('Move up'); ?> title="<?php echo __('Move up'); ?>"></button>
+                <button type="button" class="keyboard-reorder-down" aria-label="<?php echo __('Move down'); ?> title="<?php echo __('Move down'); ?>"></button>
+                <button type="button" class="keyboard-reorder-nest" aria-label="<?php echo __('Nest'); ?> title="<?php echo __('Nest'); ?>"></button>
+                <button type="button" class="keyboard-reorder-unnest" aria-label="<?php echo __('Unnest'); ?> title="<?php echo __('Unnest'); ?>"></button>
+            </div>
             <button type="button" id="drawer-toggle-<?php echo $pageCount; ?>" class="drawer-toggle" data-action-selector="opened" aria-expanded="<?php echo ($template) ? 'true' : 'false'; ?>" aria-controls="contents-<?php echo $pageCount; ?>" aria-label="<?php echo __('Show Options'); ?>" aria-label="<?php echo __('Show Options'); ?>" aria-labelledby="drawer-<?php echo $pageCount; ?> drawer-toggle-<?php echo $pageCount; ?>"><span class="icon"></span></button>
             <?php if ($template || $checkboxValue['can_delete']): ?>
             <button type="button" id="drawer-undo-<?php echo $pageCount; ?>" class="undo-delete" data-action-selector="deleted" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="drawer-undo-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>"  title="<?php echo __('Undo'); ?>"><span class="icon"></span></button>

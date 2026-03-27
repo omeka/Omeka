@@ -863,27 +863,54 @@ button.ui-dialog-titlebar-close {
 .ui-widget-overlay {
   background-color: rgba(0, 0, 0, 0.5); }
 
-.keyboard-reorder {
+.keyboard-reorder,
+.keyboard-reorder-panel button {
   padding: 0;
   border: 0;
   display: inline-block;
-  margin: 0 5px 0 auto;
-  background-color: transparent; }
+  margin: 0;
+  background-color: transparent;
+  display: inline-block;
+  min-height: 24px;
+  min-width: 24px; }
+  .keyboard-reorder:before,
+  .keyboard-reorder-panel button:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; }
 
 .keyboard-reorder:before {
-  content: "\f11c";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  display: inline-block;
-  height: 20px; }
+  content: "\f11c"; }
 
-li.selected {
-  box-shadow: 0 0 0 2px #B00D00; }
-  li.selected .sortable-item {
-    background-color: #c8c8c8; }
-  li.selected ul li .sortable-item .keyboard-reorder,
-  li.selected ul li .sortable-item .drawer-toggle {
-    display: none; }
+.keyboard-reorder-up:before {
+  content: "\f0d8"; }
+
+.keyboard-reorder-down:before {
+  content: "\f0d7"; }
+
+.keyboard-reorder-nest:before {
+  content: "\f03c"; }
+
+.keyboard-reorder-unnest:before {
+  content: "\f03b"; }
+
+.keyboard-reorder-panel {
+  display: none; }
+
+.selected > .ui-sortable-handle > .drawer > .keyboard-reorder {
+  background-color: #D6D5C2;
+  border-radius: 3px 0 0 3px; }
+  .selected > .ui-sortable-handle > .drawer > .keyboard-reorder:focus {
+    position: relative;
+    z-index: 1; }
+
+.selected > .ui-sortable-handle > .drawer > .keyboard-reorder-panel {
+  display: inline-flex;
+  background-color: #fff;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 0 1px inset #D6D5C2; }
+
+li.selected .sortable-item {
+  border: 2px solid #b9b9b9; }
 
 footer {
   clear: both;

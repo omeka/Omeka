@@ -90,16 +90,18 @@ Omeka.Navigation = {};
 
     Omeka.Navigation.enableKeyboardNavigation = function() {
         $(document).on('click', '.keyboard-reorder', function() {
-            var keyboarReorderButton = $(this);
-            var currentSortableElement = keyboarReorderButton.parents('li').first();
-            var childSortableElements = currentSortableElement.find('li input, li button');
+            var keyboardReorderButton = $(this);
+            var currentSortableElement = keyboardReorderButton.parents('li').first();
             if (currentSortableElement.hasClass('selected')) {
                 currentSortableElement.removeClass('selected');
-                childSortableElements.removeAttr('disabled');
-            } else {
+                keyboardReorderButton.attr('aria-expanded', 'false');
+
+            } else { 
+                $('li.selected').find('.keyboard-reorder').attr('aria-expanded', 'false');
                 $('li.selected').removeClass('selected');
                 currentSortableElement.addClass('selected');
-                childSortableElements.attr('disabled', 'true');
+                keyboardReorderButton.attr('aria-expanded', 'true');
+                keyboardReorderButton.next('.keyboard-reorder-panel').find('button').first().focus();
             }
         })
     };
