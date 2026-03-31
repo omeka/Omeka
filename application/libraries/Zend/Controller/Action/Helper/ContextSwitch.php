@@ -529,7 +529,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
              * @see Zend_Controller_Action_Exception
              */
             require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception(sprintf('Context "%s" does not exist', $context));
+            throw new Zend_Controller_Action_ContextNotFoundException(sprintf('Context "%s" does not exist', $context));
         }
 
         return false;
