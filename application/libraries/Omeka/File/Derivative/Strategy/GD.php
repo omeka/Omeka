@@ -118,8 +118,10 @@ class Omeka_File_Derivative_Strategy_GD extends Omeka_File_Derivative_AbstractSt
             $result = imagejpeg($destinationGD, $destination);
         }
 
-        imagedestroy($sourceGD);
-        imagedestroy($destinationGD);
+        if (PHP_VERSION_ID < 80000) {
+            imagedestroy($sourceGD);
+            imagedestroy($destinationGD);
+        }
         return $result;
     }
 
@@ -170,8 +172,10 @@ class Omeka_File_Derivative_Strategy_GD extends Omeka_File_Derivative_AbstractSt
             $result = imagejpeg($destinationGD, $destination);
         }
 
-        imagedestroy($sourceGD);
-        imagedestroy($destinationGD);
+        if (PHP_VERSION_ID < 80000) {
+            imagedestroy($sourceGD);
+            imagedestroy($destinationGD);
+        }
         return $result;
     }
 
