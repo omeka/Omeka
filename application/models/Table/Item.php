@@ -140,7 +140,7 @@ class Table_Item extends Omeka_Db_Table
                     break;
 
                 default:
-                    throw new Omeka_Record_Exception(__('Invalid search type given!'));
+                    throw new Omeka_Record_InvalidSearchTypeException(__('Invalid search type given!'));
             }
 
             $predicateClause = "{$alias}.text {$predicate}";
