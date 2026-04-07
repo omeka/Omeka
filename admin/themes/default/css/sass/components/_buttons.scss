@@ -107,7 +107,7 @@
 }
 
 @mixin green {
-    color: darken($green, 5%);
+    color: darken($green, 7%);
     background: $lightgreen;
     border: 1px solid rgba($green, 0.25);
 

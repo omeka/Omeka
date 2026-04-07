@@ -232,10 +232,9 @@ span.title {
 }
 
 .featured.label {
-    color: $green;
+    color: darken($green, 7%);
     border-color: rgba($green, 0.65);
     background: $lightgreen;
-
 
     &:before {
         content: '\f005' / '';

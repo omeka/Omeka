@@ -598,7 +598,7 @@ span.button.green,
 a.button.green,
 input[type=submit].green,
 button.green {
-  color: rgb(49.9390243902, 97.5, 0);
+  color: rgb(44.7146341463, 87.3, 0);
   background: #eaf2e1;
   border: 1px solid rgba(63, 123, 0, 0.25);
 }
@@ -2253,7 +2253,7 @@ span.title small {
 }
 
 .featured.label {
-  color: #3f7b00;
+  color: rgb(44.7146341463, 87.3, 0);
   border-color: rgba(63, 123, 0, 0.65);
   background: #eaf2e1;
 }
