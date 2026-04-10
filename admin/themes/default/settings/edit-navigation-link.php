@@ -22,7 +22,7 @@
     }
     $checkboxClass = implode(' ', $checkboxClasses);
 ?>
-<li <?php echo ($template) ? 'class="template"' : ''; ?>> 
+<li <?php echo ($template) ? 'class="template"' : 'class="nav-list-item"'; ?>> 
     <div class="main_link">
         <div class="sortable-item drawer <?php echo ($template) ? 'opened' : ''; ?>">
             <span class="move icon" aria-label="<?php echo __('Move'); ?>" id="move-<?php echo $pageCount; ?>" aria-labelledby="move-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Move'); ?>"></span>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <?php if (isset($page) && $page->hasChildren()): ?>
-        <ul>
+        <ul class="nav-list-item-children">
         <?php foreach ($page as $childPage): ?>
             <?php $pageCount += 10; ?>
             <?php echo $this->partial('settings/edit-navigation-link.php', [

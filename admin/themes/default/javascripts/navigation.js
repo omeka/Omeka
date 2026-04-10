@@ -104,6 +104,43 @@ Omeka.Navigation = {};
                 keyboardReorderButton.next('.keyboard-reorder-panel').find('button').first().focus();
             }
         })
+
+        $(document).on('click', '.keyboard-reorder-panel button', function() {
+            var activeButton = $(this);
+            var selectedNavItem = activeButton.parents('.selected');
+            var activeClass = activeButton.attr('class');
+            var nextNavItem = selectedNavItem.next();
+            var prevNavItem = selectedNavItem.prev();
+            var prevNavItemChildren, parentNavItem;
+
+            switch(activeClass) {
+                case 'keyboard-reorder-down':
+                    selectedNavItem.insertAfter(nextNavItem);
+                    break;
+                case 'keyboard-reorder-up':
+                    selectedNavItem.insertBefore(prevNavItem);
+                    break;
+                case 'keyboard-reorder-nest':
+                    if (prevNavItem.length > 0) {
+                        prevNavItemChildren = prevNavItem.children('.nav-list-item-children').first();
+                        if (prevNavItemChildren.length == 0) {
+                            prevNavItemChildren = $('<ul></ul>');
+                            prevNavItemChildren.appendTo(prevNavItem);
+                        }
+                        selectedNavItem.appendTo(prevNavItemChildren);
+                        prevNavItem = selectedNavItem.prev();
+                    }
+                    break;
+                case 'keyboard-reorder-unnest':
+                    parentNavItem = selectedNavItem.parents('.nav-list-item').first();
+                    selectedNavItem.insertAfter(parentNavItem);
+                    break;
+                default:
+                    console.log('no reorder');
+            }
+
+            selectedNavItem.find('.' + activeClass).first().focus();
+        });
     };
 
     Omeka.Navigation.addNewNavLinkForm = function () {
