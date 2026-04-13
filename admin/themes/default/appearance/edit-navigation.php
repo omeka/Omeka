@@ -1,6 +1,12 @@
 <?php
 queue_js_file(['vendor/jquery.nestedSortable', 'navigation']);
 
+$successAlertTemplate = __("<span class='nav-item-title'></span> reordered. ");
+$failAlertTemplate = __("Cannot reorder further.");
+$upActionAlertTemplate = __("Moved above <span class='positional-nav-item-title'></span>.");
+$downActionAlertTemplate = __("Moved below <span class='positional-nav-item-title'></span>.");
+$nestActionAlertTemplate = __("Nested under <span class='positional-nav-item-title'></span>.");
+$unnestActionAlertTemplate = __("Unnested from <span class='positional-nav-item-title'></span>.");
 $pageTitle = __('Appearance');
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
@@ -15,6 +21,14 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
     <p class="explanation"><?php echo __('Check the links to display them ' 
     . 'in the main navigation. Click and drag the links into the preferred ' 
     . 'display order.'); ?></p>
+    <div class="sr-only" role="alert" id="reorder-alerts" 
+        data-success-alert-template="<?php echo $successAlertTemplate; ?>" 
+        data-fail-alert-template="<?php echo $failAlertTemplate; ?>" 
+        data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
+        data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>"
+        data-nest-action-alert-template="<?php echo $nestActionAlertTemplate; ?>"
+        data-unnest-action-alert-template="<?php echo $unnestActionAlertTemplate; ?>">
+    </div>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->partial('settings/edit-navigation-link.php', ['template' => true]); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
