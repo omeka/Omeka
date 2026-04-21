@@ -29,7 +29,7 @@
             <?php if ($template): ?>
             <input type="hidden" class="new-link-hidden" value="0">
             <?php endif; ?>
-            <input type="checkbox" name="<?php echo $checkboxId; ?>" id="<?php echo $checkboxId; ?>" value="<?php echo html_escape(json_encode($checkboxValue)); ?>" <?php echo $checkboxChecked; ?> class="<?php echo $checkboxClass; ?>" aria-label="<?php echo __('Enable'); ?>" aria-labelledby="<?php echo $checkboxId; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Enable'); ?>">
+            <input type="checkbox" id="<?php echo $checkboxId; ?>" value="<?php echo html_escape(json_encode($checkboxValue)); ?>" <?php echo $checkboxChecked; ?> class="<?php echo $checkboxClass; ?>" aria-label="<?php echo __('Enable'); ?>" aria-labelledby="<?php echo $checkboxId; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Enable'); ?>">
             <span class="drawer-name" id="drawer-<?php echo $pageCount; ?>">
             <?php echo (!$template) ? html_escape($page->getLabel()) : ''; ?>
             </span>
@@ -40,8 +40,8 @@
             <?php endif; ?>
         </div>
         <div class="drawer-contents <?php echo ($template) ? 'opened' : ''; ?>" id="contents-<?php echo $pageCount; ?>">
-            <label for="label-input-<?php echo $pageCount; ?>" class="label-label"><?php echo __('Label') ; ?></label><input type="text" id="label-input-<?php echo $pageCount; ?>" name="label-input-<?php echo $pageCount; ?>" class="navigation-label" />
-            <label for="uri-input-<?php echo $pageCount; ?>" class="uri-label"><?php echo __('URL'); ?></label><input type="text" id="uri-input-<?php echo $pageCount; ?>" name="uri-input-<?php echo $pageCount; ?>" class="navigation-uri" />
+            <label for="label-input-<?php echo $pageCount; ?>" class="label-label"><?php echo __('Label') ; ?></label><input type="text" id="label-input-<?php echo $pageCount; ?>" class="navigation-label">
+            <label for="uri-input-<?php echo $pageCount; ?>" class="uri-label"><?php echo __('URL'); ?></label><input type="text" id="uri-input-<?php echo $pageCount; ?>" class="navigation-uri">
             <div class="main_link_buttons"></div>
         </div>
     </div>
