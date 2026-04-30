@@ -41,24 +41,23 @@ echo flash();
                     <?php $key = 0; ?>
                     <?php foreach (loop('Collection') as $collection): ?>
                     <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                        <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
-                            <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
-                                <?php echo link_to_collection($collectionImage, ['class' => 'image']); ?>
-                            <?php endif; ?>
-
-
+                        <?php 
+                        $collectionTitle = metadata($collection, 'rich_title', ['no_escape' => true]); 
+                        $collectionFeatured = $collection->featured;
+                        $collectionPrivate = !$collection->public;
+                        ?>
+                        <td class="record-info">
                             <span class="title">
-                                <?php echo link_to_collection(); ?>
-                                <?php if ($collection->featured): ?>
-                                <div class="featured-icon">
-                                    <span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>
-                                    <span class="sr-only icon-label"><?php echo __('Featured'); ?></span>
-                                </div>
+                                <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
+                                    <?php $collectionTitle = $collectionImage . $collectionTitle; ?>
                                 <?php endif; ?>
-                                <?php if(!$collection->public): ?>
-                                    <span class="private"><?php echo __('(Private)'); ?></span>
-                                <?php endif; ?>
+                                <?php echo link_to_collection($collectionTitle); ?>
                             </span>
+
+                            <div class="labels">
+                                <?php echo ($collectionFeatured) ? '<span class="featured label">' . __('Featured') . '</span>': ''; ?>
+                                <?php echo ($collectionPrivate) ? '<span class="private label">' . __('Private') . '</span>': ''; ?>
+                            </div>
 
                             <?php if (is_allowed($collection, 'edit')): ?>
                             <ul class="action-links">

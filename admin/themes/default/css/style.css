@@ -369,6 +369,11 @@ dd {
   box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
 }
 
+.collection .record-info .title img {
+  width: 48px;
+  box-shadow: -3px -3px rgba(0, 0, 0, 0.2), -6px -6px rgba(0, 0, 0, 0.1);
+}
+
 #info-field {
   word-wrap: break-word;
 }
@@ -593,7 +598,7 @@ span.button.green,
 a.button.green,
 input[type=submit].green,
 button.green {
-  color: rgb(49.9390243902, 97.5, 0);
+  color: rgb(44.7146341463, 87.3, 0);
   background: #eaf2e1;
   border: 1px solid rgba(63, 123, 0, 0.25);
 }
@@ -2196,6 +2201,21 @@ td {
   width: 50%;
 }
 
+.browse .record-info .title img {
+  float: left;
+  margin: 0 10px 0 0;
+  max-width: 20%;
+  box-sizing: border-box;
+  border: 1px solid #E4E5DE;
+}
+
+@media (max-width: 767px) {
+  .browse .record-info .title img {
+    width: auto;
+    max-height: 6rem;
+    margin-bottom: 5px;
+  }
+}
 span.title {
   margin: 0 5px 5px 0;
   font-weight: 700;
@@ -2207,27 +2227,47 @@ span.title small {
 }
 @media (max-width: 767px) {
   span.title {
-    margin-bottom: 10px;
     display: block;
   }
 }
 
-.featured-icon,
-.private {
-  display: inline-block;
+.labels {
+  margin-top: 2.5px;
 }
 
-span.featured:after {
+.labels .label {
+  display: inline-flex;
+  gap: 3px;
+  border-radius: 2px;
+  padding: 2.5px 5px;
+  font-weight: bold;
+  font-size: 12px;
+  align-items: center;
+  border: 0 !important;
+  background-color: #f1f2f2;
+}
+.labels .label:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  content: "\f005";
-  width: 24px;
-  height: 24px;
-  color: #82423B;
+  font-size: 10px;
 }
 
-span.private {
-  font-weight: normal;
+.featured.label {
+  color: rgb(44.7146341463, 87.3, 0);
+  border-color: rgba(63, 123, 0, 0.65);
+  background: #eaf2e1;
+}
+.featured.label:before {
+  content: "\f005"/"";
+}
+
+.private.label {
+  color: #003576;
+  border-color: rgba(0, 53, 118, 0.65);
+  background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
+}
+.private.label:before {
+  content: "\f070"/"";
 }
 
 .details {
@@ -2494,27 +2534,6 @@ ul.details li:last-child {
 .items.browse .input-block {
   overflow: auto;
   margin: 0 0 20px 0;
-}
-
-.items.browse a.item-thumbnail {
-  float: left;
-  margin: 0 10px 0 0;
-  width: 20%;
-}
-
-@media (max-width: 767px) {
-  .items.browse a.item-thumbnail {
-    width: auto;
-    margin-bottom: 10px;
-  }
-}
-.items.browse .item-thumbnail img {
-  display: block;
-  border: 1px solid #E4E5DE;
-  width: 100%;
-  margin: 0;
-  float: left;
-  box-sizing: border-box;
 }
 
 .table-actions {

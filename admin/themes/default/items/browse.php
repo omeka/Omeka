@@ -69,24 +69,26 @@ echo item_search_filters();
                     </td>
                     <?php endif; ?>
 
-                    <td class="item-info">
-
-                        <?php if (metadata('item', 'has files')): ?>
-                        <?php echo link_to_item(item_image('square_thumbnail', [], 0, $item), ['class' => 'item-thumbnail'], 'show', $item); ?>
+                    <td class="record-info">
+                        <?php 
+                        $itemTitle = metadata($item, 'rich_title', ['no_escape' => true]); 
+                        if (metadata('item', 'has files')) {
+                            $itemTitle = item_image('square_thumbnail', ['class' => 'item-thumbnail', 'alt' => ''], 0, $item) . $itemTitle; 
+                        }
+                        $itemFeatured = $item->featured;
+                        $itemPrivate = !$item->public;
+                        ?>
+                        <span class="title"><?php echo link_to_item($itemTitle); ?></span>
+                        <?php if ($itemFeatured || $itemPrivate): ?>
+                        <div class="labels">
+                            <?php if ($itemFeatured): ?>
+                            <span class="featured label"><?php echo __('Featured'); ?></span>
+                            <?php endif; ?>
+                            <?php if ($itemPrivate): ?>
+                            <span class="private label"><?php echo __('Private'); ?></span>
+                            <?php endif; ?>
+                        </div>
                         <?php endif; ?>
-
-                        <span class="title">
-                            <?php echo link_to_item(); ?>
-                            <?php if ($item->featured): ?>
-                            <div class="featured-icon">
-                                <span class="featured" aria-hidden="true" title="<?php echo __('Featured'); ?>"></span>
-                                <span class="sr-only icon-label"><?php echo __('Featured'); ?></span>
-                            </div>
-                            <?php endif; ?>
-                            <?php if(!$item->public): ?>
-                                <span class="private"><?php echo __('(Private)'); ?></span>
-                            <?php endif; ?>
-                            </span>
                         <ul class="action-links group">
                             <?php if (is_allowed($item, 'edit')): ?>
                             <li>
