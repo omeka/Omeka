@@ -1320,6 +1320,12 @@ dialog.o-modal {
   position: relative;
 }
 
+@media (max-width: 991px) {
+  dialog.o-modal {
+    min-width: 0;
+    max-width: calc(100% - 1rem);
+  }
+}
 dialog.o-modal::backdrop {
   background-color: rgba(0, 0, 0, 0.45);
 }
