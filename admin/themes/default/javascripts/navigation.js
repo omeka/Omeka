@@ -152,6 +152,15 @@ Omeka.Navigation = {};
             console.log(reorderAlertElement.text());
         });
 
+        $(document).on('click', '.delete-drawer', function() {
+            var deleteButton = $(this);
+            var parentLi = deleteButton.parents('li').first();
+            if (parentLi.hasClass('selected')) {
+                var keyboardReorder = parentLi.find('.keyboard-reorder').first();
+                keyboardReorder.click();
+            }
+        });
+
         var constructAlert = function(selectedNavItem, reorderAction, positionalNavItem) {
             var newAlert = '';
             if ((positionalNavItem !== undefined) && (positionalNavItem.length > 0)) {

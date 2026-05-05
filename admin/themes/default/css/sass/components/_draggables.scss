@@ -106,7 +106,8 @@
 .drawer.deleted .delete-drawer,
 .drawer.deleted .drawer-toggle,
 .drawer:not(.deleted) .undo-delete, 
-.drawer.deleted ~ ul .undo-delete {
+.drawer.deleted ~ ul .undo-delete,
+.drawer.deleted .keyboard-reorder {
     display: none;
 }
 
@@ -186,7 +187,7 @@
     border: 1px solid $darkgrayborder;
     box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
     line-height: 1.5em;
-    margin: -2px 0 2px 0;
+    margin: -2px 0 0 0;
     overflow: auto;
     padding: $spacing-l;
     
@@ -263,7 +264,7 @@
     display: none;
 }
 
-.selected > .ui-sortable-handle > .drawer > .keyboard-reorder {
+.selected > .main_link > .drawer > .keyboard-reorder {
     background-color: $darkgrayborder;
     border-radius: 3px 0 0 3px;
 
@@ -273,7 +274,7 @@
     }
 }
 
-.selected > .ui-sortable-handle > .drawer > .keyboard-reorder-panel {
+.selected > .main_link > .drawer > .keyboard-reorder-panel {
     display: inline-flex;
     background-color: #fff;
     border-radius: 0 3px 3px 0;
@@ -282,7 +283,7 @@
 
 li.selected {
 
-    .sortable-item {
+    .main_link {
         border: 2px solid #b9b9b9;
     }
 }
