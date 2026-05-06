@@ -41,6 +41,7 @@ if ($this->pageCount > 1):
                     . '</label>';
         echo __('%s of %s', $pageInput, $this->last);
         ?>
+        <input type="submit" value= "Go" />
         </form>
         </li>
 
