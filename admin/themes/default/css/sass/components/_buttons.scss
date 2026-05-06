@@ -173,7 +173,7 @@ button {
 [popover="hint"] {
   inset: unset;
   position: absolute;
-  top: calc(anchor(bottom) + 5px);
+  top: anchor(bottom);
   margin: 0;
   padding: 8px;
   border-radius: 6px;

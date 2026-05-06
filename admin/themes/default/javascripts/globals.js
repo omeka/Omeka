@@ -161,7 +161,7 @@ if (!Omeka) {
             tooltipTop = tooltipPosition['top'];
             iconHeight = iconPosition['height'];
             if (tooltipTop < (iconTop + iconHeight)) {
-                let newTooltipTop = iconTop + iconHeight + 5;
+                let newTooltipTop = iconTop + iconHeight;
                 tooltip.style.top = `${newTooltipTop}px`;
             }
         };
