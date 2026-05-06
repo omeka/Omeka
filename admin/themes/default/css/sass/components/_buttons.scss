@@ -25,6 +25,8 @@
     white-space: normal;
     transition-duration: 0.5s;
     transition-property: border-color, background, outline, box-shadow, z-index;
+    min-width: 24px;
+    min-height: 24px;
 }
 
 @mixin large {

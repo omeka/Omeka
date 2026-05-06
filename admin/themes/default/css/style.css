@@ -463,6 +463,8 @@ button {
   white-space: normal;
   transition-duration: 0.5s;
   transition-property: border-color, background, outline, box-shadow, z-index;
+  min-width: 24px;
+  min-height: 24px;
 }
 span.button.full-width,
 a.button.full-width,
@@ -981,6 +983,11 @@ button.ui-dialog-titlebar-close {
   transform: rotate(90deg);
 }
 
+.drawer-toggle[aria-expanded=false] .tooltip .collapse,
+.drawer-toggle[aria-expanded=true] .tooltip .expand {
+  display: none;
+}
+
 .delete-drawer {
   display: inline-block;
 }
@@ -993,6 +1000,10 @@ button.ui-dialog-titlebar-close {
   content: "\f0e2";
   font-size: 12px;
   line-height: 1;
+}
+
+.undo-delete .tooltip {
+  color: #fff;
 }
 
 .drawer-contents {
@@ -2578,6 +2589,8 @@ ul.details li:last-child {
     white-space: normal;
     transition-duration: 0.5s;
     transition-property: border-color, background, outline, box-shadow, z-index;
+    min-width: 24px;
+    min-height: 24px;
     display: inline-block;
     margin: 0 5px 20px 0;
     padding: 5px 10px;

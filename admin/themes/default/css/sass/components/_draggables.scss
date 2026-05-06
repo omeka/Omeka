@@ -171,6 +171,11 @@
     transform: rotate(90deg);
 }
 
+.drawer-toggle[aria-expanded="false"] .tooltip .collapse,
+.drawer-toggle[aria-expanded="true"] .tooltip .expand {
+    display: none;
+}
+
 .delete-drawer { display: inline-block; }
 .delete-drawer .icon:after { content: "\f00d"; }
 
@@ -178,6 +183,10 @@
     content: "\f0e2";
     font-size: 12px;
     line-height: 1;
+}
+
+.undo-delete .tooltip {
+    color: #fff;
 }
 
 .drawer-contents {
