@@ -70,16 +70,8 @@
 		    }
         }
 
-        .pagination_next a,
-        .pagination_previous a {
-            text-indent: -9999px;
-            position: relative;
-            height: 38px;
-            width: 38px;
-        }
-
-        .pagination_next a:after,
-        .pagination_previous a:after {
+        .pagination_next .icon:after,
+        .pagination_previous .icon:after {
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
             position: absolute;
@@ -91,12 +83,12 @@
             text-align: center;
         }
 
-        .pagination_next a:after {
+        .pagination_next .icon:after {
             text-indent: 0;
             content: "\f105";
         }
 
-        .pagination_previous a:after {
+        .pagination_previous .icon:after {
             text-indent: -3px;
             content: "\f104";
         }

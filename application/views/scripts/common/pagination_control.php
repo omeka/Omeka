@@ -8,7 +8,10 @@ if ($this->pageCount > 1):
         <!-- Previous page link -->
         <li class="pagination_previous">
             <?php $getParams['page'] = $previous; ?>
-            <a rel="prev" href="<?php echo html_escape($this->url([], null, $getParams)); ?>"><?php echo __('Previous Page'); ?></a>
+            <a class="has-tooltip" rel="prev" href="<?php echo html_escape($this->url([], null, $getParams)); ?>">
+                <span class="icon" aria-hidden="true"></span>
+                <div class="tooltip" popover="hint"><?php echo __('Previous Page'); ?></div>
+            </a>
         </li>
         <?php endif; ?>
 
@@ -48,7 +51,10 @@ if ($this->pageCount > 1):
         <!-- Next page link -->
         <li class="pagination_next">
             <?php $getParams['page'] = $next; ?>
-            <a rel="next" href="<?php echo html_escape($this->url([], null, $getParams)); ?>"><?php echo __('Next Page'); ?></a>
+            <a class="has-tooltip" rel="next" href="<?php echo html_escape($this->url([], null, $getParams)); ?>">
+                <span class="icon" aria-hidden="true"></span>
+                <div class="tooltip" popover="hint"><?php echo __('Next Page'); ?></div>
+            </a>
         </li>
         <?php endif; ?>
     </ul>
