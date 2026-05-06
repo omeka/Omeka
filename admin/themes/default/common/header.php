@@ -45,7 +45,10 @@
     <div id="site-title" class="two columns">
         <?php echo link_to_home_page(option('site_title'), ['target' => '_blank']); ?>
     </div>
-	<button id="mobile-navbar-toggle" class="mobile-menu" data-target="#global-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
+	<button id="mobile-navbar-toggle" class="mobile-menu has-tooltip" data-target="#global-nav" aria-expanded="false">
+        <span class="admin-icon icon" aria-hidden="true"></span>
+        <div class="tooltip" popover="hint"><?php echo __('Admin'); ?></div>
+    </button>
 
     <nav id="global-nav">
         <?php echo common('global-nav'); ?>

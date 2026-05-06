@@ -1518,12 +1518,11 @@ header nav {
      -moz-appearance: initial;
           appearance: initial;
   cursor: pointer;
-  text-indent: -9999px;
   background: transparent;
   border: 0;
   margin: -5px 0 0 auto;
 }
-#mobile-navbar-toggle:after {
+#mobile-navbar-toggle .icon:after {
   content: "\f141";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
