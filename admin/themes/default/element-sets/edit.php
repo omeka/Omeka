@@ -22,11 +22,17 @@ echo flash();
             <?php $elementId = $element->id; ?>
             <li class="element">
             <div class="sortable-item drawer">
-                <span id="move-<?php echo $elementId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>"></span>
+                <div class="move-handle has-tooltip" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>">
+                    <span id="move-<?php echo $elementId; ?>" class="move icon" aria-hidden="true"></span>
+                    <div class="tooltip" popover="hint"><?php echo __('Move'); ?></div>
+                </div>
                 <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, ['class' => 'element-order']); ?>
                 <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>
-                <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?>" class="drawer-toggle" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Comment'); ?>"><span class="icon" aria-hidden="true"></span></button>
+                <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" class="drawer-toggle has-tooltip" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>">
+                    <span class="icon" aria-hidden="true"></span>
+                    <div class="tooltip" popover="hint"><span class="expand"><?php echo __('Expand'); ?></span><span class="collapse"><?php echo __('Collapse'); ?></span></div>
+                </button>
             </div>
             <div class="drawer-contents">
                 <?php echo __($element->description); ?>
