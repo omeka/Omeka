@@ -289,7 +289,7 @@ hr {
   .section-title {
     width: 100%;
     padding-right: 0;
-    margin-top: 80px;
+    margin-top: 40px;
   }
 }
 
@@ -1744,7 +1744,7 @@ header nav {
     float: none;
     width: 100%;
     position: relative;
-    top: -50px;
+    top: 20px;
   }
 }
 #search-form p {
