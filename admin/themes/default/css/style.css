@@ -873,7 +873,8 @@ button.ui-dialog-titlebar-close {
 
 .drawer > button {
   max-width: 350px;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

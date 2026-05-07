@@ -150,41 +150,41 @@ if (!Omeka) {
         });
     };
 
+    Omeka.positionToolTip = function (icon, tooltip) {
+        let iconPosition = icon.getBoundingClientRect();
+        let tooltipPosition = tooltip.getBoundingClientRect();
+        iconTop = iconPosition['top'];
+        tooltipTop = tooltipPosition['top'];
+        iconHeight = iconPosition['height'];
+        if (tooltipTop < (iconTop + iconHeight)) {
+            let newTooltipTop = iconTop + iconHeight;
+            tooltip.style.top = `${newTooltipTop}px`;
+        }
+    };
+
+    Omeka.addToolTipEventListeners = function (hasTooltipElement, tooltipElement) {
+        hasTooltipElement.addEventListener("mouseover", () => {
+            tooltipElement.showPopover({ source: tooltipElement });
+            Omeka.positionToolTip(hasTooltipElement, tooltipElement);
+        });
+        hasTooltipElement.addEventListener("focus", () => {
+            tooltipElement.showPopover({ source: tooltipElement });
+            Omeka.positionToolTip(hasTooltipElement, tooltipElement);
+        });
+        hasTooltipElement.addEventListener("mouseout", () => {
+            tooltipElement.hidePopover();
+        });
+        hasTooltipElement.addEventListener("blur", () => {
+            tooltipElement.hidePopover();
+        });
+    };
+
     Omeka.setupTooltips = function () {
         const tooltips = $('.tooltip');
         const buttons = $('.has-tooltip');
 
-        function positionTooltip (icon, tooltip) {
-            let iconPosition = icon.getBoundingClientRect();
-            let tooltipPosition = tooltip.getBoundingClientRect();
-            iconTop = iconPosition['top'];
-            tooltipTop = tooltipPosition['top'];
-            iconHeight = iconPosition['height'];
-            if (tooltipTop < (iconTop + iconHeight)) {
-                let newTooltipTop = iconTop + iconHeight;
-                tooltip.style.top = `${newTooltipTop}px`;
-            }
-        };
-
-        function addEventListeners(i) {
-            buttons[i].addEventListener("mouseover", () => {
-                tooltips[i].showPopover({ source: buttons[i] });
-                positionTooltip(buttons[i], tooltips[i]);
-            });
-            buttons[i].addEventListener("mouseout", () => {
-                tooltips[i].hidePopover();
-            });
-            buttons[i].addEventListener("focus", () => {
-                tooltips[i].showPopover({ source: buttons[i] });
-                positionTooltip(buttons[i], tooltips[i]);
-            });
-            buttons[i].addEventListener("blur", () => {
-                tooltips[i].hidePopover();
-            });
-        }
-
         for (let i = 0; i < buttons.length; i++) {
-            addEventListeners(i);
+            Omeka.addToolTipEventListeners(buttons[i], tooltips[i]);
         }
     };
 
