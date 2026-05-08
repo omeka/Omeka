@@ -150,7 +150,7 @@ if (!Omeka) {
         });
     };
 
-    Omeka.positionToolTip = function (icon, tooltip) {
+    Omeka.positionTooltip = function (icon, tooltip) {
         let iconPosition = icon.getBoundingClientRect();
         let tooltipPosition = tooltip.getBoundingClientRect();
         iconTop = iconPosition['top'];
@@ -162,30 +162,30 @@ if (!Omeka) {
         }
     };
 
-    Omeka.addToolTipEventListeners = function (hasTooltipElement, tooltipElement) {
-        hasTooltipElement.addEventListener("mouseover", () => {
-            tooltipElement.showPopover({ source: tooltipElement });
-            Omeka.positionToolTip(hasTooltipElement, tooltipElement);
-        });
-        hasTooltipElement.addEventListener("focus", () => {
-            tooltipElement.showPopover({ source: tooltipElement });
-            Omeka.positionToolTip(hasTooltipElement, tooltipElement);
-        });
-        hasTooltipElement.addEventListener("mouseout", () => {
-            tooltipElement.hidePopover();
-        });
-        hasTooltipElement.addEventListener("blur", () => {
-            tooltipElement.hidePopover();
-        });
-    };
+    Omeka.addTooltipEventListeners = function (buttons, tooltips) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("mouseover", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                Omeka.positionTooltip(buttons[i], tooltips[i]);
+            });
+            buttons[i].addEventListener("mouseout", () => {
+                tooltips[i].hidePopover();
+            });
+            buttons[i].addEventListener("focus", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                Omeka.positionTooltip(buttons[i], tooltips[i]);
+            });
+            buttons[i].addEventListener("blur", () => {
+                tooltips[i].hidePopover();
+            });
+        }
+    }
 
     Omeka.setupTooltips = function () {
         const tooltips = $('.tooltip');
         const buttons = $('.has-tooltip');
 
-        for (let i = 0; i < buttons.length; i++) {
-            Omeka.addToolTipEventListeners(buttons[i], tooltips[i]);
-        }
+        Omeka.addTooltipEventListeners(buttons, tooltips);
     };
 
     Omeka.setupModals = function () {

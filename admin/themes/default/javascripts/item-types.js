@@ -118,9 +118,7 @@ Omeka.ItemTypes = {};
                         var responseElement = $('#element-list .element').last();
                         var hasTooltip = responseElement.find('.has-tooltip');
                         var tooltips = responseElement.find('.tooltip');
-                        for (let i = 0; i < hasTooltip.length; i++) {
-                            Omeka.addToolTipEventListeners(hasTooltip[i], tooltips[i]);
-                        }
+                        Omeka.addTooltipEventListeners(hasTooltip, tooltips);
                     }
                     var totalElements = $('#item-type-elements .element').length;
                     $('#add-element-success .element-count').text(totalElements);
