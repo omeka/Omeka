@@ -6,7 +6,10 @@
             <li class="file">
                 <?php $fileId = $file->id; ?>
                 <div class="sortable-item">
-                    <span id="move-<?php echo $fileId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>"></span>
+                    <div class="move-handle has-tooltip" id="move-<?php echo $fileId; ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>">
+                        <span class="move icon" aria-hidden="true"></span>
+                        <div class="tooltip" popover="hint"><?php echo __('Move'); ?></div>
+                    </div>
                     <?php echo file_image('square_thumbnail', [], $file); ?>
                     <?php echo link_to($file, 'show', html_escape($file->original_filename), ['class' => 'drawer-name', 'id' => 'file-' . $fileId]); ?>
                     <?php echo $this->formHidden("order[{$file->id}]", $file->order, ['class' => 'file-order']); ?>

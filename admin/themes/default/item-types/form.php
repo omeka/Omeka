@@ -36,7 +36,10 @@ jQuery(document).ready(function () {
                 <li class="element">
                     <div class="sortable-item drawer">
                     <?php $elementId = html_escape($element->id); ?>
-                    <span id="move-<?php echo $elementId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name"></span>
+                    <div class="move-handle has-tooltip" id="move-<?php echo $elementId; ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
+                        <span class="move icon" aria-hidden="true"></span>
+                        <div class="tooltip" popover="hint"><?php echo __('Move'); ?>"></div>
+                    </div>
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
                     <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
                     <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" class="drawer-toggle has-tooltip" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>">
