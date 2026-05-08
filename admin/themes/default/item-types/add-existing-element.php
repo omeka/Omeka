@@ -25,11 +25,11 @@
         ?>
         <button type="button" id="return-element-link-<?php echo $element_id_temp; ?>" class="undo-delete has-tooltip" data-action-selector="deleted" aria-labelledby="return-element-link-<?php echo $element_id_temp; ?> elements-to-add-<?php echo $element_id_temp; ?>-id">
             <span class="icon" aria-hidden="true"></span>
-            <div class="tooltip" popover="hint"><?php echo __('Undo'); ?></div>
+            <div class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
         </button>
         <button type="button" id="remove-element-link-<?php echo $element_id_temp; ?>" class="delete-drawer has-tooltip" data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $element_id_temp; ?> elements-to-add-<?php echo $element_id_temp; ?>-id">
             <span class="icon" aria-hidden="true"></span>
-            <div class="tooltip" popover="hint"><?php echo __('Remove'); ?></div>
+            <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
         </button>
     </div>
     <div class="drawer-contents opened"></div>

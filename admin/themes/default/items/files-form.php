@@ -8,7 +8,7 @@
                 <div class="sortable-item">
                     <div class="move-handle has-tooltip" id="move-<?php echo $fileId; ?>" aria-labelledby="move-<?php echo $fileId; ?> file-<?php echo $fileId; ?>">
                         <span class="move icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Move'); ?></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Move'); ?></div>
                     </div>
                     <?php echo file_image('square_thumbnail', [], $file); ?>
                     <?php echo link_to($file, 'show', html_escape($file->original_filename), ['class' => 'drawer-name', 'id' => 'file-' . $fileId]); ?>

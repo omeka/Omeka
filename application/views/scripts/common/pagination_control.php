@@ -10,7 +10,7 @@ if ($this->pageCount > 1):
             <?php $getParams['page'] = $previous; ?>
             <a class="has-tooltip" rel="prev" href="<?php echo html_escape($this->url([], null, $getParams)); ?>">
                 <span class="icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><?php echo __('Previous Page'); ?></div>
+                <div class="tooltip" popover="auto"><?php echo __('Previous Page'); ?></div>
             </a>
         </li>
         <?php endif; ?>
@@ -53,7 +53,7 @@ if ($this->pageCount > 1):
             <?php $getParams['page'] = $next; ?>
             <a class="has-tooltip" rel="next" href="<?php echo html_escape($this->url([], null, $getParams)); ?>">
                 <span class="icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><?php echo __('Next Page'); ?></div>
+                <div class="tooltip" popover="auto"><?php echo __('Next Page'); ?></div>
             </a>
         </li>
         <?php endif; ?>

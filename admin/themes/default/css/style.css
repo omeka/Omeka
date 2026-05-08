@@ -631,7 +631,7 @@ button.green * {
   position: relative;
 }
 
-[popover=hint] {
+[popover=auto] {
   inset: unset;
   position: absolute;
   top: anchor(bottom);

@@ -27,7 +27,7 @@
         <div class="sortable-item drawer <?php echo ($template) ? 'opened' : ''; ?>">
             <div class="move-handle has-tooltip">
                 <span class="move icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><?php echo __('Move'); ?></div>
+                <div class="tooltip" popover="auto"><?php echo __('Move'); ?></div>
             </div>
             <?php if ($template): ?>
             <input type="hidden" class="new-link-hidden" value="0">
@@ -38,16 +38,16 @@
             </span>
             <button type="button" id="drawer-toggle-<?php echo $pageCount; ?>" class="drawer-toggle has-tooltip" data-action-selector="opened" aria-expanded="<?php echo ($template) ? 'true' : 'false'; ?>" aria-controls="contents-<?php echo $pageCount; ?>" aria-labelledby="drawer-<?php echo $pageCount; ?> drawer-toggle-<?php echo $pageCount; ?>">
                 <span class="icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><span class="expand"><?php echo __('Expand'); ?></span><span class="collapse"><?php echo __('Collapse'); ?></span></div>
+                <div class="tooltip" popover="auto"><span class="expand"><?php echo __('Expand'); ?></span><span class="collapse"><?php echo __('Collapse'); ?></span></div>
             </button>
             <?php if ($template || $checkboxValue['can_delete']): ?>
             <button type="button" id="drawer-undo-<?php echo $pageCount; ?>" class="undo-delete has-tooltip" data-action-selector="deleted" aria-labelledby="drawer-undo-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>"  title="<?php echo __('Undo'); ?>">
                 <span class="icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><?php echo __('Undo'); ?></div>
+                <div class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
             </button>
             <button type="button" id="drawer-remove-<?php echo $pageCount; ?>" class="delete-drawer has-tooltip" data-action-selector="deleted" aria-labelledby="drawer-remove-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>">
                 <span class="icon" aria-hidden="true"></span>
-                <div class="tooltip" popover="hint"><?php echo __('Remove'); ?></div>
+                <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
             </button>
             <?php endif; ?>
         </div>

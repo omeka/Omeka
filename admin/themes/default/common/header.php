@@ -47,7 +47,7 @@
     </div>
 	<button id="mobile-navbar-toggle" class="mobile-menu has-tooltip" data-target="#global-nav" aria-expanded="false">
         <span class="admin-icon icon" aria-hidden="true"></span>
-        <div class="tooltip" popover="hint"><?php echo __('Admin'); ?></div>
+        <div class="tooltip" popover="auto"><?php echo __('Admin'); ?></div>
     </button>
 
     <nav id="global-nav">

@@ -38,13 +38,13 @@ jQuery(document).ready(function () {
                     <?php $elementId = html_escape($element->id); ?>
                     <div class="move-handle has-tooltip" id="move-<?php echo $elementId; ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
                         <span class="move icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Move'); ?>"></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Move'); ?>"></div>
                     </div>
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
                     <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
                     <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" class="drawer-toggle has-tooltip" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint">
+                        <div class="tooltip" popover="auto">
                             <span class="expand"><?php echo __('Expand'); ?></span>
                             <span class="collapse"><?php echo __('Collapse'); ?></span>
                         </div>
@@ -52,11 +52,11 @@ jQuery(document).ready(function () {
                     <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
                     <button type="button" id="remove-element-link-<?php echo $elementId; ?>" class="delete-drawer has-tooltip" data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Remove'); ?></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
                     </button>
                     <button type="button" id="return-element-link-<?php echo $elementId; ?>" class="undo-delete has-tooltip" data-action-selector="deleted" aria-labelledby="return-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Undo'); ?></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
                     </button>
                     <?php echo $this->formHidden("elements[$elementId][order]", $elementOrder, ['size'=>2, 'class' => 'element-order']); ?>
                     <?php endif; ?>

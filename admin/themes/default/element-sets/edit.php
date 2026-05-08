@@ -24,14 +24,14 @@ echo flash();
             <div class="sortable-item drawer">
                 <div class="move-handle has-tooltip" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>">
                     <span id="move-<?php echo $elementId; ?>" class="move icon" aria-hidden="true"></span>
-                    <div class="tooltip" popover="hint"><?php echo __('Move'); ?></div>
+                    <div class="tooltip" popover="auto"><?php echo __('Move'); ?></div>
                 </div>
                 <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, ['class' => 'element-order']); ?>
                 <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>
                 <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" class="drawer-toggle has-tooltip" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>">
                     <span class="icon" aria-hidden="true"></span>
-                    <div class="tooltip" popover="hint"><span class="expand"><?php echo __('Expand'); ?></span><span class="collapse"><?php echo __('Collapse'); ?></span></div>
+                    <div class="tooltip" popover="auto"><span class="expand"><?php echo __('Expand'); ?></span><span class="collapse"><?php echo __('Collapse'); ?></span></div>
                 </button>
             </div>
             <div class="drawer-contents">

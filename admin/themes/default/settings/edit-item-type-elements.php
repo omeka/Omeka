@@ -23,11 +23,11 @@ echo flash();
                     <?php $buttonToggleLabel = ' element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
                     <button type="button" id="return-element-link-<?php echo $elementId; ?>" class="undo-delete has-tooltip" data-action-selector="deleted" aria-labelledby="return-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Remove'); ?></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
                     </button>
                     <button type="button" id="remove-element-link-<?php echo $elementId; ?>" class="delete-drawer has-tooltip"  data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="hint"><?php echo __('Remove'); ?></div>
+                        <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
                     </button>
                     <?php echo $this->formHidden("elements[{$elementId}][delete]", "", ['class' => 'element-delete-hidden']); ?>
                 </div>

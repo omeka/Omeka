@@ -9,12 +9,12 @@
     <?php if ($options['show_advanced']): ?>
     <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced has-tooltip button o-modal-trigger" data-modal-target="advanced-form">
         <span class="icon" aria-hidden="true"></span>
-        <div id="advanced-search-tooltip" class="tooltip" popover="hint"><?php echo __('Search options') ?></div>
+        <div id="advanced-search-tooltip" class="tooltip" popover="auto"><?php echo __('Search options') ?></div>
     </button>
     <dialog id="advanced-form" class="o-modal" aria-labelledby="advanced-options-heading">
         <button type="button" class="o-modal-close o-icon-close has-tooltip">
             <span class="icon" aria-hidden="true"></span>
-            <div id="advanced-close-tooltip" class="tooltip" popover="hint"><?php echo __('Close') ?></div>
+            <div id="advanced-close-tooltip" class="tooltip" popover="auto"><?php echo __('Close') ?></div>
         </button>
         <h2 id="advanced-options-heading"><?php echo __('Search options'); ?></h2>
         <fieldset id="query-types">
@@ -44,7 +44,7 @@
             'type' => 'submit', 
             'title' => __('Submit'), 
             'class' => 'has-tooltip button', 
-            'content' => '<span class="icon" aria-hidden="true"></span><div id="search-submit-tooltip" class="tooltip" popover="hint">' . __('Submit') . '</div>', 
+            'content' => '<span class="icon" aria-hidden="true"></span><div id="search-submit-tooltip" class="tooltip" popover="auto">' . __('Submit') . '</div>', 
             'escape' => false,
             ]
         ); 
