@@ -128,7 +128,11 @@ Omeka.Navigation = {};
                 var totalLinks = $('#navigation_main_list .main_link').length;
                 $('.link-count').text(totalLinks);
                 $('#new-link-success').show();
+
+                var newLinkHasTooltip = newLink.find('.has-tooltip');
+                var newLinkTooltips = newLink.find('.tooltip');
                 Omeka.Navigation.updateForNewLinks();
+                Omeka.addTooltipEventListeners(newLinkHasTooltip, newLinkTooltips);
             } else {
                 if (!n_label) { $('#label-required').show(); }
                 if (!n_uri) { $('#uri-required').show(); }
