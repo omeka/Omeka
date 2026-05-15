@@ -153,12 +153,17 @@ if (!Omeka) {
     Omeka.positionTooltip = function (icon, tooltip) {
         let iconPosition = icon.getBoundingClientRect();
         let tooltipPosition = tooltip.getBoundingClientRect();
-        iconTop = iconPosition['top'];
-        tooltipTop = tooltipPosition['top'];
-        iconHeight = iconPosition['height'];
-        if (tooltipTop < (iconTop + iconHeight)) {
-            let newTooltipTop = iconTop + iconHeight;
+        let iconLeft = iconPosition['left'];
+        let iconWidth = iconPosition['width'];
+        let iconCenter = iconLeft + (.5 * iconPosition['width']);
+        let tooltipCenter = tooltipPosition['left'] + (.5 * tooltipPosition['width']);
+        if (tooltipPosition['top'] < (iconPosition['top'] + iconPosition['height'])) {
+            let newTooltipTop = iconPosition['top'] + iconPosition['height'];
             tooltip.style.top = `${newTooltipTop}px`;
+        }
+        if (iconCenter !== tooltipCenter) {
+            let newToolTipLeft = iconLeft + (.5 * iconWidth) - (.5 * tooltipPosition['width']);
+            tooltip.style.left = `${newToolTipLeft}px`;
         }
     };
 
