@@ -172,16 +172,28 @@ if (!Omeka) {
             buttons[i].addEventListener("mouseover", () => {
                 tooltips[i].showPopover({ source: buttons[i] });
                 Omeka.positionTooltip(buttons[i], tooltips[i]);
+                window.addEventListener('resize', function() {
+                    Omeka.positionTooltip(buttons[i], tooltips[i]);
+                });
             });
             buttons[i].addEventListener("mouseout", () => {
                 tooltips[i].hidePopover();
+                window.removeEventListener('resize', function() {
+                    Omeka.positionTooltip(buttons[i], tooltips[i]);
+                });
             });
             buttons[i].addEventListener("focus", () => {
                 tooltips[i].showPopover({ source: buttons[i] });
                 Omeka.positionTooltip(buttons[i], tooltips[i]);
+                window.addEventListener('resize', function() {
+                    Omeka.positionTooltip(buttons[i], tooltips[i]);
+                });
             });
             buttons[i].addEventListener("blur", () => {
                 tooltips[i].hidePopover();
+                window.removeEventListener('resize', function() {
+                    Omeka.positionTooltip(buttons[i], tooltips[i]);
+                });
             });
         }
     }
