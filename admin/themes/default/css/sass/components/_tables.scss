@@ -132,6 +132,7 @@ td {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    gap: $spacing-s;
 
     @include screen-xs {
         clear: both;
@@ -143,7 +144,7 @@ td {
     }
 
     li {
-        display: inline-block;
+        display: inline-flex;
 
         .spacer {
             display: inline-block;
@@ -155,13 +156,8 @@ td {
             margin-right: 3px;
 
             @include screen-xs {
-                content: '';
-                margin: 0;
+                display: none;
             }
-        }
-
-        @include screen-xs {
-            margin-bottom: $spacing-s;
         }
 
         &:last-child:after {
