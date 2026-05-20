@@ -2155,6 +2155,9 @@ td {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 @media (max-width: 767px) {
   .action-links {
@@ -2172,7 +2175,7 @@ td {
   display: inline-block;
 }
 .action-links li .spacer:after {
-  content: " ·";
+  content: " ·" \  "";
   margin-left: 3px;
   margin-right: 3px;
 }
