@@ -151,9 +151,8 @@ td {
         }
 
         .spacer:after {
-            content: ' \00b7' \ '';
-            margin-left: 3px;
-            margin-right: 3px;
+            content: '\00b7' / '';
+            margin-right: 5px;
 
             @include screen-xs {
                 display: none;

@@ -2176,9 +2176,8 @@ td {
   display: inline-block;
 }
 .action-links li .spacer:after {
-  content: " ·" \  "";
-  margin-left: 3px;
-  margin-right: 3px;
+  content: "·"/"";
+  margin-right: 5px;
 }
 @media (max-width: 767px) {
   .action-links li .spacer:after {
