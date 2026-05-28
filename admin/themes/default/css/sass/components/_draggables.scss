@@ -81,6 +81,10 @@
 
 .drawer-name {
     margin-right: auto !important;
+    max-width: calc(100% - 15rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .drawer > button {
@@ -223,6 +227,10 @@
     background-color: rgba(0,0,0,.5);	
 }
 
+.keyboard-reorder-group {
+    display: inline-flex;
+}
+
 .keyboard-reorder,
 .keyboard-reorder-panel button {
     padding: 0;
@@ -264,7 +272,7 @@
     display: none;
 }
 
-.selected > .main_link > .drawer > .keyboard-reorder {
+.selected > .main_link > .drawer .keyboard-reorder {
     background-color: $darkgrayborder;
     border-radius: 3px 0 0 3px;
 
@@ -274,7 +282,7 @@
     }
 }
 
-.selected > .main_link > .drawer > .keyboard-reorder-panel {
+.selected > .main_link > .drawer .keyboard-reorder-panel {
     display: inline-flex;
     background-color: #fff;
     border-radius: 0 3px 3px 0;
