@@ -854,24 +854,17 @@ button.ui-dialog-titlebar-close {
 }
 
 .drawer > button {
-  max-width: 350px;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   line-height: 1.5;
   vertical-align: top;
-  background-color: transparent;
   padding: 0;
   border: 0;
-  margin-bottom: 0;
+  margin: 0;
   color: #4C3939;
-  height: 1rem;
-}
-@media (max-width: 767px) {
-  .drawer > button {
-    max-width: 180px;
-  }
+  height: 24px;
+  width: 24px;
+  min-height: 0;
+  min-width: 0;
+  background-color: transparent;
 }
 
 .drawer.deleted .delete-drawer,
@@ -1067,16 +1060,16 @@ button.ui-dialog-titlebar-close {
   display: none;
 }
 
-.selected > .main_link > .drawer .keyboard-reorder {
+.keyboard-reorder[aria-expanded=true] {
   background-color: #D6D5C2;
   border-radius: 3px 0 0 3px;
 }
-.selected > .main_link > .drawer .keyboard-reorder:focus {
+.keyboard-reorder[aria-expanded=true]:focus {
   position: relative;
   z-index: 1;
 }
 
-.selected > .main_link > .drawer .keyboard-reorder-panel {
+.keyboard-reorder[aria-expanded=true] + .keyboard-reorder-panel {
   display: inline-flex;
   background-color: #fff;
   border-radius: 0 3px 3px 0;
@@ -2493,6 +2486,35 @@ ul.details li:last-child {
   float: left;
   margin: -3px 10px 0 0;
   border: 1px solid #D6D5C2;
+}
+
+#file-list .edit {
+  text-indent: -9999px;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+#file-list .edit:after {
+  content: "\f303"/"";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  text-indent: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+}
+
+.delete-checkbox {
+  height: 0;
+  width: 0;
+}
+
+#file-list .deleted .edit {
+  display: none;
 }
 
 .file-container {

@@ -7,11 +7,22 @@ if ($type_name != '') {
 }
 $title = __('Edit Item Type #%s', $item_type->id) . $type_name;
 
+$successAlertTemplate = __("<span class='nav-item-title'></span> reordered. ");
+$failAlertTemplate = __("Cannot reorder further.");
+$upActionAlertTemplate = __("Moved above <span class='positional-nav-item-title'></span>.");
+$downActionAlertTemplate = __("Moved below <span class='positional-nav-item-title'></span>.");
+
 echo head(['title'=> $title,'bodyclass'=>'item-types']);
 echo flash();
 ?>
 
 <form method="post" action="">
+    <div class="sr-only" role="alert" id="reorder-alerts" 
+        data-success-alert-template="<?php echo $successAlertTemplate; ?>" 
+        data-fail-alert-template="<?php echo $failAlertTemplate; ?>" 
+        data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
+        data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>">
+    </div>
     <?php include 'form.php';?>
     <section class="three columns omega">
         <div id="save" class="panel">
@@ -26,7 +37,8 @@ echo flash();
 </form>
 
 <script type="text/javascript">
-Omeka.addReadyCallback(Omeka.ItemTypes.enableSorting);
+Omeka.enableKeyboardNavigation('li.element', '.element-order');
+Omeka.enableSorting('li.element', '.element-order')
 Omeka.manageDrawers('#type-elements');
 </script>
 <?php echo foot(); ?>

@@ -38,6 +38,13 @@ jQuery(document).ready(function () {
                     <?php $elementId = html_escape($element->id); ?>
                     <span id="move-<?php echo $elementId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name"></span>
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo html_escape($element->name); ?></span>
+                    <div class="keyboard-reorder-group">
+                        <button type="button" class="keyboard-reorder" aria-label="<?php echo __('Reorder with keyboard'); ?>" title="<?php echo __('Reorder with keyboard'); ?>" aria-expanded="false" aria-controls="keyboard-reorder-<?php echo $element_id_temp; ?>"></button>
+                        <div class="keyboard-reorder-panel" id="keyboard-reorder-<?php echo $element_id_temp; ?>" role="group" aria-label="<?php echo __('Reorder actions'); ?>">
+                            <button type="button" class="keyboard-reorder-up" aria-label="<?php echo __('Move up'); ?>" title="<?php echo __('Move up'); ?>"></button>
+                            <button type="button" class="keyboard-reorder-down" aria-label="<?php echo __('Move down'); ?>" title="<?php echo __('Move down'); ?>"></button>
+                        </div>
+                    </div>
                     <?php $buttonToggleLabel = 'element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
                     <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?> <?php echo __('Description'); ?>" class="drawer-toggle" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Description'); ?>"><span class="icon" aria-hidden="true"></span></button>
                     <?php if (is_allowed('ItemTypes', 'delete-element')): ?>

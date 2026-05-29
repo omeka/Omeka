@@ -63,8 +63,8 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
     Omeka.Navigation.deleteText = <?php echo js_escape(__('Delete')); ?>;
     Omeka.addReadyCallback(Omeka.Navigation.updateNavLinkEditForms);
     Omeka.addReadyCallback(Omeka.Navigation.addNewNavLinkForm);
-    Omeka.addReadyCallback(Omeka.Navigation.enableKeyboardNavigation);
     Omeka.addReadyCallback(Omeka.Navigation.updateForNewLinks);
+    Omeka.addReadyCallback(Omeka.enableKeyboardNavigation);
     Omeka.addReadyCallback(Omeka.Navigation.setUpFormSubmission);
     Omeka.manageDrawers('#navigation_main_list', '.main_link');
 </script>

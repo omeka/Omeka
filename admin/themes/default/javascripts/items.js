@@ -6,52 +6,28 @@ Omeka.Items = {};
 
 (function ($) {
     /**
-     * Enable drag and drop sorting for files.
-     */
-    Omeka.Items.enableSorting = function () {
-        $('.sortable').sortable({
-            items: 'li.file',
-            forcePlaceholderSize: true,
-            forceHelperSize: true,
-            revert: 200,
-            placeholder: "ui-sortable-highlight",
-            containment: 'document',
-            update: function (event, ui) {
-                $(this).find('.file-order').each(function (index) {
-                    $(this).val(index + 1);
-                });
-            }
-        });
-        $( ".sortable" ).disableSelection();
-
-        $( ".sortable input[type=checkbox]" ).each(function () {
-            $(this).css("display", "none");
-        });
-    };
-
-    /**
      * Make links to files open in a new window.
      */
     Omeka.Items.makeFileWindow = function () {
         $('#file-list a').click(function (event) {
             event.preventDefault();
-            if($(this).hasClass("delete")) {
-                Omeka.Items.enableFileDeletion($(this));
-            } else {
-                window.open(this.getAttribute('href'));
-            }
+            window.open(this.getAttribute('href'));
         });
     };
 
     /**
      * Set up toggle for marking files for deletion.
      */
-    Omeka.Items.enableFileDeletion = function (deleteLink) {
-        if( !deleteLink.next().is(":checked") ) {
-            deleteLink.text("Undo").next().prop('checked', true).parents('.sortable-item').addClass("deleted");
-        } else {
-            deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
-        }
+    Omeka.Items.enableFileDeletion = function () {
+        $('#file-list').on('click', '.delete-drawer, .undo-delete', function() {
+            var toggleButton = $(this);
+            var deleteCheckbox = toggleButton.siblings('.delete-checkbox').first();
+            if (toggleButton.hasClass('delete-drawer')) {
+                deleteCheckbox.prop('checked', true);
+            } else {
+                deleteCheckbox.prop('checked', false);
+            }
+        });
     };
 
     /**

@@ -9,7 +9,10 @@ jQuery(document).ready(function () {
     Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.enableTagRemoval();
     Omeka.Items.makeFileWindow();
-    Omeka.Items.enableSorting();
+    Omeka.Items.enableFileDeletion();
+    Omeka.manageDrawers('#file-list', '.file');
+    Omeka.enableKeyboardNavigation('li.file', '.file-order');
+    Omeka.enableSorting('li.file', '.file-order');
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(['controller'=>'tags', 'action'=>'autocomplete'], 'default', [], true)); ?>);
 
     Omeka.wysiwyg({

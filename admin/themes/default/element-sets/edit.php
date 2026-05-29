@@ -1,5 +1,11 @@
 <?php
 queue_js_file('element-sets');
+
+$successAlertTemplate = __("<span class='nav-item-title'></span> reordered. ");
+$failAlertTemplate = __("Cannot reorder further.");
+$upActionAlertTemplate = __("Moved above <span class='positional-nav-item-title'></span>.");
+$downActionAlertTemplate = __("Moved below <span class='positional-nav-item-title'></span>.");
+
 echo head(
     [
         'title' => __('Edit Element Set'),
@@ -16,6 +22,12 @@ echo flash();
         <p class="explanation">
             <?php echo __('Click and drag the elements into the preferred display order. Click the right arrows to add customized comments to element descriptions.'); ?>
         </p>
+        <div class="sr-only" role="alert" id="reorder-alerts" 
+            data-success-alert-template="<?php echo $successAlertTemplate; ?>" 
+            data-fail-alert-template="<?php echo $failAlertTemplate; ?>" 
+            data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
+            data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>">
+        </div>
         <p><?php echo __($element_set->description); ?></p>
         <ul class="sortable">
         <?php foreach ($element_set->getElements() as $element): ?>
@@ -25,6 +37,13 @@ echo flash();
                 <span id="move-<?php echo $elementId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-label="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $elementId; ?> element-<?php echo $elementId; ?>"></span>
                 <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                 <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, ['class' => 'element-order']); ?>
+                <div class="keyboard-reorder-group">
+                    <button type="button" class="keyboard-reorder" aria-label="<?php echo __('Reorder with keyboard'); ?>" title="<?php echo __('Reorder with keyboard'); ?>" aria-expanded="false" aria-controls="keyboard-reorder-<?php echo $elementId; ?>"></button>
+                    <div class="keyboard-reorder-panel" id="keyboard-reorder-<?php echo $elementId; ?>" role="group" aria-label="<?php echo __('Reorder actions'); ?>">
+                        <button type="button" class="keyboard-reorder-up" aria-label="<?php echo __('Move up'); ?>" title="<?php echo __('Move up'); ?>"></button>
+                        <button type="button" class="keyboard-reorder-down" aria-label="<?php echo __('Move down'); ?>" title="<?php echo __('Move down'); ?>"></button>
+                    </div>
+                </div>
                 <?php $buttonToggleLabel = 'element-' . $elementId . '-toggle element-' . $elementId . '-name element-' . $elementId . '-comment'; ?>
                 <button type="button" id="element-<?php echo $elementId; ?>-toggle" aria-expanded="false" aria-label="<?php echo __('Show'); ?>" class="drawer-toggle" data-action-selector="opened" aria-labelledby="<?php echo $buttonToggleLabel; ?>" title="<?php echo __($element->name); ?> <?php echo __('Comment'); ?>"><span class="icon" aria-hidden="true"></span></button>
             </div>
@@ -48,9 +67,10 @@ echo flash();
 </form>
 <script type="text/javascript">
 //<![CDATA[
-Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
 Omeka.manageDrawers('.sortable');
+Omeka.enableKeyboardNavigation('li.element','.element-order');
+Omeka.enableSorting('li.element', '.element-order');
 //]]>
 </script>
 <?php echo foot(); ?>
