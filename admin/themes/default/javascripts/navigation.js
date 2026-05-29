@@ -129,6 +129,7 @@ Omeka.Navigation = {};
                 $('.link-count').text(totalLinks);
                 $('#new-link-success').show();
                 Omeka.Navigation.updateForNewLinks();
+                $('#new_nav_link_label').focus();
             } else {
                 if (!n_label) { $('#label-required').show(); }
                 if (!n_uri) { $('#uri-required').show(); }
