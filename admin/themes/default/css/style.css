@@ -2158,7 +2158,6 @@ td {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
 }
 @media (max-width: 767px) {
   .action-links {
@@ -2172,15 +2171,12 @@ td {
 .action-links li {
   display: inline-flex;
 }
-.action-links li .spacer {
-  display: inline-block;
-}
-.action-links li .spacer:after {
+.action-links li:not(:last-child):after {
   content: "·"/"";
-  margin-right: 5px;
+  margin: 0 5px;
 }
 @media (max-width: 767px) {
-  .action-links li .spacer:after {
+  .action-links li:not(:last-child):after {
     display: none;
   }
 }
