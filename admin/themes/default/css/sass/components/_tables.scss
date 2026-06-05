@@ -129,6 +129,9 @@ td {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
     @include screen-xs {
         clear: both;
@@ -140,25 +143,15 @@ td {
     }
 
     li {
-        display: inline-block;
+        display: inline-flex;
 
-        .spacer {
-            display: inline-block;
-        }
-
-        .spacer:after {
-            content: ' \00b7';
-            margin-left: 3px;
-            margin-right: 3px;
+        &:not(:last-child):after {
+            content: '\00b7' / '';
+            margin: 0 5px;
 
             @include screen-xs {
-                content: '';
-                margin: 0;
+                display: none;
             }
-        }
-
-        @include screen-xs {
-            margin-bottom: $spacing-s;
         }
 
         &:last-child:after {

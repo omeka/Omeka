@@ -92,14 +92,12 @@ echo item_search_filters();
                         <ul class="action-links group">
                             <?php if (is_allowed($item, 'edit')): ?>
                             <li>
-                                <span class="spacer" aria-hidden="true"></span>
                                 <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
                             </li>
                             <?php endif; ?>
 
                             <?php if (is_allowed($item, 'delete')): ?>
                             <li>
-                                <span class="spacer" aria-hidden="true"></span>
                                 <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
                             </li>
                             <?php endif; ?>
