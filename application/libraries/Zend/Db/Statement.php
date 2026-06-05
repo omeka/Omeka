@@ -111,6 +111,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         if ($sql instanceof Zend_Db_Select) {
             $sql = $sql->assemble();
         }
+        $sql = (string) $sql;
         $this->_parseParameters($sql);
         $this->_prepare($sql);
 
