@@ -102,15 +102,13 @@ echo flash();
                 <?php if ($plugin->isInstalled()): ?>
                     <?php if ($needsUpgrade): ?>
                         <?php if (is_allowed('Plugins', 'upgrade')): ?>
-                            <form action="<?php echo html_escape(url('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
-                                <li></li>
-                                <li></li>
-                                <li>
+                            <li>     
+                                <form action="<?php echo html_escape(url('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">
                                     <button name="upgrade" type="submit" class="upgrade green button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
                                     <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
-                                </li>
-                                <?php echo $csrf; ?>
-                            </form>
+                                    <?php echo $csrf; ?>
+                                </form>
+                            </li>
                         <?php endif; ?>
                     <?php else: ?>
                     <?php $activateOrDeactivate = ($plugin->isActive()) ? 'deactivate' : 'activate'; ?>
