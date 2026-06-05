@@ -439,8 +439,8 @@ msgstr "Просмотреть открытую страницу"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:101
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:148
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/users/browse.php:70
@@ -463,8 +463,8 @@ msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:91
-#: admin/themes/default/collections/browse.php:101
+#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:100
 msgid "Add a Collection"
 msgstr "Добавить коллекцию"
 
@@ -484,14 +484,12 @@ msgid "Public"
 msgstr "Общественный"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/collections/browse.php:55
+#: admin/themes/default/collections/browse.php:58
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:82
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/items/browse.php:85
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -567,11 +565,12 @@ msgid "Total Number of Items"
 msgstr "Общее количество документов"
 
 #: admin/themes/default/collections/browse.php:59
-#: admin/themes/default/items/browse.php:87
-msgid "(Private)"
-msgstr "(Личный)"
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/quick-filters.php:5
+msgid "Private"
+msgstr "Личный"
 
-#: admin/themes/default/collections/browse.php:65
+#: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -580,21 +579,21 @@ msgstr "(Личный)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:96
+#: admin/themes/default/items/browse.php:145
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Редактировать"
 
-#: admin/themes/default/collections/browse.php:74
+#: admin/themes/default/collections/browse.php:73
 msgid "No contributors"
 msgstr "Нет соисполнителей"
 
-#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/collections/browse.php:88
 #: admin/themes/default/item-types/browse.php:57
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:154
 #: admin/themes/default/search/index.php:36
 #: application/views/scripts/collections/browse.php:49
 #: application/views/scripts/items/browse.php:57
@@ -602,19 +601,19 @@ msgstr "Нет соисполнителей"
 msgid "Bottom pagination"
 msgstr ""
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "There are no collections on this page."
 msgstr "На этой странице нет коллекций."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "View All Collections"
 msgstr "Просмотр всех коллекций"
 
-#: admin/themes/default/collections/browse.php:98
+#: admin/themes/default/collections/browse.php:97
 msgid "You have no collections."
 msgstr "У вас нет коллекций."
 
-#: admin/themes/default/collections/browse.php:100
+#: admin/themes/default/collections/browse.php:99
 msgid "Get started by adding your first collection."
 msgstr "Начните создавать свою первую коллекцию."
 
@@ -664,7 +663,7 @@ msgstr "Нет соисполнителей."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:105
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:163
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -720,7 +719,7 @@ msgid "Item Types"
 msgstr "Типы документов"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:120
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -779,7 +778,7 @@ msgstr "Пользователи"
 msgid "Omeka Admin"
 msgstr "Администратор Omeka"
 
-#: admin/themes/default/common/header.php:36
+#: admin/themes/default/common/header.php:38
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr ""
@@ -950,7 +949,7 @@ msgid "File #%s"
 msgstr "Файл #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:409
+#: application/libraries/globals.php:418
 #: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Документ"
@@ -1198,8 +1197,8 @@ msgstr "Нет недавно добавленных документов."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:154
-#: admin/themes/default/items/browse.php:181
+#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:183
 msgid "Add an Item"
 msgstr "Добавить документ"
 
@@ -1209,10 +1208,10 @@ msgstr "Добавить документ"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:114
+#: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:411
+#: application/libraries/globals.php:420
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Коллекция"
@@ -1375,22 +1374,22 @@ msgid "Browse Items"
 msgstr "Просмотр документов"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2546
-#: application/libraries/globals.php:2942
+#: application/libraries/globals.php:2555
+#: application/libraries/globals.php:2951
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Поиск документов"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:142
 #, php-format
 msgid "Select all %s results"
 msgstr ""
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:143
 msgid "items selected"
 msgstr ""
 
@@ -1403,31 +1402,31 @@ msgstr ""
 msgid "Select item \"%s\""
 msgstr ""
 
-#: admin/themes/default/items/browse.php:119
+#: admin/themes/default/items/browse.php:121
 msgid "No Tags"
 msgstr "Нет меток"
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:169
 msgid "Details"
 msgstr "Детали"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:170
 msgid "Show Details"
 msgstr "Показать детали"
 
-#: admin/themes/default/items/browse.php:169
+#: admin/themes/default/items/browse.php:171
 msgid "Hide Details"
 msgstr "Скрыть детали"
 
-#: admin/themes/default/items/browse.php:178
+#: admin/themes/default/items/browse.php:180
 msgid "You have no items."
 msgstr "У вас нет документов."
 
-#: admin/themes/default/items/browse.php:180
+#: admin/themes/default/items/browse.php:182
 msgid "Get started by adding your first item."
 msgstr "Начните добавлять ваш первый документ."
 
-#: admin/themes/default/items/browse.php:185
+#: admin/themes/default/items/browse.php:187
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1436,11 +1435,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 msgid "refine your search"
 msgstr "Уточните поиск"
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Хотели бы вы %s?"
@@ -1488,10 +1487,6 @@ msgstr "Быстрый фильтр"
 #: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
 msgstr "Просмотреть все"
-
-#: admin/themes/default/items/quick-filters.php:5
-msgid "Private"
-msgstr "Личный"
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
@@ -3280,9 +3275,9 @@ msgstr "Такой адрес электронной почты уже испо�
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
-"href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
-"for details."
-msgstr "Роли описывают разрешения, которые имеет пользователь. См. <a href='http://omeka.org/codex/User_Roles' target='_blank'>документацию</a> для дальнейших подробностей."
+"href='https://omeka.org/classic/docs/Admin/Users/' "
+"target='_blank'>documentation</a> for details."
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
@@ -3334,12 +3329,12 @@ msgstr "Неверный адрес объекта Omeka_Navigation_Page_Uri:%s"
 msgid "Path to plugin.ini for \"%s\" is not correct."
 msgstr "Путь к plugin.ini \"%s\" не правильный."
 
-#: application/libraries/Omeka/Plugin/Installer.php:76
+#: application/libraries/Omeka/Plugin/Installer.php:78
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
 msgstr "\"%s\" плагин должен быть установлен и иметь более новые файлы для обновления."
 
-#: application/libraries/Omeka/Plugin/Installer.php:112
+#: application/libraries/Omeka/Plugin/Installer.php:122
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Плагин должен иметь допустимое название каталога, прежде чем он может быть установлен."
 
@@ -3352,99 +3347,99 @@ msgstr "'%s' неверное специальное значение."
 msgid "An invalid value was detected during record iteration."
 msgstr "Было обнаружено недопустимое значение  во время повторной записи."
 
-#: application/libraries/globals.php:410
+#: application/libraries/globals.php:419
 msgid "File"
 msgstr "Файл"
 
-#: application/libraries/globals.php:468
+#: application/libraries/globals.php:477
 msgid "Keyword"
 msgstr "Ключевое слово"
 
-#: application/libraries/globals.php:469
+#: application/libraries/globals.php:478
 msgid "Boolean"
 msgstr " Логическое выражение"
 
-#: application/libraries/globals.php:470
+#: application/libraries/globals.php:479
 msgid "Exact match"
 msgstr "Точное совпадение"
 
-#: application/libraries/globals.php:1286
-#: application/libraries/globals.php:1307
+#: application/libraries/globals.php:1295
+#: application/libraries/globals.php:1316
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Файл не найден %s!"
 
-#: application/libraries/globals.php:1323
+#: application/libraries/globals.php:1332
 msgid "No featured collections are available."
 msgstr "Отмеченные коллекции отсутствуют."
 
-#: application/libraries/globals.php:1629
+#: application/libraries/globals.php:1638
 msgid "Select Below "
 msgstr "Выберите ниже"
 
-#: application/libraries/globals.php:1672
+#: application/libraries/globals.php:1681
 msgid "Omeka RSS Feed"
 msgstr "Лента RSS Omeka "
 
-#: application/libraries/globals.php:1673
+#: application/libraries/globals.php:1682
 msgid "Omeka Atom Feed"
 msgstr "Лента Atom Omeka "
 
-#: application/libraries/globals.php:1992
+#: application/libraries/globals.php:2001
 msgid "Sort ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2002
+#: application/libraries/globals.php:2011
 msgid "Sorting descending"
 msgstr ""
 
-#: application/libraries/globals.php:2006
+#: application/libraries/globals.php:2015
 msgid "Sorting ascending"
 msgstr ""
 
-#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2376
 msgid "No recent items available."
 msgstr "Нет недавних доступных документов."
 
-#: application/libraries/globals.php:2467
+#: application/libraries/globals.php:2476
 msgid "No featured items are available."
 msgstr "Отмеченные документы отсутствуют."
 
-#: application/libraries/globals.php:2528
+#: application/libraries/globals.php:2537
 msgid "View"
 msgstr "Режим просмотра"
 
-#: application/libraries/globals.php:2590
+#: application/libraries/globals.php:2599
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Нет коллекции"
 
-#: application/libraries/globals.php:2709
+#: application/libraries/globals.php:2718
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2726
+#: application/libraries/globals.php:2735
 msgid "Next Item &rarr;"
 msgstr "Следующий документ &rarr;"
 
-#: application/libraries/globals.php:2746
+#: application/libraries/globals.php:2755
 msgid "&larr; Previous Item"
 msgstr "&larr; Предыдущий документ"
 
-#: application/libraries/globals.php:2887
+#: application/libraries/globals.php:2896
 msgid "Pagination"
 msgstr ""
 
-#: application/libraries/globals.php:2932
+#: application/libraries/globals.php:2941
 msgid "Browse All"
 msgstr "Просмотреть все"
 
-#: application/libraries/globals.php:2937
+#: application/libraries/globals.php:2946
 msgid "Browse by Tag"
 msgstr "Просмотр по меткам"
 
-#: application/libraries/globals.php:3217
+#: application/libraries/globals.php:3226
 msgid "No tags are available."
 msgstr "Нет доступных меток."
 
@@ -3988,6 +3983,10 @@ msgstr "Файлы"
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "Цитата"
+
+#: application/views/scripts/items/show.php:47
+msgid "Item pagination"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"

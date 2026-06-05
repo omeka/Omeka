@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Furkan Kalkan <furkan.kalkan3@gmail.com>, 2018
-# Kamil Comlekci, 2021,2023
+# Kamil Comlekci <kcomlekci@tedankara.k12.tr>, 2021,2023,2025-2026
 # mustafaulu@msn.com <Mustafaulu@msn.com>, 2014-2017
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Kamil Comlekci, 2021,2023\n"
+"Last-Translator: Kamil Comlekci <kcomlekci@tedankara.k12.tr>, 2021,2023,2025-2026\n"
 "Language-Team: Turkish (Turkey) (http://app.transifex.com/omeka/omeka/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +177,7 @@ msgstr "Üstveri Madde Türü"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Madde türü metadata öğe seti "
+msgstr "Omeka ile birlikte gelen tüm materyal türü öğelerinden ve bir yönetici tarafından oluşturulan tüm materyal türü öğelerinden oluşan materyal türü meta veri öğesi kümesi."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -348,7 +348,7 @@ msgstr "Navigasyona link ekle"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 msgid "New Link Added. Total links: "
-msgstr ""
+msgstr "Yeni bağlantı eklendi. Toplam bağlantılar:"
 
 #: admin/themes/default/appearance/edit-navigation.php:24
 #: admin/themes/default/appearance/edit-navigation.php:26
@@ -384,7 +384,7 @@ msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:29
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: admin/themes/default/appearance/edit-navigation.php:30
 msgid "Add Link"
@@ -436,8 +436,8 @@ msgstr "Kamu Sayfasına Bak"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:101
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:148
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/users/browse.php:70
@@ -460,8 +460,8 @@ msgstr "Bütün kişiselleştirilmiş ayarlar kaybedilecektir. Düzen ve etiketl
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:91
-#: admin/themes/default/collections/browse.php:101
+#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:100
 msgid "Add a Collection"
 msgstr "Koleksiyon Ekle"
 
@@ -481,14 +481,12 @@ msgid "Public"
 msgstr "Kamuya Açık"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/collections/browse.php:55
+#: admin/themes/default/collections/browse.php:58
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:82
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/items/browse.php:85
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -528,14 +526,14 @@ msgstr "(%s toplam)"
 #: application/views/scripts/items/browse.php:14
 #: application/views/scripts/search/index.php:9
 msgid "Top pagination"
-msgstr ""
+msgstr "Üst sayfalandırma"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d materyal%s koleksiyonuda yer almıyor"
+msgstr[1] "%s %dmateryaller %s koleksiyonda yer almıyor."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
@@ -562,11 +560,12 @@ msgid "Total Number of Items"
 msgstr "Toplam Materyal Sayısı"
 
 #: admin/themes/default/collections/browse.php:59
-#: admin/themes/default/items/browse.php:87
-msgid "(Private)"
-msgstr "(Özel)"
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/quick-filters.php:5
+msgid "Private"
+msgstr "Özel"
 
-#: admin/themes/default/collections/browse.php:65
+#: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -575,41 +574,41 @@ msgstr "(Özel)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:96
+#: admin/themes/default/items/browse.php:145
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Düzenle"
 
-#: admin/themes/default/collections/browse.php:74
+#: admin/themes/default/collections/browse.php:73
 msgid "No contributors"
 msgstr "Katkıda bulunanlar yok"
 
-#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/collections/browse.php:88
 #: admin/themes/default/item-types/browse.php:57
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:154
 #: admin/themes/default/search/index.php:36
 #: application/views/scripts/collections/browse.php:49
 #: application/views/scripts/items/browse.php:57
 #: application/views/scripts/search/index.php:37
 msgid "Bottom pagination"
-msgstr ""
+msgstr "Alt sayfalandırma"
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "There are no collections on this page."
 msgstr "Bu sayfada koleksiyon bulunmamaktadır."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "View All Collections"
 msgstr "Bütün Koleksiyonlara Bak"
 
-#: admin/themes/default/collections/browse.php:98
+#: admin/themes/default/collections/browse.php:97
 msgid "You have no collections."
 msgstr "Koleksiyonsa sahip değilsiniz."
 
-#: admin/themes/default/collections/browse.php:100
+#: admin/themes/default/collections/browse.php:99
 msgid "Get started by adding your first collection."
 msgstr "İlk koleksiyonunuzu ekleyerek başlayın."
 
@@ -659,7 +658,7 @@ msgstr "Katkıda bulunanlar yok"
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:105
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:163
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -715,7 +714,7 @@ msgid "Item Types"
 msgstr "İtem Türleri"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:120
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -774,7 +773,7 @@ msgstr "Kullanıcılar"
 msgid "Omeka Admin"
 msgstr "Omeka Yönetici"
 
-#: admin/themes/default/common/header.php:36
+#: admin/themes/default/common/header.php:38
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Ana içeriğe geç"
@@ -851,12 +850,12 @@ msgstr "Tercih edilen görünüm düzenindeki dosyalara tıkla ve sürükle. Dü
 #: admin/themes/default/items/files-form.php:9
 #: admin/themes/default/settings/edit-navigation-link.php:28
 msgid "Move"
-msgstr ""
+msgstr "Taşı"
 
 #: admin/themes/default/element-sets/edit.php:29
 #: admin/themes/default/item-types/form.php:42
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: admin/themes/default/element-sets/edit.php:29
 #: admin/themes/default/element-sets/edit.php:33
@@ -903,7 +902,7 @@ msgstr "Yeni Materyaller"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
-msgstr "Yeni item ekle"
+msgstr "Yeni Materyal ekle"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
@@ -932,11 +931,11 @@ msgstr "Dosya#%s Düzenle"
 #: admin/themes/default/files/edit.php:41
 #: admin/themes/default/files/show.php:44
 msgid "Alt Text"
-msgstr ""
+msgstr "Alternatif Metin"
 
 #: admin/themes/default/files/edit.php:43
 msgid "Provide a brief description of visual files to screen reader users."
-msgstr ""
+msgstr "Ekran okuyucu kullanıcılarına görsel dosyaların kısa bir açıklamasını sağlayın."
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
@@ -945,10 +944,10 @@ msgid "File #%s"
 msgstr "Dosya #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:409
+#: application/libraries/globals.php:418
 #: application/views/scripts/files/show.php:22
 msgid "Item"
-msgstr "İtem"
+msgstr "Materyal"
 
 #: admin/themes/default/files/show.php:52
 msgid "Direct Links"
@@ -1031,7 +1030,7 @@ msgstr "Birleştirilen Üstveri"
 msgid "item"
 msgid_plural "items"
 msgstr[0] "itemler"
-msgstr[1] "materyaller"
+msgstr[1] "Materyaller"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
@@ -1105,27 +1104,27 @@ msgstr "Öğe Tanımı"
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "İtem Türü Ekle"
+msgstr "Materyal Türü Ekle"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "İtem Türlerini Tara"
+msgstr "Materyal Türlerini Tara"
 
 #: admin/themes/default/item-types/browse.php:9
 #: admin/themes/default/item-types/browse.php:54
 msgid "Add an Item Type"
-msgstr "İtem Türü Ekle"
+msgstr "Bir Materyal Türü Ekle"
 
 #: admin/themes/default/item-types/browse.php:16
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d %s Türü olmayan öğeler"
+msgstr[1] "%s%d %s Türü olmayan öğeler"
 
 #: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
-msgstr "Tüm öğelerin bir türü vardır."
+msgstr "Tüm materyallerin bir türü vardır."
 
 #: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
@@ -1142,7 +1141,7 @@ msgstr "İtem Türü #%s Düzenle"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "İtem Türü Bilgisi"
+msgstr "Materyal Türü Bilgisi"
 
 #: admin/themes/default/item-types/form.php:24
 #: admin/themes/default/item-types/show.php:16
@@ -1156,7 +1155,7 @@ msgstr "Öğe Ekle"
 
 #: admin/themes/default/item-types/form.php:86
 msgid "New element added. Total Elements: "
-msgstr ""
+msgstr "Yeni öğe eklendi. Toplam Öğeler:"
 
 #: admin/themes/default/item-types/form.php:88
 msgid "Existing"
@@ -1169,7 +1168,7 @@ msgstr "Yeni"
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "İtem Türü #%s"
+msgstr "Materyal Türü #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
@@ -1181,21 +1180,21 @@ msgstr "Son dönemde eklenen materyal bulunmamaktadır."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:154
-#: admin/themes/default/items/browse.php:181
+#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:183
 msgid "Add an Item"
-msgstr "İtem Ekle"
+msgstr "Materyal Ekle"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "İtem Ekle"
+msgstr "Materyal Ekle"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:114
+#: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:411
+#: application/libraries/globals.php:420
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Koleksiyon"
@@ -1212,7 +1211,7 @@ msgstr "Yukarıdaki arama filtreleri ile eşleşen bütün %dmateryaller silinec
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr "Bütün %d itemleri silinecektir."
+msgstr "Bütün %d materyalleri silinecektir."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
@@ -1258,7 +1257,7 @@ msgstr "Değişiklikler arka planda madde madde işlenecektir."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
-msgstr "Üstveri İtemi"
+msgstr "Üstveri Materyali"
 
 #: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
@@ -1286,7 +1285,7 @@ msgstr "Ayrıcalıklı Değil"
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "İtem Türü"
+msgstr "Materyal Türü"
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
@@ -1358,22 +1357,22 @@ msgid "Browse Items"
 msgstr "Materyalleri Göster"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2546
-#: application/libraries/globals.php:2942
+#: application/libraries/globals.php:2555
+#: application/libraries/globals.php:2951
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Materyalleri Ara"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:142
 #, php-format
 msgid "Select all %s results"
 msgstr "Bütün %s sonuçlarını seç"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:143
 msgid "items selected"
 msgstr "Seçilmiş Materyaller"
 
@@ -1384,44 +1383,44 @@ msgstr "Bütün satırları seç"
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr "\"%s\" itemini seç"
+msgstr "\"%s\" Materyali seç"
 
-#: admin/themes/default/items/browse.php:119
+#: admin/themes/default/items/browse.php:121
 msgid "No Tags"
 msgstr "Etiket Yok"
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:169
 msgid "Details"
 msgstr "Detaylar"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:170
 msgid "Show Details"
 msgstr "Detayları Göster"
 
-#: admin/themes/default/items/browse.php:169
+#: admin/themes/default/items/browse.php:171
 msgid "Hide Details"
 msgstr "Detayları Gizle"
 
-#: admin/themes/default/items/browse.php:178
+#: admin/themes/default/items/browse.php:180
 msgid "You have no items."
 msgstr "Materyallere sahip değilsiniz."
 
-#: admin/themes/default/items/browse.php:180
+#: admin/themes/default/items/browse.php:182
 msgid "Get started by adding your first item."
-msgstr "İlk iteminizi ekleyerek başlayın."
+msgstr "İlk materyalinizi ekleyerek başlayın."
 
-#: admin/themes/default/items/browse.php:185
+#: admin/themes/default/items/browse.php:187
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] "%s itemleri sorgusu arandı ve sonuç bulunamadı."
 msgstr[1] "%s itemleri sorgusu arandı ve sonuç bulunamadı."
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 msgid "refine your search"
 msgstr "Aramanızı daraltın"
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 #, php-format
 msgid "Would you like to %s?"
 msgstr " %s ister misiniz?"
@@ -1429,7 +1428,7 @@ msgstr " %s ister misiniz?"
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "#%s İtem Düzenle"
+msgstr "#%s Materyal Düzenle"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -1469,10 +1468,6 @@ msgstr "Hızlı Filtre"
 #: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
 msgstr "Tümünü Gör"
-
-#: admin/themes/default/items/quick-filters.php:5
-msgid "Private"
-msgstr "Özel"
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
@@ -1544,7 +1539,7 @@ msgstr "VEYA"
 #: admin/themes/default/items/search-form.php:71
 #: application/views/scripts/items/search-form.php:71
 msgid "Field"
-msgstr ""
+msgstr "Alan"
 
 #: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
@@ -1668,15 +1663,15 @@ msgstr "Materyal Ara"
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "İtem  #%s"
+msgstr "Materyal  #%s"
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr "Önceki İtem"
+msgstr "Önceki Materyal"
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "Sonraki İtem"
+msgstr "Sonraki Materyal"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
@@ -1684,7 +1679,7 @@ msgstr "Üstveri Dosyası"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "Bu item için henüz dosya bulunmamaktadır."
+msgstr "Bu materyal için henüz dosya bulunmamaktadır."
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
@@ -1866,7 +1861,7 @@ msgstr "API aktif edildikten sonra uygulamalar site kaynaklarınızı gösterebi
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "belirli bir item türünü düzenle"
+msgstr "belirli bir materyal türünü düzenle"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
@@ -1883,7 +1878,7 @@ msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Veritabanından seçilen öğe türü öğelerini silmek istediğinizden emin misiniz? Seçilen öğelerle ilgili tüm metinleri kaybedersiniz. Bu işlem geri alınamaz."
+msgstr "Veritabanından seçilen materyal türü öğelerini silmek istediğinizden emin misiniz? Seçilen materyaller ile ilgili tüm metinleri kaybedersiniz. Bu işlem geri alınamaz."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:59
 msgid "Ok"
@@ -1891,11 +1886,11 @@ msgstr "Tamam"
 
 #: admin/themes/default/settings/edit-navigation-link.php:32
 msgid "Enable"
-msgstr ""
+msgstr "Etkinleştir"
 
 #: admin/themes/default/settings/edit-navigation-link.php:36
 msgid "Show Options"
-msgstr ""
+msgstr "Opsiyonları Göster"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
@@ -1963,7 +1958,7 @@ msgstr "Etiketler Düzenleniyor"
 msgid ""
 "This number counts all records associated with a tag. Filtering \"Record "
 "types\" to \"Items\" will provide links to all items containing the tag."
-msgstr "Bu sayı, bir etiketle ilişkili tüm kayıtları sayar. \"Kayıt türleri\"ni \"Öğeler\" olarak filtrelemek, etiketi içeren tüm öğelere bağlantılar sağlayacaktır."
+msgstr "Bu sayı, bir etiketle ilişkili tüm kayıtları sayar. \"Kayıt türleri\"ni \"Materyaller\" olarak filtrelemek, etiketi içeren tüm materyallere bağlantılar sağlayacaktır."
 
 #: admin/themes/default/tags/browse.php:23
 msgid ""
@@ -2339,7 +2334,7 @@ msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün metadatala
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Bu işlem, öğe setini ve onunla ilişkili olan bütün öğeleri silecektir. Maddeler, öğe seti ile ilişkilendirilen bütün metadataları kaybedecektir. "
+msgstr "Bu, öğe kümesini ve öğe kümesine atanmış tüm öğeleri silecektir. Materyaller bu öğe kümesine özgü tüm meta verileri kaybedecektir."
 
 #: application/controllers/ElementSetsController.php:51
 #: application/controllers/PluginsController.php:54
@@ -2381,12 +2376,12 @@ msgstr "Dosya başarıyla silindi."
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "\"%s\" item türü başarıyla eklendi."
+msgstr "\"%s\" Materyal türü başarıyla eklendi."
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "\"%s\" item türü başarıyla güncelleştirildi."
+msgstr "\"%s\" Materyal türü başarıyla güncelleştirildi."
 
 #: application/controllers/ItemTypesController.php:152
 #, php-format
@@ -2401,7 +2396,7 @@ msgstr "Bu işlem, \"%s\" isimli materyal türünü silecektir ancak  ve bu tür
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "\"%s\" isimli item türü başarıyla eklendi. Şimdi öğeleri yeni item türüne ekleyebilirsiniz."
+msgstr "\"%s\" isimli Materyal türü başarıyla eklendi. Şimdi öğeleri yeni item türüne ekleyebilirsiniz."
 
 #: application/controllers/ItemsController.php:86
 #: application/controllers/ItemsController.php:146
@@ -2414,52 +2409,52 @@ msgstr "ImageMagick dizin yolu oluşturulmadı. Hiçbir türev görüntü oluşt
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "\"%s\" isimli item başarıyla eklendi!"
+msgstr "\"%s\" isimli materyal başarıyla eklendi!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "#%s isimli item başarıyla eklendi!"
+msgstr "#%s isimli materyal başarıyla eklendi!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "#%s isimli item başarıyla değiştirildi!"
+msgstr "#%s isimli materyal başarıyla değiştirildi!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "\"%s\" isimli item başarıyla değiştirildi!"
+msgstr "\"%s\" isimli materyal başarıyla değiştirildi!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "\"%s\" isimli item başarıyla silindi!"
+msgstr "\"%s\" isimli materyal başarıyla silindi!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "#%s isimli item başarıyla silindi!"
+msgstr "#%s isimli materyal başarıyla silindi!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Bu işlem, \"%s\" koleksiyonunu ve onunla ilişkili olan bütün üstverileri silecektir. Aynı zamanda bu işlem, bütün dosyalar ve itemlerle ilişkili olan bütün üstveri dosyalarını da silecektir."
+msgstr "Bu işlem, \"%s\" koleksiyonunu ve onunla ilişkili olan bütün üstverileri silecektir. Aynı zamanda bu işlem, bütün dosyalar ve materyal ile ilişkili olan bütün üstveri dosyalarını da silecektir."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün üstverileri silecektir. Aynı zamanda bu işlem, bütün dosyalar ve itemlerle ilişkili olan bütün üstveri dosyalarını da silecektir."
+msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün üstverileri silecektir. Aynı zamanda bu işlem, bütün dosyalar ve materyal ile ilişkili olan bütün üstveri dosyalarını da silecektir."
 
 #: application/controllers/ItemsController.php:235
 #: application/controllers/ItemsController.php:368
 #: application/controllers/ItemsController.php:434
 msgid "No item to batch edit."
-msgstr "toplu olarak düzenlenecek item yok"
+msgstr "toplu olarak düzenlenecek materyal yok"
 
 #: application/controllers/ItemsController.php:242
 msgid "The deletion of all items is forbidden."
@@ -2626,7 +2621,7 @@ msgstr "Kayıtlar indeksleniyor. Bu biraz zaman alabilir. Bu esnada sitenizi yö
 
 #: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
-msgstr "İtem türü öğeleri başarıyla değiştirildi!"
+msgstr "İMateryal türü öğeleri başarıyla değiştirildi!"
 
 #: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
@@ -2686,7 +2681,7 @@ msgid ""
 "Omeka requires MySQL version %1$s or higher, but this server is running "
 "MySQL version %2$s. Please update the installed version of MySQL and try "
 "again."
-msgstr ""
+msgstr "Omeka için gerekli MySQL versiyonu %1$s veya daha yüksek, fakat bu sunucuda çalışan MySQL versiyonu %2$s. Lütfen MySQL'in yüklü sürümünü güncelleyin ve tekrar deneyin."
 
 #: application/controllers/UsersController.php:74
 msgid ""
@@ -2880,18 +2875,18 @@ msgstr "Dosya Meta Verilerine Bağlantı"
 #: application/forms/AppearanceSettings.php:75
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
-msgstr "Öğe dosyalarının doğrudan dosya yerine dosya meta verilerine bağlanmasını sağlayın."
+msgstr "Materyal dosyalarının doğrudan dosya yerine dosya meta verilerine bağlanmasını sağlayın."
 
 #: application/forms/AppearanceSettings.php:81
 msgid "File Alt Text Element"
-msgstr ""
+msgstr "Dosya Alternatif Metin Öğesi"
 
 #: application/forms/AppearanceSettings.php:82
 msgid ""
 "Default file element to use in describing visual files to screen reader "
 "users via the image tag's alt attribute. This can be overridden using the "
 "file form's \"Alt Text\" field."
-msgstr ""
+msgstr "Ekran okuyucu kullanıcılarına görsel dosyaları tanımlamak için kullanılan varsayılan dosya öğesi, resim etiketi alt özniteliği aracılığıyla kullanılır. Bu, dosya formunun \"Alternatif Metin\" alanı kullanılarak geçersiz kılınabilir."
 
 #: application/forms/AppearanceSettings.php:95
 msgid "Admin Theme"
@@ -3052,16 +3047,16 @@ msgstr "Site Ayarları"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "İtem türünün adı"
+msgstr "Materyal türünün adı"
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "İtem türünün tanımı"
+msgstr "Materyal türünün tanımı"
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "İtem türü \"%s\" öğresinin birden fazlasına sahip değildir."
+msgstr "Materyal türü \"%s\" öğresinin birden fazlasına sahip değildir."
 
 #: application/forms/Login.php:35
 msgid "Username cannot be empty."
@@ -3261,9 +3256,9 @@ msgstr "Bu E-Posta adresi kullanılmaktadır."
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
-"href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
-"for details."
-msgstr "Roller bir kullanıcının sahip olduğu izinleri belirler. Detaylar için <a href='http://omeka.org/codex/User_Roles' target='_blank'>belgesine</a> bakınız."
+"href='https://omeka.org/classic/docs/Admin/Users/' "
+"target='_blank'>documentation</a> for details."
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
@@ -3315,12 +3310,12 @@ msgstr "Omeka_Navigasyon_Sayfa_Url linki için geçersiz URI: %s"
 msgid "Path to plugin.ini for \"%s\" is not correct."
 msgstr "\"%s\" için plugin.ini yolu doğru değil."
 
-#: application/libraries/Omeka/Plugin/Installer.php:76
+#: application/libraries/Omeka/Plugin/Installer.php:78
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
 msgstr "\"%s\" plugin yüklenmeli ve güncelleme için daha yeni dosyalara sahip olmalıdır."
 
-#: application/libraries/Omeka/Plugin/Installer.php:112
+#: application/libraries/Omeka/Plugin/Installer.php:122
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Yüklenmeden önce plugin geçerli bir dizin adına sahip olmalıdır."
 
@@ -3333,105 +3328,105 @@ msgstr "'%s' geçersiz bir özel karakterdir."
 msgid "An invalid value was detected during record iteration."
 msgstr "Kayıt yenileme sürecinde geçersiz bir değer tespit edildi."
 
-#: application/libraries/globals.php:410
+#: application/libraries/globals.php:419
 msgid "File"
 msgstr "Dosya"
 
-#: application/libraries/globals.php:468
+#: application/libraries/globals.php:477
 msgid "Keyword"
 msgstr "Anahtar Kelime"
 
-#: application/libraries/globals.php:469
+#: application/libraries/globals.php:478
 msgid "Boolean"
 msgstr "Mantıksal"
 
-#: application/libraries/globals.php:470
+#: application/libraries/globals.php:479
 msgid "Exact match"
 msgstr "Tam eşleşme"
 
-#: application/libraries/globals.php:1286
-#: application/libraries/globals.php:1307
+#: application/libraries/globals.php:1295
+#: application/libraries/globals.php:1316
 #, php-format
 msgid "Could not find file %s!"
 msgstr "%s isimli dosya bulunamadı!"
 
-#: application/libraries/globals.php:1323
+#: application/libraries/globals.php:1332
 msgid "No featured collections are available."
 msgstr "Ayrıcalıklı koleksiyon mevcut değil."
 
-#: application/libraries/globals.php:1629
+#: application/libraries/globals.php:1638
 msgid "Select Below "
 msgstr "Aşağıdan Seç"
 
-#: application/libraries/globals.php:1672
+#: application/libraries/globals.php:1681
 msgid "Omeka RSS Feed"
 msgstr "Omek RSS Besleme"
 
-#: application/libraries/globals.php:1673
+#: application/libraries/globals.php:1682
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Besleme"
 
-#: application/libraries/globals.php:1992
+#: application/libraries/globals.php:2001
 msgid "Sort ascending"
 msgstr "Artan sıralama"
 
-#: application/libraries/globals.php:2002
+#: application/libraries/globals.php:2011
 msgid "Sorting descending"
 msgstr "Azalan sıralama"
 
-#: application/libraries/globals.php:2006
+#: application/libraries/globals.php:2015
 msgid "Sorting ascending"
 msgstr "Artan sıralama"
 
-#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2376
 msgid "No recent items available."
 msgstr "Geçerli bir en son materyal yoktur."
 
-#: application/libraries/globals.php:2467
+#: application/libraries/globals.php:2476
 msgid "No featured items are available."
 msgstr "Ayrıcalıklı materyal mevcut değil."
 
-#: application/libraries/globals.php:2528
+#: application/libraries/globals.php:2537
 msgid "View"
 msgstr "Görünüm"
 
-#: application/libraries/globals.php:2590
+#: application/libraries/globals.php:2599
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Koleksiyon Yok"
 
-#: application/libraries/globals.php:2709
+#: application/libraries/globals.php:2718
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2726
+#: application/libraries/globals.php:2735
 msgid "Next Item &rarr;"
-msgstr "&rarr; Sonraki İtem"
+msgstr "&rarr; Sonraki Materyal"
 
-#: application/libraries/globals.php:2746
+#: application/libraries/globals.php:2755
 msgid "&larr; Previous Item"
-msgstr "&larr; Önceki İtem"
+msgstr "&larr; Önceki Materyal"
 
-#: application/libraries/globals.php:2887
+#: application/libraries/globals.php:2896
 msgid "Pagination"
 msgstr "Sayfalama"
 
-#: application/libraries/globals.php:2932
+#: application/libraries/globals.php:2941
 msgid "Browse All"
 msgstr "Tümünü Tara"
 
-#: application/libraries/globals.php:2937
+#: application/libraries/globals.php:2946
 msgid "Browse by Tag"
 msgstr "Etikete Göre Tara"
 
-#: application/libraries/globals.php:3217
+#: application/libraries/globals.php:3226
 msgid "No tags are available."
 msgstr "Etiket mevcut değil."
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Dosyalar bir iteme eklendiğinde dosya transfer türü belirtilmelidir!"
+msgstr "Dosyalar bir materyale eklendiğinde dosya transfer türü belirtilmelidir!"
 
 #: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
@@ -3487,7 +3482,7 @@ msgstr "\"%s\" geçerli bir dosya türetilmesi değildir."
 #: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "Dosyalar, veritabanında kalıcı olmayan bir itemle ilişkilendirilemez!"
+msgstr "Dosyalar, veritabanında kalıcı olmayan bir materyal ile ilişkilendirilemez!"
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:468
@@ -3515,15 +3510,15 @@ msgstr "%1$s, %2$s ulaşıldı."
 
 #: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
-msgstr "Mevcut bir dosya bir iteme eklenilemez!"
+msgstr "Mevcut bir dosya bir materyale eklenilemez!"
 
 #: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
-msgstr "Bir itemle ilişkilendirilmeden önce dosya geçerli olmalıdır!"
+msgstr "Bir materyal ilişkilendirilmeden önce dosya geçerli olmalıdır!"
 
 #: application/models/Item.php:540
 msgid "Invalid item type."
-msgstr "Geçersiz öğe türü."
+msgstr "Geçersiz materyal türü."
 
 #: application/models/Item.php:543
 msgid "Invalid collection."
@@ -3532,11 +3527,11 @@ msgstr "Geçersiz koleksiyon."
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "İtem türü ismi %1$s ile %2$s karakterleri arasında olmalıdır."
+msgstr "Materyal türü ismi %1$s ile %2$s karakterleri arasında olmalıdır."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "İtem türü ismi benzersiz olmalıdır."
+msgstr "Materyal türü ismi benzersiz olmalıdır."
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
@@ -3556,7 +3551,7 @@ msgstr "Geçersiz öğe verisi. Öğe eklemek için ya öğe objelerini ya da ö
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Öğeler veritabanında kalıcı olmayan bir item türünden kaldırılamaz!"
+msgstr "Öğeler veritabanında kalıcı olmayan bir materyal türünden kaldırılamaz!"
 
 #: application/models/ItemType.php:295
 #, php-format
@@ -3566,13 +3561,13 @@ msgstr "%s IDsi ile öğe bulunamaz!"
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "İtem türü %s IDli bir öğe içeremez! "
+msgstr "Materyal türü %s IDli bir öğe içeremez! "
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Geçersiz parametre. HasElement işlevi, itemin bir öğeye sahip olup olmadığını belirlemek için ya bir öğe nesnesi ya da bir öğe kimliği gerektirir."
+msgstr "Geçersiz parametre. hasElement işlevi, bir materyal türünün bir öğeye sahip olup olmadığını belirlemek için bir öğe nesnesi veya bir öğe kimliği gerektirir."
 
 #: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
@@ -3601,37 +3596,37 @@ msgstr[1] "Toplu olarak düzenle: bütün %ditemleri başarıyla işlenmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr "İtem mevcut değil: item işlemden önce silinmiştir."
+msgstr "Materyal mevcut değil: materyal işlemden önce silinmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
-msgstr "Kullanıcının itemi silmesine izin verilmedi."
+msgstr "Kullanıcının materyali silmesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
-msgstr "Kullanıcının itemi düzenlemesine izin verilmedi."
+msgstr "Kullanıcının materyali düzenlemesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
-msgstr "Kullanıcının itemi etiketlemesine izin verilmedi."
+msgstr "Kullanıcının materyali etiketlemesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
-msgstr "İtem başarıyla silinmiştir."
+msgstr "materyal başarıyla silinmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:153
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr "İtem güncellenirken bir hata oluştu: %s"
+msgstr "materyal güncellenirken bir hata oluştu: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr "İtem, toplu olarak başarıyla düzenlendi."
+msgstr "materyal, toplu olarak başarıyla düzenlendi."
 
 #: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr "Toplu olarak düzenlenen itemler #%d [%d/%d]: %s"
+msgstr "Toplu olarak düzenlenen materyaller #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:292
 #, php-format
@@ -3866,14 +3861,14 @@ msgstr "%s teki materyalleri aç"
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr "Koleksiyon Öğeleri"
+msgstr "Koleksiyon Materyalleri"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
 msgid "View item"
 msgid_plural "View all %s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Materyali görüntüle"
+msgstr[1] " %s teki materyalleri aç"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
@@ -3946,7 +3941,7 @@ msgstr "Bu hata hakkında daha detaylı bilgiyi nasıl göreceğinizi öğrenmek
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr "Ayrıcalıklı İtem"
+msgstr "Ayrıcalıklı Materyal"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
@@ -3963,6 +3958,10 @@ msgstr "Dosyalar"
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "Alıntı"
+
+#: application/views/scripts/items/show.php:47
+msgid "Item pagination"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3983,7 +3982,7 @@ msgstr "Sorgu"
 
 #: application/views/scripts/search/search-form.php:10
 msgid "Search options"
-msgstr ""
+msgstr "Tarama opsiyonları"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"

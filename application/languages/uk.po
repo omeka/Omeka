@@ -8,7 +8,7 @@
 # Izoniz <izonizne@mail.ru>, 2013-2014
 # John Flatness <john@omeka.org>, 2020
 # tanya chorna <tanya.chorna@gmail.com>, 2017-2020
-# Vladimir, 2024
+# Volodimir, 2024
 # Yuliya Ilchuk, 2022
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Vladimir, 2024\n"
+"Last-Translator: Volodimir, 2024\n"
 "Language-Team: Ukrainian (http://app.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -441,8 +441,8 @@ msgstr "Переглянути загальнодоступну сторінку
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:101
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:148
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/users/browse.php:70
@@ -465,8 +465,8 @@ msgstr "Всі налаштування будуть втрачені. Поря�
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:91
-#: admin/themes/default/collections/browse.php:101
+#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:100
 msgid "Add a Collection"
 msgstr "Додати колекцію"
 
@@ -486,14 +486,12 @@ msgid "Public"
 msgstr "Загальнодоступні"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/collections/browse.php:55
+#: admin/themes/default/collections/browse.php:58
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:82
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/items/browse.php:85
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -569,11 +567,12 @@ msgid "Total Number of Items"
 msgstr "Загальна кількість елементів"
 
 #: admin/themes/default/collections/browse.php:59
-#: admin/themes/default/items/browse.php:87
-msgid "(Private)"
-msgstr "(Приватне)"
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/quick-filters.php:5
+msgid "Private"
+msgstr "Приватне"
 
-#: admin/themes/default/collections/browse.php:65
+#: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -582,21 +581,21 @@ msgstr "(Приватне)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:96
+#: admin/themes/default/items/browse.php:145
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Редагувати"
 
-#: admin/themes/default/collections/browse.php:74
+#: admin/themes/default/collections/browse.php:73
 msgid "No contributors"
 msgstr "Партнери відсутні"
 
-#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/collections/browse.php:88
 #: admin/themes/default/item-types/browse.php:57
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:154
 #: admin/themes/default/search/index.php:36
 #: application/views/scripts/collections/browse.php:49
 #: application/views/scripts/items/browse.php:57
@@ -604,19 +603,19 @@ msgstr "Партнери відсутні"
 msgid "Bottom pagination"
 msgstr ""
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "There are no collections on this page."
 msgstr "Колекції відсутні на цій сторінці."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "View All Collections"
 msgstr "Перегляд усіх колекцій"
 
-#: admin/themes/default/collections/browse.php:98
+#: admin/themes/default/collections/browse.php:97
 msgid "You have no collections."
 msgstr "У вас відсутні колекції."
 
-#: admin/themes/default/collections/browse.php:100
+#: admin/themes/default/collections/browse.php:99
 msgid "Get started by adding your first collection."
 msgstr "Розпочніть з додавання вашої першої колекції."
 
@@ -666,7 +665,7 @@ msgstr "Партнери відсутні."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:105
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:163
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -722,7 +721,7 @@ msgid "Item Types"
 msgstr "Типи елементів"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:120
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -781,7 +780,7 @@ msgstr "Користувачі"
 msgid "Omeka Admin"
 msgstr "Адміністратор"
 
-#: admin/themes/default/common/header.php:36
+#: admin/themes/default/common/header.php:38
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Перейти до головного змісту"
@@ -952,7 +951,7 @@ msgid "File #%s"
 msgstr "Файл #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:409
+#: application/libraries/globals.php:418
 #: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Елемент"
@@ -1200,8 +1199,8 @@ msgstr "Останні додані елементи відсутні."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:154
-#: admin/themes/default/items/browse.php:181
+#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:183
 msgid "Add an Item"
 msgstr "Додати елемент"
 
@@ -1211,10 +1210,10 @@ msgstr "Додати елемент"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:114
+#: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:411
+#: application/libraries/globals.php:420
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Колекція"
@@ -1377,22 +1376,22 @@ msgid "Browse Items"
 msgstr "Перегляд елементів"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2546
-#: application/libraries/globals.php:2942
+#: application/libraries/globals.php:2555
+#: application/libraries/globals.php:2951
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Пошук"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:142
 #, php-format
 msgid "Select all %s results"
 msgstr "Вибрати всі %sрезультати"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:143
 msgid "items selected"
 msgstr "Вибрані елементи"
 
@@ -1405,31 +1404,31 @@ msgstr "Вибрати всі рядки"
 msgid "Select item \"%s\""
 msgstr "Вибрати елемент \"%s\""
 
-#: admin/themes/default/items/browse.php:119
+#: admin/themes/default/items/browse.php:121
 msgid "No Tags"
 msgstr "Теги відсутні"
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:169
 msgid "Details"
 msgstr "Деталі"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:170
 msgid "Show Details"
 msgstr "Переглянути деталі"
 
-#: admin/themes/default/items/browse.php:169
+#: admin/themes/default/items/browse.php:171
 msgid "Hide Details"
 msgstr "Приховати деталі"
 
-#: admin/themes/default/items/browse.php:178
+#: admin/themes/default/items/browse.php:180
 msgid "You have no items."
 msgstr "У вас відсутні елементи."
 
-#: admin/themes/default/items/browse.php:180
+#: admin/themes/default/items/browse.php:182
 msgid "Get started by adding your first item."
 msgstr "Розпочніть з додавання вашого першого елемента."
 
-#: admin/themes/default/items/browse.php:185
+#: admin/themes/default/items/browse.php:187
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1438,11 +1437,11 @@ msgstr[1] "Пошуковий запит %s елементів не дав ре�
 msgstr[2] "Пошуковий запит %s елементів не дав результатів."
 msgstr[3] "Пошуковий запит %s елементів не дав результатів."
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 msgid "refine your search"
 msgstr "змініть свій пошук"
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Хочете %s?"
@@ -1490,10 +1489,6 @@ msgstr "Швидкий фільтр"
 #: admin/themes/default/items/quick-filters.php:3
 msgid "View All"
 msgstr "Переглянути усі"
-
-#: admin/themes/default/items/quick-filters.php:5
-msgid "Private"
-msgstr "Приватне"
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
@@ -3282,9 +3277,9 @@ msgstr "Ця електронна пошта вже використовуєть
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
-"href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
-"for details."
-msgstr "Ролі описують дозволи, які має користувач. Детальніше у <a href='http://omeka.org/codex/User_Roles' target='_blank'> документації </a> ."
+"href='https://omeka.org/classic/docs/Admin/Users/' "
+"target='_blank'>documentation</a> for details."
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
@@ -3336,12 +3331,12 @@ msgstr "Недійсний URI для Omeka_Navigation_Page_Uri об'єкта: %
 msgid "Path to plugin.ini for \"%s\" is not correct."
 msgstr "Некоректний шлях до plugin.ini \"%s\"."
 
-#: application/libraries/Omeka/Plugin/Installer.php:76
+#: application/libraries/Omeka/Plugin/Installer.php:78
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
 msgstr "\"%s\" плагін повинен бути встановлений та мати новіші файли для його оновлення."
 
-#: application/libraries/Omeka/Plugin/Installer.php:112
+#: application/libraries/Omeka/Plugin/Installer.php:122
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Плагін повинен мати вірну назву директорії, перш ніж він може бути встановлений."
 
@@ -3354,99 +3349,99 @@ msgstr "'%s' неправильне спеціальне значення."
 msgid "An invalid value was detected during record iteration."
 msgstr "Було виявлено недійсне значення під час ітерації запису."
 
-#: application/libraries/globals.php:410
+#: application/libraries/globals.php:419
 msgid "File"
 msgstr "Документ"
 
-#: application/libraries/globals.php:468
+#: application/libraries/globals.php:477
 msgid "Keyword"
 msgstr "Ключове слово"
 
-#: application/libraries/globals.php:469
+#: application/libraries/globals.php:478
 msgid "Boolean"
 msgstr "Математичний вираз"
 
-#: application/libraries/globals.php:470
+#: application/libraries/globals.php:479
 msgid "Exact match"
 msgstr "Точне співпадіння"
 
-#: application/libraries/globals.php:1286
-#: application/libraries/globals.php:1307
+#: application/libraries/globals.php:1295
+#: application/libraries/globals.php:1316
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Не можу знайти документ %s!"
 
-#: application/libraries/globals.php:1323
+#: application/libraries/globals.php:1332
 msgid "No featured collections are available."
 msgstr "Популярні колекції відсутні."
 
-#: application/libraries/globals.php:1629
+#: application/libraries/globals.php:1638
 msgid "Select Below "
 msgstr "Вибрати нижче"
 
-#: application/libraries/globals.php:1672
+#: application/libraries/globals.php:1681
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS стрічка новин"
 
-#: application/libraries/globals.php:1673
+#: application/libraries/globals.php:1682
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom стрічка новин"
 
-#: application/libraries/globals.php:1992
+#: application/libraries/globals.php:2001
 msgid "Sort ascending"
 msgstr "Сортувати за зростанням"
 
-#: application/libraries/globals.php:2002
+#: application/libraries/globals.php:2011
 msgid "Sorting descending"
 msgstr "Сортування за спаданням"
 
-#: application/libraries/globals.php:2006
+#: application/libraries/globals.php:2015
 msgid "Sorting ascending"
 msgstr "Сортування за зростанням"
 
-#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2376
 msgid "No recent items available."
 msgstr "Останні елементи відсутні."
 
-#: application/libraries/globals.php:2467
+#: application/libraries/globals.php:2476
 msgid "No featured items are available."
 msgstr "Популярні елементи відсутні."
 
-#: application/libraries/globals.php:2528
+#: application/libraries/globals.php:2537
 msgid "View"
 msgstr "Перегляд"
 
-#: application/libraries/globals.php:2590
+#: application/libraries/globals.php:2599
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Колекції відсутні"
 
-#: application/libraries/globals.php:2709
+#: application/libraries/globals.php:2718
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2726
+#: application/libraries/globals.php:2735
 msgid "Next Item &rarr;"
 msgstr "Наступний елемент &rarr;"
 
-#: application/libraries/globals.php:2746
+#: application/libraries/globals.php:2755
 msgid "&larr; Previous Item"
 msgstr "&larr; Попередній елемент"
 
-#: application/libraries/globals.php:2887
+#: application/libraries/globals.php:2896
 msgid "Pagination"
 msgstr "Пагінація"
 
-#: application/libraries/globals.php:2932
+#: application/libraries/globals.php:2941
 msgid "Browse All"
 msgstr "Перегляд"
 
-#: application/libraries/globals.php:2937
+#: application/libraries/globals.php:2946
 msgid "Browse by Tag"
 msgstr "Перегляд за тегами"
 
-#: application/libraries/globals.php:3217
+#: application/libraries/globals.php:3226
 msgid "No tags are available."
 msgstr "Теги відсутні"
 
@@ -3990,6 +3985,10 @@ msgstr "Документи"
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "Цитування"
+
+#: application/views/scripts/items/show.php:47
+msgid "Item pagination"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"

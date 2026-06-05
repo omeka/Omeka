@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Daniel Alves <daniel_r_alves@hotmail.com>, 2011,2013-2016,2019
+# Daniel Alves <daniel_r_alves@hotmail.com>, 2011,2013-2016,2019,2026
 # Filipe <llopes@museus.ul.pt>, 2013
 # John Flatness <john@omeka.org>, 2020
 # Vania Vicente <vv.25420@hotmail.com>, 2013
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: John Flatness <john@omeka.org>, 2020\n"
+"Last-Translator: Daniel Alves <daniel_r_alves@hotmail.com>, 2011,2013-2016,2019,2026\n"
 "Language-Team: Portuguese (Portugal) (http://app.transifex.com/omeka/omeka/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,7 +349,7 @@ msgstr "Adicionar um link ao explorador"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 msgid "New Link Added. Total links: "
-msgstr ""
+msgstr "Novo link adicionado. Total de links:"
 
 #: admin/themes/default/appearance/edit-navigation.php:24
 #: admin/themes/default/appearance/edit-navigation.php:26
@@ -385,7 +385,7 @@ msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:29
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: admin/themes/default/appearance/edit-navigation.php:30
 msgid "Add Link"
@@ -437,8 +437,8 @@ msgstr "Ver Página Pública"
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:48
 #: admin/themes/default/items/browse.php:33
-#: admin/themes/default/items/browse.php:101
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:103
+#: admin/themes/default/items/browse.php:148
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/users/browse.php:70
@@ -461,8 +461,8 @@ msgstr "Todas as personalizações serão perdidas. A ordenação e as etiquetas
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:91
-#: admin/themes/default/collections/browse.php:101
+#: admin/themes/default/collections/browse.php:90
+#: admin/themes/default/collections/browse.php:100
 msgid "Add a Collection"
 msgstr "Adicionar uma Colecção"
 
@@ -482,14 +482,12 @@ msgid "Public"
 msgstr "Público"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/browse.php:54
-#: admin/themes/default/collections/browse.php:55
+#: admin/themes/default/collections/browse.php:58
 #: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
 #: admin/themes/default/items/batch-edit-common.php:24
-#: admin/themes/default/items/browse.php:82
-#: admin/themes/default/items/browse.php:83
+#: admin/themes/default/items/browse.php:85
 #: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
@@ -529,7 +527,7 @@ msgstr "(%s total)"
 #: application/views/scripts/items/browse.php:14
 #: application/views/scripts/search/index.php:9
 msgid "Top pagination"
-msgstr ""
+msgstr "Paginação superior"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
@@ -564,11 +562,12 @@ msgid "Total Number of Items"
 msgstr "Número Total de Itens"
 
 #: admin/themes/default/collections/browse.php:59
-#: admin/themes/default/items/browse.php:87
-msgid "(Private)"
-msgstr "(Privado)"
+#: admin/themes/default/items/browse.php:88
+#: admin/themes/default/items/quick-filters.php:5
+msgid "Private"
+msgstr "Privado"
 
-#: admin/themes/default/collections/browse.php:65
+#: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:28
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -577,41 +576,41 @@ msgstr "(Privado)"
 #: admin/themes/default/item-types/browse.php:40
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:30
-#: admin/themes/default/items/browse.php:94
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:96
+#: admin/themes/default/items/browse.php:145
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
 msgstr "Editar"
 
-#: admin/themes/default/collections/browse.php:74
+#: admin/themes/default/collections/browse.php:73
 msgid "No contributors"
 msgstr "Sem colaboradores"
 
-#: admin/themes/default/collections/browse.php:89
+#: admin/themes/default/collections/browse.php:88
 #: admin/themes/default/item-types/browse.php:57
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:154
 #: admin/themes/default/search/index.php:36
 #: application/views/scripts/collections/browse.php:49
 #: application/views/scripts/items/browse.php:57
 #: application/views/scripts/search/index.php:37
 msgid "Bottom pagination"
-msgstr ""
+msgstr "Paginação inferior"
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "There are no collections on this page."
 msgstr " Não existem colecções nesta página."
 
-#: admin/themes/default/collections/browse.php:95
+#: admin/themes/default/collections/browse.php:94
 msgid "View All Collections"
 msgstr "Ver Todas as Colecções"
 
-#: admin/themes/default/collections/browse.php:98
+#: admin/themes/default/collections/browse.php:97
 msgid "You have no collections."
 msgstr "Você não tem colecções."
 
-#: admin/themes/default/collections/browse.php:100
+#: admin/themes/default/collections/browse.php:99
 msgid "Get started by adding your first collection."
 msgstr "Comece por adicionar a sua primeira colecção."
 
@@ -661,7 +660,7 @@ msgstr "Sem contribuidores."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:105
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:163
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
@@ -717,7 +716,7 @@ msgid "Item Types"
 msgstr "Tipos de Item"
 
 #: admin/themes/default/common/content-nav.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:120
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -776,7 +775,7 @@ msgstr "Utilizadores"
 msgid "Omeka Admin"
 msgstr "Administração do Omeka"
 
-#: admin/themes/default/common/header.php:36
+#: admin/themes/default/common/header.php:38
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Saltar para o conteúdo principal"
@@ -853,12 +852,12 @@ msgstr "Clique e arraste os elementos para a ordem de visualização preferida. 
 #: admin/themes/default/items/files-form.php:9
 #: admin/themes/default/settings/edit-navigation-link.php:28
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 #: admin/themes/default/element-sets/edit.php:29
 #: admin/themes/default/item-types/form.php:42
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: admin/themes/default/element-sets/edit.php:29
 #: admin/themes/default/element-sets/edit.php:33
@@ -934,11 +933,11 @@ msgstr "Editar Ficheiro #%s"
 #: admin/themes/default/files/edit.php:41
 #: admin/themes/default/files/show.php:44
 msgid "Alt Text"
-msgstr ""
+msgstr "Texto alt"
 
 #: admin/themes/default/files/edit.php:43
 msgid "Provide a brief description of visual files to screen reader users."
-msgstr ""
+msgstr "Forneça uma breve descrição dos ficheiros visuais para os utilizadores de leitores de ecrã."
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
@@ -947,7 +946,7 @@ msgid "File #%s"
 msgstr "Ficheiro #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:409
+#: application/libraries/globals.php:418
 #: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Item"
@@ -1164,7 +1163,7 @@ msgstr "Adicionar Elemento"
 
 #: admin/themes/default/item-types/form.php:86
 msgid "New element added. Total Elements: "
-msgstr ""
+msgstr "Novo elemento adicionado. Total de elementos:"
 
 #: admin/themes/default/item-types/form.php:88
 msgid "Existing"
@@ -1189,8 +1188,8 @@ msgstr "Não existem itens adicionados recentemente"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:17
-#: admin/themes/default/items/browse.php:154
-#: admin/themes/default/items/browse.php:181
+#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:183
 msgid "Add an Item"
 msgstr "Adicionar um Item"
 
@@ -1200,10 +1199,10 @@ msgstr "Adicionar Item"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:114
+#: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:411
+#: application/libraries/globals.php:420
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Colecção"
@@ -1366,22 +1365,22 @@ msgid "Browse Items"
 msgstr "Explorar Itens"
 
 #: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:158
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2546
-#: application/libraries/globals.php:2942
+#: application/libraries/globals.php:2555
+#: application/libraries/globals.php:2951
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Procurar Itens"
 
 #: admin/themes/default/items/browse.php:25
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:142
 #, php-format
 msgid "Select all %s results"
 msgstr "Seleccionar todos os %s resultados"
 
 #: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:143
 msgid "items selected"
 msgstr "Itens seleccionados"
 
@@ -1394,31 +1393,31 @@ msgstr "Seleccionar todas as linhas"
 msgid "Select item \"%s\""
 msgstr "Seleccionar item \"%s\""
 
-#: admin/themes/default/items/browse.php:119
+#: admin/themes/default/items/browse.php:121
 msgid "No Tags"
 msgstr "Sem Etiquetas"
 
-#: admin/themes/default/items/browse.php:167
+#: admin/themes/default/items/browse.php:169
 msgid "Details"
 msgstr "Detalhes"
 
-#: admin/themes/default/items/browse.php:168
+#: admin/themes/default/items/browse.php:170
 msgid "Show Details"
 msgstr "Mostrar Detalhes"
 
-#: admin/themes/default/items/browse.php:169
+#: admin/themes/default/items/browse.php:171
 msgid "Hide Details"
 msgstr "Esconder Detalhes"
 
-#: admin/themes/default/items/browse.php:178
+#: admin/themes/default/items/browse.php:180
 msgid "You have no items."
 msgstr "Você não possui itens."
 
-#: admin/themes/default/items/browse.php:180
+#: admin/themes/default/items/browse.php:182
 msgid "Get started by adding your first item."
 msgstr "Comece por adicionar o seu primeiro item."
 
-#: admin/themes/default/items/browse.php:185
+#: admin/themes/default/items/browse.php:187
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1426,11 +1425,11 @@ msgstr[0] "A pesquisa procurou 1 item e não obteve resultados."
 msgstr[1] "A pesquisa procurou %s itens e não obteve resultados."
 msgstr[2] "A pesquisa procurou %s itens e não obteve resultados."
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 msgid "refine your search"
 msgstr "melhore a sua pesquisa"
 
-#: admin/themes/default/items/browse.php:186
+#: admin/themes/default/items/browse.php:188
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Gostaria de %s?"
@@ -1479,10 +1478,6 @@ msgstr "Filtro Rápido"
 msgid "View All"
 msgstr "Ver Todos"
 
-#: admin/themes/default/items/quick-filters.php:5
-msgid "Private"
-msgstr "Privado"
-
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
@@ -1500,7 +1495,7 @@ msgstr "Restringir por Campos Específicos"
 #: application/views/scripts/items/search-form.php:25
 #, php-format
 msgid "Number of rows in \"%s\":"
-msgstr ""
+msgstr "Número de linhas em \"%s\":"
 
 #: admin/themes/default/items/search-form.php:34
 #: application/views/scripts/items/search-form.php:29
@@ -1531,12 +1526,12 @@ msgstr "Adicionar Um Campo"
 #: application/views/scripts/items/search-form.php:52
 #, php-format
 msgid "Row %s"
-msgstr ""
+msgstr "Linha %s"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:54
 msgid "Joiner"
-msgstr ""
+msgstr "Junção"
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/helpers/ItemSearchFilters.php:108
@@ -1553,7 +1548,7 @@ msgstr "OU"
 #: admin/themes/default/items/search-form.php:71
 #: application/views/scripts/items/search-form.php:71
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 #: admin/themes/default/items/search-form.php:98
 #: admin/themes/default/tags/browse.php:50
@@ -1606,7 +1601,7 @@ msgstr "não corresponde"
 #: admin/themes/default/items/search-form.php:113
 #: application/views/scripts/items/search-form.php:110
 msgid "Terms"
-msgstr ""
+msgstr "Termos"
 
 #: admin/themes/default/items/search-form.php:126
 #: application/views/scripts/items/search-form.php:33
@@ -1900,19 +1895,19 @@ msgstr "Ok"
 
 #: admin/themes/default/settings/edit-navigation-link.php:32
 msgid "Enable"
-msgstr ""
+msgstr "Ativar"
 
 #: admin/themes/default/settings/edit-navigation-link.php:36
 msgid "Show Options"
-msgstr ""
+msgstr "Mostrar Opções"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Tipo de consulta de pesquisa"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Selecione o tipo de consulta padrão utilizado para a pesquisa simples no Omeka."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
@@ -1972,7 +1967,7 @@ msgstr "A Editar Etiquetas"
 msgid ""
 "This number counts all records associated with a tag. Filtering \"Record "
 "types\" to \"Items\" will provide links to all items containing the tag."
-msgstr ""
+msgstr "Este número contabiliza todos os registos associados a uma etiqueta. Filtrar por \"Tipos de registo\" para \"Artigos\" fornecerá ligações para todos os artigos que contêm a etiqueta."
 
 #: admin/themes/default/tags/browse.php:23
 msgid ""
@@ -1984,7 +1979,7 @@ msgstr "Para editar o nome da etiqueta, clicar no nome e editar, premir \"enter\
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "records."
-msgstr ""
+msgstr "Para eliminar uma etiqueta, clique no X. Apagar uma etiqueta não eliminará os registos associados a esta."
 
 #: admin/themes/default/tags/browse.php:33
 msgid "Search tags"
@@ -2198,7 +2193,7 @@ msgstr "Adicionar um utilizador"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/browse.php:52
@@ -2695,7 +2690,7 @@ msgid ""
 "Omeka requires MySQL version %1$s or higher, but this server is running "
 "MySQL version %2$s. Please update the installed version of MySQL and try "
 "again."
-msgstr ""
+msgstr "O Omeka requer o MySQL versão%1$sou superior, mas este servidor está a executar o MySQL versão%2$s. Atualize a versão do MySQL instalada e tente novamente."
 
 #: application/controllers/UsersController.php:74
 msgid ""
@@ -2872,7 +2867,7 @@ msgstr "Mostrar elementos vazios"
 
 #: application/forms/AppearanceSettings.php:63
 msgid "Include empty elements in show pages."
-msgstr ""
+msgstr "Inclua elementos vazios nas páginas de visualização."
 
 #: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
@@ -2880,7 +2875,7 @@ msgstr "Mostrar Cabeçalhos da Configuração de Elementos"
 
 #: application/forms/AppearanceSettings.php:69
 msgid "Include element set headings in show pages and in drop-down lists."
-msgstr ""
+msgstr "Inclua os títulos dos conjuntos de elementos nas páginas de visualização e nas listas pendentes."
 
 #: application/forms/AppearanceSettings.php:74
 msgid "Link to File Metadata"
@@ -2893,14 +2888,14 @@ msgstr "Ter ficheiros de item vinculados aos metadados do ficheiro em vez de ao 
 
 #: application/forms/AppearanceSettings.php:81
 msgid "File Alt Text Element"
-msgstr ""
+msgstr "Elemento de texto alt do ficheiro"
 
 #: application/forms/AppearanceSettings.php:82
 msgid ""
 "Default file element to use in describing visual files to screen reader "
 "users via the image tag's alt attribute. This can be overridden using the "
 "file form's \"Alt Text\" field."
-msgstr ""
+msgstr "Elemento de ficheiro padrão utilizado para descrever ficheiros visuais para utilizadores de leitores de ecrã através do atributo alt da tag de imagem. Isto pode ser alterado utilizando o campo \"Texto Alt\" do formulário de ficheiro."
 
 #: application/forms/AppearanceSettings.php:95
 msgid "Admin Theme"
@@ -2988,7 +2983,7 @@ msgstr "Caminho para o Directório do ImageMagick"
 
 #: application/forms/GeneralSettings.php:69
 msgid "General Settings"
-msgstr ""
+msgstr "Configurações Gerais"
 
 #: application/forms/Install.php:44
 msgid "must be 30 characters or fewer with no whitespace"
@@ -3176,7 +3171,7 @@ msgstr "Chave reCAPTCHA do Site"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Introduza a chave do site obtida em %s. Tanto esta chave como a chave privada devem ser preenchidas para proteger os formulários públicos. As chaves devem ser válidas para o reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3187,7 +3182,7 @@ msgstr "Chave reCAPTCHA Secreta"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Introduza a chave secreta do item %s. Tanto esta chave como a chave pública devem ser preenchidas para proteger os formulários públicos. As chaves devem ser válidas para o reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3270,9 +3265,9 @@ msgstr "Este email já está em uso."
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
-"href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
-"for details."
-msgstr "Papel descreve as permissões que um utilizador tem. Ver a <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentação</a> para mais informação."
+"href='https://omeka.org/classic/docs/Admin/Users/' "
+"target='_blank'>documentation</a> for details."
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
@@ -3324,12 +3319,12 @@ msgstr "URI inválido para o objecto Omeka_Navigation_Page_Uri: %s"
 msgid "Path to plugin.ini for \"%s\" is not correct."
 msgstr "Caminho para plugin.ini para \"%s\" não está correcto."
 
-#: application/libraries/Omeka/Plugin/Installer.php:76
+#: application/libraries/Omeka/Plugin/Installer.php:78
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
 msgstr "O plugin \"%s\" tem que ser instalado e tem novos ficheiros para o actualizar."
 
-#: application/libraries/Omeka/Plugin/Installer.php:112
+#: application/libraries/Omeka/Plugin/Installer.php:122
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "O plugin tem que ter um nome de directório válido antes que possa ser instalado."
 
@@ -3342,99 +3337,99 @@ msgstr "'%s' é um valor especial inválido."
 msgid "An invalid value was detected during record iteration."
 msgstr "Um valor inválido foi detectado durante a iteração dos registos."
 
-#: application/libraries/globals.php:410
+#: application/libraries/globals.php:419
 msgid "File"
 msgstr "Ficheiro"
 
-#: application/libraries/globals.php:468
+#: application/libraries/globals.php:477
 msgid "Keyword"
 msgstr "Palavra-chave"
 
-#: application/libraries/globals.php:469
+#: application/libraries/globals.php:478
 msgid "Boolean"
 msgstr "Booleano"
 
-#: application/libraries/globals.php:470
+#: application/libraries/globals.php:479
 msgid "Exact match"
 msgstr "Correspondência exacta"
 
-#: application/libraries/globals.php:1286
-#: application/libraries/globals.php:1307
+#: application/libraries/globals.php:1295
+#: application/libraries/globals.php:1316
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Não foi possível encontrar o ficheiro %s!"
 
-#: application/libraries/globals.php:1323
+#: application/libraries/globals.php:1332
 msgid "No featured collections are available."
 msgstr "Não existem colecções em destaque."
 
-#: application/libraries/globals.php:1629
+#: application/libraries/globals.php:1638
 msgid "Select Below "
 msgstr "Seleccione Em Baixo"
 
-#: application/libraries/globals.php:1672
+#: application/libraries/globals.php:1681
 msgid "Omeka RSS Feed"
 msgstr "RSS Feed do Omeka"
 
-#: application/libraries/globals.php:1673
+#: application/libraries/globals.php:1682
 msgid "Omeka Atom Feed"
 msgstr "Atom Feed do Omeka"
 
-#: application/libraries/globals.php:1992
+#: application/libraries/globals.php:2001
 msgid "Sort ascending"
-msgstr ""
+msgstr "Ordenar por ordem crescente"
 
-#: application/libraries/globals.php:2002
+#: application/libraries/globals.php:2011
 msgid "Sorting descending"
-msgstr ""
+msgstr "Ordenação por ordem decrescente"
 
-#: application/libraries/globals.php:2006
+#: application/libraries/globals.php:2015
 msgid "Sorting ascending"
-msgstr ""
+msgstr "Ordenação por ordem crescente"
 
-#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2376
 msgid "No recent items available."
 msgstr "Não existem itens adicionados recentemente."
 
-#: application/libraries/globals.php:2467
+#: application/libraries/globals.php:2476
 msgid "No featured items are available."
 msgstr "Não existem itens em destaque."
 
-#: application/libraries/globals.php:2528
+#: application/libraries/globals.php:2537
 msgid "View"
 msgstr "Ver"
 
-#: application/libraries/globals.php:2590
+#: application/libraries/globals.php:2599
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Sem Colecção"
 
-#: application/libraries/globals.php:2709
+#: application/libraries/globals.php:2718
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2726
+#: application/libraries/globals.php:2735
 msgid "Next Item &rarr;"
 msgstr "Próximo item &rarr;"
 
-#: application/libraries/globals.php:2746
+#: application/libraries/globals.php:2755
 msgid "&larr; Previous Item"
 msgstr "&larr; Item anterior"
 
-#: application/libraries/globals.php:2887
+#: application/libraries/globals.php:2896
 msgid "Pagination"
 msgstr "Paginação"
 
-#: application/libraries/globals.php:2932
+#: application/libraries/globals.php:2941
 msgid "Browse All"
 msgstr "Explorar todos"
 
-#: application/libraries/globals.php:2937
+#: application/libraries/globals.php:2946
 msgid "Browse by Tag"
 msgstr "Explorar por Etiqueta"
 
-#: application/libraries/globals.php:3217
+#: application/libraries/globals.php:3226
 msgid "No tags are available."
 msgstr "Não existem etiquetas."
 
@@ -3901,7 +3896,7 @@ msgstr "Página Anterior"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: application/views/scripts/common/pagination_control.php:42
 #, php-format
@@ -3976,6 +3971,10 @@ msgstr "Ficheiros"
 msgid "Citation"
 msgstr "Citação"
 
+#: application/views/scripts/items/show.php:47
+msgid "Item pagination"
+msgstr ""
+
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
 msgstr "Interrogar:"
@@ -3991,11 +3990,11 @@ msgstr "Tipos de registos:"
 #: application/views/scripts/search/search-form.php:4
 #: application/views/scripts/search/search-form.php:5
 msgid "Query"
-msgstr ""
+msgstr "Consulta"
 
 #: application/views/scripts/search/search-form.php:10
 msgid "Search options"
-msgstr ""
+msgstr "Opções de pesquisa"
 
 #: application/views/scripts/search/search-form.php:15
 msgid "Search using this query type:"
