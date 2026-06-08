@@ -200,10 +200,12 @@ if (!Omeka) {
         $(document).on('click', '.keyboard-reorder-panel button', function() {
             var activeButton = $(this);
             var selectedNavItem = activeButton.parents('.selected');
+            var selectedNavItemTitle = selectedNavItem.find('.drawer-name').first().text();
+
             var activeClass = activeButton.attr('class');
             var nextNavItem = selectedNavItem.next(sortableNode);
             var prevNavItem = selectedNavItem.prev(sortableNode);
-            var prevNavItemChildren, parentNavItem, positionalNavItem;
+            var prevNavItemChildren, parentNavItem, positionalNavItem, positionalNavItemTitle;
 
             switch(activeClass) {
                 case 'keyboard-reorder-down':
@@ -234,6 +236,7 @@ if (!Omeka) {
                 default:
                     console.log('no reorder');
             }
+            positionalNavItemTitle = (positionalNavItem) ? positionalNavItem.find('.drawer-name').text() : '';
 
             if (typeof orderSelector !== 'undefined') {
                 var sortable = $('.sortable');
@@ -243,7 +246,7 @@ if (!Omeka) {
             var reorderAction = activeClass.replace('keyboard-reorder-', '');
             selectedNavItem.find('.' + activeClass).first().focus();
 
-            var newAlert = constructAlert(selectedNavItem, reorderAction, positionalNavItem);
+            var newAlert = constructAlert(selectedNavItemTitle, reorderAction, positionalNavItemTitle);
             reorderAlertElement.html(newAlert);
             console.log(reorderAlertElement.text());
         });
@@ -257,16 +260,14 @@ if (!Omeka) {
             }
         });
 
-        var constructAlert = function(selectedNavItem, reorderAction, positionalNavItem) {
+        var constructAlert = function(selectedNavItemTitle, reorderAction, positionalNavItemTitle) {
             var newAlert = '';
-            if ((positionalNavItem !== undefined) && (positionalNavItem.length > 0)) {
+            if (positionalNavItemTitle !== '') {
                 var successAlert = reorderAlertElement.data('successAlertTemplate');
                 var actionAlert = reorderAlertElement.data(reorderAction + 'ActionAlertTemplate');
                 newAlert = $('<p>' + successAlert + actionAlert + '</p>');
 
-                var navItemTitle = selectedNavItem.find('.drawer-name').first().text();
-                var positionalNavItemTitle = positionalNavItem.find('.drawer-name').first().text();
-                newAlert.find('.nav-item-title').text(navItemTitle);
+                newAlert.find('.nav-item-title').text(selectedNavItemTitle);
                 newAlert.find('.positional-nav-item-title').text(positionalNavItemTitle);
             } else {
                 newAlert = reorderAlertElement.data('failAlertTemplate');
