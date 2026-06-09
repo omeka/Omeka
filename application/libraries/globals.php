@@ -2009,10 +2009,16 @@ function browse_sort_links($links, $wrapperTags = [])
                     $class = 'class="sorting desc"';
                     $urlParams[$sortDirParam] = 'a';
                     $sortingLabel = __('Sorting descending');
+                    if ($sortlistWrappers['link_tag'] !== '') {
+                        $sortlistWrappers['link_tag'] .= ' aria-sort="descending"';
+                    }
                 } else {
                     $class = 'class="sorting asc"';
                     $urlParams[$sortDirParam] = 'd';
                     $sortingLabel = __('Sorting ascending');
+                    if ($sortlistWrappers['link_tag'] !== '') {
+                        $sortlistWrappers['link_tag'] .= ' aria-sort="ascending"';
+                    }
                 }
             }
             $url = html_escape(url([], null, $urlParams));
