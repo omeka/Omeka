@@ -1,6 +1,9 @@
 <li class="element">
     <div class="sortable-item drawer">
+        <span id="move-<?php echo $element_id_name; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-labelledby="move-<?php echo $element_id_name; ?> <?php echo $element_id_name; ?>"></span>
+        <label class="drawer-name">
         <?php
+        echo __('Element Name');
         echo $this->formSelect(
             $element_id_name, $element_id_value,
             [
@@ -16,6 +19,7 @@
             )
         );
         ?>
+        </label>
         <?php
         echo $this->formHidden(
             $element_order_name, $element_order_value,
