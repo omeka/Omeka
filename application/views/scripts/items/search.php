@@ -6,7 +6,7 @@ echo head(['title' => $pageTitle,
 
 <h1><?php echo $pageTitle; ?></h1>
 
-<nav class="items-nav navigation secondary-nav">
+<nav class="items-nav navigation secondary-nav" aria-label="<?php echo __('Items'); ?>">
     <?php echo public_nav_items(); ?>
 </nav>
 

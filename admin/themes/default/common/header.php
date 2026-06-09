@@ -34,7 +34,7 @@
 
 <?php echo body_tag(['id' => @$bodyid, 'class' => @$bodyclass]); ?>
 
-<header role="banner">
+<header>
     <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('admin_header_top', ['view'=>$this]); ?>
     <div id="site-title" class="two columns">
@@ -42,7 +42,7 @@
     </div>
 	<button id="mobile-navbar-toggle" class="mobile-menu" data-target="#global-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
 
-    <nav id="global-nav">
+    <nav id="global-nav" aria-label="<?php echo __('Admin'); ?>">
         <?php echo common('global-nav'); ?>
         
         <ul id="user-nav">

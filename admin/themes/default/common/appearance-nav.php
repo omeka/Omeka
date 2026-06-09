@@ -1,4 +1,4 @@
-<nav id="section-nav" class="navigation vertical" role="navigation">
+<nav id="section-nav" class="navigation vertical" role="navigation" aria-label="<?php echo __('Appearance'); ?>">
 <?php
     $navArray = [
         [

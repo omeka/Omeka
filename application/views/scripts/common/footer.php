@@ -2,7 +2,7 @@
 
         <footer role="contentinfo">
 
-            <nav id="bottom-nav">
+            <nav id="bottom-nav" aria-label="<?php echo __('Footer'); ?>">
                 <?php echo public_nav_main(); ?>
             </nav>
 
