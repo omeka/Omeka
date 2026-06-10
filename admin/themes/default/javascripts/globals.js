@@ -206,7 +206,6 @@ if (!Omeka) {
             var nextNavItem = selectedNavItem.next(sortableNode);
             var prevNavItem = selectedNavItem.prev(sortableNode);
             var prevNavItemChildren, parentNavItem, positionalNavItem, positionalNavItemTitle;
-
             switch(activeClass) {
                 case 'keyboard-reorder-down':
                     selectedNavItem.insertAfter(nextNavItem);
@@ -247,7 +246,7 @@ if (!Omeka) {
             selectedNavItem.find('.' + activeClass).first().focus();
 
             var newAlert = constructAlert(selectedNavItemTitle, reorderAction, positionalNavItemTitle);
-            reorderAlertElement.html(newAlert);
+            reorderAlertElement.text(newAlert);
             console.log(reorderAlertElement.text());
         });
 
@@ -265,10 +264,7 @@ if (!Omeka) {
             if (positionalNavItemTitle !== '') {
                 var successAlert = reorderAlertElement.data('successAlertTemplate');
                 var actionAlert = reorderAlertElement.data(reorderAction + 'ActionAlertTemplate');
-                newAlert = $('<p>' + successAlert + actionAlert + '</p>');
-
-                newAlert.find('.nav-item-title').text(selectedNavItemTitle);
-                newAlert.find('.positional-nav-item-title').text(positionalNavItemTitle);
+                newAlert = successAlert.replace("{ACTIVE}", selectedNavItemTitle) + actionAlert.replace("{RELATIVE}", positionalNavItemTitle);
             } else {
                 newAlert = reorderAlertElement.data('failAlertTemplate');
             }

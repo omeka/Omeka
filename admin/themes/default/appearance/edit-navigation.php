@@ -1,12 +1,12 @@
 <?php
 queue_js_file(['vendor/jquery.nestedSortable', 'navigation']);
 
-$successAlertTemplate = __("<span class='nav-item-title'></span> reordered. ");
+$successAlertTemplate = __("{ACTIVE} reordered. ");
 $failAlertTemplate = __("Cannot reorder further.");
-$upActionAlertTemplate = __("Moved above <span class='positional-nav-item-title'></span>.");
-$downActionAlertTemplate = __("Moved below <span class='positional-nav-item-title'></span>.");
-$nestActionAlertTemplate = __("Nested under <span class='positional-nav-item-title'></span>.");
-$unnestActionAlertTemplate = __("Unnested from <span class='positional-nav-item-title'></span>.");
+$upActionAlertTemplate = __("Moved above {RELATIVE}.");
+$downActionAlertTemplate = __("Moved below {RELATIVE}.");
+$nestActionAlertTemplate = __("Nested under {RELATIVE}.");
+$unnestActionAlertTemplate = __("Unnested from {RELATIVE}.");
 $pageTitle = __('Appearance');
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
