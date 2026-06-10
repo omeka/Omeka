@@ -28,3 +28,11 @@ licenses.
 
 Release notes for Omeka are available at
 [http://omeka.org/codex/Release_Notes](http://omeka.org/codex/Release_Notes).
+
+## Installation via Docker
+
+```bash
+docker compose up -d
+```
+
+Navigate to http://localhost:8080/install.
