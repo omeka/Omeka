@@ -847,7 +847,7 @@ button.ui-dialog-titlebar-close {
 
 .drawer-name {
   margin-right: auto !important;
-  max-width: calc(100% - 15rem);
+  padding-right: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

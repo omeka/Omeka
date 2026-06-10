@@ -81,7 +81,7 @@
 
 .drawer-name {
     margin-right: auto !important;
-    max-width: calc(100% - 15rem);
+    padding-right: $spacing-m;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
