@@ -1,10 +1,10 @@
 <?php
 queue_js_file('element-sets');
 
-$successAlertTemplate = __("<span class='nav-item-title'></span> reordered. ");
+$successAlertTemplate = __("{ACTIVE} reordered. ");
 $failAlertTemplate = __("Cannot reorder further.");
-$upActionAlertTemplate = __("Moved above <span class='positional-nav-item-title'></span>.");
-$downActionAlertTemplate = __("Moved below <span class='positional-nav-item-title'></span>.");
+$upActionAlertTemplate = __("Moved above {RELATIVE}.");
+$downActionAlertTemplate = __("Moved below {RELATIVE}.");
 
 echo head(
     [
