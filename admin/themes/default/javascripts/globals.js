@@ -197,7 +197,7 @@ if (!Omeka) {
             }
         });
 
-        $(document).on('click', '.keyboard-reorder-panel button', function() {
+        $(document).on('click keydown', '.keyboard-reorder-panel button', function() {
             var activeButton = $(this);
             var selectedNavItem = activeButton.parents('.selected');
             var selectedNavItemTitle = selectedNavItem.find('.drawer-name').first().text();
