@@ -92,6 +92,7 @@ jQuery(document).ready(function () {
                     </div>
                 </li>
             </ul>
+            <span class="sr-only" id="unnamed-element-label"><?php echo __('Unnamed Element'); ?></span>
             <?php echo $this->form->getElement(Omeka_Form_ItemTypes::REMOVE_HIDDEN_ELEMENT_ID); ?>
         </div>
     </fieldset>
