@@ -197,7 +197,7 @@ if (!Omeka) {
             }
         });
 
-        $(document).on('click keydown', '.keyboard-reorder-panel button', function() {
+        $(document).on('click', '.keyboard-reorder-panel button', function(e) {
             var activeButton = $(this);
             var selectedNavItem = activeButton.parents('.selected');
             var selectedNavItemTitle = selectedNavItem.find('.drawer-name').first().text();
@@ -235,7 +235,7 @@ if (!Omeka) {
                 default:
                     console.log('no reorder');
             }
-            positionalNavItemTitle = (positionalNavItem) ? positionalNavItem.find('.drawer-name').text() : '';
+            positionalNavItemTitle = (positionalNavItem) ? positionalNavItem.find('.drawer-name').first().text() : '';
 
             if (typeof orderSelector !== 'undefined') {
                 var sortable = $('.sortable');
