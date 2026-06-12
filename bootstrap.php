@@ -14,7 +14,7 @@ if (getenv('OMEKA_REPORT_DEPRECATED') === '1') {
 }
 
 // Define the current version of Omeka.
-define('OMEKA_VERSION', '3.2');
+define('OMEKA_VERSION', '3.2.1');
 
 // Define the application environment.
 if (!defined('APPLICATION_ENV')) {
