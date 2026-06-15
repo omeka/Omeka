@@ -9,7 +9,11 @@ echo head(
 );
 echo $this->partial('items/search-form.php',
     [
-        'formAttributes' => ['id'=>'advanced-search-form'],
+        'formAttributes' => [
+            'id' => 'advanced-search-form', 
+            'role' => 'search',
+            'aria-label' => __('Search Items')
+        ],
         'useSidebar' => true
     ]
 );

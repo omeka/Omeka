@@ -68,6 +68,9 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         if (!isset($options['form_attributes']['id'])) {
             $options['form_attributes']['id'] = 'search-form';
         }
+        if (!isset($options['form_attributes']['aria-label'])) {
+            $options['form_attributes']['aria-label'] = option('site_title');
+        }
         $options['form_attributes']['method'] = 'get';
 
         $formParams = [

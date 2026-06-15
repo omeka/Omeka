@@ -10,8 +10,12 @@ echo head(['title' => $pageTitle,
     <?php echo public_nav_items(); ?>
 </nav>
 
-<?php echo $this->partial('items/search-form.php',
-    ['formAttributes' =>
-        ['id' => 'advanced-search-form']]); ?>
+<?php echo $this->partial('items/search-form.php', [
+    'formAttributes' => [
+        'id' => 'advanced-search-form', 
+        'role' => 'search',
+        'aria-label' => __('Search Items')
+    ]
+]); ?>
 
 <?php echo foot(); ?>
