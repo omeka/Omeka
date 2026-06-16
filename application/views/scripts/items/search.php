@@ -14,7 +14,7 @@ echo head(['title' => $pageTitle,
     'formAttributes' => [
         'id' => 'advanced-search-form', 
         'role' => 'search',
-        'aria-label' => __('Search Items')
+        'aria-label' => __('Items')
     ]
 ]); ?>
 

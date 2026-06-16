@@ -12,7 +12,7 @@ echo $this->partial('items/search-form.php',
         'formAttributes' => [
             'id' => 'advanced-search-form', 
             'role' => 'search',
-            'aria-label' => __('Search Items')
+            'aria-label' => __('Items')
         ],
         'useSidebar' => true
     ]
