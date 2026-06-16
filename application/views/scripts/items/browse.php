@@ -5,13 +5,13 @@ echo head(['title' => $pageTitle, 'bodyclass' => 'items browse']);
 
 <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
 
-<nav class="items-nav navigation secondary-nav">
+<nav class="items-nav navigation secondary-nav" aria-label="<?php echo __('Items'); ?>">
     <?php echo public_nav_items(); ?>
 </nav>
 
 <?php echo item_search_filters(); ?>
 
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 
 <?php if ($total_results > 0): ?>
 
@@ -54,7 +54,7 @@ $sortLinks[__('Date Added')] = 'added';
 </div><!-- end class="item hentry" -->
 <?php endforeach; ?>
 
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 
 <div id="outputs">
     <span class="outputs-label"><?php echo __('Output Formats'); ?></span>

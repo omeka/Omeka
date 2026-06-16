@@ -4,7 +4,7 @@ echo head(['title' => $pageTitle, 'bodyclass' => 'collections browse']);
 ?>
 
 <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_results); ?></h1>
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Top pagination')]]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 
 <?php
 $sortLinks[__('Title')] = 'Dublin Core,Title';
@@ -46,7 +46,7 @@ $sortLinks[__('Date Added')] = 'added';
 
 <?php endforeach; ?>
 
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Bottom pagination')]]); ?>
+<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 
 <?php fire_plugin_hook('public_collections_browse', ['collections' => $collections, 'view' => $this]); ?>
 

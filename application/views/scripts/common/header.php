@@ -51,7 +51,7 @@
 
             <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
             
-            <nav id="top-nav" role="navigation">
+            <nav id="top-nav" aria-label="<?php __('Main menu'); ?>">
                 <?php echo public_nav_main(); ?>
             </nav>
 
