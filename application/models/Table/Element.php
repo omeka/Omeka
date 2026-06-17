@@ -180,10 +180,18 @@ class Table_Element extends Omeka_Db_Table
 
         // REST API params.
         if (array_key_exists('name', $params)) {
-            $select->where("elements.name = ?", $params['name']);
+            if (is_array($params['name'])) {
+                $select->where("elements.name IN (?)", $params['name']);
+            } else {
+                $select->where("elements.name = ?", $params['name']);
+            }
         }
         if (array_key_exists('element_set', $params)) {
-            $select->where("elements.element_set_id = ?", $params['element_set']);
+            if (is_array($params['element_set'])) {
+                $select->where("elements.element_set_id IN (?)", $params['element_set']);
+            } else {
+                $select->where("elements.element_set_id = ?", $params['element_set']);
+            }
         }
     }
 
