@@ -96,10 +96,20 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         if ($titles) {
             $this->_record->setSearchTextTitle($titles[0]->text);
         }
-        $elementTexts = apply_filters('search_element_texts', $this->getAllElementTexts());
-        foreach ($elementTexts as $elementText) {
+        foreach ($this->getSearchElementTexts() as $elementText) {
             $this->_record->addSearchText($elementText->text);
         }
+    }
+
+    /**
+     * Get this record's element texts that should be searchable, i.e. with
+     * the search_element_texts filter applied.
+     *
+     * @return array Set of ElementText records.
+     */
+    public function getSearchElementTexts()
+    {
+        return apply_filters('search_element_texts', $this->getAllElementTexts());
     }
 
     /**
