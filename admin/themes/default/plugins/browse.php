@@ -44,7 +44,7 @@ echo flash();
         <div class="six columns alpha">
             <h2>
             <?php if ($plugin->getLinkUrl()): ?>
-                <a href="<?php echo html_escape($plugin->getLinkUrl()); ?>" target="_blank"><?php echo html_escape($displayName); ?></a>
+                <a href="<?php echo html_escape($plugin->getLinkUrl()); ?>" target="_blank"><?php echo html_escape($displayName); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a>
             <?php else: ?>
                 <?php echo html_escape($displayName); ?>
             <?php endif; ?>
@@ -65,7 +65,7 @@ echo flash();
                 <p class="plugin-description"><?php echo html_escape($pluginDescription); ?></p>
             <?php endif; ?>
             <?php if($pluginSupportLink = $plugin->getSupportLinkUrl()):?>
-                <p class="plugin-support-link"><a href="<?php echo $pluginSupportLink; ?>"><?php echo __("Get support"); ?></a></p>
+                <p class="plugin-support-link"><a href="<?php echo $pluginSupportLink; ?>" target="_blank"><?php echo __("Get support"); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a></p>
             <?php endif;?>
             <?php if ($needsUpgrade): ?>
                 <ul class="version-notification active">

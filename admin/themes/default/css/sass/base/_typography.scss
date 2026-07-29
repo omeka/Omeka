@@ -51,6 +51,15 @@ a:visited {
 	color: darken($blue, 20%);
 }
 
+a[target="_blank"]:after {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f35d" / "";
+	display: inline-block;
+	margin: 0 $spacing-s;
+	font-size: 10px;
+}
+
 p, 
 li {
     line-height: 1.5em;
