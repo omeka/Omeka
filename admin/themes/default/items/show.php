@@ -42,7 +42,7 @@ echo flash();
         <?php 
         echo link_to_item(__('Edit'), ['class'=>'big green button'], 'edit'); ?>
         <?php endif; ?>
-        <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
+        <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a>
         <?php if (is_allowed($item, 'delete')): ?>
         <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm big red button'], 'delete-confirm'); ?>
         <?php endif; ?>
