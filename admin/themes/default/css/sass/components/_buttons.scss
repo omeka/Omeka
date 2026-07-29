@@ -158,6 +158,10 @@ button {
         @include green;
     }
 }
+
+a.button[target="_blank"] {
+    justify-content: center;
+}
            
 
 /* jQuery UI overrides

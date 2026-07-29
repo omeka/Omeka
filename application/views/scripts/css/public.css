@@ -1,3 +1,12 @@
+a[target="_blank"]:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-style: normal;
+  content: "\f35d" / "";
+  display: inline-block;
+  margin: 0 .25rem;
+  font-size: 10px; }
+
 .sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -13,7 +22,6 @@
 
 .search-entry {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 1rem; }
   .search-entry .visible-label {
