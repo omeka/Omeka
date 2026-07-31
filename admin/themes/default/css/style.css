@@ -1230,6 +1230,7 @@ textarea {
   box-sizing: border-box;
   color: #666666;
   padding: 5px 10px;
+  resize: vertical;
 }
 
 input[type=checkbox] {

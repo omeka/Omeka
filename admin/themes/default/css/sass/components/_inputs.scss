@@ -196,6 +196,7 @@ textarea {
     box-sizing: border-box;
     color: #666666;
     padding: $spacing-s $spacing-m;
+    resize: vertical;
 }
 
 input[type="checkbox"] {
