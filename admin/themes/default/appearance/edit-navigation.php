@@ -29,6 +29,7 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
         data-nest-action-alert-template="<?php echo $nestActionAlertTemplate; ?>"
         data-unnest-action-alert-template="<?php echo $unnestActionAlertTemplate; ?>">
     </div>
+    <div class="sr-only" role="alert" id="repeated-reorder-alerts"></div>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->partial('settings/edit-navigation-link.php', ['template' => true]); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>

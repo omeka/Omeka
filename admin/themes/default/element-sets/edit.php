@@ -28,6 +28,7 @@ echo flash();
             data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
             data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>">
         </div>
+        <div class="sr-only" role="alert" id="repeated-reorder-alerts"></div>
         <p><?php echo __($element_set->description); ?></p>
         <ul class="sortable">
         <?php foreach ($element_set->getElements() as $element): ?>

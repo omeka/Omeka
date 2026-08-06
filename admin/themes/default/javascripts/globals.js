@@ -174,6 +174,7 @@ if (!Omeka) {
 
     Omeka.enableKeyboardNavigation = function(nodeSelector, orderSelector) {
         var reorderAlertElement = $('#reorder-alerts');
+        var repeatedReorderAlertElement = $('#repeated-reorder-alerts');
         var sortableNode = '';
         if ((typeof nodeSelector == 'undefined') || nodeSelector == '') {
             sortableNode = 'li';
@@ -246,8 +247,13 @@ if (!Omeka) {
             selectedNavItem.find('.' + activeClass).first().focus();
 
             var newAlert = constructAlert(selectedNavItemTitle, reorderAction, positionalNavItemTitle);
-            reorderAlertElement.text(newAlert);
-            console.log(reorderAlertElement.text());
+            if (reorderAlertElement.text() == newAlert) {
+                reorderAlertElement.text('');
+                repeatedReorderAlertElement.text(newAlert);
+            } else {
+                reorderAlertElement.text(newAlert);
+                repeatedReorderAlertElement.text('');
+            }
         });
 
         $(document).on('click', '.delete-drawer', function() {

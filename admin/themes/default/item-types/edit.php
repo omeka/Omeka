@@ -23,6 +23,7 @@ echo flash();
         data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
         data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>">
     </div>
+    <div class="sr-only" role="alert" id="repeated-reorder-alerts"></div>
     <?php include 'form.php';?>
     <section class="three columns omega">
         <div id="save" class="panel">
