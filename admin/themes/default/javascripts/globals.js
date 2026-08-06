@@ -157,14 +157,10 @@ if (!Omeka) {
         let iconWidth = iconPosition['width'];
         let iconCenter = iconLeft + (.5 * iconPosition['width']);
         let tooltipCenter = tooltipPosition['left'] + (.5 * tooltipPosition['width']);
-        if (tooltipPosition['top'] < (iconPosition['top'] + iconPosition['height'])) {
-            let newTooltipTop = iconPosition['top'] + iconPosition['height'];
-            tooltip.style.top = `${newTooltipTop}px`;
-        }
-        if (iconCenter !== tooltipCenter) {
-            let newToolTipLeft = iconLeft + (.5 * iconWidth) - (.5 * tooltipPosition['width']);
-            tooltip.style.left = `${newToolTipLeft}px`;
-        }
+        let newTooltipTop = iconPosition['top'] + iconPosition['height'];
+        tooltip.style.top = `${newTooltipTop}px`;
+        let newToolTipLeft = iconLeft + (.5 * iconWidth) - (.5 * tooltipPosition['width']);
+        tooltip.style.left = `${newToolTipLeft}px`;
     };
 
     Omeka.addTooltipEventListeners = function (buttons, tooltips) {
