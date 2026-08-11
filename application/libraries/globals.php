@@ -2032,6 +2032,46 @@ function browse_sort_links($links, $wrapperTags = [])
 }
 
 /**
+ * Get the configured list of sort tiles for a browsable type, falling back
+ * to defaults if "{$type}_sort_options" is empty, unset, or malformed.
+ *
+ * @package Omeka\Function\View
+ * @param string $type
+ * @param array $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
+ * @return array
+ */
+function get_sort_tiles($type, $defaultTiles)
+{
+    $tiles = json_decode((string) get_option("{$type}_sort_options"), true);
+    if (!is_array($tiles) || !$tiles) {
+        return $defaultTiles;
+    }
+    $tiles = array_values(array_filter($tiles, function ($tile) {
+        return is_array($tile) && !empty($tile['label']) && !empty($tile['field']);
+    }));
+    return $tiles ?: $defaultTiles;
+}
+
+/**
+ * Get the list of links for sorting displayed records from sorted tiles
+ * in Appearance Settings for the given browsable type.
+ *
+ * @package Omeka\Function\View
+ * @param string $type
+ * @param array $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
+ * @param array $wrapperTags See browse_sort_links().
+ * @return string
+ */
+function browse_sort_links_for($type, $defaultTiles, $wrapperTags = [])
+{
+    $links = [];
+    foreach (get_sort_tiles($type, $defaultTiles) as $tile) {
+        $links[$tile['label']] = $tile['field'];
+    }
+    return browse_sort_links($links, $wrapperTags);
+}
+
+/**
  * Get a <body> tag with attributes.
  *
  * Attributes can be filtered using the 'body_tag_attributes' filter.
