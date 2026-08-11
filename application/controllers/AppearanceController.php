@@ -42,6 +42,9 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 // valid option in the database.
                 unset($options['appearance_csrf']);
                 foreach ($options as $key => $value) {
+                    if (substr($key, -13) === '_sort_options') {
+                        $value = json_encode(sanitize_sort_tiles($value));
+                    }
                     set_option($key, $value);
                 }
                 $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');

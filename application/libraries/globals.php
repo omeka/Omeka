@@ -2032,6 +2032,26 @@ function browse_sort_links($links, $wrapperTags = [])
 }
 
 /**
+ * Decode a sort-tiles JSON string, dropping any entry that isn't a
+ * {label, field} pair with non-empty strings for both.
+ *
+ * @package Omeka\Function\View
+ * @param string $json
+ * @return array
+ */
+function sanitize_sort_tiles($json)
+{
+    $tiles = json_decode((string) $json, true);
+    if (!is_array($tiles)) {
+        return [];
+    }
+    return array_values(array_filter($tiles, function ($tile) {
+        return is_array($tile) && !empty($tile['label']) && !empty($tile['field'])
+            && is_string($tile['label']) && is_string($tile['field']);
+    }));
+}
+
+/**
  * Get the configured list of sort tiles for a browsable type, falling back
  * to defaults if "{$type}_sort_options" is empty, unset, or malformed.
  *
@@ -2043,13 +2063,7 @@ function browse_sort_links($links, $wrapperTags = [])
 function get_sort_tiles($type, $defaultTiles)
 {
     $tiles = json_decode((string) get_option("{$type}_sort_options"), true);
-    if (!is_array($tiles) || !$tiles) {
-        return $defaultTiles;
-    }
-    $tiles = array_values(array_filter($tiles, function ($tile) {
-        return is_array($tile) && !empty($tile['label']) && !empty($tile['field']);
-    }));
-    return $tiles ?: $defaultTiles;
+    return (is_array($tiles) && $tiles) ? $tiles : $defaultTiles;
 }
 
 /**

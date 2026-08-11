@@ -97,6 +97,24 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             ]);
         }
 
+        $this->addElement('hidden', 'items_sort_options', [
+            'decorators' => ['ViewHelper'],
+        ]);
+
+        $this->addElement('select', 'items_sort_default_dir', [
+            'label' => __('Default Direction'),
+            'multiOptions' => ['a' => __('Ascending'), 'd' => __('Descending')],
+        ]);
+
+        $this->addElement('hidden', 'collections_sort_options', [
+            'decorators' => ['ViewHelper'],
+        ]);
+
+        $this->addElement('select', 'collections_sort_default_dir', [
+            'label' => __('Default Direction'),
+            'multiOptions' => ['a' => __('Ascending'), 'd' => __('Descending')],
+        ]);
+
         $this->addElement('hash', 'appearance_csrf', [
             'timeout' => 3600
         ]);
@@ -107,6 +125,14 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
                 'square_thumbnail_constraint',
             ],
             'derivative-constraints', ['legend' => __('Derivative Size Constraints')]
+        );
+
+        $this->addDisplayGroup(
+            [
+                'items_sort_options', 'items_sort_default_dir',
+                'collections_sort_options', 'collections_sort_default_dir',
+            ],
+            'sorting', ['legend' => __('Sorting')]
         );
 
         $this->addDisplayGroup(
