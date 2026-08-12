@@ -2052,16 +2052,48 @@ function sanitize_sort_tiles($json)
 }
 
 /**
- * Get the configured list of sort tiles for a browsable type, falling back
- * to defaults if "{$type}_sort_options" is empty, unset, or malformed.
+ * Get the built-in default sort tiles for browsing "item" and "collection" 
+ * type resources. Other browsable types (from plugins etc.) must pass
+ * their own $defaultTiles value to get_sort_tiles()/browse_sort_links_for().
  *
  * @package Omeka\Function\View
  * @param string $type
- * @param array $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
  * @return array
  */
-function get_sort_tiles($type, $defaultTiles)
+function default_sort_tiles($type)
 {
+    switch ($type) {
+        case 'items':
+            return [
+                ['label' => __('Title'), 'field' => 'Dublin Core,Title'],
+                ['label' => __('Creator'), 'field' => 'Dublin Core,Creator'],
+                ['label' => __('Date Added'), 'field' => 'added'],
+            ];
+        case 'collections':
+            return [
+                ['label' => __('Title'), 'field' => 'Dublin Core,Title'],
+                ['label' => __('Date Added'), 'field' => 'added'],
+            ];
+        default:
+            return [];
+    }
+}
+
+/**
+ * Get the configured list of sort tiles for a browsable type, falling back
+ * to $defaultTiles (or default_sort_tiles($type) if not given) when
+ * "{$type}_sort_options" is empty, unset, or malformed.
+ *
+ * @package Omeka\Function\View
+ * @param string $type
+ * @param array|null $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
+ * @return array
+ */
+function get_sort_tiles($type, $defaultTiles = null)
+{
+    if ($defaultTiles === null) {
+        $defaultTiles = default_sort_tiles($type);
+    }
     $tiles = json_decode((string) get_option("{$type}_sort_options"), true);
     return (is_array($tiles) && $tiles) ? $tiles : $defaultTiles;
 }
@@ -2072,11 +2104,11 @@ function get_sort_tiles($type, $defaultTiles)
  *
  * @package Omeka\Function\View
  * @param string $type
- * @param array $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
+ * @param array|null $defaultTiles Default sort array in ['label' => ..., 'field' => ...] syntax.
  * @param array $wrapperTags See browse_sort_links().
  * @return string
  */
-function browse_sort_links_for($type, $defaultTiles, $wrapperTags = [])
+function browse_sort_links_for($type, $defaultTiles = null, $wrapperTags = [])
 {
     $links = [];
     foreach (get_sort_tiles($type, $defaultTiles) as $tile) {

@@ -128,11 +128,13 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         );
 
         $this->addDisplayGroup(
-            [
-                'items_sort_options', 'items_sort_default_dir',
-                'collections_sort_options', 'collections_sort_default_dir',
-            ],
-            'sorting', ['legend' => __('Sorting')]
+            ['items_sort_options', 'items_sort_default_dir'],
+            'items-sorting', ['legend' => __('Items Sort Options')]
+        );
+
+        $this->addDisplayGroup(
+            ['collections_sort_options', 'collections_sort_default_dir'],
+            'collections-sorting', ['legend' => __('Collections Sort Options')]
         );
 
         $this->addDisplayGroup(

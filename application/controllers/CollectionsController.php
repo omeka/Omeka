@@ -114,10 +114,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     
     protected function _getBrowseDefaultSort()
     {
-        $tiles = get_sort_tiles('collections', [
-            ['label' => __('Title'), 'field' => 'Dublin Core,Title'],
-            ['label' => __('Date Added'), 'field' => 'added'],
-        ]);
+        $tiles = get_sort_tiles('collections');
         return [$tiles[0]['field'], get_option('collections_sort_default_dir') ?: 'd'];
     }
 }
