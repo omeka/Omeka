@@ -182,8 +182,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     protected function _getBrowseDefaultSort()
     {
-        $tiles = get_sort_tiles('items');
-        return [$tiles[0]['field'], get_option('items_sort_default_dir') ?: 'd'];
+        return [
+            get_option('items_sort_default_field') ?: 'added',
+            get_option('items_sort_default_dir') ?: 'd',
+        ];
     }
 
     ///// AJAX ACTIONS /////

@@ -20,9 +20,10 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
      * @param string $hiddenElementId The id of the hidden form input this
      *  widget's tiles should be serialized into on submit.
      * @param string $currentDir Current default direction, 'a' or 'd'.
+     * @param string $currentField Current default sort field.
      * @return string HTML output
      */
-    public function sortTilesWidget($type, $legend, array $tiles, $hiddenElementId, $currentDir = 'd')
+    public function sortTilesWidget($type, $legend, array $tiles, $hiddenElementId, $currentDir = 'd', $currentField = '')
     {
         $html = '<fieldset class="sort-tiles-widget">';
         $html .= '<legend>' . html_escape($legend) . '</legend>';
@@ -42,6 +43,22 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
         $html .= '</div>';
         $html .= '</li>';
         $html .= '</ul>';
+        $fieldId = html_escape($type) . '_sort_default_field';
+        $html .= '<div class="field">';
+        $html .= '<div id="' . $fieldId . '-label" class="two columns alpha">';
+        $html .= '<label for="' . $fieldId . '">' . html_escape(__('Default Sort Field')) . '</label>';
+        $html .= '</div>';
+        $html .= '<div class="inputs five columns omega">';
+        $html .= '<select name="' . $fieldId . '" id="' . $fieldId . '" class="default-field-select">';
+        foreach ($tiles as $tile) {
+            $html .= '<option value="' . html_escape($tile['field']) . '"'
+                . ($currentField === $tile['field'] ? ' selected="selected"' : '') . '>'
+                . html_escape($tile['label']) . '</option>';
+        }
+        $html .= '</select>';
+        $html .= '</div>';
+        $html .= '</div>';
+
         $dirId = html_escape($type) . '_sort_default_dir';
         $html .= '<div class="field">';
         $html .= '<div id="' . $dirId . '-label" class="two columns alpha">';

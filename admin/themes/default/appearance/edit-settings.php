@@ -17,9 +17,9 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
     <?php echo $sortTilesSpacingFix; ?>
 
-    <?php echo $this->sortTilesWidget('items', __('Items Sort Options'), get_sort_tiles('items'), 'items_sort_options', get_option('items_sort_default_dir') ?: 'd'); ?>
+    <?php echo $this->sortTilesWidget('items', __('Items Sort Options'), get_sort_tiles('items'), 'items_sort_options', get_option('items_sort_default_dir') ?: 'd', get_option('items_sort_default_field') ?: 'added'); ?>
 
-    <?php echo $this->sortTilesWidget('collections', __('Collections Sort Options'), get_sort_tiles('collections'), 'collections_sort_options', get_option('collections_sort_default_dir') ?: 'd'); ?>
+    <?php echo $this->sortTilesWidget('collections', __('Collections Sort Options'), get_sort_tiles('collections'), 'collections_sort_options', get_option('collections_sort_default_dir') ?: 'd', get_option('collections_sort_default_field') ?: 'added'); ?>
 
     <?php fire_plugin_hook('admin_appearance_settings_form', ['form' => $form, 'view' => $this]); ?>
 

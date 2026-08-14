@@ -22,8 +22,31 @@ Omeka.SortTiles = {};
     // Remove a tile when its delete button is clicked.
     Omeka.SortTiles.enableTileRemoval = function () {
         $(document).on('click', '.sort-tiles-widget .delete-drawer', function () {
+            var widget = $(this).closest('.sort-tiles-widget');
             $(this).closest('li.element').remove();
+            Omeka.SortTiles.syncDefaultFieldOptions(widget);
         });
+    };
+
+    // Rebuild the "Default Sort Field" select's options from the widget's
+    // current tiles, preserving the current selection if it still exists.
+    Omeka.SortTiles.syncDefaultFieldOptions = function (widget) {
+        var select = widget.find('.default-field-select');
+        var currentValue = select.val();
+        var stillExists = false;
+        select.empty();
+        widget.find('li.element').each(function () {
+            var field = $(this).find('.tile-field').val();
+            select.append($('<option></option>')
+                .val(field)
+                .text($(this).find('.tile-label').text()));
+            if (field === currentValue) {
+                stillExists = true;
+            }
+        });
+        if (stillExists) {
+            select.val(currentValue);
+        }
     };
 
     // Derive a tile's label from its field value: the element name half of
@@ -57,6 +80,7 @@ Omeka.SortTiles = {};
             li.append(item);
             widget.find('.sort-tiles li.add-tile-row').before(li);
             fieldInput.val('');
+            Omeka.SortTiles.syncDefaultFieldOptions(widget);
         });
     };
 
