@@ -5,42 +5,57 @@ if (!Omeka) {
 Omeka.SortTiles = {};
 
 (function ($) {
-
-    // Enable drag and drop reordering of sort tiles.
+    // Enable drag and drop reordering of sort tiles. The trailing add-row
+    // (li.add-tile-row, no "element" class) is excluded, so it stays pinned
+    // at the bottom of the list.
     Omeka.SortTiles.enableSorting = function () {
-        $('.sortable-tiles').sortable({
-            items: 'li.sort-tile',
+        $('.sort-tiles').sortable({
+            items: 'li.element',
+            forcePlaceholderSize: true,
+            forceHelperSize: true,
+            revert: 200,
             placeholder: 'ui-sortable-highlight',
             containment: 'document'
         });
     };
 
-    // Remove a tile when its remove button is clicked.
+    // Remove a tile when its delete button is clicked.
     Omeka.SortTiles.enableTileRemoval = function () {
-        $(document).on('click', '.remove-sort-tile-button', function () {
-            $(this).closest('li.sort-tile').remove();
+        $(document).on('click', '.sort-tiles-widget .delete-drawer', function () {
+            $(this).closest('li.element').remove();
         });
     };
 
-    // Append a new tile from the label/field inputs when "Add" is clicked.
+    // Derive a tile's label from its field value: the element name half of
+    // an "Element Set,Element Name" pair, or the field itself, title-cased.
+    Omeka.SortTiles.deriveTileLabel = function (field) {
+        var match = field.match(/^[^,]+,\s*(.+)$/);
+        var label = match ? match[1].trim() : field.trim();
+        return label.charAt(0).toUpperCase() + label.slice(1);
+    };
+
+    // Append a new tile from the field input when "Add" is clicked, inserted
+    // just before the add-row so it stays last in the draggable list.
     Omeka.SortTiles.enableAddTile = function () {
         $(document).on('click', '.add-sort-tile-button', function () {
             var widget = $(this).closest('.sort-tiles-widget');
-            var labelInput = widget.find('.new-tile-label');
             var fieldInput = widget.find('.new-tile-field');
-            var label = $.trim(labelInput.val());
             var field = $.trim(fieldInput.val());
-            if (!label || !field) {
+            if (!field) {
                 return;
             }
-            var li = $('<li class="sort-tile"></li>');
-            li.append($('<span class="tile-handle">&#9776;</span>'));
-            li.append($('<span class="tile-label"></span>').text(label));
-            li.append($('<input type="hidden" class="tile-field">').val(field));
-            li.append($('<button type="button" class="remove-sort-tile-button">&times;</button>')
+            var label = Omeka.SortTiles.deriveTileLabel(field);
+            var li = $('<li class="element"></li>');
+            var item = $('<div class="sortable-item drawer"></div>');
+            item.append($('<span class="move icon"></span>')
+                .attr('title', Omeka.SortTiles.moveText)
+                .attr('aria-label', Omeka.SortTiles.moveText));
+            item.append($('<span class="drawer-name tile-label"></span>').text(label));
+            item.append($('<input type="hidden" class="tile-field">').val(field));
+            item.append($('<button type="button" class="delete-drawer"><span class="icon" aria-hidden="true"></span></button>')
                 .attr('title', Omeka.SortTiles.removeText));
-            widget.find('.sortable-tiles').append(li);
-            labelInput.val('');
+            li.append(item);
+            widget.find('.sort-tiles li.add-tile-row').before(li);
             fieldInput.val('');
         });
     };
@@ -49,10 +64,10 @@ Omeka.SortTiles = {};
     // corresponding hidden input as JSON.
     Omeka.SortTiles.setUpFormSubmission = function () {
         $('#appearance-form').submit(function () {
-            $('.sortable-tiles').each(function () {
+            $('.sort-tiles').each(function () {
                 var list = $(this);
                 var tiles = [];
-                list.find('li.sort-tile').each(function () {
+                list.find('li.element').each(function () {
                     tiles.push({
                         label: $(this).find('.tile-label').text(),
                         field: $(this).find('.tile-field').val()

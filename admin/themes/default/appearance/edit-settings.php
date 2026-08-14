@@ -1,7 +1,8 @@
 <?php
-queue_js_file(['sort-tiles']);
+queue_js_file('sort-tiles', 'javascripts', [], filemtime(physical_path_to('javascripts/sort-tiles.js')));
 
 $pageTitle = __('Appearance');
+$sortTilesSpacingFix = '<style>.sort-tiles-widget + .sort-tiles-widget { margin-top: 30px; }</style>';
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
 <?php echo common('appearance-nav'); ?>
@@ -14,11 +15,11 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
     <?php echo $this->form; ?>
 
-    <h2><?php echo __('Items Sort Options'); ?></h2>
-    <?php echo $this->sortTilesWidget('items', get_sort_tiles('items'), 'items_sort_options'); ?>
+    <?php echo $sortTilesSpacingFix; ?>
 
-    <h2><?php echo __('Collections Sort Options'); ?></h2>
-    <?php echo $this->sortTilesWidget('collections', get_sort_tiles('collections'), 'collections_sort_options'); ?>
+    <?php echo $this->sortTilesWidget('items', __('Items Sort Options'), get_sort_tiles('items'), 'items_sort_options', get_option('items_sort_default_dir') ?: 'd'); ?>
+
+    <?php echo $this->sortTilesWidget('collections', __('Collections Sort Options'), get_sort_tiles('collections'), 'collections_sort_options', get_option('collections_sort_default_dir') ?: 'd'); ?>
 
     <?php fire_plugin_hook('admin_appearance_settings_form', ['form' => $form, 'view' => $this]); ?>
 
@@ -34,6 +35,7 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
 <script type="text/javascript">
     Omeka.SortTiles.removeText = <?php echo js_escape(__('Remove')); ?>;
+    Omeka.SortTiles.moveText = <?php echo js_escape(__('Move')); ?>;
     Omeka.addReadyCallback(Omeka.SortTiles.enableSorting);
     Omeka.addReadyCallback(Omeka.SortTiles.enableTileRemoval);
     Omeka.addReadyCallback(Omeka.SortTiles.enableAddTile);

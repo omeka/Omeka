@@ -47,6 +47,12 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                     }
                     set_option($key, $value);
                 }
+                // Sort direction selects are plain fields inside the
+                // hand-built sort tiles widget, not Zend_Form elements.
+                foreach (['items_sort_default_dir', 'collections_sort_default_dir'] as $dirKey) {
+                    $dir = ($_POST[$dirKey] ?? null) === 'a' ? 'a' : 'd';
+                    set_option($dirKey, $dir);
+                }
                 $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
                 $this->_helper->redirector('edit-settings');
             } else {
