@@ -440,20 +440,20 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // Should we ever include more image sizes by default, this will be
         // easier to modify.
         $imgClasses = [
-            null => 'thumb',
             'thumbnail' => 'thumb',
             'square_thumbnail' => 'thumb',
-            'fullsize' => 'full'];
+            'fullsize' => 'full',
+        ];
         $imageSize = $options['imageSize'];
 
         // If we can make an image from the given image size.
-        if (array_key_exists($imageSize, $imgClasses)) {
+        if ($imageSize === null || array_key_exists($imageSize, $imgClasses)) {
 
             // A class is given to all of the images by default to make it
             // easier to style. This can be modified by passing it in as an
             // option, but recommended against. Can also modify alt text via an
             // option.
-            $imgClass = $imgClasses[$imageSize];
+            $imgClass = $imageSize ? $imgClasses[$imageSize] : 'thumb';
             $imgAttributes = array_merge(['class' => $imgClass],
                                 (array) $options['imgAttributes']);
             $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
