@@ -56,11 +56,7 @@ Omeka.Navigation = {};
             var hiddenInfo = $.parseJSON(enableCheckbox.val());
             var buttonsDiv = link.find('div.main_link_buttons'); 
             if (!buttonsDiv.find('.navigation_main_list_visit').length) {
-                buttonsDiv.append('<button type="button" class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">' + Omeka.Navigation.visitText + '</button>');
-                buttonsDiv.find('.navigation_main_list_visit').click(function () {
-                    var url = link.find('.navigation-uri').val();
-                    window.open(url);
-                });
+                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '" target="_blank">' + Omeka.Navigation.visitText + '</a>');
             }
         });
     };
