@@ -53,10 +53,11 @@ Omeka.Navigation = {};
         $('#navigation_main_list .link-status').each(function () {
             var enableCheckbox = $(this);
             var link = enableCheckbox.parents('.main_link');
+            var externalLinkText = $('#navigation_form').data('external-link-text');
             var hiddenInfo = $.parseJSON(enableCheckbox.val());
             var buttonsDiv = link.find('div.main_link_buttons'); 
             if (!buttonsDiv.find('.navigation_main_list_visit').length) {
-                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '" target="_blank">' + Omeka.Navigation.visitText + '</a>');
+                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '" target="_blank">' + Omeka.Navigation.visitText + ' <span class="sr-only">' + externalLinkText + '</span></a>');
             }
         });
     };
