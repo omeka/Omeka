@@ -42,17 +42,34 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 // valid option in the database.
                 unset($options['appearance_csrf']);
                 foreach ($options as $key => $value) {
-                    if (substr($key, -13) === '_sort_options') {
-                        $value = json_encode(sanitize_sort_tiles($value));
-                    }
                     set_option($key, $value);
                 }
-                // Sort direction and default field selects are plain fields
-                // inside the hand-built sort tiles widget, not Zend_Form
-                // elements — core's own (items/collections) and any
-                // plugin-registered type's (e.g. exhibits_sort_default_dir).
+                $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-settings');
+            } else {
+                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
+            }
+        }
+    }
+
+    public function editSortingAction()
+    {
+        $form = new Zend_Form();
+        $form->setElementDecorators(['ViewHelper']);
+        $form->removeDecorator('HtmlTag');
+        $form->addElement('hash', 'sorting_csrf', ['timeout' => 3600]);
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($_POST)) {
+                // The sort tiles widget (core's items/collections, and any
+                // plugin-registered type via the admin_appearance_sorting_form
+                // hook) is plain HTML, not Zend_Form elements, so its fields
+                // are read directly by name pattern rather than a fixed list.
                 foreach ($_POST as $key => $value) {
-                    if (str_ends_with($key, '_sort_default_dir')) {
+                    if (str_ends_with($key, '_sort_options')) {
+                        set_option($key, json_encode(sanitize_sort_tiles($value)));
+                    } elseif (str_ends_with($key, '_sort_default_dir')) {
                         set_option($key, $value === 'a' ? 'a' : 'd');
                     } elseif (str_ends_with($key, '_sort_default_field')) {
                         $field = trim((string) $value);
@@ -61,8 +78,8 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                         }
                     }
                 }
-                $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
-                $this->_helper->redirector('edit-settings');
+                $this->_helper->flashMessenger(__('The sorting settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-sorting');
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }

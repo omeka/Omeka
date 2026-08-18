@@ -19,6 +19,18 @@ Omeka.SortTiles = {};
         });
     };
 
+    // Collapse/expand the "Add Sort Option" row via the shared drawer toggle.
+    // The whole row is clickable, not just the arrow button.
+    Omeka.SortTiles.enableAddRowToggle = function () {
+        Omeka.manageDrawers('.sort-tiles-widget', '.add-tile-row');
+        $(document).on('click', '.add-tile-row .sortable-item', function (event) {
+            if ($(event.target).closest('.drawer-toggle').length) {
+                return;
+            }
+            $(this).find('.drawer-toggle').trigger('click');
+        });
+    };
+
     // Remove a tile when its delete button is clicked.
     Omeka.SortTiles.enableTileRemoval = function () {
         $(document).on('click', '.sort-tiles-widget .delete-drawer', function () {

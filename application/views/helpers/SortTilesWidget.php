@@ -17,24 +17,30 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
      * @param string $type The browsable type, e.g. 'items' or 'collections'.
      * @param string $legend Fieldset legend text, e.g. "Items Sort Options".
      * @param array $tiles List of ['label' => ..., 'field' => ...] tiles.
-     * @param string $hiddenElementId The id of the hidden form input this
-     *  widget's tiles should be serialized into on submit.
      * @param string $currentDir Current default direction, 'a' or 'd'.
      * @param string $currentField Current default sort field.
      * @return string HTML output
      */
-    public function sortTilesWidget($type, $legend, array $tiles, $hiddenElementId, $currentDir = 'd', $currentField = '')
+    public function sortTilesWidget($type, $legend, array $tiles, $currentDir = 'd', $currentField = '')
     {
+        $hiddenElementId = html_escape($type) . '_sort_options';
         $html = '<fieldset class="sort-tiles-widget">';
         $html .= '<legend>' . html_escape($legend) . '</legend>';
+        $html .= '<input type="hidden" name="' . $hiddenElementId . '" id="' . $hiddenElementId
+            . '" value="' . html_escape(json_encode($tiles)) . '">';
         $html .= '<ul class="sortable sort-tiles" data-type="' . html_escape($type)
-            . '" data-hidden-input="' . html_escape($hiddenElementId) . '">';
+            . '" data-hidden-input="' . $hiddenElementId . '">';
         foreach ($tiles as $tile) {
             $html .= $this->_tileMarkup($tile['label'], $tile['field']);
         }
+        $addToggleId = 'add-tile-toggle-' . html_escape($type);
+        $addContentsId = 'add-tile-contents-' . html_escape($type);
         $html .= '<li class="add-tile-row">';
-        $html .= '<div class="add-new">' . html_escape(__('Add Sort Option')) . '</div>';
-        $html .= '<div class="drawer-contents opened">';
+        $html .= '<div class="sortable-item drawer">';
+        $html .= '<span class="drawer-name" id="' . $addToggleId . '-name">' . html_escape(__('Add Sort Option')) . '</span>';
+        $html .= '<button type="button" id="' . $addToggleId . '" class="drawer-toggle" data-action-selector="opened" aria-expanded="false" aria-controls="' . $addContentsId . '" aria-labelledby="' . $addToggleId . ' ' . $addToggleId . '-name" title="' . html_escape(__('Show Options')) . '"><span class="icon" aria-hidden="true"></span></button>';
+        $html .= '</div>';
+        $html .= '<div class="drawer-contents" id="' . $addContentsId . '">';
         $html .= '<label for="new-tile-field-' . html_escape($type) . '">' . html_escape(__('Field')) . '</label>';
         $html .= '<input type="text" class="new-tile-field textinput" size="30" id="new-tile-field-' . html_escape($type)
             . '" placeholder="' . html_escape(__('Dublin Core,Subject')) . '">';

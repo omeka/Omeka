@@ -97,14 +97,6 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             ]);
         }
 
-        $this->addElement('hidden', 'items_sort_options', [
-            'decorators' => ['ViewHelper'],
-        ]);
-
-        $this->addElement('hidden', 'collections_sort_options', [
-            'decorators' => ['ViewHelper'],
-        ]);
-
         $this->addElement('hash', 'appearance_csrf', [
             'timeout' => 3600
         ]);

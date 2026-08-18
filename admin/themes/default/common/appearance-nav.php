@@ -15,6 +15,10 @@
             'label' => __('Settings'),
             'uri' => url('appearance/edit-settings')
         ],
+        [
+            'label' => __('Sorting'),
+            'uri' => url('appearance/edit-sorting')
+        ],
     ];
     echo nav($navArray, 'admin_navigation_appearance');
 ?>
