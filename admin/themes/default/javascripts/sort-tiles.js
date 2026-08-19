@@ -31,23 +31,29 @@ Omeka.SortTiles = {};
         });
     };
 
-    // Remove a tile when its delete button is clicked.
-    Omeka.SortTiles.enableTileRemoval = function () {
-        $(document).on('click', '.sort-tiles-widget .delete-drawer', function () {
-            var widget = $(this).closest('.sort-tiles-widget');
-            $(this).closest('li.element').remove();
-            Omeka.SortTiles.syncDefaultFieldOptions(widget);
+    // Mark/unmark a tile for removal via the same delete/undo drawer toggle
+    // Element Sets and Item Types use (Omeka.manageDrawers() defaults to
+    // '.element' as the container, matching this widget's tile <li>s).
+    // Marked tiles are excluded when the list is serialized on submit.
+    Omeka.SortTiles.enableTileDeleteToggle = function () {
+        Omeka.manageDrawers('.sort-tiles-widget');
+        $(document).on('omeka:delete-drawer omeka:undo-drawer-delete', '.sort-tiles-widget .delete-drawer, .sort-tiles-widget .undo-delete', function () {
+            Omeka.SortTiles.syncDefaultFieldOptions($(this).closest('.sort-tiles-widget'));
         });
     };
 
     // Rebuild the "Default Sort Field" select's options from the widget's
-    // current tiles, preserving the current selection if it still exists.
+    // current, non-deleted tiles, preserving the current selection if it
+    // still exists.
     Omeka.SortTiles.syncDefaultFieldOptions = function (widget) {
         var select = widget.find('.default-field-select');
         var currentValue = select.val();
         var stillExists = false;
         select.empty();
         widget.find('li.element').each(function () {
+            if ($(this).find('.sortable-item.drawer').hasClass('deleted')) {
+                return;
+            }
             var field = $(this).find('.tile-field').val();
             select.append($('<option></option>')
                 .val(field)
@@ -61,16 +67,9 @@ Omeka.SortTiles = {};
         }
     };
 
-    // Derive a tile's label from its field value: the element name half of
-    // an "Element Set,Element Name" pair, or the field itself, title-cased.
-    Omeka.SortTiles.deriveTileLabel = function (field) {
-        var match = field.match(/^[^,]+,\s*(.+)$/);
-        var label = match ? match[1].trim() : field.trim();
-        return label.charAt(0).toUpperCase() + label.slice(1);
-    };
-
-    // Append a new tile from the field input when "Add" is clicked, inserted
-    // just before the add-row so it stays last in the draggable list.
+    // Ask the server to render a new tile from the field input (reusing the
+    // same PHP template the initial page render uses) and insert it just
+    // before the add-row, so it stays last in the draggable list.
     Omeka.SortTiles.enableAddTile = function () {
         $(document).on('click', '.add-sort-tile-button', function () {
             var widget = $(this).closest('.sort-tiles-widget');
@@ -79,31 +78,35 @@ Omeka.SortTiles = {};
             if (!field) {
                 return;
             }
-            var label = Omeka.SortTiles.deriveTileLabel(field);
-            var li = $('<li class="element"></li>');
-            var item = $('<div class="sortable-item drawer"></div>');
-            item.append($('<span class="move icon"></span>')
-                .attr('title', Omeka.SortTiles.moveText)
-                .attr('aria-label', Omeka.SortTiles.moveText));
-            item.append($('<span class="drawer-name tile-label"></span>').text(label));
-            item.append($('<input type="hidden" class="tile-field">').val(field));
-            item.append($('<button type="button" class="delete-drawer"><span class="icon" aria-hidden="true"></span></button>')
-                .attr('title', Omeka.SortTiles.removeText));
-            li.append(item);
-            widget.find('.sort-tiles li.add-tile-row').before(li);
-            fieldInput.val('');
-            Omeka.SortTiles.syncDefaultFieldOptions(widget);
+            var type = widget.find('.sort-tiles').data('type');
+            var index = widget.find('.sort-tiles li.element').length;
+            $.ajax({
+                url: Omeka.SortTiles.addTileUrl,
+                dataType: 'text',
+                data: {type: type, field: field, index: index},
+                success: function (responseText) {
+                    widget.find('.sort-tiles li.add-tile-row').before(responseText);
+                    fieldInput.val('');
+                    Omeka.SortTiles.syncDefaultFieldOptions(widget);
+                },
+                error: function () {
+                    alert(Omeka.SortTiles.addTileErrorText);
+                }
+            });
         });
     };
 
-    // On form submit, serialize each tile list's current order into its
-    // corresponding hidden input as JSON.
+    // On form submit, serialize each tile list's current, non-deleted order
+    // into its corresponding hidden input as JSON.
     Omeka.SortTiles.setUpFormSubmission = function () {
         $('#appearance-form').submit(function () {
             $('.sort-tiles').each(function () {
                 var list = $(this);
                 var tiles = [];
                 list.find('li.element').each(function () {
+                    if ($(this).find('.sortable-item.drawer').hasClass('deleted')) {
+                        return;
+                    }
                     tiles.push({
                         label: $(this).find('.tile-label').text(),
                         field: $(this).find('.tile-field').val()

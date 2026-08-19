@@ -86,6 +86,25 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         }
     }
 
+    /**
+     * Render a single sort tile's markup for AJAX insertion, so newly-added
+     * tiles are built from the same template as the initial page render
+     * instead of being duplicated in JavaScript.
+     */
+    public function addSortTileAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $type = trim((string) $this->_getParam('type'));
+        $field = trim((string) $this->_getParam('field'));
+        $index = (int) $this->_getParam('index');
+        if ($type === '' || $field === '') {
+            return;
+        }
+        $label = derive_sort_tile_label($field);
+        $widget = new Omeka_View_Helper_SortTilesWidget();
+        echo $widget->tileMarkup($type, $index, $label, $field);
+    }
+
     public function editNavigationAction()
     {
         $form = new Omeka_Form_Navigation();

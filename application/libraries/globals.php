@@ -2080,6 +2080,27 @@ function default_sort_tiles($type)
 }
 
 /**
+ * Derive a sort tile's label from its field value: the element name half of
+ * an "Element Set,Element Name" pair, or the field itself, title-cased.
+ *
+ * @package Omeka\Function\View
+ * @param string $field
+ * @return string
+ */
+function derive_sort_tile_label($field)
+{
+    if (preg_match('/^[^,]+,\s*(.+)$/', $field, $matches)) {
+        $label = trim($matches[1]);
+    } else {
+        $label = trim($field);
+    }
+    if ($label === '') {
+        return '';
+    }
+    return mb_strtoupper(mb_substr($label, 0, 1)) . mb_substr($label, 1);
+}
+
+/**
  * Get the configured list of sort tiles for a browsable type, falling back
  * to $defaultTiles (or default_sort_tiles($type) if not given) when
  * "{$type}_sort_options" is empty, unset, or malformed.

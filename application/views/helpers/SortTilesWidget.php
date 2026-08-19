@@ -30,8 +30,8 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
             . '" value="' . html_escape(json_encode($tiles)) . '">';
         $html .= '<ul class="sortable sort-tiles" data-type="' . html_escape($type)
             . '" data-hidden-input="' . $hiddenElementId . '">';
-        foreach ($tiles as $tile) {
-            $html .= $this->_tileMarkup($tile['label'], $tile['field']);
+        foreach ($tiles as $index => $tile) {
+            $html .= $this->tileMarkup($type, $index, $tile['label'], $tile['field']);
         }
         $addToggleId = 'add-tile-toggle-' . html_escape($type);
         $addContentsId = 'add-tile-contents-' . html_escape($type);
@@ -81,14 +81,29 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
         return $html;
     }
 
-    protected function _tileMarkup($label, $field)
+    /**
+     * Render a single sort tile's markup. Public so AppearanceController's
+     * add-sort-tile action can render an identical tile server-side for
+     * AJAX insertion, instead of duplicating this structure in JavaScript.
+     *
+     * @param string $type The browsable type, e.g. 'items' or 'collections'.
+     * @param int $index Position among this widget's tiles, for unique ids.
+     * @param string $label
+     * @param string $field
+     * @return string HTML output
+     */
+    public function tileMarkup($type, $index, $label, $field)
     {
+        $nameId = html_escape($type) . '-tile-' . (int) $index . '-name';
+        $undoId = html_escape($type) . '-tile-' . (int) $index . '-undo';
+        $deleteId = html_escape($type) . '-tile-' . (int) $index . '-delete';
         return '<li class="element">'
             . '<div class="sortable-item drawer">'
-            . '<span class="move icon" title="' . html_escape(__('Move')) . '" aria-label="' . html_escape(__('Move')) . '"></span>'
-            . '<span class="drawer-name tile-label">' . html_escape($label) . '</span>'
+            . '<span class="move icon" title="' . html_escape(__('Move')) . '" aria-label="' . html_escape(__('Move')) . '" aria-labelledby="' . $nameId . '"></span>'
+            . '<span class="drawer-name tile-label" id="' . $nameId . '">' . html_escape($label) . '</span>'
             . '<input type="hidden" class="tile-field" value="' . html_escape($field) . '">'
-            . '<button type="button" class="delete-drawer" title="' . html_escape(__('Remove')) . '"><span class="icon" aria-hidden="true"></span></button>'
+            . '<button type="button" id="' . $undoId . '" class="undo-delete" data-action-selector="deleted" title="' . html_escape(__('Undo')) . '" aria-label="' . html_escape(__('Undo')) . ' ' . html_escape(__('Remove')) . '" aria-labelledby="' . $undoId . ' ' . $nameId . '"><span class="icon" aria-hidden="true"></span></button>'
+            . '<button type="button" id="' . $deleteId . '" class="delete-drawer" data-action-selector="deleted" title="' . html_escape(__('Remove')) . '" aria-label="' . html_escape(__('Remove')) . '" aria-labelledby="' . $deleteId . ' ' . $nameId . '"><span class="icon" aria-hidden="true"></span></button>'
             . '</div>'
             . '</li>';
     }
