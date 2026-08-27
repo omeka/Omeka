@@ -398,8 +398,10 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
             foreach ($paths as $path) {
                 $loadFile = $path . $classFile;
-                if (Zend_Loader::isReadable($loadFile)) {
-                    include_once $loadFile;
+                // Omeka edit: switch from isReadable to stream_resolve_include_path
+                $resolvedName = stream_resolve_include_path($loadFile);
+                if ($resolvedName !== false) {
+                    include_once $resolvedName;
                     if (class_exists($className, false)) {
                         if (null !== $incFile) {
                             self::_appendIncFile($loadFile);
