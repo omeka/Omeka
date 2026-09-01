@@ -51,14 +51,21 @@ a:visited {
 	color: darken($blue, 20%);
 }
 
+a[target="_blank"] {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0 .5rem;
+	align-items: baseline;
+}
+
 a[target="_blank"]:after {
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	font-style: normal;
 	content: "\f35d" / "";
 	display: inline-block;
-	margin: 0 $spacing-s;
 	font-size: 10px;
+	text-decoration: none;
 }
 
 p, 

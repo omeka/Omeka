@@ -105,14 +105,21 @@ a:visited {
   color: rgb(0, 7.186440678, 16);
 }
 
+a[target=_blank] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  align-items: baseline;
+}
+
 a[target=_blank]:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-style: normal;
   content: "\f35d"/"";
   display: inline-block;
-  margin: 0 5px;
   font-size: 10px;
+  text-decoration: none;
 }
 
 p,
