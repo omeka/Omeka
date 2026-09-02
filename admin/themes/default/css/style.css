@@ -3312,6 +3312,11 @@ ul.details li:last-child {
   overflow: hidden;
 }
 
+.tag-desc {
+  max-width: 100%;
+  height: 80px;
+}
+
 .tags h3 {
   margin: 0;
 }
@@ -3322,16 +3327,6 @@ ul.details li:last-child {
 .tags ol li {
   margin-left: 5px;
   padding-left: 20px;
-}
-
-.tags ol:before {
-  content: "";
-  display: inline-block;
-  width: 180px;
-  height: 75px;
-  background: url("../images/tag-desc.png") no-repeat;
-  background-size: cover;
-  margin: 5px 0 0px;
 }
 
 .editable-inline div {

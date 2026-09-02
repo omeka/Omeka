@@ -18,6 +18,8 @@ echo flash();
 <section class="three columns alpha">
     <h2><?php echo __('Editing Tags'); ?></h2>
 
+    <img class="tag-desc" src="<?php echo img('tag-desc.png'); ?>" alt="<?php echo __('Example of editable tag, labeled "1" for the associated record count, "2" for editable name, and "3" for delete action.'); ?>">
+
     <ol>
         <li><?php echo __('This number counts all records associated with a tag. Filtering "Record types" to "Items" will provide links to all items containing the tag.'); ?></li>
         <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
