@@ -635,7 +635,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         if (isset($attrs['alt'])) {
             $alt = $attrs['alt'];
         } else {
-            $alt = ($file->getAltText()) ? $file->getAltText() : '';
+            $alt = $file->getAltText() ?? '';
         }
         $attrs['alt'] = $alt;
 
