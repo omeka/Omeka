@@ -23,7 +23,7 @@ if ($current->image) {
         <p class="version"><?php echo __('Version %s', html_escape($current->version)); ?></p>
         <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
-        <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
+        <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a></p>
         <?php if ($versionNotifications): ?>
         <ul class="version-notification details"
             data-addon-id="<?php echo html_escape($current->directory); ?>"
@@ -43,7 +43,7 @@ if ($current->image) {
     </div>
 </div>
 
-<p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own</a>!'); ?></p>
+<p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory <span class="sr-only">(external link)</span></a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own <span class="sr-only">(external link)</span></a>!'); ?></p>
 <div class="themes group">
     <form method="post" id="themes-form" action="<?php echo $this->url(['controller' => 'themes', 'action' => 'switch'], 'default'); ?>">
 <?php
@@ -66,8 +66,8 @@ foreach ($themes as $theme):
             <div class="meta">
                 <h3><?php echo html_escape($theme->title); ?></h3>
                 <p class="version"><?php echo __('Version %s', html_escape($theme->version)); ?></p>
-                <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?></a></p>
-                <p class="theme-support-link"><a href="<?php echo $theme->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
+                <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a></p>
+                <p class="theme-support-link"><a href="<?php echo $theme->support_link; ?>" target="_blank"><?php echo __('Get support');?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a></p>
             </div>
             <?php fire_plugin_hook('admin_themes_browse_each', ['theme' => $theme, 'view' => $this]); ?>
         </div>
