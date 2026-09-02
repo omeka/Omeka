@@ -105,7 +105,8 @@ a:visited {
   color: rgb(0, 7.186440678, 16);
 }
 
-a[target=_blank] {
+a[target=_blank],
+a.button[target=_blank] {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0 0.5rem;
@@ -642,6 +643,10 @@ a.button.green *,
 input[type=submit].green *,
 button.green * {
   color: rgb(49.9390243902, 97.5, 0);
+}
+
+a.button[target=_blank] {
+  justify-content: center;
 }
 
 /* jQuery UI overrides
@@ -1421,6 +1426,10 @@ header nav {
     float: none;
     padding: 5px 20px;
   }
+}
+
+#site-title a {
+  padding-bottom: 0;
 }
 
 @media (max-width: 767px) {

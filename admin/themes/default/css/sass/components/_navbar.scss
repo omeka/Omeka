@@ -110,6 +110,10 @@ header {
 	}
 }
 
+#site-title a {
+	padding-bottom: 0;
+}
+
 @include screen-xs {
 	#site-title a {
 		font-size: 16px;
