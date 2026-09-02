@@ -29,8 +29,7 @@ function admin_bar()
  */
 function admin_bar_css()
 {
-    queue_css_url('//fonts.googleapis.com/css?family=Arvo:400', 'screen');
-    queue_css_file('admin-bar', 'screen');
+    queue_css_file(['core-fonts', 'admin-bar'], 'screen');
 }
 
 /**

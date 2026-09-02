@@ -6,9 +6,9 @@
     <title><?php echo __('Omeka'); ?></title>
     <?php
         $this->headLink()
+            ->appendStylesheet($this->baseUrl('/../application/views/scripts/css/core-fonts.css'))
             ->appendStylesheet($this->baseUrl('/screen.css'), 'screen')
             ->appendStylesheet($this->baseUrl('/skeleton.css'))
-            ->appendStylesheet('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic');
     ?>
     <?php echo $this->headLink(); ?>
 </head>

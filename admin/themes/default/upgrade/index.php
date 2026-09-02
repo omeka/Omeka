@@ -5,22 +5,17 @@
 
     <title><?php echo __('Omeka Admin'); ?>: <?php echo option('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
+<!-- Stylesheets -->
 <?php
-    queue_css_file(['style', 'skeleton', 'jquery-ui']);
-    queue_css_file('media/960min', 'only screen and (min-width: 960px)');
-    queue_css_file('media/768min', 'only screen and (min-width: 768px) and (max-width: 959px)');
-    queue_css_file('media/767max', 'only screen and (max-width: 767px)');
-    queue_css_file('media/479max', 'only screen and (max-width: 479px)');
-    queue_css_url('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic');
-
-    queue_js_file(['vendor/respond', 'vendor/modernizr', 'vendor/selectivizr', 'globals']);
+queue_css_file(['core-fonts', 'style', 'layout', 'skeleton']);
+echo head_css();
 ?>
 
-<!-- Stylesheets -->
-<?php echo head_css(); ?>
-
 <!-- JavaScripts -->
-<?php echo head_js(); ?>
+<?php
+queue_js_file(['vendor/respond', 'vendor/modernizr', 'vendor/selectivizr', 'globals']);
+echo head_js();
+?>
 </head>
 
 <body id="upgrade">

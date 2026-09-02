@@ -6,11 +6,10 @@
     <title><?php echo option('site_title'); ?></title>
     
     <!-- Stylesheets -->
-    <?php queue_css_file('style'); ?>
-    <?php queue_css_file('layout'); ?>
-    <?php queue_css_file('skeleton'); ?>
-    <?php echo head_css(); ?>
-    <link href='//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <?php
+    queue_css_file(['core-fonts', 'style', 'layout', 'skeleton']);
+    echo head_css();
+    ?>
 
     <!-- JavaScripts -->
     <?php
