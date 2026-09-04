@@ -35,12 +35,6 @@ class ThemesController extends Omeka_Controller_AbstractActionController
         }
 
         $themeName = $this->_getParam(Theme::PUBLIC_THEME_OPTION);
-        // Theme names should be alphanumeric(-ish) (prevent security flaws).
-        if (preg_match('/[^a-z0-9\-_]/i', $themeName)) {
-            $this->_helper->flashMessenger(__('You have chosen an illegal theme name. Please select another theme.'), 'error');
-            return;
-        }
-
         $theme = Theme::getTheme($themeName);
         $minVer = $theme->omeka_minimum_version;
         if (!empty($minVer) && version_compare(OMEKA_VERSION, $theme->omeka_minimum_version, '<')) {

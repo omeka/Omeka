@@ -119,6 +119,9 @@ class Theme
      */
     public function __construct($themeName)
     {
+        if (preg_match('/[^a-z0-9\-_]/i', $themeName) || $themeName === '') {
+            throw new InvalidArgumentException('Invalid theme name.');
+        }
         $this->setDirectoryName($themeName);
         $this->setImage(self::THEME_IMAGE_FILE_NAME);
         $this->setIni(self::THEME_INI_FILE_NAME);
@@ -390,6 +393,9 @@ class Theme
      */
     public static function getOptionName($themeName)
     {
+        if (preg_match('/[^a-z0-9\-_]/i', $themeName) || $themeName === '') {
+            throw new InvalidArgumentException('Invalid theme name.');
+        }
         $themeOptionName = 'theme_' . trim(strtolower($themeName)) . '_options';
         return $themeOptionName;
     }
