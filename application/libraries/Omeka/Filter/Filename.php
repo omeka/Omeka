@@ -41,7 +41,7 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
     public function renameFile($name)
     {
         $extension = strrchr($name, '.');
-        $basename = md5(mt_rand() + microtime(true));
+        $basename = bin2hex(random_bytes(16));
         // Assume that extensions that do not exclusively contain alphanumeric,
         // hyphen, and underscore characters are invalid, and remove them.
         if (preg_match('/[^a-z0-9_\-]/i', substr($extension, 1))) {
