@@ -66,7 +66,7 @@ class UsersActivations extends Omeka_Record_AbstractRecord
     {
         $timestamp = microtime(true);
         $this->added = date('Y-m-d H:i:s', (int) $timestamp);
-        $this->url = sha1($timestamp);
+        $this->url = bin2hex(random_bytes(20));
     }
 
     /**

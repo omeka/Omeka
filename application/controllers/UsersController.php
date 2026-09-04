@@ -319,7 +319,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 $key = new Key;
                 $key->user_id = $user->id;
                 $key->label = $this->getParam('api_key_label');
-                $key->key = sha1($user->username . microtime() . rand());
+                $key->key = bin2hex(random_bytes(20));
                 $key->save();
                 $this->_helper->flashMessenger(__('A new API key was successfully created.'), 'success');
             }

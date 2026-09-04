@@ -152,10 +152,6 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
      */
     protected function _generateToken()
     {
-        return md5(
-            mt_rand(1, 1000000)
-            .  self::SESSION_NAME
-            .  mt_rand(1, 1000000)
-        );
+        return bin2hex(random_bytes(16));
     }
 }
