@@ -376,6 +376,10 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             return false;
         }
 
+        if (preg_match('/[^a-z0-9\-_]/i', $pluginDirName)) {
+            throw new Omeka_Controller_Exception_404('Invalid plugin name');
+        }
+
         // Look for the plugin in the list of loaded plugins.
         if (!($plugin = $this->_pluginLoader->getPlugin($pluginDirName))) {
             if ($create) {
