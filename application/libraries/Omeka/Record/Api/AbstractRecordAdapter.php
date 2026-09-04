@@ -107,6 +107,14 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         if ($elementTexts === null) {
             return;
         }
+        if (get_option('html_purifier_is_enabled') == '1') {
+            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
+            foreach ($elementTexts as &$elementText) {
+                if (!empty($elementText['html']) && isset($elementText['text'])) {
+                    $elementText['text'] = $purifier->purify($elementText['text']);
+                }
+            }
+        }
         $record->addElementTextsByArray($elementTexts);
         $record->setReplaceElementTexts();
     }
