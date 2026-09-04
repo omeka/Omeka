@@ -80,16 +80,20 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $acl = $bootstrap->getResource('Acl');
+        $currentUser = $bootstrap->getResource('CurrentUser');
+
         if (isset($data->item_type->id)) {
             $record->item_type_id = $data->item_type->id;
         }
         if (isset($data->collection->id)) {
             $record->collection_id = $data->collection->id;
         }
-        if (isset($data->public)) {
+        if (isset($data->public) && $acl->isAllowed($currentUser, 'Items', 'makePublic')) {
             $record->public = $data->public;
         }
-        if (isset($data->featured)) {
+        if (isset($data->featured) && $acl->isAllowed($currentUser, 'Items', 'makeFeatured')) {
             $record->featured = $data->featured;
         }
         $this->setTagData($record, $data);
