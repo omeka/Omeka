@@ -326,6 +326,10 @@ class UsersController extends Omeka_Controller_AbstractActionController
             // Rescend API keys.
             if ($this->getParam('api_key_rescind')) {
                 foreach ($this->getParam('api_key_rescind') as $keyId) {
+                    $key = $keyTable->find($keyId);
+                    if (!$key || ($key->user_id !== $user->id)) {
+                        throw new Omeka_Controller_Exception_404;
+                    }
                     $keyTable->find($keyId)->delete();
                 }
                 $this->_helper->flashMessenger(__('An existing API key was successfully rescinded.'), 'success');
