@@ -47,6 +47,80 @@ class Table_Tag extends Omeka_Db_Table
             $select->where('tags.id = 0');
         }
     }
+    
+    /**
+     * Filter a SELECT statement based on Omeka record IDs of a given record type.
+     *
+     * Can specify a range of valid record IDs or an individual ID
+     *
+     * @version 2.2.2
+     * @param Omeka_Db_Select $select
+     * @param string $range Example: 1-4, 75, 89
+     * @param string $type Example: Item, Collection, etc.
+     * @return void
+     */
+    public function filterByRecordRange($select, $range, $type)
+    {
+        // Narrow the records to the given type
+        $select->where('records_tags.record_type = ?',$type);
+
+        // Comma-separated expressions should be treated individually
+        $exprs = explode(',', $range);
+
+        // Construct a SQL clause where every entry in this array is linked by 'OR'
+        $wheres = array();
+
+        foreach ($exprs as $expr) {
+            // If it has a '-' in it, it is a range of item IDs.  Otherwise it is
+            // a single item ID
+            if (strpos($expr, '-') !== false) {
+                list($start, $finish) = explode('-', $expr);
+
+                // Naughty naughty koolaid, no SQL injection for you
+                $start  = (int) trim($start);
+                $finish = (int) trim($finish);
+
+                $wheres[] = "(records_tags.record_id BETWEEN $start AND $finish)";
+
+                //It is a single item ID
+            } else {
+                $id = (int) trim($expr);
+                $wheres[] = "(records_tags.record_id = $id)";
+            }
+        }
+
+        $where = join(' OR ', $wheres);
+
+        $select->where('('.$where.')');
+    }
+
+    /**
+     * Filter the SELECT statement based on an item's collection
+     *
+     * @param Zend_Db_Select
+     * @param Collection|integer Either a Collection object, or the collection ID
+     * @return void
+     */
+    public function filterByCollection($select, $collection)
+    {
+        if ($collection instanceof Collection) {
+            $collectionId = $collection->id;
+        } elseif (is_numeric($collection)) {
+            $collectionId = (int) $collection;
+        } else {
+            return;
+        }
+
+        if ($collectionId === 0) {
+            $select->where('items.collection_id IS NULL');
+        } else {
+            $select->joinInner(
+                array('collections' => $this->getDb()->Collection),
+                'items.collection_id = collections.id',
+                array());
+            $select->where('collections.id = ?', $collectionId);
+        }
+    }
 
     /**
      * Apply custom sorting for tags.
@@ -127,12 +201,20 @@ class Table_Tag extends Omeka_Db_Table
         $db = $this->getDb();
 
         if (array_key_exists('type', $params)) {
-            $this->filterByTagType($select, $params['type']);
+            if (isset($params['range'])) {
+              $this->filterByRecordRange($select,$params['range'],$params['type']);
+            } else {
+              $this->filterByTagType($select, $params['type']);
+            }
 
             //If we only want tags for public items, use one of the ItemTable's filters
             if ($params['type'] == 'Item' && isset($params['public'])) {
                 $db->getTable('Item')->filterByPublic($select, (bool) $params['public']);
             }
+        }
+        
+        if (array_key_exists('collection',$params) && isset($params['type']) && $params['type']==='Item') {
+          $this->filterByCollection($select,$params['collection']);
         }
 
         if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record_AbstractRecord) {
