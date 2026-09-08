@@ -106,12 +106,18 @@ header {
 	
 	@include screen-xs {
 		float: none;
-		padding: $spacing-s $spacing-l;
+		padding: $spacing-s 0 $spacing-s $spacing-l;
+		display: inline-block;
+		max-width: calc(100% - 6rem);
 	}
 }
 
-@include screen-xs {
-	#site-title a {
+
+#site-title a {
+	padding-bottom: 0;
+
+	@include screen-xs {
+		display: inline-block;
 		font-size: 16px;
 	}
 }
@@ -124,7 +130,7 @@ header {
 	}
 }
 
-#user-nav {
+#global-nav #user-nav {
     float: left;
 	margin-left: $spacing-l;
     
@@ -172,7 +178,6 @@ header {
     color: white;
 	appearance: initial;
     cursor: pointer;
-    text-indent: -9999px;
 	background: transparent;
 	border: 0;
 	margin: (-1 * $spacing-s) 0 0 auto;
@@ -183,7 +188,6 @@ header {
 		font-weight: 900;
 	    font-size: 21px;
 	    display: block;
-	    text-indent: 0;
 	    text-align: center;
 	}
 

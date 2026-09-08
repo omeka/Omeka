@@ -1403,15 +1403,22 @@ header nav {
 @media (max-width: 767px) {
   #site-title {
     float: none;
-    padding: 5px 20px;
+    padding: 5px 0 5px 20px;
+    display: inline-block;
+    max-width: calc(100% - 6rem);
   }
 }
 
+#site-title a {
+  padding-bottom: 0;
+}
 @media (max-width: 767px) {
   #site-title a {
+    display: inline-block;
     font-size: 16px;
   }
 }
+
 #global-nav > .navigation {
   float: left;
 }
@@ -1421,20 +1428,20 @@ header nav {
   }
 }
 
-#user-nav {
+#global-nav #user-nav {
   float: left;
   margin-left: 20px;
 }
 @media (max-width: 767px) {
-  #user-nav {
+  #global-nav #user-nav {
     float: none;
     border-top: 1px solid #666;
     margin-left: 0;
   }
-  #user-nav li:first-of-type {
+  #global-nav #user-nav li:first-of-type {
     padding: 12px 20px 8px;
   }
-  #user-nav li:first-of-type a {
+  #global-nav #user-nav li:first-of-type a {
     display: inline;
     border-bottom: none;
     padding: 0;
@@ -1466,7 +1473,6 @@ header nav {
      -moz-appearance: initial;
           appearance: initial;
   cursor: pointer;
-  text-indent: -9999px;
   background: transparent;
   border: 0;
   margin: -5px 0 0 auto;
@@ -1477,7 +1483,6 @@ header nav {
   font-weight: 900;
   font-size: 21px;
   display: block;
-  text-indent: 0;
   text-align: center;
 }
 @media (min-width: 768px) {
