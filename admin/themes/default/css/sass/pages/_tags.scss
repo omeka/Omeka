@@ -103,7 +103,7 @@ color: darken($green, 15%);
 }
 
 .tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
-    content: "\f067";
+    content: "\f067" / "";
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -127,7 +127,7 @@ color: darken($green, 15%);
 }
 
 .undo-remove-tag a:after {
-    content: "\f112";
+    content: "\f112" / "";
     color: #BB8282;
     font-size: 9px;
     text-indent: 3px;

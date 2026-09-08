@@ -142,7 +142,7 @@
 		margin-bottom: 0;
 	    
 	    &:after {
-		    content: "\f0d7";
+		    content: "\f0d7" / "";
 		    font-family: "Font Awesome 5 Free";
 			font-weight: 900;
 		    font-size: 21px;

@@ -25,7 +25,7 @@
 		    margin-right: $spacing-s;
 		    text-indent: 0;
 		    text-align: center;
-			content: "\f0b2";
+			content: "\f0b2" / "";
 			opacity: 0.5;
 			position: relative;
 	    }
@@ -155,7 +155,7 @@
     text-align: center;
     display: inline-block;
 }
-.drawer-toggle .icon:after { content: "\f0da"; }
+.drawer-toggle .icon:after { content: "\f0da" / ""; }
 
 .delete-drawer:link, .delete-drawer:active,
 .delete-drawer:hover, .delete-drawer:visited,
@@ -172,10 +172,10 @@
 }
 
 .delete-drawer { display: inline-block; }
-.delete-drawer .icon:after { content: "\f00d"; }
+.delete-drawer .icon:after { content: "\f00d" / ""; }
 
 .undo-delete .icon:after {
-    content: "\f0e2";
+    content: "\f0e2" / "";
     font-size: 12px;
     line-height: 1;
 }

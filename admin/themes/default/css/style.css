@@ -394,7 +394,7 @@ dd {
 .ui-icon.ui-icon-closethick:before,
 .ui-icon.ui-icon-close:before {
   font-family: "Font Awesome 5 Free";
-  content: "\f00d";
+  content: "\f00d"/"";
 }
 
 #content #flash ul {
@@ -797,7 +797,7 @@ button.ui-dialog-titlebar-close {
   margin-right: 5px;
   text-indent: 0;
   text-align: center;
-  content: "\f0b2";
+  content: "\f0b2"/"";
   opacity: 0.5;
   position: relative;
 }
@@ -951,7 +951,7 @@ button.ui-dialog-titlebar-close {
 }
 
 .drawer-toggle .icon:after {
-  content: "\f0da";
+  content: "\f0da"/"";
 }
 
 .delete-drawer:link, .delete-drawer:active,
@@ -970,11 +970,11 @@ button.ui-dialog-titlebar-close {
 }
 
 .delete-drawer .icon:after {
-  content: "\f00d";
+  content: "\f00d"/"";
 }
 
 .undo-delete .icon:after {
-  content: "\f0e2";
+  content: "\f0e2"/"";
   font-size: 12px;
   line-height: 1;
 }
@@ -1472,7 +1472,7 @@ header nav {
   margin: -5px 0 0 auto;
 }
 #mobile-navbar-toggle:after {
-  content: "\f141";
+  content: "\f141"/"";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 21px;
@@ -1569,12 +1569,12 @@ header nav {
 
 .pagination_next a:after {
   text-indent: 0;
-  content: "\f105";
+  content: "\f105"/"";
 }
 
 .pagination_previous a:after {
   text-indent: -3px;
-  content: "\f104";
+  content: "\f104"/"";
 }
 
 .pagination_next {
@@ -1748,7 +1748,7 @@ header nav {
   position: absolute;
   display: block;
   font-weight: 900;
-  content: "\f002";
+  content: "\f002"/"";
   text-indent: 0;
   text-align: center;
 }
@@ -1764,7 +1764,7 @@ header nav {
   right: 37px;
 }
 #advanced-search.button:after {
-  content: "\f141";
+  content: "\f141"/"";
 }
 
 #advanced-form {
@@ -2029,7 +2029,7 @@ button.remove_search {
     margin-bottom: 0;
   }
   #content-nav-toggle:after {
-    content: "\f0d7";
+    content: "\f0d7"/"";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 21px;
@@ -3413,7 +3413,7 @@ form.form-inline.editableform {
 }
 
 .tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
-  content: "\f067";
+  content: "\f067"/"";
   transform: rotate(45deg);
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -3433,7 +3433,7 @@ form.form-inline.editableform {
 }
 
 .undo-remove-tag a:after {
-  content: "\f112";
+  content: "\f112"/"";
   color: #BB8282;
   font-size: 9px;
   text-indent: 3px;

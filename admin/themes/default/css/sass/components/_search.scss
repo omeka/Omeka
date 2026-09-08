@@ -65,7 +65,7 @@
         position: absolute;
         display: block;
         font-weight: 900;
-        content: "\f002";
+        content: "\f002" / "";
         text-indent: 0;
         text-align: center;
     }
@@ -81,7 +81,7 @@
     right: 37px;
 
     &:after {
-        content: "\f141";
+        content: "\f141" / "";
     }
 }
 

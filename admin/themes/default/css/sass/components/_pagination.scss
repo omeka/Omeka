@@ -93,12 +93,12 @@
 
         .pagination_next a:after {
             text-indent: 0;
-            content: "\f105";
+            content: "\f105" / "";
         }
 
         .pagination_previous a:after {
             text-indent: -3px;
-            content: "\f104";
+            content: "\f104" / "";
         }
 
         .pagination_next { margin: 0 0 0 $spacing-m; }
