@@ -351,7 +351,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     {
         if ($element instanceof Element) {
             $elementId = $element->id;
-        } elseif (is_string($element) || is_integer($element)) {
+        } elseif (is_string($element) || is_int($element)) {
             $elementId = (string) $element;
         } else {
             throw new Omeka_Record_Exception(__('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.'));

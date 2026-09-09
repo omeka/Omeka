@@ -119,7 +119,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
     protected function _getOptions($options)
     {
         $converted = [];
-        if (is_integer($options)) {
+        if (is_int($options)) {
             $converted = [self::INDEX => $options];
         } elseif (self::ALL == $options) {
             $converted = [self::ALL => true];

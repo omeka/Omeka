@@ -254,7 +254,7 @@ class Table_Item extends Omeka_Db_Table
                 'item_types' => $this->getDb()->ItemType],
                 'items.item_type_id = item_types.id',
                 []);
-            $typeIds = array_filter($typeIdsOrNames, 'is_integer');
+            $typeIds = array_filter($typeIdsOrNames, 'is_int');
             $typeNames = array_diff($typeIdsOrNames, $typeIds);
             if (!empty($typeIds)) {
                 if (!empty($typeNames)) {
