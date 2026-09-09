@@ -11,9 +11,13 @@
  */
 class Table_UsersActivations extends Omeka_Db_Table
 {
+    const VALIDITY_SECONDS = 86400;
+
     public function findByUrl($url)
     {
-        return $this->fetchObject($this->getSelect()->where('url = ?', $url)->limit(1));
+        $earliest = date('Y-m-d H:i:s', time() - self::VALIDITY_SECONDS);
+        $select = $this->getSelect()->where('url = ?', $url)->where('added > ?', $earliest)->limit(1);
+        return $this->fetchObject($select);
     }
 
     public function findByUser($user)
@@ -22,5 +26,15 @@ class Table_UsersActivations extends Omeka_Db_Table
         $select->where('user_id = ?', $user->id);
         $select->limit(1);
         return $this->fetchObject($select);
+    }
+
+    public function deleteAllByUser($user)
+    {
+        if (!$user || !$user->id) {
+            throw new InvalidArgumentException('Cannot delete activations for nonexistent user');
+        }
+        return $this->getDb()->delete($this->getTableName(), [
+            'user_id = ?' => (int) $user->id,
+        ]);
     }
 }
