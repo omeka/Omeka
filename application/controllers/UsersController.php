@@ -124,7 +124,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
     public function activateAction()
     {
         $hash = $this->_getParam('u');
-        $ua = $this->_helper->db->getTable('UsersActivations')->findBySql("url = ?", [$hash], true);
+        $ua = $this->_helper->db->getTable('UsersActivations')->findByUrl($hash);
 
         if (!$ua) {
             $this->_helper->flashMessenger(__('Invalid activation code given.'), 'error');
@@ -143,7 +143,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             $user->setPassword($_POST['new_password1']);
             $user->active = 1;
             if ($user->save(false)) {
-                $ua->delete();
+                $this->_helper->db->getTable('UsersActivations')->deleteAllByUser($user);
                 $this->_helper->flashMessenger(__('You may now log in to Omeka.'), 'success');
                 $this->_helper->redirector('login');
             } else {
@@ -198,7 +198,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
     public function editAction()
     {
         $user = $this->_helper->db->findById();
-        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
+        $uaTable = $this->_helper->db->getTable('UsersActivations');
+        $ua = $uaTable->findByUser($user);
 
         $form = $this->_getUserForm($user, $ua);
         $form->setDefaults([
@@ -237,19 +238,13 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
                 return;
             }
-            //check to see if user has been manually deactivated. if so, delete ua (if exists)
-            if ($user->active == 1 && ($form->getValue('active') == 0)) {
-                //couldn't really do a migration to remove useless ua's, so just to be safe double-check
-                //that the ua exists
-                if ($ua) {
-                    $ua->delete();
-                }
-            }
-            //reverse situation from above. If manually activating, also delete the ua
-            if ($user->active == 0 && ($form->getValue('active') == 1)) {
-                if ($ua) {
-                    $ua->delete();
-                }
+
+            // Delete any open activations if the user is being manually activated or deactivated
+            if (
+                ($user->active == 1 && $form->getValue('active') == 0) ||
+                ($user->active == 0 && $form->getValue('active') == 1)
+            ) {
+                $uaTable->deleteAllByUser($user);
             }
 
             $user->setPostData($form->getValues());
@@ -349,10 +344,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
     public function deleteAction()
     {
         $user = $this->_helper->db->findById();
-        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
-        if ($ua) {
-            $ua->delete();
-        }
+        $ua = $this->_helper->db->getTable('UsersActivations')->deleteAllByUser($user);
         parent::deleteAction();
     }
 
@@ -379,10 +371,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
      */
     protected function sendActivationEmail($user)
     {
-        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
-        if ($ua) {
-            $ua->delete();
-        }
+        $this->_helper->db->getTable('UsersActivations')->deleteAllByUser($user);
+
         $ua = new UsersActivations;
         $ua->user_id = $user->id;
         $ua->save();
