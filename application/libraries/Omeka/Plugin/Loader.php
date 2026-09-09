@@ -240,7 +240,9 @@ class Omeka_Plugin_Loader
 
         $error = false;
 
-        if (!$this->hasPluginBootstrap($plugin)) {
+        if (preg_match('/[^a-z0-9\-_]/i', $pluginDirName)) {
+            $error = "'%s' is an invalid plugin name.";
+        } elseif (!$this->hasPluginBootstrap($plugin)) {
             $error = "'%s' has no valid bootstrap file.";
         } elseif (!$plugin->isInstalled()) {
             $error = "'%s' has not been installed.";
