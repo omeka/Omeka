@@ -2,19 +2,14 @@
     overflow: hidden;
 }
 
+.tag-desc {
+    max-width: 100%;
+    height: 4 * $spacing-l;
+}
+
 .tags h3 { margin: 0; }
 
 .tags ol { padding: 0 0 0 $spacing-m;  li { margin-left: $spacing-s; padding-left: $spacing-l; }}
-
-.tags ol:before {
-    content: "";
-    display: inline-block;
-    width: 180px;
-    height: 75px;
-    background:url('../images/tag-desc.png') no-repeat;
-    background-size: cover;
-    margin: $spacing-s 0 $spacing-l -$spacing-l;
-}
 
 .editable-inline div {
     display: inline-block;
