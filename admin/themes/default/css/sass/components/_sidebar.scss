@@ -1,13 +1,31 @@
-#content-nav {
+#main-nav {
     background-color: $darkestred;
     position: fixed;
-    top: 40px;
+    top: 48px;
     left: 0;
     height: calc(100vh - 40px);
     margin: 0;
-    padding: 0 0 (1.5 * $spacing-l);
-    z-index: 99;
+    padding: $spacing-m 0 (1.5 * $spacing-l);
+    z-index: 1002;
     box-sizing: border-box;
+	overflow-y: auto;
+
+	//scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
+	scrollbar-color: $scrollbar $darkestred;
+
+	&::-webkit-scrollbar {
+		width: auto;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $darkestred;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $scrollbar;
+		border-radius: 6px;
+		border: 3px solid $darkestred;
+	}
 
 	@include screen-xs {
         position: relative;
@@ -19,8 +37,8 @@
         padding: 0;
         z-index: auto;
 
-        &.open {
-            z-index: 99;
+        &.in {
+            display: block;
         }
     }
 
@@ -31,43 +49,13 @@
 
     ul {
         width: 100%;
-        height: 100%;
         list-style-type: none;
-        padding: $spacing-s 0;
-        float: left;
-        clear: left;
-        margin: 0;
-        overflow-y: auto;
-
-        //scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
-        scrollbar-color: $scrollbar $darkestred;
-
-        &::-webkit-scrollbar {
-            width: auto;
-        }
-
-        &::-webkit-scrollbar-track {
-            background: $darkestred;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: $scrollbar;
-            border-radius: 6px;
-            border: 3px solid $darkestred;
-        }
+        padding: 0;
+		margin: 0;
 
 	    @include screen-xs {
 		 	margin-top: 0;
-		 	height: 0px;
-			display: none;
-		 	overflow: auto;
 		 	transition: 0.5s display;
-		 	
-		 	&.in {
-			 	height: auto;
-				display: block;
-				overflow: visible;
-		 	}
 		}
 	}
 
@@ -87,7 +75,7 @@
 	    a {
 	        color: white;
 	        display: block;
-	        padding: .5em .5em .5em 1em;
+	        padding: .25em .5em .25em 1em;
 	        text-decoration: none;
 	        transition: 0.5s color;
 	        
@@ -116,44 +104,70 @@
 			}
 	    }
 	}
+
+
+	button {
+		margin: 0;
+		width: 100%;
+		background: transparent;
+		color: #e7e7e7;
+		text-transform: uppercase;
+		text-align: left;
+		padding: .5rem 1rem;
+		font-size: 12px;
+		border: 0;
+		position: relative;
+	}
+
+	[aria-expanded=false] + nav {
+		display: none;
+	}
 }
 
-#content-nav-toggle {
-	display: none;
-	
-	@include screen-xs {
-		width: 100%;
-		border: 0;
-		text-align: left;
+#main-nav .icon:before {
+	margin-right: .5rem;
+	display: inline-block;
+	width: 1rem;
+}
+
+#current-user .icon:before {
+	content: "\f007" / "";
+}
+
+#logout .icon:before {
+	content: "\f2f5" / "";
+}
+
+#main-nav [aria-expanded]:after {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+
+#main-nav [aria-expanded] {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: .25rem;
+}
+
+#main-nav [aria-expanded=false]:after {
+	content: "\f0da" / "";
+}
+
+#main-nav [aria-expanded=true]:after {
+	content: "\f0d7" / "";
+}
+
+#mobile-nav button {
+	margin-top: $spacing-l;
+}
+
+@include screen-xs {
+	#mobile-nav {
+		display: none;
+	}
+
+	#mobile-nav.in {
 		display: block;
-		background: $darkred;
-		word-wrap: break-word;
-		border-bottom: 1px solid rgba(236, 181, 179, 0.25);
-	    color: white;
-	    display: block;
-	    line-height: 1.5em;
-	    padding: .625em 3em .625em $spacing-l;
-	    font-size: 16px;
-	    text-decoration: none;
-		overflow: hidden;
-		border-radius: 0;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		margin-bottom: 0;
-	    
-	    &:after {
-		    content: "\f0d7" / "";
-		    font-family: "Font Awesome 5 Free";
-			font-weight: 900;
-		    font-size: 21px;
-		    display: block;
-		    text-indent: 0;
-		    text-align: center;
-		    margin: -0.75em 0 0 0em;
-		    color: white;
-		    position: absolute;
-		    right: $spacing-l;
-		    top: 27px;
-	    }
 	}
 }

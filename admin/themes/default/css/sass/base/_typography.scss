@@ -80,10 +80,10 @@ li:empty {
 
 .subhead {
     position: relative;
-    
-	h1 {
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	}
+	padding: $spacing-l 0 0 0;
+}
+
+.icon:before {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
 }

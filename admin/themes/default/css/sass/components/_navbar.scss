@@ -2,8 +2,11 @@ header {
     left: 0;
     right: 0;
     top: 0;
-    height: 40px;    
+    height: 48px;    
     box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
     position: fixed;
     padding:  8px 1em;
     z-index: 99;
@@ -18,7 +21,7 @@ header {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		padding: $spacing-s 0;
+		padding: $spacing-m $spacing-l;
 	}
 
 	.site-title a:focus,
@@ -70,13 +73,6 @@ header {
 			transition-duration: 0.5s;
 			transition-property: height, overflow-x, display, z-index;
 			
-			&.in {
-				height: 260px;
-				overflow-x: hidden;
-				display: block;
-				z-index: 99;
-			}
-			
 			li {
 				float: none;
 				margin-right: 0;
@@ -106,9 +102,8 @@ header {
 	
 	@include screen-xs {
 		float: none;
-		padding: $spacing-s 0 $spacing-s $spacing-l;
 		display: inline-block;
-		max-width: calc(100% - 6rem);
+		margin-bottom: $spacing-m;
 	}
 }
 
@@ -122,42 +117,17 @@ header {
 	}
 }
 
-#global-nav > .navigation {
-	float: left;
-
-	@include screen-xs {
-		float: none;
-	}
-}
-
-#global-nav #user-nav {
-    float: left;
-	margin-left: $spacing-l;
-    
+#user-nav ul {
     @include screen-xs {
-	 	float: none;
-	 	border-top: 1px solid #666;
-		margin-left: 0;
-	 	
-	 	li:first-of-type {
-		 	padding: 12px $spacing-l 8px;
-    
-		 	a {
-			 	display: inline;
-			 	border-bottom: none;
-			 	padding: 0;
-		 	}
-	 	} 
+	 	display: flex;
+		justify-content: space-between;
+		border-bottom: 1px solid rgba(0, 0, 0, .25);
 	}
 }
 
 #global-nav {
-    float: right;
-    margin-right: 1.5em;
-    
+
     @include screen-xs {
-	 	float: none;   
-	 	border-top: 1px solid #666;
 	 	margin: 0;
 		overflow: visible;
 	 	
@@ -177,16 +147,18 @@ header {
 #mobile-navbar-toggle {
     color: white;
 	appearance: initial;
+	align-self: flex-end;
+	height: 30px;
     cursor: pointer;
 	background: transparent;
-	border: 0;
+	border: 1px solid #646464;
+	padding: $spacing-s $spacing-m;
 	margin: (-1 * $spacing-s) 0 0 auto;
     
     &:after {
-        content: "\f141" / "";
+        content: "\f0c9" / "";
 	    font-family: "Font Awesome 5 Free";
 		font-weight: 900;
-	    font-size: 21px;
 	    display: block;
 	    text-align: center;
 	}

@@ -114,11 +114,10 @@ if (!Omeka) {
     };
     
     Omeka.toggleMobileMenu = function() {
-	    $('.mobile-menu').click(function (event) {
+	    $(document).on('click', '.mobile-menu', function (event) {
             var button = $(this);
 			var target = button.data('target');
 			$(target).toggleClass('in');
-            button.parent('nav').toggleClass('open');
             Omeka.toggleAriaExpanded(button);
 	    });
     };

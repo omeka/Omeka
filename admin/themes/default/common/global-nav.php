@@ -1,3 +1,5 @@
+<button type="button" class="mobile-menu collapse" aria-expanded="true" data-target="#global-nav"><?php echo __('Site Management'); ?></button>
+<nav id="global-nav" class="in" aria-label="<?php echo __('Site Management'); ?>">
 <?php
     $globalNav = [
         [
@@ -27,4 +29,4 @@
         ];
     echo nav($globalNav, 'admin_navigation_global');
 ?>
-
+</nav>

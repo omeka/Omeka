@@ -39,27 +39,8 @@
     <div id="site-title" class="two columns">
         <?php echo link_to_home_page(option('site_title') . '<span class="sr-only">' . __('(external link)') . '</span>', ['target' => '_blank']); ?>
     </div>
-	<button id="mobile-navbar-toggle" class="mobile-menu" data-target="#global-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
-
-    <nav id="global-nav" aria-label="<?php echo __('Admin'); ?>">
-        <?php echo common('global-nav'); ?>
-        
-        <ul id="user-nav">
-        <?php if ($user = current_user()): ?>
-            <?php
-                $name = html_escape($user->name);
-                if (is_allowed($user, 'edit')) {
-                    $userLink = '<a href="' . html_escape(url('users/edit/' . $user->id)) . '">' . $name . '</a>';
-                } else {
-                    $userLink = $name;
-                }
-            ?>
-            <li><?php echo __('Welcome, %s', $userLink); ?></li>
-            <li><a href="<?php echo html_escape(url('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
-        <?php endif; ?>
-        </ul>
-    </nav>
-    <?php fire_plugin_hook('admin_header_bottom', ['view'=>$this]); ?>
+    <?php echo search_form(['show_advanced' => true, 'form_attributes'=> ['role'=>'search']]); ?>
+    <button id="mobile-navbar-toggle" class="mobile-menu" data-target="#mobile-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
 </header>
 
 <div class="container container-twelve">
@@ -67,7 +48,6 @@
 
     <div id="content" class="ten columns omega offset-by-two" role="main" aria-labelledby="content-heading">
 	    <div class="subhead">
-	        <?php echo search_form(['show_advanced' => true, 'form_attributes'=> ['role'=>'search']]); ?>
 	        <?php if (isset($title)) : ?>
 	            <h1 id="content-heading" class="section-title"><?php echo $title ?></h1>
 	        <?php endif; ?>
