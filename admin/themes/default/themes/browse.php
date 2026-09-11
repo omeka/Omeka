@@ -2,8 +2,7 @@
 if ($versionNotifications):
     queue_js_file('vendor/semver.min', 'javascripts');
 endif;
-echo head(['title' => __('Appearance'), 'bodyclass' => 'themes']);
-echo common('appearance-nav');
+echo head(['title' => __('Themes'), 'bodyclass' => 'themes']);
 echo flash();
 
 if ($current->image) {

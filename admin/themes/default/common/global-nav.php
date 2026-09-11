@@ -10,9 +10,21 @@
             ],
         [
             'label' => __('Appearance'),
-            'uri' => url('appearance'),
+            'uri' => url('appearance/edit-settings'),
             'resource' => 'Appearance',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'pages' => [
+                    [
+                        'label' => __('Themes'),
+                        'uri' => url('themes'),
+                        'resource' => 'Themes',
+                        'privilege' => 'edit'
+                    ],
+                    [
+                        'label' => __('Navigation'),
+                        'uri' => url('appearance/edit-navigation')
+                    ]
+                ]
             ],
         [
             'label' => __('Users'),

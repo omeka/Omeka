@@ -1,7 +1,6 @@
 <?php
 queue_js_file(['vendor/tinymce/tinymce.min', 'themes']);
 echo head(['title'=> __('Appearance'), 'bodyclass' => 'themes theme-configuration']);
-echo common('appearance-nav');
 echo flash();
 ?>
 

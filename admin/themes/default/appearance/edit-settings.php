@@ -2,8 +2,6 @@
 $pageTitle = __('Appearance');
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
-<?php echo common('appearance-nav'); ?>
-
 <?php echo flash(); ?>
 
 <form id="appearance-form" method="post">
