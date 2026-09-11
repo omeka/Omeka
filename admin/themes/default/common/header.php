@@ -40,7 +40,7 @@
         <?php echo link_to_home_page(option('site_title') . '<span class="sr-only">' . __('(external link)') . '</span>', ['target' => '_blank']); ?>
     </div>
     <?php echo search_form(['show_advanced' => true, 'form_attributes'=> ['role'=>'search']]); ?>
-    <button id="mobile-navbar-toggle" class="mobile-menu" data-target="#mobile-nav" title="<?php echo __('Admin'); ?>" aria-label="<?php echo __('Admin'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
+    <button id="mobile-navbar-toggle" class="mobile-menu" data-target="#mobile-nav" title="<?php echo __('Main menu'); ?>" aria-label="<?php echo __('Main menu'); ?>" aria-expanded="false"><span class="admin-icon" aria-role="hidden"></span></button>
 </header>
 
 <div class="container container-twelve">

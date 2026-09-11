@@ -1,5 +1,5 @@
-<nav id="main-nav" class="two columns" role="navigation" aria-label="<?php echo __('Content'); ?>">
-    <nav id="user-nav">
+<nav id="main-nav" class="two columns" role="navigation" aria-label="<?php echo __('Main'); ?>">
+    <div id="user-nav">
         <ul>
         <?php if ($user = current_user()): ?>
             <?php
@@ -14,13 +14,13 @@
             <li><a href="<?php echo html_escape(url('users/logout'));?>" id="logout"><span class="icon"></span><?php echo __('Log Out'); ?></a></li>
         <?php endif; ?>
         </ul>
-    </nav>
+    </div>
     <div id="mobile-nav">
         <?php echo common('global-nav'); ?>
         <?php fire_plugin_hook('admin_header_bottom', ['view'=>$this]); ?>
 
         <button type="button" id="content-nav-toggle" class="mobile-menu collapse" data-target="#content-nav" aria-expanded="true"><?php echo __('Content'); ?></button>
-        <nav id="content-nav" class="in">
+        <nav id="content-nav" class="in" aria-label="<?php echo __('Content'); ?>">
             <?php
                 $mainNav = [
                     [
