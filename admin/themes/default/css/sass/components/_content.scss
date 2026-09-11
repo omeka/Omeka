@@ -62,14 +62,21 @@
 	}
 }
 
-.recent-records {
+#section-nav ul {
+    margin-top: -$spacing-m;
+    list-style: none;
     display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+    flex-wrap: wrap;
+    padding-left: 0;
+    gap: $spacing-l;
 
-.recent-records .add-new-link {
-    margin-top: auto;
+    a {
+        color: $blue;
+    }
+
+    .active {
+        font-weight: bold;
+    }
 }
 
 .admin-thumb.panel img {

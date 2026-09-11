@@ -1,5 +1,5 @@
 <?php if (is_allowed('Settings', 'edit')): ?>
-<div id="section-nav" role="navigation" class="navigation">
+<nav id="section-nav" aria-label="<?php echo __('Settings'); ?>" class="navigation">
 <?php
     $navArray = [
         [
@@ -35,5 +35,5 @@
     ];
     echo nav($navArray, 'admin_navigation_settings');
 ?>
-</div>
+</nav>
 <?php endif ?>

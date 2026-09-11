@@ -122,7 +122,7 @@ if (!Omeka) {
             Omeka.toggleAriaExpanded(button);
 	    });
     };
-    
+
     Omeka.moveNavList = function () {
         nav = $('.content-wrapper > .navigation');
         nav.insertAfter(nav.parent().parent().find('.subhead'));
