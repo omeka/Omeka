@@ -35,10 +35,10 @@ $tabs = apply_filters('admin_items_form_tabs', $tabs, ['item' => $item]);
 
 <!-- Create the sections for the various element sets -->
 
-<ul id="section-nav" class="navigation tabs">
+<ul id="section-tabs" aria-label="<?php echo __('Form'); ?>" class="tabs navigation" role="tablist">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): // Don't display tabs with no content. '?>
-            <li><a href="#<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape(__($tabName)); ?></a></li>
+            <li><button type="button" role="tab" aria-selected="false" aria-controls="<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape(__($tabName)); ?></button></li>
         <?php endif; ?> 
     <?php endforeach; ?>
 </ul>

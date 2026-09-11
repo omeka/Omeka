@@ -9,37 +9,36 @@ Omeka.Tabs = {};
      * Set up JS hide/show tabs for the edit page/
      */
     Omeka.Tabs.initialize = function () {
-        var tabLinks = $('#section-nav > li > a');
-        var tabIds = tabLinks.map(function () {
+        var tabButtons = $('#section-tabs [role="tab"]');
+        var tabIds = tabButtons.map(function () {
             // Rely on the fact that the links have pound signs.
             // Workaround IE7's creation of absolute URLs.
-            return '#' + this.getAttribute('href').split('#')[1];
+            return '#' + this.getAttribute('aria-controls');
         }).toArray().join(',');
         var tabs = $(tabIds);
 
-        function selectTab(tabLink) {
-            tabLinks.removeClass('active');
+        function selectTab(tabButton) {
+            tabButtons.removeClass('active').attr('aria-selected', 'false');
             tabs.hide();
 
-            tabLink.addClass('active');
-            $(tabLink.attr('href')).show();
-            tabLink.trigger('omeka:tabselected');
+            tabButton.addClass('active').attr('aria-selected', 'true');
+            $('#' + tabButton.attr('aria-controls')).show();
+            tabButton.trigger('omeka:tabselected');
         }
 
-        tabLinks.click(function (event) {
-            event.preventDefault();
+        tabButtons.click(function (event) {
             selectTab($(this));
         });
 
-        // Select the tab given in the anchor, if any, or the first tab.
+        // Select the tab given in the button, if any, or the first tab.
         var selectedTab;
         var url = document.location.toString();
         if (url.match('#')) {
             var anchor = '#' + url.split('#')[1];
-            selectedTab = tabLinks.filter('[href="' + anchor + '"]');
+            selectedTab = tabButtons.filter('[aria-controls="' + anchor + '"]');
         }
         if (!selectedTab || !selectedTab.length) {
-            selectedTab = tabLinks.first();
+            selectedTab = tabButtons.first();
         }
 
         selectTab(selectedTab);
