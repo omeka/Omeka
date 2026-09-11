@@ -1,6 +1,9 @@
 <?php 
-echo head(['title' => __('Add a Collection'), 'bodyclass'=>'collections']);
+ob_start();
 include 'form-tabs.php';
+$sectionNav = ob_get_contents();
+ob_end_clean();
+echo head(['title' => __('Add a Collection'), 'bodyclass'=>'collections', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 

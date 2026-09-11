@@ -1,4 +1,4 @@
-<div id="section-nav" role="navigation" class="navigation">
+<nav id="section-nav" aria-label="<?php echo __('Users'); ?>" class="navigation">
 <?php
     $navArray = [
         [
@@ -22,4 +22,4 @@
     ];
     echo nav($navArray, 'admin_navigation_users', ['user' => $user]);
 ?>
-</div>
+</nav>

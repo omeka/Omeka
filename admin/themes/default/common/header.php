@@ -72,4 +72,7 @@
 	            <h1 id="content-heading" class="section-title"><?php echo $title ?></h1>
 	        <?php endif; ?>
 	    </div>
+        <?php if (isset($sectionNav)): ?>
+        <?php echo $sectionNav; ?>
+        <?php endif; ?>
 	    <div class="content-wrapper">
