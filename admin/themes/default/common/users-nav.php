@@ -1,8 +1,7 @@
-<div id="section-nav" role="navigation" class="navigation">
 <?php
     $navArray = [
         [
-            'label' => __('General'),
+            'label' => __('Edit "%s"', $user->username),
             'uri' => record_url($user, 'edit'),
             'resource' => $user,
             'privilege' => 'edit'
@@ -20,6 +19,10 @@
             'privilege' => 'api-keys'
         ],
     ];
-    echo nav($navArray, 'admin_navigation_users', ['user' => $user]);
+    echo nav($navArray, 'admin_navigation_users')->setUlClass('user-nav');
 ?>
-</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        Omeka.Users.tempUserSubmenu();
+    });
+</script>

@@ -1,4 +1,5 @@
 <?php
+queue_js_file('users');
 $userTitle = $user->username;
 if ($userTitle != '') {
     $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
@@ -6,7 +7,7 @@ if ($userTitle != '') {
     $userTitle = '';
 }
 $userTitle = __('Edit User #%s', $user->id) . $userTitle;
-echo head(['title' => $userTitle, 'bodyclass' => 'users']);
+echo head(['title' => $userTitle, 'bodyclass' => 'users', 'user' => $user]);
 echo common('users-nav', ['user' => $user]);
 echo flash();
 ?>
