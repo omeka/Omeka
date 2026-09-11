@@ -1,6 +1,5 @@
 <?php
-echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-api']);
-echo common('settings-nav');
+echo head(['title' => __('API'), 'bodyclass'=>'settings edit-api']);
 echo flash();
 ?>
 <form method="post">

@@ -1902,6 +1902,14 @@ button.remove_search {
     transition: 0.5s display;
   }
 }
+#main-nav ul ul {
+  background-color: rgba(0, 0, 0, 0.3);
+  text-indent: 1rem;
+  display: none;
+}
+#main-nav .active ul {
+  display: block;
+}
 #main-nav li {
   word-wrap: break-word;
   z-index: 99;

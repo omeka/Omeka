@@ -1,6 +1,5 @@
 <?php
-echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-search']);
-echo common('settings-nav');
+echo head(['title' => __('Search'), 'bodyclass'=>'settings edit-search']);
 echo flash();
 ?>
 <form method="post" class="search-record-types">

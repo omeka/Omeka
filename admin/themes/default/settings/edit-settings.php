@@ -1,7 +1,6 @@
 <?php
 queue_js_file('settings');
 echo head(['title' => __('Settings'),'bodyclass' => 'settings edit-settings']);
-echo common('settings-nav');
 echo flash();
 ?>
 

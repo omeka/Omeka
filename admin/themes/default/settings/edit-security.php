@@ -1,7 +1,6 @@
 <?php
 queue_js_file('security');
-echo head(['title' => __('Settings'), 'bodyclass' => 'settings edit-security']);
-echo common('settings-nav');
+echo head(['title' => __('Security'), 'bodyclass' => 'settings edit-security']);
 echo flash();
 ?>
 

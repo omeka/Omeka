@@ -3,11 +3,10 @@ $doNotDelete = ['Dublin Core', 'Item Type Metadata'];
 
 echo head(
     [
-        'title' => __('Settings'),
+        'title' => __('Element Sets'),
         'bodyclass'=>'element-sets'
     ]
 );
-echo common('settings-nav');
 echo flash();
 ?>
 <div class="table-responsive">

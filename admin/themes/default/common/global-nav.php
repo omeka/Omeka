@@ -24,7 +24,39 @@
             'label' => __('Settings'),
             'uri' => url('settings'),
             'resource' => 'Settings',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'pages' => [
+                [
+                    'label' => __('Security'),
+                    'uri' => url('settings/edit-security'),
+                    'resource' => 'Settings',
+                    'privilege' => 'edit'
+                ],
+                [
+                    'label' => __('Search'),
+                    'uri' => url('settings/edit-search'),
+                    'resource' => 'Settings',
+                    'privilege' => 'edit'
+                ],
+                [
+                    'label' => __('Element Sets'),
+                    'uri' => url('element-sets'),
+                    'resource' => 'Settings',
+                    'privilege' => 'edit'
+                ],
+                [
+                    'label' => __('Item Type Elements'),
+                    'uri' => url('settings/edit-item-type-elements'),
+                    'resource' => 'Settings',
+                    'privilege' => 'edit'
+                ],
+                [
+                    'label' => __('API'),
+                    'uri' => url('settings/edit-api'),
+                    'resource' => 'Settings',
+                    'privilege' => 'edit'
+                ]
+            ]
             ]
         ];
     echo nav($globalNav, 'admin_navigation_global');

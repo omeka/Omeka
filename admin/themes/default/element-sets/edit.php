@@ -6,7 +6,6 @@ echo head(
         'bodyclass' => 'element-sets'
     ]
 );
-echo common('settings-nav');
 echo flash();
 ?>
 <form method='post'>
