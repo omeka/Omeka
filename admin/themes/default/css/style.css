@@ -722,6 +722,21 @@ button.ui-dialog-titlebar-close {
   margin-bottom: 20px !important;
 }
 
+#section-nav ul {
+  margin-top: -10px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  gap: 20px;
+}
+#section-nav ul a {
+  color: #003576;
+}
+#section-nav ul .active {
+  font-weight: bold;
+}
+
 .admin-thumb.panel img {
   max-width: 100%;
   padding-bottom: 10px;
@@ -2921,77 +2936,34 @@ ul.details li:last-child {
   margin-bottom: 20px;
 }
 
-#section-nav,
-#section-nav ul {
+#section-tabs {
   list-style-type: none;
+  margin: -20px 0 0;
+  padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#section-tabs button {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
   margin: 0;
-  padding: 0;
-}
-#section-nav li,
-#section-nav ul li {
-  display: inline-block;
-}
-#section-nav li:first-child a,
-#section-nav ul li:first-child a {
-  padding: 10px 16px;
-}
-#section-nav li.active:first-child a, #section-nav li.current:first-child a, #section-nav li:first-child a.active,
-#section-nav ul li.active:first-child a,
-#section-nav ul li.current:first-child a,
-#section-nav ul li:first-child a.active {
-  padding: 10px 16px;
-}
-#section-nav a,
-#section-nav ul a {
-  display: inline-block;
-  padding: 10px 16px;
-  margin: 0 0 0 5px;
-  background: rgba(241, 242, 242, 0.8);
-  border-top: 1px solid rgb(214.5555555556, 217.4444444444, 217.4444444444);
-  border-left: 1px solid rgb(214.5555555556, 217.4444444444, 217.4444444444);
-  border-right: 1px solid rgb(214.5555555556, 217.4444444444, 217.4444444444);
+  background: #D6D5C2;
   text-decoration: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-weight: normal;
 }
-#section-nav a:hover,
-#section-nav ul a:hover {
+#section-tabs button:hover {
   background: rgb(255, 255, 255);
 }
-@media (max-width: 767px) {
-  #section-nav a,
-  #section-nav ul a {
-    margin: 0 10px 10px 0;
-    border: 1px solid #ddd;
-  }
-  #section-nav a:hover,
-  #section-nav ul a:hover {
-    border: 1px solid #bbb;
-  }
-}
-#section-nav .active a,
-#section-nav .current a,
-#section-nav a.active,
-#section-nav ul .active a,
-#section-nav ul .current a,
-#section-nav ul a.active {
+#section-tabs .active button,
+#section-tabs .current button,
+#section-tabs button.active {
   background-color: white;
   color: #232323 !important;
-  border-top: 1px solid #eee;
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
-  position: relative;
-  z-index: 999;
   box-shadow: none;
-}
-@media (max-width: 767px) {
-  #section-nav .active a,
-  #section-nav .current a,
-  #section-nav a.active,
-  #section-nav ul .active a,
-  #section-nav ul .current a,
-  #section-nav ul a.active {
-    border: 1px solid #ddd;
-  }
+  border: 1px solid #ddd;
+  font-weight: bold;
 }
 
 /* Edit Item Types

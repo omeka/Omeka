@@ -7,8 +7,11 @@ if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
 }
 $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 
-echo head(['title'=> $itemTitle, 'bodyclass'=>'items edit']);
+ob_start();
 include 'form-tabs.php';
+$sectionNav = ob_get_contents();
+ob_end_clean();
+echo head(['title'=> $itemTitle, 'bodyclass'=>'items edit', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 

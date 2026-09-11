@@ -1,13 +1,14 @@
 <?php
 $doNotDelete = ['Dublin Core', 'Item Type Metadata'];
 
+$sectionNav = common('settings-nav');
 echo head(
     [
         'title' => __('Settings'),
-        'bodyclass'=>'element-sets'
+        'bodyclass'=>'element-sets',
+        'sectionNav' => $sectionNav
     ]
 );
-echo common('settings-nav');
 echo flash();
 ?>
 <div class="table-responsive">

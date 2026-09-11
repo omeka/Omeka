@@ -364,67 +364,36 @@
 	margin-bottom: 20px;
 }
 
-
-#section-nav, 
-#section-nav ul {
+#section-tabs {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: -$spacing-l 0 0;
+    padding: $spacing-m 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
 
-    li { 
-	    display: inline-block; 
-	    
-	    &:first-child a { 
-		    padding: 10px 16px;
-		}
-
-        &.active:first-child a,
-        &.current:first-child a,
-        &:first-child a.active {
-            padding: 10px 16px;
-        }
-    }
-
-    a {
+    button {
         display: inline-block;
-        padding: 10px 16px;
-        margin: 0 0 0 5px;
-		background: rgba($lightgray, 0.8);
-		border-top: 1px solid darken($lightgray, 10%);
-        border-left: 1px solid darken($lightgray, 10%);
-        border-right: 1px solid darken($lightgray, 10%);
+        padding: $spacing-s $spacing-m;
+        border-radius: $spacing-l;
+        margin: 0;
+		background: $darkgrayborder;
         text-decoration: none;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        
+        font-weight: normal;
+
         &:hover {
 	        background: rgba(255,255,255,1);
         }
-        
-        @include screen-xs {
-	        margin: 0 10px 10px 0;
-	        border: 1px solid #ddd;
-	        
-	        &:hover {
-		       border: 1px solid #bbb; 
-	        }
-	    }
     }
 
-    .active a,
-    .current a,
-    a.active {
+    .active button,
+    .current button,
+    button.active {
         background-color: white;
         color: $black !important;
-        border-top: 1px solid #eee;
-        border-left: 1px solid #eee;
-        border-right: 1px solid #eee;
-        position: relative;
-		z-index: 999;
 		box-shadow: none;
-        
-        @include screen-xs {
-	        border: 1px solid #ddd;
-	    }
+        border: 1px solid #ddd;
+        font-weight: bold;
     }
 }
 
