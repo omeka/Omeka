@@ -5,34 +5,41 @@ if (!Omeka) {
 Omeka.ItemsBrowse = {};
 
 (function ($) {
-    Omeka.ItemsBrowse.setupDetails = function (detailsText, showDetailsText, hideDetailsText) {
-        $('.details').hide();
-        $('.action-links').prepend('<li><a href="#" class="details-link">' + detailsText + '</a></li>');
-
+    Omeka.ItemsBrowse.setupDetails = function (showDetailsText, hideDetailsText) {
         $('tr.item').each(function() {
             var itemDetails = $(this).find('.details');
+            var itemDetailsId = itemDetails.attr('id');
+            var itemDetailsButton = $(this).find('.details-link');
             if ($.trim(itemDetails.html()) != '') {
-                $(this).find('.details-link').click(function(e) {
-                    e.preventDefault();
-                    itemDetails.slideToggle('fast');
+                itemDetails.attr('aria-controls', itemDetailsId);
+                $(this).on('click', '.details-link', function () {
+                    if (itemDetailsButton.attr('aria-expanded') == "false") {
+                        itemDetailsButton.attr('aria-expanded', 'true');
+                    } else {
+                        itemDetailsButton.attr('aria-expanded', 'false');
+                    }
                 });
             }
         });
 
-        var toggleList = '<a href="#" class="toggle-all-details full-width-mobile blue button">' + showDetailsText + '</a>';
+        var toggleList = '<button type="button" class="toggle-all-details full-width-mobile blue button">' + showDetailsText + '</button>';
 
         $('.advanced-search-link').before(toggleList);
 
         // Toggle item details.
         var detailsShown = false;
+        var srAlerts = $('#details-sr-alerts');
+        var showAllSuccess = srAlerts.data('show-details-success');
+        var hideAllSuccess = srAlerts.data('hide-details-success');
         $('.toggle-all-details').click(function (e) {
-            e.preventDefault();
             if (detailsShown) {
             	$('.toggle-all-details').text(showDetailsText);
-            	$('.details').slideUp('fast');
+                $('.details-link').attr('aria-expanded', "false");
+                srAlerts.text(hideAllSuccess);
             } else {
             	$('.toggle-all-details').text(hideDetailsText);
-            	$('.details').slideDown('fast');
+                $('.details-link').attr('aria-expanded', "true");
+                srAlerts.text(showAllSuccess);
             }
             detailsShown = !detailsShown;
         });

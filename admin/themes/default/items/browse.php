@@ -42,6 +42,8 @@ echo $itemSearchFilters;
             <?php endif; ?>
         </div>
 
+        <div id="details-sr-alerts" class="sr-only" aria-live="polite" aria-atomic="true" data-show-details-success="<?php echo __('All item details have been expanded.'); ?>" data-hide-details-success="<?php echo __('All item details have been hidden.'); ?>">
+        </div>
         <div class="table-responsive">
             <table id="items" aria-label="<?php echo __('Items'); ?>">
             <thead>
@@ -86,47 +88,49 @@ echo $itemSearchFilters;
                         $itemPrivate = !$item->public;
                         ?>
                         <span class="title"><?php echo link_to_item($itemTitle); ?></span>
-                        <?php if ($itemFeatured || $itemPrivate): ?>
-                        <div class="labels">
-                            <?php if ($itemFeatured): ?>
-                            <span class="featured label"><?php echo __('Featured'); ?></span>
+                        <div class="item-meta">
+                            <?php if ($itemFeatured || $itemPrivate): ?>
+                            <div class="labels">
+                                <?php if ($itemFeatured): ?>
+                                <span class="featured label"><?php echo __('Featured'); ?></span>
+                                <?php endif; ?>
+                                <?php if ($itemPrivate): ?>
+                                <span class="private label"><?php echo __('Private'); ?></span>
+                                <?php endif; ?>
+                            </div>
                             <?php endif; ?>
-                            <?php if ($itemPrivate): ?>
-                            <span class="private label"><?php echo __('Private'); ?></span>
-                            <?php endif; ?>
+                            <ul class="action-links group">
+                                <?php if (is_allowed($item, 'edit')): ?>
+                                <li>
+                                    <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
+                                </li>
+                                <?php endif; ?>
+
+                                <?php if (is_allowed($item, 'delete')): ?>
+                                <li>
+                                    <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
+                                </li>
+                                <?php endif; ?>
+                            </ul>
+
+                            <button type="button" class="details-link" aria-expanded="false"><?php echo __('Details'); ?></button>
+                            <div class="details" id="item-<?php echo $item->id; ?>-details">
+                                <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
+                                <?php if ($itemDescription !== ''): ?>
+                                    <p class="description"><?php echo $itemDescription; ?></p>
+                                <?php endif; ?>
+                                <p>
+                                    <strong><?php echo __('Collection'); ?>:</strong>
+                                    <?php echo link_to_collection_for_item(); ?>
+                                </p>
+                                <p>
+                                    <strong><?php echo __('Tags'); ?>:</strong>
+                                    <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
+                                </p>
+                                <?php fire_plugin_hook('admin_items_browse_detailed_each', ['item' => $item, 'view' => $this]); ?>
+                            </div>
                         </div>
-                        <?php endif; ?>
-                        <ul class="action-links group">
-                            <?php if (is_allowed($item, 'edit')): ?>
-                            <li>
-                                <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
-                            </li>
-                            <?php endif; ?>
-
-                            <?php if (is_allowed($item, 'delete')): ?>
-                            <li>
-                                <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
-                            </li>
-                            <?php endif; ?>
-                        </ul>
-
                         <?php fire_plugin_hook('admin_items_browse_simple_each', ['item' => $item, 'view' => $this]); ?>
-
-                        <div class="details">
-                            <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
-                            <?php if ($itemDescription !== ''): ?>
-                                <p class="description"><?php echo $itemDescription; ?></p>
-                            <?php endif; ?>
-                            <p>
-                                <strong><?php echo __('Collection'); ?>:</strong>
-                                <?php echo link_to_collection_for_item(); ?>
-                            </p>
-                            <p>
-                                <strong><?php echo __('Tags'); ?>:</strong>
-                                <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
-                            </p>
-                            <?php fire_plugin_hook('admin_items_browse_detailed_each', ['item' => $item, 'view' => $this]); ?>
-                        </div>
                     </td>
                     <td><?php echo strip_formatting(metadata('item', ['Dublin Core', 'Creator'])); ?></td>
                     <td>
@@ -173,9 +177,8 @@ echo $itemSearchFilters;
 
     <script type="text/javascript">
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupDetails, [
-        <?php echo js_escape(__('Details')); ?>,
-        <?php echo js_escape(__('Show Details')); ?>,
-        <?php echo js_escape(__('Hide Details')); ?>
+        <?php echo js_escape(__('Show All Details')); ?>,
+        <?php echo js_escape(__('Hide All Details')); ?>
     ]);
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupBatchEdit);
     Omeka.addReadyCallback(Omeka.quickFilter);
