@@ -490,6 +490,11 @@ class Zend_View_Helper_Navigation_Menu
             $element = 'span';
         }
 
+        // Is page active?
+        if ($page->isActive()) {
+            $attribs['aria-current'] = 'page';
+        }
+
         // Add custom HTML attributes
         $attribs = array_merge($attribs, $page->getCustomHtmlAttribs());
 
