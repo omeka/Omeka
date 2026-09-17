@@ -35,6 +35,8 @@ echo item_search_filters();
             <?php endif; ?>
         </div>
 
+        <div id="details-sr-alerts" class="sr-only" aria-live="polite" aria-atomic="true" data-show-details-success="<?php echo __('All item details have been expanded.'); ?>" data-hide-details-success="<?php echo __('All item details have been hidden.'); ?>">
+        </div>
         <div class="table-responsive">
             <table id="items">
             <thead>
@@ -105,7 +107,7 @@ echo item_search_filters();
 
                         <?php fire_plugin_hook('admin_items_browse_simple_each', ['item' => $item, 'view' => $this]); ?>
 
-                        <div class="details">
+                        <div class="details" id="item-<?php echo $item->id; ?>-details">
                             <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
                             <?php if ($itemDescription !== ''): ?>
                                 <p class="description"><?php echo $itemDescription; ?></p>
@@ -165,8 +167,8 @@ echo item_search_filters();
     <script type="text/javascript">
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupDetails, [
         <?php echo js_escape(__('Details')); ?>,
-        <?php echo js_escape(__('Show Details')); ?>,
-        <?php echo js_escape(__('Hide Details')); ?>
+        <?php echo js_escape(__('Show All Details')); ?>,
+        <?php echo js_escape(__('Hide All Details')); ?>
     ]);
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupBatchEdit);
     Omeka.addReadyCallback(Omeka.quickFilter);

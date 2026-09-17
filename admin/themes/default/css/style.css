@@ -2270,6 +2270,24 @@ span.title small {
   content: "\f070"/"";
 }
 
+button.details-link {
+  background-color: transparent;
+  min-height: 24px;
+  min-width: 24px;
+  box-shadow: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+button.details-link:before {
+  content: "\f0da"/"";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+button.details-link[aria-expanded=true]:before {
+  content: "\f0d7"/"";
+}
+
 .details {
   background-color: #fff;
   background-color: rgba(255, 255, 255, 0.5);
