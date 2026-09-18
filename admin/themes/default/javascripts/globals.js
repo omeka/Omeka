@@ -76,6 +76,20 @@ if (!Omeka) {
         }
     };
 
+
+    /**
+     * Fire screen reader alerts for status messages on page load.
+     */
+    Omeka.pageLoadScreenReaderAlerts = function() {
+        var flashContents = $('#flash').text();
+        var srAlerts = $('#page-sr-alerts');
+        if (flash !== '') {
+            setTimeout(() => {
+                srAlerts.text(flashContents);
+            }, 2000);
+        }
+    }
+
     /**
      * Add link that collapses and expands content.
      */
@@ -234,6 +248,7 @@ if (!Omeka) {
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
+        [Omeka.pageLoadScreenReaderAlerts, null],
         [Omeka.toggleMobileMenu, null],
         [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],

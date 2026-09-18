@@ -19,6 +19,7 @@
                 <?php endif; ?>
             </p>
         </div>
+        <div id="page-sr-alerts" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     </footer>
 </div>
 <script type="text/javascript">
