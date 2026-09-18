@@ -517,7 +517,7 @@ a.button.small:focus,
 input[type=submit].small:focus,
 button.small:focus {
   box-shadow: 0 0 0 3px #C67F6F;
-  z-index: 9999;
+  z-index: 99;
 }
 span.button.small:disabled,
 a.button.small:disabled,
@@ -1307,7 +1307,7 @@ header {
   box-sizing: border-box;
   position: fixed;
   padding: 8px 1em;
-  z-index: 9999;
+  z-index: 99;
   background-color: #333333;
   color: #FFFFFF;
 }
@@ -1325,7 +1325,7 @@ header {
 header .site-title a:focus,
 header button:focus {
   position: relative;
-  z-index: 9999;
+  z-index: 99;
 }
 header a:link,
 header a:visited {
@@ -1374,7 +1374,7 @@ header nav {
     height: 260px;
     overflow-x: hidden;
     display: block;
-    z-index: 10000;
+    z-index: 99;
   }
   header nav li {
     float: none;
@@ -1691,7 +1691,7 @@ header nav {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 1001;
+  z-index: 98;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   #search-form {
@@ -1777,7 +1777,7 @@ header nav {
   background-color: #fff;
   overflow: auto;
   clear: both;
-  z-index: 1001;
+  z-index: 98;
   position: absolute;
   top: 36px;
   left: 0;
@@ -1906,7 +1906,7 @@ button.remove_search {
   height: calc(100vh - 40px);
   margin: 0;
   padding: 0 0 30px;
-  z-index: 1002;
+  z-index: 99;
   box-sizing: border-box;
 }
 @media (max-width: 767px) {
@@ -1921,12 +1921,12 @@ button.remove_search {
     z-index: auto;
   }
   #content-nav.open {
-    z-index: 9999;
+    z-index: 99;
   }
 }
 #content-nav button:focus {
   position: relative;
-  z-index: 9999;
+  z-index: 99;
 }
 #content-nav ul {
   width: 100%;
@@ -1966,7 +1966,7 @@ button.remove_search {
 }
 #content-nav li {
   word-wrap: break-word;
-  z-index: 1000;
+  z-index: 99;
   transition: 0.5s background;
 }
 #content-nav li:hover {
@@ -2594,7 +2594,7 @@ ul.details li:last-child {
   }
   .browse .action-links a:focus {
     box-shadow: 0 0 0 3px #C67F6F;
-    z-index: 9999;
+    z-index: 99;
   }
   .browse .action-links a:disabled {
     box-shadow: none !important;
@@ -2957,6 +2957,11 @@ ul.details li:last-child {
 #section-nav ul a:hover {
   background: rgb(255, 255, 255);
 }
+#section-nav a:focus,
+#section-nav ul a:focus {
+  position: relative;
+  z-index: 10;
+}
 @media (max-width: 767px) {
   #section-nav a,
   #section-nav ul a {
@@ -2980,7 +2985,6 @@ ul.details li:last-child {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   position: relative;
-  z-index: 999;
   box-shadow: none;
 }
 @media (max-width: 767px) {

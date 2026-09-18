@@ -6,7 +6,7 @@ header {
     box-sizing: border-box;
     position: fixed;
     padding:  8px 1em;
-    z-index: 9999;
+    z-index: 99;
     
     background-color: #333333;
     color: #FFFFFF;
@@ -24,7 +24,7 @@ header {
 	.site-title a:focus,
 	button:focus {
 		position: relative;
-		z-index: 9999;
+		z-index: 99;
 	}
 
     a:link,
@@ -74,7 +74,7 @@ header {
 				height: 260px;
 				overflow-x: hidden;
 				display: block;
-				z-index: 10000;
+				z-index: 99;
 			}
 			
 			li {

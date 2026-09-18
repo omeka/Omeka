@@ -399,6 +399,11 @@
         &:hover {
 	        background: rgba(255,255,255,1);
         }
+
+        &:focus {
+            position: relative;
+            z-index: 10;
+        }
         
         @include screen-xs {
 	        margin: 0 10px 10px 0;
@@ -419,7 +424,6 @@
         border-left: 1px solid #eee;
         border-right: 1px solid #eee;
         position: relative;
-		z-index: 999;
 		box-shadow: none;
         
         @include screen-xs {
