@@ -2,8 +2,8 @@
 if ($versionNotifications):
     queue_js_file('vendor/semver.min', 'javascripts');
 endif;
-echo head(['title' => __('Appearance'), 'bodyclass' => 'themes']);
-echo common('appearance-nav');
+$sectionNav = common('appearance-nav');
+echo head(['title' => __('Appearance'), 'bodyclass' => 'themes', 'sectionNav' => $sectionNav]);
 echo flash();
 
 if ($current->image) {

@@ -1,6 +1,6 @@
 <?php
-echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-api']);
-echo common('settings-nav');
+$sectionNav = common('settings-nav');
+echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-api', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 <form method="post">

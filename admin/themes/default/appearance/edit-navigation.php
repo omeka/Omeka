@@ -2,9 +2,9 @@
 queue_js_file(['vendor/jquery.nestedSortable', 'navigation']);
 
 $pageTitle = __('Appearance');
-echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
+$sectionNav = common('appearance-nav');
+echo head(['title'=>$pageTitle, 'bodyclass'=>'settings', 'sectionNav'=>$sectionNav]); ?>
 
-<?php echo common('appearance-nav'); ?>
 <?php echo flash(); ?>
 <form action="<?php echo $this->form->getAction() ?>"
       enctype="<?php echo $this->form->getEnctype() ?>"

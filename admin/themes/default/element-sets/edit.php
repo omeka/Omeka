@@ -1,12 +1,13 @@
 <?php
 queue_js_file('element-sets');
+$sectionNav = common('settings-nav');
 echo head(
     [
         'title' => __('Edit Element Set'),
-        'bodyclass' => 'element-sets'
+        'bodyclass' => 'element-sets',
+        'sectionNav' => $sectionNav
     ]
 );
-echo common('settings-nav');
 echo flash();
 ?>
 <form method='post'>

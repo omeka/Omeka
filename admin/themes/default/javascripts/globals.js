@@ -123,11 +123,6 @@ if (!Omeka) {
 	    });
     };
     
-    Omeka.moveNavList = function () {
-        nav = $('.content-wrapper > .navigation');
-        nav.insertAfter(nav.parent().parent().find('.subhead'));
-    };
-
     Omeka.showAdvancedForm = function () {
         $('#search-form').on('click', '.show-advanced', function() {
             var advanced_toggle = $(this);

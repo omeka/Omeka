@@ -7,9 +7,13 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 
-queue_js_file(['vendor/tinymce/tinymce.min', 'elements', 'tabs']);
-echo head(['title' => $fileTitle, 'bodyclass' => 'files edit']);
+ob_start();
 include 'form-tabs.php';
+$sectionNav = ob_get_contents();
+ob_end_clean();
+
+queue_js_file(['vendor/tinymce/tinymce.min', 'elements', 'tabs']);
+echo head(['title' => $fileTitle, 'bodyclass' => 'files edit', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 <form method="post" action="">

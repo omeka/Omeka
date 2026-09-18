@@ -11,8 +11,6 @@ Omeka.Tabs = {};
     Omeka.Tabs.initialize = function () {
         var tabButtons = $('#section-tabs [role="tab"]');
         var tabIds = tabButtons.map(function () {
-            // Rely on the fact that the links have pound signs.
-            // Workaround IE7's creation of absolute URLs.
             return '#' + this.getAttribute('aria-controls');
         }).toArray().join(',');
         var tabs = $(tabIds);
@@ -26,7 +24,7 @@ Omeka.Tabs = {};
             tabButton.trigger('omeka:tabselected');
         }
 
-        tabButtons.click(function (event) {
+        $(document).on('click', '#section-tabs [role="tab"]', function (event) {
             selectTab($(this));
         });
 

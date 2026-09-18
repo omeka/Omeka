@@ -6,8 +6,8 @@ if ($userTitle != '') {
     $userTitle = '';
 }
 $userTitle = __('Edit User #%s', $user->id) . $userTitle;
-echo head(['title' => $userTitle, 'bodyclass' => 'users']);
-echo common('users-nav', ['user' => $user]);
+$sectionNav = common('users-nav', ['user' => $user]);
+echo head(['title' => $userTitle, 'bodyclass' => 'users', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 <form id="change-password" method="post">

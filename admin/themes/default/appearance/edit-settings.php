@@ -1,8 +1,8 @@
 <?php
 $pageTitle = __('Appearance');
-echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
+$sectionNav = common('appearance-nav');
+echo head(['title'=>$pageTitle, 'bodyclass'=>'settings', 'sectionNav'=>$sectionNav]); ?>
 
-<?php echo common('appearance-nav'); ?>
 
 <?php echo flash(); ?>
 

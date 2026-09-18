@@ -5,9 +5,9 @@ if ($userTitle != '') {
 } else {
     $userTitle = '';
 }
+$sectionNav = common('users-nav', ['user' => $user]);
 $userTitle = __('Edit User #%s', $user->id) . $userTitle;
-echo head(['title' => $userTitle, 'bodyclass' => 'users']);
-echo common('users-nav', ['user' => $user]);
+echo head(['title' => $userTitle, 'bodyclass' => 'users', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 <section class="seven columns alpha">
