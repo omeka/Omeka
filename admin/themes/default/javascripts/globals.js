@@ -232,7 +232,6 @@ if (!Omeka) {
         [Omeka.toggleMobileMenu, null],
         [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],
-        [Omeka.moveNavList, null],
         [Omeka.mediaFallback, null],
         [Omeka.warnIfUnsaved, null]
     ];
