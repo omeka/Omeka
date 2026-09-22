@@ -24,10 +24,11 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 <section class="seven columns alpha" id="edit-form">
     <div id="collection-metadata">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
+        <?php $escapedTabId = text_to_id(html_escape($tabName)); ?>
         <?php if (!empty($tabContent)): ?>
-            <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+            <div id="<?php echo $escapedTabId; ?>-metadata" role="tabpanel" aria-labelledby="<?php echo $escapedTabId; ?>-heading" tabindex="0">
                 <fieldset class="set">
-                    <h2><?php echo html_escape(__($tabName)); ?></h2>
+                    <h2 id="<?php echo $escapedTabId; ?>-heading"><?php echo html_escape(__($tabName)); ?></h2>
                     <?php echo $tabContent; ?>
                 </fieldset>
             </div>

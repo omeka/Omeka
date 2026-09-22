@@ -36,10 +36,11 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     
     <div id="item-metadata">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
+        <?php $escapedTabId = text_to_id(html_escape($tabName)); ?>
         <?php if (!empty($tabContent)): ?>
-            <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+            <div id="<?php echo $escapedTabId; ?>-metadata" role="tabpanel" aria-labelledby="<?php echo $escapedTabId; ?>-heading" tabindex="0">
             <fieldset class="set">
-              <legend><h2><?php echo html_escape(__($tabName)); ?></h2></legend>
+              <legend id="<?php echo $escapedTabId; ?>-heading"><?php echo html_escape(__($tabName)); ?></legend>
               <?php echo $tabContent; ?>
             </fieldset>
             </div>     
