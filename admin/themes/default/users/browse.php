@@ -44,7 +44,7 @@ echo flash();
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 <div class="table-responsive">
-    <table id="users">
+    <table id="users" aria-labelledby="content-heading">
         <thead>
             <tr>
             <?php $sortLinks = [

@@ -36,7 +36,7 @@ echo flash();
             <?php endif; ?>
         </div>
         <?php else: ?>
-        <table>
+        <table aria-labelledby="content-heading">
             <thead>
                 <tr>
                     <th><?php echo __('Label'); ?></th>

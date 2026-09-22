@@ -36,7 +36,7 @@ echo item_search_filters();
         </div>
 
         <div class="table-responsive">
-            <table id="items">
+            <table id="items" aria-labelledby="content-heading">
             <thead>
                 <tr>
                     <?php if (is_allowed('Items', 'edit')): ?>

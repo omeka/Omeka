@@ -50,7 +50,7 @@ echo flash();
         '<a href="' . url('users') . '">', '</a>'
         ); ?></p>
         <div class="table-responsive">
-	        <table>
+	        <table aria-labelledby="content-heading">
 	            <thead>
 	            <tr>
 	                <th><?php echo 'Resource'; ?></th>
