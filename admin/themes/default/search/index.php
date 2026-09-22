@@ -6,7 +6,7 @@ $searchRecordTypes = get_search_record_types();
 <?php echo search_filters(); ?>
 <?php if ($total_results): ?>
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-<table id="search-results" aria-labelledby="content-heading">
+<table id="search-results" aria-label="<?php echo __('Search Results'); ?>">
     <thead>
         <tr>
             <th><?php echo __('Record Type');?></th>
