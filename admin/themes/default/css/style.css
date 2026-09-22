@@ -3437,7 +3437,7 @@ form.form-inline.editableform {
 }
 
 .undo-remove-tag a:after {
-  content: "\f112"/"";
+  content: "\f0e2"/"";
   color: #BB8282;
   font-size: 9px;
   text-indent: 3px;
