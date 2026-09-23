@@ -510,7 +510,6 @@ button.small:hover,
 button.small:focus {
   border-color: rgba(35, 35, 35, 0.65);
   background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
-  outline: none;
 }
 span.button.small:focus,
 a.button.small:focus,
@@ -551,7 +550,6 @@ button.blue:hover,
 button.blue:focus {
   border-color: rgba(0, 53, 118, 0.65);
   background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
-  outline: none;
 }
 span.button.blue *,
 a.button.blue *,
@@ -586,7 +584,6 @@ button.red:hover,
 button.red:focus {
   border-color: rgba(176, 13, 0, 0.65);
   background: rgb(243.9, 212.45, 210.6);
-  outline: none;
 }
 span.button.red *,
 a.button.red *,
@@ -618,7 +615,6 @@ button.green:hover,
 button.green:focus {
   border-color: rgba(63, 123, 0, 0.65);
   background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
-  outline: none;
 }
 span.button.green *,
 a.button.green *,
@@ -660,7 +656,6 @@ button.ui-dialog-titlebar-close {
 .mce-primary button:hover, .mce-primary button:focus {
   border-color: rgba(63, 123, 0, 0.65);
   background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
-  outline: none;
 }
 .mce-primary button * {
   color: rgb(49.9390243902, 97.5, 0);
@@ -908,7 +903,6 @@ button.ui-dialog-titlebar-close {
 .deleted.drawer:focus {
   border-color: rgba(176, 13, 0, 0.65);
   background: rgb(243.9, 212.45, 210.6);
-  outline: none;
 }
 .deleted.sortable-item *,
 .deleted.drawer * {
@@ -2590,7 +2584,6 @@ ul.details li:last-child {
   .browse .action-links a:hover, .browse .action-links a:focus {
     border-color: rgba(35, 35, 35, 0.65);
     background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
-    outline: none;
   }
   .browse .action-links a:focus {
     box-shadow: 0 0 0 3px #C67F6F;
@@ -2608,7 +2601,6 @@ ul.details li:last-child {
   .browse .action-links a:hover, .browse .action-links a:focus {
     border-color: rgba(0, 53, 118, 0.65);
     background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
-    outline: none;
   }
   .browse .action-links a * {
     color: #003576;
@@ -2625,7 +2617,6 @@ ul.details li:last-child {
   .browse .action-links a.delete-confirm:hover, .browse .action-links a.delete-confirm:focus {
     border-color: rgba(176, 13, 0, 0.65);
     background: rgb(243.9, 212.45, 210.6);
-    outline: none;
   }
   .browse .action-links a.delete-confirm * {
     color: #B00D00;
@@ -3383,7 +3374,6 @@ form.form-inline.editableform {
 .tag-list li:hover, .tag-list li:focus {
   border-color: rgba(63, 123, 0, 0.65);
   background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
-  outline: none;
 }
 
 .tag-list .count {

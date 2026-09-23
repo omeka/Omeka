@@ -44,7 +44,6 @@
     &:focus {
 	    border-color: rgba($black, 0.65);
 	    background: darken($lightgray, 5%);
-	    outline: none;
     }
 
     &:focus {
@@ -75,7 +74,6 @@
     &:focus {
         border-color: rgba($blue, 0.65);
         background: darken(#EEF3FA, 5%);
-        outline: none;
     }
 
     * {
@@ -98,7 +96,6 @@
     &:focus {
         border-color: rgba($red, 0.65);
         background: darken(#F9E8E7, 5%);
-        outline: none;
     }
 
     * {
@@ -120,7 +117,6 @@
     &:focus {
         border-color: rgba($green, 0.65);
         background: darken($lightgreen, 5%);
-        outline: none;
     }
 
     * {
@@ -204,7 +200,6 @@ button.ui-dialog-titlebar-close {
         &:focus {
             border-color: rgba($green, 0.65);
             background: darken($lightgreen, 5%);
-            outline: none;
         }
     
         * {

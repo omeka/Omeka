@@ -55,7 +55,6 @@ form.form-inline.editableform {
     &:focus {
         border-color: rgba($green, 0.65);
         background: darken($lightgreen, 5%);
-        outline: none;
     }
     
     -webkit-border-radius: 3;
