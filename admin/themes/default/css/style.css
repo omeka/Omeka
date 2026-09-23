@@ -2848,31 +2848,27 @@ ul.details li:last-child {
 
 /* Edit Item
 ================================================== */
-#all-tags-list {
-  padding: 0;
-}
-
-.tag-list li.tag-removed {
+.tag-list .tag-group.tag-removed {
   color: #B00D00;
   background: #F9E8E7;
   border: 1px solid rgba(176, 13, 0, 0.25);
 }
-.tag-list li.tag-removed:hover, .tag-list li.tag-removed:focus {
+.tag-list .tag-group.tag-removed:hover, .tag-list .tag-group.tag-removed:focus {
   border-color: rgba(176, 13, 0, 0.65);
   background: rgb(243.9, 212.45, 210.6);
   outline: none;
 }
-.tag-list li.tag-removed .undo-remove-tag .icon:after {
+.tag-list .tag-group.tag-removed .undo-remove-tag .icon:after {
   background-color: #B00D00;
   color: white;
 }
 
-.tag-list li .undo-remove-tag,
-.tag-list li.tag-removed .remove-tag {
+.tag-list .tag-group .undo-remove-tag,
+.tag-list .tag-group.tag-removed .remove-tag {
   display: none;
 }
 
-.tag-list li.tag-removed .undo-remove-tag {
+.tag-list .tag-removed .undo-remove-tag {
   display: inline-block;
 }
 
@@ -3364,9 +3360,12 @@ form.form-inline.editableform {
 
 .tag-list {
   padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.tag-list li {
+.tag-list .tag-group {
   height: 22px;
   color: #3f7b00;
   background: #eaf2e1;
@@ -3376,7 +3375,7 @@ form.form-inline.editableform {
   margin: 0 10px 10px 0;
   padding: 5px 10px;
 }
-.tag-list li:hover, .tag-list li:focus {
+.tag-list .tag-group:hover, .tag-list .tag-group:focus {
   border-color: rgba(63, 123, 0, 0.65);
   background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
   outline: none;
@@ -3388,7 +3387,7 @@ form.form-inline.editableform {
   position: relative;
 }
 
-.tag-list li .count:after {
+.tag-list .tag-group .count:after {
   content: "";
   width: 1px;
   position: absolute;
@@ -3398,18 +3397,18 @@ form.form-inline.editableform {
   right: 0;
 }
 
-.tag-list li .tag, .tag-list li button, .tag-list li .count {
+.tag-list .tag-group .tag, .tag-list .tag-group button, .tag-list .tag-group .count {
   display: inline-block;
   color: rgb(23.8170731707, 46.5, 0);
 }
 
-.tag-list li {
+.tag-list .tag-group {
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.tag-list li button {
+.tag-list .tag-group button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -3420,8 +3419,8 @@ form.form-inline.editableform {
   text-align: center;
 }
 
-.tag-list li .delete-tag .icon:after,
-.tag-list li .remove-tag .icon:after,
+.tag-list .tag-group .delete-tag .icon:after,
+.tag-list .tag-group .remove-tag .icon:after,
 .undo-remove-tag .icon:after {
   content: "\f00d"/"";
   font-family: "Font Awesome 5 Free";

@@ -290,11 +290,7 @@
 /* Edit Item
 ================================================== */
 
-#all-tags-list {
-    padding: 0;
-}
-
-.tag-list li.tag-removed {
+.tag-list .tag-group.tag-removed {
     color: #B00D00;
     background: #F9E8E7;
     border: 1px solid rgba(#B00D00, 0.25);
@@ -312,12 +308,12 @@
 	}
 }
 
-.tag-list li .undo-remove-tag,
-.tag-list li.tag-removed .remove-tag {
+.tag-list .tag-group .undo-remove-tag,
+.tag-list .tag-group.tag-removed .remove-tag {
     display: none;
 }
 
-.tag-list li.tag-removed .undo-remove-tag {
+.tag-list .tag-removed .undo-remove-tag {
     display: inline-block;
 }
 

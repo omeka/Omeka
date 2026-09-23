@@ -43,9 +43,12 @@ form.form-inline.editableform {
 
 .tag-list {
     padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tag-list li {
+.tag-list .tag-group {
     height: 22px;
     color: $green;
     background: $lightgreen;
@@ -73,7 +76,7 @@ form.form-inline.editableform {
     position: relative;
 }
 
-.tag-list li .count:after {
+.tag-list .tag-group .count:after {
     content: "";
     width: 1px;
     position: absolute;
@@ -83,18 +86,18 @@ form.form-inline.editableform {
     right: 0;
 }
 
-.tag-list li .tag, .tag-list li button, .tag-list li .count {
+.tag-list .tag-group .tag, .tag-list .tag-group button, .tag-list .tag-group .count {
     display: inline-block;
     color: darken($green, 15%);
 }
 
-.tag-list li {
+.tag-list .tag-group {
     display: inline-flex;
     align-items: center;
     gap: $spacing-m;
 }
 
-.tag-list li button {
+.tag-list .tag-group button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -105,8 +108,8 @@ form.form-inline.editableform {
     text-align: center;
 }
 
-.tag-list li .delete-tag .icon:after, 
-.tag-list li .remove-tag .icon:after, 
+.tag-list .tag-group .delete-tag .icon:after, 
+.tag-list .tag-group .remove-tag .icon:after, 
 .undo-remove-tag .icon:after {
     content: "\f00d" / "";
     font-family: "Font Awesome 5 Free";
