@@ -250,13 +250,13 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
     protected function _getDescriptionComponent()
     {
-        return '<p class="explanation">' . __($this->_getFieldDescription()) .'</p>';
+        return '<p class="explanation" id="input-description-' . $this->_getFieldId() .'">' . __($this->_getFieldDescription()) .'</p>';
     }
 
     protected function _getCommentComponent()
     {
         if ($this->_getFieldComment()) {
-            return '<p class="explanation">' . $this->_getFieldComment() .'</p>';
+            return '<p class="explanation" id="input-comment-' . $this->_getFieldId() .'">' . $this->_getFieldComment() .'</p>';
         }
         return '';
     }

@@ -98,13 +98,14 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      */
     protected function _getInputComponent($inputNameStem, $inputNameStemId, $value)
     {
-        $elementLabelId = 'label_element_' . $this->_element->id;
+        $elementId = $this->_element->id;
+        $elementLabelId = 'label_element_' . $elementId;
         $thisId = $inputNameStemId . '-text';
         $html = $this->view->formTextarea($inputNameStem . '[text]',
                                           $value,
                                           ['rows' => 3,
                                                 'cols' => 50,
-                                                'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId])]);
+                                                'aria-describedby' => 'input-description-' . $elementId]);
         return $html;
     }
 
