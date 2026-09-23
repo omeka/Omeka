@@ -2862,22 +2862,18 @@ ul.details li:last-child {
   background: rgb(243.9, 212.45, 210.6);
   outline: none;
 }
-.tag-list li.tag-removed .undo-remove-tag a:after {
+.tag-list li.tag-removed .undo-remove-tag .icon:after {
   background-color: #B00D00;
   color: white;
 }
 
-.undo-remove-tag {
-  display: none;
-  text-indent: -9999px;
-}
-
+.tag-list li .undo-remove-tag,
 .tag-list li.tag-removed .remove-tag {
   display: none;
 }
 
-.tag-removed .undo-remove-tag {
-  display: inline;
+.tag-list li.tag-removed .undo-remove-tag {
+  display: inline-block;
 }
 
 .controls {
@@ -3402,46 +3398,48 @@ form.form-inline.editableform {
   right: 0;
 }
 
-.tag-list li .tag, .tag-list li a, .tag-list li .count {
+.tag-list li .tag, .tag-list li button, .tag-list li .count {
   display: inline-block;
   color: rgb(23.8170731707, 46.5, 0);
 }
 
-.tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
-  text-indent: -9999px;
-  width: 16px;
-  height: 16px;
-  margin-left: 8px;
-  position: relative;
-  top: 3px;
+.tag-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
-  content: "\f067"/"";
-  transform: rotate(45deg);
+.tag-list li button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.tag-list li .delete-tag .icon:after,
+.tag-list li .remove-tag .icon:after,
+.undo-remove-tag .icon:after {
+  content: "\f00d"/"";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  height: 100%;
-  width: 100%;
   background-color: #3f7b00;
-  border-radius: 20px;
   color: #eaf2e1;
-  display: block;
-  position: relative;
   font-size: 10px;
-  top: 0;
-  float: left;
-  text-indent: 4px;
-  line-height: 17px;
   text-shadow: none;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border-radius: 16px;
+  display: inline-block;
 }
 
-.undo-remove-tag a:after {
+.undo-remove-tag .icon:after {
   content: "\f0e2"/"";
   color: #BB8282;
-  font-size: 9px;
-  text-indent: 3px;
-  line-height: 18px;
 }
 
 #tags-nav {

@@ -306,23 +306,19 @@
         outline: none;
     }
     
-    .undo-remove-tag a:after {
+    .undo-remove-tag .icon:after {
 	    background-color: #B00D00;
 	    color: white;  
 	}
 }
 
-.undo-remove-tag {
-    display: none;
-    text-indent: -9999px;
-}
-
+.tag-list li .undo-remove-tag,
 .tag-list li.tag-removed .remove-tag {
     display: none;
 }
 
-.tag-removed .undo-remove-tag {
-    display: inline;
+.tag-list li.tag-removed .undo-remove-tag {
+    display: inline-block;
 }
 
 .controls {

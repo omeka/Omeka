@@ -95,7 +95,7 @@ echo flash();
                 <span class="tag"><?php echo html_escape($tag->name); ?></span>
             <?php endif; ?>
             <?php if ($canDelete): ?>
-                <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm']); ?></span>
+                <button type="button" class="delete-tag delete-confirm" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
             <?php endif; ?>
             </li>
         <?php endforeach; ?>

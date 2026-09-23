@@ -45,6 +45,8 @@ if (!Omeka) {
                 url = $(this).parents('form').attr('action');
             } else if ($(this).is('a')) {
                 url = $(this).attr('href');
+            } else if ($(this).is('button')) {
+                url = $(this).data('action-url');
             } else {
                 return;
             }
