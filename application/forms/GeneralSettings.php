@@ -33,6 +33,13 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
             'required' => true
         ]);
 
+        $this->addElement('text', 'server_url', [
+            'label' => __('Server URL'),
+            'description' => __('Server URL for the installation. The URL will be autodetected if left blank, but this can be less secure.'),
+            'filters' => ['StringTrim'],
+            'validators' => ['ServerUrl'],
+        ]);
+
         $this->addElement('text', 'copyright', [
             'label' => __('Site Copyright Information')
         ]);
@@ -64,7 +71,7 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ]);
 
         $this->addDisplayGroup(
-            ['administrator_email', 'site_title', 'description',
+            ['server_url', 'administrator_email', 'site_title', 'description',
                   'copyright', 'author', 'tag_delimiter', 'path_to_convert'],
             'site_settings', ['legend' => __('General Settings')]);
     }

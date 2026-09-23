@@ -98,6 +98,7 @@ class Installer_Default implements Installer_InstallerInterface
     {
         $task = new Installer_Task_Options();
         $task->setOptions([
+            'server_url' => $this->_getValue('server_url'),
             'administrator_email' => $this->_getValue('administrator_email'),
             'copyright' => $this->_getValue('copyright'),
             'site_title' => $this->_getValue('site_title'),

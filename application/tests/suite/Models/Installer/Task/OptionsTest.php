@@ -47,6 +47,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
         $task = new Installer_Task_Options;
         $task->setOptions([
             'fake_option' => 'This option does not exist.',
+            'server_url' => '',
             'administrator_email' => 'foobar',
             'copyright' => 'foobar',
             'site_title' => 'foobar',
@@ -91,6 +92,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
     {
         $task = new Installer_Task_Options();
         $task->setOptions([
+            'server_url' => '',
             'administrator_email' => 'foobar',
             'copyright' => 'foobar',
             'site_title' => 'foobar',
