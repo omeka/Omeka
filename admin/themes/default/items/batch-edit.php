@@ -43,11 +43,11 @@ endif;
         <?php if ($showItemFields): ?>
         <fieldset>
             <h2><?php echo __('Delete Items'); ?></h2>
-            <p class="explanation"><?php echo __('Check if you wish to delete selected items.'); ?></p>
+            <p class="explanation" id="delete-items-description"><?php echo __('Check if you wish to delete selected items.'); ?></p>
             <div class="field">
                 <label class="two columns alpha" for="delete"><?php echo __('Delete'); ?></label>
                 <div class="inputs five columns omega">
-                   <?php echo $this->formCheckbox('delete'); ?>
+                   <?php echo $this->formCheckbox('delete', null, ['aria-describedby' => 'delete-items-description']); ?>
                 </div>
             </div>
         </fieldset>

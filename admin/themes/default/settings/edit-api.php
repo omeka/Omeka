@@ -11,10 +11,10 @@ echo flash();
                 <label for="api_enable"><?php echo __('Enable API'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __(
+                <p class="explanation" id="enable-api-description"><?php echo __(
                     'Enable or disable the API by checking or unchecking the box below.'
                 ); ?></p>
-                <?php echo $this->formCheckbox('api_enable', null, ['checked' => (bool) get_option('api_enable')]); ?>
+                <?php echo $this->formCheckbox('api_enable', null, ['checked' => (bool) get_option('api_enable'), 'aria-describedby' => 'enable-api-description']); ?>
             </div>
         </div>
         <div class="field">
@@ -22,12 +22,12 @@ echo flash();
                 <label for="api_filter_element_texts"><?php echo __('Filter Element Texts'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __(
+                <p class="explanation" id="filter-element-texts-description"><?php echo __(
                     'Filter element texts by checking the box below. When checked, the ' .
                     'API will respect the display element and element text filters when ' .
                     'outputting element text representations.'
                 ); ?></p>
-                <?php echo $this->formCheckbox('api_filter_element_texts', null, ['checked' => (bool) get_option('api_filter_element_texts')]); ?>
+                <?php echo $this->formCheckbox('api_filter_element_texts', null, ['checked' => (bool) get_option('api_filter_element_texts'), 'aria-describedby' => 'filter-element-texts-description']); ?>
             </div>
         </div>
         <div class="field">
@@ -35,10 +35,10 @@ echo flash();
                 <label for="api_per_page"><?php echo __('Results per Page'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __(
+                <p class="explanation" id="max-api-results-description"><?php echo __(
                     'Maximum number of API results displayed per page.'
                 ); ?></p>
-                <?php echo $this->formText('api_per_page', get_option('api_per_page')); ?>
+                <?php echo $this->formText('api_per_page', get_option('api_per_page'), null, ['aria-describedby' => 'max-api-results-description']); ?>
             </div>
         </div>
         <p><?php echo __(
