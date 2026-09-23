@@ -76,7 +76,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $html = '<div '
               . 'class="input-block" '
               . 'id="' . $inputNameStemId .'" '
-              . 'aria-label="' . $displayIndex . '" '
+              . 'aria-label="' . __('Input group: %s', $displayIndex) . '" '
               . 'role="group" '
               . 'aria-labelledby="label_element_' . $this->_element->id . ' ' . $inputNameStemId . '">'
               . '<div class="input">'
@@ -124,8 +124,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
                                        __('Remove'),
                                        [
                                          'class' => 'remove-element red button',
-                                         'id' => $thisId,
-                                         'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId, $thisId])
+                                         'id' => $thisId
                                        ])
               . '</div>';
 
@@ -147,8 +146,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $html = '<label id = "' . $thisId . '" class="use-html">'
               . __('Use HTML')
               . $this->view->formCheckbox($inputNameStem . '[html]', 1, [
-                'checked' => $isHtml, 'class' => 'use-html-checkbox',
-                'aria-labelledby' => join(' ', [$elementLabelId, $inputNameStemId, $thisId])])
+                'checked' => $isHtml, 'class' => 'use-html-checkbox'])
               . '</label>';
 
         return $html;
