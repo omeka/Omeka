@@ -1537,7 +1537,6 @@ header nav {
 .pagination li a:hover, .pagination li a:focus {
   border-color: rgba(35, 35, 35, 0.65);
   background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
-  outline: none;
 }
 .pagination li a:disabled {
   box-shadow: none !important;
@@ -2851,7 +2850,6 @@ ul.details li:last-child {
 .tag-list li.tag-removed:hover, .tag-list li.tag-removed:focus {
   border-color: rgba(176, 13, 0, 0.65);
   background: rgb(243.9, 212.45, 210.6);
-  outline: none;
 }
 .tag-list li.tag-removed .undo-remove-tag a:after {
   background-color: #B00D00;
