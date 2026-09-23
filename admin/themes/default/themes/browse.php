@@ -13,13 +13,13 @@ if ($current->image) {
 }
 ?>
 
-<div id="current-theme" class="theme">
+<div id="current-theme" class="theme" role="group" aria-labelledby="current-theme-heading">
     <div id="current-image" class="four columns alpha">
         <div class="crop"><img src="<?php echo $currentScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" /></div>
     <?php if($current->hasConfig): ?><a href="<?php echo html_escape(url('themes/config?name=' . $current->directory)); ?>" id="configure-button" class="full-width blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
     </div>
     <div id="current-info" class="six columns omega">
-        <h2><?php echo html_escape($current->title); ?> <small class="current-theme-label"><?php echo __('Current Theme'); ?></small></h2>
+        <h2 id="current-theme-heading"><?php echo html_escape($current->title); ?> <small class="current-theme-label"><?php echo __('Current Theme'); ?></small></h2>
         <p class="version"><?php echo __('Version %s', html_escape($current->version)); ?></p>
         <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
@@ -58,13 +58,13 @@ foreach ($themes as $theme):
         $themeScreenshot = img('fallback-theme.png');
     }
 ?>
-        <div class="theme three columns<?php if ($i % 3 == 1) echo ' alpha'; $i++; ?>">
+        <div class="theme three columns<?php if ($i % 3 == 1) echo ' alpha'; $i++; ?>" aria-labelledby="theme-<?php echo $i; ?>-heading">
             <div class="crop">
                 <img src="<?php echo $themeScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
             </div>
             <button type="submit" name="public_theme" class="use-theme green button" value="<?php echo html_escape($theme->directory); ?>"><?php echo __('Use this theme'); ?></button>
             <div class="meta">
-                <h3><?php echo html_escape($theme->title); ?></h3>
+                <h3 id="theme-<?php echo $i; ?>-heading"><?php echo html_escape($theme->title); ?></h3>
                 <p class="version"><?php echo __('Version %s', html_escape($theme->version)); ?></p>
                 <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?></a></p>
                 <p class="theme-support-link"><a href="<?php echo $theme->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
