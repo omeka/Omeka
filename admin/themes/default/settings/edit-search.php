@@ -10,8 +10,8 @@ echo flash();
                 <label for="search_query_type"><?php echo __('Search Query Type') ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __('Select the default query type used for simple search in Omeka.'); ?></p>
-                <?php echo $this->formRadio('search_query_type', $this->defaultQueryType, [], $this->validQueryTypes); ?>
+                <p class="explanation" id="query-type-description"><?php echo __('Select the default query type used for simple search in Omeka.'); ?></p>
+                <?php echo $this->formRadio('search_query_type', $this->defaultQueryType, ['aria-describedby' => 'query-type-description'], $this->validQueryTypes); ?>
             </div>
         </div>
         <div class="field">
@@ -20,11 +20,11 @@ echo flash();
             </div>
             <div class="inputs five columns omega">
                 <fieldset>
-                <legend class="explanation"><?php echo __('Customize which types of records '
+                <legend class="explanation" id="record-types-description"><?php echo __('Customize which types of records '
                 . 'will be searchable in Omeka.'); ?></legend>
                 <?php foreach ($this->searchRecordTypes as $key => $value): ?>
                 <label class="checkbox-label"><?php echo $this->formCheckbox("search_record_types[$key]", $key,
-                ['checked' => array_key_exists($key, $this->customSearchRecordTypes)]); ?> <?php echo $value; ?></label>
+                ['checked' => array_key_exists($key, $this->customSearchRecordTypes), 'aria-describedby' => 'record-types-description']); ?> <?php echo $value; ?></label>
                 <?php endforeach; ?>
                 </fieldset>
             </div>
@@ -36,7 +36,7 @@ echo flash();
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __('Click on the "Index Records" '
                 . 'button to re-index your records.'); ?></p>
-                <p class="explanation"><?php echo __('Indexing means to collect, parse, '
+                <p class="explanation" id="indexing-description"><?php echo __('Indexing means to collect, parse, '
                 . 'and store data to facilitate fast and accurate searches. Omeka will '
                 . 'automatically index individual records as they are saved, but there '
                 . 'are circumstances when your records are not indexed; for instance, '
@@ -50,7 +50,7 @@ echo flash();
     <section class="three columns omega">
         <div id="save" class="panel">
             <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), ['class'=>'submit full-width green button']); ?>
-            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), ['class'=>'submit full-width blue button']); ?>
+            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), ['class'=>'submit full-width blue button', 'aria-describedby' => 'indexing-description']); ?>
         </div>
     </section>
 </form>

@@ -19,12 +19,12 @@ echo flash();
                 <label for="api_key_label"><?php echo __('New key label'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __(
+                <p class="explanation" id="api-key-label-description"><?php echo __(
                     'To create a new API key, enter a label for the key below. For example, ' 
                 . 'describe for what purpose it will be used. This key will have all your ' 
                 . 'permissions; treat it as you would your password.'
                 ); ?></p>
-                <?php echo $this->formText('api_key_label'); ?>
+                <?php echo $this->formText('api_key_label', null, ['aria-describedby' => 'api-key-label-description']); ?>
             </div>
         </div>
         <?php if (!$this->keys): ?>
