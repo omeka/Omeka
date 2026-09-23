@@ -88,9 +88,9 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
         // Compose html for element form
         $html = '<div id="element-' . $element->id . '-alerts" class="sr-only alerts" aria-atomic="true" aria-live="polite">';
-        $html .= __('Number of rows in "%s":', $components['label']) . '<span class="count">1</span>';
+        $html .= __('Number of input groups in "%s":', $components['label']) . '<span class="count">1</span>';
         $html .= '</div>';
-        $html .= $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
+        $html .= $divWrap ? '<div aria-labelledby="label_element_' . $this->_getFieldId() . '" class="field" id="element-' . html_escape($element->id) . '">' : '';
 
         $html .= '<div class="field-meta two columns alpha">';
         $html .= $components['label'];
@@ -275,8 +275,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
           $elementAddId,
           __('Add Input'),
           [
-            'class' => 'add-element',
-            'aria-labelledby' => join(' ', [$elementLabelId, $elementAddId])
+            'class' => 'add-element'
           ]
         );
 
