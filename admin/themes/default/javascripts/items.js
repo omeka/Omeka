@@ -145,7 +145,10 @@ Omeka.Items = {};
      * @param {Element} button Clicked button.
      */
     Omeka.Items.toggleTag = function (button) {
-        $(button).parent().toggleClass('tag-removed');
+        var tagGroup = $(button).parent();
+        tagGroup.toggleClass('tag-removed');
+        tagGroup.find(':focusable').focus();
+
         Omeka.Items.updateTagsField();
     };
 
@@ -156,7 +159,7 @@ Omeka.Items = {};
         var tagsToAdd = [];
         var tagsToDelete = [];
 
-        $('.tag-list li').each(function () {
+        $('.tag-list .tag-group').each(function () {
             var tagSpan = $(this).find('.tag');
             var tag = $.trim(tagSpan.text());
             if ($(this).hasClass('tag-removed')) {

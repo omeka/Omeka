@@ -14,18 +14,19 @@
     <?php if ($tags): ?>
         <h3><?php echo __('All Tags'); ?></h3>
         
-        <div class="tag-list">
-        <ul id="all-tags-list">
+        <ul id="all-tags-list" class="tag-list">
             <?php foreach( $tags as $tag ): ?>
+                <?php $tagId = $tag->id; ?>
                 <li>
-                    <?php echo '<span class="tag">' . html_escape($tag->name) . '</span>';
+                    <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
+                    <?php echo '<span class="tag" id="tag-' . $tagId . '-name">' . html_escape($tag->name) . '</span>';
                           echo '<button type="button" class="remove-tag" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
                           echo '<button type="button" class="undo-remove-tag" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
                     ?>
+                    </div>  
                 </li>
             <?php endforeach; ?>
         </ul>
-        </div>
     <?php endif; ?>
     </div>
 </div>

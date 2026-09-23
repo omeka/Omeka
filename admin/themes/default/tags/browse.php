@@ -83,20 +83,23 @@ echo flash();
         </div>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
+            <?php $tagId = $tag->id; ?>
             <li>
-            <?php if($browse_for == 'Item'):?>
-                <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
-            <?php else: ?>
-                <span class="count"><?php echo $tag['tagCount']; ?></span>
-            <?php endif; ?>
-            <?php if ($canEdit): ?>
-                <span class="tag edit-tag" data-pk="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
-            <?php else: ?>
-                <span class="tag"><?php echo html_escape($tag->name); ?></span>
-            <?php endif; ?>
-            <?php if ($canDelete): ?>
-                <button type="button" class="delete-tag delete-confirm" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
-            <?php endif; ?>
+                <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
+                <?php if($browse_for == 'Item'):?>
+                    <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
+                <?php else: ?>
+                    <span class="count"><?php echo $tag['tagCount']; ?></span>
+                <?php endif; ?>
+                <?php if ($canEdit): ?>
+                    <span class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></span>
+                <?php else: ?>
+                    <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
+                <?php endif; ?>
+                <?php if ($canDelete): ?>
+                    <button type="button" class="delete-tag delete-confirm" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
+                <?php endif; ?>
+                </div>
             </li>
         <?php endforeach; ?>
         </ul>
