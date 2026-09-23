@@ -19,8 +19,9 @@
             <?php foreach( $tags as $tag ): ?>
                 <li>
                     <?php echo '<span class="tag">' . html_escape($tag->name) . '</span>';
-                          echo '<span class="undo-remove-tag"><a href="#">' . __('Undo') . '</a></span>';
-                          echo '<span class="remove-tag"><a href="#">' . __('Remove') . '</a></span>'; ?>
+                          echo '<button type="button" class="remove-tag" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
+                          echo '<button type="button" class="undo-remove-tag" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
+                    ?>
                 </li>
             <?php endforeach; ?>
         </ul>

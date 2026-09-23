@@ -101,8 +101,8 @@ Omeka.Items = {};
         tagLi.after(" ");
 
         $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagLi);
-        var undoButton = $('<span class="undo-remove-tag"><a href="#">Undo</a></span>').appendTo(tagLi);
-        var deleteButton = $('<span class="remove-tag"><a href="#">Remove</a></span>').appendTo(tagLi);
+        var undoButton = $('<button type="button" class="undo-remove-tag" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagLi);
+        var deleteButton = $('<button type="button" class="remove-tag" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagLi);
 
         if($('#all-tags-list').length != 0) {
             $('#all-tags-list').append(tagLi);
@@ -180,13 +180,11 @@ Omeka.Items = {};
             Omeka.Items.addTags($('#tags').val());
         });
 
-        $(document).on('click', 'span.remove-tag', function (event) {
-            event.preventDefault();
+        $(document).on('click', '.remove-tag', function () {
             Omeka.Items.toggleTag(this);
         });
 
-        $(document).on('click', 'span.undo-remove-tag', function (event) {
-            event.preventDefault();
+        $(document).on('click', '.undo-remove-tag', function () {
             Omeka.Items.toggleTag(this);
         });
 
