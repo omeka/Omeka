@@ -22,4 +22,4 @@
     ];
     echo nav($navArray, 'admin_navigation_users', ['user' => $user]);
 ?>
-</div>
+</nav>
