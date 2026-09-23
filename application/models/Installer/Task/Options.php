@@ -14,6 +14,7 @@
 class Installer_Task_Options implements Installer_TaskInterface
 {
     private $_expectedOptions = [
+        'server_url',
         'administrator_email',
         'copyright',
         'site_title',

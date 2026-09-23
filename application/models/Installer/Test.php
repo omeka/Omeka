@@ -16,6 +16,7 @@ class Installer_Test extends Installer_Default
     const TEST_ITEM_TITLE = 'Foobar';
 
     private $_testDefaults = [
+        'server_url' => '',
         'administrator_email' => Omeka_Test_Resource_Db::SUPER_EMAIL,
         'copyright' => Omeka_Test_Resource_Db::DEFAULT_COPYRIGHT,
         'site_title' => Omeka_Test_Resource_Db::DEFAULT_SITE_TITLE,

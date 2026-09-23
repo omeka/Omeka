@@ -26,9 +26,10 @@ class Omeka_Form_Install extends Omeka_Form
 
         $this->setMethod('post');
 
-
         $defaultLabelOptions = ['placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field'))];
         $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
+
+        $serverUrlHelper = new Zend_View_Helper_ServerUrl;
 
         $decorators = [
                         ['Description', ['tag' => 'p', 'class' => 'explanation', 'escape' => false]],
@@ -119,6 +120,14 @@ class Omeka_Form_Install extends Omeka_Form
             'validators' => ['EmailAddress'],
             'decorators' => $decorators,
             'required' => true
+        ]);
+
+        $this->addElement('text', 'server_url', [
+            'label' => __('Server URL'),
+            'description' => __('Server URL for the installation. The URL will be autodetected if left blank, but this can be less secure.'),
+            'filters' => ['StringTrim'],
+            'validators' => ['ServerUrl'],
+            'value' => $serverUrlHelper->serverUrl(),
         ]);
 
         $this->addElement('text', 'copyright', [
@@ -217,7 +226,7 @@ class Omeka_Form_Install extends Omeka_Form
         );
 
         $this->addDisplayGroup(
-            ['administrator_email', 'site_title', 'description',
+            ['server_url', 'administrator_email', 'site_title', 'description',
                   'copyright', 'author', 'tag_delimiter', 'fullsize_constraint',
                   'thumbnail_constraint', 'square_thumbnail_constraint',
                   'per_page_admin', 'per_page_public', 'show_empty_elements',

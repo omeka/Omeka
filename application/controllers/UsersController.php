@@ -379,11 +379,19 @@ class UsersController extends Omeka_Controller_AbstractActionController
         // send the user an email telling them about their new user account
         $siteTitle = get_option('site_title');
         $from = get_option('administrator_email');
-        $body = __('Welcome!')
-                    ."\n\n"
-                    . __('Your account for the %s repository has been created. Please click the following link to activate your account:', $siteTitle)."\n\n"
-                    . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
-                    . __('%s Administrator', $siteTitle);
+
+        set_theme_base_url('admin');
+        $url = $this->view->serverUrl() . $this->view->url([
+            'controller' => 'users',
+            'action' => 'activate',
+            'u' => $ua->url
+        ], 'default');
+        revert_theme_base_url();
+
+        $body = __('Welcome!') . "\n\n"
+            . __('Your account for the %s repository has been created. Please click the following link to activate your account:', $siteTitle) . "\n\n"
+            . "{$url}\n\n"
+            . __('%s Administrator', $siteTitle);
         $subject = __('Activate your account with the %s repository', $siteTitle);
 
         $mail = new Zend_Mail('UTF-8');

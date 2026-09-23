@@ -3342,7 +3342,7 @@ function url($options = [], $route = null, $queryParams = [],
  * directly because a view may not be registered.
  *
  * @package Omeka\Function\View\Navigation
- * @uses Zend_View_Helper_ServerUrl::serverUrl()
+ * @uses Omeka_View_Helper_ServerUrl::serverUrl()
  * @uses Omeka_View_Helper_Url::url()
  * @param mixed $options If a string is passed it is treated as an
  *  Omeka-relative link. So, passing 'items' would create a link to the items
@@ -3357,7 +3357,7 @@ function url($options = [], $route = null, $queryParams = [],
 function absolute_url($options = [], $route = null, $queryParams = [],
     $reset = false, $encode = true
 ) {
-    $serverUrlHelper = new Zend_View_Helper_ServerUrl;
+    $serverUrlHelper = new Omeka_View_Helper_ServerUrl;
     $urlHelper = new Omeka_View_Helper_Url;
     return $serverUrlHelper->serverUrl()
          . $urlHelper->url($options, $route, $queryParams, $reset, $encode);
