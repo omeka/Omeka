@@ -15,10 +15,10 @@ $tabs = apply_filters('admin_files_form_tabs', $tabs, ['file' => $file]);
 
 <!-- Create the sections for the various element sets -->
 
-<ul id="section-tabs" aria-label="<?php echo __('Form'); ?>" class="tabs navigation" role="tablist">
+<div id="section-tabs" aria-label="<?php echo __('Form'); ?>" class="tabs navigation" role="tablist">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): // Don't display tabs with no content. '?>
-            <li><button type="button" tabindex="-1" role="tab" aria-selected="false"aria-controls="<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape(__($tabName)); ?></a></li>
+            <button type="button" tabindex="-1" role="tab" aria-selected="false"aria-controls="<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape(__($tabName)); ?></a>
         <?php endif; ?> 
     <?php endforeach; ?>
-</ul>
+</div>
