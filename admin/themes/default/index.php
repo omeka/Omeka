@@ -76,7 +76,7 @@ endif; ?>
         set_loop_records('collections', $collections);
         foreach (loop('collections') as $collection):
     ?>
-        <div class="recent-row" aria-labelledby="collection-<?php echo $collection->id; ?>">
+        <div role="group" class="recent-row" aria-labelledby="collection-<?php echo $collection->id; ?>">
             <p class="recent" id="collection-<?php echo $collection->id; ?>"><?php echo link_to_collection(); ?> <?php echo __("(%s items)", metadata($collection, 'total_items')); ?></p>
             <?php if (is_allowed($collection, 'edit')): ?>
             <p class="dash-edit"><?php echo link_to_collection(__('Edit'), [], 'edit'); ?></p>
