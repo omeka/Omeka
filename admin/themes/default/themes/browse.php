@@ -58,7 +58,7 @@ foreach ($themes as $theme):
         $themeScreenshot = img('fallback-theme.png');
     }
 ?>
-        <div class="theme three columns<?php if ($i % 3 == 1) echo ' alpha'; $i++; ?>" aria-labelledby="theme-<?php echo $i; ?>-heading">
+        <div role="group" class="theme three columns<?php if ($i % 3 == 1) echo ' alpha'; $i++; ?>" aria-labelledby="theme-<?php echo $i; ?>-heading">
             <div class="crop">
                 <img src="<?php echo $themeScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
             </div>
