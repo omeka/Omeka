@@ -132,6 +132,7 @@ td {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    gap: $spacing-s;
 
     @include screen-xs {
         clear: both;

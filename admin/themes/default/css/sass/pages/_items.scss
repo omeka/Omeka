@@ -73,7 +73,7 @@
 
 
 @include screen-xs {
-    .browse .action-links a {
+    .browse table .action-links a {
         @include button;
         @include small;
         @include blue;

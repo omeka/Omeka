@@ -2158,6 +2158,7 @@ td {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 5px;
 }
 @media (max-width: 767px) {
   .action-links {
@@ -2553,7 +2554,7 @@ ul.details li:last-child {
 }
 
 @media (max-width: 767px) {
-  .browse .action-links a {
+  .browse table .action-links a {
     border-radius: 3px;
     box-sizing: border-box;
     cursor: pointer;
@@ -2580,28 +2581,28 @@ ul.details li:last-child {
     border: 1px solid rgba(0, 53, 118, 0.25);
     margin: 0;
   }
-  .browse .action-links a:hover, .browse .action-links a:focus {
+  .browse table .action-links a:hover, .browse table .action-links a:focus {
     border-color: rgba(35, 35, 35, 0.65);
     background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
   }
-  .browse .action-links a:focus {
+  .browse table .action-links a:focus {
     box-shadow: 0 0 0 3px #C67F6F;
     z-index: 99;
   }
-  .browse .action-links a:disabled {
+  .browse table .action-links a:disabled {
     box-shadow: none !important;
     cursor: default;
     opacity: 0.35;
   }
-  .browse .action-links a.ui-button {
+  .browse table .action-links a.ui-button {
     background: #EEF3FA !important;
     border: 1px solid rgba(0, 53, 118, 0.25) !important;
   }
-  .browse .action-links a:hover, .browse .action-links a:focus {
+  .browse table .action-links a:hover, .browse table .action-links a:focus {
     border-color: rgba(0, 53, 118, 0.65);
     background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
   }
-  .browse .action-links a * {
+  .browse table .action-links a * {
     color: #003576;
   }
   .browse .action-links a.delete-confirm {
