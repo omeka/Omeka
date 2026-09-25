@@ -97,12 +97,13 @@ Omeka.Items = {};
      * @param {string} tag Tag to add buttons for.
      */
     Omeka.Items.addTagElement = function (tag) {
-        var tagLi = $('<li/>');
-        tagLi.after(" ");
+        var tagLi = $("<li></li>");
+        var tagDiv = $('<div class="tag-group" role="group" />');
 
-        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagLi);
-        var undoButton = $('<button type="button" class="undo-remove-tag" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagLi);
-        var deleteButton = $('<button type="button" class="remove-tag" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagLi);
+        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagDiv);
+        var undoButton = $('<button type="button" class="undo-remove-tag" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagDiv);
+        var deleteButton = $('<button type="button" class="remove-tag" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagDiv);
+        tagDiv.appendTo(tagLi);
 
         if($('#all-tags-list').length != 0) {
             $('#all-tags-list').append(tagLi);
