@@ -3,11 +3,11 @@ $pageTitle = __('Search') . ' ' . __('(%s total)', $total_results);
 echo head(['title' => $pageTitle, 'bodyclass' => 'search']);
 $searchRecordTypes = get_search_record_types();
 ?>
-<h1><?php echo $pageTitle; ?></h1>
+<h1 id="page-title"><?php echo $pageTitle; ?></h1>
 <?php echo search_filters(); ?>
 <?php if ($total_results): ?>
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-<table id="search-results">
+<table id="search-results" aria-labelledby="page-title">
     <thead>
         <tr>
             <th><?php echo __('Record Type');?></th>

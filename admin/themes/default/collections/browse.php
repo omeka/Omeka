@@ -23,7 +23,7 @@ echo flash();
     </p>
     <?php if (has_loop_records('collections')): ?>
         <div class="table-responsive">
-            <table id="collections">
+            <table id="collections" aria-label="<?php echo __('Collections'); ?>">
                 <thead>
                     <tr>
                     <?php

@@ -22,7 +22,7 @@ echo flash();
 </p>
 
 <div class="table-responsive">
-    <table>
+    <table aria-label="<?php echo __('Item Types'); ?>">
         <thead>
             <tr>
                 <th width="200px"><?php echo __('Type Name'); ?></th>
