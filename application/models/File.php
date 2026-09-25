@@ -193,6 +193,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->_mixins[] = new Mixin_ElementText($this);
         $this->_mixins[] = new Mixin_Timestamp($this);
         $this->_mixins[] = new Mixin_Search($this);
+        $this->_mixins[] = new Mixin_ParentItemSearchText($this);
     }
 
     /**
