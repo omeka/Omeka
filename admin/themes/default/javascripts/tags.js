@@ -21,8 +21,15 @@ Omeka.Tags = {};
                 return params;
             },
             success: function (value, settings) {
-                $(this).parents('li').find('a.count').first().attr("href", tagURLBase + value);
-            },
+                $(this).parents('li').find('.count').first().attr("href", tagURLBase + value);
+            }
+        }).on('hidden', function(e, reason) {
+            if (reason === 'onblur') {
+                return;
+            }
+            var tagGroup = $(this).parents('.tag-group');
+            var editButton = tagGroup.find('.edit-tag');
+            editButton.focus();
         });
     };
 })(jQuery);

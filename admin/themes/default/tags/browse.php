@@ -81,6 +81,9 @@ echo flash();
             }
             ?>
         </div>
+        <?php if ($canEdit): ?>
+        <span id="tag-edit-description" class="sr-only"><?php echo __('Activate button to edit'); ?></span>
+        <?php endif; ?>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
             <?php $tagId = $tag->id; ?>
@@ -89,15 +92,15 @@ echo flash();
                 <?php if($browse_for == 'Item'):?>
                     <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
                 <?php else: ?>
-                    <span class="count"><?php echo $tag['tagCount']; ?></span>
+                    <div class="count" id="count-<?php echo $tagId; ?>"><span class="sr-only"><?php echo __('Tagged records:'); ?></span> <?php echo $tag['tagCount']; ?></div>
                 <?php endif; ?>
                 <?php if ($canEdit): ?>
-                    <span class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></span>
+                    <button type="button" aria-describedby="count-<?php echo $tagId; ?> tag-edit-description" class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></button>
                 <?php else: ?>
                     <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
                 <?php endif; ?>
                 <?php if ($canDelete): ?>
-                    <button type="button" class="delete-tag delete-confirm" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
+                    <button type="button" class="delete-tag delete-confirm button" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
                 <?php endif; ?>
                 </div>
             </li>
