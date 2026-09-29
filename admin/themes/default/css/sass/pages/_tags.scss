@@ -97,7 +97,7 @@ form.form-inline.editableform {
     gap: $spacing-m;
 }
 
-.tag-list .tag-group button {
+.tag-list .tag-group .button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -106,6 +106,15 @@ form.form-inline.editableform {
     min-height: 0;
     background: transparent;
     text-align: center;
+}
+
+.tag-list .tag-group button.editable {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-height: 0;
+    background: transparent;
+    font-weight: normal;
 }
 
 .tag-list .tag-group .delete-tag .icon:after, 

@@ -20,8 +20,8 @@
                 <li>
                     <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
                     <?php echo '<span class="tag" id="tag-' . $tagId . '-name">' . html_escape($tag->name) . '</span>';
-                          echo '<button type="button" class="remove-tag" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
-                          echo '<button type="button" class="undo-remove-tag" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
+                          echo '<button type="button" class="remove-tag button" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
+                          echo '<button type="button" class="undo-remove-tag button" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
                     ?>
                     </div>  
                 </li>
