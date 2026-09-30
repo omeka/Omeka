@@ -97,25 +97,41 @@ Omeka.Items = {};
      * @param {string} tag Tag to add buttons for.
      */
     Omeka.Items.addTagElement = function (tag) {
+        var allTagsList = $('#all-tags-list');
+        var newTagId = allTagsList.attr('data-new-tag-id');
         var tagLi = $("<li></li>");
-        var tagDiv = $('<div class="tag-group" role="group" />');
+        var tagDiv = $('<div class="tag-group" role="group" aria-labelledby="new-tag-' + newTagId + '"/>');
 
-        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagDiv);
-        var undoButton = $('<button type="button" class="undo-remove-tag" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagDiv);
-        var deleteButton = $('<button type="button" class="remove-tag" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagDiv);
+        $('<span></span>', {'class': 'tag', 'text': tag, 'id': 'new-tag-' + newTagId}).appendTo(tagDiv);
+        var undoButton = $('<button type="button" class="undo-remove-tag button" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagDiv);
+        var deleteButton = $('<button type="button" class="remove-tag button" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagDiv);
         tagDiv.appendTo(tagLi);
 
-        if($('#all-tags-list').length != 0) {
-            $('#all-tags-list').append(tagLi);
+        if(allTagsList.length != 0) {
+            allTagsList.append(tagLi);
         } else {
             $('#all-tags').append($('<h3>All Tags</h3><div class="tag-list"><ul id="all-tags-list"></ul></div>'));
-            $('#all-tags-list').append(tagLi);
+            allTagsList.append(tagLi);
         }
-
+        newTagId++;
+        allTagsList.attr('data-new-tag-id', newTagId);
+        Omeka.Items.tagsSrAlert('success-alert');
         Omeka.Items.updateTagsField();
         return false;
     };
 
+    Omeka.Items.tagsSrAlert = function (alertType) {
+        var tagsSrAlerts = $('#tags-sr-alerts');
+        var tagsRepeatedSrAlerts = $('#tags-sr-alerts-repeat');
+        var tagAlertType = tagsSrAlerts.data(alertType);
+        if (tagsSrAlerts.text == tagAlertType) {
+            tagsSrAlerts.text('');
+            tagsRepeatedSrAlerts.text(tagAlertType);
+        } else {
+            tagsRepeatedSrAlerts.text('');
+            tagsSrAlerts.text(tagAlertType);
+        }
+    }
 
     /**
      * Add tag elements for new tags from the input box.
@@ -134,6 +150,8 @@ Omeka.Items = {};
             var tag = $.trim(this);
             if (tag && $.inArray(tag, oldTags) === -1) {
                 Omeka.Items.addTagElement(tag);
+            } else {
+                Omeka.Items.tagsSrAlert('duplicate-alert');
             }
         });
 
