@@ -53,13 +53,23 @@
     a.button, 
 	input[type=submit], 
 	button {
-		margin-bottom: $spacing-m;
+		margin: $spacing-m 0;
 		width: 100%;
 	}
 	
 	.button:last-child {
 		margin-bottom: $spacing-l !important;
 	}
+}
+
+.recent-records {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.recent-records .add-new-link {
+    margin-top: auto;
 }
 
 .admin-thumb.panel img {
@@ -71,7 +81,7 @@
 .recent-row {
     border-bottom: 1px solid #e7e7e7;
     overflow: auto;
-    margin: 12px 0;
+    margin: 12px 0 0;
     
     p {
         margin: 0 0 $spacing-m 0;

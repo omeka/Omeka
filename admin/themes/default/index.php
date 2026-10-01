@@ -49,48 +49,52 @@ endif; ?>
 <?php $panels = []; ?>
 
 <?php ob_start(); ?>
-<h2><?php echo __('Recent Items'); ?></h2>
-<?php
-    set_loop_records('items', get_recent_items(5));
-    foreach (loop('items') as $item):
-?>
-    <div class="recent-row">
-        <p class="recent"><?php echo link_to_item(); ?></p>
-        <?php if (is_allowed($item, 'edit')): ?>
-        <p class="dash-edit"><?php echo link_to_item(__('Edit'), [], 'edit'); ?></p>
-        <?php endif; ?>
-    </div>
-<?php endforeach; ?>
+<div role="group" class="recent-records" aria-labelledby="recent-items-heading">
+    <h2 id="recent-items-heading"><?php echo __('Recent Items'); ?></h2>
+    <?php
+        set_loop_records('items', get_recent_items(5));
+        foreach (loop('items') as $item):
+    ?>
+        <div class="recent-row" role="group" aria-labelledby="item-<?php echo $item->id; ?>">
+            <p class="recent" id="item-<?php echo $item->id; ?>"><?php echo link_to_item(); ?></p>
+            <?php if (is_allowed($item, 'edit')): ?>
+            <p class="dash-edit"><?php echo link_to_item(__('Edit'), [], 'edit'); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
     <?php if (is_allowed('Items', 'add')): ?>
-    <div class="add-new-link"><p><a class="add-new-item green button" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+    <div class="add-new-link"><a class="add-new-item green button" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></div>
     <?php endif; ?>
+</div>
 <?php $panels[] = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<h2><?php echo __('Recent Collections'); ?></h2>
-<?php
-    $collections = get_recent_collections(5);
-    set_loop_records('collections', $collections);
-    foreach (loop('collections') as $collection):
-?>
-    <div class="recent-row">
-        <p class="recent"><?php echo link_to_collection() . " (" . metadata($collection, 'total_items') . ")"; ?></p>
-        <?php if (is_allowed($collection, 'edit')): ?>
-        <p class="dash-edit"><?php echo link_to_collection(__('Edit'), [], 'edit'); ?></p>
-        <?php endif; ?>
-    </div>
-<?php endforeach; ?>
+<div role="group" clsas="recent-records" aria-labelledby="recent-collections-heading">
+    <h2 id="recent-collections-heading"><?php echo __('Recent Collections'); ?></h2>
+    <?php
+        $collections = get_recent_collections(5);
+        set_loop_records('collections', $collections);
+        foreach (loop('collections') as $collection):
+    ?>
+        <div role="group" class="recent-row" aria-labelledby="collection-<?php echo $collection->id; ?>">
+            <p class="recent" id="collection-<?php echo $collection->id; ?>"><?php echo link_to_collection(); ?> <?php echo __("(%s items)", metadata($collection, 'total_items')); ?></p>
+            <?php if (is_allowed($collection, 'edit')): ?>
+            <p class="dash-edit"><?php echo link_to_collection(__('Edit'), [], 'edit'); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
     <?php if (is_allowed('Collections', 'add')): ?>
-    <div class="add-new-link"><p><a class="add-collection green button" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
+    <div class="add-new-link"><a class="add-collection green button" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></div>
     <?php endif; ?>
+</div>
 <?php $panels[] = ob_get_clean(); ?>
 
 <?php $panels = apply_filters('admin_dashboard_panels', $panels, ['view' => $this]); ?>
-<div role="group" class="panels">
+<div class="panels">
     <?php for ($i = 0; $i < count($panels); $i++): ?>
-    <section class="panel five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
+    <div class="panel five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
         <?php echo $panels[$i]; ?>
-    </section>
+    </div>
     <?php endfor; ?>
     <?php fire_plugin_hook('admin_dashboard', ['view' => $this]); ?>
 </div>
