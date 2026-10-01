@@ -10,7 +10,8 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
       enctype="<?php echo $this->form->getEnctype() ?>"
       method="<?php echo $this->form->getMethod() ?>"
       id="<?php echo $this->form->getId() ?>"
-      class="<?php echo $this->form->getAttrib('class') ?>" >
+      class="<?php echo $this->form->getAttrib('class') ?>" 
+      data-external-link-text="<?php echo __('(external link)'); ?>">
 <section class="seven columns alpha">
     <p class="explanation"><?php echo __('Check the links to display them ' 
     . 'in the main navigation. Click and drag the links into the preferred ' 

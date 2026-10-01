@@ -6,9 +6,9 @@
         <div class="ten columns offset-by-two">
             <?php fire_plugin_hook('admin_footer', ['view'=>$this]); ?>
             <p class="left">
-                <a href="https://omeka.org" target="_blank"><?php echo __('Powered by Omeka') ?></a>
-                <a href="https://omeka.org/classic/docs/" target="_blank"><?php echo __('Documentation'); ?></a>
-                <a href="https://forum.omeka.org" target="_blank"><?php echo __('Support Forums'); ?></a>
+                <a href="https://omeka.org" target="_blank"><?php echo __('Powered by Omeka') ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a>
+                <a href="https://omeka.org/classic/docs/" target="_blank"><?php echo __('Documentation'); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a>
+                <a href="https://forum.omeka.org" target="_blank"><?php echo __('Support Forums'); ?> <span class="sr-only"><?php echo __('(external link)'); ?></span></a>
                 <a href="#content"><?php echo __('Back to top'); ?></a>
             </p>
         
