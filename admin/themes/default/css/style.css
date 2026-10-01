@@ -710,11 +710,21 @@ button.ui-dialog-titlebar-close {
 .panel a.button,
 .panel input[type=submit],
 .panel button {
-  margin-bottom: 10px;
+  margin: 10px 0;
   width: 100%;
 }
 .panel .button:last-child {
   margin-bottom: 20px !important;
+}
+
+.recent-records {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.recent-records .add-new-link {
+  margin-top: auto;
 }
 
 .admin-thumb.panel img {
@@ -726,7 +736,7 @@ button.ui-dialog-titlebar-close {
 .recent-row {
   border-bottom: 1px solid #e7e7e7;
   overflow: auto;
-  margin: 12px 0;
+  margin: 12px 0 0;
 }
 .recent-row p {
   margin: 0 0 10px 0;
