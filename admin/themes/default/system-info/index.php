@@ -4,7 +4,7 @@ echo head(['title' => $title, 'bodyclass' => 'system-info']); ?>
 
 <?php echo flash(); ?>
 <div class="table-responsive">
-	<table>
+	<table aria-labelledby="content-heading">
 	<?php foreach ($info as $category => $entries): ?>
 	    <tr><th colspan="2"><?php echo html_escape($category); ?></th></tr>
 	    <?php foreach ($entries as $name => $value): ?>

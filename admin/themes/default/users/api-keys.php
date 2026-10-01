@@ -36,7 +36,7 @@ echo flash();
             <?php endif; ?>
         </div>
         <?php else: ?>
-        <table>
+        <table aria-label="<?php echo __('API Keys'); ?>">
             <thead>
                 <tr>
                     <th><?php echo __('Label'); ?></th>

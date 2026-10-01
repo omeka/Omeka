@@ -11,7 +11,7 @@ echo common('settings-nav');
 echo flash();
 ?>
 <div class="table-responsive">
-    <table>
+    <table aria-label="<?php echo __('Element Sets'); ?>">
         <thead>
             <tr>
                 <th><?php echo __('Name'); ?></th>
