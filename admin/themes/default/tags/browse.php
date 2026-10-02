@@ -22,7 +22,7 @@ echo flash();
 
     <ol>
         <li><?php echo __('This number counts all records associated with a tag. Filtering "Record types" to "Items" will provide links to all items containing the tag.'); ?></li>
-        <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
+        <li><span id="edit-instructions"><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></span></li>
         <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged records.'); ?></li>
     </ol>
 </section>
@@ -82,7 +82,6 @@ echo flash();
             ?>
         </div>
         <?php if ($canEdit): ?>
-        <span id="tag-edit-description" class="sr-only"><?php echo __('Activate button to edit'); ?></span>
         <?php endif; ?>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
@@ -95,7 +94,7 @@ echo flash();
                     <div class="count" id="count-<?php echo $tagId; ?>"><span class="sr-only"><?php echo __('Tagged records:'); ?></span> <?php echo $tag['tagCount']; ?></div>
                 <?php endif; ?>
                 <?php if ($canEdit): ?>
-                    <button type="button" aria-describedby="count-<?php echo $tagId; ?> tag-edit-description" class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></button>
+                    <button type="button" aria-describedby="count-<?php echo $tagId; ?> edit-instructions" class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></button>
                 <?php else: ?>
                     <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
                 <?php endif; ?>
