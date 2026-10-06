@@ -16,7 +16,7 @@ Omeka.Tabs = {};
         var tabPanels = $(tabIds);
 
         function selectTab(tabButton) {
-            tabButtons.removeClass('active').attr('aria-selected', 'false');
+            tabButtons.removeClass('active').attr('aria-selected', 'false').attr('tabindex', '-1');;
             tabPanels.hide();
 
             tabButton.addClass('active').attr('aria-selected', 'true').attr('tabindex', '0');

@@ -26,7 +26,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php $escapedTabId = text_to_id(html_escape($tabName)); ?>
         <?php if (!empty($tabContent)): ?>
-            <div id="<?php echo $escapedTabId; ?>-metadata" role="tabpanel" aria-labelledby="<?php echo $escapedTabId; ?>-heading" tabindex="0">
+            <div id="<?php echo $escapedTabId; ?>-metadata" role="tabpanel" aria-labelledby="<?php echo $escapedTabId; ?>-heading" tabindex="-1">
                 <fieldset class="set">
                     <h2 id="<?php echo $escapedTabId; ?>-heading"><?php echo html_escape(__($tabName)); ?></h2>
                     <?php echo $tabContent; ?>
