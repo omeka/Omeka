@@ -110,11 +110,11 @@ Omeka.Items = {};
         if(allTagsList.length != 0) {
             allTagsList.append(tagLi);
         } else {
-            $('#all-tags').append($('<h3>All Tags</h3><div class="tag-list"><ul id="all-tags-list"></ul></div>'));
-            allTagsList.append(tagLi);
+            $('#all-tags').append($('<h3>All Tags</h3><ul id="all-tags-list" class="tag-list"></ul>'));
+            $('#all-tags-list').append(tagLi);
         }
         newTagId++;
-        allTagsList.attr('data-new-tag-id', newTagId);
+        $('#all-tags-list').attr('data-new-tag-id', newTagId);
         Omeka.Items.tagsSrAlert('success-alert');
         Omeka.Items.updateTagsField();
         return false;
