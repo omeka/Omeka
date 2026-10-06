@@ -6,7 +6,7 @@ $pageTitle = __('Browse Tags');
 $pageTitle .= ' ' . __('(%s total)', $total_results);
 
 if ($canEdit) {
-    queue_js_file(['tags', 'vendor/jquery-editable-poshytip.min']);
+    queue_js_file(['tags', 'vendor/jquery-editable-poshytip']);
 }
 
 echo head(['title'=>$pageTitle,'bodyclass'=>'tags browse-tags']);
