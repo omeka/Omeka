@@ -105,7 +105,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $oldTag = $this->_helper->db->findById($oldTagId);
         $oldName = $oldTag->name;
         $newName = trim($_POST['value']);
-        $error = __('Error occurred.');
+        $error = __('Input cannot be left blank.');
 
         $oldTag->name = $newName;
         $this->_helper->viewRenderer->setNoRender();
