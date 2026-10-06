@@ -124,7 +124,8 @@ Omeka.Items = {};
         var tagsSrAlerts = $('#tags-sr-alerts');
         var tagsRepeatedSrAlerts = $('#tags-sr-alerts-repeat');
         var tagAlertType = tagsSrAlerts.data(alertType);
-        if (tagsSrAlerts.text == tagAlertType) {
+
+        if (tagsSrAlerts.text() == tagAlertType) {
             tagsSrAlerts.text('');
             tagsRepeatedSrAlerts.text(tagAlertType);
         } else {
