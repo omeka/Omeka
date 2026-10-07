@@ -70,7 +70,7 @@ jQuery(document).ready(function () {
                         [
                             'from_post' => true,
                             'elementTempId' => $elementTempId,
-                            'elementId' => $elementId,
+                            'elementId' => $element->id,
                             'elementOrder' => $elementOrder
                         ]
                     );
