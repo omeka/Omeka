@@ -117,7 +117,7 @@ header {
 	padding-bottom: 0;
 
 	@include screen-xs {
-		display: inline-block;
+		display: inline-flex;
 		font-size: 16px;
 	}
 }
