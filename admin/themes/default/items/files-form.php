@@ -27,7 +27,9 @@
 
     <div id="file-inputs">
         <label><?php echo __('Find a File'); ?></label>
-        <button type="button" id="add-file" class="add-file button"><?php echo __('Add Another File'); ?></button>
+        <button type="button" id="add-file" class="add-file button" data-success-message="<?php echo __('File input added.'); ?>"><?php echo __('Add Another File'); ?></button>
+        <div id="file-upload-sr-alerts" class="sr-only" aria-live="polite"></div>
+        <div id="file-upload-sr-alerts-repeat" class="sr-only" aria-live="polite"></div>
     </div>
 
     <?php
