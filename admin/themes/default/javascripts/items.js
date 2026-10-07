@@ -272,8 +272,17 @@ Omeka.Items = {};
 
         // Handle an add file click.
         $('#add-file').on('click', function(e) {
-            e.preventDefault();
             filesDiv.append(getFileContainer());
+            var fileUploadSrAlerts = $('#file-upload-sr-alerts');
+            var fileUploadSrAlertsRepeat = $('#file-upload-sr-alerts-repeat');
+            var successMessage = $(this).data('success-message');
+            if (fileUploadSrAlerts.text() == '') {
+                fileUploadSrAlerts.text(successMessage);
+                fileUploadSrAlertsRepeat.text('');
+            } else {
+                fileUploadSrAlertsRepeat.text(successMessage);
+                fileUploadSrAlerts.text('');
+            }
         });
 
         // Handle multiple file input.
