@@ -1207,10 +1207,11 @@ header {
 
 #site-title a {
   padding-bottom: 0; }
+  @media (max-width: 767px) {
+    #site-title a {
+      display: inline-flex;
+      font-size: 16px; } }
 
-@media (max-width: 767px) {
-  #site-title a {
-    font-size: 16px; } }
 #global-nav > .navigation {
   float: left; }
   @media (max-width: 767px) {

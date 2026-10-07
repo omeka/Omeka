@@ -114,10 +114,9 @@ header {
 
 #site-title a {
 	padding-bottom: 0;
-}
 
-@include screen-xs {
-	#site-title a {
+	@include screen-xs {
+		display: inline-flex;
 		font-size: 16px;
 	}
 }
