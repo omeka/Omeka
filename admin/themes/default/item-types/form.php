@@ -3,9 +3,8 @@
 jQuery(document).ready(function () {
     var addNewRequestUrl = '<?php echo admin_url('item-types/add-new-element'); ?>';
     var addExistingRequestUrl = '<?php echo admin_url('item-types/add-existing-element'); ?>';
-    var changeExistingElementUrl = '<?php echo admin_url('item-types/change-existing-element'); ?>';
 
-    Omeka.ItemTypes.manageItemTypes(addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl);
+    Omeka.ItemTypes.manageItemTypes(addNewRequestUrl, addExistingRequestUrl);
 });
 </script>
 

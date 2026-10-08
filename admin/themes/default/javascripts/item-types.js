@@ -29,46 +29,9 @@ Omeka.ItemTypes = {};
      *
      * @param {string} addNewRequestUrl
      * @param {string} addExistingRequestUrl
-     * @param {string} changeExistingElementUrl
      */
-    Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl) {
-        /**
-         * Activate dropdown for selecting from existing elements.
-         */
-        function activateSelectElementDropdowns() {
-            $('select.existing-element-drop-down').change(function () {
-                var dropDown = $(this);
-                var elementId = dropDown.val();
-                var addExistingElementIdPrefix = 'add-existing-element-id-';
-                var addExistingElementId = this.getAttribute('id');
-                if (addExistingElementId) {
-                    var elementTempId = addExistingElementId.substring(addExistingElementIdPrefix.length);
-                    $.ajax({
-                        url: changeExistingElementUrl,
-                        dataType: 'json',
-                        data: {elementId: elementId, elementTempId: elementTempId},
-                        success: function (response) {
-                            var elementDescriptionCol = dropDown.parent().next();
-                            if(response.elementDescription) {
-                                elementDescriptionCol.html('<div class="element-description">' + response.elementDescription + '</div>');
-                                elementDescriptionCol.toggle();
-                            } else {
-                                elementDescriptionCol.hide();
-                            }
-                        },
-                        error: function () {
-                            alert('Unable to get selected element data.');
-                        }
-                    });
-                }
-            });
-        }
-        
-        /**
-         * Turn all the links into AJAX requests that will mark the element for deletion and update the list.
-         */
+    Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequestUrl) {
         function activateRemoveElementLinks() {
-
             $(document).on('click', '.delete-drawer, .undo-delete', function () {
                 toggleElements(this);
             });
