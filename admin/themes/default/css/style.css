@@ -1823,12 +1823,12 @@ td {
   padding: 0;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 5px; }
+  flex-wrap: wrap; }
   @media (max-width: 767px) {
     .action-links {
       clear: both;
-      padding-top: 5px; } }
+      padding-top: 5px;
+      gap: 5px; } }
   .action-links a {
     color: #003576; }
   .action-links li {
