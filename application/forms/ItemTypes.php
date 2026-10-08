@@ -255,6 +255,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             }
         }
 
+        uasort($elementInfos, function ($a, $b) { return $a['order'] <=> $b['order']; });
         return $elementInfos;
     }
 }
