@@ -52,30 +52,22 @@ jQuery(document).ready(function () {
                     </div>
                 </li>
                 <?php else: ?>
-                    <?php if (!$element->exists()):  ?>
-                    <?php echo $this->action(
-                        'add-new-element', 'item-types', null,
-                        [
-                            'from_post' => true,
+                    <?php
+                    if (!$element->exists()):
+                        echo $this->partial('item-types/add-new-element.php', [
                             'elementTempId' => $elementTempId,
                             'elementName' => $element->name,
                             'elementDescription' => $element->description,
                             'elementOrder' => $elementOrder
-                        ]
-                    );
-                    ?>
-                    <?php else: ?>
-                    <?php echo $this->action(
-                        'add-existing-element', 'item-types', null,
-                        [
-                            'from_post' => true,
+                        ]);
+                    else:
+                        echo $this->partial('item-types/add-existing-element.php', [
                             'elementTempId' => $elementTempId,
                             'elementId' => $element->id,
                             'elementOrder' => $elementOrder
-                        ]
-                    );
+                        ]);
+                    endif;
                     ?>
-                    <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; // end for each $elementInfos ?> 
                 <li>

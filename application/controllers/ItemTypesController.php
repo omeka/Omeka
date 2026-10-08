@@ -69,61 +69,10 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 
     public function addNewElementAction()
     {
-        if ($this->_getParam('from_post') == 'true') {
-            $elementTempId = $this->_getParam('elementTempId');
-            $elementName = $this->_getParam('elementName');
-            $elementDescription = $this->_getParam('elementDescription');
-            $elementOrder = $this->_getParam('elementOrder');
-        } else {
-            $elementTempId = '' . time();
-            $elementName = '';
-            $elementDescription = '';
-            $elementOrder = intval($this->_getParam('elementCount')) + 1;
-        }
-
-        $stem = Omeka_Form_ItemTypes::NEW_ELEMENTS_INPUT_NAME . "[$elementTempId]";
-        $elementNameName = $stem . '[name]';
-        $elementDescriptionName = $stem . '[description]';
-        $elementOrderName = $stem . '[order]';
-
-        $this->view->assign(['element_name_name' => $elementNameName,
-                                  'element_name_value' => $elementName,
-                                  'element_id_temp' => $elementTempId,
-                                  'element_description_name' => $elementDescriptionName,
-                                  'element_description_value' => $elementDescription,
-                                  'element_order_name' => $elementOrderName,
-                                  'element_order_value' => $elementOrder,
-                                   ]);
     }
 
     public function addExistingElementAction()
     {
-        if ($this->_getParam('from_post') == 'true') {
-            $elementTempId = $this->_getParam('elementTempId');
-            $elementId = $this->_getParam('elementId');
-            $element = $this->_helper->db->getTable('Element')->find($elementId);
-            if ($element) {
-                $elementDescription = $element->description;
-            }
-            $elementOrder = $this->_getParam('elementOrder');
-        } else {
-            $elementTempId = '' . time();
-            $elementId = '';
-            $elementDescription = '';
-            $elementOrder = intval($this->_getParam('elementCount')) + 1;
-        }
-
-        $stem = Omeka_Form_ItemTypes::ELEMENTS_TO_ADD_INPUT_NAME . "[$elementTempId]";
-        $elementIdName = $stem .'[id]';
-        $elementOrderName = $stem .'[order]';
-
-        $this->view->assign(['element_id_name' => $elementIdName,
-                                  'element_id_temp' => $elementTempId,
-                                  'element_id_value' => $elementId,
-                                  'element_description' => $elementDescription,
-                                  'element_order_name' => $elementOrderName,
-                                  'element_order_value' => $elementOrder,
-                                  ]);
     }
 
     public function changeExistingElementAction()

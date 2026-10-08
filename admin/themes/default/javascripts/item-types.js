@@ -131,10 +131,11 @@ Omeka.ItemTypes = {};
             $.ajax({
                 url: requestUrl,
                 dataType: 'text',
-                data: {elementCount: elementCount},
                 success: function (responseText) {
                     var response = responseText || 'no response text';
-                    $('.add-new').parent().before(response);
+                    var newElement = $(response);
+                    newElement.find('.element-order').val(elementCount);
+                    $('.add-new').parent().before(newElement);
                     var totalElements = $('#item-type-elements .element').length;
                     $('#add-element-success .element-count').text(totalElements);
                     $('#add-element-success').show();
