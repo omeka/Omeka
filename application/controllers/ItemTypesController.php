@@ -75,22 +75,6 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
     {
     }
 
-    public function changeExistingElementAction()
-    {
-        $elementId = $this->_getParam('elementId');
-        $element = $this->_helper->db->getTable('Element')->find($elementId);
-
-        $elementDescription = '';
-        if ($element) {
-            $elementDescription = $element->description;
-        }
-
-        $data = [];
-        $data['elementDescription'] = $elementDescription;
-
-        $this->_helper->json($data);
-    }
-
     protected function _redirectAfterAdd($itemType)
     {
         $this->_redirect("item-types/edit/{$itemType->id}");
