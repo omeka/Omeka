@@ -2190,12 +2190,12 @@ td {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
 }
 @media (max-width: 767px) {
   .action-links {
     clear: both;
     padding-top: 5px;
+    gap: 5px;
   }
 }
 .action-links a {
