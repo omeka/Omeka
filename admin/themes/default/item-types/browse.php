@@ -4,22 +4,22 @@ $totalItemsWithoutType = get_db()->getTable('Item')->count(['item_type' => 0]);
 echo head(['title' => $pageTitle,'bodyclass' => 'item-types browse']);
 echo flash();
 ?>
+<div class="results-header">
+    <?php if (is_allowed('ItemTypes', 'add')): ?>
+    <?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
+    <?php endif ?>
 
-<?php if (is_allowed('ItemTypes', 'add')): ?>
-<?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
-<?php endif ?>
-
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-
-<p class="without-item-type">
-    <?php if ($totalItemsWithoutType):
-        $withoutTypeMessage = __(plural('%s%d item%s has no type.', "%s%d items%s have no type.", $totalItemsWithoutType),
-            '<a href="' . html_escape(url('items/browse?type=0')) . '">', $totalItemsWithoutType, '</a>');
-    else:
-        $withoutTypeMessage = __('All items have a type.');
-    endif; ?>
-    <?php echo $withoutTypeMessage; ?>
-</p>
+    <p class="without-item-type">
+        <?php if ($totalItemsWithoutType):
+            $withoutTypeMessage = __(plural('%s%d item%s has no type.', "%s%d items%s have no type.", $totalItemsWithoutType),
+                '<a href="' . html_escape(url('items/browse?type=0')) . '">', $totalItemsWithoutType, '</a>');
+        else:
+            $withoutTypeMessage = __('All items have a type.');
+        endif; ?>
+        <?php echo $withoutTypeMessage; ?>
+    </p>
+    <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+</div>
 
 <div class="table-responsive">
     <table aria-label="<?php echo __('Item Types'); ?>">
@@ -49,14 +49,13 @@ echo flash();
         </tbody>
     </table>
 </div>
-
-<?php if (is_allowed('ItemTypes', 'add')): ?>
-<?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
-<?php endif ?>
-
-<?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-
-<p class="without-item-type"><?php echo $withoutTypeMessage; ?></p>
+<div class="results-footer">
+    <?php if (is_allowed('ItemTypes', 'add')): ?>
+    <?php echo link_to('item-types', 'add', __('Add an Item Type'), ['class'=>'add green button']); ?>
+    <?php endif ?>
+    <p class="without-item-type"><?php echo $withoutTypeMessage; ?></p>
+    <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+</div>
 
 <?php fire_plugin_hook('admin_item_types_browse', ['item_types' => $this->item_types, 'view' => $this]); ?>
 

@@ -12,12 +12,15 @@ echo item_search_filters();
 ?>
 
 <?php if ($total_results): ?>
-    <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-    <?php if (is_allowed('Items', 'add')): ?>
-    <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
-    <?php endif; ?>
-    <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
-    <?php echo common('quick-filters', [], 'items'); ?>
+
+    <div class="results-header">
+        <?php if (is_allowed('Items', 'add')): ?>
+        <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
+        <?php endif; ?>
+        <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
+        <?php echo common('quick-filters', [], 'items'); ?>
+        <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+    </div>
 
     <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
         <div class="table-actions batch-edit-option">
@@ -149,12 +152,14 @@ echo item_search_filters();
         </div>
     </form>
 
-    <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-    <?php if (is_allowed('Items', 'add')): ?>
-    <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
-    <?php endif; ?>
-    <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
-    <?php echo common('quick-filters', [], 'items'); ?>
+    <div class="results-footer">
+        <?php if (is_allowed('Items', 'add')): ?>
+        <a href="<?php echo html_escape(url('items/add')); ?>" class="add full-width-mobile button green"><?php echo __('Add an Item'); ?></a>
+        <?php endif; ?>
+        <?php echo link_to_item_search(__('Search Items'), ['class' => 'blue full-width-mobile advanced-search-link button']); ?>
+        <?php echo common('quick-filters', [], 'items'); ?>
+        <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+    </div>
 
 
     <div id="outputs">

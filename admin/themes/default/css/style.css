@@ -1517,18 +1517,20 @@ header nav {
   }
 }
 
-.pagination {
+.pagination-nav {
   clear: right;
   float: right;
-  margin: 0 0 20px 14px;
+  margin: 0 0 20px auto;
   padding: 0;
 }
 @media (max-width: 767px) {
-  .pagination {
-    float: none;
-    margin: 0 0 10px;
-    overflow: hidden;
+  .pagination-nav {
+    margin: 0 0 10px auto;
   }
+}
+
+ul.pagination {
+  margin: 0;
 }
 
 .pagination li {
@@ -2338,14 +2340,20 @@ ul.details li:last-child {
   width: 20%;
 }
 
+.results-header,
+.results-footer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .without-item-type,
 .not-in-collections {
-  float: right;
   padding: 7px 12px;
   background-color: #fff3cd;
   border: 1px solid #ffeeba;
   border-radius: 3px;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px auto;
   color: #856404;
 }
 .without-item-type a,
@@ -2357,6 +2365,10 @@ ul.details li:last-child {
   .not-in-collections {
     float: left;
   }
+}
+.without-item-type + .pagination-nav,
+.not-in-collections + .pagination-nav {
+  margin-left: 0;
 }
 
 .collections.show .recent-items {
