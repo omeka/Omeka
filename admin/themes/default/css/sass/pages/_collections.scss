@@ -18,6 +18,12 @@
     & + .pagination-nav {
         margin-left: 0;
     }
+
+    @include screen-xs {
+        & + .pagination-nav {
+            margin-left: auto;
+        }
+    }
 }
 
 .collections.show .recent-items {

@@ -2370,6 +2370,12 @@ ul.details li:last-child {
 .not-in-collections + .pagination-nav {
   margin-left: 0;
 }
+@media (max-width: 767px) {
+  .without-item-type + .pagination-nav,
+  .not-in-collections + .pagination-nav {
+    margin-left: auto;
+  }
+}
 
 .collections.show .recent-items {
   list-style-type: none;
