@@ -6,21 +6,23 @@ echo flash();
 ?>
 
 <?php if (total_records('Collection') > 0): ?>
-    <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-    <?php if (is_allowed('Collections', 'add')): ?>
-        <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button">
-            <?php echo __('Add a Collection'); ?>
-        </a>
-    <?php endif; ?>
-    <p class="not-in-collections">
-    <?php if ($totalItemsWithoutCollection):
-        $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
-            $totalItemsWithoutCollection), '<a href="' . html_escape(url('items/browse?collection=0')) . '">', $totalItemsWithoutCollection, '</a>');
-    else:
-        $withoutCollectionMessage = __('All items are in a collection.');
-    endif; ?>
-    <?php echo $withoutCollectionMessage; ?>
-    </p>
+    <div class="results-header">
+        <?php if (is_allowed('Collections', 'add')): ?>
+            <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button">
+                <?php echo __('Add a Collection'); ?>
+            </a>
+        <?php endif; ?>
+        <p class="not-in-collections">
+        <?php if ($totalItemsWithoutCollection):
+            $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
+                $totalItemsWithoutCollection), '<a href="' . html_escape(url('items/browse?collection=0')) . '">', $totalItemsWithoutCollection, '</a>');
+        else:
+            $withoutCollectionMessage = __('All items are in a collection.');
+        endif; ?>
+        <?php echo $withoutCollectionMessage; ?>
+        </p>
+        <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+    </div>
     <?php if (has_loop_records('collections')): ?>
         <div class="table-responsive">
             <table id="collections" aria-label="<?php echo __('Collections'); ?>">
@@ -84,12 +86,13 @@ echo flash();
                 </tbody>
             </table>
         </div>
-
-        <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
-        <?php if (is_allowed('Collections', 'add')): ?>
-            <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button"><?php echo __('Add a Collection'); ?></a>
-        <?php endif; ?>
-        <p class="not-in-collections"><?php echo $withoutCollectionMessage; ?></p>
+        <div class="results-footer">
+            <?php if (is_allowed('Collections', 'add')): ?>
+                <a href="<?php echo html_escape(url('collections/add')); ?>" class="green button"><?php echo __('Add a Collection'); ?></a>
+            <?php endif; ?>
+            <p class="not-in-collections"><?php echo $withoutCollectionMessage; ?></p>
+            <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
+        </div>
     <?php else: ?>
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?>

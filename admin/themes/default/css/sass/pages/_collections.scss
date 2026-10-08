@@ -1,11 +1,10 @@
 .without-item-type,
 .not-in-collections {
-    float: right;
     padding: 7px 12px;
     background-color: #fff3cd;
     border: 1px solid #ffeeba;
     border-radius: 3px;
-    margin: 0 0 20px 0;
+    margin: 0 0 20px auto;
     color: #856404;
     
     a {
@@ -14,6 +13,10 @@
 
     @include screen-xs {
         float: left;
+    }
+
+    & + .pagination-nav {
+        margin-left: 0;
     }
 }
 
