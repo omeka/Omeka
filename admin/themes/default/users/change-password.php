@@ -1,5 +1,4 @@
 <?php
-queue_js_file('users');
 $userTitle = $user->username;
 if ($userTitle != '') {
     $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
