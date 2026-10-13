@@ -16,9 +16,6 @@
         </ul>
     </div>
     <div id="mobile-nav">
-        <?php echo common('global-nav'); ?>
-        <?php fire_plugin_hook('admin_header_bottom', ['view'=>$this]); ?>
-
         <button type="button" id="content-nav-toggle" class="mobile-menu collapse" data-target="#content-nav" aria-expanded="true"><?php echo __('Content'); ?></button>
         <nav id="content-nav" class="in" aria-label="<?php echo __('Content'); ?>">
             <?php
@@ -48,5 +45,7 @@
                 echo $nav;
             ?>
         </nav>
+        <?php echo common('global-nav'); ?>
+        <?php fire_plugin_hook('admin_header_bottom', ['view'=>$this]); ?>
     </div>
 </nav>
