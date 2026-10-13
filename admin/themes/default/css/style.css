@@ -3348,6 +3348,7 @@ form.form-inline.editableform {
 .editable-error-block.editable-error {
   position: absolute;
   top: 100%;
+  z-index: 10;
   background-color: #fff;
   text-shadow: none;
   color: #82423B;
