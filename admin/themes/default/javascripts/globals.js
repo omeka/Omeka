@@ -129,11 +129,29 @@ if (!Omeka) {
     };
 
     Omeka.showAdvancedForm = function () {
-        $('#search-form').on('click', '.show-advanced', function() {
-            var advanced_toggle = $(this);
+        var searchForm = $('#search-form');
+        var advanced_toggle = $('#advanced-search');
+        var advancedFormElement = document.getElementById('advanced-form');
+        searchForm.on('click', '#advanced-search', function(e) {
             advanced_toggle.toggleClass('open');
             if (advanced_toggle.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
+                $(document).on('keydown', function(e) {
+                    if (e.key == 'Escape') {
+                        advanced_toggle.removeClass('open').attr('aria-expanded', 'false');
+                        advanced_toggle.focus();
+                        $(document).off(e);
+                    };
+                });
+                e.stopPropagation();
+                $(document).on('click focusin', function(e) {
+                    if (!$.contains(advancedFormElement, e.target)) {
+                        if (!$(e.target).hasClass('show-advanced')) {
+                            advanced_toggle.removeClass('open').attr('aria-expanded', 'false');
+                            $(document).off(e);
+                        }
+                    }
+                });
             } else {
                 advanced_toggle.attr('aria-expanded', false);
             }
