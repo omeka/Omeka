@@ -9,37 +9,63 @@ Omeka.Tabs = {};
      * Set up JS hide/show tabs for the edit page/
      */
     Omeka.Tabs.initialize = function () {
-        var tabLinks = $('#section-nav > li > a');
-        var tabIds = tabLinks.map(function () {
-            // Rely on the fact that the links have pound signs.
-            // Workaround IE7's creation of absolute URLs.
-            return '#' + this.getAttribute('href').split('#')[1];
+        var tabButtons = $('#section-tabs [role="tab"]');
+        var tabIds = tabButtons.map(function () {
+            return '#' + this.getAttribute('aria-controls');
         }).toArray().join(',');
-        var tabs = $(tabIds);
+        var tabPanels = $(tabIds);
 
-        function selectTab(tabLink) {
-            tabLinks.removeClass('active');
-            tabs.hide();
+        function selectTab(tabButton) {
+            tabButtons.removeClass('active').attr('aria-selected', 'false').attr('tabindex', '-1');;
+            tabPanels.hide();
 
-            tabLink.addClass('active');
-            $(tabLink.attr('href')).show();
-            tabLink.trigger('omeka:tabselected');
+            tabButton.addClass('active').attr('aria-selected', 'true').attr('tabindex', '0');
+            $('#' + tabButton.attr('aria-controls')).show();
+            tabButton.trigger('omeka:tabselected');
         }
 
-        tabLinks.click(function (event) {
-            event.preventDefault();
+        $(document).on('click', '#section-tabs [role="tab"]', function (event) {
             selectTab($(this));
         });
 
-        // Select the tab given in the anchor, if any, or the first tab.
+        $(document).on('keydown', '#section-tabs [role="tab"]', (e) => {
+            var tabButtonsArray = Array.from(tabButtons);
+            var currentTab = e.target;
+            var currentIndex = tabButtonsArray.indexOf(currentTab);
+            if (currentIndex === -1) return; // Exit if the focused element is not a tab
+            var newIndex = 0;
+
+            switch (e.key) {
+                case "ArrowRight":
+                newIndex = (currentIndex + 1) % tabButtons.length;
+                break;
+                case "ArrowLeft":
+                newIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length;
+                break   ;
+                case "Home":
+                newIndex = 0;
+                break;
+                case "End":
+                newIndex = tabs.length - 1;
+                break;
+                default:
+                return; // Exit if the key is not recognized
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+            tabButtons[newIndex].focus();
+        });
+
+        // Select the tab given in the button, if any, or the first tab.
         var selectedTab;
         var url = document.location.toString();
         if (url.match('#')) {
             var anchor = '#' + url.split('#')[1];
-            selectedTab = tabLinks.filter('[href="' + anchor + '"]');
+            selectedTab = tabButtons.filter('[aria-controls="' + anchor + '"]');
         }
         if (!selectedTab || !selectedTab.length) {
-            selectedTab = tabLinks.first();
+            selectedTab = tabButtons.first();
         }
 
         selectTab(selectedTab);

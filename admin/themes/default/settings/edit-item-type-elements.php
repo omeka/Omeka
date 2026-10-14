@@ -1,7 +1,7 @@
 <?php
 queue_js_file('element-sets');
-echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-item-type-elements']);
-echo common('settings-nav');
+$sectionNav = common('settings-nav');
+echo head(['title' => __('Settings'), 'bodyclass'=>'settings edit-item-type-elements', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 <form method="post" id="edit-item-type-elements">

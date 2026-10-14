@@ -1,7 +1,10 @@
 <?php 
 $pageTitle = __('Add an Item');
-echo head(['title' => $pageTitle,'bodyclass' => 'items']);
+ob_start();
 include 'form-tabs.php';
+$sectionNav = ob_get_contents();
+ob_end_clean();
+echo head(['title' => $pageTitle,'bodyclass' => 'items', 'sectionNav' => $sectionNav]);
 echo flash();
 ?>
 
