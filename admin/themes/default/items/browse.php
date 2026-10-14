@@ -1,6 +1,11 @@
 <?php
 queue_js_file('items-browse');
-$pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_results);
+$itemSearchFilters = item_search_filters();
+if ($itemSearchFilters == '') {
+    $pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_results);
+} else {
+    $pageTitle = __('Browse Items') . ' ' . __('(filtered results: %s total)', $total_results);
+}
 echo head(
     [
         'title' => $pageTitle,
@@ -8,9 +13,8 @@ echo head(
     ]
 );
 echo flash();
-echo item_search_filters();
+echo $itemSearchFilters;
 ?>
-
 <?php if ($total_results): ?>
     <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
     <?php if (is_allowed('Items', 'add')): ?>
