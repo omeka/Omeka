@@ -53,7 +53,7 @@ if (!Omeka) {
 
             $.post(url, function (response){
                 $(response).dialog({modal:true});
-                $('.ui-dialog .ui-dialog-titlebar-close').focus();
+                $('.ui-dialog [type="submit"]').focus();
             });
         });
     };
