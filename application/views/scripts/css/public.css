@@ -1,11 +1,12 @@
-a[target="_blank"]:after {
+a[target=_blank]:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-style: normal;
-  content: "\f35d" / "";
+  content: "\f35d"/"";
   display: inline-block;
-  margin: 0 .25rem;
-  font-size: 10px; }
+  margin: 0 0.25rem;
+  font-size: 10px;
+}
 
 .sr-only {
   border: 0;
@@ -15,23 +16,29 @@ a[target="_blank"]:after {
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px; }
+  width: 1px;
+}
 
 #search-narrow-by-fields-remove-field {
-  display: none; }
+  display: none;
+}
 
 .search-entry {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 1rem; }
-  .search-entry .visible-label {
-    display: block;
-    margin-bottom: .25rem; }
-  .search-entry .input,
-  .search-entry input[type=text] {
-    margin-bottom: .5rem; }
+  margin-bottom: 1rem;
+}
+.search-entry .visible-label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.search-entry .input,
+.search-entry input[type=text] {
+  margin-bottom: 0.5rem;
+}
 
 #search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
-  display: none; }
+  display: none;
+}
 
 /*# sourceMappingURL=public.css.map */

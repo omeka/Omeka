@@ -39,10 +39,6 @@
 }
 
 .in {
-  -webkit-animation-name: fadeIn;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
   animation-name: fadeIn;
   animation-fill-mode: forwards;
   animation-duration: 1s;
@@ -50,10 +46,6 @@
 }
 
 .in-out {
-  -webkit-animation-name: fadeInOut;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-iteration-count: 1;
   animation-name: fadeInOut;
   animation-fill-mode: forwards;
   animation-duration: 4s;
@@ -471,7 +463,6 @@ button {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
-  -webkit-appearance: none;
   background: #f1f2f2;
   border: 1px solid #D6D5C2;
   color: #232323;
@@ -1145,8 +1136,6 @@ input[type=search],
 input[type=password] {
   height: 36px;
   border: 1px solid #D6D5C2;
-  -webkit-border-radius: 0;
-  -moz-box-radius: 0;
   border-radius: 0;
   box-sizing: border-box;
   color: #666666;
@@ -1264,7 +1253,6 @@ label input[type=text] {
   background-color: #eee;
   border-radius: 2px;
   display: block;
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0 0.25rem;
   font-weight: normal;
@@ -1295,9 +1283,7 @@ input[type=checkbox] {
 
 .quick-filter,
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   padding: 10px 36px 10px 9px;
   border: 1px solid #D6D5C2;
   border-radius: 3px;
@@ -1519,9 +1505,7 @@ header nav {
 
 #mobile-navbar-toggle {
   color: white;
-  -webkit-appearance: initial;
-     -moz-appearance: initial;
-          appearance: initial;
+  appearance: initial;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -1576,7 +1560,6 @@ ul.pagination {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
-  -webkit-appearance: none;
   background: #f1f2f2;
   border: 1px solid #D6D5C2;
   color: #232323;
@@ -2104,8 +2087,6 @@ button.remove_search {
   display: block;
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 1px solid #dcdcdc;
   border-bottom: 0;
   box-sizing: border-box;
@@ -2648,7 +2629,6 @@ ul.details li:last-child {
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
-    -webkit-appearance: none;
     background: #f1f2f2;
     border: 1px solid #D6D5C2;
     color: #232323;
@@ -3701,3 +3681,5 @@ form.form-inline.editableform {
 #navigation_form .template {
   display: none;
 }
+
+/*# sourceMappingURL=style.css.map */

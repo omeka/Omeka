@@ -2,8 +2,6 @@
     display: block;
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
     border: 1px solid #dcdcdc;
     border-bottom: 0;
     box-sizing: border-box;
@@ -253,8 +251,6 @@ span.title {
     padding: $spacing-m;
     clear: both;
     width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-flex;
     flex-wrap: wrap;
