@@ -1,15 +1,20 @@
 <?php
-$pageTitle = __('Browse Items');
+$itemSearchFilters = item_search_filters();
+if ($itemSearchFilters == '') {
+    $pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_results);
+} else {
+    $pageTitle = __('Browse Items') . ' ' . __('(filtered results: %s total)', $total_results);
+}
 echo head(['title' => $pageTitle, 'bodyclass' => 'items browse']);
 ?>
 
-<h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
+<h1><?php echo $pageTitle;?></h1>
 
 <nav class="items-nav navigation secondary-nav" aria-label="<?php echo __('Items'); ?>">
     <?php echo public_nav_items(); ?>
 </nav>
 
-<?php echo item_search_filters(); ?>
+<?php echo $itemSearchFilters; ?>
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
 
