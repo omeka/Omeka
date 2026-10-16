@@ -51,5 +51,7 @@
 .settings/
 
 # For Sass
-
 .sass-cache
+
+# NPM
+/node_modules/

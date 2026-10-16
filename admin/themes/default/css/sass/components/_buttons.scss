@@ -1,14 +1,9 @@
 @mixin button {
-    -webkit-border-radius: 3;
-    -moz-border-radius: 3;
     border-radius: 3px;
     
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
-    -webkit-appearance: none;
     
     background: $lightgray;
     border: 1px solid $darkgrayborder;
@@ -52,8 +47,6 @@
     }
     
     &:disabled {
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
         box-shadow: none !important;
         cursor: default;
         opacity: .35;
@@ -171,15 +164,11 @@ button.ui-state-default {
     background: #A4C637;
     color: #fff !important;
     border: 1px solid #749308 !important;
-    -webkit-border-radius: 3 !important;
-    -moz-border-radius: 3 !important;
     border-radius: 3 !important;
 }
 
 button.ui-dialog-titlebar-close {
     top: 40% !important;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     border: 0 !important;
     background-image: none !important;

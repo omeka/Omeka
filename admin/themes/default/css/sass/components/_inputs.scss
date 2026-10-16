@@ -41,11 +41,7 @@ input[type=search],
 input[type=password] { 
     height: 36px;
     border: 1px solid $darkgrayborder;
-    -webkit-border-radius: 0;
-    -moz-box-radius: 0;
     border-radius: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #666666;
     line-height: $spacing-l;
@@ -151,8 +147,6 @@ label {
     input[type=password],
     textarea {
         width: 100%;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
 
@@ -188,11 +182,7 @@ textarea {
     width: 100%;
     border: 1px solid $darkgrayborder;
     overflow: auto;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
     border-radius: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #666666;
     padding: $spacing-s $spacing-m;
@@ -211,7 +201,6 @@ input[type="checkbox"] {
 
 .quick-filter,
 select {
-    -webkit-appearance: none;
     appearance: none;
     padding: $spacing-m 36px $spacing-m 9px;
     border: 1px solid $darkgrayborder;

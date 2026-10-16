@@ -39,10 +39,6 @@
 }
 
 .in {
-  -webkit-animation-name: fadeIn;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
   animation-name: fadeIn;
   animation-fill-mode: forwards;
   animation-duration: 1s;
@@ -50,10 +46,6 @@
 }
 
 .in-out {
-  -webkit-animation-name: fadeInOut;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-iteration-count: 1;
   animation-name: fadeInOut;
   animation-fill-mode: forwards;
   animation-duration: 4s;
@@ -102,7 +94,7 @@ a:link {
 a:hover,
 a:active,
 a:visited {
-  color: rgb(0, 7.186440678, 16);
+  color: rgb(0%, 2.8182120306%, 6.2745098039%);
 }
 
 a[target=_blank],
@@ -454,7 +446,7 @@ li .flash {
 .success {
   color: #155724;
   background-color: #eaf2e1 !important;
-  border-color: rgb(209.0930232558, 226.5813953488, 189.4186046512) !important;
+  border-color: rgb(81.9972640219%, 88.8554491564%, 74.2818057456%) !important;
 }
 
 .error, .alert {
@@ -471,7 +463,6 @@ button {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
-  -webkit-appearance: none;
   background: #f1f2f2;
   border: 1px solid #D6D5C2;
   color: #232323;
@@ -527,7 +518,7 @@ input[type=submit].small:focus,
 button.small:hover,
 button.small:focus {
   border-color: rgba(35, 35, 35, 0.65);
-  background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
+  background: rgb(89.3246187364%, 90.0871459695%, 90.0871459695%);
 }
 span.button.small:focus,
 a.button.small:focus,
@@ -567,7 +558,7 @@ input[type=submit].blue:focus,
 button.blue:hover,
 button.blue:focus {
   border-color: rgba(0, 53, 118, 0.65);
-  background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
+  background: rgb(85.6060606061%, 89.8395721925%, 95.7664884135%);
 }
 span.button.blue *,
 a.button.blue *,
@@ -601,7 +592,7 @@ input[type=submit].red:focus,
 button.red:hover,
 button.red:focus {
   border-color: rgba(176, 13, 0, 0.65);
-  background: rgb(243.9, 212.45, 210.6);
+  background: rgb(95.6470588235%, 83.3137254902%, 82.5882352941%);
 }
 span.button.red *,
 a.button.red *,
@@ -613,7 +604,7 @@ span.button.green,
 a.button.green,
 input[type=submit].green,
 button.green {
-  color: rgb(44.7146341463, 87.3, 0);
+  color: rgb(17.5351506456%, 34.2352941176%, 0%);
   background: #eaf2e1;
   border: 1px solid rgba(63, 123, 0, 0.25);
 }
@@ -632,13 +623,13 @@ input[type=submit].green:focus,
 button.green:hover,
 button.green:focus {
   border-color: rgba(63, 123, 0, 0.65);
-  background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
+  background: rgb(86.8809849521%, 91.8787049704%, 81.2585499316%);
 }
 span.button.green *,
 a.button.green *,
 input[type=submit].green *,
 button.green * {
-  color: rgb(49.9390243902, 97.5, 0);
+  color: rgb(19.5839311334%, 38.2352941176%, 0%);
 }
 
 a.button[target=_blank] {
@@ -672,15 +663,15 @@ button.ui-dialog-titlebar-close {
   background: #eaf2e1 !important;
 }
 .mce-primary button {
-  color: rgb(49.9390243902, 97.5, 0) !important;
+  color: rgb(19.5839311334%, 38.2352941176%, 0%) !important;
   border: 1px solid rgba(63, 123, 0, 0.25) !important;
 }
 .mce-primary button:hover, .mce-primary button:focus {
   border-color: rgba(63, 123, 0, 0.65);
-  background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
+  background: rgb(86.8809849521%, 91.8787049704%, 81.2585499316%);
 }
 .mce-primary button * {
-  color: rgb(49.9390243902, 97.5, 0);
+  color: rgb(19.5839311334%, 38.2352941176%, 0%);
 }
 
 #content {
@@ -936,8 +927,6 @@ button.ui-dialog-titlebar-close {
   color: #B00D00;
   background: #F9E8E7;
   border: 1px solid rgba(176, 13, 0, 0.25);
-  border-radius: 2px;
-  text-shadow: none;
 }
 .deleted.sortable-item.ui-button, .deleted.sortable-item.drawer,
 .deleted.drawer.ui-button,
@@ -949,11 +938,16 @@ button.ui-dialog-titlebar-close {
 .deleted.drawer:hover,
 .deleted.drawer:focus {
   border-color: rgba(176, 13, 0, 0.65);
-  background: rgb(243.9, 212.45, 210.6);
+  background: rgb(95.6470588235%, 83.3137254902%, 82.5882352941%);
 }
 .deleted.sortable-item *,
 .deleted.drawer * {
   color: #B00D00;
+}
+.deleted.sortable-item,
+.deleted.drawer {
+  border-radius: 2px;
+  text-shadow: none;
 }
 .deleted.sortable-item input.drawer-name,
 .deleted.sortable-item select.drawer-name,
@@ -1136,8 +1130,6 @@ input[type=search],
 input[type=password] {
   height: 36px;
   border: 1px solid #D6D5C2;
-  -webkit-border-radius: 0;
-  -moz-box-radius: 0;
   border-radius: 0;
   box-sizing: border-box;
   color: #666666;
@@ -1255,7 +1247,6 @@ label input[type=text] {
   background-color: #eee;
   border-radius: 2px;
   display: block;
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0 0.25rem;
   font-weight: normal;
@@ -1286,9 +1277,7 @@ input[type=checkbox] {
 
 .quick-filter,
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   padding: 10px 36px 10px 9px;
   border: 1px solid #D6D5C2;
   border-radius: 3px;
@@ -1314,7 +1303,7 @@ select[multiple=multiple] {
 }
 .mce-title:focus,
 .mce-textbox:focus {
-  border-color: rgb(162.75, 160.5, 117.75) !important;
+  border-color: rgb(63.8235294118%, 62.9411764706%, 46.1764705882%) !important;
 }
 
 .field label.checkbox-label {
@@ -1510,9 +1499,7 @@ header nav {
 
 #mobile-navbar-toggle {
   color: white;
-  -webkit-appearance: initial;
-     -moz-appearance: initial;
-          appearance: initial;
+  appearance: initial;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -1565,7 +1552,6 @@ header nav {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
-  -webkit-appearance: none;
   background: #f1f2f2;
   border: 1px solid #D6D5C2;
   color: #232323;
@@ -1583,7 +1569,7 @@ header nav {
 }
 .pagination li a:hover, .pagination li a:focus {
   border-color: rgba(35, 35, 35, 0.65);
-  background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
+  background: rgb(89.3246187364%, 90.0871459695%, 90.0871459695%);
 }
 .pagination li a:disabled {
   box-shadow: none !important;
@@ -2093,8 +2079,6 @@ button.remove_search {
   display: block;
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 1px solid #dcdcdc;
   border-bottom: 0;
   box-sizing: border-box;
@@ -2294,7 +2278,7 @@ span.title small {
 }
 
 .featured.label {
-  color: rgb(44.7146341463, 87.3, 0);
+  color: rgb(17.5351506456%, 34.2352941176%, 0%);
   border-color: rgba(63, 123, 0, 0.65);
   background: #eaf2e1;
 }
@@ -2305,7 +2289,7 @@ span.title small {
 .private.label {
   color: #003576;
   border-color: rgba(0, 53, 118, 0.65);
-  background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
+  background: rgb(85.6060606061%, 89.8395721925%, 95.7664884135%);
 }
 .private.label:before {
   content: "\f070"/"";
@@ -2606,7 +2590,6 @@ ul.details li:last-child {
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
-    -webkit-appearance: none;
     background: #f1f2f2;
     border: 1px solid #D6D5C2;
     color: #232323;
@@ -2623,14 +2606,10 @@ ul.details li:last-child {
     display: inline-block;
     margin: 0 5px 20px 0;
     padding: 5px 10px;
-    color: #003576;
-    background: #EEF3FA;
-    border: 1px solid rgba(0, 53, 118, 0.25);
-    margin: 0;
   }
   .browse table .action-links a:hover, .browse table .action-links a:focus {
     border-color: rgba(35, 35, 35, 0.65);
-    background: rgb(227.7777777778, 229.7222222222, 229.7222222222);
+    background: rgb(89.3246187364%, 90.0871459695%, 90.0871459695%);
   }
   .browse table .action-links a:focus {
     box-shadow: 0 0 0 3px #C67F6F;
@@ -2641,16 +2620,24 @@ ul.details li:last-child {
     cursor: default;
     opacity: 0.35;
   }
+  .browse table .action-links a {
+    color: #003576;
+    background: #EEF3FA;
+    border: 1px solid rgba(0, 53, 118, 0.25);
+  }
   .browse table .action-links a.ui-button {
     background: #EEF3FA !important;
     border: 1px solid rgba(0, 53, 118, 0.25) !important;
   }
   .browse table .action-links a:hover, .browse table .action-links a:focus {
     border-color: rgba(0, 53, 118, 0.65);
-    background: rgb(218.2954545455, 229.0909090909, 244.2045454545);
+    background: rgb(85.6060606061%, 89.8395721925%, 95.7664884135%);
   }
   .browse table .action-links a * {
     color: #003576;
+  }
+  .browse table .action-links a {
+    margin: 0;
   }
   .browse .action-links a.delete-confirm {
     color: #B00D00;
@@ -2663,7 +2650,7 @@ ul.details li:last-child {
   }
   .browse .action-links a.delete-confirm:hover, .browse .action-links a.delete-confirm:focus {
     border-color: rgba(176, 13, 0, 0.65);
-    background: rgb(243.9, 212.45, 210.6);
+    background: rgb(95.6470588235%, 83.3137254902%, 82.5882352941%);
   }
   .browse .action-links a.delete-confirm * {
     color: #B00D00;
@@ -2897,7 +2884,7 @@ ul.details li:last-child {
 }
 .tag-list li.tag-removed:hover, .tag-list li.tag-removed:focus {
   border-color: rgba(176, 13, 0, 0.65);
-  background: rgb(243.9, 212.45, 210.6);
+  background: rgb(95.6470588235%, 83.3137254902%, 82.5882352941%);
 }
 .tag-list li.tag-removed .undo-remove-tag a:after {
   background-color: #B00D00;
@@ -3258,10 +3245,10 @@ ul.details li:last-child {
   content: none;
 }
 .plugins.browse .cannotload {
-  background-color: rgb(255, 241.2, 241.2);
+  background-color: rgb(100%, 94.5882352941%, 94.5882352941%);
 }
 .plugins.browse .upgrade:not(button) {
-  background-color: rgb(248.9441860465, 251.2511627907, 246.3488372093);
+  background-color: rgb(97.6251709986%, 98.5298677611%, 96.6073871409%);
 }
 
 .plugin-row {
@@ -3365,14 +3352,16 @@ form.form-inline.editableform {
   color: #3f7b00;
   background: #eaf2e1;
   border: 1px solid rgba(63, 123, 0, 0.25);
+}
+.tag-list li:hover, .tag-list li:focus {
+  border-color: rgba(63, 123, 0, 0.65);
+  background: rgb(86.8809849521%, 91.8787049704%, 81.2585499316%);
+}
+.tag-list li {
   border-radius: 3px;
   display: inline-block;
   margin: 0 10px 10px 0;
   padding: 5px 10px;
-}
-.tag-list li:hover, .tag-list li:focus {
-  border-color: rgba(63, 123, 0, 0.65);
-  background: rgb(221.5465116279, 234.2906976744, 207.2093023256);
 }
 
 .tag-list .count {
@@ -3393,7 +3382,7 @@ form.form-inline.editableform {
 
 .tag-list li .tag, .tag-list li a, .tag-list li .count {
   display: inline-block;
-  color: rgb(23.8170731707, 46.5, 0);
+  color: rgb(9.3400286944%, 18.2352941176%, 0%);
 }
 
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {

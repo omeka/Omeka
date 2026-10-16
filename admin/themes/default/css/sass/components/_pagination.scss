@@ -26,16 +26,11 @@
         }
 
         .pagination li a {
-            -webkit-border-radius: 3;
-		    -moz-border-radius: 3;
 		    border-radius: 3px;
 		    
-		    -webkit-box-sizing: border-box;
-		    -moz-box-sizing: border-box;
 		    box-sizing: border-box;
 		    cursor: pointer;
 		    display: inline-block;
-		    -webkit-appearance: none;
 		    
 		    background: $lightgray;
 		    border: 1px solid $darkgrayborder;
@@ -61,8 +56,6 @@
 		    }
 		    
 		    &:disabled {
-		        -moz-box-shadow: none !important;
-		        -webkit-box-shadow: none !important;
 		        box-shadow: none !important;
 		        cursor: default;
 		        opacity: .35;
@@ -107,8 +100,6 @@
     .pagination .page-input input[type=text] {
         width: 40px;
         height: 38x;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
         margin: 0 $spacing-s;
         padding: 0;
