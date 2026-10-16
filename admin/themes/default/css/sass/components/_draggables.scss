@@ -68,13 +68,9 @@
 .ui-sortable-highlight:empty {
     background: rgba(0,0,0,.04);
     border: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     display: block;
     margin: 15px 0;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -120,8 +116,6 @@
 .deleted.sortable-item,
 .deleted.drawer {
     @include red;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
     border-radius: 2px;
     text-shadow: none;
 
@@ -165,9 +159,6 @@
 }
 
 .drawer.opened .drawer-toggle .icon:after {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 

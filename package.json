@@ -1,0 +1,15 @@
+{
+  "name": "omeka",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omeka/Omeka.git"
+  },
+  "devDependencies": {
+    "sass": "^1.107.0"
+  },
+  "scripts": {
+    "css": "sass admin/themes/default/css/sass/:admin/themes/default/css/ application/views/scripts/css/sass/:application/views/scripts/css/",
+    "css:watch": "npm run-script css -- --watch"
+  }
+}
