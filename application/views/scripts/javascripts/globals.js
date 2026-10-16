@@ -17,27 +17,35 @@ if (!Omeka) {
     
     // Show advanced options for site-wide search.
     Omeka.showAdvancedForm = function () {
-        var advanced_form = $('#advanced-form');
-
-        if (!advanced_form.length) {
-            return;
-        }
-
-        advanced_form.addClass('closed');
-        $('#search-container').addClass('with-advanced');
-
-        $('.show-advanced').click(function(e) {
-            e.preventDefault();
-            var advanced_toggle = $(this);
-            advanced_toggle.toggleClass('open').toggleClass('closed');
-            advanced_form.toggleClass('open').toggleClass('closed');
+        var searchForm = $('#search-form');
+        var advanced_toggle = $('#advanced-search');
+        var advancedFormElement = document.getElementById('advanced-form');
+        searchForm.on('click', '#advanced-search', function(e) {
+            advanced_toggle.toggleClass('open');
             if (advanced_toggle.hasClass('open')) {
                 advanced_toggle.attr('aria-expanded', true);
+                $(document).on('keydown', function(e) {
+                    if (e.key == 'Escape') {
+                        advanced_toggle.removeClass('open').attr('aria-expanded', 'false');
+                        advanced_toggle.focus();
+                        $(document).off(e);
+                    };
+                });
+                e.stopPropagation();
+                $(document).on('click focusin', function(e) {
+                    if (!$.contains(advancedFormElement, e.target)) {
+                        if (!$(e.target).hasClass('show-advanced')) {
+                            advanced_toggle.removeClass('open').attr('aria-expanded', 'false');
+                            $(document).off(e);
+                        }
+                    }
+                });
             } else {
                 advanced_toggle.attr('aria-expanded', false);
             }
         });
     };
+
 
     Omeka.megaMenu = function (menuSelector, customMenuOptions) {
         if (typeof menuSelector === 'undefined') {
