@@ -31,14 +31,15 @@ echo flash();
         <?php echo link_to('users', 'add', __('Add a User'), ['class'=>'green button']); ?>
     <?php endif; ?>
 
-<form id='search-users' method='GET'>
-    <input type='text' name='search' aria-labelledby="search-users-button" />
-    <fieldset>
-        <legend class="sr-only"><?php echo __('Options'); ?></legend>
-        <label><input type='radio' name='search-type' value='username' checked='checked' /><?php echo __('Username'); ?></label>
-        <label><input type='radio' name='search-type' value='name' /><?php echo __('Display Name'); ?></label>
-        <label><input type='radio' name='search-type' value='email' /><?php echo __('Email'); ?></label>
-    </fieldset>
+<form id='search-users' method='GET' role="group" aria-labelledby="search-users-button">
+    <label id="search-users-type"><?php echo __('Search by'); ?>
+        <select name="search-type">
+            <option value='username' checked='checked'><?php echo __('Username'); ?></option>
+            <option value='name'><?php echo __('Display Name'); ?></option>
+            <option value='email'><?php echo __('Email'); ?></option>
+        </select>
+    </label>
+    <input type='text' name='search' aria-label="<?php echo __('Query'); ?>" aria-describedby="search-users-type" />
     <button id="search-users-button"><?php echo __('Search users'); ?></button>
 </form>
 
