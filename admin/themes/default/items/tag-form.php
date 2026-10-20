@@ -9,22 +9,29 @@
         <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
         <p id="add-tags-explanation" class="explanation"><?php echo __('Separate tags with %s', option('tag_delimiter')); ?></p>
         <input type="submit" name="add-tags-button" id="add-tags-button" class="button" value="<?php echo __('Add Tags'); ?>" />
+        <div id="tags-sr-alerts" class="sr-only" aria-live="polite" 
+            data-duplicate-alert="<?php echo __('Tag already added.'); ?>"
+            data-success-alert="<?php echo __('Tag added.'); ?>">
+        </div>
+        <div id="tags-sr-alerts-repeat" class="sr-only" aria-live="polite"></div>
     </div>
     <div id="all-tags">
     <?php if ($tags): ?>
         <h3><?php echo __('All Tags'); ?></h3>
         
-        <div class="tag-list">
-        <ul id="all-tags-list">
+        <ul id="all-tags-list" class="tag-list" data-new-tag-id="0">
             <?php foreach( $tags as $tag ): ?>
+                <?php $tagId = $tag->id; ?>
                 <li>
-                    <?php echo '<span class="tag">' . html_escape($tag->name) . '</span>';
-                          echo '<span class="undo-remove-tag"><a href="#">' . __('Undo') . '</a></span>';
-                          echo '<span class="remove-tag"><a href="#">' . __('Remove') . '</a></span>'; ?>
+                    <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
+                    <?php echo '<span class="tag" id="tag-' . $tagId . '-name">' . html_escape($tag->name) . '</span>';
+                          echo '<button type="button" class="remove-tag button" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
+                          echo '<button type="button" class="undo-remove-tag button" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
+                    ?>
+                    </div>  
                 </li>
             <?php endforeach; ?>
         </ul>
-        </div>
     <?php endif; ?>
     </div>
 </div>

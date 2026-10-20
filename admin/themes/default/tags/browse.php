@@ -6,7 +6,7 @@ $pageTitle = __('Browse Tags');
 $pageTitle .= ' ' . __('(%s total)', $total_results);
 
 if ($canEdit) {
-    queue_js_file(['tags', 'vendor/jquery-editable-poshytip.min']);
+    queue_js_file(['tags', 'vendor/jquery-editable-poshytip']);
 }
 
 echo head(['title'=>$pageTitle,'bodyclass'=>'tags browse-tags']);
@@ -22,7 +22,7 @@ echo flash();
 
     <ol>
         <li><?php echo __('This number counts all records associated with a tag. Filtering "Record types" to "Items" will provide links to all items containing the tag.'); ?></li>
-        <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
+        <li><span id="edit-instructions"><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></span></li>
         <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged records.'); ?></li>
     </ol>
 </section>
@@ -81,22 +81,27 @@ echo flash();
             }
             ?>
         </div>
+        <?php if ($canEdit): ?>
+        <?php endif; ?>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
+            <?php $tagId = $tag->id; ?>
             <li>
-            <?php if($browse_for == 'Item'):?>
-                <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
-            <?php else: ?>
-                <span class="count"><?php echo $tag['tagCount']; ?></span>
-            <?php endif; ?>
-            <?php if ($canEdit): ?>
-                <span class="tag edit-tag" data-pk="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
-            <?php else: ?>
-                <span class="tag"><?php echo html_escape($tag->name); ?></span>
-            <?php endif; ?>
-            <?php if ($canDelete): ?>
-                <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm']); ?></span>
-            <?php endif; ?>
+                <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
+                <?php if($browse_for == 'Item'):?>
+                    <a href="<?php echo html_escape(url('items/browse', ['tags' => $tag->name])); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
+                <?php else: ?>
+                    <div class="count" id="count-<?php echo $tagId; ?>"><span class="sr-only"><?php echo __('Tagged records:'); ?></span> <?php echo $tag['tagCount']; ?></div>
+                <?php endif; ?>
+                <?php if ($canEdit): ?>
+                    <button type="button" aria-describedby="count-<?php echo $tagId; ?> edit-instructions" class="tag edit-tag" id="tag-<?php echo $tagId; ?>-name" data-pk="<?php echo $tagId; ?>"><?php echo html_escape($tag->name); ?></button>
+                <?php else: ?>
+                    <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
+                <?php endif; ?>
+                <?php if ($canDelete): ?>
+                    <button type="button" class="delete-tag delete-confirm button" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
+                <?php endif; ?>
+                </div>
             </li>
         <?php endforeach; ?>
         </ul>

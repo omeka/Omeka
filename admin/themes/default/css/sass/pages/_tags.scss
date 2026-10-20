@@ -31,6 +31,7 @@ form.form-inline.editableform {
 .editable-error-block.editable-error {
     position: absolute;
     top: 100%;
+    z-index: 10;
     background-color: #fff;
     text-shadow: none;
     color: $darkred;
@@ -43,9 +44,12 @@ form.form-inline.editableform {
 
 .tag-list {
     padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tag-list li {
+.tag-list .tag-group {
     height: 22px;
     color: $green;
     background: $lightgreen;
@@ -72,7 +76,7 @@ form.form-inline.editableform {
     position: relative;
 }
 
-.tag-list li .count:after {
+.tag-list .tag-group .count:after {
     content: "";
     width: 1px;
     position: absolute;
@@ -82,50 +86,57 @@ form.form-inline.editableform {
     right: 0;
 }
 
-.tag-list li .tag, .tag-list li a, .tag-list li .count {
+.tag-list .tag-group .tag, .tag-list .tag-group button, .tag-list .tag-group .count {
     display: inline-block;
-color: darken($green, 15%);
+    color: darken($green, 15%);
 }
 
-.tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
-    text-indent: -9999px;
-    width: 16px;
-    height: 16px;
-    margin-left: 8px;
-    position: relative;
-    top: 3px;
+.tag-list .tag-group {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-m;
 }
 
-.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
-    content: "\f067" / "";
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    transform: rotate(45deg);
+.tag-list .tag-group .button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 24px;
+    height: 24px;
+    min-height: 0;
+    background: transparent;
+    text-align: center;
+}
+
+.tag-list .tag-group button.editable {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-height: 0;
+    background: transparent;
+    font-weight: normal;
+}
+
+.tag-list .tag-group .delete-tag .icon:after, 
+.tag-list .tag-group .remove-tag .icon:after, 
+.undo-remove-tag .icon:after {
+    content: "\f00d" / "";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    height: 100%;
-    width: 100%;
     background-color: rgba($green, 1);
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
     color:$lightgreen;
-    display: block;
-    position: relative;
     font-size: $spacing-m;
-    top: 0;
-    float: left;
-    text-indent: 4px;
-    line-height: 17px;
     text-shadow: none;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    border-radius: 16px;
+    display: inline-block;
 }
 
-.undo-remove-tag a:after {
-    content: "\f112" / "";
+.undo-remove-tag .icon:after {
+    content: "\f0e2" / "";
     color: #BB8282;
-    font-size: 9px;
-    text-indent: 3px;
-    line-height: 18px;
 }
 
 #tags-nav {

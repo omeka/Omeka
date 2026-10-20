@@ -97,24 +97,42 @@ Omeka.Items = {};
      * @param {string} tag Tag to add buttons for.
      */
     Omeka.Items.addTagElement = function (tag) {
-        var tagLi = $('<li/>');
-        tagLi.after(" ");
+        var allTagsList = $('#all-tags-list');
+        var newTagId = allTagsList.attr('data-new-tag-id');
+        var tagLi = $("<li></li>");
+        var tagDiv = $('<div class="tag-group" role="group" aria-labelledby="new-tag-' + newTagId + '"/>');
 
-        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagLi);
-        var undoButton = $('<span class="undo-remove-tag"><a href="#">Undo</a></span>').appendTo(tagLi);
-        var deleteButton = $('<span class="remove-tag"><a href="#">Remove</a></span>').appendTo(tagLi);
+        $('<span></span>', {'class': 'tag', 'text': tag, 'id': 'new-tag-' + newTagId}).appendTo(tagDiv);
+        var undoButton = $('<button type="button" class="undo-remove-tag button" aria-label="Undo remove" title="Undo remove"><span class="icon"></a></span>').appendTo(tagDiv);
+        var deleteButton = $('<button type="button" class="remove-tag button" aria-label="Remove" title="Remove"><span class="icon"></span></button>').appendTo(tagDiv);
+        tagDiv.appendTo(tagLi);
 
-        if($('#all-tags-list').length != 0) {
-            $('#all-tags-list').append(tagLi);
+        if(allTagsList.length != 0) {
+            allTagsList.append(tagLi);
         } else {
-            $('#all-tags').append($('<h3>All Tags</h3><div class="tag-list"><ul id="all-tags-list"></ul></div>'));
+            $('#all-tags').append($('<h3>All Tags</h3><ul id="all-tags-list" class="tag-list"></ul>'));
             $('#all-tags-list').append(tagLi);
         }
-
+        newTagId++;
+        $('#all-tags-list').attr('data-new-tag-id', newTagId);
+        Omeka.Items.tagsSrAlert('success-alert');
         Omeka.Items.updateTagsField();
         return false;
     };
 
+    Omeka.Items.tagsSrAlert = function (alertType) {
+        var tagsSrAlerts = $('#tags-sr-alerts');
+        var tagsRepeatedSrAlerts = $('#tags-sr-alerts-repeat');
+        var tagAlertType = tagsSrAlerts.data(alertType);
+
+        if (tagsSrAlerts.text() == tagAlertType) {
+            tagsSrAlerts.text('');
+            tagsRepeatedSrAlerts.text(tagAlertType);
+        } else {
+            tagsRepeatedSrAlerts.text('');
+            tagsSrAlerts.text(tagAlertType);
+        }
+    }
 
     /**
      * Add tag elements for new tags from the input box.
@@ -133,6 +151,8 @@ Omeka.Items = {};
             var tag = $.trim(this);
             if (tag && $.inArray(tag, oldTags) === -1) {
                 Omeka.Items.addTagElement(tag);
+            } else {
+                Omeka.Items.tagsSrAlert('duplicate-alert');
             }
         });
 
@@ -145,7 +165,10 @@ Omeka.Items = {};
      * @param {Element} button Clicked button.
      */
     Omeka.Items.toggleTag = function (button) {
-        $(button).parent().toggleClass('tag-removed');
+        var tagGroup = $(button).parent();
+        tagGroup.toggleClass('tag-removed');
+        tagGroup.find(':focusable').focus();
+
         Omeka.Items.updateTagsField();
     };
 
@@ -156,7 +179,7 @@ Omeka.Items = {};
         var tagsToAdd = [];
         var tagsToDelete = [];
 
-        $('.tag-list li').each(function () {
+        $('.tag-list .tag-group').each(function () {
             var tagSpan = $(this).find('.tag');
             var tag = $.trim(tagSpan.text());
             if ($(this).hasClass('tag-removed')) {
@@ -180,13 +203,11 @@ Omeka.Items = {};
             Omeka.Items.addTags($('#tags').val());
         });
 
-        $(document).on('click', 'span.remove-tag', function (event) {
-            event.preventDefault();
+        $(document).on('click', '.remove-tag', function () {
             Omeka.Items.toggleTag(this);
         });
 
-        $(document).on('click', 'span.undo-remove-tag', function (event) {
-            event.preventDefault();
+        $(document).on('click', '.undo-remove-tag', function () {
             Omeka.Items.toggleTag(this);
         });
 
