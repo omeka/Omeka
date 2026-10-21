@@ -293,3 +293,10 @@ ul.details {
         width: 20%;
     }
 }
+
+.results-header,
+.results-footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

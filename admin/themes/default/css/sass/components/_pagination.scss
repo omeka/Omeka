@@ -1,15 +1,17 @@
-.pagination {
+.pagination-nav {
     clear: right;
     float: right;
-    margin: 0 0 $spacing-l 14px;
+    margin: 0 0 $spacing-l auto;
     padding: 0;
 
     @include screen-xs {
-        float: none;
-        margin: 0 0 $spacing-m;
-        overflow: hidden;
+        margin: 0 0 $spacing-m auto;
     }
 }
+
+    ul.pagination {
+        margin: 0;
+    }
 
     .pagination li {
         height: 38px;
