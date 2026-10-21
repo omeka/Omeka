@@ -1,25 +1,25 @@
 <?php
-$pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_results);
+$isFiltered = isset($_GET['search']);
+if ($isFiltered) {
+    $pageTitle = __('Browse Users') . ' ' . __('(filtered results: %s total)', $total_results);
+} else {
+    $pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_results);
+}
+$userSearchTypes = [
+    'name' => __('Name'),
+    'username' => __('Username'),
+    'email' => __('Email')
+];
 echo head(['title'=>$pageTitle, 'bodyclass'=>'users']);
 echo flash();
 ?>
 
-<?php if(isset($_GET['search'])):?>
+<?php if($isFiltered):?>
+<?php $currentSearchType = $_GET['search-type']; ?>
 <div id='search-filters'>
     <ul>
         <li>
-        <?php switch($_GET['search-type']) {
-                        case "name":
-                            echo __("Name") . ': ';
-                        break;
-                        case "username":
-                            echo __("Username") . ': ';
-                        break;
-                        case "email":
-                            echo __("Email") . ': ';
-                        break;
-                    }
-        ?>
+        <?php echo $userSearchTypes[$currentSearchType]; ?>: 
         <?php echo html_escape($_GET['search']); ?>
         </li>
     </ul>
@@ -34,9 +34,10 @@ echo flash();
 <form id='search-users' method='GET' role="group" aria-labelledby="search-users-button">
     <label id="search-users-type"><?php echo __('Search by'); ?>
         <select name="search-type">
-            <option value='username' checked='checked'><?php echo __('Username'); ?></option>
-            <option value='name'><?php echo __('Display Name'); ?></option>
-            <option value='email'><?php echo __('Email'); ?></option>
+            <?php foreach ($userSearchTypes as $name => $label): ?>
+            <?php $checked = (isset($currentSearchType) && ($currentSearchType == $name)) ? 'selected="true"' : ''; ?>
+            <option value="<?php echo $name; ?>" <?php echo $checked; ?>><?php echo $label; ?></option>
+            <?php endforeach; ?>
         </select>
     </label>
     <input type='text' name='search' aria-label="<?php echo __('Query'); ?>" aria-describedby="search-users-type" />
