@@ -1951,7 +1951,19 @@ ul.details {
 .results-footer {
   width: 100%;
   display: flex;
-  flex-wrap: wrap; }
+  gap: 10px 5px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 20px; }
+
+.results-header > .button,
+.results-header > select,
+.results-header > nav,
+.results-footer > .button,
+.results-footer > select,
+.results-footer > nav {
+  margin-bottom: 0;
+  margin-right: 0; }
 
 .without-item-type,
 .not-in-collections {

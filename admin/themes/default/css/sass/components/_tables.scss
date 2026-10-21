@@ -298,5 +298,18 @@ ul.details {
 .results-footer {
     width: 100%;
     display: flex;
+    gap: $spacing-m $spacing-s;
     flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: $spacing-l;
+}
+
+.results-header > .button,
+.results-header > select,
+.results-header > nav,
+.results-footer > .button,
+.results-footer > select,
+.results-footer > nav {
+    margin-bottom: 0;
+    margin-right: 0;
 }
