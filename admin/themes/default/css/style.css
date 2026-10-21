@@ -3645,6 +3645,7 @@ form.form-inline.editableform {
 
 #search-users input[type=text] {
   margin-bottom: 0;
+  flex-grow: 1;
 }
 
 #search-users label {
