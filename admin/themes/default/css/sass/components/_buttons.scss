@@ -15,6 +15,7 @@
     color: $black;
     
     margin: 0 $spacing-s $spacing-l 0;
+    min-width: 25px;
     min-height: 25px;
     padding: $spacing-m ($spacing-l - 2px);
     line-height: 16px;
