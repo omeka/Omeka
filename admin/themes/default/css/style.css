@@ -1959,9 +1959,11 @@ ul.details {
 .results-header > .button,
 .results-header > select,
 .results-header > nav,
+.results-header > p,
 .results-footer > .button,
 .results-footer > select,
-.results-footer > nav {
+.results-footer > nav,
+.results-footer > p {
   margin-bottom: 0;
   margin-right: 0; }
 
