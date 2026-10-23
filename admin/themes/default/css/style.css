@@ -3006,6 +3006,7 @@ form.form-inline.editableform {
 #search-users label select {
   margin: 0; }
 
+#search-users a.button,
 #search-users button {
   margin: 0; }
 
