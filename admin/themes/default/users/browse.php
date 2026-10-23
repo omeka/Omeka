@@ -42,6 +42,7 @@ echo flash();
     </label>
     <input type='text' name='search' aria-label="<?php echo __('Query'); ?>" aria-describedby="search-users-type" />
     <button id="search-users-button"><?php echo __('Search users'); ?></button>
+    <a class="red button" href="<?php echo url(['action' => 'browse']); ?>"><?php echo __('Reset'); ?></a>
 </form>
 
 <?php echo pagination_links(['attributes' => ['aria-label' => __('Pagination')]]); ?>
