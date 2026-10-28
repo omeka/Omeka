@@ -8,6 +8,7 @@ $pageTitle = __('Appearance');
 $sortTilesSpacingFix = '<style>'
     . '.sort-tiles-widget + .sort-tiles-widget { margin-top: 30px; }'
     . '.add-tile-row .sortable-item { cursor: pointer; }'
+    . '.sort-tiles .tile-field-name { margin: 0 1.5em 0 0.5em; color: #666; font-size: 0.85em; }'
     . '</style>';
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 

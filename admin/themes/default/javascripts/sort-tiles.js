@@ -44,20 +44,27 @@ Omeka.SortTiles = {};
 
     // Rebuild the "Default Sort Field" select's options from the widget's
     // current, non-deleted tiles, preserving the current selection if it
-    // still exists.
+    // still exists. Labels shared by more than one tile get the full field
+    // appended, matching the initial server-side render.
     Omeka.SortTiles.syncDefaultFieldOptions = function (widget) {
         var select = widget.find('.default-field-select');
         var currentValue = select.val();
         var stillExists = false;
+        var tiles = widget.find('li.element').filter(function () {
+            return !$(this).find('.sortable-item.drawer').hasClass('deleted');
+        });
+        var labelCounts = {};
+        tiles.each(function () {
+            var label = $(this).find('.tile-label').text();
+            labelCounts[label] = (labelCounts[label] || 0) + 1;
+        });
         select.empty();
-        widget.find('li.element').each(function () {
-            if ($(this).find('.sortable-item.drawer').hasClass('deleted')) {
-                return;
-            }
+        tiles.each(function () {
             var field = $(this).find('.tile-field').val();
+            var label = $(this).find('.tile-label').text();
             select.append($('<option></option>')
                 .val(field)
-                .text($(this).find('.tile-label').text()));
+                .text(labelCounts[label] > 1 ? label + ' (' + field + ')' : label));
             if (field === currentValue) {
                 stillExists = true;
             }
@@ -80,17 +87,27 @@ Omeka.SortTiles = {};
             }
             var type = widget.find('.sort-tiles').data('type');
             var index = widget.find('.sort-tiles li.element').length;
+            // Send the current tiles so the server can reject a duplicate.
+            var tiles = [];
+            widget.find('li.element').each(function () {
+                tiles.push({
+                    label: $(this).find('.tile-label').text(),
+                    field: $(this).find('.tile-field').val()
+                });
+            });
             $.ajax({
                 url: Omeka.SortTiles.addTileUrl,
                 dataType: 'text',
-                data: {type: type, field: field, index: index},
+                data: {type: type, field: field, index: index, tiles: JSON.stringify(tiles)},
                 success: function (responseText) {
                     widget.find('.sort-tiles li.add-tile-row').before(responseText);
                     fieldInput.val('');
                     Omeka.SortTiles.syncDefaultFieldOptions(widget);
                 },
-                error: function () {
-                    alert(Omeka.SortTiles.addTileErrorText);
+                error: function (jqXHR) {
+                    alert(jqXHR.status === 400 && jqXHR.responseText
+                        ? jqXHR.responseText
+                        : Omeka.SortTiles.addTileErrorText);
                 }
             });
         });

@@ -2045,10 +2045,101 @@ function sanitize_sort_tiles($json)
     if (!is_array($tiles)) {
         return [];
     }
-    return array_values(array_filter($tiles, function ($tile) {
+    $tiles = array_filter($tiles, function ($tile) {
         return is_array($tile) && !empty($tile['label']) && !empty($tile['field'])
             && is_string($tile['label']) && is_string($tile['field']);
-    }));
+    });
+    $normalized = [];
+    foreach ($tiles as $tile) {
+        $field = normalize_sort_tile_field($tile['field']);
+        if ($field !== null) {
+            $normalized[] = ['label' => $tile['label'], 'field' => $field];
+        }
+    }
+    return unique_sort_tiles($normalized);
+}
+
+/**
+ * Normalize a sort tile field to the form the browse tables' applySorting()
+ * expects (unless it's a non-element field like added or modified).
+ *
+ * @package Omeka\Function\View
+ * @param string $field
+ * @return string|null
+ */
+function normalize_sort_tile_field($field)
+{
+    $field = trim((string) $field);
+    if ($field === '') {
+        return null;
+    }
+    if (strpos($field, ',') === false) {
+        return strtolower($field);
+    }
+    $fieldData = array_map('trim', explode(',', $field));
+    if (count($fieldData) != 2 || $fieldData[0] === '' || $fieldData[1] === '') {
+        return null;
+    }
+    $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
+    if (!$element) {
+        return null;
+    }
+    return $element->set_name . ',' . $element->name;
+}
+
+/**
+ * Drop tiles whose field repeats an earlier tile's.
+ *
+ * @package Omeka\Function\View
+ * @param array $tiles List of ['label' => ..., 'field' => ...] tiles.
+ * @return array
+ */
+function unique_sort_tiles(array $tiles)
+{
+    $byField = [];
+    foreach ($tiles as $tile) {
+        if (!isset($byField[$tile['field']])) {
+            $byField[$tile['field']] = $tile;
+        }
+    }
+    return array_values($byField);
+}
+
+/**
+ * Make sort tile labels unique by appending the element set name (or, for
+ * non-element fields, the field itself) to any label shared by more than one
+ * tile. Only needed where the label is all that's shown, e.g. public sort
+ * links; admin tiles show the full field alongside the label instead.
+ *
+ * @package Omeka\Function\View
+ * @param array $tiles List of ['label' => ..., 'field' => ...] tiles.
+ * @return array
+ */
+function disambiguate_sort_tile_labels(array $tiles)
+{
+    $labelCounts = array_count_values(array_column($tiles, 'label'));
+    foreach ($tiles as &$tile) {
+        if ($labelCounts[$tile['label']] > 1) {
+            $tile['label'] = disambiguated_sort_tile_label($tile['label'], $tile['field']);
+        }
+    }
+    return $tiles;
+}
+
+/**
+ * Append a field's element set name (or the field itself, for non-element
+ * fields) to a sort tile label, e.g. "Subject (PBCore)".
+ *
+ * @package Omeka\Function\View
+ * @param string $label
+ * @param string $field
+ * @return string
+ */
+function disambiguated_sort_tile_label($label, $field)
+{
+    $fieldData = explode(',', $field);
+    $suffix = count($fieldData) == 2 ? $fieldData[0] : $field;
+    return __('%1$s (%2$s)', $label, $suffix);
 }
 
 /**
@@ -2132,7 +2223,9 @@ function get_sort_tiles($type, $defaultTiles = null)
 function browse_sort_links_for($type, $defaultTiles = null, $wrapperTags = [])
 {
     $links = [];
-    foreach (get_sort_tiles($type, $defaultTiles) as $tile) {
+    // Links are keyed by label, so settings saved with duplicate fields or
+    // labels would otherwise silently collapse into one link.
+    foreach (disambiguate_sort_tile_labels(unique_sort_tiles(get_sort_tiles($type, $defaultTiles))) as $tile) {
         $links[$tile['label']] = $tile['field'];
     }
     return browse_sort_links($links, $wrapperTags);

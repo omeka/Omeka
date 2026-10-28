@@ -90,10 +90,10 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                         // Only keep a default field that's one of this type's
                         // saved tiles; otherwise delete it so the view falls
                         // back to the built-in default instead of a stale field.
-                        $field = trim((string) $value);
+                        $field = normalize_sort_tile_field($value);
                         $type = substr($key, 0, -strlen('_sort_default_field'));
                         $tileFields = array_column(sanitize_sort_tiles($_POST["{$type}_sort_options"] ?? ''), 'field');
-                        if ($field !== '' && in_array($field, $tileFields, true)) {
+                        if ($field !== null && in_array($field, $tileFields, true)) {
                             set_option($key, $field);
                         } else {
                             delete_option($key);
@@ -112,19 +112,35 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
      * Render a single sort tile's markup for AJAX insertion, so newly-added
      * tiles are built from the same template as the initial page render
      * instead of being duplicated in JavaScript.
+     *
+     * The widget's current tiles are passed as JSON in "tiles", so a field
+     * that's invalid or already in the list is rejected with a 400 and a
+     * message body instead of a tile.
      */
     public function addSortTileAction()
     {
         $this->_helper->viewRenderer->setNoRender();
         $type = trim((string) $this->_getParam('type'));
-        $field = trim((string) $this->_getParam('field'));
+        $rawField = trim((string) $this->_getParam('field'));
         $index = (int) $this->_getParam('index');
-        if ($type === '' || $field === '') {
+        if ($type === '' || $rawField === '') {
+            return;
+        }
+        $field = normalize_sort_tile_field($rawField);
+        if ($field === null) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->getResponse()->setBody(__('"%s" is not a valid sort field.', $rawField));
+            return;
+        }
+        $existingTiles = sanitize_sort_tiles($this->_getParam('tiles'));
+        if (in_array($field, array_column($existingTiles, 'field'), true)) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->getResponse()->setBody(__('"%s" is already a sort option.', $field));
             return;
         }
         $label = derive_sort_tile_label($field);
         $widget = new Omeka_View_Helper_SortTilesWidget();
-        echo $widget->tileMarkup($type, $index, $label, $field);
+        $this->getResponse()->setBody($widget->tileMarkup($type, $index, $label, $field));
     }
 
     public function editNavigationAction()

@@ -56,10 +56,16 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
         $html .= '</div>';
         $html .= '<div class="inputs five columns omega">';
         $html .= '<select name="' . $fieldId . '" id="' . $fieldId . '" class="default-field-select">';
+        // Show the full field after any label shared by more than one tile,
+        // so e.g. Dublin Core and PBCore "Subject" can be told apart.
+        $labelCounts = array_count_values(array_column($tiles, 'label'));
         foreach ($tiles as $tile) {
+            $optionText = $labelCounts[$tile['label']] > 1
+                ? __('%1$s (%2$s)', $tile['label'], $tile['field'])
+                : $tile['label'];
             $html .= '<option value="' . html_escape($tile['field']) . '"'
                 . ($currentField === $tile['field'] ? ' selected="selected"' : '') . '>'
-                . html_escape($tile['label']) . '</option>';
+                . html_escape($optionText) . '</option>';
         }
         $html .= '</select>';
         $html .= '</div>';
@@ -101,6 +107,7 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
             . '<div class="sortable-item drawer">'
             . '<span class="move icon" title="' . html_escape(__('Move')) . '" aria-label="' . html_escape(__('Move')) . '" aria-labelledby="' . $nameId . '"></span>'
             . '<span class="drawer-name tile-label" id="' . $nameId . '">' . html_escape($label) . '</span>'
+            . '<span class="tile-field-name">' . html_escape($field) . '</span>'
             . '<input type="hidden" class="tile-field" value="' . html_escape($field) . '">'
             . '<button type="button" id="' . $undoId . '" class="undo-delete" data-action-selector="deleted" title="' . html_escape(__('Undo')) . '" aria-label="' . html_escape(__('Undo')) . ' ' . html_escape(__('Remove')) . '" aria-labelledby="' . $undoId . ' ' . $nameId . '"><span class="icon" aria-hidden="true"></span></button>'
             . '<button type="button" id="' . $deleteId . '" class="delete-drawer" data-action-selector="deleted" title="' . html_escape(__('Remove')) . '" aria-label="' . html_escape(__('Remove')) . '" aria-labelledby="' . $deleteId . ' ' . $nameId . '"><span class="icon" aria-hidden="true"></span></button>'
