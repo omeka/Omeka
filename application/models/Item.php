@@ -457,7 +457,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
 
         $creators = metadata($this, ['Dublin Core', 'Creator'], ['all' => true]);
         // Strip formatting and remove empty creator elements.
-        $creators = array_filter(array_map('strip_formatting', $creators));
+        $creators = array_values(array_filter(array_map('strip_formatting', $creators)));
         if ($creators) {
             switch (count($creators)) {
                 case 1:
