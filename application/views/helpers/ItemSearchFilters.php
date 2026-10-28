@@ -89,7 +89,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
             $advancedArray = [];
             $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
-                if (!is_array($row) || !$row['element_id'] || !$row['type']) {
+                if (!is_array($row) || empty($row['element_id']) || empty($row['type'])) {
                     continue;
                 }
                 $elementID = $row['element_id'];
