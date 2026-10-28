@@ -35,10 +35,12 @@ $formAttributes['method'] = 'GET';
         <?php
         // If the form has been submitted, retain the number of search
         // fields used and rebuild the form
-        if (!empty($_GET['advanced'])) {
-            $search = $_GET['advanced'];
-        } else {
-            $search = [['field' => '', 'type' => '', 'value' => '']];
+        $search = [];
+        if (isset($_GET['advanced']) && is_array($_GET['advanced'])) {
+            $search = array_filter($_GET['advanced'], 'is_array');
+        }
+        if (!$search) {
+            $search[] = [];
         }
 
         //Here is where we actually build the search form
@@ -48,14 +50,19 @@ $formAttributes['method'] = 'GET';
         //[type] = 'contains'
         //[terms] = 'foobar'
         //etc
-        foreach ($search as $i => $rows): ?>
+        foreach ($search as $i => $row):
+            $joiner = $row['joiner'] ?? '';
+            $element_id = $row['element_id'] ?? '';
+            $type = $row['type'] ?? '';
+            $terms = $row['terms'] ?? '';
+        ?>
             <div class="search-entry" id="search-row-<?php echo $i; ?>" aria-label="<?php echo __('Row %s', $i+1); ?>">
                 <div class="input advanced-search-joiner"> 
                     <span aria-hidden="true" class="visible-label"><?php echo __('Joiner'); ?></span>
                     <?php 
                     echo $this->formSelect(
                         "advanced[$i][joiner]",
-                        @$rows['joiner'],
+                        $joiner,
                         [
                             'id' => null,
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-joiner',
@@ -72,7 +79,7 @@ $formAttributes['method'] = 'GET';
                     <?php 
                     echo $this->formSelect(
                         "advanced[$i][element_id]",
-                        @$rows['element_id'],
+                        $element_id,
                         [
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-property',
                             'id' => null,
@@ -89,7 +96,7 @@ $formAttributes['method'] = 'GET';
                     <?php 
                     echo $this->formSelect(
                         "advanced[$i][type]",
-                        @$rows['type'],
+                        $type,
                         [
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-type',
                             'id' => null,
@@ -111,7 +118,7 @@ $formAttributes['method'] = 'GET';
                     <?php 
                     echo $this->formText(
                         "advanced[$i][terms]",
-                        @$rows['terms'],
+                        $terms,
                         [
                             'size' => '20',
                             'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-terms',

@@ -85,11 +85,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to
         // the ability to add fields.
-        if (array_key_exists('advanced', $requestArray)) {
+        if (array_key_exists('advanced', $requestArray) && is_array($requestArray['advanced'])) {
             $advancedArray = [];
             $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
-                if (!$row['element_id'] || !$row['type']) {
+                if (!is_array($row) || !$row['element_id'] || !$row['type']) {
                     continue;
                 }
                 $elementID = $row['element_id'];
