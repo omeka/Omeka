@@ -19,14 +19,14 @@ class Table_Item extends Omeka_Db_Table
      */
     public function filterBySearch($select, $params)
     {
+        $simpleTerms = $params['search'] ?? '';
+        $advancedTerms = $params['advanced'] ?? [];
         //Apply the simple or advanced search
-        if (isset($params['search']) || isset($params['advanced'])) {
-            if ($simpleTerms = @$params['search']) {
-                $this->_simpleSearch($select, $simpleTerms);
-            }
-            if ($advancedTerms = @$params['advanced']) {
-                $this->_advancedSearch($select, $advancedTerms);
-            }
+        if (is_string($simpleTerms) && $simpleTerms !== '') {
+            $this->_simpleSearch($select, $simpleTerms);
+        }
+        if (is_array($advancedTerms) && $advancedTerms) {
+            $this->_advancedSearch($select, $advancedTerms);
         }
     }
 
@@ -41,7 +41,7 @@ class Table_Item extends Omeka_Db_Table
      * tagged items show up higher on the found results list for a given search.
      * 
      * @param Zend_Db_Select $select
-     * @param string $simpleTerms
+     * @param string $terms
      */
     protected function _simpleSearch($select, $terms)
     {
@@ -80,7 +80,7 @@ class Table_Item extends Omeka_Db_Table
      * Build the advanced search.
      * 
      * @param Zend_Db_Select $select
-     * @param array $simpleTerms
+     * @param array $terms
      */
     protected function _advancedSearch($select, $terms)
     {
