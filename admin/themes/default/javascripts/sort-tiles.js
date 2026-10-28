@@ -29,6 +29,13 @@ Omeka.SortTiles = {};
             }
             $(this).find('.drawer-toggle').trigger('click');
         });
+        // Focus the field input as soon as the row is expanded.
+        $(document).on('omeka:toggle-drawer', '.add-tile-row .drawer-toggle', function () {
+            var row = $(this).closest('.add-tile-row');
+            if (row.find('.drawer-contents').hasClass('opened')) {
+                row.find('.new-tile-field').trigger('focus');
+            }
+        });
     };
 
     // Mark/unmark a tile for removal via the same delete/undo drawer toggle
