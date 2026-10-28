@@ -34,6 +34,7 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 <section class="three columns omega">
     <div id="save" class="panel">
         <?php echo $this->formSubmit('sorting_submit', __('Save Changes'), ['class'=>'submit full-width green button']); ?>
+        <?php echo $this->formSubmit('sorting_restore_defaults', __('Restore Defaults'), ['class'=>'submit full-width red button']); ?>
     </div>
 </section>
 

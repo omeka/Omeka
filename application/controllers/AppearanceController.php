@@ -62,6 +62,21 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
+                // Restore defaults by deleting each type's stored options, so
+                // get_sort_tiles() and the view's ?: fallbacks take over again.
+                if (isset($_POST['sorting_restore_defaults'])) {
+                    foreach ($_POST as $key => $value) {
+                        if (str_ends_with($key, '_sort_options')) {
+                            $type = substr($key, 0, -strlen('_sort_options'));
+                            delete_option("{$type}_sort_options");
+                            delete_option("{$type}_sort_default_dir");
+                            delete_option("{$type}_sort_default_field");
+                        }
+                    }
+                    $this->_helper->flashMessenger(__('The sorting settings have been restored to their defaults.'), 'success');
+                    $this->_helper->redirector('edit-sorting');
+                    return;
+                }
                 // The sort tiles widget (core's items/collections, and any
                 // plugin-registered type via the admin_appearance_sorting_form
                 // hook) is plain HTML, not Zend_Form elements, so its fields
@@ -72,9 +87,16 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                     } elseif (str_ends_with($key, '_sort_default_dir')) {
                         set_option($key, $value === 'a' ? 'a' : 'd');
                     } elseif (str_ends_with($key, '_sort_default_field')) {
+                        // Only keep a default field that's one of this type's
+                        // saved tiles; otherwise delete it so the view falls
+                        // back to the built-in default instead of a stale field.
                         $field = trim((string) $value);
-                        if ($field !== '') {
+                        $type = substr($key, 0, -strlen('_sort_default_field'));
+                        $tileFields = array_column(sanitize_sort_tiles($_POST["{$type}_sort_options"] ?? ''), 'field');
+                        if ($field !== '' && in_array($field, $tileFields, true)) {
                             set_option($key, $field);
+                        } else {
+                            delete_option($key);
                         }
                     }
                 }
