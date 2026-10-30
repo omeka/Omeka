@@ -19,9 +19,10 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
      * @param array $tiles List of ['label' => ..., 'field' => ...] tiles.
      * @param string $currentDir Current default direction, 'a' or 'd'.
      * @param string $currentField Current default sort field.
+     * @param bool $useSelectForm Whether the public side shows dropdowns instead of links.
      * @return string HTML output
      */
-    public function sortTilesWidget($type, $legend, array $tiles, $currentDir = 'd', $currentField = '')
+    public function sortTilesWidget($type, $legend, array $tiles, $currentDir = 'd', $currentField = '', $useSelectForm = false)
     {
         $hiddenElementId = html_escape($type) . '_sort_options';
         $html = '<fieldset class="sort-tiles-widget">';
@@ -81,6 +82,17 @@ class Omeka_View_Helper_SortTilesWidget extends Zend_View_Helper_Abstract
         $html .= '<option value="a"' . ($currentDir === 'a' ? ' selected="selected"' : '') . '>' . html_escape(__('Ascending')) . '</option>';
         $html .= '<option value="d"' . ($currentDir === 'd' ? ' selected="selected"' : '') . '>' . html_escape(__('Descending')) . '</option>';
         $html .= '</select>';
+        $html .= '</div>';
+        $html .= '</div>';
+
+        $selectFormId = html_escape($type) . '_sort_use_select_form';
+        $html .= '<div class="field">';
+        $html .= '<div class="two columns alpha">';
+        $html .= '<label for="' . $selectFormId . '">' . html_escape(__('Use Sort Dropdowns')) . '</label>';
+        $html .= '</div>';
+        $html .= '<div class="inputs five columns omega">';
+        $html .= '<p class="explanation">' . html_escape(__('Show sort options as dropdown settings instead of individual links.')) . '</p>';
+        $html .= $this->view->formCheckbox($selectFormId, null, ['checked' => (bool) $useSelectForm, 'class' => 'checkbox']);
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</fieldset>';

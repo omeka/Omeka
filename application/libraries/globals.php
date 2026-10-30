@@ -2228,7 +2228,63 @@ function browse_sort_links_for($type, $defaultTiles = null, $wrapperTags = [])
     foreach (disambiguate_sort_tile_labels(unique_sort_tiles(get_sort_tiles($type, $defaultTiles))) as $tile) {
         $links[$tile['label']] = $tile['field'];
     }
-    return browse_sort_links($links, $wrapperTags);
+    if (get_option("{$type}_sort_use_select_form")) {
+        return browse_sort_select_form(
+            $links,
+            get_option("{$type}_sort_default_field") ?: 'added',
+            get_option("{$type}_sort_default_dir") ?: 'd'
+        );
+    }
+    // browse_sort_links() doesn't escape labels.
+    $escapedLinks = [];
+    foreach ($links as $label => $field) {
+        $escapedLinks[html_escape($label)] = $field;
+    }
+    return browse_sort_links($escapedLinks, $wrapperTags);
+}
+
+/**
+ * Get a form for sorting by field and direction.
+ *
+ * @package Omeka\Function\View
+ * @param array $links
+ * @param string $defaultField
+ * @param string $defaultDir
+ * @return string
+ */
+function browse_sort_select_form($links, $defaultField, $defaultDir)
+{
+    $sortParam = Omeka_Db_Table::SORT_PARAM;
+    $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
+    $req = Zend_Controller_Front::getInstance()->getRequest();
+    $currentSort = $req->getParam($sortParam) ?: $defaultField;
+    $currentDir = $req->getParam($sortDirParam) ?: $defaultDir;
+
+    // Keep the rest of the query, but start from the first page.
+    $params = $_GET;
+    unset($params[$sortParam], $params[$sortDirParam], $params['page']);
+    $html = '<form class="sort-form" method="get" action="' . html_escape(url()) . '">';
+    foreach (array_filter(explode('&', http_build_query($params))) as $pair) {
+        list($name, $value) = array_map('urldecode', explode('=', $pair, 2));
+        $html .= '<input type="hidden" name="' . html_escape($name) . '" value="' . html_escape($value) . '">';
+    }
+
+    $html .= '<select name="' . $sortParam . '" aria-label="' . html_escape(__('Sort by')) . '">';
+    foreach ($links as $label => $column) {
+        $html .= '<option value="' . html_escape($column) . '"'
+            . ($currentSort == $column ? ' selected="selected"' : '') . '>'
+            . html_escape($label) . '</option>';
+    }
+    $html .= '</select>';
+
+    $html .= '<select name="' . $sortDirParam . '" aria-label="' . html_escape(__('Sort direction')) . '">';
+    $html .= '<option value="a"' . ($currentDir === 'a' ? ' selected="selected"' : '') . '>' . html_escape(__('Ascending')) . '</option>';
+    $html .= '<option value="d"' . ($currentDir === 'd' ? ' selected="selected"' : '') . '>' . html_escape(__('Descending')) . '</option>';
+    $html .= '</select>';
+
+    $html .= '<button type="submit">' . html_escape(__('Sort')) . '</button>';
+    $html .= '</form>';
+    return $html;
 }
 
 /**

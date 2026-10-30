@@ -71,6 +71,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                             delete_option("{$type}_sort_options");
                             delete_option("{$type}_sort_default_dir");
                             delete_option("{$type}_sort_default_field");
+                            delete_option("{$type}_sort_use_select_form");
                         }
                     }
                     $this->_helper->flashMessenger(__('The sorting settings have been restored to their defaults.'), 'success');
@@ -84,6 +85,8 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 foreach ($_POST as $key => $value) {
                     if (str_ends_with($key, '_sort_options')) {
                         set_option($key, json_encode(sanitize_sort_tiles($value)));
+                    } elseif (str_ends_with($key, '_sort_use_select_form')) {
+                        set_option($key, empty($value) ? '0' : '1');
                     } elseif (str_ends_with($key, '_sort_default_dir')) {
                         set_option($key, $value === 'a' ? 'a' : 'd');
                     } elseif (str_ends_with($key, '_sort_default_field')) {

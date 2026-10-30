@@ -22,9 +22,9 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings']); ?>
 
     <?php echo $sortTilesSpacingFix; ?>
 
-    <?php echo $this->sortTilesWidget('items', __('Items Sort Options'), get_sort_tiles('items'), get_option('items_sort_default_dir') ?: 'd', get_option('items_sort_default_field') ?: 'added'); ?>
+    <?php echo $this->sortTilesWidget('items', __('Items Sort Options'), get_sort_tiles('items'), get_option('items_sort_default_dir') ?: 'd', get_option('items_sort_default_field') ?: 'added', (bool) get_option('items_sort_use_select_form')); ?>
 
-    <?php echo $this->sortTilesWidget('collections', __('Collections Sort Options'), get_sort_tiles('collections'), get_option('collections_sort_default_dir') ?: 'd', get_option('collections_sort_default_field') ?: 'added'); ?>
+    <?php echo $this->sortTilesWidget('collections', __('Collections Sort Options'), get_sort_tiles('collections'), get_option('collections_sort_default_dir') ?: 'd', get_option('collections_sort_default_field') ?: 'added', (bool) get_option('collections_sort_use_select_form')); ?>
 
     <?php fire_plugin_hook('admin_appearance_sorting_form', ['form' => $form, 'view' => $this]); ?>
 
