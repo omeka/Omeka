@@ -24,6 +24,9 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             [
                 'label' => __('Current Password'),
                 'description' => __('Password must be at least 6 characters long.'),
+                'attribs' => [
+                    'autocomplete' => 'current-password',
+                ],
                 'required' => true,
                 'errorMessages' => [__("Invalid current password")],
             ]
@@ -34,6 +37,9 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'label' => __('New Password'),
                 'required' => true,
                 'description' => __('Password must be at least 6 characters long.'),
+                'attribs' => [
+                    'autocomplete' => 'new-password',
+                ],
                 'validators' => [
                     ['validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                         [
@@ -67,6 +73,9 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             [
                 'label' => __('Repeat New Password'),
                 'required' => true,
+                'attribs' => [
+                    'autocomplete' => 'new-password',
+                ],
                 'errorMessages' => [__('New password must be typed correctly twice.')]
             ]
         );
