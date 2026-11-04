@@ -22,7 +22,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
     <div id="search-narrow-by-field-alerts" class="sr-only alerts" aria-atomic="true" aria-live="polite">
-        <p><?php echo __('Number of rows in "%s":', __('Narrow by Specific Fields')); ?> <span class="count">1</span></p>
+        <p><?php echo __('Number of input blocks in "%s":', __('Narrow by Specific Fields')); ?> <span class="count">1</span></p>
     </div>
     <div id="search-narrow-by-fields" class="field">
         <div id="search-narrow-by-fields-label" class="label"><?php echo __('Narrow by Specific Fields'); ?></div>

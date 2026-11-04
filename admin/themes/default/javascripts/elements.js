@@ -129,7 +129,23 @@ Omeka.Elements = {};
             });
             inputBlock.remove();
 
-            fieldDiv.find('textarea').last().focus();
+            var inputBlockCount = 1;
+            fieldDiv.find('.input-block').each(function() {
+                var currentInputBlock = $(this);
+                var currentInputBlockLabel = currentInputBlock.attr('aria-label');
+                var newInputBlockLabel = currentInputBlockLabel.replace(/\d+$/, inputBlockCount);
+                currentInputBlock.attr('aria-label', newInputBlockLabel);
+                inputBlockCount++;
+            });
+
+            var lastFieldTextarea = fieldDiv.find('.input-block:last-child textarea');
+            var lastFieldTinyMCE = tinyMCE.get(lastFieldTextarea.attr('id'));
+            if (lastFieldTinyMCE) {
+                lastFieldTinyMCE.focus();
+            } else {
+                lastFieldTextarea.focus();
+            }
+
             setTimeout(() => {
                 Omeka.Elements.alertElementChange(elementId, fieldDiv);
              }, 2000);
