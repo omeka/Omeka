@@ -5,10 +5,7 @@ if (!Omeka) {
 Omeka.ItemsBrowse = {};
 
 (function ($) {
-    Omeka.ItemsBrowse.setupDetails = function (detailsText, showDetailsText, hideDetailsText) {
-        $('.details').hide();
-        $('.title').after('<button type="button" class="details-link" aria-expanded="false"><span class="sr-only">' + detailsText + '</span></button></li>');
-
+    Omeka.ItemsBrowse.setupDetails = function (showDetailsText, hideDetailsText) {
         $('tr.item').each(function() {
             var itemDetails = $(this).find('.details');
             var itemDetailsId = itemDetails.attr('id');
@@ -21,7 +18,6 @@ Omeka.ItemsBrowse = {};
                     } else {
                         itemDetailsButton.attr('aria-expanded', 'false');
                     }
-                    itemDetails.slideToggle('fast');
                 });
             }
         });
@@ -38,12 +34,10 @@ Omeka.ItemsBrowse = {};
         $('.toggle-all-details').click(function (e) {
             if (detailsShown) {
             	$('.toggle-all-details').text(showDetailsText);
-            	$('.details').slideUp('fast');
                 $('.details-link').attr('aria-expanded', "false");
                 srAlerts.text(showAllSuccess);
             } else {
             	$('.toggle-all-details').text(hideDetailsText);
-            	$('.details').slideDown('fast');
                 $('.details-link').attr('aria-expanded', "true");
                 srAlerts.text(hideAllSuccess);
             }

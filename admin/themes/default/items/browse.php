@@ -91,37 +91,39 @@ echo item_search_filters();
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
-                        <ul class="action-links group">
-                            <?php if (is_allowed($item, 'edit')): ?>
-                            <li>
-                                <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
-                            </li>
-                            <?php endif; ?>
+                        <div class="item-meta">
+                            <ul class="action-links group">
+                                <?php if (is_allowed($item, 'edit')): ?>
+                                <li>
+                                    <?php echo link_to_item(__('Edit'), ['class' => 'edit'], 'edit'); ?>
+                                </li>
+                                <?php endif; ?>
 
-                            <?php if (is_allowed($item, 'delete')): ?>
-                            <li>
-                                <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
-                            </li>
-                            <?php endif; ?>
-                        </ul>
+                                <?php if (is_allowed($item, 'delete')): ?>
+                                <li>
+                                    <?php echo link_to_item(__('Delete'), ['class' => 'delete-confirm'], 'delete-confirm'); ?>
+                                </li>
+                                <?php endif; ?>
+                            </ul>
 
-                        <?php fire_plugin_hook('admin_items_browse_simple_each', ['item' => $item, 'view' => $this]); ?>
-
-                        <div class="details" id="item-<?php echo $item->id; ?>-details">
-                            <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
-                            <?php if ($itemDescription !== ''): ?>
-                                <p class="description"><?php echo $itemDescription; ?></p>
-                            <?php endif; ?>
-                            <p>
-                                <strong><?php echo __('Collection'); ?>:</strong>
-                                <?php echo link_to_collection_for_item(); ?>
-                            </p>
-                            <p>
-                                <strong><?php echo __('Tags'); ?>:</strong>
-                                <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
-                            </p>
-                            <?php fire_plugin_hook('admin_items_browse_detailed_each', ['item' => $item, 'view' => $this]); ?>
+                            <button type="button" class="details-link" aria-expanded="false"><?php echo __('Details'); ?></button>
+                            <div class="details" id="item-<?php echo $item->id; ?>-details">
+                                <?php $itemDescription = snippet_by_word_count(metadata('item', ['Dublin Core', 'Description']), 40); ?>
+                                <?php if ($itemDescription !== ''): ?>
+                                    <p class="description"><?php echo $itemDescription; ?></p>
+                                <?php endif; ?>
+                                <p>
+                                    <strong><?php echo __('Collection'); ?>:</strong>
+                                    <?php echo link_to_collection_for_item(); ?>
+                                </p>
+                                <p>
+                                    <strong><?php echo __('Tags'); ?>:</strong>
+                                    <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
+                                </p>
+                                <?php fire_plugin_hook('admin_items_browse_detailed_each', ['item' => $item, 'view' => $this]); ?>
+                            </div>
                         </div>
+                        <?php fire_plugin_hook('admin_items_browse_simple_each', ['item' => $item, 'view' => $this]); ?>
                     </td>
                     <td><?php echo strip_formatting(metadata('item', ['Dublin Core', 'Creator'])); ?></td>
                     <td>
@@ -166,7 +168,6 @@ echo item_search_filters();
 
     <script type="text/javascript">
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupDetails, [
-        <?php echo js_escape(__('Details')); ?>,
         <?php echo js_escape(__('Show All Details')); ?>,
         <?php echo js_escape(__('Hide All Details')); ?>
     ]);

@@ -71,20 +71,6 @@
         height: 25px;
     }
 
-
-@include screen-xs {
-    .browse .action-links a {
-        @include button;
-        @include small;
-        @include blue;
-        margin: 0;
-    }
-    
-    .browse .action-links a.delete-confirm {
-        @include red;
-    }
-}
-
 .browse .details .description {
     width: 100%;
     margin-bottom: $spacing-s;
