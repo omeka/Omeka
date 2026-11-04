@@ -1878,8 +1878,7 @@ span.title {
 
 .item-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px 0; }
+  flex-wrap: wrap; }
 
 button.details-link {
   color: #003576;

@@ -81,17 +81,17 @@ echo item_search_filters();
                         $itemPrivate = !$item->public;
                         ?>
                         <span class="title"><?php echo link_to_item($itemTitle); ?></span>
-                        <?php if ($itemFeatured || $itemPrivate): ?>
-                        <div class="labels">
-                            <?php if ($itemFeatured): ?>
-                            <span class="featured label"><?php echo __('Featured'); ?></span>
-                            <?php endif; ?>
-                            <?php if ($itemPrivate): ?>
-                            <span class="private label"><?php echo __('Private'); ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <?php endif; ?>
                         <div class="item-meta">
+                            <?php if ($itemFeatured || $itemPrivate): ?>
+                            <div class="labels">
+                                <?php if ($itemFeatured): ?>
+                                <span class="featured label"><?php echo __('Featured'); ?></span>
+                                <?php endif; ?>
+                                <?php if ($itemPrivate): ?>
+                                <span class="private label"><?php echo __('Private'); ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
                             <ul class="action-links group">
                                 <?php if (is_allowed($item, 'edit')): ?>
                                 <li>
