@@ -128,6 +128,11 @@ class Omeka_Form extends Zend_Form
                 $element->setAttrib('aria-describedby', $element->getName() . '-explanation');
             }
         }
+        foreach ($this->getDisplayGroups() as $group) {
+            if ($group->getDescription()) {
+                $group->setAttrib('aria-describedby', $group->getName() . '-explanation');
+            }
+        }
     }
 
     /**
