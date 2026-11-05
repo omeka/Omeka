@@ -38,7 +38,7 @@ echo flash();
                 <p class="explanation" id="max-api-results-description"><?php echo __(
                     'Maximum number of API results displayed per page.'
                 ); ?></p>
-                <?php echo $this->formText('api_per_page', get_option('api_per_page'), null, ['aria-describedby' => 'max-api-results-description']); ?>
+                <?php echo $this->formText('api_per_page', get_option('api_per_page'), ['aria-describedby' => 'max-api-results-description']); ?>
             </div>
         </div>
         <p><?php echo __(
