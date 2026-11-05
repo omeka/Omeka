@@ -3,7 +3,7 @@
 
     <?php if ( is_allowed('Items', 'makePublic') ): ?>
     <div class="field">
-        <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
+        <label class="two columns alpha" for="metadata-public"><?php echo __('Public?'); ?></label>
         <div class="inputs five columns omega">
             <?php
             $publicOptions = [''  => __('Select Below'),
@@ -17,7 +17,7 @@
 
     <?php if ( is_allowed('Items', 'makeFeatured') ): ?>
     <div class="field">
-        <label class="two columns alpha" for="metadata[featured]"><?php echo __('Featured?'); ?></label>
+        <label class="two columns alpha" for="metadata-featured"><?php echo __('Featured?'); ?></label>
         <div class="inputs five columns omega">
             <?php
             $featuredOptions = [''  => __('Select Below'),
@@ -30,7 +30,7 @@
     <?php endif; ?>
 
     <div class="field">
-        <label class="two columns alpha" for="metadata[item_type_id]"><?php echo __('Item Type'); ?></label>
+        <label class="two columns alpha" for="metadata-item_type_id"><?php echo __('Item Type'); ?></label>
         <div class="inputs five columns omega">
         <?php
         $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
@@ -47,7 +47,7 @@
     </div>
 
     <div class="field">
-        <label class="two columns alpha" for="metadata[collection_id]"><?php echo __('Collection'); ?></label>
+        <label class="two columns alpha" for="metadata-collection_id"><?php echo __('Collection'); ?></label>
         <div class="inputs five columns omega">
             <?php
             $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
@@ -64,7 +64,7 @@
     </div>
 
     <div class="field">
-        <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
+        <label class="two columns alpha" for="metadata-tags"><?php echo __('Add Tags'); ?></label>
         <div class="inputs five columns omega">
             <p class="explanation" id="add-tags-explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', option('tag_delimiter')); ?></p>
             <?php echo $this->formText('metadata[tags]', null, ['size' => 32, 'aria-describedby' => 'add-tags-explanation']); ?>
