@@ -124,6 +124,10 @@ Omeka.Elements = {};
             }
 
             var inputBlock = removeButton.parents(inputBlockSelector);
+            var prevInputBlock = inputBlock.prev('.input-block');
+            if (prevInputBlock.length < 1) {
+                prevInputBlock = fieldDiv.find('.input-block').first();
+            }
             inputBlock.find('textarea').each(function () {
                 tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, this.id);
             });
@@ -134,16 +138,15 @@ Omeka.Elements = {};
                 var currentInputBlock = $(this);
                 var currentInputBlockLabel = currentInputBlock.attr('aria-label');
                 var newInputBlockLabel = currentInputBlockLabel.replace(/\d+$/, inputBlockCount);
-                currentInputBlock.attr('aria-label', newInputBlockLabel);
                 inputBlockCount++;
             });
 
-            var lastFieldTextarea = fieldDiv.find('.input-block:last-child textarea');
-            var lastFieldTinyMCE = tinyMCE.get(lastFieldTextarea.attr('id'));
-            if (lastFieldTinyMCE) {
-                lastFieldTinyMCE.focus();
+            var prevFieldTextarea = prevInputBlock.find('textarea');
+            var prevFieldTinyMCE = tinyMCE.get(prevFieldTextarea.attr('id'));
+            if (prevFieldTinyMCE) {
+                prevFieldTinyMCE.focus();
             } else {
-                lastFieldTextarea.focus();
+                prevFieldTextarea.focus();
             }
 
             setTimeout(() => {
