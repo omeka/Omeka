@@ -12,12 +12,18 @@ endif;
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
-            <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
-            <div class="five columns omega">
+            <h2><?php echo __('Items'); ?></h2>
+            <div class="inputs">
+                <?php
+                    $itemCheckboxes = [];
+                    $excludedItems = false;
+                ?>
+                <p id="item-list-explanation" class="explanation"><?php echo __('Checked items will be deleted.'); ?></p>
+                <?php if ($excludedItems): ?>
+                <p id="exluded-items-explanation" class="explanation"><?php echo __('Some items were excluded because you do not have permission to delete them.'); ?></p>
+                <?php endif; ?>
                 <ul>
                 <?php
-                $itemCheckboxes = [];
-                $excludedItems = false;
                 foreach ($itemIds as $id) {
                     if (!($item = get_record_by_id('item', $id))) {
                         continue;
@@ -30,13 +36,9 @@ endif;
                     }
                     release_object($item);
                 }
-                echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked'], $itemCheckboxes, '</li><li>') . '</li>'; ?>
+                echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked', 'aria-describedby' => 'item-list-explanation'], $itemCheckboxes, '</li><li>') . '</li>'; ?>
                 </ul>
-                <?php if ($excludedItems): ?>
-                <p class="explanation"><?php echo __('Some items were excluded because you do not have permission to delete them.'); ?></p>
-                <?php endif; ?>
 
-                <p class="explanation"><?php echo __('Checked items will be deleted.'); ?></p>
             </div>
         </fieldset>
         <input type="hidden" name="delete" value="1">
