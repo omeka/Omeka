@@ -1,4 +1,7 @@
-<?php echo js_tag('item-types'); ?>
+<?php 
+echo js_tag('item-types'); 
+$this->form->applyOmekaStyles();
+?>
 <script type="text/javascript">
 jQuery(document).ready(function () {
     var addNewRequestUrl = '<?php echo admin_url('item-types/add-new-element'); ?>';
@@ -11,14 +14,9 @@ jQuery(document).ready(function () {
 
 <section class="seven columns alpha">
     <fieldset id="type-information">
-        <legend><?php echo __('Item Type Information'); ?></legend>
-            
-        <div class="field">
-            <?php echo $this->form->getElement(Omeka_Form_ItemTypes::NAME_ELEMENT_ID); ?>
-        </div>
-        <div class="field">
-            <?php echo $this->form->getElement(Omeka_Form_ItemTypes::DESCRIPTION_ELEMENT_ID); ?>
-        </div>
+        <legend><?php echo __('Item Type Information'); ?></legend>            
+        <?php echo $this->form->getElement(Omeka_Form_ItemTypes::NAME_ELEMENT_ID); ?>
+        <?php echo $this->form->getElement(Omeka_Form_ItemTypes::DESCRIPTION_ELEMENT_ID); ?>
     </fieldset>
     <fieldset id="type-elements">
         <legend><?php echo __('Elements'); ?></legend>
