@@ -583,7 +583,7 @@ input[type=email],
 input[type=search],
 input[type=password] {
   height: 36px;
-  border: 1px solid #D6D5C2;
+  border: 1px solid #8f8f8f;
   border-radius: 0;
   box-sizing: border-box;
   color: #666666;
@@ -614,7 +614,7 @@ input[type=text].small {
 .field select {
   width: 100%;
   margin-bottom: 10px;
-  border: 1px solid #D6D5C2;
+  border: 1px solid #8f8f8f;
 }
 
 label select,
@@ -710,7 +710,7 @@ label input[type=text] {
 
 textarea {
   width: 100%;
-  border: 1px solid #D6D5C2;
+  border: 1px solid #8f8f8f;
   overflow: auto;
   border-radius: 0;
   box-sizing: border-box;
@@ -733,7 +733,7 @@ input[type=checkbox] {
 select {
   appearance: none;
   padding: 10px 36px 10px 9px;
-  border: 1px solid #D6D5C2;
+  border: 1px solid #8f8f8f;
   border-radius: 3px;
   line-height: 16px;
   text-align: left;
@@ -757,7 +757,7 @@ select[multiple=multiple] {
 }
 .mce-title:focus,
 .mce-textbox:focus {
-  border-color: rgb(63.8235294118%, 62.9411764706%, 46.1764705882%) !important;
+  border-color: rgb(31.0784313725%, 31.0784313725%, 31.0784313725%) !important;
 }
 
 .field label.checkbox-label {
@@ -792,7 +792,7 @@ button {
   cursor: pointer;
   display: inline-block;
   background: #f1f2f2;
-  border: 1px solid #D6D5C2;
+  border: 1px solid #8f8f8f;
   color: #232323;
   margin: 0 5px 20px 0;
   min-width: 25px;

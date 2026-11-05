@@ -464,7 +464,7 @@ button {
   cursor: pointer;
   display: inline-block;
   background: #f1f2f2;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   color: #232323;
   margin: 0 5px 20px 0;
   min-width: 25px;
@@ -850,7 +850,7 @@ button.ui-dialog-titlebar-close {
 .add-new {
   background: #f1f2f2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   border-radius: 2px;
   padding: 8.5px;
   margin: 0;
@@ -1022,7 +1022,7 @@ button.ui-dialog-titlebar-close {
 
 .drawer-contents {
   background: #fff;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   line-height: 1.5em;
   margin: -2px 0 2px 0;
@@ -1135,7 +1135,7 @@ input[type=email],
 input[type=search],
 input[type=password] {
   height: 36px;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   border-radius: 0;
   box-sizing: border-box;
   color: #666666;
@@ -1166,7 +1166,7 @@ input[type=text].small {
 .field select {
   width: 100%;
   margin-bottom: 10px;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
 }
 
 label select,
@@ -1262,7 +1262,7 @@ label input[type=text] {
 
 textarea {
   width: 100%;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   overflow: auto;
   border-radius: 0;
   box-sizing: border-box;
@@ -1285,7 +1285,7 @@ input[type=checkbox] {
 select {
   appearance: none;
   padding: 10px 36px 10px 9px;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   border-radius: 3px;
   line-height: 16px;
   text-align: left;
@@ -1309,7 +1309,7 @@ select[multiple=multiple] {
 }
 .mce-title:focus,
 .mce-textbox:focus {
-  border-color: rgb(33.2156862745%, 32.9411764706%, 28.5490196078%) !important;
+  border-color: rgb(31.0784313725%, 31.0784313725%, 31.0784313725%) !important;
 }
 
 .field label.checkbox-label {
@@ -1561,7 +1561,7 @@ ul.pagination {
   cursor: pointer;
   display: inline-block;
   background: #f1f2f2;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   color: #232323;
   margin: 0 0 20px 0;
   min-height: 25px;
@@ -1648,7 +1648,7 @@ ul.pagination {
 }
 
 #save .field, #edit .field {
-  border-top: 1px solid #979686;
+  border-top: 1px solid #8f8f8f;
   overflow: visible;
   padding-top: 20px;
 }
@@ -1816,7 +1816,7 @@ ul.pagination {
   top: 36px;
   left: 0;
   padding: 0 20px 1em 20px;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   border-top: 0;
   box-sizing: border-box;
   width: 100%;
@@ -2489,7 +2489,7 @@ ul.details li:last-child {
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 1px solid #979686;
+  border-bottom: 1px solid #8f8f8f;
 }
 
 #files-metadata .add-new + .drawer-contents {
@@ -2525,11 +2525,11 @@ ul.details li:last-child {
   width: auto;
   float: left;
   margin: -3px 10px 0 0;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
 }
 
 .file-container {
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   border-bottom: 0;
   border-radius: 2px;
 }
@@ -2546,7 +2546,7 @@ ul.details li:last-child {
 }
 
 .file-info .file-size:not(:empty) {
-  border-bottom: 1px solid #979686;
+  border-bottom: 1px solid #8f8f8f;
   padding: 10px;
 }
 
@@ -2630,7 +2630,7 @@ ul.details li:last-child {
     cursor: pointer;
     display: inline-block;
     background: #f1f2f2;
-    border: 1px solid #979686;
+    border: 1px solid #8f8f8f;
     color: #232323;
     margin: 0 5px 20px 0;
     min-width: 25px;
@@ -3003,7 +3003,7 @@ ul.details li:last-child {
   background-color: white;
   color: #232323 !important;
   box-shadow: none;
-  border: 1px solid #979686;
+  border: 1px solid #8f8f8f;
   font-weight: bold;
 }
 
@@ -3285,7 +3285,7 @@ ul.details li:last-child {
 
 .plugin-row {
   overflow: auto;
-  border-bottom: 1px solid #979686;
+  border-bottom: 1px solid #8f8f8f;
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
