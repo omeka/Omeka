@@ -362,7 +362,7 @@
         padding: $spacing-s $spacing-m;
         border-radius: $spacing-l;
         margin: 0;
-		background: $darkgrayborder;
+		background: $lightgrayborder;
         text-decoration: none;
         font-weight: normal;
 
@@ -377,7 +377,7 @@
         background-color: white;
         color: $black !important;
 		box-shadow: none;
-        border: 1px solid #ddd;
+        border: 1px solid $darkgrayborder;
         font-weight: bold;
     }
 }
