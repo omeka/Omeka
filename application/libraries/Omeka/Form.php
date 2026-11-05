@@ -124,6 +124,9 @@ class Omeka_Form extends Zend_Form
                     || $element instanceof Zend_Form_Element_Hash) {
                 $element->setDecorators(['ViewHelper']);
             }
+            if ($element->getDescription()) {
+                $element->setAttrib('aria-describedby', $element->getName() . '-explanation');
+            }
         }
     }
 

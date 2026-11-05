@@ -173,6 +173,7 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
         $placement = $this->getPlacement();
         $tag       = $this->getTag();
         $class     = $this->getClass();
+        $id        = $element->getId();
         $escape    = $this->getEscape();
 
         $options   = $this->getOptions();
@@ -185,6 +186,9 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
             require_once 'Zend/Form/Decorator/HtmlTag.php';
             $options['tag'] = $tag;
             $decorator = new Zend_Form_Decorator_HtmlTag($options);
+            $decorator->setOptions(array('tag'   => $tag,
+                                         'id'    => $id . '-explanation',
+                                         'class' => $class));
             $description = $decorator->render($description);
         }
 
