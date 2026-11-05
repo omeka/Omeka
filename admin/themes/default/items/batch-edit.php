@@ -15,6 +15,7 @@ endif;
     <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
             <h2><?php echo __('Items'); ?></h2>
+            <p id="item-list-explanation" class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
             <ul>
             <?php 
             $itemCheckboxes = [];
@@ -30,10 +31,9 @@ endif;
                 $itemCheckboxes[$id] = metadata($item, 'display_title', ['no_escape' => true]);
                 release_object($item);
             }
-            echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked'], $itemCheckboxes, '</li><li>') . '</li>';
+            echo '<li>' . $this->formMultiCheckbox('items[]', null, ['checked' => 'checked', 'aria-describedby' => 'item-list-explanation'], $itemCheckboxes, '</li><li>') . '</li>';
             ?>
             </ul>
-            <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
         </fieldset>
 
         <?php echo common('batch-edit-common', [], 'items'); ?>

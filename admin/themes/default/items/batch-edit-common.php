@@ -38,8 +38,10 @@
         echo $this->formSelect('metadata[item_type_id]', null, [], $itemTypeOptions);
         ?>
             <div class="batch-edit-remove">
-                <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
-                <label for="removeMetadata[item_type_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
+                <label>
+                    <?php echo __('Remove?'); ?>
+                    <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
+                </label>
             </div>
         </div>
     </div>
@@ -53,8 +55,10 @@
             echo $this->formSelect('metadata[collection_id]', null, [], $collectionOptions);
             ?>
             <div class="batch-edit-remove">
-                <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
-                <label class="two columns alpha" for="removeMetadata[collection_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
+                <label>
+                    <?php echo __('Remove?'); ?>
+                    <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
+                </label>
             </div>
         </div>
     </div>
@@ -62,8 +66,8 @@
     <div class="field">
         <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
         <div class="inputs five columns omega">
-            <?php echo $this->formText('metadata[tags]', null, ['size' => 32, 'aria-describedby' => 'add-tags-description']); ?>
-            <p class="explanation" id="add-tags-description"><?php echo __('List of tags to add to all checked items, separated by %s.', option('tag_delimiter')); ?></p>
+            <p class="explanation" id="add-tags-explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', option('tag_delimiter')); ?></p>
+            <?php echo $this->formText('metadata[tags]', null, ['size' => 32, 'aria-describedby' => 'add-tags-explanation']); ?>
         </div>
     </div>
 </fieldset>
