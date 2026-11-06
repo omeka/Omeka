@@ -3644,6 +3644,10 @@ form.form-inline.editableform {
   }
 }
 
+.theme-file.template {
+  display: none;
+}
+
 #search-users {
   float: right;
   display: flex;

@@ -18,4 +18,10 @@ echo flash();
     </section>
 </form>
 
+<!-- Template for uploaded configured files -->
+<div id="x_hidden_file" class="theme-file template">
+    <button type="button" class="green button"><?php echo __('Change'); ?></button>
+    <a href=""><img src="" alt="" /></a>
+</div>
+
 <?php echo foot(); ?>
