@@ -83,6 +83,15 @@ Omeka.Search = {};
             var countSpan = $(alertId).find('.count');
             var countValue = field.find(rowClass).length;
             countSpan.text(countValue);
+
+            var inputBlockCount = 1;
+            field.find('.search-entry').each(function () {
+                var currentInputBlock = $(this);
+                var currentInputBlockLabel = currentInputBlock.attr('aria-label');
+                var newInputBlockLabel = currentInputBlockLabel.replace(/\d+$/, inputBlockCount);
+                currentInputBlock.attr('aria-label', newInputBlockLabel);
+                inputBlockCount++;
+            });
         }
 
         /**
@@ -91,10 +100,11 @@ Omeka.Search = {};
          * @param {Element} button The clicked delete button.
          */
         function removeAdvancedSearch(button) {
+            var prevInputBlockFocus = $(button).parent().prev('.search-entry').find(':focusable').first();
             $(button).parent().remove();
             handleRemoveButtons();
             updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
-            addButton.focus();
+            prevInputBlockFocus.focus();
         }
 
         /**

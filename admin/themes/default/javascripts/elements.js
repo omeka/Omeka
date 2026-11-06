@@ -138,6 +138,7 @@ Omeka.Elements = {};
                 var currentInputBlock = $(this);
                 var currentInputBlockLabel = currentInputBlock.attr('aria-label');
                 var newInputBlockLabel = currentInputBlockLabel.replace(/\d+$/, inputBlockCount);
+                currentInputBlock.attr('aria-label', newInputBlockLabel);
                 inputBlockCount++;
             });
 
