@@ -87,7 +87,7 @@ Omeka.Items = {};
                         // Explicit show() call fixes IE7
                         $(this).show();
                     });
-                    itemTypeSelect[0].ariaNotify(srAlert);
+                    $('.element-set-description').focus();
                 }
             });
         });
