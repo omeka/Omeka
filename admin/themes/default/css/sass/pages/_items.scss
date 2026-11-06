@@ -5,19 +5,6 @@
     float: left;
 }
 
-#type-metadata-form {
-	.offset-by-two {
-		margin-left: 28%;
-		
-		@include screen-sm {
-			margin-left: 0;	
-		}
-		@include screen-xs {
-			margin-left: 0;	
-		}
-	}
-}
-
 .items.browse #advanced-search-link {
     float: left;
     margin-bottom: 20px;
@@ -314,11 +301,6 @@
     float: left;
 }
 
-.element-set-description {
-    display: inline-block;
-    margin: 0 0 40px 0;
-}
-
 #public-featured {
     margin: 0 0 10px 0;
     padding: 0;
@@ -380,6 +362,30 @@
         border: 1px solid #ddd;
         font-weight: bold;
     }
+}
+
+#type-select #item-type {
+    margin-bottom: 0;
+}
+
+#type-metadata-form {
+	.offset-by-two {
+		margin-left: 28%;
+		
+		@include screen-xs {
+			margin-left: 0;	
+		}
+	}
+}
+
+#type-select #item-type {
+    margin-bottom: 0;
+}
+
+#type-metadata-form h2 {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
 }
 
 /* Edit Item Types
