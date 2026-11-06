@@ -82,6 +82,8 @@ class Omeka_Form extends Zend_Form
 
         $defaultLabelOptions = ['placement' => 'prepend', 'tag' => 'div', 'tagClass' => 'two columns alpha', 'requiredSuffix' => sprintf('<span class="required-label">%s</span>', __('required field'))];
         $defaultLabel = new Omeka_Form_Decorator_RawAffixLabel($defaultLabelOptions);
+        $defaultFieldTagOptions = ['tag' => 'div', 'class' => 'field'];
+        $defaultFieldTag = new Omeka_Form_Decorator_HtmlTagAria($defaultFieldTagOptions);
 
         return [
                         ['Description', ['tag' => 'p', 'class' => 'explanation', 'escape' => false]],
@@ -89,7 +91,7 @@ class Omeka_Form extends Zend_Form
                         ['Errors', ['class' => 'error']],
                         [['InputsTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'inputs five columns omega']],
                         'Label' => $defaultLabel,
-                        [['FieldTag' => 'HtmlTag'], ['tag' => 'div', 'class' => 'field']]
+                        [['FieldTag' => $defaultFieldTag]]
                     ];
     }
 
@@ -102,6 +104,9 @@ class Omeka_Form extends Zend_Form
     public function applyOmekaStyles()
     {
         foreach ($this->getElements() as $element) {
+            if ($element->getLabel()) {
+                $element->setAttrib('aria-labelledby', $element->getName() . '-label');
+            }
             if ($element instanceof Zend_Form_Element_Submit) {
                 // All submit form elements should be wrapped in a div with
                 // no class.

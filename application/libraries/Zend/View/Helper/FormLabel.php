@@ -54,8 +54,8 @@ class Zend_View_Helper_FormLabel extends Zend_View_Helper_FormElement
         }
 
         $value = ($escape) ? $this->view->escape($value) : $value;
-        $for   = (empty($attribs['disableFor']) || !$attribs['disableFor'])
-               ? ' for="' . $this->view->escape($id) . '"'
+        $idAttrib   = (empty($attribs['disableFor']) || !$attribs['disableFor'])
+               ? ' id="' . $this->view->escape($id) . '-label"'
                : '';
         if (array_key_exists('disableFor', $attribs)) {
             unset($attribs['disableFor']);
@@ -63,7 +63,7 @@ class Zend_View_Helper_FormLabel extends Zend_View_Helper_FormElement
 
         // enabled; display label
         $xhtml = '<label'
-                . $for
+                . $idAttrib
                 . $this->_htmlAttribs($attribs)
                 . '>' . $value . '</label>';
 
