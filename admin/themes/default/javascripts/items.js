@@ -61,10 +61,10 @@ Omeka.Items = {};
      * @param {string} itemId Item ID.
      */
     Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
-        $('#change_type').hide();
         $('#item-type').change(function () {
+            var itemTypeSelect = $(this);
             var params = {
-                type_id: $(this).val()
+                type_id: itemTypeSelect.val()
             };
             if (itemId) {
                 params.item_id = itemId;
@@ -76,6 +76,7 @@ Omeka.Items = {};
                 data: params,
                 success: function (response) {
                     var form = $('#type-metadata-form');
+                    var srAlert = itemTypeSelect.data('sr-alert');
                     form.hide();
                     form.find('textarea').each(function () {
                         tinyMCE.EditorManager.execCommand('mceRemoveEditor', true, this.id);
@@ -86,6 +87,7 @@ Omeka.Items = {};
                         // Explicit show() call fixes IE7
                         $(this).show();
                     });
+                    itemTypeSelect[0].ariaNotify(srAlert);
                 }
             });
         });
