@@ -31,6 +31,23 @@ if (!Omeka) {
             add_unload_trigger: false,
             cache_suffix: '?v=' + tinymce.majorVersion + '.' + tinymce.minorVersion,
             help_accessibility: true,
+            init_instance_callback: function(editor) {
+                // Target editor and container bodies separately for screen reader coverage.
+                // See: https://github.com/tinymce/tinymce/issues/6839#issuecomment-1208844069
+                var editorContainer = editor.getContainer();
+                var editorBody = editor.getBody();
+                var groupParent = editorContainer.closest('[role="group"]');
+                var ariaLabelledby = groupParent.getAttribute('aria-labelledby');
+                var explanation = groupParent.querySelector('.explanation').getAttribute('id');
+                if (ariaLabelledby) {
+                    editorContainer.setAttribute('aria-labelledby', ariaLabelledby);
+                    editorBody.setAttribute('aria-labelledby', ariaLabelledby);
+                }
+                if (explanation) {
+                    editorContainer.setAttribute('aria-describedby', explanation);
+                    editorBody.setAttribute('aria-describedby', explanation);
+                }
+            }
         };
 
         tinymce.init($.extend(initParams, params));
