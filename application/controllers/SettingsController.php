@@ -99,6 +99,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $this->view->defaultQueryType = get_option('search_query_type') ?: 'keyword';
         $this->view->searchRecordTypes = get_search_record_types();
         $this->view->customSearchRecordTypes = get_custom_search_record_types();
+        $this->view->searchIncludeFileTexts = (bool) get_option('search_include_file_texts');
         $this->view->csrf = $csrf;
 
         if ($this->getRequest()->isPost()) {
@@ -120,6 +121,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                     $option = serialize([]);
                 }
                 set_option('search_record_types', $option);
+                set_option('search_include_file_texts', !empty($_POST['search_include_file_texts']) ? '1' : '0');
                 $this->_helper->flashMessenger(__('You have changed which records are searchable in Omeka. Please re-index the records using the form below.'), 'success');
             }
 
