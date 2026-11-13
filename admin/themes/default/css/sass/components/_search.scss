@@ -111,7 +111,7 @@
     }
 }
 
-.show-advanced.open + #advanced-form {
+.show-advanced[aria-expanded="true"] + #advanced-form {
     display: block;
 }
 
