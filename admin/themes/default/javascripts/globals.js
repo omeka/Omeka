@@ -40,7 +40,6 @@ if (!Omeka) {
                 var ariaLabelledby = groupParent.getAttribute('aria-labelledby');
                 var explanation = groupParent.querySelector('.explanation');
                 if (ariaLabelledby !== null) {
-                    console.log(ariaLabelledby);
                     editorContainer.setAttribute('aria-labelledby', ariaLabelledby);
                     editorBody.setAttribute('aria-labelledby', ariaLabelledby);
                 }
