@@ -38,14 +38,16 @@ if (!Omeka) {
                 var editorBody = editor.getBody();
                 var groupParent = editorContainer.closest('[role="group"]');
                 var ariaLabelledby = groupParent.getAttribute('aria-labelledby');
-                var explanation = groupParent.querySelector('.explanation').getAttribute('id');
-                if (ariaLabelledby) {
+                var explanation = groupParent.querySelector('.explanation');
+                if (ariaLabelledby !== null) {
+                    console.log(ariaLabelledby);
                     editorContainer.setAttribute('aria-labelledby', ariaLabelledby);
                     editorBody.setAttribute('aria-labelledby', ariaLabelledby);
                 }
-                if (explanation) {
-                    editorContainer.setAttribute('aria-describedby', explanation);
-                    editorBody.setAttribute('aria-describedby', explanation);
+                if (explanation !== null) {
+                    explanationId = explanation.getAttribute('id');
+                    editorContainer.setAttribute('aria-describedby', explanationId);
+                    editorBody.setAttribute('aria-describedby', explanationId);
                 }
             }
         };
