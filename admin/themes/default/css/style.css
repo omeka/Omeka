@@ -1809,9 +1809,10 @@ td {
     height: 100%; }
   .action-links li {
     display: inline-flex; }
-    .action-links li:after {
-      content: '\00b7' / '';
-      margin: 0 5px; }
+
+.browse.items .action-links li:after {
+  content: '\00b7' / '';
+  margin: 0 5px; }
 
 .batch-edit-heading {
   width: 1%;

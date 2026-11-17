@@ -141,11 +141,12 @@ td {
     li {
         display: inline-flex;
 
-        &:after {
-            content: '\00b7' / '';
-            margin: 0 5px;
-        }
     }
+}
+
+.browse.items .action-links li:after {
+    content: '\00b7' / '';
+    margin: 0 5px;
 }
 
 .batch-edit-heading {
