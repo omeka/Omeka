@@ -49,7 +49,7 @@ $formAttributes['method'] = 'GET';
         //[terms] = 'foobar'
         //etc
         foreach ($search as $i => $rows): ?>
-            <div class="search-entry" id="search-row-<?php echo $i; ?>" aria-label="<?php echo __('Row %s', $i+1); ?>">
+            <div class="search-entry" id="search-row-<?php echo $i; ?>" aria-label="<?php echo __('Input block %s', $i+1); ?>">
                 <div class="input advanced-search-joiner"> 
                     <span aria-hidden="true" class="visible-label"><?php echo __('Joiner'); ?></span>
                     <?php 
