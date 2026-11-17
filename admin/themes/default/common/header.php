@@ -19,7 +19,6 @@
     queue_js_file('vendor/selectivizr', 'javascripts', ['conditional' => '(gte IE 6)&(lte IE 8)']);
     queue_js_file('globals');
 ?>
-
 <!-- Plugin Stuff -->
 <?php fire_plugin_hook('admin_head', ['view'=>$this]); ?>
 
@@ -28,6 +27,14 @@
 
 <!-- JavaScripts -->
 <?php echo head_js(); ?>
+<script type="module">
+    if (!("anchorName" in document.documentElement.style)) {
+        import("https://unpkg.com/@oddbird/css-anchor-positioning");
+        console.log("anchor positioning polyfill applied");
+    } else {
+        console.log("anchor positioning polyfill unnecessary");
+    }
+</script>
 
 </head>
 
