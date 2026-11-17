@@ -191,6 +191,10 @@ span.title {
 
 .labels {
     margin-top: .5 * $spacing-s;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
+    flex-basis: 100%;
 }
 
 .labels .label {

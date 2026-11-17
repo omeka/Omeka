@@ -1845,7 +1845,11 @@ span.title {
       display: block; } }
 
 .labels {
-  margin-top: 2.5px; }
+  margin-top: 2.5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  flex-basis: 100%; }
 
 .labels .label {
   display: inline-flex;
@@ -2048,9 +2052,6 @@ button.details-link {
   float: left;
   margin: -3px 10px 0 0;
   border: 1px solid #D6D5C2; }
-
-#file-list .action-links li:last-child:after {
-  content: ""; }
 
 .file-container {
   border: 1px solid #D6D5C2;
