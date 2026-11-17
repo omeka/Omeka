@@ -1803,8 +1803,7 @@ td {
   padding: 0;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  height: 25px; }
+  flex-wrap: wrap; }
   .action-links a {
     color: #003576;
     height: 100%; }
@@ -2048,6 +2047,9 @@ button.details-link {
   float: left;
   margin: -3px 10px 0 0;
   border: 1px solid #D6D5C2; }
+
+#file-list .action-links li:last-child:after {
+  content: ""; }
 
 .file-container {
   border: 1px solid #D6D5C2;

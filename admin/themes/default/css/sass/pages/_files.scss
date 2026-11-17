@@ -70,6 +70,10 @@
     border: 1px solid $darkgrayborder;
 }
 
+#file-list .action-links li:last-child:after {
+    content: "";
+}
+
 .file-container {
   border: 1px solid $darkgrayborder;
   border-bottom: 0;
