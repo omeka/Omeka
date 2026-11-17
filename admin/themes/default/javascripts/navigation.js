@@ -128,7 +128,10 @@ Omeka.Navigation = {};
                 $('#new-link-success').show();
 
                 $('#navigation_form').data('omekaFormDirty', true);
+                var newLinkHasTooltip = newLink.find('.has-tooltip');
+                var newLinkTooltips = newLink.find('.tooltip');
                 Omeka.Navigation.updateForNewLinks();
+                Omeka.addTooltipEventListeners(newLinkHasTooltip, newLinkTooltips);
             } else {
                 if (!n_label) { $('#label-required').show(); }
                 if (!n_uri) { $('#uri-required').show(); }

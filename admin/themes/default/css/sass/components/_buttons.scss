@@ -1,16 +1,20 @@
 @mixin button {
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
     border-radius: 3px;
     
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
+    -webkit-appearance: none;
     
     background: $lightgray;
     border: 1px solid $darkgrayborder;
     color: $black;
     
     margin: 0 $spacing-s $spacing-l 0;
-    min-width: 25px;
     min-height: 25px;
     padding: $spacing-m ($spacing-l - 2px);
     line-height: 16px;
@@ -21,6 +25,8 @@
     white-space: normal;
     transition-duration: 0.5s;
     transition-property: border-color, background, outline, box-shadow, z-index;
+    min-width: 24px;
+    min-height: 24px;
 }
 
 @mixin large {
@@ -40,14 +46,17 @@
     &:focus {
 	    border-color: rgba($black, 0.65);
 	    background: darken($lightgray, 5%);
+	    outline: none;
     }
 
     &:focus {
         box-shadow: 0 0 0 3px #C67F6F;
-        z-index: 99;
+        z-index: 9999;
     }
     
     &:disabled {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
         box-shadow: none !important;
         cursor: default;
         opacity: .35;
@@ -68,6 +77,7 @@
     &:focus {
         border-color: rgba($blue, 0.65);
         background: darken(#EEF3FA, 5%);
+        outline: none;
     }
 
     * {
@@ -90,6 +100,7 @@
     &:focus {
         border-color: rgba($red, 0.65);
         background: darken(#F9E8E7, 5%);
+        outline: none;
     }
 
     * {
@@ -98,7 +109,7 @@
 }
 
 @mixin green {
-    color: darken($green, 7%);
+    color: darken($green, 5%);
     background: $lightgreen;
     border: 1px solid rgba($green, 0.25);
 
@@ -111,6 +122,7 @@
     &:focus {
         border-color: rgba($green, 0.65);
         background: darken($lightgreen, 5%);
+        outline: none;
     }
 
     * {
@@ -153,10 +165,30 @@ button {
     }
 }
 
-a.button[target="_blank"] {
-    justify-content: center;
+/* Tooltips
+================================================== */
+
+.has-tooltip {
+    position: relative;
 }
-           
+
+.has-tooltip.active {
+    anchor-name: --active-tooltip;
+}
+
+[popover="auto"] {
+  inset: unset;
+  position-anchor: --active-tooltip;
+  top: anchor(bottom);
+  margin: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: #271717;
+  color: whitesmoke !important;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
+  justify-self: anchor-center;
+}
 
 /* jQuery UI overrides
 ================================================== */
@@ -165,11 +197,15 @@ button.ui-state-default {
     background: #A4C637;
     color: #fff !important;
     border: 1px solid #749308 !important;
+    -webkit-border-radius: 3 !important;
+    -moz-border-radius: 3 !important;
     border-radius: 3 !important;
 }
 
 button.ui-dialog-titlebar-close {
     top: 40% !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
     box-shadow: none;
     border: 0 !important;
     background-image: none !important;
@@ -194,6 +230,7 @@ button.ui-dialog-titlebar-close {
         &:focus {
             border-color: rgba($green, 0.65);
             background: darken($lightgreen, 5%);
+            outline: none;
         }
     
         * {

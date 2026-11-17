@@ -13,7 +13,10 @@ $removeId = html_escape("remove-element-link-$elementTempId");
 ?>
 <li class="element">
     <div class="sortable-item drawer">
-        <span id="<?php echo $moveId; ?>" class="move icon" title="<?php echo __('Move'); ?>" aria-labelledby="<?php echo $moveId; ?> unnamed-element-label"></span>
+        <div id="<?php echo $moveId; ?>" class="move-handle has-tooltip">
+            <span class="move icon" aria-hidden="true"></span>
+            <div class="tooltip" popover="auto"><?php echo __('Move'); ?></div>
+        </div>
         <label class="drawer-name">
         <?php
         echo __('Element Name');
@@ -29,8 +32,14 @@ $removeId = html_escape("remove-element-link-$elementTempId");
         ?>
         </label>
         <?php echo $this->formHidden($elementOrderName, $elementOrder, ['class' => 'element-order']); ?>
-        <button type="button" id="<?php echo $returnId; ?>" class="undo-delete" data-action-selector="deleted" title="<?php echo __('Undo'); ?>" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="<?php echo $returnId; ?> unnamed-element-label"><span class="icon" aria-hidden="true"></span></button>
-        <button type="button" id="<?php echo $removeId; ?>" class="delete-drawer" data-action-selector="deleted" title="<?php echo __('Remove'); ?>" aria-label="<?php echo __('Remove'); ?>" aria-labelledby="<?php echo $removeId; ?> unnamed-element-label"><span class="icon" aria-hidden="true"></span></button>
+        <button type="button" id="<?php echo $returnId; ?>" class="undo-delete has-tooltip" data-action-selector="deleted" aria-labelledby="<?php echo $returnId; ?> unnamed-element-label">
+            <span class="icon" aria-hidden="true"></span>
+            <div class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
+        </button>
+        <button type="button" id="<?php echo $removeId; ?>" class="delete-drawer has-tooltip" data-action-selector="deleted" aria-labelledby="<?php echo $removeId; ?> unnamed-element-label">
+            <span class="icon" aria-hidden="true"></span>
+            <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
+        </button>
     </div>
     <div class="drawer-contents opened"></div>
 </li>

@@ -129,7 +129,13 @@
     display: none;
 }
 
-.drawer-contents { display: none; }
+.drawer-contents {
+    display: none;
+}
+
+.drawer-contents:empty { 
+    display: none !important; 
+}
 
 .drawer-contents.opened:not(.deleted) { display: block; }
 
@@ -160,6 +166,11 @@
 
 .drawer.opened .drawer-toggle .icon:after {
     transform: rotate(90deg);
+}
+
+.drawer-toggle[aria-expanded="false"] .tooltip .collapse,
+.drawer-toggle[aria-expanded="true"] .tooltip .expand {
+    display: none;
 }
 
 .delete-drawer { display: inline-block; }

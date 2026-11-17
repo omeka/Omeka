@@ -39,6 +39,34 @@ if (!Omeka) {
         });
     };
 
+    Omeka.addTooltipEventListeners = function (buttons, tooltips) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("mouseover", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                $(buttons[i]).addClass('active');
+            });
+            buttons[i].addEventListener("mouseout", () => {
+                tooltips[i].hidePopover();
+                $(buttons[i]).removeClass('active');
+            });
+            buttons[i].addEventListener("focus", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                $(buttons[i]).addClass('active');
+            });
+            buttons[i].addEventListener("blur", () => {
+                tooltips[i].hidePopover();
+                $(buttons[i]).removeClass('active');
+            });
+        }
+    }
+
+    Omeka.setupTooltips = function () {
+        const tooltips = $('.tooltip');
+        const buttons = $('.has-tooltip');
+
+        Omeka.addTooltipEventListeners(buttons, tooltips);
+    };
+
     Omeka.megaMenu = function (menuSelector, customMenuOptions) {
         if (typeof menuSelector === 'undefined') {
             menuSelector = '#primary-nav';
@@ -77,6 +105,7 @@ if (!Omeka) {
     };
 
     $(document).ready(function () {
+        Omeka.setupTooltips();
         $('.omeka-media').on('error', function () {
             if (this.networkState === HTMLMediaElement.NETWORK_NO_SOURCE ||
                 this.networkState === HTMLMediaElement.NETWORK_EMPTY

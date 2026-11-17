@@ -99,6 +99,12 @@ Omeka.ItemTypes = {};
                     var newElement = $(response);
                     newElement.find('.element-order').val(elementCount);
                     $('.add-new').parent().before(newElement);
+                    if (responseText) {
+                        var responseElement = $('#element-list .element').last();
+                        var hasTooltip = responseElement.find('.has-tooltip');
+                        var tooltips = responseElement.find('.tooltip');
+                        Omeka.addTooltipEventListeners(hasTooltip, tooltips);
+                    }
                     var totalElements = $('#item-type-elements .element').length;
                     $('#add-element-success .element-count').text(totalElements);
                     $('#add-element-success').show();

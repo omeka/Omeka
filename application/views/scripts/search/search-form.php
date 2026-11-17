@@ -7,8 +7,9 @@
         ]); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced button" title="<?php echo __('Search options'); ?>" aria-label="<?php echo __('Search options') ?>">
+    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced has-tooltip button" data-modal-target="advanced-form">
         <span class="icon" aria-hidden="true"></span>
+        <div id="advanced-search-tooltip" class="tooltip" popover="auto"><?php echo __('Search options') ?></div>
     </button>
     <div id="advanced-form">
         <fieldset id="query-types">
@@ -37,11 +38,9 @@
         echo $this->formButton('submit_search', $options['submit_value'], [
             'type' => 'submit', 
             'title' => __('Submit'), 
-            'class' => 'button', 
-            'content' => '<span class="icon" aria-hidden="true"></span>', 
+            'class' => 'has-tooltip button', 
+            'content' => '<span class="icon" aria-hidden="true"></span><div id="search-submit-tooltip" class="tooltip" popover="auto">' . __('Submit') . '</div>', 
             'escape' => false,
-            'aria-label' => __('Submit'),
-            'aria-labelledby' => 'search-form submit_search'
             ]
         ); 
     ?>

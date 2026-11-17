@@ -24,10 +24,15 @@
                 <?php $tagId = $tag->id; ?>
                 <li>
                     <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
-                    <?php echo '<span class="tag" id="tag-' . $tagId . '-name">' . html_escape($tag->name) . '</span>';
-                          echo '<button type="button" class="remove-tag button" aria-label="' . __('Remove') . '" title="' . __('Remove') . '"><span class="icon"></span></button>';
-                          echo '<button type="button" class="undo-remove-tag button" aria-label="' . __('Undo remove') . '" title="' . __('Undo remove') . '"><span class="icon"></span></button>';
-                    ?>
+                        <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
+                        <button type="button" class="has-tooltip remove-tag button">
+                            <span class="icon" aria-hidden="true"></span>
+                            <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
+                        </button>
+                        <button type="button" class="has-tooltip undo-remove-tag button">
+                            <span class="icon" aria-hidden="true"></span>
+                            <div class="tooltip" popover="auto"><?php echo __('Undo remove'); ?></div>
+                        </button>
                     </div>  
                 </li>
             <?php endforeach; ?>

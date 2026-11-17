@@ -19,6 +19,31 @@ a[target="_blank"]:after {
     width: 1px;
 }
 
+/* Tooltips
+================================================== */
+
+.has-tooltip {
+    position: relative;
+}
+
+.has-tooltip.active {
+    anchor-name: --active-tooltip;
+}
+
+[popover="auto"] {
+  inset: unset;
+  position-anchor: --active-tooltip;
+  top: anchor(bottom);
+  margin: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: #271717;
+  color: whitesmoke !important;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
+  justify-self: anchor-center;
+}
+
 #search-narrow-by-fields-remove-field {
     display: none;
 }

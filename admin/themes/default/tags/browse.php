@@ -99,7 +99,10 @@ echo flash();
                     <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
                 <?php endif; ?>
                 <?php if ($canDelete): ?>
-                    <button type="button" class="delete-tag delete-confirm button" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>"><span class="icon"></span></button>
+                    <button type="button" class="has-tooltip delete-tag delete-confirm button" data-action-url="<?php echo html_escape(record_url($tag, 'delete-confirm', 'delete', ['class' => 'delete-confirm'])); ?>" aria-label="<?php echo __('Delete'); ?>" title="<?php echo __('Delete'); ?>">
+                        <span class="icon" aria-hidden="true"></span>
+                        <div class="tooltip" popover="auto"><?php echo __('Delete'); ?></div>
+                    </button>
                 <?php endif; ?>
                 </div>
             </li>

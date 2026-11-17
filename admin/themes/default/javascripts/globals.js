@@ -153,6 +153,34 @@ if (!Omeka) {
         });
     };
 
+    Omeka.addTooltipEventListeners = function (buttons, tooltips) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("mouseover", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                $(buttons[i]).addClass('active');
+            });
+            buttons[i].addEventListener("mouseout", () => {
+                tooltips[i].hidePopover();
+                $(buttons[i]).removeClass('active');
+            });
+            buttons[i].addEventListener("focus", () => {
+                tooltips[i].showPopover({ source: buttons[i] });
+                $(buttons[i]).addClass('active');
+            });
+            buttons[i].addEventListener("blur", () => {
+                tooltips[i].hidePopover();
+                $(buttons[i]).removeClass('active');
+            });
+        }
+    }
+
+    Omeka.setupTooltips = function () {
+        const tooltips = $('.tooltip');
+        const buttons = $('.has-tooltip');
+
+        Omeka.addTooltipEventListeners(buttons, tooltips);
+    };
+
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
     };
@@ -240,6 +268,7 @@ if (!Omeka) {
         [Omeka.toggleMobileMenu, null],
         [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],
+        [Omeka.setupTooltips, null],
         [Omeka.moveNavList, null],
         [Omeka.mediaFallback, null],
         [Omeka.warnIfUnsaved, null]
