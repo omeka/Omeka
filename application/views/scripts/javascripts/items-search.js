@@ -100,11 +100,13 @@ Omeka.Search = {};
          * @param {Element} button The clicked delete button.
          */
         function removeAdvancedSearch(button) {
-            var prevInputBlockFocus = $(button).parent().prev('.search-entry').find(':focusable').first();
-            $(button).parent().remove();
+            var removeButton = $(button);
+            var currentInputs = removeButton.parents('.inputs');
+            removeButton.parent().remove();
             handleRemoveButtons();
             updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
-            prevInputBlockFocus.focus();
+            var firstInputBlockFocus = currentInputs.find('.search-entry :focusable').first();
+            firstInputBlockFocus.focus();
         }
 
         /**
