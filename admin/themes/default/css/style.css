@@ -1809,6 +1809,12 @@ td {
     height: 100%; }
   .action-links li {
     display: inline-flex; }
+    .action-links li:after {
+      content: '\00b7' / '';
+      margin: 0 5px; }
+    .action-links li:last-child:after {
+      content: "";
+      margin: 0; }
 
 .browse.items .action-links li:after {
   content: '\00b7' / '';
