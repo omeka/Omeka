@@ -12,7 +12,7 @@ echo head(['title' => $userTitle, 'bodyclass' => 'users', 'sectionNav' => $secti
 echo flash();
 ?>
 <section class="seven columns alpha">
-<form method="post" action="">
+<form id="user-api-keys" method="post" action="" data-no-changes-text="<?php echo __('No changes detected. Enter a new key label or select an existing API key to rescind.'); ?>">
     <fieldset>
         <legend><?php echo __('API Keys'); ?></legend>
         <div class="field">
@@ -67,7 +67,6 @@ echo flash();
     <div id="save" class="panel">
         <?php echo $this->formSubmit('update_api_keys', __('Update API Keys'), ['class' => 'submit full-width green button']); ?>
     </div>
-    <span aria-hidden="true" class="sr-only" id="no-changes-text"><?php echo __('No changes detected. Enter a new key label or select an existing API key to rescind.'); ?></span>
 </section>
 </form>
 
