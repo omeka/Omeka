@@ -11,10 +11,9 @@ Omeka.Users = {};
     };
 
     Omeka.Users.flashNoChangesError = function () {
-        let errorText = $('#user-api-keys').data('no-changes-text');
-        let errorElement;
-        if (errorText) {
-            errorElement = $('<li class="error" tabindex="-1" id="no-changes">' + errorText + '</li>');
+        let errorElement = $('#no-changes');
+        if (errorElement.length == 0) {
+            errorElement = $('<li class="error" tabindex="-1" id="no-changes">' + $('#user-api-keys').data('no-changes-text') + '</li>');
             let flash = $('#flash');
             if (flash.length == 0) {
                 flash = $('<div id="flash"><ul></ul></div>');
