@@ -46,9 +46,9 @@
     <div id="site-title" class="two columns">
         <?php echo link_to_home_page(option('site_title') . '<span class="sr-only">' . __('(external link)') . '</span>', ['target' => '_blank']); ?>
     </div>
-	<button id="mobile-navbar-toggle" class="mobile-menu has-tooltip" data-target="#global-nav" aria-expanded="false">
+	<button id="mobile-navbar-toggle" class="mobile-menu has-tooltip" data-target="#global-nav" aria-labelledby="mobile-navbar-toggle-tooltip" aria-expanded="false">
         <span class="admin-icon icon" aria-hidden="true"></span>
-        <div class="tooltip" popover="auto"><?php echo __('Admin'); ?></div>
+        <div id="mobile-navbar-toggle-tooltip" class="tooltip" popover="auto"><?php echo __('Admin'); ?></div>
     </button>
 
     <nav id="global-nav" aria-label="<?php echo __('Admin'); ?>">

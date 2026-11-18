@@ -7,7 +7,7 @@
         ]); 
     ?>
     <?php if ($options['show_advanced']): ?>
-    <button id="advanced-search" type="button" aria-expanded="false" class="show-advanced has-tooltip button" data-modal-target="advanced-form">
+    <button id="advanced-search" type="button" aria-expanded="false" aria-labelledby="advanced-search-tooltip" class="show-advanced has-tooltip button" data-modal-target="advanced-form">
         <span class="icon" aria-hidden="true"></span>
         <div id="advanced-search-tooltip" class="tooltip" popover="auto"><?php echo __('Search options') ?></div>
     </button>
@@ -37,8 +37,8 @@
     <?php 
         echo $this->formButton('submit_search', $options['submit_value'], [
             'type' => 'submit', 
-            'title' => __('Submit'), 
             'class' => 'has-tooltip button', 
+            'aria-labelledby' => 'search-submit-tooltip',
             'content' => '<span class="icon" aria-hidden="true"></span><div id="search-submit-tooltip" class="tooltip" popover="auto">' . __('Submit') . '</div>', 
             'escape' => false,
             ]

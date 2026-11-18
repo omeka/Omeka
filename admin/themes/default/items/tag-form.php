@@ -25,13 +25,13 @@
                 <li>
                     <div role="group" aria-labelledby="tag-<?php echo $tagId; ?>-name" class="tag-group">
                         <span class="tag" id="tag-<?php echo $tagId; ?>-name"><?php echo html_escape($tag->name); ?></span>
-                        <button type="button" class="has-tooltip remove-tag button">
+                        <button type="button" class="has-tooltip remove-tag button" aria-labelledby="tag-<?php echo $tagId; ?>-remove-tooltip">
                             <span class="icon" aria-hidden="true"></span>
-                            <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
+                            <div id="tag-<?php echo $tagId; ?>-remove-tooltip" class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
                         </button>
-                        <button type="button" class="has-tooltip undo-remove-tag button">
+                        <button type="button" class="has-tooltip undo-remove-tag button" aria-labelledby="tag-<?php echo $tagId; ?>-undo-tooltip">
                             <span class="icon" aria-hidden="true"></span>
-                            <div class="tooltip" popover="auto"><?php echo __('Undo remove'); ?></div>
+                            <div id="tag-<?php echo $tagId; ?>-undo-tooltip" class="tooltip" popover="auto"><?php echo __('Undo remove'); ?></div>
                         </button>
                     </div>  
                 </li>

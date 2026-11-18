@@ -17,17 +17,17 @@ echo flash();
                 <ul class="item-type-metadata drawers">
         <?php foreach ($element_set->getElements() as $element): ?>
             <?php $elementId = html_escape($element->id); ?>
-            <li class="element">
+            <li class="element" aria-labelledby="element-<?php echo $elementId; ?>-name">
                 <div class="drawer">
                     <span id="element-<?php echo $elementId; ?>-name" class="drawer-name"><?php echo __($element->name); ?></span>
                     <?php $buttonToggleLabel = ' element-' . $elementId . '-name element-' . $elementId . '-toggle'; ?>
-                    <button type="button" id="return-element-link-<?php echo $elementId; ?>" class="has-tooltip undo-delete" data-action-selector="deleted" aria-labelledby="return-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
+                    <button type="button" id="return-element-link-<?php echo $elementId; ?>" class="has-tooltip undo-delete" data-action-selector="deleted" aria-labelledby="element-<?php echo $elementId; ?>-name-tooltip">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="auto"><?php echo __('Undo remove'); ?></div>
+                        <div id="element-<?php echo $elementId; ?>-name-tooltip" class="tooltip" popover="auto"><?php echo __('Undo remove'); ?></div>
                     </button>
-                    <button type="button" id="remove-element-link-<?php echo $elementId; ?>" class="has-tooltip delete-drawer"  data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $elementId; ?> element-<?php echo $elementId; ?>-name">
+                    <button type="button" id="remove-element-link-<?php echo $elementId; ?>" class="has-tooltip delete-drawer"  data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $elementId; ?>-tooltip">
                         <span class="icon" aria-hidden="true"></span>
-                        <div class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
+                        <div id="remove-element-link-<?php echo $elementId; ?>-tooltip" class="tooltip" popover="auto"><?php echo __('Remove'); ?></div>
                     </button>
                     <?php echo $this->formHidden("elements[{$elementId}][delete]", "", ['class' => 'element-delete-hidden']); ?>
                 </div>

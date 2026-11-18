@@ -25,9 +25,9 @@ $removeId = html_escape("remove-element-link-$elementTempId");
         echo $this->formText($elementNameName, $elementName, ['class' => 'drawer-name']);
         ?>
         </label>
-        <button type="button" id="<?php echo $returnId; ?>" class="has-tooltip undo-delete" data-action-selector="deleted" aria-labelledby="<?php echo $returnId; ?> unnamed-element-label">
+        <button type="button" id="<?php echo $returnId; ?>" class="has-tooltip undo-delete" aria-labelledby="<?php echo $returnId; ?>-tooltip" data-action-selector="deleted" aria-labelledby="<?php echo $returnId; ?> unnamed-element-label">
             <span class="icon" aria-hidden="true"></span>
-            <div class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
+            <div id="<?php echo $returnId; ?>-tooltip" class="tooltip" popover="auto"><?php echo __('Undo'); ?></div>
         </button>
         <button type="button" id="<?php echo $removeId; ?>" class="delete-drawer" data-action-selector="deleted" aria-labelledby="remove-element-link-<?php echo $removeId; ?> unnamed-element-label">
             <span class="icon" aria-hidden="true"></span>
