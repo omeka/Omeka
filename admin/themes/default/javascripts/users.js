@@ -28,7 +28,7 @@ Omeka.Users = {};
     }
 
     $(document).ready(function () {
-        $('#save').on('click', '[type="submit"]', function(e) {
+        $('#user-api-keys').on('submit', function(e) {
             if (!Omeka.Users.detectChanges()) {
                 e.preventDefault();
                 Omeka.Users.flashNoChangesError();
