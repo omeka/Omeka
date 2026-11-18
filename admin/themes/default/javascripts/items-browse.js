@@ -35,11 +35,11 @@ Omeka.ItemsBrowse = {};
             if (detailsShown) {
             	$('.toggle-all-details').text(showDetailsText);
                 $('.details-link').attr('aria-expanded', "false");
-                srAlerts.text(showAllSuccess);
+                srAlerts.text(hideAllSuccess);
             } else {
             	$('.toggle-all-details').text(hideDetailsText);
                 $('.details-link').attr('aria-expanded', "true");
-                srAlerts.text(hideAllSuccess);
+                srAlerts.text(showAllSuccess);
             }
             detailsShown = !detailsShown;
         });
