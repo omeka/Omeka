@@ -7,13 +7,11 @@ Omeka.Users = {};
 (function ($) {
     Omeka.Users.detectChanges = function () {
         let changedCheckboxes = $('#user-api-keys').find('[type="checkbox"]:checked');
-        let formChanged = ($('#api_key_label').val() !== '') || (changedCheckboxes.length > 0);
-        return formChanged;
+        return ($('#api_key_label').val() !== '') || (changedCheckboxes.length > 0);
     };
 
     Omeka.Users.flashNoChangesError = function () {
         let errorText = $('#user-api-keys').data('no-changes-text');
-        console.log(errorText);
         let errorElement;
         if (errorText) {
             errorElement = $('<li class="error" tabindex="-1" id="no-changes">' + errorText + '</li>');
