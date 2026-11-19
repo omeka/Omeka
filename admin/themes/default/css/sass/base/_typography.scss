@@ -59,6 +59,10 @@ a.button[target="_blank"] {
 	align-items: baseline;
 }
 
+a.button[target="_blank"] {
+	justify-content: center;
+}
+
 a[target="_blank"]:after {
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
