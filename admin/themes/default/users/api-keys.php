@@ -1,4 +1,5 @@
 <?php
+queue_js_file('users');
 $userTitle = $user->username;
 if ($userTitle != '') {
     $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
@@ -11,7 +12,7 @@ echo head(['title' => $userTitle, 'bodyclass' => 'users', 'sectionNav' => $secti
 echo flash();
 ?>
 <section class="seven columns alpha">
-<form method="post" action="">
+<form id="user-api-keys" method="post" action="" data-no-changes-text="<?php echo __('No changes detected. Enter a new key label or select an existing API key to rescind.'); ?>">
     <fieldset>
         <legend><?php echo __('API Keys'); ?></legend>
         <div class="field">
@@ -36,7 +37,7 @@ echo flash();
             <?php endif; ?>
         </div>
         <?php else: ?>
-        <table aria-label="<?php echo __('API Keys'); ?>">
+        <table id="user-api-keys" aria-label="<?php echo __('API Keys'); ?>">
             <thead>
                 <tr>
                     <th><?php echo __('Label'); ?></th>
@@ -53,7 +54,7 @@ echo flash();
                     <td style="font-family: monospace;"><?php echo $key->key; ?></td>
                     <td><?php echo $key->ip ? inet_ntop($key->ip) : ''; ?></td>
                     <td><?php echo $key->accessed; ?></td>
-                    <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id, ['aria-labelledby' => 'rescind']); ?></td>
+                    <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id, ['aria-labelledby' => 'rescind', 'id' => 'api_key_rescind-' . $key->id]); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
