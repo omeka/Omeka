@@ -829,6 +829,7 @@ button.ui-dialog-titlebar-close {
 
 .ui-sortable .sortable-item {
   cursor: move;
+  display: flex;
 }
 .ui-sortable .sortable-item .move.icon:before {
   display: inline-block;
@@ -894,33 +895,31 @@ button.ui-dialog-titlebar-close {
 
 .drawer-name {
   margin-right: auto !important;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .drawer > button {
-  max-width: 350px;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   line-height: 1.5;
   vertical-align: top;
-  background-color: transparent;
   padding: 0;
   border: 0;
-  margin-bottom: 0;
+  margin: 0;
   color: #4C3939;
-  height: 1rem;
-}
-@media (max-width: 767px) {
-  .drawer > button {
-    max-width: 180px;
-  }
+  height: 24px;
+  width: 24px;
+  min-height: 0;
+  min-width: 0;
+  background-color: transparent;
 }
 
 .drawer.deleted .delete-drawer,
 .drawer.deleted .drawer-toggle,
 .drawer:not(.deleted) .undo-delete,
-.drawer.deleted ~ ul .undo-delete {
+.drawer.deleted ~ ul .undo-delete,
+.drawer.deleted .keyboard-reorder {
   display: none;
 }
 
@@ -1029,7 +1028,7 @@ button.ui-dialog-titlebar-close {
   border: 1px solid #8f8f8f;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   line-height: 1.5em;
-  margin: -2px 0 2px 0;
+  margin: -2px 0 0 0;
   overflow: auto;
   padding: 20px;
 }
@@ -1064,6 +1063,72 @@ button.ui-dialog-titlebar-close {
 
 .ui-widget-overlay {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.keyboard-reorder-group {
+  display: inline-flex;
+}
+
+.keyboard-reorder,
+.keyboard-reorder-panel button {
+  padding: 0;
+  border: 0;
+  display: inline-block;
+  margin: 0;
+  background-color: transparent;
+  display: inline-block;
+  min-height: 24px;
+  min-width: 24px;
+}
+.keyboard-reorder:before,
+.keyboard-reorder-panel button:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.keyboard-reorder:before {
+  content: "\f11c";
+}
+
+.keyboard-reorder-up:before {
+  content: "\f0d8";
+}
+
+.keyboard-reorder-down:before {
+  content: "\f0d7";
+}
+
+.keyboard-reorder-nest:before {
+  content: "\f03c";
+}
+
+.keyboard-reorder-unnest:before {
+  content: "\f03b";
+}
+
+.keyboard-reorder-panel {
+  display: none;
+}
+
+.keyboard-reorder[aria-expanded=true] {
+  border: 1px solid #8f8f8f;
+  border-right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.keyboard-reorder[aria-expanded=true]:focus {
+  position: relative;
+  z-index: 1;
+}
+
+.keyboard-reorder[aria-expanded=true] + .keyboard-reorder-panel {
+  display: inline-flex;
+  background-color: #fff;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 0 1px inset #8f8f8f;
+}
+
+li.selected .main_link {
+  border: 2px solid #b9b9b9;
 }
 
 footer {
@@ -2530,6 +2595,35 @@ ul.details li:last-child {
   float: left;
   margin: -3px 10px 0 0;
   border: 1px solid #8f8f8f;
+}
+
+#file-list .edit {
+  text-indent: -9999px;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+#file-list .edit:after {
+  content: "\f303"/"";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  text-indent: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+}
+
+.delete-checkbox {
+  height: 0;
+  width: 0;
+}
+
+#file-list .deleted .edit {
+  display: none;
 }
 
 .file-container {

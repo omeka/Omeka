@@ -70,6 +70,36 @@
     border: 1px solid $darkgrayborder;
 }
 
+#file-list .edit {
+    text-indent: -9999px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+
+    &:after {
+        content: "\f303" / "";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        text-indent: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+    }
+}
+
+.delete-checkbox {
+    height: 0;
+    width: 0;
+}
+
+#file-list .deleted .edit {
+    display: none;
+}
+
 .file-container {
   border: 1px solid $darkgrayborder;
   border-bottom: 0;

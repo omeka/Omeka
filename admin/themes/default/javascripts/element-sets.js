@@ -5,24 +5,6 @@ if (!Omeka) {
 Omeka.ElementSets = {};
 
 (function ($) {
-    /**
-     * Enable drag and drop sorting for elements.
-     */
-    Omeka.ElementSets.enableSorting = function () {
-        $('.sortable').sortable({
-            items: 'li.element',
-            forcePlaceholderSize: true,
-            forceHelperSize: true,
-            revert: 200,
-            placeholder: 'ui-sortable-highlight',
-            containment: 'document',
-            update: function (event, ui) {
-                $(this).find('.element-order').each(function (index) {
-                    $(this).val(index + 1);
-                });
-            }
-        });
-    };
 
     /**
      * Set up tag remove/undo buttons for each element.

@@ -1,6 +1,12 @@
 <?php
 queue_js_file(['vendor/jquery.nestedSortable', 'navigation']);
 
+$successAlertTemplate = __("{ACTIVE} reordered. ");
+$failAlertTemplate = __("Cannot reorder further.");
+$upActionAlertTemplate = __("Moved above {RELATIVE}.");
+$downActionAlertTemplate = __("Moved below {RELATIVE}.");
+$nestActionAlertTemplate = __("Nested under {RELATIVE}.");
+$unnestActionAlertTemplate = __("Unnested from {RELATIVE}.");
 $pageTitle = __('Appearance');
 $sectionNav = common('appearance-nav');
 echo head(['title'=>$pageTitle, 'bodyclass'=>'settings', 'sectionNav'=>$sectionNav]); ?>
@@ -16,6 +22,15 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings', 'sectionNav'=>$sectionN
     <p class="explanation"><?php echo __('Check the links to display them ' 
     . 'in the main navigation. Click and drag the links into the preferred ' 
     . 'display order.'); ?></p>
+    <div class="sr-only" role="alert" id="reorder-alerts" 
+        data-success-alert-template="<?php echo $successAlertTemplate; ?>" 
+        data-fail-alert-template="<?php echo $failAlertTemplate; ?>" 
+        data-up-action-alert-template="<?php echo $upActionAlertTemplate; ?>"
+        data-down-action-alert-template="<?php echo $downActionAlertTemplate; ?>"
+        data-nest-action-alert-template="<?php echo $nestActionAlertTemplate; ?>"
+        data-unnest-action-alert-template="<?php echo $unnestActionAlertTemplate; ?>">
+    </div>
+    <div class="sr-only" role="alert" id="repeated-reorder-alerts"></div>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->partial('settings/edit-navigation-link.php', ['template' => true]); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
@@ -51,6 +66,7 @@ echo head(['title'=>$pageTitle, 'bodyclass'=>'settings', 'sectionNav'=>$sectionN
     Omeka.addReadyCallback(Omeka.Navigation.updateNavLinkEditForms);
     Omeka.addReadyCallback(Omeka.Navigation.addNewNavLinkForm);
     Omeka.addReadyCallback(Omeka.Navigation.updateForNewLinks);
+    Omeka.addReadyCallback(Omeka.enableKeyboardNavigation);
     Omeka.addReadyCallback(Omeka.Navigation.setUpFormSubmission);
     Omeka.manageDrawers('#navigation_main_list', '.main_link');
 </script>

@@ -6,25 +6,6 @@ Omeka.ItemTypes = {};
 
 (function ($) {
     /**
-     * Enable drag and drop sorting for elements.
-     */
-    Omeka.ItemTypes.enableSorting = function () {
-        $('.sortable').sortable({
-            items: 'li.element',
-            forcePlaceholderSize: true,
-            forceHelperSize: true,
-            revert: 200,
-            placeholder: 'ui-sortable-highlight',
-            containment: 'document',
-            update: function (event, ui) {
-                $(this).find('.element-order').each(function (index) {
-                    $(this).val(index + 1);
-                });
-            }
-        });
-    };
-
-    /**
      * Add AJAX-enabled buttons to item type form for adding and removing elements.
      *
      * @param {string} addNewRequestUrl

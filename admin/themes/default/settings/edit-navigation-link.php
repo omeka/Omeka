@@ -22,18 +22,25 @@
     }
     $checkboxClass = implode(' ', $checkboxClasses);
 ?>
-<li <?php echo ($template) ? 'class="template"' : ''; ?>> 
+<li <?php echo ($template) ? 'class="template"' : 'class="nav-list-item"'; ?>> 
     <div class="main_link">
-        <div class="sortable-item drawer <?php echo ($template) ? 'opened' : ''; ?>">
-            <span class="move icon" aria-label="<?php echo __('Move'); ?>" id="move-<?php echo $pageCount; ?>" aria-labelledby="move-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Move'); ?>"></span>
+        <div class="sortable-item drawer <?php echo ($template) ? 'opened' : ''; ?>" role="group" aria-labelledby="drawer-<?php echo $pageCount; ?>">
+            <span class="move icon" aria-hidden="true" id="move-<?php echo $pageCount; ?>" title="<?php echo __('Move'); ?>"></span>
             <?php if ($template): ?>
             <input type="hidden" class="new-link-hidden" value="0">
             <?php endif; ?>
-            <input type="checkbox" id="<?php echo $checkboxId; ?>" value="<?php echo html_escape(json_encode($checkboxValue)); ?>" <?php echo $checkboxChecked; ?> class="<?php echo $checkboxClass; ?>" aria-label="<?php echo __('Enable'); ?>" aria-labelledby="<?php echo $checkboxId; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Enable'); ?>">
-            <span class="drawer-name" id="drawer-<?php echo $pageCount; ?>">
-            <?php echo (!$template) ? html_escape($page->getLabel()) : ''; ?>
-            </span>
-            <button type="button" id="drawer-toggle-<?php echo $pageCount; ?>" class="drawer-toggle" data-action-selector="opened" aria-expanded="<?php echo ($template) ? 'true' : 'false'; ?>" aria-controls="contents-<?php echo $pageCount; ?>" aria-label="<?php echo __('Show Options'); ?>" aria-label="<?php echo __('Show Options'); ?>" aria-labelledby="drawer-<?php echo $pageCount; ?> drawer-toggle-<?php echo $pageCount; ?>"><span class="icon"></span></button>
+            <input type="checkbox" name="<?php echo $checkboxId; ?>" id="<?php echo $checkboxId; ?>" value="<?php echo html_escape(json_encode($checkboxValue)); ?>" <?php echo $checkboxChecked; ?> class="<?php echo $checkboxClass; ?>" aria-label="<?php echo __('Enable'); ?>" aria-labelledby="<?php echo $checkboxId; ?> drawer-<?php echo $pageCount; ?>" title="<?php echo __('Enable'); ?>">
+            <span class="drawer-name" id="drawer-<?php echo $pageCount; ?>"><?php echo (!$template) ? html_escape($page->getLabel()) : ''; ?></span>
+            <div class="keyboard-reorder-group">
+                <button type="button" id="reorder-<?php echo $pageCount; ?>" aria-labelledby="reorder-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" class="keyboard-reorder" aria-label="<?php echo __('Reorder with keyboard'); ?>" title="<?php echo __('Reorder with keyboard'); ?>" aria-expanded="false" aria-controls="keyboard-reorder-<?php echo $pageCount; ?>"></button>
+                <div class="keyboard-reorder-panel" id="keyboard-reorder-<?php echo $pageCount; ?>" aria-labelledby="keyboard-reorder-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" role="group" aria-label="<?php echo __('Reorder actions'); ?>">
+                    <button type="button" id="reorder-up-<?php echo $pageCount; ?>" aria-labelledby="reorder-up-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" class="keyboard-reorder-up" aria-label="<?php echo __('Move up'); ?>" title="<?php echo __('Move up'); ?>"></button>
+                    <button type="button" id="reorder-down-<?php echo $pageCount; ?>" aria-labelledby="reorder-down-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" class="keyboard-reorder-down" aria-label="<?php echo __('Move down'); ?>" title="<?php echo __('Move down'); ?>"></button>
+                    <button type="button" id="reorder-nest-<?php echo $pageCount; ?>" aria-labelledby="reorder-nest-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" class="keyboard-reorder-nest" aria-label="<?php echo __('Nest'); ?>" title="<?php echo __('Nest'); ?>"></button>
+                    <button type="button" id="reorder-unnest-<?php echo $pageCount; ?>" aria-labelledby="reorder-unnest-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>" class="keyboard-reorder-unnest" aria-label="<?php echo __('Unnest'); ?>" title="<?php echo __('Unnest'); ?>"></button>
+                </div>
+            </div>
+            <button type="button" id="drawer-toggle-<?php echo $pageCount; ?>" class="drawer-toggle" data-action-selector="opened" aria-expanded="<?php echo ($template) ? 'true' : 'false'; ?>" aria-controls="contents-<?php echo $pageCount; ?>" aria-label="<?php echo __('Show Options'); ?>" aria-label="<?php echo __('Show Options'); ?>" aria-labelledby="drawer-toggle-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>"><span class="icon"></span></button>
             <?php if ($template || $checkboxValue['can_delete']): ?>
             <button type="button" id="drawer-undo-<?php echo $pageCount; ?>" class="undo-delete" data-action-selector="deleted" aria-label="<?php echo __('Undo'); ?> <?php echo __('Remove'); ?>" aria-labelledby="drawer-undo-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>"  title="<?php echo __('Undo'); ?>"><span class="icon"></span></button>
             <button type="button" id="drawer-remove-<?php echo $pageCount; ?>" class="delete-drawer" data-action-selector="deleted" aria-label="<?php echo __('Remove'); ?>" aria-labelledby="drawer-remove-<?php echo $pageCount; ?> drawer-<?php echo $pageCount; ?>"  title="<?php echo __('Remove'); ?>"><span class="icon"></span></button>
@@ -46,7 +53,7 @@
         </div>
     </div>
     <?php if (isset($page) && $page->hasChildren()): ?>
-        <ul>
+        <ul class="nav-list-item-children">
         <?php foreach ($page as $childPage): ?>
             <?php $pageCount += 10; ?>
             <?php echo $this->partial('settings/edit-navigation-link.php', [
