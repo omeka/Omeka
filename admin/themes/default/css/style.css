@@ -2882,7 +2882,10 @@ ul.details li:last-child {
   width: 100%;
   padding: 0;
   margin: 0 0 20px;
-  display: flow-root;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 #next-item {
