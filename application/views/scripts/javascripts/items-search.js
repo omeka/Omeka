@@ -101,12 +101,17 @@ Omeka.Search = {};
          */
         function removeAdvancedSearch(button) {
             var removeButton = $(button);
-            var currentInputs = removeButton.parents('.inputs');
-            removeButton.parent().remove();
+            var currentInputBlock = removeButton.parent();
+            var nextFocus;
+            if (currentInputBlock.is(':first-child')) {
+                nextFocus = currentInputBlock.next('.search-entry');
+            } else {
+                nextFocus = currentInputBlock.prev('.search-entry');
+            }
+            currentInputBlock.remove();
+            nextFocus.find(':focusable').first().focus();
             handleRemoveButtons();
             updateAdvancedSearchCount('#search-narrow-by-fields', '#search-narrow-by-field-alerts', '.search-entry');
-            var firstInputBlockFocus = currentInputs.find('.search-entry :focusable').first();
-            firstInputBlockFocus.focus();
         }
 
         /**

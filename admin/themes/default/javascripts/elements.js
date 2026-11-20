@@ -111,11 +111,11 @@ Omeka.Elements = {};
         context.find(removeSelector).click(function (event) {
             event.preventDefault();
             var removeButton = $(this);
-            var fieldDiv = $(this).parents(fieldSelector);
+            var fieldDiv = removeButton.parents(fieldSelector);
             var elementId = fieldDiv.attr('id');
 
             // Don't delete the last input block for an element.
-            if (removeButton.parents(fieldSelector).find(inputBlockSelector).length === 1) {
+            if (fieldDiv.find(inputBlockSelector).length === 1) {
                 return;
             }
 
@@ -124,6 +124,13 @@ Omeka.Elements = {};
             }
 
             var inputBlock = removeButton.parents(inputBlockSelector);
+            var nextFocusableBlock;
+            if (inputBlock.is(':first-child')) {
+                nextFocusableBlock = inputBlock.next(inputBlockSelector);
+            } else {
+                nextFocusableBlock = inputBlock.prev(inputBlockSelector);
+            }
+
             inputBlock.find('textarea').each(function () {
                 tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, this.id);
             });
@@ -138,13 +145,12 @@ Omeka.Elements = {};
                 inputBlockCount++;
             });
 
-            var firstInputBlock = fieldDiv.find('.input-block').first();
-            var firstFocusable = firstInputBlock.find(':focusable').first();
-            if (firstInputBlock.find('.tox-tinymce').length > 0) {
-                var firstTextarea = firstInputBlock.find('textarea').first();
-                firstFocusable = tinyMCE.get(firstTextarea.attr('id'));
+            var nextFocusableElement = nextFocusableBlock.find(':focusable').first();
+            if (nextFocusableBlock.find('.tox-tinymce').length > 0) {
+                var nextTextarea = nextFocusableBlock.find('textarea').first();
+                nextFocusableElement = tinyMCE.get(nextTextarea.attr('id'));
             } 
-            firstFocusable.focus();
+            nextFocusableElement.focus();
 
             setTimeout(() => {
                 Omeka.Elements.alertElementChange(elementId, fieldDiv);
