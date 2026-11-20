@@ -251,7 +251,12 @@
 
 .public-featured .label { font-weight: bold; }
 
-.items.show .pagination { width: 100% }
+.items.show .pagination { 
+    width: 100%;
+    padding: 0;
+    margin: 0 0 $spacing-l;
+    display: flow-root;
+}
 
 #next-item { float: right;}
 
