@@ -30,7 +30,6 @@ if (!Omeka) {
             verify_html: false,
             add_unload_trigger: false,
             cache_suffix: '?v=' + tinymce.majorVersion + '.' + tinymce.minorVersion,
-            help_accessibility: true,
             init_instance_callback: function(editor) {
                 // Target editor and container bodies separately for screen reader coverage.
                 // See: https://github.com/tinymce/tinymce/issues/6839#issuecomment-1208844069
@@ -42,6 +41,7 @@ if (!Omeka) {
                 if (ariaLabelledby !== null) {
                     editorContainer.setAttribute('aria-labelledby', ariaLabelledby);
                     editorBody.setAttribute('aria-labelledby', ariaLabelledby);
+                    editorBody.removeAttribute('aria-label');
                 }
                 if (explanation !== null) {
                     explanationId = explanation.getAttribute('id');
