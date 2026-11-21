@@ -127,6 +127,13 @@ class Zend_Session_SaveHandler_DbTable
     protected $_sessionName;
 
     /**
+     * Rows found from validateId
+     *
+     * @var array
+     */
+    protected $_foundRows = array();
+
+    /**
      * Constructor
      *
      * $config is an instance of Zend_Config or an array of key/value pairs containing configuration options for
@@ -315,7 +322,13 @@ class Zend_Session_SaveHandler_DbTable
     {
         $return = '';
 
-        $rows = call_user_func_array(array(&$this, 'find'), $this->_getPrimary($id));
+        // Avoid double-read if validateId already called (i.e., sessions.use_strict_mode)
+        if (isset($this->_foundRows[$id])) {
+            $rows = $this->_foundRows[$id];
+            unset($this->_foundRows[$id]);
+        } else {
+            $rows = $this->_doRead($id);
+        }
 
         if (count($rows)) {
             if ($this->_getExpirationTime($row = $rows->current()) > time()) {
@@ -326,6 +339,16 @@ class Zend_Session_SaveHandler_DbTable
         }
 
         return $return;
+    }
+
+    /**
+     * Read matching row frow session table
+     *
+     * @return Zend_Db_Table_Rowset_Abstract
+     */
+    protected function _doRead($id)
+    {
+        return call_user_func_array(array(&$this, 'find'), $this->_getPrimary($id));
     }
 
     /**
@@ -391,6 +414,29 @@ class Zend_Session_SaveHandler_DbTable
                     . $this->getAdapter()->quote(time()));
 
         return true;
+    }
+
+    /**
+     * Create a new session id
+     *
+     * Uses PHP's own standard session_create_id()
+     */
+    public function create_sid(): string
+    {
+        return session_create_id();
+    }
+
+    /**
+     * Validate that a session ID exists
+     */
+    public function validateId(string $id): bool
+    {
+        $rows = $this->_doRead($id);
+        if (count($rows)) {
+            $this->_foundRows[$id] = $rows;
+            return true;
+        }
+        return false;
     }
 
     /**
