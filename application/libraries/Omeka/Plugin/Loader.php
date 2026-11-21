@@ -154,11 +154,11 @@ class Omeka_Plugin_Loader
         }
 
         // If the current plugin is already on the waiting list, don't load it.
-        if (array_key_exists(spl_object_hash($plugin), $pluginsWaitingToLoad)) {
+        if (array_key_exists(spl_object_id($plugin), $pluginsWaitingToLoad)) {
             return;
         } else {
             // Otherwise add the current plugin to the waiting list.
-            $pluginsWaitingToLoad[spl_object_hash($plugin)] = $plugin;
+            $pluginsWaitingToLoad[spl_object_id($plugin)] = $plugin;
         }
 
         // Load the required plugins

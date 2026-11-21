@@ -221,7 +221,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
      */
     public function makeClone(Zend_Pdf_ElementFactory $factory, array &$processed, $mode)
     {
-        $id = spl_object_hash($this);
+        $id = spl_object_id($this);
         if (isset($processed[$id])) {
             // Do nothing if object is already processed
             // return it

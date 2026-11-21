@@ -202,7 +202,7 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
 
         // This code duplicates code in Zend_Pdf_Element_Object class,
         // but allows to avoid unnecessary method call in most cases
-        $id = spl_object_hash($this->_ref);
+        $id = spl_object_id($this->_ref);
         if (isset($processed[$id])) {
             // Do nothing if object is already processed
             // return it

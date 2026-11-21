@@ -1291,11 +1291,11 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
     /**
      * Returns a hash code value for the page
      *
-     * @return string  a hash code value for this page
+     * @return int  a hash code value for this page
      */
     public final function hashCode()
     {
-        return spl_object_hash($this);
+        return spl_object_id($this);
     }
 
     /**
