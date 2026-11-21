@@ -1387,13 +1387,13 @@ function latest_omeka_version()
     $omekaApiVersion = '0.1';
 
     // Determine if we have already checked for the version lately.
+    $check = [];
     $updateOption = get_option('omeka_update');
-    if (!$updateOption) {
-        $updateOption = '';
-    }
-    $check = unserialize($updateOption);
-    if (!$check) {
-        $check = [];
+    if ($updateOption) {
+        $updateCheck = unserialize($updateOption);
+        if ($updateCheck) {
+            $check = $updateCheck;
+        }
     }
 
     // This a timestamp corresponding to the last time we checked for
