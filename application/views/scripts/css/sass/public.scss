@@ -43,3 +43,7 @@ a[target="_blank"]:after {
 #search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
     display: none;
 }
+
+#advanced-search[aria-expanded="false"] + #advanced-form {
+    display: none;
+}

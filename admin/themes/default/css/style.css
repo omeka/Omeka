@@ -1836,7 +1836,7 @@ ul.pagination {
   margin: 20px 0 10px;
 }
 
-.show-advanced.open + #advanced-form {
+.show-advanced[aria-expanded=true] + #advanced-form {
   display: block;
 }
 

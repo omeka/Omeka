@@ -41,4 +41,8 @@ a[target=_blank]:after {
   display: none;
 }
 
+#advanced-search[aria-expanded=false] + #advanced-form {
+  display: none;
+}
+
 /*# sourceMappingURL=public.css.map */
