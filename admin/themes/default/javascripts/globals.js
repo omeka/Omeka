@@ -37,6 +37,9 @@ if (!Omeka) {
                 var editorBody = editor.getBody();
                 var groupParent = editorContainer.closest('[role="group"]');
                 var ariaLabelledby = groupParent.getAttribute('aria-labelledby');
+                var fieldLabel = editorContainer.closest('.field').querySelector('label').textContent;
+                editor.getDoc().title = fieldLabel;
+                editor.iframeElement.setAttribute('title', fieldLabel);
                 var explanation = groupParent.querySelector('.explanation');
                 if (ariaLabelledby !== null) {
                     editorContainer.setAttribute('aria-labelledby', ariaLabelledby);
