@@ -131,33 +131,29 @@ td {
     align-items: center;
     flex-wrap: wrap;
 
-    @include screen-xs {
-        clear: both;
-        padding-top: $spacing-s;
-        gap: $spacing-s;
-    }
-
     a {
         color: $blue;
+        height: 100%;
     }
 
     li {
         display: inline-flex;
 
-        &:not(:last-child):after {
+        &:after {
             content: '\00b7' / '';
             margin: 0 5px;
-
-            @include screen-xs {
-                display: none;
-            }
         }
 
         &:last-child:after {
-            content: '';
+            content: "";
             margin: 0;
         }
     }
+}
+
+.browse.items .action-links li:after {
+    content: '\00b7' / '';
+    margin: 0 5px;
 }
 
 .batch-edit-heading {
@@ -171,7 +167,7 @@ td {
 
 .browse .record-info .title img {
     float: left;
-    margin: 0 10px 0 0;
+    margin: 0 $spacing-m 0 0;
     max-width: 20%;
     box-sizing: border-box;
     border: 1px solid $lightgrayborder;
@@ -202,6 +198,10 @@ span.title {
 
 .labels {
     margin-top: .5 * $spacing-s;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
+    flex-basis: 100%;
 }
 
 .labels .label {
@@ -243,36 +243,57 @@ span.title {
     }
 }
 
-.details {
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, .5);
-    border: 1px solid $lightgrayborder;
-    margin-top: $spacing-m;
-    padding: $spacing-m;
-    clear: both;
-    width: 100%;
-    box-sizing: border-box;
-    display: inline-flex;
+.item-meta {
+    display: flex;
     flex-wrap: wrap;
-
-    p {
-        margin: 0 $spacing-l 0 0;
-        display: inline-block;
-    }
 }
 
-ul.details {
-    margin-bottom: 0;
-    padding: $spacing-m $spacing-m $spacing-m $spacing-l;
+button.details-link {
+    color: $blue;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    justify-content: space-between;
+    gap: 0 $spacing-s;
+    padding: 0;
+    clear: both;
+    background: transparent;
+    border: 0;
 
-    li {
-        margin-bottom: $spacing-m;
+    &:after {
+        content: "\f0da" / "";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        display: inline-block;  
+        width: $spacing-m;
     }
 
-    li:last-child {
+    &[aria-expanded=true] {
         margin-bottom: 0;
     }
 
+    &[aria-expanded=true]:after {
+        content: "\f0d7" / "";
+    }
+}
+
+.details {
+    display: none;
+}
+
+.details-link[aria-expanded="true"] + .details {
+    display: block;
+    width: 100%;
+    padding: $spacing-s;
+    border-radius: 3px;
+    border: 1px solid $lightgrayborder;
+    background-color: #fff;
+}
+
+.details p {
+    margin: 0 $spacing-l 0 0;
+    display: inline-block;
 }
 
 .inactive {
