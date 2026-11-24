@@ -125,7 +125,7 @@ Omeka.Elements = {};
 
             var inputBlock = removeButton.parents(inputBlockSelector);
             var nextFocusableBlock;
-            if (inputBlock.is(':first-child')) {
+            if (inputBlock.is(':first-of-type')) {
                 nextFocusableBlock = inputBlock.next(inputBlockSelector);
             } else {
                 nextFocusableBlock = inputBlock.prev(inputBlockSelector);
