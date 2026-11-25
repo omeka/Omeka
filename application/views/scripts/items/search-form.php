@@ -89,7 +89,6 @@ $formAttributes['method'] = 'GET';
                         "advanced[$i][type]",
                         @$rows['type'],
                         [
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-type',
                             'id' => null,
                         ],
                         label_table_options([
@@ -112,13 +111,12 @@ $formAttributes['method'] = 'GET';
                         @$rows['terms'],
                         [
                             'size' => '20',
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-terms',
                             'id' => null,
                         ]
                     );
                     ?>
                 </div>
-                <button type="button" class="remove_search" disabled="disabled" style="display: none;" aria-labelledby="search-narrow-by-fields-label search-row-<?php echo $i; ?> search-narrow-by-fields-remove-field" title="<?php echo __('Remove field'); ?>"><?php echo __('Remove field'); ?></button>
+                <button type="button" class="remove_search" disabled="disabled" style="display: none;" title="<?php echo __('Remove field'); ?>"><?php echo __('Remove field'); ?></button>
             </div>
         <?php endforeach; ?>
         </div>

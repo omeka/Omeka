@@ -55,7 +55,6 @@ $formAttributes['method'] = 'GET';
                         @$rows['joiner'],
                         [
                             'id' => null,
-                            'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-joiner',
                         ],
                         [
                             'and' => __('AND'),
@@ -73,7 +72,6 @@ $formAttributes['method'] = 'GET';
                             "advanced[$i][element_id]",
                             @$rows['element_id'],
                             [
-                                'aria-labelledby' => 'search-narrow-by-fields-label search-row-' . $i . ' search-narrow-by-fields-property',
                                 'id' => null,
                             ],
                             get_table_options('Element', null, [
