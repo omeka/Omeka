@@ -16,16 +16,20 @@ class Table_Plugin extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         $alias = $this->getTableAlias();
-        if (isset($params['name'])) {
-            $select->where("`$alias`.`name` = ?", $params['name']);
+        $boolean = new Omeka_Filter_Boolean;
+        $genericParams = array();
+
+        foreach ($params as $key => $value) {
+            switch ($key) {
+                case 'active':
+                    $select->where("`$alias`.`active` = ?", $boolean->filter($value));
+                    break;
+                default:
+                    $genericParams[$key] = $value;
+            }
         }
-        if (isset($params['active'])) {
-            $boolean = new Omeka_Filter_Boolean;
-            $select->where("`$alias`.`active` = ?", $boolean->filter($params['active']));
-        }
-        if (isset($params['version'])) {
-            $boolean = new Omeka_Filter_Boolean;
-            $select->where("`$alias`.`version` = ?", $params['version']);
+        if (!empty($genericParams)) {
+            parent::applySearchFilters($select, $genericParams);
         }
     }
 
