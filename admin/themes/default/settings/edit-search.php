@@ -31,6 +31,17 @@ echo flash();
         </div>
         <div class="field">
             <div class="two columns alpha">
+                <label for="search_include_file_texts"><?php echo __('Include Files with Items'); ?></label>
+            </div>
+            <div class="inputs five columns omega">
+                <p class="explanation"><?php echo __('Check this to include the text '
+                . 'of an item\'s files with the item itself, so a search matching a '
+                . 'file will also find the item.'); ?></p>
+                <?php echo $this->formCheckbox('search_include_file_texts', null, ['checked' => $this->searchIncludeFileTexts]); ?>
+            </div>
+        </div>
+        <div class="field">
+            <div class="two columns alpha">
                 <label><?php echo __('Index Records'); ?></label>
             </div>
             <div class="inputs five columns omega">
