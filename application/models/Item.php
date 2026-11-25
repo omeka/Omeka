@@ -170,6 +170,31 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
 
     /**
+     * Get a complete set of Element IDs associated with this Item.
+     *
+     * @uses Mixin_ElementText::getElementsBySetName()
+     * @uses Table_Element::findByItemType()
+     * @return array Element IDs that are associated with the item type of
+     * the item together with Dublin Core element set.
+     */
+    public function getAssociatedElementIds()
+    {
+        $elementIds = array();
+        $dublinCoreElements = $this->getElementsBySetName('Dublin Core');
+        foreach ($dublinCoreElements as $element) {
+            $elementIds[] = $element->id;
+        }
+        if ($this->item_type_id) {
+            $itemTypeElements = $this->ItemTypeElements;
+            foreach ($itemTypeElements as $element) {
+                $elementIds[] = $element->id;
+            }
+        }
+
+        return $elementIds;
+    }
+
+    /**
      * Get a property for display.
      *
      * @param string $property
