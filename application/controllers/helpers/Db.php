@@ -123,13 +123,8 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
         $record = $table->find($id);
 
         if (!$record) {
-
-            //Check to see whether to record exists at all
-            if (!$table->checkExists($id)) {
-                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with ID # $id exists");
-            } else {
-                throw new Omeka_Controller_Exception_403('You do not have permission to access this page.');
-            }
+            // Do not disclose existence of private records, always return status 404
+            throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with ID # $id exists");
         }
 
         return $record;
